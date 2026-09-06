@@ -208,7 +208,7 @@ def test_discovery_envelope_keeps_official_routes_distinct() -> None:
     assert isinstance(result, PublicRecordsResult)
     assert result.status is ResultStatus.OK
     assert result.query.query.operation == "discovery"
-    manifest = result.records[0]
+    manifest = result.to_dict()["records"][0]
     assert manifest["record_kind"] == "source_manifest"
     assert manifest["projection"]["projectable_as_case_record"] is False
     capabilities = {item["name"] for item in manifest["capabilities"]}

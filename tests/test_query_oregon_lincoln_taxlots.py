@@ -23,6 +23,49 @@ def _text_fixture(name: str) -> str:
     return (FIXTURE_ROOT / name).read_text()
 
 
+def test_python_options_and_cli_namespace_produce_same_source_query(monkeypatch):
+    namespace = adapter.build_parser().parse_args([
+        "search", "R452940", "--field", "property", "--limit", "2",
+    ])
+    options = adapter.QueryOptions(
+        command="search", query="R452940", field="property", limit=2,
+    )
+    monkeypatch.setattr(adapter, "build_parser", lambda: pytest.fail("internal CLI parsing"))
+    direct = adapter.execute(options, client=FakeClient(), log_results=False).to_dict()
+    legacy = adapter.execute(namespace, client=FakeClient(), log_results=False).to_dict()
+    assert direct["query"] == legacy["query"]
+    assert direct["records"] == legacy["records"]
+    assert direct["status"] == legacy["status"] == "ok"
+
+
+def test_shared_property_route_uses_validated_python_options(monkeypatch):
+    from tools import query_property
+
+    args = query_property.build_parser().parse_args([
+        "map", "07-11-03-DC-05800-00", "--source", adapter.SOURCE_ID,
+        "--jurisdiction", "41041", "--limit", "2",
+    ])
+    monkeypatch.setattr(adapter, "build_parser", lambda: pytest.fail("internal CLI parsing"))
+    route = query_property.LIVE_ROUTES[adapter.SOURCE_ID]["map"]
+    options = route.translate(args, route.adapter_command)
+    assert isinstance(options, adapter.QueryOptions)
+    assert options.field == "parcel"
+    assert options.geometry
+    assert options.limit == 2
+    result = adapter.execute(options, client=FakeClient(), log_results=False)
+    assert result.status == "ok"
+    assert result.records[0]["native_identity"]["propertyid"] == "R452940"
+
+
+@pytest.mark.parametrize("values", [
+    {"page_size": 0}, {"limit": 0}, {"timeout": float("inf")},
+    {"minimum_interval": -1}, {"field": "unknown"}, {"match": "unknown"},
+])
+def test_python_options_validate_before_acquiring_source(values):
+    with pytest.raises(ValueError):
+        adapter.QueryOptions(command="search", query="R452940", **values)
+
+
 def _json_fixture(name: str) -> dict[str, Any]:
     return json.loads(_text_fixture(name))
 
@@ -313,7 +356,10 @@ def test_exact_property_search_normalizes_join_keys_without_geometry() -> None:
         == "R452940"
     )
     assert record["official_links"]["assessor_map"].startswith("https://ormap.net/")
-    assert record["official_links"]["interactive_map"] == adapter.APP_URL
+    assert record["official_links"]["interactive_map"] == (
+        adapter.APP_URL
+        + "?service=search-Taxlots&field:parcelid=07-11-03-DC-05800-00"
+    )
     assert adapter.INTERACTIVE_MAP_SOURCE_ID == adapter.SOURCE_ID
     assert adapter.ORMAP_SOURCE_ID == "us-or-ormap-cadastral-routing"
     assert record["geometry_available"] is True

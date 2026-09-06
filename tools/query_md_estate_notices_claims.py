@@ -2364,9 +2364,11 @@ def _run_notice_search(
         if emitted_after < first.total_count
         else None
     )
-    return PublicRecordsResult.success(
+    return _search_result(
         query,
         records,
+        source_total=first.total_count,
+        emitted_through=emitted_after,
         retrieved_at=retrieved_at,
         raw_artifact_refs=list(dict.fromkeys(artifacts)),
         next_cursor=next_cursor,
@@ -2466,13 +2468,59 @@ def _run_claim_search(
         if emitted_after < first.total_count
         else None
     )
-    return PublicRecordsResult.success(
+    return _search_result(
         query,
         records,
+        source_total=first.total_count,
+        emitted_through=emitted_after,
         retrieved_at=retrieved_at,
         raw_artifact_refs=list(dict.fromkeys(artifacts)),
         next_cursor=next_cursor,
         warnings=CLAIM_WARNINGS,
+    )
+
+
+def _search_result(
+    query: PublicRecordsQuery,
+    records: list[dict[str, Any]],
+    *,
+    source_total: int,
+    emitted_through: int,
+    retrieved_at: str,
+    raw_artifact_refs: list[str],
+    next_cursor: str | None,
+    warnings: tuple[str, ...],
+) -> PublicRecordsResult:
+    """An explicit caller limit leaves incomplete source coverage to resume."""
+    if next_cursor:
+        return PublicRecordsResult.failure(
+            query,
+            ResultStatus.PARTIAL,
+            [PublicRecordsError(
+                code="caller_result_limit",
+                message=(
+                    "More source rows are available; continue with the "
+                    "returned snapshot-bound cursor."
+                ),
+                category="pagination",
+                retryable=False,
+                details={
+                    "source_total": source_total,
+                    "emitted_through": emitted_through,
+                },
+            )],
+            records=records,
+            next_cursor=next_cursor,
+            retrieved_at=retrieved_at,
+            raw_artifact_refs=raw_artifact_refs,
+            warnings=warnings,
+        )
+    return PublicRecordsResult.success(
+        query,
+        records,
+        retrieved_at=retrieved_at,
+        raw_artifact_refs=raw_artifact_refs,
+        warnings=warnings,
     )
 
 

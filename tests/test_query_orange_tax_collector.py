@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import csv
 import io
-import json
 import zipfile
 from pathlib import Path
 from typing import Any
@@ -180,8 +179,28 @@ def test_live_algolia_shape_preserves_account_owner_situs_and_ids() -> None:
     assert record["alternate_keys"][0]["external_id"] == "6431"
     assert record["roll_year"] == 2025
     assert record["owners"][0]["raw_name"] == "ORANGE COUNTY BCC"
+    assert record["owners"][0]["name"] == "ORANGE COUNTY BCC"
+    assert record["owners"][0]["external_id"] == (
+        _hit()["custom_parameters"]["entities"][0]["external_id"]
+    )
+    assert record["owners"][0]["assertion_type"] == "tax_account_owner_label"
     assert record["owners"][0]["title_caveat"] == "not_a_title_chain"
     assert record["situs_entities"][0]["address"] == "OAK LN"
+
+
+def test_portal_missing_owner_name_does_not_promote_composite_address_label() -> None:
+    hit = _hit()
+    hit["custom_parameters"]["entities"][0]["name"] = ""
+
+    owner = orange.normalize_portal_hit(hit)["owners"][0]
+
+    assert owner["raw_name"] is None
+    assert owner["name"] is None
+    assert owner["external_id"] == (
+        "ORANGE COUNTY BCC, PO BOX 1393, ORLANDO, FL 32802-1393"
+    )
+    assert owner["assertion_type"] == "tax_account_owner_label"
+    assert owner["title_caveat"] == "not_a_title_chain"
 
 
 def test_portal_search_posts_verified_index_contract_and_binds_cursor() -> None:

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import replace
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -394,6 +395,8 @@ def test_execute_limits_are_optional_and_cursors_bind_source_query_snapshot() ->
     notice_cursor = md._decode_cursor(notices.next_cursor)
     assert notice_cursor.source_id == md.NOTICE_SOURCE_ID
     assert notice_cursor.emitted_count == 1
+    assert notices.errors[0].code == "caller_result_limit"
+    assert notices.errors[0].details == {"source_total": 21, "emitted_through": 1}
 
     claims = md.execute(
         _args(
@@ -416,6 +419,114 @@ def test_execute_limits_are_optional_and_cursors_bind_source_query_snapshot() ->
     assert claim_cursor.effective_criteria_fingerprint == (
         md._effective_fingerprint(client.claim_page)
     )
+    assert claims.errors[0].code == "caller_result_limit"
+
+
+class PagedFixtureClient(FixtureClient):
+    """Complete synthetic 20+1 pages built from the parsed source row shapes."""
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.notice_rows = tuple(
+            replace(self.notice_page.rows[0], notice_id=str(177286 + index), source_page=1 if index < 20 else 2)
+            for index in range(21)
+        )
+        self.claim_rows = tuple(
+            replace(
+                self.claim_page.rows[0], record_id=str(270350434 + index),
+                detail_url=f"{md.CLAIM_DETAIL_URL}?src=row&RecordId={270350434 + index}",
+                source_page=1 if index < 20 else 2,
+            )
+            for index in range(21)
+        )
+        self.notice_page = replace(self.notice_page, rows=self.notice_rows[:20])
+        self.claim_page = replace(self.claim_page, rows=self.claim_rows[:20])
+
+    def search_notices(self, criteria: md.NoticeCriteria) -> md.NoticeResultsPage:
+        page = super().search_notices(criteria)
+        return replace(page, effective_parameters={**page.effective_parameters, **criteria.parameters()})
+
+    def search_claims(self, criteria: md.ClaimCriteria) -> md.ClaimResultsPage:
+        page = super().search_claims(criteria)
+        return replace(page, effective_parameters=criteria.parameters())
+
+    def postback_notices(self, page: md.NoticeResultsPage, target: str) -> md.NoticeResultsPage:
+        assert page.current_page == 1 and target == page.page_targets[2]
+        return replace(page, current_page=2, rows=self.notice_rows[20:], page_targets={}, forward_target=None)
+
+    def postback_claims(self, page: md.ClaimResultsPage, target: str) -> md.ClaimResultsPage:
+        assert page.current_page == 1 and target == page.page_targets[2]
+        return replace(page, current_page=2, rows=self.claim_rows[20:], page_targets={}, forward_target=None)
+
+    def claim_detail(self, record_id: str, source_partition: str) -> md.ClaimDetail:
+        detail = super().claim_detail(record_id, source_partition)
+        return replace(
+            detail,
+            record={**detail.record, "record_id": record_id, "source_partition": source_partition},
+            url=f"{md.CLAIM_DETAIL_URL}?src={source_partition}&RecordId={record_id}",
+        )
+
+
+def _paged_execute(command: str, client: PagedFixtureClient, *options: str):
+    return md.execute(
+        _args(command, *options), access_decision=_allowed(), client=client,
+        retrieved_at=RETRIEVED_AT, log_results=False,
+    )
+
+
+@pytest.mark.parametrize("command", ["notices", "claims"])
+def test_limit_continuation_crosses_native_page_without_skips_or_duplicates(command: str) -> None:
+    client = PagedFixtureClient()
+    first = _paged_execute(command, client, "--limit", "1")
+    assert first.status == md.ResultStatus.PARTIAL
+    middle = _paged_execute(command, client, "--limit", "19", "--cursor", first.next_cursor)
+    assert middle.status == md.ResultStatus.PARTIAL
+    position = md._decode_cursor(middle.next_cursor)
+    assert (position.emitted_count, position.page_number, position.row_offset) == (20, 2, 0)
+    assert middle.errors[0].details == {"source_total": 21, "emitted_through": 20}
+    final = _paged_execute(command, client, "--cursor", middle.next_cursor)
+    assert final.status == md.ResultStatus.OK
+    assert final.next_cursor is None and not final.errors
+    key, first_id = ("notice_id", 177286) if command == "notices" else ("record_id", 270350434)
+    records = first.records + middle.records + final.records
+    assert [record[key] for record in records] == [str(first_id + index) for index in range(21)]
+    if command == "claims":
+        assert client.detail_ids == [(str(first_id + index), "row") for index in range(21)]
+
+
+@pytest.mark.parametrize("command", ["notices", "claims"])
+@pytest.mark.parametrize("limit", [None, "21"])
+def test_complete_traversal_is_ok_with_omitted_or_exact_limit(command: str, limit: str | None) -> None:
+    options = ("--limit", limit) if limit else ()
+    result = _paged_execute(command, PagedFixtureClient(), *options)
+    assert result.status == md.ResultStatus.OK
+    assert len(result.records) == 21
+    assert result.next_cursor is None and not result.errors
+
+
+@pytest.mark.parametrize("command", ["notices", "claims"])
+@pytest.mark.parametrize("change", ["source", "query", "snapshot", "schema", "count"])
+def test_limited_cursor_rejects_changed_source_query_or_snapshot(command: str, change: str) -> None:
+    client = PagedFixtureClient()
+    first = _paged_execute(command, client, "--limit", "1")
+    options = ["--cursor", first.next_cursor]
+    if change == "source":
+        command = "claims" if command == "notices" else "notices"
+    elif change == "query":
+        options.extend(["--last-name", "Different"])
+    else:
+        attribute = "notice_page" if command == "notices" else "claim_page"
+        page = getattr(client, attribute)
+        fields = {
+            "snapshot": {"snapshot_marker": "changed"},
+            "schema": {"schema_fingerprint": "changed"},
+            "count": {"total_count": 22},
+        }
+        setattr(client, attribute, replace(page, **fields[change]))
+    result = _paged_execute(command, client, *options)
+    assert result.status not in {md.ResultStatus.OK, md.ResultStatus.PARTIAL, md.ResultStatus.NO_RESULTS}
+    assert result.records == () and result.next_cursor is None
+    assert result.errors[0].code == "stale_or_invalid_cursor"
 
 
 def test_source_records_keep_notices_claims_and_estate_routes_separate() -> None:

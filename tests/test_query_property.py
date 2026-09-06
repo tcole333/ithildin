@@ -2464,10 +2464,17 @@ def test_orleans_live_route_preserves_ingest_and_catalog_decision(
 
 
 def test_account_operation_requires_source_when_multiple_routes_exist(
-    tmp_path,
+    tmp_path, monkeypatch,
 ):
     catalog_path = tmp_path / "catalog.db"
     seed_catalog(db_path=catalog_path)
+    logged = []
+    monkeypatch.setattr(query_property, "log_search", lambda *args: logged.append(args))
+
+    def unexpected_dispatch(*_args, **_kwargs):
+        raise AssertionError("adapter dispatch requires an explicit source selection")
+
+    monkeypatch.setattr(query_property, "_live_result", unexpected_dispatch)
 
     payload = query_property.execute(
         _parse(
@@ -2494,12 +2501,16 @@ def test_account_operation_requires_source_when_multiple_routes_exist(
         query_property.ORLEANS_SOURCE_ID,
         *query_property.OREGON_TAXLOT_SOURCE_IDS,
     }.issubset(compatible_source_ids)
+    assert len(logged) == 1
+    assert logged[0][1:] == (query_property.CATALOG_SOURCE_ID, None)
 
 
 def test_orleans_catalog_decision_precedes_adapter_dispatch(tmp_path, monkeypatch):
     catalog_path = tmp_path / "catalog.db"
     seed_catalog(db_path=catalog_path)
     route = query_property.LIVE_ROUTES[query_property.ORLEANS_SOURCE_ID]["owner"]
+    logged = []
+    monkeypatch.setattr(query_property, "log_search", lambda *args: logged.append(args))
 
     def unexpected_dispatch(*_args, **_kwargs):
         raise AssertionError("adapter was called before catalog readiness")
@@ -2531,6 +2542,8 @@ def test_orleans_catalog_decision_precedes_adapter_dispatch(tmp_path, monkeypatc
 
     assert payload["status"] == "unavailable"
     assert payload["errors"][0]["code"] == "access_review_required"
+    assert len(logged) == 1
+    assert logged[0][1:] == (query_property.ORLEANS_SOURCE_ID, None)
 
 
 def test_bulk_source_surfaces_adapter_status_and_direct_tool_guidance(

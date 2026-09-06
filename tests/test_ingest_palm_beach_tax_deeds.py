@@ -5,9 +5,11 @@ import json
 from pathlib import Path
 from typing import Any
 
+import pytest
+
 from tools import query_palm_beach_property_appraiser as appraiser
 from tools import query_palm_beach_tax_deeds as tax_deeds
-from tools.ingest_property_records import ingest_property_envelope
+from tools.ingest_property_records import PropertyIngestError, ingest_property_envelope
 from tools.public_records_contract import (
     PublicRecordsQuery,
     PublicRecordsResult,
@@ -90,6 +92,19 @@ def test_tax_deed_case_projects_event_roles_and_source_attributed_shell(
 
     db = connect_property(db_path)
     try:
+        jurisdiction = db.execute(
+            "SELECT name, jurisdiction_type, parent_geoid, state_code, county_code "
+            "FROM jurisdiction WHERE geoid='12099'"
+        ).fetchone()
+        assert tuple(jurisdiction) == ("Palm Beach County", "county", "12", "FL", "099")
+        observation = db.execute(
+            "SELECT raw_json FROM source_observation WHERE source_id=? "
+            "AND record_kind='tax_deed_case_occurrence'",
+            (tax_deeds.SOURCE_ID,),
+        ).fetchone()
+        assert json.loads(observation["raw_json"])["jurisdiction"] == (
+            detail["jurisdiction"]
+        )
         shell = db.execute(
             """
             SELECT source_id, native_parcel_id, raw_json
@@ -190,6 +205,51 @@ def test_tax_deed_case_projects_event_roles_and_source_attributed_shell(
         )
     finally:
         db.close()
+
+
+@pytest.mark.parametrize(
+    "jurisdiction",
+    [
+        {"state_code": "FL"},
+        {"state_code": "FL", "county_fips": "099"},
+        {"state_code": "FL", "county_fips": "12086"},
+        {"state_code": "FL", "state_fips": "12"},
+        {"state_code": "FL", "county_fips": "12099", "county_geoid": "12086"},
+    ],
+)
+def test_tax_deed_rejects_missing_ambiguous_or_out_of_scope_county(
+    tmp_path: Path, jurisdiction: dict[str, str]
+) -> None:
+    db_path = tmp_path / "property.db"
+    detail = _tax_deed_detail()
+    detail["jurisdiction"] = jurisdiction
+    with pytest.raises(PropertyIngestError, match="GEOID"):
+        ingest_property_envelope(
+            _envelope(tax_deeds.SOURCE_METADATA, tax_deeds.JURISDICTION, "detail", detail),
+            db_path=db_path,
+        )
+    db = connect_property(db_path)
+    try:
+        for table in ("jurisdiction", "source_observation", "property_event", "parcel_snapshot"):
+            assert db.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0] == 0
+    finally:
+        db.close()
+
+
+def test_tax_deed_still_accepts_legacy_record_jurisdiction(tmp_path: Path) -> None:
+    detail = _tax_deed_detail()
+    detail["jurisdiction"] = {
+        "county_geoid": "12099",
+        "state_fips": "12",
+        "state_code": "FL",
+        "county_name": "Palm Beach",
+    }
+    summary = ingest_property_envelope(
+        _envelope(tax_deeds.SOURCE_METADATA, tax_deeds.JURISDICTION, "detail", detail),
+        db_path=tmp_path / "property.db",
+    )
+    assert summary["records_ingested"] == 1
+    assert summary["records"][0]["current_ownership_assertions_created"] == 0
 
 
 def test_later_appraiser_observation_adopts_tax_deed_shell_with_provenance(

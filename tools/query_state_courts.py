@@ -7711,7 +7711,9 @@ def _doj_court_records_args(
                 "case-page URL"
             )
         return argparse.Namespace(
-            case_url=query_doj_court_records._canonical_case_url(selector),
+            # The adapter validates this before acquisition and retains its
+            # structured query-selection error in the shared result envelope.
+            case_url=selector,
             limit=_caller_limit(args),
             cursor=args.cursor,
             **runtime,

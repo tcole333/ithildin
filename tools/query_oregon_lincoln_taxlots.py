@@ -23,11 +23,12 @@ import argparse
 import base64
 import binascii
 import json
+import math
 import re
 import sys
 import time
 import xml.etree.ElementTree as ET
-from dataclasses import dataclass
+from dataclasses import dataclass, fields
 from typing import Any, Mapping
 from urllib.parse import urlparse
 
@@ -1987,13 +1988,92 @@ def _sources_payload() -> dict[str, Any]:
     }
 
 
+@dataclass(frozen=True)
+class QueryOptions:
+    """Validated Python boundary shared by the CLI, router, and monitor."""
+
+    command: str
+    query: str | None = None
+    field: str = "all"
+    match: str = "auto"
+    limit: int = 100
+    cursor: str | None = None
+    geometry: bool = False
+    page_size: int = DEFAULT_PAGE_SIZE
+    max_response_bytes: int = DEFAULT_MAX_RESPONSE_BYTES
+    timeout: float = DEFAULT_TIMEOUT
+    minimum_interval: float = DEFAULT_MINIMUM_INTERVAL
+    retry_attempts: int = DEFAULT_RETRY_ATTEMPTS
+
+    def __post_init__(self) -> None:
+        if self.command not in {"sources", "search", "probe"}:
+            raise ValueError("command must be sources, search, or probe")
+        if self.field not in SEARCH_FIELDS:
+            raise ValueError("field must be one of " + ", ".join(sorted(SEARCH_FIELDS)))
+        if self.match not in {"auto", "exact", "contains"}:
+            raise ValueError("match must be auto, exact, or contains")
+        if self.command == "search" and (not isinstance(self.query, str) or not self.query.strip()):
+            raise ValueError("query must not be blank")
+        for name in ("page_size", "retry_attempts", "max_response_bytes", "limit"):
+            value = getattr(self, name)
+            if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+                raise ValueError(f"{name} must be a positive integer")
+        if self.page_size > MAX_PAGE_SIZE:
+            raise ValueError(f"page_size must not exceed {MAX_PAGE_SIZE}")
+        if not math.isfinite(self.timeout) or self.timeout <= 0:
+            raise ValueError("timeout must be positive and finite")
+        if not math.isfinite(self.minimum_interval) or self.minimum_interval < 0:
+            raise ValueError("minimum_interval must be nonnegative and finite")
+
+    @classmethod
+    def from_namespace(cls, args: argparse.Namespace) -> QueryOptions:
+        """Adapt legacy Python/CLI callers without parsing another argv list."""
+        return cls(**{
+            item.name: getattr(args, item.name)
+            for item in fields(cls) if hasattr(args, item.name)
+        })
+
+
+def property_query_options(
+    operation: str,
+    selector: str,
+    *,
+    jurisdiction: str | None = None,
+    county_fips: str | None = None,
+    search_field: str | None = None,
+    geometry: bool = False,
+    **options: Any,
+) -> QueryOptions:
+    """Translate the unified property vocabulary beside its source adapter."""
+    jurisdiction = str(jurisdiction or "").strip().upper()
+    if jurisdiction not in {"", "41", "OR", "41041"}:
+        raise ValueError("Lincoln County taxlot WFS serves Oregon GEOID 41041")
+    county = str(county_fips or "").strip()
+    if county and county not in {"041", "41041"}:
+        raise ValueError("Lincoln County taxlot WFS uses county code 041 or GEOID 41041")
+    field_by_operation = {
+        "search": "all", "owner": "owner", "address": "address",
+        "parcel": "parcel", "map": "parcel", "account": "property",
+    }
+    if operation not in field_by_operation:
+        raise ValueError(f"unsupported Lincoln property operation: {operation}")
+    field = str(search_field or "").strip().casefold() or field_by_operation[operation]
+    return QueryOptions(
+        command="search", query=selector, field=field,
+        geometry=geometry or operation == "map", **options,
+    )
+
+
 def execute(
-    args: argparse.Namespace,
+    args: QueryOptions | argparse.Namespace,
     *,
     client: Any = None,
     log_results: bool = True,
 ) -> PublicRecordsResult | dict[str, Any]:
     """Execute source discovery, record search, or the bounded sentinel probe."""
+
+    if not isinstance(args, QueryOptions):
+        args = QueryOptions.from_namespace(args)
 
     if args.command == "sources":
         return _sources_payload()
@@ -2131,20 +2211,11 @@ def build_parser() -> argparse.ArgumentParser:
 def main() -> None:
     parser = build_parser()
     args = parser.parse_args()
-    for name in ("page_size", "retry_attempts", "max_response_bytes"):
-        if hasattr(args, name) and getattr(args, name) <= 0:
-            parser.error(f"--{name.replace('_', '-')} must be positive")
-    if hasattr(args, "page_size") and args.page_size > MAX_PAGE_SIZE:
-        parser.error(f"--page-size must not exceed {MAX_PAGE_SIZE}")
-    if hasattr(args, "timeout") and args.timeout <= 0:
-        parser.error("--timeout must be positive")
-    if hasattr(args, "minimum_interval") and args.minimum_interval < 0:
-        parser.error("--minimum-interval must not be negative")
-    if hasattr(args, "limit") and args.limit <= 0:
-        parser.error("--limit must be positive")
-    if hasattr(args, "query") and not args.query.strip():
-        parser.error("query must not be blank")
-    _emit(execute(args), args)
+    try:
+        options = QueryOptions.from_namespace(args)
+    except (TypeError, ValueError) as error:
+        parser.error(str(error))
+    _emit(execute(options), args)
 
 
 if __name__ == "__main__":

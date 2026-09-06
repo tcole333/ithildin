@@ -18,10 +18,12 @@ Usage:
 """
 
 import argparse
+import hashlib
 import os
 import re
 import sqlite3
 import sys
+import threading
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 try:
@@ -96,6 +98,32 @@ def _utcnow() -> datetime:
 
 
 _schema_initialized = False
+_schema_cache = {}
+_schema_cache_lock = threading.RLock()
+
+
+def _schema_cache_state(db):
+    """Identify the open database and schema, without relying on a shared default.
+
+    File identity detects replacement; the schema digest also detects an
+    incomplete replacement when an inode or SQLite schema counter is reused.
+    Ordinary data writes leave this signature unchanged. Independent memory or
+    temporary databases must each be initialized, so they have no cache key.
+    """
+    filename = next(row[2] for row in db.execute("PRAGMA database_list") if row[1] == "main")
+    if not filename:
+        return None, None
+    db_path = Path(filename).resolve()
+    try:
+        stat = db_path.stat()
+    except FileNotFoundError:
+        return None, None  # An open but unlinked database cannot seed a path cache.
+    schema = [tuple(row) for row in db.execute(
+        "SELECT type, name, tbl_name, sql FROM sqlite_master ORDER BY type, name"
+    )]
+    digest = hashlib.sha256(repr(schema).encode("utf-8")).digest()
+    version = db.execute("PRAGMA schema_version").fetchone()[0]
+    return db_path, (stat.st_dev, stat.st_ino, version, digest)
 
 
 def _quote_sqlite_identifier(identifier):
@@ -543,9 +571,20 @@ def get_db():
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")
     db.execute("PRAGMA foreign_keys=ON")
-    if not _schema_initialized:
-        db = _ensure_schema(db)
-        _schema_initialized = True
+    try:
+        with _schema_cache_lock:
+            if not _schema_initialized:
+                _schema_cache.clear()  # Preserve explicit invalidation by callers/tests.
+            cache_key, state = _schema_cache_state(db)
+            if cache_key is None or _schema_cache.get(cache_key) != state:
+                db = _ensure_schema(db)
+                cache_key, state = _schema_cache_state(db)
+                if cache_key is not None:
+                    _schema_cache[cache_key] = state
+            _schema_initialized = True
+    except Exception:
+        db.close()
+        raise
     return db
 
 

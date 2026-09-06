@@ -35,7 +35,9 @@ def test_shared_routes_and_guidance_preserve_source_scope() -> None:
         "parcel_join_candidates": ["PIN", "TERRA_PIN", "Taxlot"],
         "parcel_join_uniqueness": "not_assumed",
     }
-    assert "Treasurer balance/payment history" in guidance["note"]
+    assert "does not publish recorder instruments or treasury balance/payment history" in (
+        guidance["note"]
+    )
     assert {
         item.get("source_id")
         for item in guidance["official_complements"]
@@ -107,6 +109,38 @@ def test_shared_bound_cursor_and_interval_are_caller_selected() -> None:
     assert translated.limit == 7
     assert translated.cursor == "cursor-value"
     assert translated.minimum_interval == 0.7
+
+
+@pytest.mark.parametrize(
+    ("command", "selector", "coordinates"),
+    [
+        ("point", "-123.1,47.2", (-123.1, 47.2)),
+        ("point", "-123.1 47.2", (-123.1, 47.2)),
+        ("bbox", "-123.2,47.1,-123.0,47.3", (-123.2, 47.1, -123.0, 47.3)),
+    ],
+)
+def test_negative_spatial_selectors_preserve_options_before_and_after(
+    command: str, selector: str, coordinates: tuple[float, ...]
+) -> None:
+    args = _parse(
+        command, "--source", mason.SOURCE_ID, selector, "--limit", "3"
+    )
+    translated = query_property._mason_county_tax_parcel_args(args, command)
+    assert args.query == selector
+    assert translated.limit == 3
+    if command == "point":
+        assert (translated.longitude, translated.latitude) == coordinates
+    else:
+        assert (
+            translated.west, translated.south, translated.east, translated.north
+        ) == coordinates
+
+
+def test_spatial_selector_handling_does_not_accept_unknown_options() -> None:
+    with pytest.raises(SystemExit):
+        _parse("point", "-123.1,47.2", "--limti", "3")
+    with pytest.raises(SystemExit):
+        _parse("point", "-123.1,47.2", "--longitude", "-123.1", "--latitude", "47.2")
 
 
 def test_shared_discovery_count_and_spatial_selectors() -> None:

@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 import argparse
+import json
 
 import pytest
 
-from tools import query_state_courts
+from tools import lead_tracker, query_state_courts
 from tools.public_records_contract import (
     JurisdictionMetadata,
     PublicRecordsQuery,
@@ -205,6 +206,9 @@ def test_vi_claims_can_ingest_and_query_from_local_sidecar(
     monkeypatch: pytest.MonkeyPatch,
     tmp_path,
 ) -> None:
+    search_db_path = tmp_path / "search-log.db"
+    monkeypatch.setattr(lead_tracker, "DB_PATH", search_db_path)
+    monkeypatch.setenv("ITHILDIN_DB_PATH", str(search_db_path))
     _install_catalog(monkeypatch)
     route = query_state_courts.LIVE_ROUTES[
         query_state_courts.VICOURTS_SOURCE_ID
@@ -287,6 +291,15 @@ def test_vi_claims_can_ingest_and_query_from_local_sidecar(
             "native_access_state": None,
         }
     ]
+    db = lead_tracker.get_db()
+    try:
+        logged = db.execute("SELECT query_text, source, result_count FROM search_log").fetchone()
+        assert logged["source"] == query_state_courts.LOCAL_SOURCE_ID
+        assert logged["result_count"] == 1
+        assert json.loads(logged["query_text"])["query"]["operation"] == "claims"
+        assert db.execute("SELECT COUNT(*) FROM search_history").fetchone()[0] == 1
+    finally:
+        db.close()
 
 
 def test_vi_router_preserves_docket_entry_document_selector(

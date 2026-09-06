@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+
 from tools import query_hcad_gis
 from tools import query_txgio_land_parcels
 from tools.ingest_property_records import ingest_property_envelope
@@ -7,14 +9,14 @@ from tools.public_records_contract import PublicRecordsResult
 from tools.public_records_store import connect_property
 
 
-def _hcad_feature(object_id: int) -> dict:
+def _hcad_feature(object_id: int, *, account: str | None = "1144740190749") -> dict:
     return query_hcad_gis._normalize_feature(
         {
             "attributes": {
                 "OBJECTID": object_id,
-                "HCAD_NUM": "1144740190749",
-                "acct_num": "1144740190749",
-                "LOWPARCELID": "1144740190749",
+                "HCAD_NUM": account,
+                "acct_num": account,
+                "LOWPARCELID": account,
                 "GlobalID": f"{{hcad-feature-{object_id}}}",
                 "tax_year": "2025",
                 "owner_name_1": "HILL GERALD B",
@@ -322,49 +324,50 @@ def test_nonparcel_bulk_records_remain_preserved_without_projection(
     )
 
 
-def test_unlinked_hcad_feature_is_retained_as_an_occurrence(
+def test_unlinked_hcad_features_retain_distinct_occurrence_references(
     tmp_path,
 ) -> None:
     envelope = _hcad_envelope()
-    feature = _hcad_feature(99)
-    feature["canonical_ref"] = None
-    feature["native_parcel_id"] = None
-    feature["parcel_identifiers"] = {
-        "hcad_num": None,
-        "cama_account": None,
-        "lowest_parcel_id": None,
-        "global_id": "{unlinked-feature-99}",
-    }
-    feature["parcel_join_key"] = {
-        "county_geoid": query_hcad_gis.COUNTY_GEOID,
-        "field": None,
-        "value": None,
-        "uniqueness_in_layer": "not_assumed",
-    }
-    envelope["records"] = [feature]
+    # Normalize absent raw join keys so the occurrence reference is generated
+    # consistently, rather than mutating only part of an already-linked record.
+    features = [_hcad_feature(object_id, account=None) for object_id in (99, 100)]
+    envelope["records"] = features
 
     db_path = tmp_path / "property.db"
     result = ingest_property_envelope(envelope, db_path=db_path)
 
     assert result["records_ingested"] == 0
-    assert result["records_preserved_without_projection"] == 1
-    assert result["projection_skips"][0]["reason"] == (
-        "feature_occurrence_has_no_parcel_join_identifier"
+    assert result["records_preserved_without_projection"] == 2
+    assert all(
+        item["reason"] == "feature_occurrence_has_no_parcel_join_identifier"
+        for item in result["projection_skips"]
     )
     db = connect_property(db_path)
     try:
-        occurrence = db.execute(
+        occurrences = db.execute(
             """
-            SELECT source_native_id, record_kind
+            SELECT source_native_id, record_kind, raw_json
             FROM source_observation
             WHERE source_id=? AND record_kind<>?
             """,
             (query_hcad_gis.SOURCE_ID, "query_envelope"),
-        ).fetchone()
-        assert tuple(occurrence) == (
-            "99",
-            "hcad_mapserver_parcel_feature",
-        )
+        ).fetchall()
+        assert {row["source_native_id"] for row in occurrences} == {
+            "PROPERTY:us-tx-harris-hcad-gis/48201/parcel_feature/unlinked%3A99",
+            "PROPERTY:us-tx-harris-hcad-gis/48201/parcel_feature/unlinked%3A100",
+        }
+        assert {row["record_kind"] for row in occurrences} == {
+            "hcad_mapserver_parcel_feature"
+        }
+        for row in occurrences:
+            raw = json.loads(row["raw_json"])
+            assert raw["native_parcel_id"] is None
+            assert raw["feature_ref"] == row["source_native_id"]
+            assert raw["parcel_join_key"]["value"] is None
+        assert {
+            json.loads(row["raw_json"])["feature_occurrence"]["object_id"]
+            for row in occurrences
+        } == {99, 100}
         assert db.execute("SELECT COUNT(*) FROM parcel_snapshot").fetchone()[0] == 0
     finally:
         db.close()

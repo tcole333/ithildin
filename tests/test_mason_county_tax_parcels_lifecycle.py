@@ -136,7 +136,7 @@ def test_catalog_census_monitor_and_shared_operation_lifecycle(
     detail = catalog.show_source(mason.SOURCE_ID)
     manifest = detail["current_manifest"]
 
-    assert manifest["jurisdiction_geoids"] == ["53045"]
+    assert [item["geoid"] for item in manifest["jurisdictions"]] == ["53045"]
     assert set(manifest["roles"]) == {
         "assessment_roll",
         "parcel_geometry",
@@ -257,4 +257,4 @@ def test_docs_citations_and_iteration_learning_capture_verified_contract() -> No
         assert "21901-00-90013" in content
         assert "rolling" in content
     assert "published capability flags select the traversal family" in roadmap
-    assert "Preserve source features that lack a business join key" in roadmap
+    assert "Preserve source features that lack a usable business join key" in roadmap

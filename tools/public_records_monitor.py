@@ -21311,18 +21311,11 @@ def probe_oregon_lincoln_taxlots(
     """Probe the county WFS with stable protocol and rolling count separation."""
 
     started = time.perf_counter()
-    args = query_oregon_lincoln_taxlots.build_parser().parse_args(
-        [
-            "probe",
-            "--page-size",
-            str(query_oregon_lincoln_taxlots.DEFAULT_PAGE_SIZE),
-            "--timeout",
-            str(context.timeout),
-            "--minimum-interval",
-            str(_catalog_interval(context.catalog_decision)),
-            "--retry-attempts",
-            str(context.max_attempts),
-        ]
+    args = query_oregon_lincoln_taxlots.QueryOptions(
+        command="probe",
+        timeout=context.timeout,
+        minimum_interval=_catalog_interval(context.catalog_decision),
+        retry_attempts=context.max_attempts,
     )
     result = query_oregon_lincoln_taxlots.execute(
         args,

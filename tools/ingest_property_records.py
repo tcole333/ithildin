@@ -809,7 +809,7 @@ def _record_url(envelope: Mapping[str, Any]) -> str | None:
 
 
 def _roll_year(record: Mapping[str, Any]) -> str:
-    value = _text(record.get("tax_year"))
+    value = _text(record.get("tax_year")) or _text(record.get("roll_year"))
     if value:
         return value[:4]
     raw = record.get("raw_attributes")
@@ -833,7 +833,12 @@ def _address_raw(address: Mapping[str, Any]) -> str | None:
 
 def _upsert_jurisdiction(db, record: Mapping[str, Any]) -> str:
     jurisdiction = _mapping(record.get("jurisdiction"), "record.jurisdiction")
-    geoid = _text(jurisdiction.get("county_geoid") or jurisdiction.get("state_fips"))
+    county_geoid = _text(jurisdiction.get("county_geoid"))
+    # Shared JurisdictionMetadata serializes a county GEOID as county_fips.
+    county_fips = _text(jurisdiction.get("county_fips"))
+    if county_geoid and county_fips and county_geoid != county_fips:
+        raise PropertyIngestError("record jurisdiction has conflicting county GEOIDs")
+    geoid = county_geoid or county_fips or _text(jurisdiction.get("state_fips"))
     if not geoid:
         raise PropertyIngestError(
             "record jurisdiction requires a county or state GEOID"
@@ -849,7 +854,7 @@ def _upsert_jurisdiction(db, record: Mapping[str, Any]) -> str:
         ),
     )
     state_code = (_text(jurisdiction.get("state_code")) or canonical_state_code).upper()
-    county_name = _text(jurisdiction.get("county_name"))
+    county_name = _text(jurisdiction.get("county_name") or jurisdiction.get("locality"))
     if county_name and not county_name.casefold().endswith(("county", "parish")):
         jurisdiction_suffix = "Parish" if state_fips == "22" else "County"
         county_name = f"{county_name} {jurisdiction_suffix}"

@@ -62,7 +62,9 @@ def _sales_record() -> dict[str, Any]:
     )
 
 
-def _assessment_record() -> dict[str, Any]:
+def _assessment_record(
+    *, tax_year: str = "2026", revision_date: str = "20260701",
+) -> dict[str, Any]:
     raw_header = (
         "TYYYY",
         "RDATE",
@@ -84,8 +86,8 @@ def _assessment_record() -> dict[str, Any]:
     )
     values = _row(
         raw_header,
-        TYYYY="2026",
-        RDATE="20260701",
+        TYYYY=tax_year,
+        RDATE=revision_date,
         TXID="R10174",
         ACCOUNT_ID="510174",
         TXCD="001",
@@ -403,5 +405,45 @@ def test_shared_ingestion_keeps_sale_occurrence_assessment_and_owner_scopes(
         assert db.execute(
             "SELECT COUNT(*) FROM recorded_instrument"
         ).fetchone()[0] == 0
+    finally:
+        db.close()
+
+
+def test_assessment_roll_years_remain_distinct_and_replay_stable(tmp_path: Path) -> None:
+    db_path = tmp_path / "property.db"
+    records = [
+        _assessment_record(tax_year="2025", revision_date="20250701"),
+        _assessment_record(tax_year="2026", revision_date="20260701"),
+    ]
+    parcel_ids = []
+    for record in records:
+        first = ingest_property_envelope(_envelope(record), db_path=db_path)
+        repeat = ingest_property_envelope(_envelope(record), db_path=db_path)
+        parcel_ids.append(first["records"][0]["parcel_id"])
+        assert repeat["records"][0]["parcel_id"] == parcel_ids[-1]
+        assert record.get("tax_year") is None
+        assert record["roll_year"] == record["assessment"]["tax_year"]
+    assert len(set(parcel_ids)) == 2
+
+    db = connect_property(db_path)
+    try:
+        rows = db.execute(
+            """SELECT p.native_parcel_id, p.jurisdiction_geoid, p.roll_year,
+                      a.tax_year, p.raw_json
+               FROM parcel_snapshot p JOIN assessment a USING (parcel_id)
+               ORDER BY p.roll_year"""
+        ).fetchall()
+        assert [tuple(row)[:4] for row in rows] == [
+            ("510174", "41047", "2025", "2025"),
+            ("510174", "41047", "2026", "2026"),
+        ]
+        assert [json.loads(row["raw_json"])["source_occurrence_id"] for row in rows] == [
+            record["source_occurrence_id"] for record in records
+        ]
+        assert dict(db.execute(
+            "SELECT record_kind, COUNT(*) FROM source_observation GROUP BY record_kind"
+        ).fetchall()) == {"query_envelope": 4, "parcel_snapshot": 4}
+        assert db.execute("SELECT COUNT(*) FROM ownership_assertion").fetchone()[0] == 0
+        assert db.execute("SELECT COUNT(*) FROM recorded_instrument").fetchone()[0] == 0
     finally:
         db.close()

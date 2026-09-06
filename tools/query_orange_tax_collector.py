@@ -876,6 +876,7 @@ def normalize_portal_hit(hit: Mapping[str, Any]) -> dict[str, Any]:
             owners.append(
                 {
                     **entity,
+                    "raw_name": entity["name"],
                     "assertion_type": "tax_account_owner_label",
                     "title_caveat": "not_a_title_chain",
                 }

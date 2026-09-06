@@ -132,6 +132,13 @@ remain source/transport facts.
   monitor data.
 - Maryland statewide address/parcel assessment queries with the source's
   withheld-current-owner state preserved explicitly.
+- Maryland MDP parcel points (`us-md-mdp-parcel-points`) through
+  `query_md_mdp_parcel_points.py`, with account, address, land-use, map/plat,
+  and spatial queries, shared routing, monitoring, and citations. `ACCTID`
+  joins the same SDAT account represented by the hidden-owner assessment
+  source; `OBJECTID` preserves each ArcGIS feature occurrence. The point
+  representation does not supply independent corroboration or current-owner
+  names.
 - Maryland MDP parcel-geodatabase, CAMA, and residential-sales bulk-release
   discovery, resumable acquisition, archive inspection, shared routing,
   monitoring, and citations. Release/provider/artifact/member identities remain

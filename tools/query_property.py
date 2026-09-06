@@ -2702,61 +2702,18 @@ def _oregon_multnomah_sail_args(
 def _oregon_lincoln_taxlot_args(
     args: argparse.Namespace,
     adapter_command: str,
-) -> argparse.Namespace:
-    """Translate shared selectors to Lincoln County's taxlot-owner WFS."""
-
-    jurisdiction = str(args.jurisdiction or "").strip().upper()
-    if jurisdiction not in {"", "41", "OR", "41041"}:
-        raise ValueError("Lincoln County taxlot WFS serves Oregon GEOID 41041")
-    county = str(args.county_fips or "").strip()
-    if county and county not in {"041", "41041"}:
-        raise ValueError(
-            "Lincoln County taxlot WFS uses county code 041 or GEOID 41041"
-        )
-
-    requested_field = str(args.search_field or "").strip().casefold()
-    if (
-        requested_field
-        and requested_field not in query_oregon_lincoln_taxlots.SEARCH_FIELDS
-    ):
-        raise ValueError(
-            "Lincoln County taxlot WFS fields are "
-            + ", ".join(sorted(query_oregon_lincoln_taxlots.SEARCH_FIELDS))
-        )
-    field = (
-        requested_field
-        or {
-            "search": "all",
-            "owner": "owner",
-            "address": "address",
-            "parcel": "parcel",
-            "map": "parcel",
-            "account": "property",
-        }[args.command]
-    )
-    return argparse.Namespace(
-        command=adapter_command,
-        query=args.query,
-        field=field,
-        match="auto",
-        limit=args.limit,
-        cursor=args.cursor,
-        geometry=args.geometry or args.command == "map",
-        page_size=(
-            args.page_size
-            if args.page_size is not None
-            else query_oregon_lincoln_taxlots.DEFAULT_PAGE_SIZE
-        ),
-        max_response_bytes=(query_oregon_lincoln_taxlots.DEFAULT_MAX_RESPONSE_BYTES),
-        timeout=(
-            args.timeout
-            if args.timeout is not None
-            else query_oregon_lincoln_taxlots.DEFAULT_TIMEOUT
-        ),
+) -> query_oregon_lincoln_taxlots.QueryOptions:
+    if adapter_command != "search":
+        raise ValueError("Lincoln taxlot shared routes require search")
+    return query_oregon_lincoln_taxlots.property_query_options(
+        args.command, args.query, jurisdiction=args.jurisdiction,
+        county_fips=args.county_fips, search_field=args.search_field,
+        geometry=args.geometry, limit=args.limit, cursor=args.cursor,
+        page_size=(args.page_size if args.page_size is not None
+                   else query_oregon_lincoln_taxlots.DEFAULT_PAGE_SIZE),
+        timeout=(args.timeout if args.timeout is not None
+                 else query_oregon_lincoln_taxlots.DEFAULT_TIMEOUT),
         minimum_interval=args.minimum_interval,
-        retry_attempts=3,
-        output=None,
-        json_out=False,
     )
 
 
@@ -17644,6 +17601,18 @@ def _emit(payload: Mapping[str, Any], args: argparse.Namespace) -> None:
 class _PropertyArgumentParser(argparse.ArgumentParser):
     """Normalize explicit coordinate options into the shared selector."""
 
+    def _parse_optional(self, arg_string: str):
+        coordinate_count = getattr(self, "coordinate_count", 0)
+        if coordinate_count:
+            # argparse recognizes a single negative number, but treats a
+            # longitude-led tuple as a flag. Only spatial subcommands accept
+            # these exact numeric selectors; unknown options still fail.
+            number = r"[+-]?(?:\d+(?:\.\d*)?|\.\d+)"
+            pattern = rf"{number}(?:[\s,]+{number}){{{coordinate_count - 1}}}"
+            if re.fullmatch(pattern, arg_string.strip()):
+                return None
+        return super()._parse_optional(arg_string)
+
     def parse_args(
         self,
         args: Any = None,
@@ -17892,6 +17861,8 @@ def build_parser() -> argparse.ArgumentParser:
         ("probe", "Run a source's bounded contract probe"),
     ):
         command_parser = sub.add_parser(command, help=help_text)
+        if command in {"point", "bbox"}:
+            command_parser.coordinate_count = 2 if command == "point" else 4
         _add_query_args(
             command_parser,
             query_optional=command

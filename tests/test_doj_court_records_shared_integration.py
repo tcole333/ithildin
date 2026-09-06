@@ -143,12 +143,6 @@ def test_discovery_and_probe_do_not_acquire_or_normalize_rows() -> None:
             "not source-native court",
         ),
         (
-            "documents",
-            "19-cr-00490",
-            (),
-            "DOJ court-record case page",
-        ),
-        (
             "search",
             "Epstein",
             ("--ingest",),
@@ -179,6 +173,58 @@ def test_shared_routes_reject_misleading_case_semantics(
 
     with pytest.raises(ValueError, match=message):
         route.translate(args, route.adapter_command)
+
+
+@pytest.mark.parametrize(
+    ("selector", "error_code"),
+    [
+        ("19-cr-00490", "invalid_case_url"),
+        ("https://example.org/court-records/example", "unofficial_url"),
+    ],
+)
+def test_invalid_document_selector_preserves_source_error_without_acquisition(
+    monkeypatch: pytest.MonkeyPatch,
+    selector: str,
+    error_code: str,
+) -> None:
+    class FakeCatalog:
+        def __init__(self, _path):
+            pass
+
+        def show_source(self, source_id):
+            assert source_id == doj_courts.SOURCE_ID
+            return {"source_id": source_id}
+
+        def machine_acquisition_decision(self, _source_id):
+            return {"allowed": True, "limits": {}}
+
+    class NoNetworkSession:
+        closed = False
+
+        def request(self, *_args, **_kwargs):
+            pytest.fail("an invalid selector must fail before any HTTP request")
+
+        def close(self):
+            self.closed = True
+
+    session = NoNetworkSession()
+    monkeypatch.setattr(query_state_courts, "PublicRecordsCatalog", FakeCatalog)
+    monkeypatch.setattr(doj_courts, "system_trust_session", lambda: session)
+    monkeypatch.setattr(doj_courts, "log_search", lambda *_args: None)
+
+    payload = query_state_courts.execute(
+        _shared_args("documents", selector, "--source", doj_courts.SOURCE_ID)
+    )
+
+    assert payload["status"] == "unavailable"
+    assert payload["records"] == []
+    assert len(payload["errors"]) == 1
+    error = payload["errors"][0]
+    assert error["code"] == error_code
+    assert error["category"] == "query_selection"
+    assert error["retryable"] is False
+    assert selector in error["details"]["url"]
+    assert session.closed is True
 
 
 def test_shared_adapter_applies_transport_settings_and_closes_client(

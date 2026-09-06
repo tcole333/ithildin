@@ -119,16 +119,23 @@ def test_repeated_parcel_number_preserves_occurrences_without_parid_alias(
         )
         addresses = db.execute(
             """
-            SELECT address_role, raw_address
+            SELECT address_role, raw_address, city, state, postal_code, effective_to
             FROM parcel_address
             WHERE source_id=?
-            ORDER BY address_role
+            ORDER BY address_role, address_id
             """,
             (palm.SOURCE_ID,),
         ).fetchall()
+        # The second occurrence omits locality fields. Equal street text does
+        # not justify collapsing the incomplete and complete address assertions.
         assert [tuple(row) for row in addresses] == [
-            ("mailing", "EXAMPLE OWNER, PO BOX 100"),
-            ("situs", "100 MAIN ST"),
+            (
+                "mailing", "EXAMPLE OWNER, PO BOX 100", "WEST PALM BEACH",
+                "FL", "33401-0001", None,
+            ),
+            ("mailing", "EXAMPLE OWNER, PO BOX 100", None, None, None, None),
+            ("situs", "100 MAIN ST", "WEST PALM BEACH", None, None, None),
+            ("situs", "100 MAIN ST", None, None, None, None),
         ]
         owner = db.execute(
             """
@@ -156,6 +163,9 @@ def test_repeated_parcel_number_preserves_occurrences_without_parid_alias(
         )
     finally:
         db.close()
+
+    repeated = ingest_property_envelope(_envelope(first, second), db_path=db_path)
+    assert sum(item["addresses_inserted"] for item in repeated["records"]) == 0
 
 
 def test_confidential_blank_fields_remain_publisher_state(

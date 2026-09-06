@@ -3714,6 +3714,7 @@ def test_lincoln_wfs_monitor_separates_protocol_from_rolling_count(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     adapter = public_records_monitor.query_oregon_lincoln_taxlots
+    monkeypatch.setattr(adapter, "build_parser", lambda: pytest.fail("internal CLI parsing"))
     rolling = {"count": 44966, "fid": "42750936"}
     calls = []
 
@@ -3794,6 +3795,7 @@ def test_lincoln_wfs_monitor_separates_protocol_from_rolling_count(
 
     assert first.status == "ok"
     assert first.schema_sha256 == adapter.EXPECTED_SCHEMA_FINGERPRINT
+    assert isinstance(calls[0][0], adapter.QueryOptions)
     assert first.artifact_sha256 == second.artifact_sha256
     assert first.details["rolling_observation"] != second.details["rolling_observation"]
     assert calls[0][0].command == "probe"

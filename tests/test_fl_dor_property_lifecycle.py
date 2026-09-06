@@ -203,8 +203,9 @@ def test_catalog_and_census_separate_source_coverage_from_projection(
     assert maturity["gis_pin_dbf_join_and_crs_preservation"] == (
         "implemented"
     )
-    assert maturity["shapefile_geometry_decoding"] == "follow_up"
-    assert maturity["shapefile_geometry_follow_up_infra_request"] == 314
+    assert maturity["shapefile_geometry_decoding"] == "implemented"
+    assert maturity["gis_pin_native_geometry_projection"] == "implemented"
+    assert maturity["shapefile_geometry_infra_request"] == 314
     assert {
         field: manifest["probe_evidence"][field]
         for field in MONITOR_HASHES
@@ -214,7 +215,14 @@ def test_catalog_and_census_separate_source_coverage_from_projection(
     ] is False
     assert capabilities["ingest_release_archives"][
         "parcel_geometry_rows_created"
-    ] is False
+    ] == "gis_pin_joinable_parcels"
+    assert capabilities["ingest_release_archives"]["projections"]["gis-pin"] == [
+        "aligned_feature_occurrence_observations",
+        "blank_join_key_observations",
+        "native_crs_geometry",
+        "exact_parcel_shells",
+        "repeated_feature_collections_without_spatial_dissolve",
+    ]
 
     associations = {
         association["role"]: association
@@ -232,9 +240,13 @@ def test_catalog_and_census_separate_source_coverage_from_projection(
     assert geometry["coverage"]["statewide"] is True
     assert geometry["coverage"]["source_geometry_type"] == "polygon"
     assert geometry["coverage"]["current_ingest_projection"] == (
-        "dbf_join_rows_and_crs_without_decoded_geometry"
+        "native_feature_references_and_repeated_feature_collections"
     )
-    assert "infrastructure request #314" in geometry["notes"]
+    assert "blank join keys, source CRS, and artifact lineage" in geometry["notes"]
+    assert any(
+        "does not dissolve them into a surveyed boundary" in gap
+        for gap in geometry["coverage_gaps"]
+    )
 
     assessment_target = census.list_targets(
         state="FL",
@@ -291,4 +303,6 @@ def test_docs_and_citation_cover_release_and_ingest_lifecycle() -> None:
     for content in (property_docs, tool_reference):
         assert florida.SOURCE_ID in content
         assert "ingest_fl_dor_property.py" in content
-        assert "infrastructure request #314" in content
+        assert "native-CRS" in content
+        assert "PARCELNO" in content
+        assert "recorded-title instruments" in content

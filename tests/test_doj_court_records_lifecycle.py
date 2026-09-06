@@ -200,7 +200,7 @@ def test_catalog_shared_routes_and_release_semantics_match_implementation(
     assert decision["allowed"] is True
     assert decision["limits"] == {}
     assert manifest["record_identity_source_id"] == doj_courts.SOURCE_ID
-    assert manifest["jurisdiction_geoids"] == ["US"]
+    assert [item["geoid"] for item in manifest["jurisdictions"]] == ["US"]
     assert manifest["stable_keys"] == [
         "case_page_url",
         "efta_id",

@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 from tools import query_new_jersey_dca_property as dca
-from tools import query_property
+from tools import lead_tracker, query_property
 from tools.ingest_property_records import ingest_property_envelope
 from tools.public_records_contract import PublicRecordsResult
 from tools.public_records_store import connect_property
@@ -211,8 +211,12 @@ def test_shared_dca_parcel_requires_source_geography() -> None:
 
 def test_dca_projection_retains_regulatory_identity_without_title_claim(
     tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     db_path = tmp_path / "property.db"
+    search_db_path = tmp_path / "search-log.db"
+    monkeypatch.setattr(lead_tracker, "DB_PATH", search_db_path)
+    monkeypatch.setenv("ITHILDIN_DB_PATH", str(search_db_path))
 
     report = ingest_property_envelope(_envelope(), db_path=db_path)
 
@@ -351,3 +355,12 @@ def test_dca_projection_retains_regulatory_identity_without_title_claim(
         local_result.records[0]["raw"]["registration"]["building_registration_number"]
         == "0714002653001"
     )
+    db = lead_tracker.get_db()
+    try:
+        logged = db.execute("SELECT query_text, source, result_count FROM search_log").fetchone()
+        assert logged["source"] == query_property.LOCAL_SOURCE_ID
+        assert logged["result_count"] == 1
+        assert json.loads(logged["query_text"])["query"]["operation"] == "event"
+        assert db.execute("SELECT COUNT(*) FROM search_history").fetchone()[0] == 1
+    finally:
+        db.close()

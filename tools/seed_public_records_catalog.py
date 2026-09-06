@@ -18,7 +18,9 @@ import hashlib
 import json
 import re
 import sqlite3
-from collections.abc import Iterable, Sequence
+from collections.abc import Callable, Iterable, Sequence
+from copy import deepcopy
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -290,8 +292,24 @@ def _normalize_census_associations(
     )
 
 
+@lru_cache(maxsize=4)
+def _cached_config_yaml(
+    _path: Path, text: str, loader: Callable[[str], Any]
+) -> Any:
+    """Cache only parsing, keyed by file contents and the current YAML loader.
+
+    Reading the file on every call detects edits even when its size and mtime
+    are unchanged. The small entry bound limits retention of custom catalogs;
+    the loader key also isolates callers that replace the parser in tests.
+    """
+    return loader(text)
+
+
 def _load_config(path: Path) -> dict[str, Any]:
-    data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    text = path.read_text(encoding="utf-8")
+    # Callers may alter nested source manifests. Never expose cached objects,
+    # and keep validation/normalization outside the cache so it always runs.
+    data = deepcopy(_cached_config_yaml(path.resolve(), text, yaml.safe_load))
     if not isinstance(data, Mapping):
         raise ValueError("public-record source config must be a mapping")
     if data.get("schema_version") != 1:
