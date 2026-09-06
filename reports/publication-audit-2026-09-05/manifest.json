@@ -1,0 +1,2193 @@
+{
+  "schema_version": 1,
+  "run_id": 155,
+  "scope_label": "platform-wide index review",
+  "cutoff_utc": "2026-09-06T01:11:55.470934+00:00",
+  "scope_snapshot": {
+    "tables": {
+      "investigation_profiles": {
+        "count": 36,
+        "max_id": null
+      },
+      "investigation_threads": {
+        "count": 213,
+        "max_id": 218
+      },
+      "findings": {
+        "count": 15678,
+        "max_id": 15694
+      },
+      "leads": {
+        "count": 14044,
+        "max_id": 96697
+      },
+      "connections": {
+        "count": 5918,
+        "max_id": 6809
+      },
+      "entities": {
+        "count": 7175,
+        "max_id": 7268
+      },
+      "hypotheses": {
+        "count": 470,
+        "max_id": 471
+      },
+      "finding_relations": {
+        "count": 700,
+        "max_id": 707
+      }
+    },
+    "profile_ids": [
+      "allbirds",
+      "altman",
+      "brad-karp",
+      "chesney",
+      "coscoluella",
+      "crml",
+      "curaleaf",
+      "dfj-network",
+      "eastport-cinemas",
+      "election-integrity",
+      "elephant-clipping",
+      "epstein",
+      "epstein-aetna",
+      "epstein-gates-ipi",
+      "epstein-oslo",
+      "feeding-our-future",
+      "fink",
+      "geo-group",
+      "hagee",
+      "hassan-boston",
+      "hfia",
+      "manosphere",
+      "mark-walter",
+      "merkin",
+      "mike-johnson",
+      "new",
+      "nginx",
+      "oversight-project",
+      "parlatore",
+      "peru-lockheed",
+      "richard-merkin",
+      "smci",
+      "softbank-caper",
+      "tech-right",
+      "test",
+      "zampolli"
+    ],
+    "finding_count": 15678,
+    "finding_max_id": 15694,
+    "lead_count": 14044,
+    "lead_max_id": 96697,
+    "git_commit": "53acdf3eae8fe6a2e8a8ad406c30c1a2e3ade54b",
+    "git_dirty": true,
+    "content_inventory": {
+      "dossiers": 519,
+      "articles": 9,
+      "frozen_files": 1099
+    }
+  },
+  "database_backup": {
+    "retained_path": "/tmp/osint-SUw5NK21/investigation-snapshot.db",
+    "sha256": "f196763205305616d1492d96aa28533e6762e1807d32cf4af4e6e6bed34a93b5"
+  },
+  "merge": {
+    "pr": "https://github.com/tcole333/ithildin/pull/12",
+    "sha": "4e1649d08a40f77a30a50ad4237aebd3c696805d",
+    "merged_at_utc": "2026-09-06T01:25:16Z",
+    "remote_ci": "not certified; user reports credit exhaustion",
+    "validation": "prior6331Python; integration11pass2skip; cleanfrontendbrowserbuildcitationspass"
+  },
+  "deployment": {
+    "post_merge_run": "https://github.com/tcole333/ithildin/actions/runs/34003848866",
+    "post_merge_conclusion": "failure",
+    "last_successful_recorded_sha": "5b8fa333e07d92b07f7662a6d70dcb94a5acea11",
+    "task_deployed": false
+  },
+  "coverage_ledger": [
+    {
+      "tool": "tools/ingest_kabasshouse.py",
+      "names": [
+        "Kabasshouse Epstein Corpus",
+        "Kabasshouse"
+      ],
+      "profiles": [
+        "brad-karp",
+        "coscoluella",
+        "epstein",
+        "epstein-gates-ipi",
+        "epstein-oslo",
+        "fink",
+        "merkin",
+        "richard-merkin"
+      ],
+      "tool_exists": true,
+      "sidecar": {
+        "path": "/Users/travcole/projects/osint-research/datasets/kabasshouse_epstein.db",
+        "exists": true,
+        "observed_at": "2026-09-06T01:20:19.204067+00:00",
+        "frozen": false,
+        "limitation": "Live sidecar metadata observed after frozen core cutoff; not part of the reproducible evidence snapshot.",
+        "size_bytes": 6422294528,
+        "modified_at": "2026-07-03T03:16:33.056576+00:00",
+        "modified_after_cutoff": false,
+        "tables": [
+          {
+            "table": "documents",
+            "columns": [
+              "id",
+              "file_key",
+              "dataset",
+              "document_type",
+              "date",
+              "ocr_source",
+              "page_number",
+              "document_number",
+              "is_photo",
+              "has_handwriting",
+              "has_stamps",
+              "char_count",
+              "email_fields",
+              "full_text"
+            ],
+            "rows": 1424673,
+            "high_water": {
+              "column": "id",
+              "value": "999999"
+            }
+          },
+          {
+            "table": "entities",
+            "columns": [
+              "id",
+              "document_id",
+              "entity_type",
+              "value",
+              "normalized_value"
+            ],
+            "rows": 10629198
+          },
+          {
+            "table": "financial_transactions",
+            "columns": [
+              "id",
+              "file_key",
+              "dataset",
+              "transaction_date",
+              "amount",
+              "currency",
+              "merchant_name",
+              "merchant_raw",
+              "merchant_category",
+              "location",
+              "cardholder",
+              "description",
+              "card_type",
+              "account_digits",
+              "statement_date",
+              "flight_from",
+              "flight_to",
+              "flight_carrier",
+              "flight_departure",
+              "flight_ticket",
+              "flight_passenger",
+              "source_page",
+              "extraction_model",
+              "extraction_confidence"
+            ],
+            "rows": 49770
+          },
+          {
+            "table": "curated_docs",
+            "columns": [
+              "id",
+              "file_key",
+              "subject",
+              "status",
+              "tier",
+              "category",
+              "doc_date",
+              "doc_from",
+              "doc_to",
+              "headline",
+              "key_quote",
+              "detail",
+              "thread_value",
+              "also_appears_as"
+            ],
+            "rows": 5766
+          },
+          {
+            "table": "communication_records",
+            "columns": [
+              "data"
+            ],
+            "rows": 128
+          },
+          {
+            "table": "investigative_records",
+            "columns": [
+              "data"
+            ],
+            "rows": 143
+          },
+          {
+            "table": "persons",
+            "columns": [
+              "data"
+            ],
+            "rows": 1614
+          }
+        ]
+      },
+      "review_level": "index",
+      "health": "local SQLite readable",
+      "limitation": "Metadata only; corpus record text not semantically reviewed. EFTA overlaps are one source family.",
+      "metadata_slices": {
+        "document_types": {
+          "distinct_labels": 6181,
+          "total_records": 1424673,
+          "null_records": 564974,
+          "top_labels": [
+            {
+              "label": "Email",
+              "n": 645640
+            },
+            {
+              "label": null,
+              "n": 564974
+            },
+            {
+              "label": "email",
+              "n": 28450
+            },
+            {
+              "label": "Email Header",
+              "n": 17946
+            },
+            {
+              "label": "Statement",
+              "n": 15077
+            },
+            {
+              "label": "Bank Statement",
+              "n": 12511
+            },
+            {
+              "label": "Court Document",
+              "n": 10636
+            },
+            {
+              "label": "Court Transcript",
+              "n": 7087
+            },
+            {
+              "label": "Memorandum",
+              "n": 6017
+            },
+            {
+              "label": "Network Log",
+              "n": 4588
+            },
+            {
+              "label": "Letter",
+              "n": 3913
+            },
+            {
+              "label": "Asset Account Portfolio",
+              "n": 3716
+            },
+            {
+              "label": "Check",
+              "n": 3295
+            },
+            {
+              "label": "Legal Filing",
+              "n": 3235
+            },
+            {
+              "label": "Report",
+              "n": 3226
+            },
+            {
+              "label": "Daily Deposit Report",
+              "n": 2784
+            },
+            {
+              "label": "Account Statement",
+              "n": 2475
+            },
+            {
+              "label": "Agreement",
+              "n": 2387
+            },
+            {
+              "label": "Account Summary",
+              "n": 2320
+            },
+            {
+              "label": "Legal Document",
+              "n": 2005
+            },
+            {
+              "label": "Portfolio Activity Summary",
+              "n": 1882
+            },
+            {
+              "label": "Invoice",
+              "n": 1813
+            },
+            {
+              "label": "Consolidated Statement",
+              "n": 1793
+            },
+            {
+              "label": "Form",
+              "n": 1568
+            },
+            {
+              "label": "Valuation Statement",
+              "n": 1556
+            }
+          ],
+          "limitations": "Full metadata distribution inspected; category labels are inherited extraction labels, not verified factual findings. Full distribution retained only in temporary source artifact."
+        },
+        "curated_category": {
+          "distinct_labels": 1804,
+          "total_records": 5766,
+          "null_records": 0,
+          "top_labels": [],
+          "limitations": "Full metadata distribution inspected; category labels are inherited extraction labels, not verified factual findings. Full distribution retained only in temporary source artifact."
+        },
+        "curated_status": [
+          {
+            "label": "gold",
+            "n": 5766
+          }
+        ],
+        "financial_confidence": [
+          {
+            "label": null,
+            "n": 49770
+          }
+        ]
+      }
+    },
+    {
+      "tool": "tools/query_unified.py",
+      "names": [
+        "Unified Epstein Relationship Database",
+        "Unified DB",
+        "Unified Epstein DB"
+      ],
+      "profiles": [
+        "brad-karp",
+        "coscoluella",
+        "epstein",
+        "epstein-aetna",
+        "epstein-gates-ipi",
+        "epstein-oslo",
+        "fink",
+        "merkin",
+        "richard-merkin",
+        "softbank-caper"
+      ],
+      "tool_exists": true,
+      "sidecar": {
+        "path": "/Users/travcole/projects/osint-research/datasets/unified_epstein.db",
+        "exists": true,
+        "observed_at": "2026-09-06T01:20:23.244761+00:00",
+        "frozen": false,
+        "limitation": "Live sidecar metadata observed after frozen core cutoff; not part of the reproducible evidence snapshot.",
+        "size_bytes": 529874944,
+        "modified_at": "2026-02-12T06:00:10.275542+00:00",
+        "modified_after_cutoff": false,
+        "tables": [
+          {
+            "table": "emails",
+            "columns": [
+              "id",
+              "source_dataset",
+              "source_doc_id",
+              "from_address",
+              "to_address",
+              "other_recipients",
+              "subject",
+              "timestamp_raw",
+              "timestamp_iso",
+              "body_text",
+              "body_html",
+              "content_hash",
+              "thread_id",
+              "message_order"
+            ],
+            "rows": 8316,
+            "high_water": {
+              "column": "id",
+              "value": 8316
+            }
+          },
+          {
+            "table": "documents",
+            "columns": [
+              "id",
+              "source_dataset",
+              "doc_id",
+              "category",
+              "summary",
+              "full_text",
+              "date_earliest",
+              "date_latest",
+              "content_hash"
+            ],
+            "rows": 70828,
+            "high_water": {
+              "column": "id",
+              "value": 70828
+            }
+          },
+          {
+            "table": "entities",
+            "columns": [
+              "id",
+              "canonical_name",
+              "hop_distance",
+              "source"
+            ],
+            "rows": 56149,
+            "high_water": {
+              "column": "id",
+              "value": 56149
+            }
+          },
+          {
+            "table": "triples",
+            "columns": [
+              "id",
+              "actor",
+              "action",
+              "target",
+              "location",
+              "timestamp",
+              "explicit_topic",
+              "implicit_topic",
+              "doc_id"
+            ],
+            "rows": 107030,
+            "high_water": {
+              "column": "id",
+              "value": 107030
+            }
+          },
+          {
+            "table": "entity_cooccurrence",
+            "columns": [
+              "id",
+              "entity_a",
+              "entity_b",
+              "file_count",
+              "label_a",
+              "label_b",
+              "source"
+            ],
+            "rows": 45051,
+            "high_water": {
+              "column": "id",
+              "value": 45051
+            }
+          }
+        ]
+      },
+      "review_level": "index",
+      "health": "local SQLite readable",
+      "limitation": "Metadata only; corpus record text not semantically reviewed. EFTA overlaps are one source family."
+    },
+    {
+      "tool": "tools/query_lmsband.py",
+      "names": [
+        "LMSBAND Structured Epstein Data",
+        "LMSBAND (legacy cross-check)",
+        "LMSBAND"
+      ],
+      "profiles": [
+        "brad-karp",
+        "coscoluella",
+        "dfj-network",
+        "epstein",
+        "epstein-aetna",
+        "epstein-gates-ipi",
+        "epstein-oslo",
+        "fink",
+        "merkin",
+        "richard-merkin",
+        "softbank-caper"
+      ],
+      "tool_exists": true,
+      "sidecar": {
+        "path": "/Users/travcole/projects/osint-research/datasets/lmsband_epstein_files.db",
+        "exists": true,
+        "observed_at": "2026-09-06T01:20:23.381359+00:00",
+        "frozen": false,
+        "limitation": "Live sidecar metadata observed after frozen core cutoff; not part of the reproducible evidence snapshot.",
+        "size_bytes": 3542994944,
+        "modified_at": "2026-02-20T19:34:33.130986+00:00",
+        "modified_after_cutoff": false,
+        "tables": [
+          {
+            "table": "files",
+            "columns": [
+              "id",
+              "filename",
+              "dataset",
+              "rel_path",
+              "file_size",
+              "sha256",
+              "has_text",
+              "needs_ocr",
+              "created_at"
+            ],
+            "rows": 591286,
+            "high_water": {
+              "column": "id",
+              "value": 595555
+            }
+          },
+          {
+            "table": "text_cache",
+            "columns": [
+              "id",
+              "file_id",
+              "extracted_text",
+              "char_count",
+              "method"
+            ],
+            "rows": 591286,
+            "high_water": {
+              "column": "id",
+              "value": 595036
+            }
+          },
+          {
+            "table": "search_results",
+            "columns": [
+              "id",
+              "file_id",
+              "keyword",
+              "match_count",
+              "context"
+            ],
+            "rows": 192062,
+            "high_water": {
+              "column": "id",
+              "value": 192062
+            }
+          },
+          {
+            "table": "downloads",
+            "columns": [
+              "id",
+              "url",
+              "dataset",
+              "status",
+              "filename",
+              "created_at"
+            ],
+            "rows": 1786139,
+            "high_water": {
+              "column": "id",
+              "value": 1786139
+            }
+          },
+          {
+            "table": "production_files",
+            "columns": [
+              "id",
+              "filename",
+              "dataset",
+              "rel_path",
+              "file_size",
+              "file_type",
+              "created_at"
+            ],
+            "rows": 2711,
+            "high_water": {
+              "column": "id",
+              "value": 2711
+            }
+          },
+          {
+            "table": "entity_cooccurrence",
+            "columns": [
+              "id",
+              "entity_a",
+              "entity_b",
+              "file_count",
+              "label_a",
+              "label_b"
+            ],
+            "rows": 110334,
+            "high_water": {
+              "column": "id",
+              "value": 371927
+            }
+          },
+          {
+            "table": "entities",
+            "columns": [
+              "id",
+              "file_id",
+              "entity_text",
+              "entity_label",
+              "normalized",
+              "count"
+            ],
+            "rows": 1693889
+          },
+          {
+            "table": "ds10_transactions",
+            "columns": [
+              "id",
+              "file_id",
+              "efta_id",
+              "tx_date",
+              "amount",
+              "currency",
+              "direction",
+              "sender",
+              "sender_account",
+              "receiver",
+              "receiver_account",
+              "bank",
+              "reference",
+              "raw_extract",
+              "confidence",
+              "statement_id",
+              "statement_seq",
+              "running_balance",
+              "running_balance_raw",
+              "parsed_from_statement",
+              "qa_status",
+              "qa_flags_json",
+              "extract_run_id",
+              "parser_version"
+            ],
+            "rows": 724,
+            "high_water": {
+              "column": "id",
+              "value": 740
+            }
+          },
+          {
+            "table": "ds10_balances",
+            "columns": [
+              "id",
+              "file_id",
+              "efta_id",
+              "account_holder",
+              "account_number",
+              "account_type",
+              "balance_date",
+              "balance",
+              "bank",
+              "raw_extract"
+            ],
+            "rows": 590,
+            "high_water": {
+              "column": "id",
+              "value": 590
+            }
+          },
+          {
+            "table": "ds10_positions",
+            "columns": [
+              "id",
+              "file_id",
+              "efta_id",
+              "entity",
+              "investment",
+              "position_date",
+              "value",
+              "cost_basis",
+              "raw_extract"
+            ],
+            "rows": 39,
+            "high_water": {
+              "column": "id",
+              "value": 39
+            }
+          },
+          {
+            "table": "ds10_statement_recon",
+            "columns": [
+              "id",
+              "statement_id",
+              "file_id",
+              "efta_id",
+              "account_holder",
+              "account_number",
+              "statement_start_date",
+              "statement_end_date",
+              "beginning_balance",
+              "ending_balance",
+              "parsed_inflow_total",
+              "parsed_outflow_total",
+              "recomputed_ending_balance",
+              "recon_delta",
+              "recon_eligible",
+              "eligibility_reason",
+              "recon_status",
+              "run_id",
+              "created_at"
+            ],
+            "rows": 0,
+            "high_water": {
+              "column": "id",
+              "value": null
+            }
+          },
+          {
+            "table": "ds09_transactions",
+            "columns": [
+              "id",
+              "file_id",
+              "efta_id",
+              "tx_date",
+              "amount",
+              "currency",
+              "direction",
+              "sender",
+              "sender_account",
+              "receiver",
+              "receiver_account",
+              "bank",
+              "reference",
+              "confirmation_number",
+              "operator",
+              "tx_type",
+              "raw_extract",
+              "confidence",
+              "parser_version",
+              "extract_run_id"
+            ],
+            "rows": 2517,
+            "high_water": {
+              "column": "id",
+              "value": 2517
+            }
+          },
+          {
+            "table": "ds09_travel_invoices",
+            "columns": [
+              "id",
+              "file_id",
+              "efta_id",
+              "record_locator",
+              "invoice_number",
+              "invoice_date",
+              "customer_number",
+              "total_charged",
+              "currency",
+              "card_last4",
+              "parser_version",
+              "extract_run_id"
+            ],
+            "rows": 1090,
+            "high_water": {
+              "column": "id",
+              "value": 1090
+            }
+          },
+          {
+            "table": "ds09_travel_passengers",
+            "columns": [
+              "id",
+              "invoice_id",
+              "passenger_name",
+              "passenger_normalized"
+            ],
+            "rows": 333,
+            "high_water": {
+              "column": "id",
+              "value": 333
+            }
+          },
+          {
+            "table": "ds09_travel_flights",
+            "columns": [
+              "id",
+              "invoice_id",
+              "file_id",
+              "efta_id",
+              "passenger_name",
+              "flight_date",
+              "airline",
+              "flight_number",
+              "origin",
+              "destination",
+              "depart_time",
+              "arrive_time",
+              "cabin_class",
+              "seat",
+              "ticket_number",
+              "ticket_cost",
+              "record_locator",
+              "confidence"
+            ],
+            "rows": 1110,
+            "high_water": {
+              "column": "id",
+              "value": 1110
+            }
+          },
+          {
+            "table": "ds09_cc_statements",
+            "columns": [
+              "id",
+              "file_id",
+              "efta_id",
+              "cardholder",
+              "card_last4",
+              "billing_start",
+              "billing_end",
+              "previous_balance",
+              "payments_total",
+              "purchases_total",
+              "statement_balance",
+              "credit_line",
+              "parser_version",
+              "extract_run_id"
+            ],
+            "rows": 74,
+            "high_water": {
+              "column": "id",
+              "value": 74
+            }
+          },
+          {
+            "table": "ds09_cc_transactions",
+            "columns": [
+              "id",
+              "statement_id",
+              "file_id",
+              "efta_id",
+              "tx_date",
+              "description",
+              "merchant",
+              "location",
+              "amount",
+              "tx_category",
+              "confidence",
+              "parser_version",
+              "extract_run_id"
+            ],
+            "rows": 89,
+            "high_water": {
+              "column": "id",
+              "value": 89
+            }
+          },
+          {
+            "table": "ds09_fund_statements",
+            "columns": [
+              "id",
+              "file_id",
+              "efta_id",
+              "fund_name",
+              "investor_name",
+              "investor_number",
+              "investor_class",
+              "statement_date",
+              "beginning_balance_mtd",
+              "beginning_balance_ytd",
+              "additions",
+              "redemptions",
+              "net_income_mtd",
+              "net_income_ytd",
+              "ending_balance",
+              "return_mtd",
+              "return_ytd",
+              "currency",
+              "confidence",
+              "parser_version",
+              "extract_run_id"
+            ],
+            "rows": 42,
+            "high_water": {
+              "column": "id",
+              "value": 42
+            }
+          }
+        ]
+      },
+      "review_level": "index",
+      "health": "local SQLite readable",
+      "limitation": "Metadata only; corpus record text not semantically reviewed. EFTA overlaps are one source family.",
+      "metadata_slices": {
+        "text_availability": [
+          {
+            "has_text": 0,
+            "needs_ocr": 0,
+            "n": 130
+          },
+          {
+            "has_text": 0,
+            "needs_ocr": 1,
+            "n": 1
+          },
+          {
+            "has_text": 1,
+            "needs_ocr": 0,
+            "n": 591149
+          },
+          {
+            "has_text": 1,
+            "needs_ocr": 1,
+            "n": 6
+          }
+        ]
+      }
+    },
+    {
+      "tool": "tools/ingest_epstein_20k.py",
+      "names": [
+        "House Oversight Epstein Files",
+        "Epstein Files 20K"
+      ],
+      "profiles": [
+        "brad-karp",
+        "coscoluella",
+        "epstein",
+        "epstein-gates-ipi",
+        "epstein-oslo",
+        "softbank-caper"
+      ],
+      "tool_exists": true,
+      "sidecar": {
+        "path": "/Users/travcole/projects/osint-research/datasets/epstein_files_20k.db",
+        "exists": true,
+        "observed_at": "2026-09-06T01:20:24.383563+00:00",
+        "frozen": false,
+        "limitation": "Live sidecar metadata observed after frozen core cutoff; not part of the reproducible evidence snapshot.",
+        "size_bytes": 180207616,
+        "modified_at": "2026-02-13T22:29:21.190723+00:00",
+        "modified_after_cutoff": false,
+        "tables": [
+          {
+            "table": "documents",
+            "columns": [
+              "id",
+              "filename",
+              "house_oversight_id",
+              "source_prefix",
+              "text",
+              "char_count",
+              "word_count"
+            ],
+            "rows": 25800,
+            "high_water": {
+              "column": "id",
+              "value": 25800
+            }
+          }
+        ]
+      },
+      "review_level": "index",
+      "health": "local SQLite readable",
+      "limitation": "Metadata only; corpus record text not semantically reviewed. EFTA overlaps are one source family."
+    },
+    {
+      "tool": "tools/ingest_fbi_files.py",
+      "names": [
+        "FBI Epstein Files",
+        "FBI Files"
+      ],
+      "profiles": [
+        "brad-karp",
+        "epstein",
+        "epstein-gates-ipi",
+        "epstein-oslo",
+        "fink",
+        "merkin",
+        "richard-merkin"
+      ],
+      "tool_exists": true,
+      "sidecar": {
+        "path": "/Users/travcole/projects/osint-research/datasets/epstein_fbi_files.db",
+        "exists": true,
+        "observed_at": "2026-09-06T01:20:24.395664+00:00",
+        "frozen": false,
+        "limitation": "Live sidecar metadata observed after frozen core cutoff; not part of the reproducible evidence snapshot.",
+        "size_bytes": 413954048,
+        "modified_at": "2026-06-23T19:26:59.761372+00:00",
+        "modified_after_cutoff": false,
+        "tables": [
+          {
+            "table": "documents",
+            "columns": [
+              "id",
+              "bates_number",
+              "efta_id",
+              "volume",
+              "page_count",
+              "confidence",
+              "text",
+              "char_count",
+              "word_count"
+            ],
+            "rows": 8150,
+            "high_water": {
+              "column": "id",
+              "value": 8150
+            }
+          }
+        ]
+      },
+      "review_level": "index",
+      "health": "local SQLite readable",
+      "limitation": "Metadata only; corpus record text not semantically reviewed. EFTA overlaps are one source family."
+    },
+    {
+      "tool": "tools/reporting_corpus.py",
+      "names": [
+        "Epstein Reporting Knowledge Layer"
+      ],
+      "profiles": [
+        "brad-karp",
+        "epstein",
+        "epstein-gates-ipi",
+        "epstein-oslo"
+      ],
+      "tool_exists": true,
+      "sidecar": {
+        "path": "/Users/travcole/projects/osint-research/datasets/epstein_reporting.db",
+        "exists": true,
+        "observed_at": "2026-09-06T01:20:24.399252+00:00",
+        "frozen": false,
+        "limitation": "Live sidecar metadata observed after frozen core cutoff; not part of the reproducible evidence snapshot.",
+        "size_bytes": 165081088,
+        "modified_at": "2026-09-06T01:03:43.298278+00:00",
+        "modified_after_cutoff": false,
+        "tables": [
+          {
+            "table": "schema_meta",
+            "columns": [
+              "key",
+              "value"
+            ],
+            "rows": 1,
+            "high_water": {
+              "column": "key",
+              "value": "schema_version"
+            }
+          },
+          {
+            "table": "discovery_run",
+            "columns": [
+              "id",
+              "method",
+              "query",
+              "source_name",
+              "started_at",
+              "completed_at",
+              "result_count",
+              "imported_count",
+              "parameters_json",
+              "error"
+            ],
+            "rows": 479,
+            "high_water": {
+              "column": "id",
+              "value": 479
+            }
+          },
+          {
+            "table": "publisher",
+            "columns": [
+              "id",
+              "name",
+              "domain",
+              "country",
+              "default_language",
+              "source_type",
+              "reliability_notes",
+              "epstein_connection",
+              "created_at",
+              "updated_at"
+            ],
+            "rows": 389,
+            "high_water": {
+              "column": "id",
+              "value": 389
+            }
+          },
+          {
+            "table": "author",
+            "columns": [
+              "id",
+              "canonical_name",
+              "affiliation",
+              "reliability_notes",
+              "epstein_connection",
+              "created_at"
+            ],
+            "rows": 815,
+            "high_water": {
+              "column": "id",
+              "value": 2497
+            }
+          },
+          {
+            "table": "reporting_item",
+            "columns": [
+              "id",
+              "item_type",
+              "title",
+              "dek",
+              "canonical_url",
+              "publisher_id",
+              "published_at",
+              "updated_at",
+              "language",
+              "access_status",
+              "rights_status",
+              "abstract",
+              "source_native_id",
+              "discovery_method",
+              "independence_group",
+              "first_seen_at",
+              "last_seen_at",
+              "current_version_id",
+              "notes",
+              "scope_class"
+            ],
+            "rows": 7782,
+            "high_water": {
+              "column": "id",
+              "value": 8121
+            }
+          },
+          {
+            "table": "item_author",
+            "columns": [
+              "item_id",
+              "author_id",
+              "position"
+            ],
+            "rows": 2448,
+            "high_water": {
+              "column": "item_id",
+              "value": 8121
+            }
+          },
+          {
+            "table": "item_version",
+            "columns": [
+              "id",
+              "item_id",
+              "retrieved_at",
+              "source_url",
+              "archive_url",
+              "content_text",
+              "content_hash",
+              "metadata_json",
+              "version_status",
+              "change_summary"
+            ],
+            "rows": 9300,
+            "high_water": {
+              "column": "id",
+              "value": 9854
+            }
+          },
+          {
+            "table": "discovery_candidate",
+            "columns": [
+              "id",
+              "url",
+              "title",
+              "publisher_domain",
+              "published_at",
+              "language",
+              "discovery_run_id",
+              "discovery_method",
+              "query",
+              "metadata_json",
+              "status",
+              "status_note",
+              "discovered_at",
+              "processed_at",
+              "scope_class"
+            ],
+            "rows": 8893,
+            "high_water": {
+              "column": "id",
+              "value": 22091
+            }
+          },
+          {
+            "table": "reporting_claim",
+            "columns": [
+              "id",
+              "item_id",
+              "version_id",
+              "claim_text",
+              "subject_text",
+              "predicate",
+              "object_text",
+              "event_date_raw",
+              "amount_raw",
+              "attribution",
+              "claim_kind",
+              "verification_status",
+              "confidence",
+              "source_excerpt",
+              "source_locator",
+              "extracted_by",
+              "reviewed_by",
+              "reviewed_at",
+              "created_at",
+              "updated_at",
+              "claim_fingerprint"
+            ],
+            "rows": 95,
+            "high_water": {
+              "column": "id",
+              "value": 95
+            }
+          },
+          {
+            "table": "claim_source",
+            "columns": [
+              "id",
+              "claim_id",
+              "source_type",
+              "source_ref",
+              "source_description",
+              "source_quote",
+              "source_page",
+              "independence_group",
+              "assessment",
+              "is_primary"
+            ],
+            "rows": 2,
+            "high_water": {
+              "column": "id",
+              "value": 2
+            }
+          },
+          {
+            "table": "item_relation",
+            "columns": [
+              "from_item_id",
+              "to_item_id",
+              "relation_type",
+              "assessment",
+              "created_at"
+            ],
+            "rows": 1113,
+            "high_water": {
+              "column": "from_item_id",
+              "value": 8118
+            }
+          },
+          {
+            "table": "claim_relation",
+            "columns": [
+              "from_claim_id",
+              "to_claim_id",
+              "relation_type",
+              "assessment",
+              "created_at"
+            ],
+            "rows": 0,
+            "high_water": {
+              "column": "from_claim_id",
+              "value": null
+            }
+          },
+          {
+            "table": "item_entity",
+            "columns": [
+              "item_id",
+              "entity_id",
+              "mention_text",
+              "match_method",
+              "confidence",
+              "status"
+            ],
+            "rows": 17,
+            "high_water": {
+              "column": "item_id",
+              "value": 23
+            }
+          },
+          {
+            "table": "claim_entity",
+            "columns": [
+              "claim_id",
+              "entity_id",
+              "role",
+              "mention_text"
+            ],
+            "rows": 0,
+            "high_water": {
+              "column": "claim_id",
+              "value": null
+            }
+          },
+          {
+            "table": "claim_promotion",
+            "columns": [
+              "claim_id",
+              "finding_id",
+              "promoted_by",
+              "promoted_at",
+              "primary_evidence_refs_json"
+            ],
+            "rows": 1,
+            "high_water": {
+              "column": "claim_id",
+              "value": 6
+            }
+          }
+        ]
+      },
+      "review_level": "index",
+      "health": "local SQLite readable",
+      "limitation": "Metadata only; corpus record text not semantically reviewed. EFTA overlaps are one source family.",
+      "metadata_slices": {
+        "access": [
+          {
+            "label": "archive_only",
+            "n": 38
+          },
+          {
+            "label": "open",
+            "n": 526
+          },
+          {
+            "label": "paywalled",
+            "n": 48
+          },
+          {
+            "label": "unavailable",
+            "n": 447
+          },
+          {
+            "label": "unknown",
+            "n": 6723
+          }
+        ],
+        "scope": [
+          {
+            "label": "background",
+            "n": 215
+          },
+          {
+            "label": "contextual",
+            "n": 1
+          },
+          {
+            "label": "direct",
+            "n": 7566
+          }
+        ]
+      }
+    },
+    {
+      "tool": "tools/query_doj.py",
+      "names": [
+        "DOJ Vol 11 (legacy fallback)",
+        "DOJ Vol 11",
+        "DOJ Epstein Files (Volume 11)"
+      ],
+      "profiles": [
+        "coscoluella",
+        "dfj-network",
+        "epstein",
+        "epstein-aetna",
+        "softbank-caper"
+      ],
+      "tool_exists": true,
+      "sidecar": {
+        "path": "/Users/travcole/projects/epstein-docs/output/documents.db",
+        "exists": true,
+        "observed_at": "2026-09-06T01:20:24.438612+00:00",
+        "frozen": false,
+        "limitation": "Live sidecar metadata observed after frozen core cutoff; not part of the reproducible evidence snapshot.",
+        "size_bytes": 1021751296,
+        "modified_at": "2026-01-30T21:49:30.373944+00:00",
+        "modified_after_cutoff": false,
+        "tables": [
+          {
+            "table": "documents",
+            "columns": [
+              "bates_id",
+              "pdf_path",
+              "page_count",
+              "ocr_text",
+              "extracted_dates",
+              "extracted_names",
+              "word_count"
+            ],
+            "rows": 331655,
+            "high_water": {
+              "column": "bates_id",
+              "value": "EFTA02730262"
+            }
+          }
+        ]
+      },
+      "review_level": "index",
+      "health": "local SQLite readable",
+      "limitation": "Metadata only; corpus record text not semantically reviewed. EFTA overlaps are one source family."
+    },
+    {
+      "tool": "tools/ingest_epstein_exposed.py",
+      "names": [
+        "EpsteinExposed",
+        "EpsteinExposed Aggregate"
+      ],
+      "profiles": [
+        "coscoluella",
+        "epstein",
+        "epstein-oslo"
+      ],
+      "tool_exists": true,
+      "sidecar": {
+        "path": "/Users/travcole/projects/osint-research/datasets/epstein_exposed.db",
+        "exists": true,
+        "observed_at": "2026-09-06T01:20:24.575878+00:00",
+        "frozen": false,
+        "limitation": "Live sidecar metadata observed after frozen core cutoff; not part of the reproducible evidence snapshot.",
+        "size_bytes": 344064,
+        "modified_at": "2026-02-13T22:30:21.739710+00:00",
+        "modified_after_cutoff": false,
+        "tables": [
+          {
+            "table": "persons",
+            "columns": [
+              "id",
+              "slug",
+              "name",
+              "category",
+              "aliases",
+              "short_bio",
+              "bio",
+              "image_url",
+              "status",
+              "black_book_entry",
+              "flight_count",
+              "document_count",
+              "connection_count",
+              "email_count",
+              "downloaded_at",
+              "detail_fetched"
+            ],
+            "rows": 1271,
+            "high_water": {
+              "column": "id",
+              "value": "p-999"
+            }
+          },
+          {
+            "table": "person_connections",
+            "columns": [
+              "person_id",
+              "connected_person_id",
+              "strength",
+              "co_flights",
+              "co_documents"
+            ],
+            "rows": 0,
+            "high_water": {
+              "column": "person_id",
+              "value": null
+            }
+          },
+          {
+            "table": "download_meta",
+            "columns": [
+              "key",
+              "value",
+              "updated_at"
+            ],
+            "rows": 2,
+            "high_water": {
+              "column": "key",
+              "value": "total_persons"
+            }
+          }
+        ]
+      },
+      "review_level": "index",
+      "health": "local SQLite readable",
+      "limitation": "Metadata only; corpus record text not semantically reviewed. EFTA overlaps are one source family."
+    },
+    {
+      "tool": "tools/government_release_corpus.py",
+      "names": [
+        "DOJ and SEC Press Releases"
+      ],
+      "profiles": [
+        "epstein",
+        "epstein-gates-ipi",
+        "epstein-oslo"
+      ],
+      "tool_exists": true,
+      "sidecar": {
+        "path": "/Users/travcole/projects/osint-research/datasets/government_releases.db",
+        "exists": true,
+        "observed_at": "2026-09-06T01:20:24.578896+00:00",
+        "frozen": false,
+        "limitation": "Live sidecar metadata observed after frozen core cutoff; not part of the reproducible evidence snapshot.",
+        "size_bytes": 4200202240,
+        "modified_at": "2026-07-13T20:43:02.302990+00:00",
+        "modified_after_cutoff": false,
+        "tables": [
+          {
+            "table": "schema_meta",
+            "columns": [
+              "key",
+              "value"
+            ],
+            "rows": 1,
+            "high_water": {
+              "column": "key",
+              "value": "schema_version"
+            }
+          },
+          {
+            "table": "ingest_run",
+            "columns": [
+              "id",
+              "agency",
+              "mode",
+              "started_at",
+              "completed_at",
+              "records_seen",
+              "records_changed",
+              "cursor_start",
+              "cursor_end",
+              "error",
+              "parameters_json"
+            ],
+            "rows": 18,
+            "high_water": {
+              "column": "id",
+              "value": 18
+            }
+          },
+          {
+            "table": "ingest_state",
+            "columns": [
+              "key",
+              "value",
+              "updated_at"
+            ],
+            "rows": 3,
+            "high_water": {
+              "column": "key",
+              "value": "doj_next_page:title:epstein"
+            }
+          },
+          {
+            "table": "government_release",
+            "columns": [
+              "id",
+              "agency",
+              "native_id",
+              "source_ref",
+              "release_number",
+              "title",
+              "canonical_url",
+              "published_at",
+              "updated_at",
+              "component_text",
+              "topic_text",
+              "teaser",
+              "fetch_status",
+              "fetch_error",
+              "current_version_id",
+              "first_seen_at",
+              "last_seen_at"
+            ],
+            "rows": 282951,
+            "high_water": {
+              "column": "id",
+              "value": 282951
+            }
+          },
+          {
+            "table": "government_release_version",
+            "columns": [
+              "id",
+              "release_id",
+              "retrieved_at",
+              "content_text",
+              "content_hash",
+              "raw_metadata_json",
+              "version_status"
+            ],
+            "rows": 276476,
+            "high_water": {
+              "column": "id",
+              "value": 276476
+            }
+          }
+        ]
+      },
+      "review_level": "index",
+      "health": "local SQLite readable",
+      "limitation": "Metadata only; corpus record text not semantically reviewed. EFTA overlaps are one source family.",
+      "metadata_slices": {
+        "agency_fetch": [
+          {
+            "agency": "DOJ",
+            "fetch_status": "complete",
+            "n": 268908
+          },
+          {
+            "agency": "DOJ",
+            "fetch_status": "failed",
+            "n": 2
+          },
+          {
+            "agency": "DOJ",
+            "fetch_status": "pending",
+            "n": 7239
+          },
+          {
+            "agency": "SEC",
+            "fetch_status": "complete",
+            "n": 6801
+          },
+          {
+            "agency": "SEC",
+            "fetch_status": "failed",
+            "n": 1
+          }
+        ]
+      }
+    },
+    {
+      "tool": "tools/query_investigations.py",
+      "names": [
+        "Ingested Court Exhibits (case-specific)",
+        "Ingested Investigation Reports"
+      ],
+      "profiles": [
+        "epstein-aetna",
+        "epstein-oslo"
+      ],
+      "tool_exists": true,
+      "sidecar": {
+        "path": "/Users/travcole/projects/osint-research/datasets/investigations.db",
+        "exists": true,
+        "observed_at": "2026-09-06T01:20:25.688080+00:00",
+        "frozen": false,
+        "limitation": "Live sidecar metadata observed after frozen core cutoff; not part of the reproducible evidence snapshot.",
+        "size_bytes": 44195840,
+        "modified_at": "2026-07-04T00:25:55.991657+00:00",
+        "modified_after_cutoff": false,
+        "tables": [
+          {
+            "table": "documents",
+            "columns": [
+              "id",
+              "title",
+              "source",
+              "source_url",
+              "category",
+              "year",
+              "total_pages",
+              "file_path",
+              "file_hash",
+              "ingested_at"
+            ],
+            "rows": 99,
+            "high_water": {
+              "column": "id",
+              "value": 99
+            }
+          },
+          {
+            "table": "pages",
+            "columns": [
+              "id",
+              "document_id",
+              "page_number",
+              "text"
+            ],
+            "rows": 10326,
+            "high_water": {
+              "column": "id",
+              "value": 10326
+            }
+          }
+        ]
+      },
+      "review_level": "index",
+      "health": "local SQLite readable",
+      "limitation": "Metadata only; corpus record text not semantically reviewed. EFTA overlaps are one source family.",
+      "metadata_slices": {
+        "category": [
+          {
+            "label": null,
+            "n": 48
+          },
+          {
+            "label": "congressional",
+            "n": 14
+          },
+          {
+            "label": "court_order",
+            "n": 12
+          },
+          {
+            "label": "enforcement",
+            "n": 15
+          },
+          {
+            "label": "forensic",
+            "n": 4
+          },
+          {
+            "label": "intelligence",
+            "n": 3
+          },
+          {
+            "label": "regulatory",
+            "n": 3
+          }
+        ]
+      }
+    },
+    {
+      "tool": "tools/ingest_faa.py",
+      "names": [
+        "FAA Aircraft Registry"
+      ],
+      "profiles": [
+        "epstein-aetna"
+      ],
+      "tool_exists": true,
+      "sidecar": {
+        "path": "/Users/travcole/projects/osint-research/datasets/faa_registry.db",
+        "exists": true,
+        "observed_at": "2026-09-06T01:20:25.691995+00:00",
+        "frozen": false,
+        "limitation": "Live sidecar metadata observed after frozen core cutoff; not part of the reproducible evidence snapshot.",
+        "size_bytes": 189788160,
+        "modified_at": "2026-02-14T22:29:11.960627+00:00",
+        "modified_after_cutoff": false,
+        "tables": [
+          {
+            "table": "aircraft",
+            "columns": [
+              "n_number",
+              "serial_number",
+              "mfr_mdl_code",
+              "year_mfr",
+              "type_registrant",
+              "registrant_type_desc",
+              "name",
+              "street",
+              "street2",
+              "city",
+              "state",
+              "zip_code",
+              "country",
+              "region",
+              "county",
+              "status_code",
+              "status_desc",
+              "is_deregistered",
+              "type_aircraft",
+              "type_engine",
+              "make",
+              "model",
+              "cert_issue_date",
+              "expiration_date",
+              "last_action_date",
+              "air_worth_date",
+              "other_names_1",
+              "other_names_2",
+              "other_names_3",
+              "other_names_4",
+              "other_names_5"
+            ],
+            "rows": 529946,
+            "high_water": {
+              "column": "n_number",
+              "value": "9ZZ"
+            }
+          },
+          {
+            "table": "acft_ref",
+            "columns": [
+              "code",
+              "mfr",
+              "model",
+              "type_acft",
+              "type_eng",
+              "ac_cat",
+              "build_cert_ind",
+              "no_eng",
+              "no_seats",
+              "ac_weight",
+              "speed"
+            ],
+            "rows": 93517,
+            "high_water": {
+              "column": "code",
+              "value": "99999XX"
+            }
+          }
+        ]
+      },
+      "review_level": "index",
+      "health": "local SQLite readable",
+      "limitation": "Metadata only; corpus record text not semantically reviewed. EFTA overlaps are one source family."
+    },
+    {
+      "tool": "tools/query_documentcloud.py",
+      "names": [
+        "DocumentCloud"
+      ],
+      "profiles": [
+        "epstein-aetna"
+      ],
+      "tool_exists": true,
+      "review_level": "excluded",
+      "health": "Remote API not probed in this local inventory",
+      "limitation": "No local sidecar configured; external source excluded from local-only opportunity assessment, not evidence of unavailable service or zero results."
+    },
+    {
+      "tool": "tools/query_muckrock.py",
+      "names": [
+        "MuckRock FOIA"
+      ],
+      "profiles": [
+        "epstein-aetna"
+      ],
+      "tool_exists": true,
+      "review_level": "excluded",
+      "health": "Remote API not probed in this local inventory",
+      "limitation": "No local sidecar configured; external source excluded from local-only opportunity assessment, not evidence of unavailable service or zero results."
+    }
+  ],
+  "thresholds": {
+    "new_investigation_launches": 0,
+    "score_before_gates": false,
+    "writing_readiness": "scope-dependent, separate from publication approval"
+  },
+  "candidates": [],
+  "watchlist": [],
+  "merge_recommendations": [
+    {
+      "candidate_id": "geo-contract-guarantees-and-local-pass-throughs",
+      "readiness_1_to_5": 4,
+      "recommended_output": "New article plus major GEO Group dossier refresh"
+    },
+    {
+      "candidate_id": "gates-ipi-pakistan-briefing-channel",
+      "readiness_1_to_5": 4,
+      "recommended_output": "IPI dossier update or careful explainer; not an original-scoop commission"
+    },
+    {
+      "candidate_id": "curaleaf-public-controls-and-observability",
+      "readiness_1_to_5": 4,
+      "recommended_output": "New neutral corporate dossier; optional bounded explanatory article"
+    },
+    {
+      "candidate_id": "smartbird-convertible-financing-terms",
+      "readiness_1_to_5": 4,
+      "recommended_output": "New article and consolidation/update of Allbirds dossier variants"
+    },
+    {
+      "candidate_id": "scisparc-automax-merger-governance",
+      "readiness_1_to_5": 3,
+      "recommended_output": "New narrow governance article and issuer dossier refresh"
+    },
+    {
+      "candidate_id": "cpi-green-dragon-disclosed-funding-chain",
+      "readiness_1_to_5": 3,
+      "recommended_output": "New institutional dossier or bounded funding explainer"
+    },
+    {
+      "candidate_id": "fof-program-enforcement-and-recovery",
+      "readiness_1_to_5": 3,
+      "recommended_output": "Major organization dossier refresh; possible program-accountability article"
+    },
+    {
+      "candidate_id": "aetna-helicopter-transaction-records",
+      "readiness_1_to_5": 3,
+      "recommended_output": "Bounded transaction dossier update; article held for stronger institutional context"
+    }
+  ],
+  "filtered_out": [
+    {
+      "candidate_id": "softbank-private-legal-market",
+      "disposition": "already_written",
+      "reason": "The July 11 top-ten story is now softbank-caper.mdx. Treat as existing article readiness/live comparison, not a new commission."
+    },
+    {
+      "candidate_id": "parlatore-navy-conflicts",
+      "disposition": "hold",
+      "finding_ids": [
+        13830,
+        13833,
+        13823
+      ],
+      "reason": "Later #13830 corrects a misattributed prosecutor-conflict notice; Kim/Messenger acquittals and Burke appeal need current dispositions. Missing accession or ethics records cannot prove impropriety."
+    },
+    {
+      "candidate_id": "matiss-tabuns-clipit-persona",
+      "disposition": "research_only",
+      "reason": "The Sep 2 authored dossier explicitly leaves the civil-person-to-persona bridge circumstantial. It contains residential/DOB material unnecessary to a platform article. Do not adapt verbatim or use as a publication-ready personal dossier. A narrowly institutional clipping-platform article would need campaign/payment evidence and an independently established operator bridge."
+    },
+    {
+      "candidate_id": "hfia-noncompliance-rates",
+      "disposition": "hold",
+      "finding_ids": [
+        13687,
+        13698,
+        13714
+      ],
+      "reason": "Zero filings in a screening universe is not adjudicated failure. Refresh exemptions, in-scope persons/issuers and cutoff before any breach rate. Do not inherit the prior memo\u2019s statutory conclusions or claim HFT/financier conduct from ownership cutoffs."
+    },
+    {
+      "candidate_id": "curaleaf-laundering",
+      "disposition": "reject_as_current_thesis",
+      "finding_ids": [
+        15311,
+        15315
+      ],
+      "reason": "Matched peer testing and transaction review do not establish anomalous deposits or a completed till-to-bank join. The same evidence supports a neutral controls dossier."
+    },
+    {
+      "candidate_id": "dfj-midland-conspiracy",
+      "disposition": "reject_as_current_thesis",
+      "finding_ids": [
+        13743,
+        13745,
+        13748
+      ],
+      "reason": "Recent identifier checks found no stable Midland overlap and rejected fuzzy-name merges. Network resemblance is not an evidence chain."
+    },
+    {
+      "candidate_id": "brad-karp-new-personal-dossier",
+      "disposition": "duplicate",
+      "reason": "An 85-finding curated brad-karp dossier is already frozen locally. Evaluate export/review/live freshness before commissioning another biography; a broad client list does not prove the fixer label."
+    }
+  ],
+  "searches": [
+    {
+      "query": "\"LaSalle\" \"GEO\" \"39,802,562\"",
+      "result_count": 1,
+      "as_of": "2026-09-06",
+      "source": "web",
+      "returned_sources": [
+        "LASALLE ECONOMIC DEVELOPMENT DISTRICT (https://lla.la.gov/publicreports.nsf/0/6fef8ffe87f626c086258b6a0053836f/%24file/00005485.pdf)"
+      ]
+    },
+    {
+      "query": "\"Epstein\" \"Pakistan\" \"back channel\" \"Nikolic\"",
+      "result_count": 9,
+      "as_of": "2026-09-06",
+      "source": "web",
+      "returned_sources": [
+        "Boris Nikolic: How Epstein Built a Back Channel to the Gates Foundation<!-- --> \u2014 Epstein Africa (https://www.epsteinafrica.com/stories/nikolic-gates-back-channel)",
+        "Health and Peace - by esc (https://escapekey.substack.com/p/health-and-peace)",
+        "Epstein Received Sensitive Military Intelligence Amid Gates Foundation Polio Campaign in Pakistan (https://www.reddit.com/r/thepaknarrative/comments/1rhluoj/epstein_received_sensitive_military_intelligence/)",
+        "\"Plz Pass On to Bill Gates\": How Confidential Polio Intelligence Intended for Gates Reached Jeffrey Epstein \u2014 and Kept Reaching Him for Five Years (https://sayerji.substack.com/p/plz-pass-on-to-bill-gates-how-confidential)",
+        "Stories \u2014 Epstein Africa (https://www.epsteinafrica.com/stories)",
+        "Epstein Received Sensitive Military Intelligence Amid Gates Foundation Polio Campaign in Pakistan (https://www.dropsitenews.com/p/epstein-sensitive-military-intelligence-bill-gates-pakistan-polio?action=share)",
+        "Epstein: False messiah of polio eradication (https://www.thecanary.co/global/world-analysis/2026/02/16/epstein-polio-eradication/)",
+        "EFTA00962456 \u2014 Epstein Files \u2014 Yirah.fi (https://yirah.fi/epstein/dokumentti/EFTA00962456)",
+        "Epstein Africa \u2014 Investigative Archive (https://www.epsteinafrica.com/)"
+      ]
+    },
+    {
+      "query": "\"Allbirds\" \"Registration Delay Payments\" \"2026\"",
+      "result_count": 5,
+      "as_of": "2026-09-06",
+      "source": "web",
+      "returned_sources": [
+        "Form 8-K for Allbirds INC filed 04/20/2026 (https://ir.allbirds.com/static-files/61adb692-5ea3-440e-a99c-338744ba5d47)",
+        "(https://cdn.yahoofinance.com/prod/sec-filings/0001653909/000119312526164338/d34261dex103.htm)",
+        "Registration Rights Agreement between Allbirds, Inc. and Buyers | Allbirds, Inc. | Business Contracts | Justia (https://contracts.justia.com/companies/allbirds-inc-13755/contract/1368291/)",
+        "Form 8-K - Current report (https://br.advfn.com/noticias/EDGAR2/2026/artigo/98321692)",
+        "Form 8-K - Current report (https://www.advfn.com/stock-market/NASDAQ/BIRD/stock-news/98321692/form-8-k-current-report)"
+      ]
+    },
+    {
+      "query": "\"Curaleaf\" \"seed-to-sale\" \"bank\" reconciliation",
+      "result_count": 14,
+      "as_of": "2026-09-06",
+      "source": "web",
+      "returned_sources": [
+        "Curaleaf Holdings, Inc. (Form: 6-K, Received: 11/06/2025 06:03:31) (https://www.otcmarkets.com/filing/html?guid=HMt-kFrm_AR9LVh&id=18897468)",
+        "Curaleaf Holdings, Inc. (Form: 6-K, Received: 05/06/2026 06:05:08) (https://www.otcmarkets.com/filing/html?guid=_re-k61eNb20B3h&id=19414217)",
+        "Revenue Architecture for Cannabis Dispensary + Seed-to-Sale\u2026 (https://pulserevops.com/revenue-architecture/ra0169)",
+        "2/7/2022 (https://legislature.maine.gov/testimony/resources/VLA20220207Dumas132887190183592718.pdf)",
+        "Curaleaf Holdings, Inc. (Form: 40-F, Received: 02/27/2026 06:07:58) (https://www.otcmarkets.com/filing/html?guid=4ix-kaqrKGK0h3h&id=19193908)",
+        "/r/weedstocks Casual Daily Discussion - [July 08, 2020] (https://www.reddit.com/r/weedstocks/comments/hneeiy)",
+        "(https://www.sec.gov/Archives/edgar/data/1756770/000155837023007557/curlf-20221231xex99d1.htm)",
+        "(https://www.sec.gov/Archives/edgar/data/1756770/000175677025000008/q424-exx991xaif.htm)",
+        "\ud83e\uddfeEarnings: GTI, Curaleaf, Trulieve - by Dai Truong (https://www.highlyobjective.com/p/earnings-gti-curaleaf-trulieve)",
+        "Curaleaf Holdings, Inc. (Form: 6-K, Received: 08/07/2025 06:05:29) (https://www.otcmarkets.com/filing/html?guid=RaE-k6fOuPBmorh&id=18671740)",
+        "Curaleaf : Q2 (image/Q2 26 10\u2013Q MDA through end) | MarketScreener (https://www.marketscreener.com/news/curaleaf-q2-image-q2-26-10a-q-mda-through-end-ce7f50dddc8ff62c)",
+        "Curaleaf : Q2 (image/Q2 26 10\u2013Q MDA through end) | MarketScreener India (https://in.marketscreener.com/news/curaleaf-q2-image-q2-26-10a-q-mda-through-end-ce7f50dddc8ff62c)",
+        "Missouri Announces First Seed-to-Sale Cannabis Licenses | The Motley Fool (https://www.fool.com/news/2020/02/05/missouri-announces-first-seed-to-sale-cannabis-lic.aspx)",
+        "\ud83d\udc4b Curaleaf exits CA/CO/OR, Akerna exits Cannabis (https://www.highlyobjective.com/p/curaleaf-exits-cacoor-akerna-exits)"
+      ]
+    }
+  ],
+  "limitations": [
+    "No full corpus semantic review.",
+    "Stored verified flags do not replace original document review.",
+    "No exact-content semantic review receipts were issued.",
+    "Raw sidecars and later research-folder metadata were not frozen with the core SQLite backup.",
+    "Live prose comparisons exclude generated citation labels and do not certify every data or visualization field."
+  ],
+  "artifacts": {
+    "README.md": {
+      "bytes": 17446,
+      "sha256": "c5038934ecbc43b62647ddf711426687c1a240f813039ebbf396d5c061ec6825"
+    },
+    "broad-prior-art-searches.json": {
+      "bytes": 5764,
+      "sha256": "40323594b6b6e19705166f29c591ad60fc78372679099d0d17f92ece4b021d4e"
+    },
+    "cluster-overlap.json": {
+      "bytes": 1024,
+      "sha256": "7d4445f61cc0b3d95656d0ae730ce47c8fc17508706f22d8dd5812262dfb4958"
+    },
+    "clusters.csv": {
+      "bytes": 6250,
+      "sha256": "f59b8c275559907b1971e8446171fc020fc2ba17b435065c4d4e0506ae2024e8"
+    },
+    "corpora.json": {
+      "bytes": 101933,
+      "sha256": "c39ab6ada291b8a3df048810897757b386a9518cd46edce9e6b4e4e72460a2bb"
+    },
+    "corpora.md": {
+      "bytes": 9297,
+      "sha256": "4755bdbd6b72d5be5d093052216714769317603fc24a52ad73beee5298676dc7"
+    },
+    "cutoff.json": {
+      "bytes": 120288,
+      "sha256": "db9e62776a570430d5e5d882dc1376289934fdab07050846fc75b88a9a0bda98"
+    },
+    "documentation-validation.md": {
+      "bytes": 2508,
+      "sha256": "61c7e6336df1f168a44fa2c71df890c45458cd40729da64bf4ef96fe23e8d632"
+    },
+    "editorial-candidates.json": {
+      "bytes": 285675,
+      "sha256": "7a45922e64bb79aa2ce8c9686b6a661e61c9ba29b1ca46f5a1eeedab2fd9888a"
+    },
+    "editorial-candidates.md": {
+      "bytes": 44477,
+      "sha256": "bc6167348dc6741744df19fc01131f83eca383b24f638e12e78908f2dfe74205"
+    },
+    "independent-opportunities.json": {
+      "bytes": 98682,
+      "sha256": "06e107d265cce0d12e22298e063bce85c028620f44d9e77f4fd125f85a87b7d5"
+    },
+    "independent-opportunities.md": {
+      "bytes": 28871,
+      "sha256": "cb7dc63c616c83873abd61030a43f5fbb335f3e8a6e6eef09fd72cd7c212248a"
+    },
+    "integration-validation.md": {
+      "bytes": 2501,
+      "sha256": "4f3cc578f522e061366aaa71880583164b974e933be83e3a0edc9cd3ea91c8ce"
+    },
+    "integrity-review.md": {
+      "bytes": 2927,
+      "sha256": "1ed46b679035b99f1315edd4c9f4155e0874f23a65ec30dadd364b064f53b175"
+    },
+    "live-publication.md": {
+      "bytes": 7511,
+      "sha256": "c3672635ae90c8c85fcca6a8dee84799d13ae1dd5ff2b6b78d7de9f4b5ec44e0"
+    },
+    "local-editorial.md": {
+      "bytes": 12770,
+      "sha256": "245d312f03cf70861f004337ed91c52619288e544b68a1d8f12438a1bb52d869"
+    },
+    "local-inventory.csv": {
+      "bytes": 201016,
+      "sha256": "88d6465a886afa4e41f0daacdc07f00134b41f77f80f71f80f543bc24b9c04ae"
+    },
+    "local-summary.json": {
+      "bytes": 3893,
+      "sha256": "85f878d6d484e91eecb155747378f49780a7430f08b31d96d2046a15da52fbc3"
+    },
+    "novelty-searches.json": {
+      "bytes": 4799,
+      "sha256": "972d4c28c45e92c5d37e6584dd199a444a1c194e02e08bdbb60dd856119c82f6"
+    },
+    "planned-readiness.json": {
+      "bytes": 21523,
+      "sha256": "1cdc4a54d8407b0fb580fa0fe63a3089592da8613f0b39ff7142a91d7814ac5c"
+    },
+    "planned-readiness.md": {
+      "bytes": 15994,
+      "sha256": "eb3b0b472c5e0c1cdb8ff132acdc89fdff127bf0c15a3c318722241cdeeb0a6a"
+    },
+    "publication-inventory.csv": {
+      "bytes": 325829,
+      "sha256": "3765695bcacc39ec57751aa909a9ad28e6adec6958b995bd9543fb6220127e9d"
+    },
+    "publication-inventory.json": {
+      "bytes": 1694068,
+      "sha256": "0f786753871121411bd37488c4c11090235b7387fe79232840f56bb534b2822a"
+    },
+    "skeptic.json": {
+      "bytes": 56282,
+      "sha256": "f13f2d4e76b74c9da01d43bfbcfaca52c70ceb944448efafa902bfb86dab9c08"
+    },
+    "skeptic.md": {
+      "bytes": 12589,
+      "sha256": "c1fd15c1b01305a6f959b07df3a628205df399e79e4533adc40ed4eadfd21029"
+    },
+    "unrendered-prose.json": {
+      "bytes": 2055,
+      "sha256": "0e9a10a5fbaabaad777c41214fd266c03ad592015fa92014133504b97bf986cb"
+    }
+  },
+  "followup_validation": {
+    "tests_passed": 22,
+    "ruff": "pass",
+    "targeted_strict_doc_examples": "pass",
+    "open_papercut": 2788
+  },
+  "planned_article_review": "planned-readiness.json",
+  "skeptic_review": "skeptic.json",
+  "artifact_transforms": [
+    {
+      "file": "clusters.csv",
+      "transform": "CRLF to LF, parsed CSV records identical",
+      "source_sha256": "5d3f3225f4c9e3929c4c9ff17f197f693df7e8b221a964f78260a8650598b3f1",
+      "output_sha256": "f59b8c275559907b1971e8446171fc020fc2ba17b435065c4d4e0506ae2024e8",
+      "rows_with_header": 19
+    },
+    {
+      "file": "local-inventory.csv",
+      "transform": "CRLF to LF, parsed CSV records identical",
+      "source_sha256": "d31612987b37e64945441b86998d138e049fc8c3bc5a768c84c6aa8ce6223fbe",
+      "output_sha256": "88d6465a886afa4e41f0daacdc07f00134b41f77f80f71f80f543bc24b9c04ae",
+      "rows_with_header": 529
+    },
+    {
+      "file": "publication-inventory.csv",
+      "transform": "CRLF to LF, parsed CSV records identical",
+      "source_sha256": "2796b731831e73ca30596190b76c43b9d2495a17db310edb820f02870e167eba",
+      "output_sha256": "3765695bcacc39ec57751aa909a9ad28e6adec6958b995bd9543fb6220127e9d",
+      "rows_with_header": 597
+    }
+  ]
+}
