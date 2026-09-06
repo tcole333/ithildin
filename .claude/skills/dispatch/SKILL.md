@@ -1,221 +1,39 @@
 ---
 name: dispatch
-description: Show queue depths and suggest which agents to launch next
-user_invocable: true
+description: Report the selected investigation’s queue, coverage, and analysis state without mutations, and recommend the next useful skill. Use for queue depths or what needs attention.
+user-invocable: true
 ---
 
 # /dispatch
 
-**CONTROL PLANE** — Read-only queue depth reporter. Shows what needs attention and suggests which skills to run based on triage scheduler fields.
-
-Use `/orchestrate-investigation` for active control-plane work such as launching workers, reviewing staged artifacts, and importing approved outputs.
-
-## Process
-
-### 1. Query All Queue Depths
-
-Run these queries against investigation.db:
+Resolve the requested profile and database under
+[the research workflow contract](../../../docs/RESEARCH_WORKFLOW_CONTRACT.md),
+then create an isolated `WORKDIR`. This is a read-only assessment; use
+/orchestrate-investigation when the user asks to act on recommendations.
 
 ```bash
-uv run python -c "
-import sqlite3
-from datetime import datetime
-db = sqlite3.connect('investigation.db')
-
-# Lead triage queue
-pending_triage = db.execute(\"SELECT COUNT(*) FROM leads WHERE status='pending_triage'\").fetchone()[0]
-
-# Infra requests
-infra_open = db.execute(\"SELECT COUNT(*) FROM infra_requests WHERE status='open'\").fetchone()[0]
-infra_active = db.execute(\"SELECT COUNT(*) FROM infra_requests WHERE status IN ('evaluating','in_progress')\").fetchone()[0]
-
-# Blocked leads
-blocked_by_infra = db.execute(\"SELECT COUNT(*) FROM leads WHERE blocked_by_infra_id IS NOT NULL AND status='blocked'\").fetchone()[0]
-
-# Unverified findings (>24h old)
-unverified_aging = db.execute(\"SELECT COUNT(*) FROM findings WHERE verification_status='unverified' AND created_at < datetime('now','-1 day')\").fetchone()[0]
-
-# General investigation health
-leads_open = db.execute(\"SELECT COUNT(*) FROM leads WHERE status='open'\").fetchone()[0]
-leads_in_progress = db.execute(\"SELECT COUNT(*) FROM leads WHERE status='in_progress'\").fetchone()[0]
-
-# Open leads by priority
-high_crit = db.execute(\"SELECT COUNT(*) FROM leads WHERE status='open' AND priority IN ('critical','high')\").fetchone()[0]
-
-# Recent activity (7 days)
-recent_completed = db.execute(\"SELECT COUNT(*) FROM leads WHERE completed_at > datetime('now','-7 days')\").fetchone()[0]
-recent_findings = db.execute(\"SELECT COUNT(*) FROM findings WHERE created_at > datetime('now','-7 days')\").fetchone()[0]
-recent_connections = db.execute(\"SELECT COUNT(*) FROM connections WHERE created_at > datetime('now','-7 days')\").fetchone()[0]
-
-# Totals
-total_findings = db.execute(\"SELECT COUNT(*) FROM findings\").fetchone()[0]
-total_connections = db.execute(\"SELECT COUNT(*) FROM connections\").fetchone()[0]
-total_entities = db.execute(\"SELECT COUNT(*) FROM entities\").fetchone()[0]
-total_leads = db.execute(\"SELECT COUNT(*) FROM leads\").fetchone()[0]
-
-# Print structured output
-print(f'pending_triage={pending_triage}')
-print(f'infra_open={infra_open}')
-print(f'infra_active={infra_active}')
-print(f'blocked_by_infra={blocked_by_infra}')
-print(f'unverified_aging={unverified_aging}')
-print(f'leads_open={leads_open}')
-print(f'leads_in_progress={leads_in_progress}')
-print(f'high_crit={high_crit}')
-print(f'recent_completed={recent_completed}')
-print(f'recent_findings={recent_findings}')
-print(f'recent_connections={recent_connections}')
-print(f'total_findings={total_findings}')
-print(f'total_connections={total_connections}')
-print(f'total_entities={total_entities}')
-print(f'total_leads={total_leads}')
-"
+uv run python tools/investigation_status.py --profile "$ITHILDIN_PROFILE" \
+  --db "$ITHILDIN_DB_PATH" --output "$WORKDIR/status.json"
 ```
 
-Then query tier distribution and scheduler recommendations:
+Read the complete snapshot and report its selected profile, absolute database,
+capture time, scoped lead/finding activity, and available analysis state. Keep
+global infrastructure, capacity, and source-health metrics explicitly separate.
+An unavailable table or field is unknown, not zero. Search-log counts describe
+recorded queries, not source coverage or independent evidence. Do not call a
+dispatcher status/reaper or a tracker initializer to obtain a read-only report.
 
-```bash
-uv run python -c "
-import sqlite3
-db = sqlite3.connect('investigation.db')
+Recommend actions that advance the user's question:
 
-# Depth tier distribution (from leads.depth_tier column)
-tiers = db.execute(\"\"\"
-    SELECT COALESCE(depth_tier, 'untiered') as tier, COUNT(*) as cnt
-    FROM leads WHERE status IN ('open', 'in_progress')
-    GROUP BY tier ORDER BY cnt DESC
-\"\"\").fetchall()
-for t in tiers:
-    print(f'tier_{t[0]}={t[1]}')
+- Pending leads may need /triage-leads; prioritize high-value open questions with
+  /pursue-lead, /investigate-person, or /deep-investigate as appropriate.
+- An actual access/tool blocker may justify /build-infra; distinguish a global
+  request from one blocking this investigation.
+- New evidence, a disputed claim, or an unresolved pattern may justify analysis
+  or verification. Finding-count scheduler thresholds are operational defaults,
+  not proof that analysis is or is not useful.
+- Few recent findings do not establish a stalled investigation. Check known
+  ongoing work, useful negative results, and coverage before drawing that conclusion.
 
-# Scheduler recommendations (from triage)
-recs = db.execute(\"\"\"
-    SELECT recommended_skill, COUNT(*) as cnt,
-           GROUP_CONCAT(SUBSTR(title, 1, 40), '; ') as examples
-    FROM leads
-    WHERE status='open' AND recommended_skill IS NOT NULL
-    GROUP BY recommended_skill
-    ORDER BY cnt DESC
-\"\"\").fetchall()
-for r in recs:
-    print(f'recommended_{r[0]}={r[1]} (e.g. {r[2][:80]})')
-
-# Source coverage (from search_log)
-source_coverage = db.execute('SELECT source, COUNT(*) as cnt FROM search_log GROUP BY source ORDER BY cnt DESC LIMIT 10').fetchall()
-for s in source_coverage:
-    print(f'source_{s[0]}={s[1]}')
-"
-```
-
-Then query analysis state:
-
-```bash
-uv run python tools/analysis_export.py analysis-state
-```
-
-### 2. Format Report
-
-Present the queue status in this format:
-
-```
-Queue Status (<DATE>)
-========================================
-
-NEEDS ACTION:
-  !! <N> leads pending triage           -> /triage-leads
-  !  <N> infra requests open            -> /build-infra
-  !  <N> high/critical leads ready      -> /pursue-lead or /deep-investigate
-
-BLOCKED:
-     <N> leads waiting on infra
-
-IN PROGRESS:
-     <N> infra requests being built
-     <N> leads currently being investigated
-
-HEALTH:
-   <N> open leads (<M> high/critical)
-   <N> unverified findings (aging >24h)
-
-ANALYSIS:
-   /analyze-network    +<N> findings since last run (trigger: 50 new findings) [READY/wait]
-   /generate-hunches   +<N> findings since last run (trigger: 75 new findings) [READY/wait]
-   /timeline-analysis  +<N> findings since last run (trigger: 50 new findings) [READY/wait]
-   /systemic-analysis  +<N> findings since last run (trigger: 100 new findings) [READY/wait]
-   Hypotheses: <N> proposed, <M> investigating
-
-INVESTIGATION DEPTH:
-   scan:        <N> leads
-   standard:    <N> leads
-   deep_dive:   <N> leads
-   untiered:    <N> leads
-
-SCHEDULER RECOMMENDATIONS:
-   /deep-investigate:    <N> leads (e.g. ...)
-   /investigate-person:  <N> leads (e.g. ...)
-   /trace-entity:        <N> leads (e.g. ...)
-   /trace-grants:        <N> leads (nonprofit funders/recipients)
-   /audit-contracts:     <N> leads (procurement cohort analysis)
-   /pursue-lead:         <N> leads (e.g. ...)
-
-SOURCE COVERAGE (search_log):
-   <source>: <N> queries | <source>: <N> queries | ...
-
-RECENT (7d):
-   <N> leads completed
-   <N> findings added
-   <N> connections mapped
-
-TOTALS:
-   <N> findings | <N> connections | <N> entities | <N> leads
-```
-
-### 3. Suggest Actions
-
-Based on queue depths, suggest which skills to run:
-
-| Condition | Suggestion |
-|-----------|-----------|
-| pending_triage > 0 | "Run `/triage-leads` to process <N> pending leads" |
-| infra_open > 0 | "Run `/build-infra` to work on <N> infra requests" |
-| high_crit > 0 and leads_in_progress == 0 | "Run `/pursue-lead` — <N> high-priority leads waiting" |
-| leads_open > 50 and pending_triage == 0 | "Run 2-3 `/pursue-lead` instances in parallel" |
-| recent_findings == 0 | "Investigation stalled — no findings in 7 days" |
-| blocked_by_infra > 3 | "Infra bottleneck — <N> leads blocked. Prioritize `/build-infra`" |
-| analysis skill has enough new findings | "Run `/analyze-network` (or other ready skill) — <N> new findings to analyze" |
-| proposed hypotheses > 5 | "Hypotheses accumulating — run `/pursue-lead` on hypothesis-linked leads" |
-
-### 4. Optional: Show Top Leads
-
-If there are open high/critical leads, list the top 5:
-
-```bash
-uv run python tools/lead_tracker.py list --status open --priority critical --limit 5
-uv run python tools/lead_tracker.py list --status open --priority high --limit 5
-```
-
-### 5. Optional: Show Infra Queue
-
-If there are open infra requests, list them:
-
-```bash
-uv run python tools/infra_tracker.py list --status open --limit 5
-```
-
-### 6. Optional: Show Hypothesis Queue
-
-If there are proposed hypotheses:
-
-```bash
-uv run python tools/hypothesis_tracker.py list --status proposed --limit 5
-```
-
-## Notes
-
-- This skill is **read-only** — it does not modify any data
-- It's designed to be run at the start of a session to decide what to work on
-- For launch/review/import lifecycle work, use `/orchestrate-investigation`
-- Automated dispatch: `uv run python scripts/dispatcher.py status` for running agents
-- Analysis skills trigger based on new findings count, not time elapsed (analyze-network: 50, generate-hunches: 75, timeline-analysis: 50, systemic-analysis: 100)
-- Priority: data gathering > triage > analysis > post-processing
-- Multiple CC instances can each run `/dispatch` to see the same queue state
+Summarize the most important actions with their evidence and skill. Do not launch
+workers, write findings, change leads, or generate follow-up leads in this mode.

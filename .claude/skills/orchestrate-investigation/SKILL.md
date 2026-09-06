@@ -1,125 +1,64 @@
 ---
 name: orchestrate-investigation
-description: Launch, supervise, review, and import staged investigation workers through the shared dispatcher control plane
-user_invocable: true
+description: Oversee a multi-step investigation in the current chat using native subagents, review their evidence, and complete the requested work. Also supports explicitly requested unattended staged jobs.
+user-invocable: true
 ---
 
 # /orchestrate-investigation
 
-**CONTROL PLANE ORCHESTRATOR** — Use this skill when you want Claude to act as the investigation foreman. Claude decides what to run, launches bounded workers through the shared dispatcher, monitors progress, reviews staged artifacts, and imports approved output. Worker execution still happens through repo-local Claude skills and the shared `scripts/dispatcher.py` backend.
+Use this for ongoing supervision of an investigation or a research wave. Use
+/dispatch for a read-only status report, and /deep-investigate for a multi-source
+investigation of one target.
 
-Use this skill instead of `/dispatch` when you need to:
-- launch workers
-- supervise running jobs
-- review staged artifacts
-- approve or reject runs
-- import approved output into canonical tables
+Read [the execution contract](../../../docs/EXECUTION_CONTRACT.md) and
+[the research workflow contract](../../../docs/RESEARCH_WORKFLOW_CONTRACT.md).
+They own context pinning, source applicability, worker handoffs, persistence, and
+evidence requirements. Resolve the requested profile/database once and create a
+unique `WORKDIR` before scoped work.
 
-Keep `/dispatch` read-only. Use it for queue visibility only.
+## Plan and supervise in the current chat
 
-## Shared Backend
+1. Establish the user's outcome, existing authorization, scope, and any budget.
+   Inspect relevant leads and retained artifacts. Define completion in terms of
+   answered questions and source coverage, without a finding or worker quota.
+2. Identify independent questions and assign each source/file scope one owner.
+   Use native subagent tools when parallel work helps; inherit the chat's model
+   and reasoning settings unless the user requests an override. Keep simple
+   work local. Do not launch headless jobs as an interactive default or fallback.
+3. Give workers the pinned context, evidence standard, expected output, report
+   path, and write policy. Maintain an assignment/checkpoint file with worker
+   IDs, expected reports, completed coverage, and next actions.
+4. Continue useful parent work while workers run: verify evidence, investigate a
+   separate question, inspect interim artifacts, or prepare integration. Coordinate
+   overlap before querying an assigned source or editing another owner's file.
+5. Use native messages and bounded waits to steer, collect results, and recover
+   failed work. Propagate user corrections promptly. After interruption or
+   compaction, read the checkpoint and reconcile workers before continuing.
+6. Read every expected report or identify its missing scope. Check source
+   identity, quotes, material full-document coverage, ordinary alternatives, and
+   contradictions. Correct or follow up on weak evidence before synthesizing.
+7. Persist authorized results through supported tracker APIs, reconcile lead
+   dispositions, and report the requested outcome, artifact paths, unresolved
+   coverage, and concrete next actions. New syntheses retain their confidence cap.
+   Continue until completion or a dependency prevents further useful work.
 
-All control-plane actions go through:
+If native subagents are unavailable, perform the work sequentially and explain
+any material limitation. Do not create a new user-owned chat for a subtask.
 
-```bash
-uv run python scripts/dispatcher.py <subcommand> ...
-```
+## Explicit unattended jobs
 
-This Claude wrapper always records `--orchestrator claude` on manual launches.
+Only select this path when the user requests unattended/background execution or
+when operating a configured automation. Use the staged dispatcher workflow in
+the execution contract, including review of actual bundle contents and
+content-matching import. Resolve IDs from the selected database; never reuse an
+example lead or run ID. Inherit the configured model unless explicitly overridden.
 
-## Workflow
-
-### 1. Plan or Status First
-
-Use one of:
-
-```bash
-uv run python scripts/dispatcher.py status
-uv run python scripts/dispatcher.py plan
-```
-
-Use `status` when you need current run health, auth health, or review queue state.
-Use `plan` when you need the next wave recommendation.
-
-### 2. Launch Typed Jobs
-
-Manual launches should use explicit task-contract fields. Common examples:
-
-```bash
-uv run python scripts/dispatcher.py launch trace_entity "Swiss Commodity Re Limited" \
-  --brief "Map ownership, directors, addresses, and filing anomalies" \
-  --priority high \
-  --review-required \
-  --orchestrator claude
-
-uv run python scripts/dispatcher.py launch investigate_person "Malcolm Scott Macintyre" \
-  --brief "Clarify role in the ASA and any overlap with Jett/Capella" \
-  --priority high \
-  --review-required \
-  --orchestrator claude
-
-uv run python scripts/dispatcher.py launch pursue_lead 32512 \
-  --lead-id 32512 \
-  --brief "Focus on evidence of post-F-3 share monetization" \
-  --priority high \
-  --review-required \
-  --orchestrator claude
-```
-
-### 3. Monitor for Completion or Stall
+Inspect the command surface before operating it:
 
 ```bash
-uv run python scripts/dispatcher.py status
+uv run python scripts/dispatcher.py --help
 ```
 
-Look for:
-- `health=stalled`
-- auth failures
-- completed runs waiting in the review queue
-
-### 4. Review Staged Artifacts
-
-Inspect:
-
-```bash
-uv run python scripts/dispatcher.py review
-uv run python scripts/dispatcher.py review --run-id <RUN_ID>
-```
-
-Approve or reject:
-
-```bash
-uv run python scripts/dispatcher.py review --approve <RUN_ID> --reviewer claude
-uv run python scripts/dispatcher.py review --reject <RUN_ID> --reviewer claude --note "reason"
-```
-
-### 5. Import Approved Output
-
-```bash
-uv run python scripts/dispatcher.py import --run-id <RUN_ID> --actor claude
-uv run python scripts/dispatcher.py import --all-approved --actor claude
-```
-
-## Rules
-
-- Prefer repo-local Claude worker skills as the canonical worker instructions.
-- Use staged review/import for manual research and analysis launches.
-- Keep task briefs short and concrete.
-- Do not bypass the dispatcher with raw `claude -p` when doing orchestrator work.
-- Do not use `/dispatch` to launch or import. It stays read-only.
-
-## Supported Subcommands
-
-- `run`
-- `daemon`
-- `status`
-- `plan`
-- `launch`
-- `review`
-- `import`
-- `stop`
-
-## Notes
-
-- Claude Code is the only worker backend in v1.
-- Future worker backends should plug into the dispatcher adapter, not into this skill.
+Dispatcher status can reconcile persisted process state; it is not the read-only
+queue report supplied by /dispatch. Native chat reports have no dispatcher run
+receipt. Preserve the unattended path's budgets, deadlines, and import checks.

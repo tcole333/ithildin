@@ -63,7 +63,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
     "timeout_seconds": 3600,
     "stall_seconds": 1800,
     "daily_budget_usd": 50.0,
-    "model": "sonnet",
+    "model": None,  # Inherit the configured Claude runtime unless explicitly overridden.
     "staging_root": ".dispatch_staging",
     "triggers": {
         "triage": {"min_pending": 1},

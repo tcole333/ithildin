@@ -422,11 +422,16 @@ uv run python tools/model_detector.py gaps --finding-id FINDING_ID  # reports wh
 
 ## Framework Discipline
 
-Frameworks are **pattern detectors**, not interpretive lenses. They help you recognize recurring structures, but they must never drive the investigation or filter what you see.
+Frameworks help recognize recurring structures and formulate discriminating
+questions. Use them provisionally: they must not predetermine a conclusion or
+filter out contradictory evidence.
 
 ### Rules
 
-1. **Evidence first, frameworks second.** Document what you find. If a pattern reminds you of a known framework, note it — but never search for evidence to "apply" a framework. The question is always "what does the evidence show?" not "which framework applies here?"
+1. **Evidence governs the conclusion.** Document what you find. A framework may
+   suggest an informative search, including a test that could refute it. Evaluate
+   all resulting evidence and ordinary alternatives rather than collecting only
+   facts that fit the label.
 
 2. **Never force the fit.** If a framework doesn't cleanly match, it doesn't match. Treat a partial match as a tentative observation with missing or contradictory features recorded; it does not establish the explanation. Resist the urge to populate every cell in a framework × subject matrix. Reality is messy and incomplete matrices are honest.
 

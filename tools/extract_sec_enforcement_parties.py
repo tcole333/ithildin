@@ -15,10 +15,10 @@ Usage:
     uv run python tools/extract_sec_enforcement_parties.py prepare \
       --mode pilot --sample-size 200 --output /tmp/sec-party-pilot.json
     uv run python tools/extract_sec_enforcement_parties.py run \
-      --manifest /tmp/sec-party-pilot.json --model gpt-5.6-terra \
+      --manifest /tmp/sec-party-pilot.json \
       --output /tmp/sec-party-run.json
     uv run python tools/extract_sec_enforcement_parties.py adjudicate \
-      --model gpt-5.6-sol --output /tmp/sec-party-adjudication.json
+      --output /tmp/sec-party-adjudication.json
     uv run python tools/extract_sec_enforcement_parties.py status \
       --output /tmp/sec-party-status.json
 
@@ -26,6 +26,9 @@ Usage:
 mode is ChatGPT. Provider API-key environment variables are removed from the
 child process so this path cannot silently fall back to usage-based API auth.
 Codex plan limits and credits still apply.
+Both execution commands inherit the user configuration's model selection;
+``--model`` supplies an explicit override. Runtime-resolved identity is not
+observed, so provenance records the selected model separately from resolution.
 """
 
 from __future__ import annotations
@@ -42,6 +45,7 @@ import sqlite3
 import subprocess
 import sys
 import tempfile
+import tomllib
 import uuid
 from collections import Counter, defaultdict
 from collections.abc import Mapping, Sequence
@@ -77,8 +81,9 @@ SIDECAR_SCHEMA_VERSION = "2"
 SIDECAR_APPLICATION_ID = 0x53454350  # ASCII "SECP"
 MAX_SUPPORT_EXCERPT_CHARS = 6_000
 MAX_ERROR_CHARS = 8_000
-DEFAULT_MODEL = "gpt-5.6-terra"
-DEFAULT_ADJUDICATION_MODEL = "gpt-5.6-sol"
+DEFAULT_MODEL = None
+DEFAULT_ADJUDICATION_MODEL = None
+UNRESOLVED_RUNTIME_MODEL = "runtime-default:unresolved"
 
 MODEL_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
 HASH_RE = re.compile(r"^[0-9a-f]{64}$")
@@ -2808,10 +2813,44 @@ def codex_auth_and_version(
     return "chatgpt", rendered_version, env
 
 
+def resolve_model_selection(model: str | None, *, environ=None) -> dict[str, Any]:
+    """Inherit only model selection, keeping all other user configuration isolated.
+
+    The extractor never observes the model actually resolved by Codex. Read the
+    root user model without enabling configured hooks, tools, or providers.
+    Named runtime profiles are not selected by this command; use --model for a
+    choice made elsewhere (such as an interactive session or profile).
+    """
+    requested_model = model
+    source = "explicit" if model is not None else "runtime_default"
+    if model is None:
+        environment = os.environ if environ is None else environ
+        codex_home = Path(environment.get("CODEX_HOME") or Path.home() / ".codex").expanduser()
+        config_path = codex_home / "config.toml"
+        if config_path.exists():
+            try:
+                with config_path.open("rb") as handle:
+                    config = tomllib.load(handle)
+            except (OSError, tomllib.TOMLDecodeError) as exc:
+                # Do not echo TOML content: configuration can contain secrets.
+                raise PartyExtractionError("cannot read Codex model configuration") from exc
+            model = config.get("model")
+            if model is not None:
+                source = "user_config"
+    if model is not None and (not isinstance(model, str) or not MODEL_RE.fullmatch(model)):
+        raise PartyExtractionError("invalid model name in model selection")
+    return {
+        "requested_model": requested_model,
+        "selected_model": model,
+        "selection_source": source,
+        "resolved_model": None,
+    }
+
+
 def run_codex_batch(
     evidence_records: Sequence[Mapping[str, Any]],
     *,
-    model: str,
+    model: str | None,
     reasoning_effort: str,
     purpose: str = "extract",
     timeout: int = 240,
@@ -2819,7 +2858,7 @@ def run_codex_batch(
 ) -> CodexBatchResult:
     """Invoke Codex in an empty read-only working directory."""
 
-    if not MODEL_RE.fullmatch(model):
+    if model is not None and not MODEL_RE.fullmatch(model):
         raise PartyExtractionError(f"invalid model name: {model!r}")
     if reasoning_effort not in {"low", "medium", "high", "xhigh", "max"}:
         raise PartyExtractionError(
@@ -2853,13 +2892,13 @@ def run_codex_batch(
             "read-only",
             "--cd",
             str(workdir_path),
-            "--model",
-            model,
             "-c",
             f'model_reasoning_effort="{reasoning_effort}"',
             "-c",
             "shell_environment_policy.inherit=none",
         ]
+        if model is not None:
+            args.extend(["--model", model])
         for feature in DISABLED_CODEX_FEATURES:
             args.extend(["--disable", feature])
         args.extend(
@@ -3246,7 +3285,7 @@ def run_extractions(
     *,
     sidecar_db_path: str | Path = DEFAULT_SIDECAR_DB,
     manifest_path: str | Path | None = None,
-    model: str = DEFAULT_MODEL,
+    model: str | None = DEFAULT_MODEL,
     reasoning_effort: str = "medium",
     batch_size: int = 8,
     max_batch_chars: int = 60_000,
@@ -3260,8 +3299,9 @@ def run_extractions(
 ) -> dict[str, Any]:
     """Run or adjudicate staged inputs, preserving every attempt."""
 
-    if not MODEL_RE.fullmatch(model):
-        raise PartyExtractionError(f"invalid model name: {model!r}")
+    model_selection = resolve_model_selection(model)
+    model = model_selection["selected_model"]
+    recorded_model = model or UNRESOLVED_RUNTIME_MODEL
     if not 1 <= batch_size <= 50:
         raise PartyExtractionError("batch_size must be between 1 and 50")
     if max_batch_chars < 10_000:
@@ -3378,7 +3418,7 @@ def run_extractions(
                 parent = item["parent"]
                 request_sha = _request_sha256(
                     input_sha256=item["payload"]["input_id"],
-                    model=model,
+                    model=recorded_model,
                     reasoning_effort=reasoning_effort,
                     purpose=purpose,
                     parent_attempt_id=(
@@ -3387,7 +3427,8 @@ def run_extractions(
                     prompt_sha256=prompt_sha256,
                     schema_sha256=schema_sha256,
                 )
-                cached = None if force else _has_cached_attempt(db, request_sha)
+                # An unobserved runtime default can change between invocations.
+                cached = None if force or model is None else _has_cached_attempt(db, request_sha)
                 current_validation = None
                 if cached is not None:
                     current_validation = _current_attempt_validation(
@@ -3429,6 +3470,7 @@ def run_extractions(
                 "status": "dry_run",
                 "purpose": purpose,
                 "model": model,
+                "model_selection": model_selection,
                 "reasoning_effort": reasoning_effort,
                 "planned_count": planned_count,
                 "batch_count": len(execution_batches),
@@ -3470,6 +3512,7 @@ def run_extractions(
                         "review_reasons": [],
                         "error": str(exc),
                         "execution_context": {
+                            "model_selection": model_selection,
                             "batch_input_ids": batch_input_ids,
                             "prompt_sha256": prompt_sha256,
                             "schema_sha256": schema_sha256,
@@ -3485,7 +3528,7 @@ def run_extractions(
                             if item["parent"] is not None
                             else None
                         ),
-                        model=model,
+                        model=recorded_model,
                         reasoning_effort=reasoning_effort,
                         cli_version="unknown",
                         auth_mode="unverified",
@@ -3519,6 +3562,7 @@ def run_extractions(
                         "review_reasons": [],
                         "error": batch_result.error_text,
                         "execution_context": {
+                            "model_selection": model_selection,
                             "batch_input_ids": batch_input_ids,
                             "prompt_sha256": prompt_sha256,
                             "schema_sha256": schema_sha256,
@@ -3539,7 +3583,7 @@ def run_extractions(
                             if item["parent"] is not None
                             else None
                         ),
-                        model=model,
+                        model=recorded_model,
                         reasoning_effort=reasoning_effort,
                         cli_version=batch_result.cli_version,
                         auth_mode=batch_result.auth_mode,
@@ -3577,6 +3621,7 @@ def run_extractions(
                 validation = {
                     **result["validation"],
                     "execution_context": {
+                        "model_selection": model_selection,
                         "batch_input_ids": batch_input_ids,
                         "prompt_sha256": prompt_sha256,
                         "schema_sha256": schema_sha256,
@@ -3594,7 +3639,7 @@ def run_extractions(
                         if item["parent"] is not None
                         else None
                     ),
-                    model=model,
+                    model=recorded_model,
                     reasoning_effort=reasoning_effort,
                     cli_version=batch_result.cli_version,
                     auth_mode=batch_result.auth_mode,
@@ -3622,6 +3667,7 @@ def run_extractions(
             "status": "failed" if aborted_error else "ok",
             "purpose": purpose,
             "model": model,
+            "model_selection": model_selection,
             "reasoning_effort": reasoning_effort,
             "attempt_count": len(attempts),
             "cache_hit_count": len(cache_hits),
@@ -3991,7 +4037,17 @@ def export_reviewed(
                     "input_id": row["input_sha256"],
                     "attempt_ref": row["attempt_ref"],
                     "attempt_status": row["status"],
-                    "model": row["model_name"],
+                    "model": (
+                        None if row["model_name"] == UNRESOLVED_RUNTIME_MODEL
+                        else row["model_name"]
+                    ),
+                    "model_selection": json.loads(row["validation_json"]).get(
+                        "execution_context", {}
+                    ).get("model_selection", {
+                        "selected_model": row["model_name"],
+                        "selection_source": "legacy_record",
+                        "resolved_model": None,
+                    }),
                     "purpose": row["purpose"],
                     "evidence": evidence_payload,
                     "review": {
@@ -4138,7 +4194,7 @@ def _parse_adjudication_statuses(value: str) -> frozenset[str]:
 def _add_execution_args(
     parser: argparse.ArgumentParser,
     *,
-    default_model: str,
+    default_model: str | None,
 ) -> None:
     parser.add_argument(
         "--sidecar-db",
@@ -4149,7 +4205,10 @@ def _add_execution_args(
         "--manifest",
         help="Restrict execution to input_ids in a prepare manifest",
     )
-    parser.add_argument("--model", default=default_model)
+    parser.add_argument(
+        "--model", default=default_model,
+        help="Explicit model override (default: user Codex model, then runtime default)",
+    )
     parser.add_argument(
         "--reasoning-effort",
         choices=["low", "medium", "high", "xhigh", "max"],

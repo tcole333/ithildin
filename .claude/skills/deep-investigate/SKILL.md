@@ -70,9 +70,12 @@ without supplying an intended conclusion.
 
 ## 2. Launch and supervise research
 
-Use the native Agent tool for bounded independent tracks and inherit the configured
-model. Launch independent background workers before waiting, and use the runtime's
-messaging or continuation tools to steer active workers and request follow-up.
+Use native subagents for bounded independent tracks and inherit the configured model.
+In Codex, use `spawn_agent` to create tracks.
+Launch independent tracks before waiting; use `send_message` to steer active
+workers and `followup_task` for a bounded continuation when needed. In Claude Code,
+use the native Agent tool and the host’s messaging/continuation facilities for
+the corresponding actions.
 
 Give each worker the pinned context, applicable sources, ownership/mutation
 policy, unique output/report paths, and evidence standard from the shared
@@ -81,8 +84,9 @@ contract. Record its runtime ID and expected report path in `$WORKDIR/progress.m
 While workers run, complete unassigned useful work: inspect existing evidence,
 resolve identity, prepare the coverage matrix, investigate a parent-owned source,
 or verify an emerging contradiction. Keep the user informed about material
-findings and changes of direction. Use the runtime's compact worker status and completion notifications;
-wait for results when no useful independent work remains. Inspect a worker's status or
+findings and changes of direction. Use `list_agents` for a compact status check and
+`wait_agent` when no useful independent work remains; in Claude Code use the
+host’s worker status and completion notifications. Inspect a worker's status or
 send a targeted progress request if a report is missing. Quiet reasoning or a
 long retrieval alone does not establish a hung worker.
 

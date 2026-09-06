@@ -1,12 +1,12 @@
 ---
 name: review-methodology
 description: Review operational learnings and propose methodology improvements
-user_invocable: true
+user-invocable: true
 ---
 
 # /review-methodology
 
-Analyze accumulated methodology observations from investigation agents. Detect patterns, cross-reference with infrastructure requests and methodology docs, and propose specific improvements. **Never auto-applies changes** — presents proposals for human review.
+Analyze accumulated methodology observations from investigation agents. Detect patterns, cross-reference with infrastructure requests and methodology docs, and propose specific improvements. A review request produces proposals; a request to implement improvements authorizes in-scope changes after inspecting the evidence.
 
 ## Arguments
 
@@ -53,8 +53,8 @@ Read: research/INVESTIGATIVE_METHODOLOGY.md
 # Tool reference (check for undocumented tools mentioned in friction)
 Read: docs/TOOL_REFERENCE.md
 
-# CLAUDE.md (check tool table completeness)
-Read: CLAUDE.md
+# Agent guidance (check tool table completeness and parity)
+Read: CLAUDE.md and AGENTS.md
 ```
 
 ### 3. Analyze Observations
@@ -163,7 +163,7 @@ Format all proposals in a clear summary:
 
 ### 6. Apply Approved Changes
 
-**Only after human approval:**
+Apply proposals within the user's existing implementation authorization. For review-only requests, present concrete changes for review before applying them:
 
 For each approved proposal:
 1. Make the change (edit doc, create infra request, update source_reliability)
@@ -179,7 +179,7 @@ uv run python tools/methodology_tracker.py dismiss <ID> --reason "Duplicate of o
 
 ## Notes
 
-- **Never auto-apply changes.** All proposals require human approval.
+- Honor review versus implementation intent. Do not ask again for an already authorized local fix; prepare concrete proposals before requesting any approval that is actually missing.
 - Friction observations about the same tool should be consolidated into a single infra request.
 - Pattern detection uses word overlap — review the groupings for false clusters.
 - Source quality observations should cite specific investigation contexts (which target, which search revealed the issue).
