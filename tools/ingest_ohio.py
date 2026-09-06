@@ -47,22 +47,18 @@ from curl_cffi import requests as req_lib
 # Add tools dir to path
 sys.path.insert(0, str(Path(__file__).parent))
 from query_registry import get_db, _rebuild_fts
+from registry_ingest_util import upsert_current_agent
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.env_loader import load_env_file
     from tools.lead_tracker import log_search
 except ImportError:
     from output_util import add_output_args, write_output
+    from env_loader import load_env_file
     from lead_tracker import log_search
 
-# Load .env
-env_path = Path(__file__).parent.parent / ".env"
-if env_path.exists():
-    for line in env_path.read_text().splitlines():
-        line = line.strip()
-        if line and not line.startswith("#") and "=" in line:
-            key, val = line.split("=", 1)
-            os.environ.setdefault(key.strip(), val.strip().strip('"'))
+load_env_file()
 
 SEARCH_URL = "https://businesssearch.ohiosos.gov/"
 API_BASE = "https://businesssearchapi.ohiosos.gov"
@@ -676,15 +672,11 @@ def _upsert_entity(db, search_data, detail=None):
         eid = row[0]
 
     if agent_name:
-        try:
-            db.execute(
-                """INSERT OR REPLACE INTO registry_agents
-                (entity_id, agent_name, agent_type, address, city, state, zip, country)
-                VALUES (?, ?, 'person', ?, ?, ?, ?, 'US')""",
-                [eid, agent_name, agent_addr, agent_city, agent_state, agent_zip],
-            )
-        except Exception:
-            pass
+        upsert_current_agent(
+            db, entity_id=eid, agent_name=agent_name, agent_type="person",
+            address=agent_addr, city=agent_city, state=agent_state,
+            zip=agent_zip, country="US",
+        )
 
     return eid
 

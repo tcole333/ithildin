@@ -92,11 +92,20 @@ def _create_finding(record: dict, args: argparse.Namespace) -> None:
     tipo = meta.get("tipoDispositivo") or "DOCUMENT"
     sumilla = (meta.get("sumilla") or "").strip()
 
-    quote = args.quote
-    if not quote:
+    full_text = (record.get("fullText") or "").strip()
+    quote = args.quote.strip() if args.quote is not None else None
+    if quote is None:
         # Derive a representative direct-quote excerpt: the sumilla is the
         # official summary — verbatim from the gazette page header.
-        quote = sumilla[:480] if sumilla else record["fullText"][:480]
+        quote = sumilla[:480] if sumilla else full_text[:480]
+    if not quote:
+        raise ValueError("A finding requires a nonblank quote from the fetched document")
+    if quote in sumilla:
+        evidence_ref = record["landingUrl"]
+    elif quote in full_text:
+        evidence_ref = record["visorUrl"]
+    else:
+        raise ValueError("The requested quote does not occur in the fetched sumilla or full text")
 
     summary = (
         f"{tipo} {nombre} ({meta.get('fechaPublicacion','')}): {sumilla[:280]}"
@@ -109,17 +118,16 @@ def _create_finding(record: dict, args: argparse.Namespace) -> None:
         "--type", "document",
         "--summary", summary,
         "--detail", detail,
-        "--evidence", nombre, record["landingUrl"],
+        "--evidence", evidence_ref,
         "--claim-type", args.claim_type,
-        "--source-quote", quote,
+        "--source-quote", f"{evidence_ref}:{quote}",
         "--sources", "elperuano",
         "--confidence", args.confidence,
     ]
     print("-> " + " ".join(cmd[3:]), file=sys.stderr)
     res = subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True)
     if res.returncode != 0:
-        print(f"warn: findings_tracker exit {res.returncode}: {res.stderr}",
-              file=sys.stderr)
+        raise RuntimeError(f"findings_tracker exit {res.returncode}: {res.stderr.strip()}")
     else:
         print(res.stdout.strip(), file=sys.stderr)
 
@@ -154,6 +162,7 @@ def cmd_ingest(args: argparse.Namespace) -> None:
         print("error: pass either OPs or --search QUERY", file=sys.stderr)
         sys.exit(2)
 
+    finding_failed = False
     for op in ops:
         op = qep._extract_op(op)
         try:
@@ -163,12 +172,19 @@ def cmd_ingest(args: argparse.Namespace) -> None:
             continue
         path = _save(rec, args.output)
         meta = rec["metadata"]
-        print(f"saved {path.relative_to(REPO_ROOT)}  "
+        display_path = path.relative_to(REPO_ROOT) if path.is_relative_to(REPO_ROOT) else path
+        print(f"saved {display_path}  "
               f"({meta.get('tipoDispositivo')} {meta.get('nombreDispositivo')})",
               file=sys.stderr)
 
         if args.finding:
-            _create_finding(rec, args)
+            try:
+                _create_finding(rec, args)
+            except (ValueError, RuntimeError) as exc:
+                print(f"  [{op}] finding failed: {exc}", file=sys.stderr)
+                finding_failed = True
+    if finding_failed:
+        raise SystemExit(1)
 
 
 def main() -> None:

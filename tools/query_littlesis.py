@@ -35,13 +35,11 @@ except ImportError:
     from output_util import add_output_args, write_output
 
 
-def _log(query, source, count):
-    """Log search to prevent redundant queries."""
-    try:
-        from tools.lead_tracker import log_search
-        log_search(query, source, count)
-    except Exception:
-        pass
+try:
+    from tools.search_log_util import log_search_result as _log
+except ImportError:
+    from search_log_util import log_search_result as _log
+
 
 
 BASE_URL = "https://littlesis.org/api"

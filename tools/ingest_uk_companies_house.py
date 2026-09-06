@@ -780,9 +780,11 @@ def cmd_ingest_insolvency(args):
         from findings_tracker import add_finding
 
     count = 0
-    for case in cases:
+    for case_index, case in enumerate(cases):
         case_number = case.get("number", "?")
-        case_type = case.get("type", "unknown")
+        case_type = case.get("type")
+        if not isinstance(case_type, str) or not case_type.strip():
+            raise ValueError(f"Insolvency case #{case_number} has no source type to quote")
 
         dates = case.get("dates", [])
         date_str = ""
@@ -807,8 +809,35 @@ def cmd_ingest_insolvency(args):
                 detail_parts.append(f"  {p.get('name', '?')} address: {addr}")
 
         summary = f"UK insolvency case #{case_number} ({case_type}) for {company_name}"
-        detail = "; ".join(detail_parts)
-        source_url = f"https://find-and-update.company-information.service.gov.uk/company/{args.number}/insolvency"
+        source_url = f"{BASE_URL}/company/{args.number}/insolvency"
+        public_url = f"https://find-and-update.company-information.service.gov.uk/company/{args.number}/insolvency"
+        # Preserve the parsed record with explicit serialization context. The
+        # quote itself is an actual source string, not our generated summary or
+        # a JSON rendering misrepresented as the original response bytes.
+        detail = (
+            "; ".join(detail_parts)
+            + f"\nPublic record page: {public_url}"
+            + f"\nParsed API case record (JSON serialization of cases[{case_index}], "
+            "not a verbatim response excerpt):\n"
+            + json.dumps(case, ensure_ascii=False, sort_keys=True)
+        )
+        source_quotes = {
+            source_url: {
+                "quote": case_type,
+                "page": f"cases[{case_index}].type",
+                "assessment": (
+                    "Exact string value from the Companies House insolvency API. "
+                    "The finding paraphrases the case fields; its detail preserves "
+                    "the parsed case as explicitly labeled JSON serialization."
+                ),
+            },
+        }
+        if company and company.get("company_name"):
+            source_quotes[f"{BASE_URL}/company/{args.number}"] = {
+                "quote": company["company_name"],
+                "page": "company_name",
+                "assessment": "Exact company_name string from the company profile API.",
+            }
 
         finding_id = add_finding(
             target_name=company_name,
@@ -816,15 +845,11 @@ def cmd_ingest_insolvency(args):
             summary=summary,
             detail=detail,
             source_datasets=["companies_house"],
-            confidence="confirmed",
+            confidence="high",
             date_of_event=date_str or None,
-            evidence_ids=[source_url],
-            claim_type="direct_quote",
-            source_quotes={
-                source_url: {
-                    "quote": f"Insolvency case #{case_number}, type: {case_type}"
-                }
-            },
+            evidence_ids=list(source_quotes),
+            claim_type="paraphrase",
+            source_quotes=source_quotes,
         )
         print(f"  Finding #{finding_id}: {summary}")
         count += 1

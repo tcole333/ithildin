@@ -27,9 +27,11 @@ DATA_DIR = Path(__file__).parent.parent / "datasets" / "fl_sunbiz"
 try:
     from tools.output_util import add_output_args, write_output
     from tools.query_registry import _rebuild_fts, format_entity, get_db
+    from tools.registry_ingest_util import upsert_current_agent, upsert_current_officer
 except ImportError:
     from output_util import add_output_args, write_output
     from query_registry import _rebuild_fts, format_entity, get_db
+    from registry_ingest_util import upsert_current_agent, upsert_current_officer
 
 # ── Fixed-width field definitions for corporate data file ──
 # (start_pos_0indexed, length, field_name)
@@ -414,12 +416,20 @@ def _ingest_corps(db, filepath):
 
 
 def _flush_batch(db, entities, officers, agents):
-    """Insert a batch of records into the database."""
-    # Disable FK checks during bulk insert (INSERT OR REPLACE triggers DELETE first)
-    db.execute("PRAGMA foreign_keys=OFF")
-    # Insert entities
+    """Refresh a batch atomically without changing entity or party identities."""
+    db.execute("SAVEPOINT florida_registry_batch")
+    try:
+        _write_batch(db, entities, officers, agents)
+    except Exception:
+        db.execute("ROLLBACK TO florida_registry_batch")
+        raise
+    finally:
+        db.execute("RELEASE florida_registry_batch")
+
+
+def _write_batch(db, entities, officers, agents):
     db.executemany("""
-        INSERT OR REPLACE INTO registry_entities (
+        INSERT INTO registry_entities (
             source_jurisdiction, source_id, entity_name, entity_type, status,
             formation_date, dissolution_date, last_filing_date, ein,
             state_of_formation, purpose,
@@ -427,56 +437,53 @@ def _flush_batch(db, entities, officers, agents):
             mailing_address, mailing_city, mailing_state, mailing_zip, mailing_country,
             source_url
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(source_jurisdiction, source_id) DO UPDATE SET
+            entity_name=excluded.entity_name,
+            entity_type=excluded.entity_type,
+            status=excluded.status,
+            formation_date=excluded.formation_date,
+            dissolution_date=COALESCE(excluded.dissolution_date, registry_entities.dissolution_date),
+            last_filing_date=excluded.last_filing_date,
+            ein=excluded.ein,
+            state_of_formation=excluded.state_of_formation,
+            purpose=COALESCE(excluded.purpose, registry_entities.purpose),
+            principal_address=excluded.principal_address,
+            principal_city=excluded.principal_city,
+            principal_state=excluded.principal_state,
+            principal_zip=excluded.principal_zip,
+            principal_country=excluded.principal_country,
+            mailing_address=excluded.mailing_address,
+            mailing_city=excluded.mailing_city,
+            mailing_state=excluded.mailing_state,
+            mailing_zip=excluded.mailing_zip,
+            mailing_country=excluded.mailing_country,
+            source_url=excluded.source_url,
+            updated_at=CURRENT_TIMESTAMP
     """, entities)
 
-    # For officers and agents, we need the entity_id from the source_id
-    # Build a mapping from corp_number to entity_id
-    if officers or agents:
-        corp_numbers = set()
-        for o in officers:
-            corp_numbers.add(o[0])
-        for a in agents:
-            corp_numbers.add(a[0])
+    corp_numbers = {party[0] for party in (*officers, *agents)}
+    id_map = {}
+    for number in corp_numbers:
+        row = db.execute(
+            "SELECT id FROM registry_entities WHERE source_jurisdiction='fl' AND source_id=?",
+            [number],
+        ).fetchone()
+        if row is None:
+            raise ValueError(f"No Florida entity for registry party: {number}")
+        id_map[number] = row[0]
 
-        id_map = {}
-        for cn in corp_numbers:
-            row = db.execute(
-                "SELECT id FROM registry_entities WHERE source_jurisdiction='fl' AND source_id=?",
-                [cn]
-            ).fetchone()
-            if row:
-                id_map[cn] = row[0]
-
-    # Insert officers
-    for o in officers:
-        entity_id = id_map.get(o[0])
-        if not entity_id:
-            continue
-        try:
-            db.execute("""
-                INSERT OR IGNORE INTO registry_officers
-                (entity_id, officer_name, title, officer_type, address, city, state, zip)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-            """, (entity_id, o[1], o[2], o[3], o[4], o[5], o[6], o[7]))
-        except sqlite3.IntegrityError:
-            pass
-
-    # Insert agents
-    for a in agents:
-        entity_id = id_map.get(a[0])
-        if not entity_id:
-            continue
-        try:
-            db.execute("""
-                INSERT OR IGNORE INTO registry_agents
-                (entity_id, agent_name, agent_type, address, city, state, zip)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
-            """, (entity_id, a[1], a[2], a[3], a[4], a[5], a[6]))
-        except sqlite3.IntegrityError:
-            pass
-
-    # Re-enable FK checks
-    db.execute("PRAGMA foreign_keys=ON")
+    for officer in officers:
+        upsert_current_officer(
+            db, entity_id=id_map[officer[0]], officer_name=officer[1],
+            title=officer[2], officer_type=officer[3], address=officer[4],
+            city=officer[5], state=officer[6], zip=officer[7],
+        )
+    for agent in agents:
+        upsert_current_agent(
+            db, entity_id=id_map[agent[0]], agent_name=agent[1],
+            agent_type=agent[2], address=agent[3], city=agent[4],
+            state=agent[5], zip=agent[6],
+        )
 
 
 def _ingest_events(db, filepath):

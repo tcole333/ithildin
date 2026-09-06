@@ -54,27 +54,15 @@ from urllib.error import HTTPError, URLError
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.env_loader import load_env_file
+    from tools.search_log_util import canonical_search_key, log_search_result as _log
 except ImportError:
     from output_util import add_output_args, write_output
+    from env_loader import load_env_file
+    from search_log_util import canonical_search_key, log_search_result as _log
 
 
-def _log(query, source, count):
-    """Log search to prevent redundant queries."""
-    try:
-        from tools.lead_tracker import log_search
-        log_search(query, source, count)
-    except Exception:
-        pass
-
-
-# Load .env
-env_path = Path(__file__).parent.parent / ".env"
-if env_path.exists():
-    for line in env_path.read_text().splitlines():
-        line = line.strip()
-        if line and not line.startswith("#") and "=" in line:
-            key, val = line.split("=", 1)
-            os.environ.setdefault(key.strip(), val.strip().strip('"'))
+load_env_file()
 
 BASE_URL = "https://api.open.fec.gov/v1"
 REQUEST_TIMEOUT_SECONDS = 60
@@ -186,6 +174,18 @@ def _fetch(endpoint, params, max_pages=1):
     return all_results, data.get("pagination", {})
 
 
+def _fetch_logged(mode, subject, endpoint, params, limit):
+    """Fetch a bounded page set and audit its complete public query scope."""
+    if limit <= 0:
+        raise ValueError("limit must be positive")
+    # _fetch adds credentials and continuation parameters in place; snapshot
+    # only the public request before invoking it.
+    key = canonical_search_key(mode, subject, filters=params, limit=limit)
+    results, pagination = _fetch(endpoint, params, max_pages=max(1, (limit + 99) // 100))
+    _log(key, "fec", len(results[:limit]))
+    return results, pagination
+
+
 def _format_amount(amount):
     """Format donation amount."""
     if amount is None:
@@ -233,11 +233,11 @@ def cmd_donor(args):
     if args.state:
         params["contributor_state"] = args.state
 
-    max_pages = max(1, args.limit // 100 + 1)
-    results, pagination = _fetch("/schedules/schedule_a/", params, max_pages=max_pages)
+    results, pagination = _fetch_logged(
+        "donor", args.query, "/schedules/schedule_a/", params, args.limit,
+    )
 
     total = pagination.get("count", len(results))
-    _log(args.query, "fec", total)
 
     if write_output(results[:args.limit], args, summary=f"FEC donor '{args.query}'"):
         return
@@ -276,11 +276,11 @@ def cmd_employer(args):
     if args.cycle:
         params["two_year_transaction_period"] = args.cycle
 
-    max_pages = max(1, args.limit // 100 + 1)
-    results, pagination = _fetch("/schedules/schedule_a/", params, max_pages=max_pages)
+    results, pagination = _fetch_logged(
+        "employer", args.query, "/schedules/schedule_a/", params, args.limit,
+    )
 
     total = pagination.get("count", len(results))
-    _log(args.query, "fec", total)
 
     if write_output(results[:args.limit], args, summary=f"FEC employer '{args.query}'"):
         return
@@ -303,8 +303,9 @@ def cmd_address(args):
     if args.cycle:
         params["two_year_transaction_period"] = args.cycle
 
-    max_pages = max(1, args.limit // 100 + 1)
-    results, pagination = _fetch("/schedules/schedule_a/", params, max_pages=max_pages)
+    results, pagination = _fetch_logged(
+        "address", args.zip_code, "/schedules/schedule_a/", params, args.limit,
+    )
 
     if write_output(results[:args.limit], args, summary=f"FEC address ZIP {args.zip_code}"):
         return
@@ -329,8 +330,9 @@ def cmd_recipient(args):
     if args.min_amount:
         params["min_amount"] = args.min_amount
 
-    max_pages = max(1, args.limit // 100 + 1)
-    results, pagination = _fetch("/schedules/schedule_a/", params, max_pages=max_pages)
+    results, pagination = _fetch_logged(
+        "recipient", args.committee_id, "/schedules/schedule_a/", params, args.limit,
+    )
 
     if write_output(results[:args.limit], args, summary=f"FEC recipient {args.committee_id}"):
         return
@@ -409,8 +411,9 @@ def cmd_disbursements(args):
     if args.cycle:
         params["two_year_transaction_period"] = args.cycle
 
-    max_pages = max(1, args.limit // 100 + 1)
-    results, pagination = _fetch("/schedules/schedule_b/", params, max_pages=max_pages)
+    results, pagination = _fetch_logged(
+        "disbursements", args.committee_id, "/schedules/schedule_b/", params, args.limit,
+    )
 
     if write_output(results[:args.limit], args, summary=f"FEC disbursements {args.committee_id}"):
         return
@@ -455,8 +458,9 @@ def cmd_ie(args):
     if args.cycle:
         params["two_year_transaction_period"] = args.cycle
 
-    max_pages = max(1, args.limit // 100 + 1)
-    results, pagination = _fetch("/schedules/schedule_e/", params, max_pages=max_pages)
+    results, pagination = _fetch_logged(
+        "ie", args.committee_id, "/schedules/schedule_e/", params, args.limit,
+    )
 
     if write_output(results[:args.limit], args, summary=f"FEC IEs {args.committee_id}"):
         return

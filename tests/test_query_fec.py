@@ -52,8 +52,52 @@ def test_donor_output_still_logs_search(monkeypatch, tmp_path):
 
     query_fec.cmd_donor(args)
 
-    assert logged == [("Example Donor", "fec", 7)]
+    assert logged == [(query_fec.canonical_search_key(
+        "donor", "Example Donor", filters={
+            "contributor_name": "Example Donor", "sort": "-contribution_receipt_date",
+        }, limit=100,
+    ), "fec", 1)]
     assert (tmp_path / "fec.json").exists()
+
+
+def test_scoped_keys_distinguish_fec_operation_cycle_and_filters(monkeypatch):
+    logged = []
+    monkeypatch.setattr(query_fec, "_fetch", lambda *a, **k: ([], {"count": 0}))
+    monkeypatch.setattr(query_fec, "_log", lambda key, *args: logged.append(key))
+    monkeypatch.setattr(query_fec, "write_output", lambda *a, **k: True)
+    args = SimpleNamespace(
+        query="Example", employer=None, min_amount=None, max_amount=None,
+        cycle=2022, state=None, limit=100,
+    )
+    query_fec.cmd_donor(args)
+    args.cycle = 2024
+    query_fec.cmd_donor(args)
+    args.employer = 'Other Employer'
+    query_fec.cmd_donor(args)
+    query_fec.cmd_employer(args)
+    assert len(set(logged)) == 4
+    assert json.loads(logged[0])["filters"]["two_year_transaction_period"] == 2022
+    assert json.loads(logged[1])["filters"]["two_year_transaction_period"] == 2024
+    assert json.loads(logged[2])["filters"]["contributor_employer"] == 'Other Employer'
+    assert json.loads(logged[3])["mode"] == 'employer'
+
+
+def test_fec_scope_snapshot_excludes_request_credentials_and_cursor(monkeypatch):
+    logged = []
+    pages = []
+
+    def fetch(endpoint, params, max_pages):
+        pages.append(max_pages)
+        params.update(api_key='never-log-this', last_index=123)
+        return [{'sub_id': '1'}], {'count': 500}
+
+    monkeypatch.setattr(query_fec, '_fetch', fetch)
+    monkeypatch.setattr(query_fec, '_log', lambda *args: logged.append(args))
+    query_fec._fetch_logged('donor', 'Example', '/test', {'contributor_name': 'Example'}, 100)
+    assert pages == [1]
+    assert 'never-log-this' not in logged[0][0]
+    assert 'last_index' not in logged[0][0]
+    assert logged[0][2] == 1
 
 
 def test_timeout_writes_audit_artifact_and_exits_nonzero(monkeypatch, tmp_path, capsys):
