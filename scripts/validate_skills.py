@@ -1,29 +1,11 @@
 #!/usr/bin/env python3
-"""Validate skills, command docs, and markdown tool-call snippets.
+"""Validate repository skills and documented CLI help contracts.
 
-Default targets:
-- .claude/skills (repo)
-- .codex/skills (repo mirror)
-- $HOME/.codex/skills
-
-Optional targets:
-- command markdown directories (e.g. ~/.claude/commands)
-- arbitrary markdown docs directories
-
-Checks include:
-- SKILL.md frontmatter is valid YAML with only allowed keys (base keys from the
-  skill-creator plugin spec plus repo conventions such as `user_invocable`),
-  a kebab-case `name`, and a sane `description`
-- Required frontmatter keys (for commands, when configured)
-- No duplicate `uv run uv run`
-- Optional warning for `.venv/bin/python*` and bare `python tools/...`
-- Command snippets reference existing scripts (when concrete, not templated)
-- Long flags appear in `--help` output for the script/subcommand (best effort)
-
-Use this instead of the skill-creator plugin's quick_validate.py: that script
-hardcodes its frontmatter allowlist (name, description, license, allowed-tools,
-metadata, compatibility), has no extension mechanism, and therefore rejects
-this repo's required `user_invocable` key.
+Runtime metadata follows the documented Claude Code / Agent Skills fields.
+Command checks reconstruct declarative argparse interfaces without importing
+applications or executing --help/actions. Dynamic declarations are reported as
+unverified; runtime availability is a separate explicit health check. Scope defaults to this repo;
+personal skills require an explicit --skills-dir.
 """
 
 from __future__ import annotations
@@ -32,28 +14,26 @@ import argparse
 import os
 import re
 import shlex
-import subprocess
-import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
 import yaml
 
+try:
+    from scripts.cli_contract import inspect_contract, select_parser
+    from scripts.skill_metadata import BASE_SKILL_KEYS, CLAUDE_SKILL_KEYS, runtime_for_path, runtime_metadata_errors
+except ModuleNotFoundError:  # direct script invocation
+    from cli_contract import inspect_contract, select_parser
+    from skill_metadata import BASE_SKILL_KEYS, CLAUDE_SKILL_KEYS, runtime_for_path, runtime_metadata_errors
+
 
 FENCED_BLOCK_RE = re.compile(r"```(?:bash|sh|zsh|shell)?\n(.*?)```", re.DOTALL | re.IGNORECASE)
 LONG_OPT_RE = re.compile(r"--[A-Za-z0-9][A-Za-z0-9-]*")
 SKILL_FRONTMATTER_RE = re.compile(r"^---\n(.*?)\n---", re.DOTALL)
 
-# Base allowlist mirrors ALLOWED_PROPERTIES in the skill-creator plugin's
-# quick_validate.py. Repo keys are conventions of this repo the plugin does not
-# know about: `user_invocable` is required on .claude skills by convention and
-# intentionally absent from the .codex mirror tree.
-BASE_ALLOWED_SKILL_KEYS = frozenset(
-    {"name", "description", "license", "allowed-tools", "metadata", "compatibility"}
-)
-REPO_ALLOWED_SKILL_KEYS = frozenset({"user_invocable"})
-ALLOWED_SKILL_KEYS = BASE_ALLOWED_SKILL_KEYS | REPO_ALLOWED_SKILL_KEYS
+# Kept as a public constant for callers; runtime selection is enforced below.
+ALLOWED_SKILL_KEYS = BASE_SKILL_KEYS | CLAUDE_SKILL_KEYS
 
 MAX_SKILL_NAME_LENGTH = 64
 MAX_SKILL_DESCRIPTION_LENGTH = 1024
@@ -73,7 +53,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "--skills-dir",
         action="append",
-        help="Skill directory root (repeatable). Defaults to .claude/skills and ~/.codex/skills",
+        help="Skill directory root (repeatable). Defaults to repository .claude/skills and .agents/skills (.codex fallback)",
     )
     parser.add_argument(
         "--commands-dir",
@@ -112,8 +92,7 @@ def default_skill_dirs() -> list[Path]:
     cwd = Path(os.getcwd())
     return [
         cwd / ".claude" / "skills",
-        cwd / ".codex" / "skills",
-        Path.home() / ".codex" / "skills",
+        cwd / ".agents" / "skills" if (cwd / ".agents" / "skills").exists() else cwd / ".codex" / "skills",
     ]
 
 
@@ -163,13 +142,8 @@ def parse_frontmatter(text: str) -> tuple[dict[str, str], int]:
     return fm, body_start_line
 
 
-def validate_skill_frontmatter(text: str) -> list[str]:
-    """Plugin-equivalent SKILL.md frontmatter validation with repo keys allowed.
-
-    Returns a list of error messages; an empty list means the frontmatter is
-    valid. Checks mirror the skill-creator plugin's quick_validate.py, with
-    ALLOWED_SKILL_KEYS extended by this repo's conventions.
-    """
+def validate_skill_frontmatter(text: str, runtime: str = "generic") -> list[str]:
+    """Validate shared fields and only the chosen runtime's documented extensions."""
     if not text.startswith("---"):
         return ["No YAML frontmatter found"]
     match = SKILL_FRONTMATTER_RE.match(text)
@@ -182,17 +156,10 @@ def validate_skill_frontmatter(text: str) -> list[str]:
     if not isinstance(frontmatter, dict):
         return ["Frontmatter must be a YAML dictionary"]
 
-    errors: list[str] = []
-    unexpected = {str(key) for key in frontmatter} - ALLOWED_SKILL_KEYS
-    if unexpected:
-        errors.append(
-            f"Unexpected frontmatter key(s): {', '.join(sorted(unexpected))}. "
-            f"Allowed: {', '.join(sorted(ALLOWED_SKILL_KEYS))}"
-        )
+    errors = runtime_metadata_errors(frontmatter, runtime)
     errors.extend(_skill_name_errors(frontmatter))
     errors.extend(_skill_description_errors(frontmatter))
     errors.extend(_skill_compatibility_errors(frontmatter))
-    errors.extend(_skill_user_invocable_errors(frontmatter))
     return errors
 
 
@@ -251,39 +218,49 @@ def _skill_compatibility_errors(frontmatter: dict) -> list[str]:
     return []
 
 
-def _skill_user_invocable_errors(frontmatter: dict) -> list[str]:
-    user_invocable = frontmatter.get("user_invocable")
-    if user_invocable is None:
-        return []
-    if not isinstance(user_invocable, bool):
-        return [f"`user_invocable` must be a boolean, got {type(user_invocable).__name__}"]
-    return []
-
-
-def join_line_continuations(block: str) -> list[str]:
-    out: list[str] = []
+def join_line_continuations(block: str) -> list[tuple[str, int]]:
+    """Return shell lines with their original zero-based block line offset."""
+    out = []
     current = ""
-    for raw in block.splitlines():
+    start = 0
+    for offset, raw in enumerate(block.splitlines()):
         line = raw.rstrip()
+        if not current:
+            start = offset
         if not line:
             if current:
-                out.append(current)
+                out.append((current, start))
                 current = ""
             continue
         if line.endswith("\\"):
             current += line[:-1] + " "
         else:
-            out.append((current + line).strip())
+            out.append(((current + line).strip(), start))
             current = ""
     if current:
-        out.append(current.strip())
+        out.append((current.strip(), start))
     return out
 
 
 def split_segments(cmd: str) -> list[str]:
-    # Good enough for skill snippets; this is a lint tool, not a shell parser.
-    segments = re.split(r"\s*(?:&&|\|\||;|\|)\s*", cmd)
-    return [s.strip() for s in segments if s.strip()]
+    """Split shell operators without splitting quoted evidence or query text."""
+    lexer = shlex.shlex(cmd, posix=True, punctuation_chars=";&|")
+    lexer.whitespace_split = True
+    segments, current = [], []
+    try:
+        tokens = list(lexer)
+    except ValueError:
+        return [cmd]  # the caller handles an incomplete/template shell line
+    for token in tokens:
+        if token in {"&&", "||", ";", "|"}:
+            if current:
+                segments.append(shlex.join(current))
+                current = []
+        else:
+            current.append(token)
+    if current:
+        segments.append(shlex.join(current))
+    return segments
 
 
 def likely_template_token(token: str) -> bool:
@@ -309,42 +286,61 @@ def resolve_script_path(workspace: Path, script_token: str) -> Path:
     return workspace / script_token
 
 
-def help_options_cache_key(script: str, subcmd: str | None) -> tuple[str, str | None]:
-    return (script, subcmd)
+@dataclass
+class HelpResult:
+    options: set[str]
+    value_options: set[str]
+    subcommands: set[str]
+    error: str | None = None
 
 
 def read_help_options(
     workspace: Path,
     script: str,
     subcmd: str | None,
-    cache: dict[tuple[str, str | None], set[str]],
-) -> set[str]:
-    key = help_options_cache_key(script, subcmd)
+    cache: dict,
+) -> HelpResult:
+    key = (script, subcmd)
     if key in cache:
         return cache[key]
+    # Read declarations, not application imports. Even --help can mutate state
+    # when a tool performs work at import time; the linter must not execute it.
+    contract_key = (script, "__contract__")
+    if contract_key not in cache:
+        cache[contract_key] = inspect_contract(resolve_script_path(workspace, script))
+    contract = cache[contract_key]
+    error = None
+    parser = select_parser(contract.parser, shlex.split(subcmd)) if contract.parser and subcmd else contract.parser
+    if parser is None:
+        error = "No statically inspectable argparse contract; runtime --help was not executed"
+    elif contract.limitations:
+        error = "Partial CLI declarations; runtime --help was not executed: " + "; ".join(contract.limitations[:3])
+    options = set()
+    value_options = set()
+    subcommands = set()
+    if parser is not None:
+        for action in parser._actions:
+            options.update(option for option in action.option_strings if option.startswith('--'))
+            if action.nargs != 0:
+                value_options.update(action.option_strings)
+            if isinstance(action, argparse._SubParsersAction):
+                subcommands.update(action.choices)
+    result = HelpResult(options, value_options, subcommands, error)
+    cache[key] = result
+    return result
 
-    cmd = ["uv", "run", "python", script]
-    if subcmd:
-        cmd.append(subcmd)
-    cmd.append("--help")
 
-    try:
-        proc = subprocess.run(
-            cmd,
-            cwd=str(workspace),
-            capture_output=True,
-            text=True,
-            timeout=20,
-            check=False,
-        )
-        text = (proc.stdout or "") + "\n" + (proc.stderr or "")
-    except Exception:
-        cache[key] = set()
-        return cache[key]
-
-    opts = set(LONG_OPT_RE.findall(text))
-    cache[key] = opts
-    return opts
+def first_positional(tokens: list[str], help_result: HelpResult) -> str | None:
+    index = 0
+    while index < len(tokens):
+        token = tokens[index]
+        if token == "--":
+            return tokens[index + 1] if index + 1 < len(tokens) else None
+        if token.startswith('-'):
+            index += 2 if token in help_result.value_options and '=' not in token else 1
+            continue
+        return token
+    return None
 
 
 def line_number_of(text: str, needle: str, start: int = 1) -> int:
@@ -359,7 +355,7 @@ def lint_markdown_file(
     workspace: Path,
     require_uv: bool,
     include_hidden: bool,  # kept for signature symmetry and future use
-    help_cache: dict[tuple[str, str | None], set[str]],
+    help_cache: dict[tuple[str, str | None], HelpResult],
     required_frontmatter_fields: tuple[str, ...] | None,
     skill_frontmatter: bool = False,
 ) -> list[Issue]:
@@ -368,7 +364,7 @@ def lint_markdown_file(
     text = md_file.read_text(encoding="utf-8", errors="replace")
 
     if skill_frontmatter:
-        for message in validate_skill_frontmatter(text):
+        for message in validate_skill_frontmatter(text, runtime_for_path(md_file)):
             issues.append(Issue("ERROR", md_file, 1, message))
     elif required_frontmatter_fields is not None:
         fm, _ = parse_frontmatter(text)
@@ -398,9 +394,11 @@ def lint_markdown_file(
             )
         )
 
-    for block in FENCED_BLOCK_RE.findall(text):
-        lines = join_line_continuations(block)
-        for raw_line in lines:
+    for block_match in FENCED_BLOCK_RE.finditer(text):
+        lines = join_line_continuations(block_match.group(1))
+        block_line = text[:block_match.start(1)].count("\n") + 1
+        for raw_line, line_offset in lines:
+            command_line = block_line + line_offset
             line = raw_line.strip()
             if not line:
                 continue
@@ -415,7 +413,8 @@ def lint_markdown_file(
             line = re.sub(r"^Bash:\s*", "", line)
             line = re.sub(r"^\$\s+", "", line)
 
-            for segment in split_segments(line):
+            segments = split_segments(line)
+            for segment in segments:
                 try:
                     tokens = shlex.split(segment)
                 except ValueError:
@@ -423,17 +422,35 @@ def lint_markdown_file(
                 if not tokens:
                     continue
 
+                # Environment assignments are context, not executable tokens.
+                if tokens[0] == "env":
+                    tokens = tokens[1:]
+                while tokens and re.match(r"^[A-Za-z_][A-Za-z0-9_]*=", tokens[0]):
+                    tokens.pop(0)
+                if not tokens:
+                    continue
+
                 # Optional style check for bare python.
-                if require_uv and len(tokens) >= 2 and tokens[0] == "python":
+                if require_uv and len(tokens) >= 2 and tokens[0] in {"python", "python3"}:
                     if tokens[1].startswith(("tools/", "scripts/")):
                         issues.append(
                             Issue(
                                 "WARN",
                                 md_file,
-                                line_number_of(text, raw_line),
+                                command_line,
                                 f"Bare python invocation should use `uv run python`: {segment}",
                             )
                         )
+
+                # A wrapper's -- terminates its own options. Validate an explicit
+                # child Python CLI separately instead of attributing its flags
+                # to the wrapper (e.g. investigation_context.py run -- ...).
+                if "--" in tokens:
+                    separator = tokens.index("--")
+                    child = tokens[separator + 1:]
+                    if child[:3] == ["uv", "run", "python"] or child and child[0] in {"python", "python3"}:
+                        segments.append(shlex.join(child))
+                    tokens = tokens[:separator]
 
                 # Validate only uv python segments.
                 if len(tokens) < 4 or tokens[:3] != ["uv", "run", "python"]:
@@ -451,31 +468,43 @@ def lint_markdown_file(
                         Issue(
                             "ERROR",
                             md_file,
-                            line_number_of(text, raw_line),
+                            command_line,
                             f"Script not found: {script}",
                         )
                     )
                     continue
 
                 remaining = tokens[4:]
-                subcmd = None
-                for tok in remaining:
-                    if tok.startswith("-"):
-                        continue
-                    if likely_template_token(tok):
-                        continue
-                    subcmd = tok
-                    break
-
-                root_opts = read_help_options(workspace, script, None, help_cache)
-                sub_opts = read_help_options(workspace, script, subcmd, help_cache) if subcmd else set()
-                allowed = root_opts | sub_opts
-                if not allowed:
+                root_help = read_help_options(workspace, script, None, help_cache)
+                if root_help.error:
+                    issues.append(Issue("WARN", md_file, command_line,
+                                        f"{script}: {root_help.error}"))
                     continue
+                allowed = set(root_help.options)
+                current_help = root_help
+                subcmd = None
+                rest = remaining
+                while current_help.subcommands:
+                    candidate = first_positional(rest, current_help)
+                    if candidate is None or likely_template_token(candidate):
+                        break
+                    if candidate not in current_help.subcommands:
+                        issues.append(Issue("ERROR", md_file, command_line,
+                                            f"Invalid subcommand `{candidate}` for `{script}`"
+                                            + (f" after `{subcmd}`" if subcmd else "")))
+                        break
+                    subcmd = f"{subcmd} {candidate}" if subcmd else candidate
+                    rest = rest[rest.index(candidate) + 1:]
+                    current_help = read_help_options(workspace, script, subcmd, help_cache)
+                    if current_help.error:
+                        issues.append(Issue("WARN", md_file, command_line,
+                                            f"{script} {subcmd}: {current_help.error}"))
+                        break
+                    allowed.update(current_help.options)
 
                 flags = []
                 for tok in remaining:
-                    if not tok.startswith("--"):
+                    if tok == "--" or not tok.startswith("--"):
                         continue
                     flag = tok.split("=", 1)[0]
                     if likely_template_token(flag):
@@ -488,7 +517,7 @@ def lint_markdown_file(
                             Issue(
                                 "WARN",
                                 md_file,
-                                line_number_of(text, raw_line),
+                                command_line,
                                 f"Possibly invalid flag `{flag}` for `{script}`"
                                 + (f" subcommand `{subcmd}`" if subcmd else ""),
                             )
@@ -516,35 +545,36 @@ def main(argv: list[str] | None = None) -> int:
     docs_dirs = [Path(p).expanduser() for p in (args.docs_dir or [])]
 
     all_issues: list[Issue] = []
-    help_cache: dict[tuple[str, str | None], set[str]] = {}
+    help_cache: dict[tuple[str, str | None], HelpResult] = {}
     checked = 0
     seen: set[Path] = set()
 
     for skill_root in skill_dirs:
         if not skill_root.exists():
-            print(f"WARN  {skill_root} does not exist; skipping")
+            all_issues.append(Issue("WARN", skill_root, 1, "Skill root does not exist; skipping"))
             continue
         for skill_file in iter_skill_files(skill_root, args.include_hidden):
-            resolved = skill_file.resolve()
-            if resolved in seen:
-                continue
-            seen.add(resolved)
-            checked += 1
-            all_issues.extend(
-                lint_markdown_file(
-                    md_file=skill_file,
-                    workspace=workspace,
-                    require_uv=args.require_uv,
-                    include_hidden=args.include_hidden,
-                    help_cache=help_cache,
-                    required_frontmatter_fields=None,
-                    skill_frontmatter=True,
-                )
-            )
+            # Progressive disclosure moves executable examples into references;
+            # validate those examples under the same contract as SKILL.md.
+            documents = [(skill_file, True)] + [
+                (path, False) for path in iter_markdown_files(skill_file.parent, args.include_hidden)
+                if path != skill_file
+            ]
+            for document, is_skill in documents:
+                resolved = document.resolve()
+                if resolved in seen:
+                    continue
+                seen.add(resolved)
+                checked += 1
+                all_issues.extend(lint_markdown_file(
+                    md_file=document, workspace=workspace, require_uv=args.require_uv,
+                    include_hidden=args.include_hidden, help_cache=help_cache,
+                    required_frontmatter_fields=None, skill_frontmatter=is_skill,
+                ))
 
     for command_root in command_dirs:
         if not command_root.exists():
-            print(f"WARN  {command_root} does not exist; skipping")
+            all_issues.append(Issue("WARN", command_root, 1, "Command root does not exist; skipping"))
             continue
         for md_file in iter_markdown_files(command_root, args.include_hidden):
             resolved = md_file.resolve()
@@ -565,7 +595,7 @@ def main(argv: list[str] | None = None) -> int:
 
     for docs_root in docs_dirs:
         if not docs_root.exists():
-            print(f"WARN  {docs_root} does not exist; skipping")
+            all_issues.append(Issue("WARN", docs_root, 1, "Docs root does not exist; skipping"))
             continue
         for md_file in iter_markdown_files(docs_root, args.include_hidden):
             resolved = md_file.resolve()
@@ -584,7 +614,7 @@ def main(argv: list[str] | None = None) -> int:
                 )
             )
 
-    print(f"Checked {checked} markdown files.")
+    print(f"Checked {checked} markdown files (CLI declarations only; runtime help/availability not executed).")
     print_report(all_issues)
 
     errors = any(i.level == "ERROR" for i in all_issues)

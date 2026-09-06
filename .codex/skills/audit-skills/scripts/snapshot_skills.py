@@ -152,7 +152,7 @@ def all_resource_files(skill_dir: Path) -> list[Path]:
     for resource_dir in ("scripts", "references", "assets"):
         base = skill_dir / resource_dir
         if base.is_dir():
-            files.extend(path for path in base.rglob("*") if path.is_file())
+            files.extend(path for path in base.rglob("*") if path.is_file() and "__pycache__" not in path.parts and path.suffix != ".pyc")
     return sorted(files)
 
 
@@ -337,7 +337,10 @@ def inspect_variant(
     )
     stale_invocations: list[str] = []
     if invocation_pattern:
+        data_spans = _runtime_helpers().data_fence_spans(text)
         for match in invocation_pattern.finditer(text):
+            if any(start <= match.start() < end for start, end in data_spans):
+                continue
             stale_invocations.append(match.group(0))
             issue(
                 issues,
@@ -405,21 +408,23 @@ def inspect_variant(
     }
 
 
+def _runtime_helpers():
+    # Installed copies resolve shared helpers from the selected repository cwd.
+    import sys
+
+    repo = Path(__file__).resolve().parents[4]
+    if not (repo / "scripts/skill_metadata.py").exists():
+        repo = Path.cwd()
+    sys.path.insert(0, str(repo))
+    try:
+        from scripts import skill_metadata
+        return skill_metadata
+    finally:
+        sys.path.pop(0)
+
+
 def normalized_runtime_text(text: str, skill_names: set[str]) -> str:
-    match = FRONTMATTER_RE.match(text)
-    if match:
-        try:
-            data = yaml.safe_load(match.group(1))
-        except yaml.YAMLError:
-            data = None
-        if isinstance(data, dict):
-            data.pop("user_invocable", None)
-            normalized_fm = yaml.safe_dump(data, sort_keys=True).strip()
-            text = f"---\n{normalized_fm}\n---" + text[match.end() - 1 :]
-    for skill_name in sorted(skill_names, key=len, reverse=True):
-        pattern = re.compile(rf"(?<![A-Za-z0-9_.~-])/{re.escape(skill_name)}\b")
-        text = pattern.sub(f"${skill_name}", text)
-    return text.strip()
+    return _runtime_helpers().normalized_runtime_text(text, skill_names)
 
 
 def resolve_selector(selector: str, workspace: Path, available_names: set[str]) -> str | None:
@@ -466,25 +471,30 @@ def append_repo_validator_issues(
         skill_path = Path(variant["path"])
         if not skill_path.is_absolute():
             skill_path = workspace / skill_path
-        validator_issues = lint_markdown_file(
-            md_file=skill_path,
-            workspace=workspace,
-            require_uv=True,
-            include_hidden=False,
-            help_cache=help_cache,
-            required_frontmatter_fields=None,
-            skill_frontmatter=True,
-        )
-        for validator_issue in validator_issues:
-            issue(
-                issues,
-                severity="error" if validator_issue.level == "ERROR" else "warning",
-                category="repo-validator",
-                skill=variant["skill"],
-                path=relpath(validator_issue.path, workspace),
-                line=validator_issue.line,
-                message=validator_issue.message,
+        documents = [(skill_path, True)] + [
+            (path, False) for path in sorted(skill_path.parent.rglob("*.md"))
+            if path != skill_path and not any(part.startswith(".") for part in path.relative_to(skill_path.parent).parts)
+        ]
+        for document, is_skill in documents:
+            validator_issues = lint_markdown_file(
+                md_file=document,
+                workspace=workspace,
+                require_uv=True,
+                include_hidden=False,
+                help_cache=help_cache,
+                required_frontmatter_fields=None,
+                skill_frontmatter=is_skill,
             )
+            for validator_issue in validator_issues:
+                issue(
+                    issues,
+                    severity="error" if validator_issue.level == "ERROR" else "warning",
+                    category="repo-validator",
+                    skill=variant["skill"],
+                    path=relpath(validator_issue.path, workspace),
+                    line=validator_issue.line,
+                    message=validator_issue.message,
+                )
 
 
 def main() -> int:

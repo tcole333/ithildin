@@ -60,7 +60,7 @@ Treat generated examples and placeholders differently from commands intended to 
 ## 4. Authorization and safety
 
 - Does the skill distinguish read-only inspection from edits, database writes, queue jobs, external messages, deployment, or publication?
-- Are approval gates placed before consequential actions?
+- Do consequential actions have the needed authorization, with existing user authorization preserved and approval requested only after the proposed action is concrete?
 - Are destructive, paid, authenticated, or rate-limited operations bounded?
 - Does the workflow preserve unrelated worktree changes and concurrent agent work?
 - Does it respect public-source-only and no-contact rules?
@@ -83,7 +83,7 @@ Any recommendation must preserve or strengthen the project's audit trail.
 - Are tasks independent enough to parallelize?
 - Does each subagent have an explicit mandate, source or file scope, mutation policy, and unique output path?
 - Are shared-file edits avoided or serialized?
-- Does the parent wait, collect artifacts, reconcile contradictions, check coverage, and own final writes?
+- Does the active parent collect artifacts, reconcile contradictions, check coverage, coordinate writes, and resume after compaction without an unnecessary headless launch?
 - Can failed agents be detected without treating silence as a negative result?
 - Does the prompt avoid leaking intended conclusions into independent review?
 
@@ -91,7 +91,7 @@ More agents are not automatically better. Flag parallelism only when coordinatio
 
 ## 7. Context efficiency and maintainability
 
-- Is SKILL.md focused on non-obvious procedure and under roughly 500 lines?
+- Is SKILL.md focused on non-obvious procedure with detail justified by task complexity? Treat roughly 500 lines as a review signal, not a hard cap.
 - Are detailed rubrics, schemas, or variants moved to directly linked references?
 - Are bundled files reachable from SKILL.md and free of placeholders?
 - Is duplicated policy likely to drift from AGENTS.md or a canonical reference?
@@ -103,7 +103,7 @@ Do not recommend splitting a skill if the extra navigation costs more than it sa
 ## 8. Runtime variants and interface metadata
 
 - Does the directory name match frontmatter `name`?
-- Does the Claude variant use its intended invocation syntax and `user_invocable` convention?
+- Does the Claude variant use its intended invocation syntax and `user-invocable` field and currently documented native metadata?
 - Does the Codex variant use `$skill-name` and omit Claude-only frontmatter?
 - Are material Claude/Codex differences intentional and documented by behavior, not accidental drift?
 - Does `agents/openai.yaml` contain quoted interface strings, a 25–64 character short description, and a default prompt that explicitly names `$skill-name`?
