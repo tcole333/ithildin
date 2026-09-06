@@ -27,6 +27,8 @@ uv run python tools/investigation_context.py show
 ```bash
 WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
 echo "Session workdir: $WORKDIR"
+uv run python tools/investigation_context.py show --json > "$WORKDIR/profile.json"
+PROFILE=$(jq -r '.name' "$WORKDIR/profile.json")
 ```
 
 ### 1. Build Target List
@@ -35,15 +37,35 @@ echo "Session workdir: $WORKDIR"
 
 **From `--sector`:** Use your knowledge to identify 10-15 public companies in the sector. Document your reasoning for each inclusion.
 
-**From `--thread N`:** Query findings for the thread, extract company names, resolve to tickers:
+**From `--thread N`:** Treat `N` as the active profile's local thread number.
+Resolve it to the database's global thread ID using the structured profile
+artifact, then query findings through the supported tracker interface. Do not
+query `investigation.db` directly and do not fall back to an identically numbered
+thread owned by another profile.
+
 ```bash
-PYTHONPATH=. uv run python -c "
-import sqlite3
-db = sqlite3.connect('investigation.db')
-rows = db.execute('SELECT DISTINCT target_name FROM findings WHERE thread_id = ? AND profile_id = ?', (N, 'PROFILE')).fetchall()
-for r in rows: print(r[0])
-"
+LOCAL_THREAD_ID="<REQUESTED_LOCAL_THREAD_ID>"
+GLOBAL_THREAD_ID=$(jq -r --arg local "$LOCAL_THREAD_ID" \
+  '.threads[] | select((.id | tostring) == $local) | .global_id // empty' \
+  "$WORKDIR/profile.json")
+
+if [[ -z "$GLOBAL_THREAD_ID" || "$GLOBAL_THREAD_ID" == "null" ]]; then
+  printf 'No global thread mapping for profile %s local thread %s\n' \
+    "$PROFILE" "$LOCAL_THREAD_ID" >&2
+  exit 1
+fi
+
+uv run python tools/findings_tracker.py list \
+  --thread-id "$GLOBAL_THREAD_ID" \
+  --profile "$PROFILE" \
+  --limit 10000 \
+  --output "$WORKDIR/thread-findings.json"
+jq -r '.[].target_name' "$WORKDIR/thread-findings.json" | sort -u
 ```
+
+Resolve the resulting company names to tickers. If the thread has no findings or
+none resolve to public companies, report an empty target set and stop without
+creating leads or findings.
 
 ### 2. Extract Financial Data (per target)
 
@@ -92,13 +114,8 @@ that coverage gap rather than treating it as zero results.
 If the investigation profile has key_dates, export them and correlate:
 
 ```bash
-# Export key dates to JSON
-PYTHONPATH=. uv run python -c "
-import yaml, json
-with open('investigations/PROFILE/config.yaml') as f:
-    cfg = yaml.safe_load(f)
-json.dump(cfg.get('key_dates', []), open('$WORKDIR/key-dates.json', 'w'), default=str)
-"
+# Export active-profile key dates from the already resolved profile artifact
+jq '.key_dates // []' "$WORKDIR/profile.json" > "$WORKDIR/key-dates.json"
 
 # Correlate each target
 uv run python tools/query_market.py correlate TICKER --events $WORKDIR/key-dates.json --window 5 --output $WORKDIR/<ticker>-correlation.json

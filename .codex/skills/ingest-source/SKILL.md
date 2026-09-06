@@ -61,9 +61,10 @@ print(df.head())
 Create `tools/query_<source>.py` following the standard pattern:
 - CLI with argparse subcommands
 - `search` command for text/keyword search
-- `--json` flag for structured output
+- `--output FILE` via `tools.output_util.add_output_args()` and `write_output()`
+- `--json` flag for structured stdout fallback
 - `--limit` flag for result count
-- Consistent output formatting
+- Consistent output formatting with only a one-line stdout summary when `--output` is used
 
 See existing wrappers for reference:
 - `tools/ingest_kabasshouse.py` (parquet download + SQLite FTS5)
@@ -74,6 +75,8 @@ See existing wrappers for reference:
 ### 5. Run Initial Investigation Search
 Test the new source against core targets. Pull the top entities dynamically from the database rather than using a hardcoded list:
 ```bash
+WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
+
 # Get the most-investigated targets from existing findings
 uv run python -c "
 import sqlite3
@@ -85,6 +88,11 @@ rows = db.execute('''
 for name, cnt in rows:
     print(f'{name} ({cnt} findings)')
 "
+
+# Smoke-test the wrapper's bounded artifact output before wider use.
+uv run python tools/query_<source>.py search "<PRIMARY_SUBJECT>" --limit 10 \
+    --output "$WORKDIR/ingest-source-smoke.json"
+uv run python -m json.tool "$WORKDIR/ingest-source-smoke.json" >/dev/null
 ```
 Also always include the primary subject and core inner circle members as search terms.
 

@@ -258,23 +258,26 @@ Infrastructure findings are first-class intelligence:
 # supports the whole claim. Then record the cross-source conclusion as synthesis.
 uv run python tools/findings_tracker.py add \
     --target "<TARGET>" \
-    --type digital \
+    --type intelligence \
     --summary "Infrastructure: <DOMAIN> resolves to <IP> on <PROVIDER>, cert issued <DATE>, CSP reveals <VENDORS>" \
     --detail "Cross-source conclusion from DNS, certificate, and HTTP observations" \
     --evidence "<DNS_EVIDENCE_REF>" "<CERT_EVIDENCE_REF>" "<HTTP_EVIDENCE_REF>" \
     --claim-type synthesis \
-    --source-quote "<DNS_EVIDENCE_REF>:<EXACT_DNS_ROW>" \
-    --source-quote "<CERT_EVIDENCE_REF>:<EXACT_CERT_ROW>" \
-    --source-quote "<HTTP_EVIDENCE_REF>:<EXACT_HTTP_HEADER>" \
-    --sources shodan crtsh web \
+    --source-quote \
+        "<DNS_EVIDENCE_REF>:<EXACT_DNS_ROW>" \
+        "<CERT_EVIDENCE_REF>:<EXACT_CERT_ROW>" \
+        "<HTTP_EVIDENCE_REF>:<EXACT_HTTP_HEADER>" \
+    --sources shodan crtsh web_search \
     --confidence medium
 
 # Record infrastructure connections
 uv run python tools/findings_tracker.py connect \
     --person-a "<ENTITY_A>" --person-b "<ENTITY_B>" \
-    --type digital --strength medium \
+    --type intelligence --strength medium \
     --description "Shared IP <IP>, same SSL cert covering both domains" \
-    --evidence "<CERT_HASH>"
+    --evidence "<CERT_EVIDENCE_REF>" \
+    --source-quote "<CERT_EVIDENCE_REF>:<EXACT_CERT_ROW>" \
+    --assessment "<CERT_EVIDENCE_REF>:The quoted certificate row associates both domains with the same certificate"
 
 # Register entities for hosting companies, registrars, etc. if relevant
 uv run python tools/entity_tracker.py add-entity \

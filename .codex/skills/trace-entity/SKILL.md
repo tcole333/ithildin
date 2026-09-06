@@ -136,6 +136,10 @@ uv run python tools/query_registry.py ucc-party "<ENTITY>" --role debtor --outpu
 uv run python tools/query_registry.py ucc-party "<ENTITY>" --role secured --output $WORKDIR/trace-ucc-secured.json
 uv run python tools/query_registry.py ucc-collateral "aircraft" --output $WORKDIR/trace-ucc-collateral.json
 
+# Massachusetts nexus: search the live UCC portal (separate from local registry data).
+# See docs/modules/registries.md for individual names, roles, and the lapsed archive.
+uv run python tools/query_massachusetts_ucc.py search-org "<ENTITY>" --limit 25 --output "$WORKDIR/trace-ma-ucc.json"
+
 # DEPRECATED (March 2026): OCCRP removed free tier in 2026. Tool returns 0 results without paid API key. Skip Aleph queries until access is restored.
 # OCCRP Aleph (global corporate registries, leaks)
 uv run python tools/query_aleph.py search "<ENTITY>" --schema Company --output $WORKDIR/trace-aleph-company.json

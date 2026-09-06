@@ -67,6 +67,10 @@ uv run python tools/query_registry.py officers "<QUERY>" --output $WORKDIR/searc
 # UCC Filings (secured transactions, liens)
 uv run python tools/query_registry.py ucc-search "<QUERY>" --output $WORKDIR/search-ucc.json
 
+# Massachusetts nexus: add live UCC search; see docs/modules/registries.md for
+# individual names, roles, and the separate lapsed archive.
+uv run python tools/query_massachusetts_ucc.py search-org "<QUERY>" --limit 25 --output "$WORKDIR/search-ma-ucc.json"
+
 # DEPRECATED (March 2026): OCCRP removed free tier in 2026. Tool returns 0 results without paid API key. Skip Aleph queries until access is restored.
 # OCCRP Aleph (corporate registries, leaks, sanctions)
 uv run python tools/query_aleph.py search "<QUERY>" --schema Person --output $WORKDIR/search-aleph-person.json

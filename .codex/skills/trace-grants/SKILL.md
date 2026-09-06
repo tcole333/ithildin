@@ -54,8 +54,14 @@ Review revenue and expense trends. Key context: is this organization growing? Is
 
 This is the core operation — build the directed grant flow graph:
 
+Use the requested `--depth` and `--min-amount` values. Default to depth `2` and
+minimum amount `50000` only when the invocation omitted those arguments.
+
 ```bash
-uv run python tools/query_990.py flow <EIN> --depth 2 --min-amount 50000 --output $WORKDIR/flow.json
+uv run python tools/query_990.py flow <EIN> \
+  --depth <REQUESTED_DEPTH_OR_2> \
+  --min-amount <REQUESTED_MIN_AMOUNT_OR_50000> \
+  --output $WORKDIR/flow.json
 ```
 
 Read the flow JSON. Key fields:
@@ -75,6 +81,34 @@ the names, amount, year, and role used in the calculation. A tool label such as
 "Schedule I grant records" is method metadata, not a `source_quote`. A single raw
 filing row may be recorded separately as `direct_quote`/`confirmed` only when its
 stored quote is verbatim and the summary makes no aggregate or network inference.
+
+#### Hydrate load-bearing filing rows
+
+`flow.json` and `shared-officers.json` are aggregate discovery artifacts, not
+primary evidence. Before promoting an edge, reciprocal pair, or shared officer
+to a finding, retrieve the underlying rows and filing links:
+
+```bash
+# Repeat for every funder EIN contributing to a promoted edge
+uv run python tools/query_990.py filer <FUNDER_EIN> \
+  --output "$WORKDIR/filer-<FUNDER_EIN>.json"
+uv run python tools/query_990.py filings <FUNDER_EIN> \
+  --output "$WORKDIR/filings-<FUNDER_EIN>.json"
+
+# Repeat for every organization used in a promoted shared-officer synthesis
+uv run python tools/query_990.py officers <ORG_EIN> \
+  --output "$WORKDIR/officers-<ORG_EIN>.json"
+uv run python tools/query_990.py filings <ORG_EIN> \
+  --output "$WORKDIR/filings-<ORG_EIN>.json"
+```
+
+Filter grant rows by exact normalized recipient EIN and the years reported on
+the aggregate edge. Confirm that the hydrated row count and sum reproduce
+`grant_count` and `amount`; resolve any discrepancy before recording the
+finding. For officers, confirm identity, title, tax year, and overlapping tenure
+from each organization's Part VII row. Preserve the relevant return/PDF link and
+the exact row serialization or verbatim span for every evidence reference. Do
+not use aggregate tool output itself as a `source_quote`.
 
 ### 4. Detect Shared Officers
 
@@ -179,7 +213,7 @@ PYTHONPATH=. uv run python tools/lead_tracker.py add \
   --title "Investigate <PERSON> — officer at <N> nonprofits in <NETWORK_NAME> grant network" \
   --category person --priority medium \
   --target "<PERSON>" --source "agent:trace-grants" \
-  --evidence "990:<EIN1>,990:<EIN2>"
+  --evidence "990:<EIN1>" "990:<EIN2>"
 ```
 
 ### 10. Output
@@ -244,7 +278,10 @@ PYTHONPATH=. uv run python tools/lead_tracker.py add \
 
 ## Stop Conditions
 
-- Flow network extracted (all depths explored)
+- Flow network reached the requested depth or exhausted its frontier; the
+  effective depth and minimum-amount threshold are recorded
+- Every promoted aggregate edge/shared-officer result was reproduced from
+  hydrated filing rows and linked to the relevant return/PDF
 - Circular flows recorded as findings
 - Shared officers checked across top recipients
 - Co-grantors analyzed for top 3-5 recipients

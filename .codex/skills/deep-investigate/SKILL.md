@@ -324,6 +324,9 @@ FOREIGN AGENTS:
 
 UCC FILINGS:
 15. uv run python tools/query_registry.py ucc-search "[TARGET]" --output [WORKDIR]/b-ucc.json
+    For a Massachusetts nexus, add live UCC search:
+    uv run python tools/query_massachusetts_ucc.py search-org "[TARGET]" --limit 25 --output "[WORKDIR]/b-ma-ucc.json"
+    For individuals, roles, or historical coverage, follow the Massachusetts UCC section in docs/modules/registries.md.
 
 FAA AIRCRAFT:
 16. uv run python tools/ingest_faa.py search "[TARGET]" --output [WORKDIR]/b-faa.json

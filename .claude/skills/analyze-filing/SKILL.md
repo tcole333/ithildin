@@ -30,6 +30,14 @@ echo "Session workdir: $WORKDIR"
 
 ### 1. Identify the Filing
 
+Resolve the invocation before selecting a filing:
+
+- If `--url` was supplied, use that exact document URL and skip company lookup
+  and form selection. Record the accession and document filename when the URL
+  exposes them.
+- Otherwise resolve the target to a CIK. Use the requested `--form` value; only
+  default to `10-K` when the invocation omitted it.
+
 ```bash
 # Look up CIK
 uv run python tools/query_edgar.py lookup "<COMPANY_OR_PERSON>" --output "$WORKDIR/edgar-lookup.json"
@@ -37,8 +45,10 @@ uv run python tools/query_edgar.py lookup "<COMPANY_OR_PERSON>" --output "$WORKD
 # Get company metadata and recent filings
 uv run python tools/query_edgar.py company <CIK> --output $WORKDIR/edgar-company.json
 
-# List specific form types
-uv run python tools/query_edgar.py filings <CIK> --form "10-K" --output $WORKDIR/edgar-filings.json
+# List the requested form type (substitute 10-K only when --form was omitted)
+uv run python tools/query_edgar.py filings <CIK> \
+  --form "<REQUESTED_FORM_OR_10-K>" \
+  --output $WORKDIR/edgar-filings.json
 ```
 
 Select the most relevant filing: most recent, or one matching a key_date from the investigation profile.
@@ -66,6 +76,37 @@ ls "$WORKDIR"/filing-chunk-*
 
 Use repeatable `read --find TERM --context N` calls only to revisit targeted
 passages; they do not replace the sequential full-text pass.
+
+#### Cover the accession package
+
+The primary document is not necessarily the complete disclosure package. Use
+the accession from `edgar-filings.json` to inspect the official SEC accession
+directory (remove dashes from the accession number):
+
+```text
+https://www.sec.gov/Archives/edgar/data/<CIK>/<ACCESSION_NO_DASH>/
+```
+
+Record that directory URL in the coverage notes, inspect its document table,
+and inventory:
+
+- the primary form;
+- separately filed exhibits needed by the checklist (including Exhibit 21 and
+  material contracts); and
+- any proxy or other filing incorporated by reference.
+
+Fetch each load-bearing document through the same complete-text path and keep a
+separate artifact so its URL, accession, and filename remain auditable:
+
+```bash
+uv run python tools/query_edgar.py read "<SEC_EXHIBIT_OR_INCORPORATED_DOCUMENT_URL>" \
+  --output "$WORKDIR/filing-<document-label>.json"
+```
+
+Read every required artifact sequentially. If the primary form incorporates a
+later DEF 14A that has not yet been filed, mark Part III coverage as pending and
+do not claim complete filing analysis. If a referenced document is unavailable,
+record the exact missing document and affected checklist items.
 
 ### 3. Extract by Filing Type
 
@@ -256,7 +297,12 @@ uv run python tools/lead_tracker.py add \
 - All extraction checklist items checked for the filing type
 - All discovered names cross-referenced against investigation DB
 - Insider transactions analyzed (if person-related investigation)
-- Complete artifact saved; every sequential chunk read through the recorded `line_count`
+- The requested form or exact requested URL was honored
+- The accession index was inventoried; the primary form, load-bearing exhibits,
+  and incorporated documents were saved and read through their recorded
+  `line_count`, or each unavailable/pending document was explicitly recorded
+- Do not report the analysis as complete while any required accession-package or
+  incorporated-document coverage remains pending
 
 ## What Makes This Skill Valuable
 
