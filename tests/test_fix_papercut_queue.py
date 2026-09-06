@@ -187,7 +187,7 @@ def test_pursue_lead_specific_id_uses_supported_show_command():
         / ".codex/skills/pursue-lead/SKILL.md"
     ).read_text()
 
-    assert "uv run python tools/lead_tracker.py show <ID>" in skill
+    assert "uv run python tools/lead_tracker.py show " in skill
     assert "lead_tracker.py search --id" not in skill
 
 

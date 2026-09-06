@@ -44,6 +44,11 @@ runtime-specific controls when intentional; do not add blanket invocation or
 tool restrictions without a concrete behavioral reason.
 
 The validator and catalog inspect CLI contracts without executing source actions.
+They validate declared command paths, flags and argument shape. The catalog's
+`value_constraints` field separately reports custom value checks and runtime
+behavior that static inspection does not execute. Unknown interface shapes remain
+validation warnings and fail strict mode; an inspectable flag is not proof that
+every possible value is valid.
 Structural success does not establish correct evidence, complete coverage, safe
 mutations, or reliable model behavior. Use fixture tests for fragile operations
 and representative forward tests for orchestration, triggers and authorization.

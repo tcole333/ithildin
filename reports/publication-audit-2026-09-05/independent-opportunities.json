@@ -1,0 +1,1729 @@
+{
+  "schema_version": 1,
+  "scope_label": "platform-wide index review with selected frozen finding excerpts",
+  "core_cutoff": "2026-09-06T01:11:55.470934+00:00",
+  "candidates": [
+    {
+      "candidate_id": "detention-local-government-payment-chains",
+      "title": "The local governments between ICE and private detention operators",
+      "source_profiles": [
+        "geo-group"
+      ],
+      "format": "new explanatory article plus GEO/CoreCivic/county dossier expansion",
+      "thesis": "Municipal contracts and audited accounts show how federal detention payments reach private operators through public intermediaries, with materially different local fee arrangements.",
+      "public_interest": "Federal detention spending, local fiscal incentives and public accountability.",
+      "families": [
+        "Town of Mason executed agreement and bank ledger",
+        "Town of Basile executed agreement",
+        "Montgomery County audited financial statements"
+      ],
+      "independence": "Independent local governments and accounting/contract records support the recurring topology. Do not describe all fee arrangements as identical.",
+      "missing": "For a current article, reconcile the Mason year-end receipt/remittance timing and confirm the latest versions of the three local agreements. The bounded historical mechanism already has strong anchors.",
+      "not_established": [
+        "Payment differences at a year-end cutoff are not missing money.",
+        "Capacity commitments do not automatically constitute guaranteed payment obligations.",
+        "Shared arrangements do not establish improper coordination."
+      ],
+      "innocent": "Public entities may act as contracting intermediaries and charge disclosed administrative fees under lawful agreements.",
+      "overlap": [
+        "investigations/geo-group/config.yaml",
+        "content/dossiers/geo-group.json (older tech-right export; 16 embedded findings)"
+      ],
+      "next": [
+        "Retrieve Mason bank ledger entries covering the January 2026 remittance period.",
+        "Confirm each local contract amendment and the period covered by the audit.",
+        "Export the geo-group profile into updated dossiers, preserving primary evidence links."
+      ],
+      "kill": "Drop any allegation of unexplained retention if subsequent remittance and the contractual fee fully reconcile the difference.",
+      "recommendation": "merge",
+      "proposed_profile_slug": null,
+      "novelty": {
+        "status": "not_searched_this_track",
+        "class": "existing-profile angle",
+        "note": "Local overlap checked; root owns current prior-art searches."
+      },
+      "total_score": null,
+      "score_reason": "No 100-point score: current novelty and independent scoring gates are not complete.",
+      "readiness_1_to_5": 4,
+      "risk_level": "medium",
+      "established": [
+        {
+          "id": 12834,
+          "profile_id": "geo-group",
+          "summary": "Town of Mason primary records expose the West Tennessee IGSA payment chain: ICE pays the Town, the Town must remit IGSA funds to CoreCivic within 30 days less a $1 per detainee-day fee, and the CY2025 bank ledger posted $7.194 million of ICE receipts and $4.365 million of CoreCivic remittances by year-end.",
+          "claim_type": "synthesis",
+          "confidence": "medium",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "MASON:BANK-RECONCILIATION-2025-12",
+              "source_quote": "ACH Deposit ICE TREAS 310-October $2,821,131.21; ACH Deposit ICE TREAS 310-November $1,544,794.92; CoreCivic Inc Payment - November $2,819,813.97; CoreCivic Inc Payment - December $1,544,794.92; ACH Deposit ICE TREAS 310-TOWN OF MASON $2,828,526.91.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "MASON:CORECIVIC-AGREEMENT-2025",
+              "source_quote": "The Town shall pay CoreCivic all funds received pursuant to the IGSA without any undue delay, and not more than 30 days after the Town receipt of the funds from the government, less an administrative fee as defined in paragraph 10 below. On a monthly basis, beginning on the Agreement effective date, CoreCivic shall pay the Town an administrative fee of $1.00 per day per detainee held at the Facility, pursuant to this Agreement and the IGSA, calculated as follows: $1.00 x # of detainees x # days in the month.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "investigations/geo-group/reports/2026-07-14-lead-58086-corecivic-ice-revenue-bridge.md",
+              "source_quote": "WEST-TN-CASH-CALC: $2,821,131.21 + $1,544,794.92 + $2,828,526.91 = $7,194,453.04 of posted ICE receipts; $2,819,813.97 + $1,544,794.92 = $4,364,608.89 of posted CoreCivic remittances by 2025-12-31.",
+              "evidence_type": "file",
+              "source_page": null
+            }
+          ],
+          "relations": [
+            {
+              "from_finding_id": 12834,
+              "to_finding_id": 12833,
+              "relation_type": "corroborates",
+              "assessment": "The Town of Mason contract and December 2025 bank reconciliation independently document the West Tennessee IGSA pass-through mechanism and cash remittances underlying one disclosed ICE facility revenue stream."
+            }
+          ]
+        },
+        {
+          "id": 13442,
+          "profile_id": "geo-group",
+          "summary": "A 2015 GEO agreement with Basile, Louisiana, provided for 25 cents per inmate-day, a $24,610.25 retroactive payment, $75,766 in sewer assistance, and annual scholarships indexed to the facility’s inmate count.",
+          "claim_type": "paraphrase",
+          "confidence": "high",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "MUCKROCK:68087:Mutual-Cooperation-Agreement:p5:retroactive",
+              "source_quote": "GEO agrees to pay to the TOWN a one-time retroactive payment for the actual number of inmates housed in the Facility for the period of time from February 17, 2015 through June 30, 2015 in the amount of $24,610.25.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "MUCKROCK:68087:Mutual-Cooperation-Agreement:p5:scholarships",
+              "source_quote": "As a community partner, GEO agrees to make payable to the Evangeline Parish School Board annual scholarships in the amount of $1,000 per the average of every 100 inmates detained at the FACILITY during the year.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "MUCKROCK:68087:Mutual-Cooperation-Agreement:p5:sewer",
+              "source_quote": "This assistance will be applied in a one-time payment of $75,766, payable to the TOWN at the execution of this AGREEMENT.",
+              "evidence_type": "ref",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        },
+        {
+          "id": 12624,
+          "profile_id": "geo-group",
+          "summary": "Montgomery County reported matching $43,194,467 inmate-housing revenue and operations expenditure in its Joe Corley Pass Through Fund for fiscal 2025.",
+          "claim_type": "direct_quote",
+          "confidence": "confirmed",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "MONTGOMERY-ACFR:FY2025:JOE-CORLEY-FUND-DEFINITION",
+              "source_quote": "Joe Corley Pass Through Fund 222 - to account for reimbursements from United States Marshal Service (USM) and Immigration and Customs Enforcement (ICE) for the housing of federal inmates.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "MONTGOMERY-ACFR:FY2025:JOE-CORLEY-INMATE-HOUSING",
+              "source_quote": "Inmate housing $ 12,000,000 $ 43,194,467 $ 43,194,467 $ -",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "MONTGOMERY-ACFR:FY2025:JOE-CORLEY-OPERATIONS",
+              "source_quote": "Operations 12,000,000 43,194,467 43,194,467 -",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://public.destinyhosted.com/montgdocs/2026/CCREG/20260326_1585/29154_Annual_Comprehensive_Financial_Report_2025.pdf",
+              "source_quote": null,
+              "evidence_type": "url",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        }
+      ],
+      "counter_evidence": [
+        {
+          "id": 12706,
+          "profile_id": "geo-group",
+          "summary": "SYNTHESIS: The acquired Joe Corley modification chain through P00043 does not convert the 1,050 ICE-exclusive beds into guaranteed-payment liability; the public record still supports payment for actual detainee days under written funded orders.",
+          "claim_type": "synthesis",
+          "confidence": "medium",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "https://public.destinyhosted.com/montgdocs/2026/CCREG/20260521_1592/29604_5.1.1-P00043-70CDCR18DIG000013.pdf",
+              "source_quote": "All other terms and conditions shall remain unchanged.",
+              "evidence_type": "url",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://www.ice.gov/doclib/foia/detFacContracts/70CDCR18DIG000013_P00001_JoeCorleyDet_IGSA_ConroeTX.pdf",
+              "source_quote": "ICE will be financially liable only for the actual detainee days as defined in Paragraph C of Article 3.",
+              "evidence_type": "url",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        },
+        {
+          "id": 12657,
+          "profile_id": "geo-group",
+          "summary": "The 2007 LEDD-GEO operating agreement specified capacity up to 1,160 detainees and expressly disclaimed any state or LEDD guaranteed minimum.",
+          "claim_type": "direct_quote",
+          "confidence": "confirmed",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "MUCKROCK:LEDD_Agreement_4-1-2007#4.8",
+              "source_quote": "GEO agrees to initially house up to 416 Detainees ... and to subsequently house up to an additional 744 detainees (for a total of 1160 detainees) ... GEO acknowledges that neither the State nor LEDD guarantees any minimum number of Detainees will be assigned to the Facility.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://cdn.muckrock.com/foia_files/2015/08/19/LEDD_Agreement_4-1-2007.pdf",
+              "source_quote": null,
+              "evidence_type": "url",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        }
+      ],
+      "candidate_fingerprint": "bcf8c812a429a13dfcc79cd85ee7cc0f56b4d475c3d4f7e258449e1243199380",
+      "gate_results": {
+        "G0": "core and content frozen; raw sidecar metadata later and separately labeled",
+        "G1": "pass: >=3 concrete finding anchors",
+        "G2": "merge into existing profile; no new investigation",
+        "G3": "preliminary excerpts checked; full primary and current publication audit incomplete",
+        "G4": "not performed by this track",
+        "G5": "not applicable to article/dossier angle inside an existing investigation",
+        "G6": "bounded risks and innocent explanation recorded",
+        "G7": "not yet independently reconciled"
+      }
+    },
+    {
+      "candidate_id": "detention-guaranteed-beds-time-comparison",
+      "title": "What guaranteed detention beds cost—and how occupancy changed",
+      "source_profiles": [
+        "geo-group"
+      ],
+      "format": "new article or a distinct chapter in the detention finance article",
+      "thesis": "OIG reports document substantial historical payments for unused beds; later ICE occupancy data show why those historical costs cannot simply be extrapolated into current waste.",
+      "public_interest": "Public procurement commitments and changing detention capacity use.",
+      "families": [
+        "DHS OIG inspections and contract-payment review",
+        "ICE executed contracts",
+        "ICE facility occupancy spreadsheets"
+      ],
+      "independence": "OIG provides an oversight assessment distinct from ICE operational and contract records, although some OIG inputs originate at ICE; avoid counting repeated figures as independent measurement.",
+      "missing": "Freeze the latest ICE occupancy sheet and compare like periods and bed definitions before making a current-cost claim.",
+      "not_established": [
+        "Historical unused-bed payments do not establish the same amount of unused capacity in 2026.",
+        "Different average-daily-population snapshots are not directly interchangeable with contract invoices.",
+        "Redacted rates prevent a complete current facility cost ranking."
+      ],
+      "innocent": "A guaranteed minimum purchases standby capacity; later occupancy can rise above the minimum.",
+      "overlap": [
+        "investigations/geo-group/config.yaml",
+        "content/dossiers/geo-group.json"
+      ],
+      "next": [
+        "Update ICE facility statistics to the editorial cutoff.",
+        "Recheck minimum quantities against current contract modifications.",
+        "Keep OIG historical amounts and current occupancy in separate dated exhibits."
+      ],
+      "kill": "Abandon a current unused-bed-spending premise where current measured occupancy exceeds guaranteed minimums.",
+      "recommendation": "merge",
+      "proposed_profile_slug": null,
+      "novelty": {
+        "status": "not_searched_this_track",
+        "class": "existing-profile angle",
+        "note": "Local overlap checked; root owns current prior-art searches."
+      },
+      "total_score": null,
+      "score_reason": "No 100-point score: current novelty and independent scoring gates are not complete.",
+      "readiness_1_to_5": 4,
+      "risk_level": "medium",
+      "established": [
+        {
+          "id": 13028,
+          "profile_id": "geo-group",
+          "summary": "DHS OIG reported a 1,181-detainee Tacoma minimum, a $138.86 daily rate as of October 2021, ADP 374 for the prior year, nearly $5 million monthly payment, and more than $40 million paid for unused bed space",
+          "claim_type": "direct_quote",
+          "confidence": "confirmed",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "DHS-OIG:OIG-23-26#p14-northwest-rate",
+              "source_quote": "ICE’s contract with Northwest required ICE to pay for space for a guaranteed minimum of 1,181 detainees. As of October 2021, the daily rate was $138.86 per detainee.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "DHS-OIG:OIG-23-26#p15-unused-payment",
+              "source_quote": "ICE paid more than $40 million for unused bed space under the guaranteed minimum for the 1-year period prior to our inspection.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "DHS-OIG:OIG-23-26#p3-northwest-adp-payment",
+              "source_quote": "Northwest had an average daily population of 374 detainees, with a maximum capacity of 1,575. Under the facility’s contract, ICE pays Northwest nearly $5 million a month",
+              "evidence_type": "ref",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        },
+        {
+          "id": 13027,
+          "profile_id": "geo-group",
+          "summary": "ICE FY25/FY26 YTD snapshots report a 1,181 guaranteed minimum at Tacoma; classification-level ADP sums to 1,179.616046 as of 2025-09-15 and 1,289.437159 as of 2026-04-02",
+          "claim_type": "paraphrase",
+          "confidence": "high",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "ICE-DETENTION-STATS:FY25#Facilities-FY25-A146-Z146",
+              "source_quote": "NORTHWEST ICE PROCESSSING CENTER | Level A 596.985673352435 | Level B 134.085959885387 | Level C 234.936962750716 | Level D 213.607449856733 | Guaranteed Minimum 1181",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "ICE-DETENTION-STATS:FY26-04092026#Facilities-FY26-A150-Z150",
+              "source_quote": "NORTHWEST ICE PROCESSSING CENTER | Level A 537.278689 | Level B 201.065574 | Level C 355.644809 | Level D 195.448087 | Guaranteed Minimum 1181",
+              "evidence_type": "ref",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        },
+        {
+          "id": 12642,
+          "profile_id": "geo-group",
+          "summary": "ICE contract 70CDCR20D00000008 set Golden State CLIN 0003A’s guaranteed minimum at 560 beds and listed 204,400 bed-days for December 20, 2022 through December 19, 2023.",
+          "claim_type": "direct_quote",
+          "confidence": "confirmed",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "ICEFOIA:70CDCR20D00000008#p5",
+              "source_quote": "Golden State Bed Detention Services / Guaranteed Minimum / (1-560 beds) ... 12/20/2022-12/19/2023 (204,400 Beds)",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://www.ice.gov/doclib/foia/detFacContracts/70CDCR20D00000008_org_MesaVerdeIPC_BakersfieldCA.pdf",
+              "source_quote": null,
+              "evidence_type": "url",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        },
+        {
+          "id": 12653,
+          "profile_id": "geo-group",
+          "summary": "DHS OIG reported fixed monthly minimum charges of $1,993,449.32, then $2,043,182.40, and $1,930,957.98 after Torrance’s minimum fell to 505 in January 2022.",
+          "claim_type": "direct_quote",
+          "confidence": "confirmed",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "DHS-OIG:OIG-22-75#p19",
+              "source_quote": "In early 2021, ICE’s contract with Torrance required ICE to pay the facility for space for a guaranteed minimum of 714 detainees at a fixed monthly rate of $1,993,449.32 until May 14, 2021. The following day, the rate increased to $2,043,182.40. Beginning on January 1, 2022, ICE lowered Torrance’s guaranteed minimum to 505 detainees at a reduced monthly rate of $1,930,957.98.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://www.oig.dhs.gov/sites/default/files/assets/2022-09/OIG-22-75-Sep22.pdf",
+              "source_quote": null,
+              "evidence_type": "url",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        }
+      ],
+      "counter_evidence": [
+        {
+          "id": 13032,
+          "profile_id": "geo-group",
+          "summary": "TIER 2 SYNTHESIS: A dependency-collapsed ICE FY25/FY26 YTD comparison shows all four Western GEO CDFs above reported minimums by 2026-04-02 after Adelanto, Desert View, and Tacoma were below or nearly at them on 2025-09-15; the shift coincides with enforcement expansion but does not prove historical unused-bed payments were cost-effective or financially remedied.",
+          "claim_type": "synthesis",
+          "confidence": "medium",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "finding:12447",
+              "source_quote": "GEO disclosed a sequence of FY2025 ICE activations: Delaney Hall awarded February 27, North Lake announced for immediate activation March 20, and D. Ray James activated under a contract modification effective June 6.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "finding:12876",
+              "source_quote": "Net obligations were 25.1369% higher in FY2026 through July 9 than in the FY2025 same-elapsed window; $262,845,644.26, or 40.5324% of FY2026-to-date net, clustered from January 21 through January 28 across seven facility/service categories.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "finding:13018",
+              "source_quote": "DHS OIG found 36 percent of South Texas guaranteed bed space was unused on average from November 2020 through October 2021 and that ICE paid approximately $18 million for unused bed space.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "finding:13024",
+              "source_quote": "ICE FY25/FY26 YTD snapshots report a 640 guaranteed minimum at Adelanto; classification-level ADP sums to 575.544413 as of 2025-09-15 and 1,733.153006 as of 2026-04-02",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "finding:13025",
+              "source_quote": "ICE FY25/FY26 YTD snapshots report Desert View at a 480 guaranteed minimum and 423.303725 ADP as of 2025-09-15, then a 120 minimum and 425.606557 ADP as of 2026-04-02",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "finding:13026",
+              "source_quote": "ICE FY25/FY26 YTD snapshots report a 600 guaranteed minimum at Aurora; classification-level ADP sums to 1,180.948424 as of 2025-09-15 and 1,260.038251 as of 2026-04-02",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "finding:13027",
+              "source_quote": "ICE FY25/FY26 YTD snapshots report a 1,181 guaranteed minimum at Tacoma; classification-level ADP sums to 1,179.616046 as of 2025-09-15 and 1,289.437159 as of 2026-04-02",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "finding:13028",
+              "source_quote": "DHS OIG reported a 1,181-detainee Tacoma minimum, a $138.86 daily rate as of October 2021, ADP 374 for the prior year, nearly $5 million monthly payment, and more than $40 million paid for unused bed space",
+              "evidence_type": "ref",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        },
+        {
+          "id": 12990,
+          "profile_id": "geo-group",
+          "summary": "Retrieved current ICE modifications preserve bed-day, guarantee and staffing-plan fields but redact the values needed for a like-for-like historical rate comparison.",
+          "claim_type": "synthesis",
+          "confidence": "medium",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "ICE-CONTRACT:70CDCR21D00000004-P00011#pdf-p2",
+              "source_quote": "Facility Operations Charge Monthly Usage Rate is increased from [redacted] to [redacted]. Transportation — Guaranteed Minimum Miles and Guard Hours ... Monthly Rate of [redacted] is increased by [redacted].",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "ICE-CONTRACT:70CDCR22D00000001-P00011#pdf-p2",
+              "source_quote": "Update Attachment 25 — Aurora Staffing Plan, dated 3 June 2024. Change Item 2001C ... Bed Day Rate. As a result of this modification, the rate for this CLIN has changed. From: [redacted] To: [redacted].",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "ICE-CONTRACT:HSCEDM-15-D-00015-P00049#pdf-p2",
+              "source_quote": "To incorporate staffing plan for [redacted] Guaranteed Minimum (GM) Beds; To change Guaranteed Minimum [redacted] Bed Day Rate from [redacted] by [redacted] to [redacted]; To incorporate staffing plan for [redacted] Full capacity Beds.",
+              "evidence_type": "ref",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        }
+      ],
+      "candidate_fingerprint": "05d36411453ae21129e077a63a10b9e678ced6f42480556fcec8ec8d61ee5b3b",
+      "gate_results": {
+        "G0": "core and content frozen; raw sidecar metadata later and separately labeled",
+        "G1": "pass: >=3 concrete finding anchors",
+        "G2": "merge into existing profile; no new investigation",
+        "G3": "preliminary excerpts checked; full primary and current publication audit incomplete",
+        "G4": "not performed by this track",
+        "G5": "not applicable to article/dossier angle inside an existing investigation",
+        "G6": "bounded risks and innocent explanation recorded",
+        "G7": "not yet independently reconciled"
+      }
+    },
+    {
+      "candidate_id": "gates-ipi-information-access-chain",
+      "title": "The Gates–IPI information channel that kept Epstein informed",
+      "source_profiles": [
+        "epstein-gates-ipi",
+        "epstein",
+        "epstein-oslo"
+      ],
+      "format": "focused follow-up article and IPI/Gates/Nikolic dossier updates",
+      "thesis": "Released correspondence, donor records and Gates testimony permit a bounded account of how IPI operational information reached Epstein and was relayed to Gates through Nikolic, while preserving Gates’s stated lack of awareness of continued updates.",
+      "public_interest": "Governance and confidentiality in donor-funded international diplomacy and public-health work.",
+      "families": [
+        "Original IPI/Nikolic correspondence in released EFTA records",
+        "Norwegian Ministry of Foreign Affairs grant record",
+        "House Oversight Gates testimony"
+      ],
+      "independence": "EFTA mirrors count once. Norwegian funding records and Gates testimony are independent records, but neither proves that a specific grant paid for a specific undisclosed activity.",
+      "missing": "Read the complete source-message chains alongside the relevant testimony and establish the novelty of the narrowly defined information-flow story.",
+      "not_established": [
+        "No foundation payment to Epstein or grant diversion is established by these anchors.",
+        "Confidential interviews are not inherently improper.",
+        "Epstein’s statements do not by themselves establish Gates’s knowledge or authorization."
+      ],
+      "innocent": "IPI could legitimately conduct confidential conflict-resolution work and donor briefings; an intermediary might receive information without the donor knowing.",
+      "overlap": [
+        "investigations/epstein-gates-ipi/research/master.md",
+        "investigations/epstein-gates-ipi/research/country-operations.md",
+        "content/articles/parallel-diplomatic-corps.mdx",
+        "content/articles/gulf-intelligence-web.mdx",
+        "content/dossiers/ipi.json"
+      ],
+      "next": [
+        "Read full EFTA00962453/EFTA00962456 and adjacent chain pages.",
+        "Compare the Gates transcript account with contemporaneous sender/recipient headers.",
+        "Build a source-by-source grant ledger that does not infer earmarking."
+      ],
+      "kill": "Narrow or drop an undisclosed-access claim if the full chain shows donor authorization or if the supposedly new messages already underpin the published article.",
+      "recommendation": "merge",
+      "proposed_profile_slug": null,
+      "novelty": {
+        "status": "not_searched_this_track",
+        "class": "existing-profile angle",
+        "note": "Local overlap checked; root owns current prior-art searches."
+      },
+      "total_score": null,
+      "score_reason": "No 100-point score: current novelty and independent scoring gates are not complete.",
+      "readiness_1_to_5": 4,
+      "risk_level": "high",
+      "established": [
+        {
+          "id": 13377,
+          "profile_id": "epstein-gates-ipi",
+          "summary": "Epstein relayed an IPI warning that Gates outreach in Pakistan threatened a confidential Taliban back channel; Boris Nikolic confirmed he sent the warning to Gates",
+          "claim_type": "direct_quote",
+          "confidence": "confirmed",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "EFTA00962453",
+              "source_quote": "may well jeopardize the back channel very discreet and very confidential outreach that has been going on",
+              "evidence_type": "efta",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "EFTA00962456",
+              "source_quote": "Thank you — sent it to Bill.",
+              "evidence_type": "efta",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        },
+        {
+          "id": 13363,
+          "profile_id": "epstein-gates-ipi",
+          "summary": "IPI’s completed Somalia research used confidential interviews without attribution to the Gates Foundation",
+          "claim_type": "direct_quote",
+          "confidence": "confirmed",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "EFTA00615247",
+              "source_quote": "All interviews were conducted in confidence and there was no attribution to the Bill & Melinda Gates Foundation.",
+              "evidence_type": "efta",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        },
+        {
+          "id": 13346,
+          "profile_id": "epstein-gates-ipi",
+          "summary": "Norway’s Foreign Ministry lists grants paid to IPI of NOK 8,000,000 in 2013, 12,554,000 in 2014, 11,854,000 in 2015, 5,800,000 in 2016, 5,000,000 in 2017, and 4,500,000 in 2018.",
+          "claim_type": "direct_quote",
+          "confidence": "confirmed",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "NORWAY-MFA:IPI-SUPPORT-2026",
+              "source_quote": "2013: 8 000 000; 2014: 12 554 000; 2015: 11 854 000; 2016: 5 800 000; 2017: 5 000 000; 2018: 4 500 000",
+              "evidence_type": "ref",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        }
+      ],
+      "counter_evidence": [
+        {
+          "id": 13360,
+          "profile_id": "epstein-gates-ipi",
+          "summary": "Gates testified that he knew Epstein introduced IPI but learned only from the released emails that Epstein continued receiving IPI updates",
+          "claim_type": "direct_quote",
+          "confidence": "confirmed",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "https://oversight.house.gov/wp-content/uploads/2026/06/Bill-Gates-Transcript.pdf",
+              "source_quote": "But other than that one time, I wasn’t aware of Epstein having any connection.",
+              "evidence_type": "url",
+              "source_page": "112"
+            }
+          ],
+          "relations": []
+        },
+        {
+          "id": 13358,
+          "profile_id": "epstein-gates-ipi",
+          "summary": "Epstein privately sought a share of JPMorgan profit from the proposed Gates donor-advised fund, and JPMorgan later admitted fee communications occurred",
+          "claim_type": "direct_quote",
+          "confidence": "confirmed",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "238-14",
+              "source_quote": "JPMC admits it had communication with Epstein about a fee for himself in connection with a proposed and never established donor advised fund, and that JPMC did not pay Epstein any such fee.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "EFTA01301177",
+              "source_quote": "I would start 15%, you would start 5.,, We then immediately agree at 10%",
+              "evidence_type": "efta",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "EFTA01856360",
+              "source_quote": "FTC my co. getting ten percent of your profit. on the daf and its offshoots",
+              "evidence_type": "efta",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        }
+      ],
+      "candidate_fingerprint": "357108afcdbb9029e2700f1d4afa3b879eadd09d0355bfba1b39a6328ff101b2",
+      "gate_results": {
+        "G0": "core and content frozen; raw sidecar metadata later and separately labeled",
+        "G1": "pass: >=3 concrete finding anchors",
+        "G2": "merge into existing profile; no new investigation",
+        "G3": "preliminary excerpts checked; full primary and current publication audit incomplete",
+        "G4": "not performed by this track",
+        "G5": "not applicable to article/dossier angle inside an existing investigation",
+        "G6": "bounded risks and innocent explanation recorded",
+        "G7": "not yet independently reconciled"
+      }
+    },
+    {
+      "candidate_id": "curaleaf-cash-controls-evidence-boundary",
+      "title": "What court records reveal about cannabis cash controls",
+      "source_profiles": [
+        "curaleaf"
+      ],
+      "format": "new institutional explainer and first curated Curaleaf dossier",
+      "thesis": "Appellate and trial records describe store-level cash reconciliation and alleged tip/inventory practices; issuer filings show why those records do not establish a store-to-bank-to-bondholder extraction chain.",
+      "public_interest": "Workplace rights, regulated cash-heavy retail operations and the limits of public financial transparency.",
+      "families": [
+        "D.C. Circuit labor decision",
+        "Heller district-court certification record",
+        "Kalmick pleadings and judicial rulings",
+        "Curaleaf SEC filings and note indenture"
+      ],
+      "independence": "Separate proceedings and issuer disclosures are distinct records. Pleadings/declarations remain allegations; certification and dismissal decisions do not adjudicate all underlying facts.",
+      "missing": "Reopen complete judicial rulings and the latest Heller/Kalmick dockets, then audit each paragraph for allegation-versus-finding language. Foundational store/bank joins remain absent for any extraction thesis.",
+      "not_established": [
+        "No completed public store-to-bank-to-treasury join.",
+        "No established systemic diversion or unsupported deposits.",
+        "Peer comparisons do not establish a Curaleaf-specific recurring ratio anomaly."
+      ],
+      "innocent": "Cash-intensive retail creates ordinary reconciliation problems; courts may reject overbroad employee claims while other disputed claims continue.",
+      "overlap": [
+        "investigations/curaleaf/reports/2026-08-26-retail-cash-banking-debt.md",
+        "investigations/curaleaf/reports/2026-08-26-wave5-t1-curaleaf-investigation.md",
+        "No dossier export lists profile_id curaleaf at the content cutoff."
+      ],
+      "next": [
+        "Retrieve latest Heller certification order and retained declarations if public.",
+        "Retrieve current Kalmick dispositions and admitted versus denied paragraphs.",
+        "Select a bounded control-procedure thesis, excluding unsupported transaction tracing."
+      ],
+      "kill": "Reject a cash-extraction or money-laundering headline unless a primary transactional join establishes it; no existing anchor does.",
+      "recommendation": "merge",
+      "proposed_profile_slug": null,
+      "novelty": {
+        "status": "not_searched_this_track",
+        "class": "existing-profile angle",
+        "note": "Local overlap checked; root owns current prior-art searches."
+      },
+      "total_score": null,
+      "score_reason": "No 100-point score: current novelty and independent scoring gates are not complete.",
+      "readiness_1_to_5": 3,
+      "risk_level": "high",
+      "established": [
+        {
+          "id": 15282,
+          "profile_id": "curaleaf",
+          "summary": "D.C. Circuit record describes cash-only drawer-to-inventory reconciliation and a $5 discrepancy threshold at Curaleaf Gilbert",
+          "claim_type": "direct_quote",
+          "confidence": "confirmed",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "https://storage.courtlistener.com/pdf/2024/05/31/absolute_healthcare_v._nlrb.pdf#page=2",
+              "source_quote": "Because the Board’s unlawful-discharge finding is not supported by substantial evidence, we grant Curaleaf’s petition for review and deny the Board’s cross-application for enforcement as to the unlawful-discharge finding and the notice-reading and union-access remedies. We grant the Board’s cross-application for enforcement as to Curaleaf’s three uncontested unfair labor practices.",
+              "evidence_type": "url",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://storage.courtlistener.com/pdf/2024/05/31/absolute_healthcare_v._nlrb.pdf#page=4",
+              "source_quote": "Budtenders have two duties relevant to this case. First, they must dispense or “allot” marijuana in compliance with Arizona state law and log each allotment in both Curaleaf’s inventory system and the Arizona government’s program for tracking allotments statewide for each patient. ... Second, since Curaleaf stores are cash-only, budtenders must handle cash and ensure that the cash in the register drawer matches what the inventory system says should be in the drawer. ... Drawer discrepancies greater than $5 violate Curaleaf policy.",
+              "evidence_type": "url",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://storage.courtlistener.com/pdf/2024/05/31/absolute_healthcare_v._nlrb.pdf#page=8",
+              "source_quote": "Receipt of a written warning for three $10 drawer shortages across three different days. ... Receipt of a final written warning for three additional $10–$20 drawer shortages across five different days. ... Curaleaf firing Hubbard for yet another $20 drawer shortage.",
+              "evidence_type": "url",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        },
+        {
+          "id": 15283,
+          "profile_id": "curaleaf",
+          "summary": "Heller certification order recounts declarations alleging tip cash was used to balance registers, a safe, and petty cash; those assertions were not merits findings",
+          "claim_type": "direct_quote",
+          "confidence": "high",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "https://storage.courtlistener.com/recap/gov.uscourts.ilnd.413696/gov.uscourts.ilnd.413696.58.0_1.pdf#page=14",
+              "source_quote": "Plaintiffs are asking the Court to conditionally certify a nationwide class based on pure speculation. The Court thus denies Plaintiff’s motion for conditional certification of a class that includes all past and present Curaleaf hourly employees.",
+              "evidence_type": "url",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://storage.courtlistener.com/recap/gov.uscourts.ilnd.413696/gov.uscourts.ilnd.413696.58.0_1.pdf#page=18",
+              "source_quote": "Although the Court refrains from commenting on the lawfulness of the February 2022 Policy, the Court concludes that conditional certification of Plaintiffs’ proposed class cannot be predicated on the February 2022 Policy.",
+              "evidence_type": "url",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://storage.courtlistener.com/recap/gov.uscourts.ilnd.413696/gov.uscourts.ilnd.413696.58.0_1.pdf#page=3",
+              "source_quote": "After the manager’s announcement, Baffoe learned from an agent-in-charge that management had been using the tip money to balance store registers and to refill the store’s petty cash fund (to buy items for the store and stock registers with small denomination bills).",
+              "evidence_type": "url",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://storage.courtlistener.com/recap/gov.uscourts.ilnd.413696/gov.uscourts.ilnd.413696.58.0_1.pdf#page=4",
+              "source_quote": "Before tips are counted, the tip money is used to balance the safe and registers if they are short. ... The tip count is then sent to corporate to be divided via a tip pool and paid out in employees’ regular paychecks.",
+              "evidence_type": "url",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://storage.courtlistener.com/recap/gov.uscourts.ilnd.413696/gov.uscourts.ilnd.413696.58.0_1.pdf#page=5",
+              "source_quote": "The February 2022 Policy requires that all unsolicited tips must be pooled and provides that a valid tip pool includes all hourly team members. ... Cole and Cox both declare that, prior to February 2022, Curaleaf’s only official tipping policy was that tips were not permitted.",
+              "evidence_type": "url",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        },
+        {
+          "id": 15285,
+          "profile_id": "curaleaf",
+          "summary": "Curaleaf admitted an IDOA shipment halt, vault-focused audit, and unresolved inventory issues while denying systemic theft/diversion allegations",
+          "claim_type": "direct_quote",
+          "confidence": "confirmed",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "https://storage.courtlistener.com/recap/gov.uscourts.ilnd.483493/gov.uscourts.ilnd.483493.26.0.pdf#page=7",
+              "source_quote": "The Court grants in part Defendant’s Motion to Dismiss Count I of the Complaint to the extent Plaintiff purports to state a claim arising under Section 10 of the Illinois Whistleblower Act because there is no private cause of action for such a claim, and the Court denies in part Defendant’s Motion to Dismiss as to Plaintiff’s claim arising under Section 15(b) of the Illinois Whistleblower Act.",
+              "evidence_type": "url",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://storage.courtlistener.com/recap/gov.uscourts.ilnd.483493/gov.uscourts.ilnd.483493.29.0.pdf#page=11",
+              "source_quote": "She expressed concerns about potential systemic theft and requested surveillance footage showing a cut perimeter fence. ... ANSWER: Curaleaf denies the allegations in Paragraph No. 35.",
+              "evidence_type": "url",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://storage.courtlistener.com/recap/gov.uscourts.ilnd.483493/gov.uscourts.ilnd.483493.29.0.pdf#page=12",
+              "source_quote": "ANSWER: Curaleaf admits O’Brien conducted a walk-through of the Litchfield facility in February 2024 and found that many inventory issues remained unresolved. ... On or about February 14, 2024, during a routine visit, IDOA regulators expressed serious concern over units of missing, unlabeled, mislabeled, or unaccounted-for inventory. They ordered Curaleaf to halt all product shipments from the Litchfield facility until a full audit could be conducted. The regulators stated they would return the following week—during the scheduled annual audit—to focus solely on the vaults and assess remaining inventory issues. ANSWER: Curaleaf admits the allegations in Paragraph No. 39.",
+              "evidence_type": "url",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://storage.courtlistener.com/recap/gov.uscourts.ilnd.483493/gov.uscourts.ilnd.483493.29.0.pdf#page=13",
+              "source_quote": "On or about February 19 and 21, 2024, Kalmick visited the Litchfield site to meet with the IDOA regulators ... and observe their detailed inventory count. ... ANSWER: Curaleaf admits the allegations in Paragraph No. 41.",
+              "evidence_type": "url",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        }
+      ],
+      "counter_evidence": [
+        {
+          "id": 15291,
+          "profile_id": "curaleaf",
+          "summary": "The 2029 note collateral excludes ordinary cash, deposit, and other accounts and generally does not require control agreements, so the bond indenture does not establish a routine sweep of Curaleaf retail-bank receipts",
+          "claim_type": "paraphrase",
+          "confidence": "high",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "SEC:CIK1756770:0001756770-26-000021:EX99.1#excluded-property",
+              "source_quote": "(x) (a) cash and Cash Equivalents, deposit, securities, commodities, commodities futures, futures accounts and other accounts, securities entitlements and related Property, except ... identifiable proceeds of Collateral ... or ... received by a Guarantor from any Unrestricted Subsidiary ... and (b) any payroll accounts, any withholding tax and fiduciary accounts, and any escrow accounts holding funds for the benefit of third parties.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "SEC:CIK1756770:0001756770-26-000021:EX99.1#section13.4",
+              "source_quote": "except as expressly provided in the Security Documents with respect to Pledged Collateral ... no perfection through control agreements or perfection by “control” shall be required with respect to any assets.",
+              "evidence_type": "ref",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        },
+        {
+          "id": 15311,
+          "profile_id": "curaleaf",
+          "summary": "Matched 2025 peer ratios show no statistically meaningful Curaleaf-specific recurring operating or balance-sheet outlier",
+          "claim_type": "synthesis",
+          "confidence": "medium",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "SEC:CIK0001754195:0001754195-26-000019",
+              "source_quote": "Table excerpts: Revenue, net 1,181,180; Cash and cash equivalents 255,535; Accounts receivable, net 10,497; Inventories 242,298; Net cash provided by operating activities 272,821; Purchases of property and equipment (44,193); Interest paid 70,267; Repayments of notes payable (393,348).",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "SEC:CIK0001756770:0001756770-26-000019",
+              "source_quote": "Table excerpts: Revenue 1,268,135; Cash and cash equivalents 89,213; Restricted cash 12,360; Accounts receivable, net 76,339; Inventory 225,022; Net cash provided by operating activities 137,706; Purchases of property, plant and equipment (63,440); Interest paid 103,606; Principal payments on notes payable (101,282).",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "SEC:CIK0001795139:0001193125-26-071672",
+              "source_quote": "Table excerpts: Revenue 1,175,295; Cash 274,298; Restricted cash 10,984; Accounts receivable 51,269; Inventories 158,288; Net cash provided by operating activities 294,926; Capital expenditures (81,068); Interest paid 21,722; Repayment of notes payable (10,701).",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "SEC:CIK0001832928:0001832928-26-000005",
+              "source_quote": "Financial-statement excerpts: Revenue, net 655,847; Cash and cash equivalents 57,902; Restricted cash 33,184 current and 3,251 non-current; Accounts receivable, net 37,887; Inventory, net 98,666; Net cash provided by operating activities 72,890; Purchases of property, plant and equipment (35,138); Interest paid 51,341; Repayment of term loan (360,000).",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "SEC:CIK0001848416:0001628280-26-017011",
+              "source_quote": "Table excerpts: Revenue, net of discounts 821,504; Cash and cash equivalents 82,724; Accounts receivable, net 30,930; Inventories 229,968; Net cash provided by operating activities 52,855; Purchases of property, plant and equipment (41,226); Interest paid 48,216; Repayment of debt (77,925).",
+              "evidence_type": "ref",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        },
+        {
+          "id": 15315,
+          "profile_id": "curaleaf",
+          "summary": "Layered public records expose no completed Curaleaf store-to-bank-to-treasury join; the partial joins cannot establish either unsupported deposits or effective end-to-end reconciliation",
+          "claim_type": "synthesis",
+          "confidence": "medium",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "analysis-run-151",
+              "source_quote": "Run 151 scored all 63 verified thread-205 findings against nine competing hypotheses. Anchors: findings 15254-15256 and 15272/15282/15285 show timing, inventory, custody, or shortage events without a bank effect; 15277 and 15281 show materially different state reach; 15269 shows Needham account architecture without a store-posting join; 15289 establishes payment authority without actual payment; 15298 and 15300 establish public tender/state-revenue gaps; 15311-15314 supply the peer baseline.",
+              "evidence_type": "ref",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        }
+      ],
+      "candidate_fingerprint": "c50f50e32069c492cfab95fd41c7e3d0c0e5f441e6d2a9cf2dd0227844808c01",
+      "gate_results": {
+        "G0": "core and content frozen; raw sidecar metadata later and separately labeled",
+        "G1": "pass: >=3 concrete finding anchors",
+        "G2": "merge into existing profile; no new investigation",
+        "G3": "preliminary excerpts checked; full primary and current publication audit incomplete",
+        "G4": "not performed by this track",
+        "G5": "not applicable to article/dossier angle inside an existing investigation",
+        "G6": "bounded risks and innocent explanation recorded",
+        "G7": "not yet independently reconciled"
+      }
+    },
+    {
+      "candidate_id": "bird-financing-capacity-versus-cash",
+      "title": "A $100 million financing headline, $8.25 million of notes sold",
+      "source_profiles": [
+        "allbirds"
+      ],
+      "format": "new financing explainer and curate existing Allbirds/Chardan dossier stubs",
+      "thesis": "BIRD’s filed note documents distinguish a large investor-controlled financing ceiling from the much smaller principal actually sold, and set out registration conditions whose current status still requires checking.",
+      "public_interest": "Investor understanding of financing availability, dilution risk and disclosure.",
+      "families": [
+        "Issuer SEC 10-Q, Form D and 8-K",
+        "Filed purchase agreement, registration rights agreement and amendments"
+      ],
+      "independence": "These are multiple decisive primary documents but principally one issuer-controlled family. The strict two-independent-family commissioning gate remains incomplete.",
+      "missing": "Update the EDGAR filing chronology from July 15 to the publication date and find public waiver/cure or amendment evidence. Independently corroborate any named investor before identifying it.",
+      "not_established": [
+        "$100 million capacity is not $100 million received.",
+        "No confirmed identity of the undisclosed note investor.",
+        "A registration default cannot be stated unconditionally if a nonpublic waiver or investor-information exception could apply.",
+        "No note conversion or predatory trading is proved by this packet."
+      ],
+      "innocent": "A staged facility intentionally leaves later drawdowns conditional and parties may agree privately to registration waivers.",
+      "overlap": [
+        "reports/allbirds-newbird-ai-forensic-memo-20260416.md",
+        "content/dossiers/allbirds-inc-bird.json",
+        "content/dossiers/chardan-capital-markets-llc.json",
+        "Ten Allbirds profile exports exist; none contains curated narrative."
+      ],
+      "next": [
+        "Refresh SEC submissions and relevant resale registration forms through publication cutoff.",
+        "Reconcile gross principal, cash proceeds, discounts and available capacity.",
+        "Look for filed waiver/amendment or issuer explanation without inferring investor identity."
+      ],
+      "kill": "Drop a default claim if a timely filing, cure, waiver or applicable exception is found; preserve the capacity-versus-cash explainer if the disclosed financing math remains correct.",
+      "recommendation": "merge",
+      "proposed_profile_slug": null,
+      "novelty": {
+        "status": "not_searched_this_track",
+        "class": "existing-profile angle",
+        "note": "Local overlap checked; root owns current prior-art searches."
+      },
+      "total_score": null,
+      "score_reason": "No 100-point score: current novelty and independent scoring gates are not complete.",
+      "readiness_1_to_5": 3,
+      "risk_level": "high",
+      "established": [
+        {
+          "id": 13763,
+          "profile_id": "allbirds",
+          "summary": "BIRD issued $3.25 million principal of senior secured convertible notes to one investor at the initial closing on April 19, 2026.",
+          "claim_type": "direct_quote",
+          "confidence": "confirmed",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "SEC:0001628280-26-035302:10-Q",
+              "source_quote": "At the initial closing, $3.25 million in aggregate principal amount of Convertible Notes was issued on April 19, 2026.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "SEC:0001653909-26-000008:FORM-D",
+              "source_quote": "Date of First Sale 2026-04-19; Total Amount Sold $3,250,000; total number of investors who already have invested: 1.",
+              "evidence_type": "ref",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        },
+        {
+          "id": 13795,
+          "profile_id": "allbirds",
+          "summary": "The June 15 facility amendment expanded possible notes to $100 million while expressly ratifying the RRA and stating that no other Transaction Document was amended.",
+          "claim_type": "paraphrase",
+          "confidence": "high",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "SEC:0001193125-26-164338:EX-10.1",
+              "source_quote": "Transaction Documents means, collectively, this Agreement, the Notes ... the Registration Rights Agreement ... and each of the other agreements and instruments entered into or delivered ... in connection with the transactions contemplated hereby.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "SEC:0001193125-26-273417:EX-10.1",
+              "source_quote": "The Securities Purchase Agreement and each of the other Transaction Documents are, and shall continue to be, in full force and effect ... and are hereby ratified and confirmed in all respects ... this Amendment shall not ... constitute an amendment of any provision of any Transaction Document.",
+              "evidence_type": "ref",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        },
+        {
+          "id": 13798,
+          "profile_id": "allbirds",
+          "summary": "The same undisclosed investor funded another $5 million of BIRD notes on June 4 and agreed on June 15 to double the maximum facility from $50 million to $100 million.",
+          "claim_type": "paraphrase",
+          "confidence": "high",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "SEC:0001193125-26-273417:EX-10.1",
+              "source_quote": "The Company and the Investor desire ... to increase the aggregate principal amount of Additional Notes ... from $44,750,000 to $94,750,000 ... incremental additional $50 million.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "SEC:0001628280-26-042166:8-K",
+              "source_quote": "On June 4, 2026, the Company sold $5.0 million in aggregate principal amount of Convertible Notes. The $5.0 million is inclusive of the $2.0 million that was subject to the approval of the Nasdaq Proposal.",
+              "evidence_type": "ref",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        }
+      ],
+      "counter_evidence": [
+        {
+          "id": 13796,
+          "profile_id": "allbirds",
+          "summary": "Absent a nonpublic written waiver or investor-information failure, the public record indicates a Filing Failure on May 4, a note Event of Default on May 11, an Effectiveness Failure on June 3, and a second default trigger on June 10.",
+          "claim_type": "synthesis",
+          "confidence": "medium",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "SEC:0001193125-26-164338:EX-10.2",
+              "source_quote": "Each of the following events shall constitute an Event of Default: the failure of the applicable Registration Statement ... to be filed ... five (5) Business Days after the applicable Filing Deadline or ... declared effective ... five (5) Business Days after the applicable Effectiveness Deadline.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "SEC:0001193125-26-164338:EX-10.3",
+              "source_quote": "Filing Deadline means ... the 15th calendar day after the Initial Closing Date; Effectiveness Deadline means ... the 45th calendar day after the Initial Closing Date.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "SEC:CIK0001653909-SUBMISSIONS-2026-07-15",
+              "source_quote": "No S-3, S-1, POS AM, EFFECT, or selling-stockholder resale registration appears between the April 19 closing and July 15, 2026.",
+              "evidence_type": "ref",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        },
+        {
+          "id": 13519,
+          "profile_id": "allbirds",
+          "summary": "An ATW-controlled vehicle remains better supported than SGV, but the investor identity is not confirmed",
+          "claim_type": "synthesis",
+          "confidence": "medium",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "SEC:0001193125-26-164338:EX-10.1",
+              "source_quote": "The Company shall reimburse the lead Buyer ... for the fees and expenses of Kelley Drye & Warren LLP ... Blank Rome LLP ... and Flexible Consulting",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "SEC:0001477932-25-004289:EX-10.1",
+              "source_quote": "Required Holder means Solana Growth Ventures LLC ... with a copy ... to: Pryor Cashman LLP",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "SEC:0001493152-26-009947",
+              "source_quote": "This Schedule is filed by: (i) ATW Partners Opportunities Management, LLC ... (ii) ATW Opportunities Master Fund II, L.P. ... (iii) Defender SPV LLC ... (iv) Kerry Propper; and (v) Antonio Ruiz-Gimenez",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "SEC:0001493152-26-009947:EX-D",
+              "source_quote": "One or more of the Reporting Persons have entered into various contracts with the Issuer ... 6/5/2025 Securities Purchase Agreement",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "SEC:0001683168-25-009319:EX-10.1",
+              "source_quote": "[Investor] c/o [Investor] 1 Pennsylvania Plaza Suite 4810 ... Attn: Antonio Ruiz-Gimenez ... Kelley Drye & Warren LLP ... Attention: Michael A. Adelstein, Esq.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "SEC:0001947975-26-000006",
+              "source_quote": "The Common Stock ... represents the approximate number of Shares which ATW Digital Asset Opportunities XIV LLC ... has the right to acquire ... through ... senior secured convertible debt issued by iPower Inc. ... ATW Partners Opportunities Management, LLC ... serves as the investment manager ... Antonio Ruiz-Gimenez and Kerry Propper are control persons",
+              "evidence_type": "ref",
+              "source_page": null
+            }
+          ],
+          "relations": [
+            {
+              "from_finding_id": 13519,
+              "to_finding_id": 10586,
+              "relation_type": "refines",
+              "assessment": "New exact-template and counsel-stack evidence keeps ATW as the leading candidate but current redactions and ownership negatives do not support confirmation or a numerical probability."
+            }
+          ]
+        },
+        {
+          "id": 12229,
+          "profile_id": "allbirds",
+          "summary": "The June amendment increased headline note capacity to $100 million but did not itself fund new cash; after $8.25 million principal sold by June 4, up to $91.75 million principal remained unfunded and investor-controlled.",
+          "claim_type": "synthesis",
+          "confidence": "medium",
+          "verification_status": "unverified",
+          "evidence": [
+            {
+              "evidence_ref": "SEC:0001193125-26-273417:EX-10.1",
+              "source_quote": "Recital D ... replacing the reference to $50,000,000 with $100,000,000.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "SEC:0001628280-26-042166",
+              "source_quote": "An aggregate principal amount of $41.75 million in Convertible Notes remains available to be sold under the Facility.",
+              "evidence_type": "ref",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        }
+      ],
+      "candidate_fingerprint": "98644aa5b066f53fa3eea6d74064347da2db610ddb2b5f1c0d85ce833377b79c",
+      "gate_results": {
+        "G0": "core and content frozen; raw sidecar metadata later and separately labeled",
+        "G1": "pass: >=3 concrete finding anchors",
+        "G2": "merge into existing profile; no new investigation",
+        "G3": "preliminary excerpts checked; full primary and current publication audit incomplete",
+        "G4": "not performed by this track",
+        "G5": "not applicable to article/dossier angle inside an existing investigation",
+        "G6": "bounded risks and innocent explanation recorded",
+        "G7": "not yet independently reconciled"
+      }
+    },
+    {
+      "candidate_id": "cpi-shared-services-network",
+      "title": "The back-office infrastructure of a political nonprofit network",
+      "source_profiles": [
+        "oversight-project",
+        "election-integrity"
+      ],
+      "format": "new institutional article and first curated Oversight/CPI/Compass dossiers",
+      "thesis": "Tax returns, benefit-plan records and state registrations document shared legal, administrative, fundraising and campus services around CPI; the public record supports operational interdependence without proving unified control.",
+      "public_interest": "Nonprofit governance, political infrastructure and transparency of tax-exempt resources.",
+      "families": [
+        "CPI IRS Form 990",
+        "DOL EFAST2 benefit-plan filings",
+        "Delaware official company registry"
+      ],
+      "independence": "CPI grant and vendor figures originate in one tax return and count once; DOL and state records independently resolve certain identities, not undisclosed beneficial ownership of the whole network.",
+      "missing": "Reconcile grants versus vendor fees and verify each operational/legal identity; several for-profit certified company histories remain unreviewed.",
+      "not_established": [
+        "A shared address or service provider does not prove common control or illegal coordination.",
+        "Same-EIN operational continuity is not an established statutory name change.",
+        "A concentrated compliance client group is not an exclusive client book."
+      ],
+      "innocent": "Aligned nonprofit groups can lawfully reduce costs by sharing specialized services and office facilities.",
+      "overlap": [
+        "investigations/oversight-project/reports/2026-07-21-wave1-synthesis.md",
+        "investigations/oversight-project/evidence/cpi-campus-schedule-r-reconciliation-2024.md",
+        "investigations/oversight-project/evidence/compass-legal-post-klimon-continuity-2025-2026.md",
+        "No dossier export lists profile_id oversight-project at the content cutoff."
+      ],
+      "next": [
+        "Crosscheck IRS Schedule I/contractor/Schedule R totals without adding unlike flows.",
+        "Resolve the four for-profit free-registry identity gaps with available primary filings.",
+        "Separate historical Klimon roles from current services and control."
+      ],
+      "kill": "Narrow the thesis to disclosed shared services if ownership/control records fail to support a wider claim.",
+      "recommendation": "merge",
+      "proposed_profile_slug": null,
+      "novelty": {
+        "status": "not_searched_this_track",
+        "class": "existing-profile angle",
+        "note": "Local overlap checked; root owns current prior-art searches."
+      },
+      "total_score": null,
+      "score_reason": "No 100-point score: current novelty and independent scoring gates are not complete.",
+      "readiness_1_to_5": 3,
+      "risk_level": "medium",
+      "established": [
+        {
+          "id": 13961,
+          "profile_id": "oversight-project",
+          "summary": "CPI's 2024 return identifies a same-address administrative, legal, property, campus, and fundraising service layer.",
+          "claim_type": "paraphrase",
+          "confidence": "high",
+          "verification_status": "unverified",
+          "evidence": [
+            {
+              "evidence_ref": "IRS:202513189349303026",
+              "source_quote": "\"Conservative Partnership Campus Inc\" — \"Event/studio/facility services\" — \"1202229\"; \"Compass Professional Inc\" — \"Administrative services\" — \"986048\"; \"Compass Legal Group Inc\" — \"Legal services\" — \"608984\"; \"Compass Property Management Inc\" — \"Property management\" — \"360000\"; each lists \"300 Independence Ave SE\". | \"Compass Direct LLC\"; \"direct marketing consulting\"; GrossReceiptsAmt \"2570110\"; RetainedByContractorAmt \"180000\"; NetToOrganizationAmt \"2390110\". | Desc \"Workspace Share Revenue\"; TotalRevenueColumnAmt \"2044685\".",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "IRS:202513219349328791",
+              "source_quote": null,
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "IRS:202543219349306334",
+              "source_quote": null,
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "IRS:202543219349306334 and IRS:202513219349328791",
+              "source_quote": "BooksInCareOfDetail identifies \"Compass Professional Inc\" at \"300 Independence Ave SE\".",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11B.zip",
+              "source_quote": null,
+              "evidence_type": "url",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11D.zip",
+              "source_quote": null,
+              "evidence_type": "url",
+              "source_page": null
+            }
+          ],
+          "relations": [
+            {
+              "from_finding_id": 14318,
+              "to_finding_id": 13961,
+              "relation_type": "corroborates",
+              "assessment": "CCF’s Schedule B payment independently confirms Compass Legal operates as a vendor beyond CPI’s own return."
+            }
+          ]
+        },
+        {
+          "id": 13962,
+          "profile_id": "oversight-project",
+          "summary": "Seven organizations using 300 Independence Ave SE received 92.66% of CPI's reported 2024 grants.",
+          "claim_type": "synthesis",
+          "confidence": "medium",
+          "verification_status": "unverified",
+          "evidence": [
+            {
+              "evidence_ref": "IRS:202513189349303026",
+              "source_quote": "Schedule I lists at \"300 Independence Ave SE\": \"American Accountability Foundation\" CashGrantAmt \"25000\"; \"American Moment Inc\" \"84000\"; \"Conservative Partnership International Inc\" \"100000\"; \"Edmund Burke Foundation\" \"255000\"; \"Foundation for Accountability Integrity & Research in Elections Fund\" \"6042000\"; \"Personnel Policy Operations Inc\" \"1075000\"; \"State Leadership Foundation\" \"250000\".",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://apps.irs.gov/pub/epostcard/990/xml/2025/2025_TEOS_XML_11D.zip",
+              "source_quote": null,
+              "evidence_type": "url",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        },
+        {
+          "id": 14365,
+          "profile_id": "oversight-project",
+          "summary": "Allowed primary records establish same-EIN operational continuity between Compass Legal Group and Compass Legal Services, but not a Delaware statutory name change; among the five scoped companies, only Conservative Partnership Campus currently has a resolved official free Delaware file, while the four for-profit file identities and all certified histories remain manual or paid.",
+          "claim_type": "synthesis",
+          "confidence": "medium",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "DE-SOS:6864831",
+              "source_quote": "File Number: 6864831 Incorporation Date / Formation Date: 6/17/2022 Entity Name: CONSERVATIVE PARTNERSHIP CAMPUS, INC. Name: THE CORPORATION TRUST COMPANY",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "DOL:EFAST2:20250723122721NAL0003438097001",
+              "source_quote": "COMPASS LEGAL GROUP | COMPASS LEGAL SERVICES INC | 862833005 | 300 INDEPENDENCE AVE SE | PATRICK CORRIGAN",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "IRS:202223199349329357",
+              "source_quote": "Compass Legal Group Inc | 86-2833005 | DE | C | Shared Services",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://corp.delaware.gov/directweb/",
+              "source_quote": "The fee is $50.00 per certificate for a short form certificate of status (includes the name of the entity and the status at the time the certificate is issued) or $175.00 for a Long Form certificate of Good Standing (states all documents that have been filed, including the dates and times and any name changes that occurred along with the status at the time the certificate is issued).",
+              "evidence_type": "url",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://corp.delaware.gov/faqs/",
+              "source_quote": "Search results will return both active and inactive entities, however, this does not provide entity status.",
+              "evidence_type": "url",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://corp.delaware.gov/onlinestatus/",
+              "source_quote": "The application will return a page listing the status, the last 5 filings, franchise tax assessment, total authorized shares (if applicable), and tax due.",
+              "evidence_type": "url",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://icis.corp.delaware.gov/Ecorp/FieldDesc.aspx",
+              "source_quote": "The current name of an entity as set forth in their certificate of incorporation or formation; or as amended by subsequent documents.",
+              "evidence_type": "url",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "investigations/oversight-project/evidence/compass-delaware-history-boundary-2026-07-23.md",
+              "source_quote": "Only unique Delaware file numbers plus a complete history and the underlying formation/amendment documents can discriminate among them.",
+              "evidence_type": "file",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        }
+      ],
+      "counter_evidence": [
+        {
+          "id": 14306,
+          "profile_id": "oversight-project",
+          "summary": "The available FEC record supports a concentrated Stoltzfus political-compliance cluster, but not a proven ecosystem-exclusive client book.",
+          "claim_type": "inference",
+          "confidence": "medium",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "FEC:1800829",
+              "source_quote": "THE SENTINEL ACTION FUND | 2024-05-23 | 1000000.00",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "FEC:1857857",
+              "source_quote": "THE SENTINEL ACTION FUND | 2024-10-09 | 35000.00",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "FEC:1941863",
+              "source_quote": "FRONTLINE LEADERS ACTION INC. | SOLANA INSTITUTE | RAI SERVICES COMPANY",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "FEC:1962158",
+              "source_quote": "MOMS FOR SAFE NEIGHBORHOODS INC. | 2026-03-20 | 100000.00",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "FEC:1975301",
+              "source_quote": "Name of Any Connected Organization, Affiliated Committee, Joint Fundraising Representative, or Leadership PAC Sponsor: NONE",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "FEC:1980173",
+              "source_quote": "SENTINEL ACTION FUND | 2026-04-23 | 225000.00; 2026-04-28 | 1000000.00",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "FEC:BULK:CM1980-2026",
+              "source_quote": "Exact NICHOLAS STOLTZFUS rows: C00811166; C00878520; C00919746; C00946921; C00950881",
+              "evidence_type": "ref",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        },
+        {
+          "id": 14368,
+          "profile_id": "oversight-project",
+          "summary": "A bounded post-move review found no first-party or official record identifying Klimon in a continuing Compass Legal service role; tested records instead point to Holtzman Vogel or legacy contact reuse.",
+          "claim_type": "synthesis",
+          "confidence": "medium",
+          "verification_status": "unverified",
+          "evidence": [
+            {
+              "evidence_ref": "Compass Legal post-move website archive",
+              "source_quote": "September 18, 2025 and April 18, 2026 captures advertise Compass Legal services and a Meet the Compass Team link without identifying Klimon on the homepage",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "Ithildin finding 14116",
+              "source_quote": "Post-move articles use William M Klimon, 2300 N Street NW Suite 643, and compliance@holtzmanvogel.com",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "Ithildin finding 14234",
+              "source_quote": "Exactly two current Klimon/Compass Legal care-of rows; both have 2024 ruling months and recur from 2024 archive coverage",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "Ithildin finding 14366",
+              "source_quote": "Prior to joining Holtzman Vogel, he was senior counsel at Compass Legal",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "Ithildin finding 14367",
+              "source_quote": "Two post-move FEC legal-consulting payments identify Compass Legal Group as recipient but do not name the individual lawyer",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "investigations/oversight-project/evidence/wy-oversight-project-annual-report-2026.pdf",
+              "source_quote": "Email wklimon@compasslegal.org; phone (202) 927-2309; annual report certified by Michael Howell on January 22, 2026",
+              "evidence_type": "file",
+              "source_page": null
+            }
+          ],
+          "relations": [
+            {
+              "from_finding_id": 14368,
+              "to_finding_id": 14042,
+              "relation_type": "refines",
+              "assessment": "The retained Compass email is a contact-of-record fact, but the 2026 report was signed by Howell and does not prove Klimon rendered services after joining HV."
+            },
+            {
+              "from_finding_id": 14368,
+              "to_finding_id": 14116,
+              "relation_type": "depends_on",
+              "assessment": "The bounded negative conclusion relies on the official post-move incorporation-address shift documented in finding 14116."
+            },
+            {
+              "from_finding_id": 14368,
+              "to_finding_id": 14234,
+              "relation_type": "depends_on",
+              "assessment": "The bounded negative conclusion relies on the exhaustive EO BMF census and ruling-date chronology in finding 14234."
+            },
+            {
+              "from_finding_id": 14368,
+              "to_finding_id": 14366,
+              "relation_type": "depends_on",
+              "assessment": "The bounded negative conclusion incorporates Holtzman Vogel’s first-party current and prior-role statements."
+            },
+            {
+              "from_finding_id": 14368,
+              "to_finding_id": 14367,
+              "relation_type": "depends_on",
+              "assessment": "The conclusion separates practice-level continuity shown by FEC payments from any person-attributed role."
+            }
+          ]
+        },
+        {
+          "id": 14359,
+          "profile_id": "oversight-project",
+          "summary": "Official Delaware records identify AAF as file 4529226, formed 2020-12-22, and AAF Action as a separate file 2735856, formed 2023-12-08; both are Corporation / Exempt entities with The Corporation Trust Company, while the free layer does not establish current status, incorporators, charter text, or filing history.",
+          "claim_type": "paraphrase",
+          "confidence": "high",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "DE-SOS:2735856",
+              "source_quote": "File Number: 2735856 Incorporation Date / Formation Date: 12/8/2023 Entity Name: AMERICAN ACCOUNTABILITY FOUNDATION ACTION, INC Name: THE CORPORATION TRUST COMPANY",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "DE-SOS:4529226",
+              "source_quote": "File Number: 4529226 Incorporation Date / Formation Date: 12/22/2020 Entity Name: AMERICAN ACCOUNTABILITY FOUNDATION Name: THE CORPORATION TRUST COMPANY",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://corp.delaware.gov/directweb/",
+              "source_quote": "The fee is $50.00 per certificate for a short form certificate of status (includes the name of the entity and the status at the time the certificate is issued) or $175.00 for a Long Form certificate of Good Standing (states all documents that have been filed, including the dates and times and any name changes that occurred along with the status at the time the certificate is issued).",
+              "evidence_type": "url",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://corp.delaware.gov/document-upload-service-information/",
+              "source_quote": "This service is for submission only of business entity filings or certificate/document requests. This service does not provide for direct online filing or retrieval of business entity documents and certificates.",
+              "evidence_type": "url",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://corp.delaware.gov/faqs/",
+              "source_quote": "Search results will return both active and inactive entities, however, this does not provide entity status.",
+              "evidence_type": "url",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://corp.delaware.gov/onlinestatus/",
+              "source_quote": "The application will return a page listing the status, the last 5 filings, franchise tax assessment, total authorized shares (if applicable), and tax due.",
+              "evidence_type": "url",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "investigations/oversight-project/evidence/aaf-delaware-free-paid-boundary-2026-07-23.md",
+              "source_quote": "The two current names map to two different file numbers and formation dates.",
+              "evidence_type": "file",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        }
+      ],
+      "candidate_fingerprint": "a04a68df0454ae71217a34f61e1324a739ac3a02e06ddff7e0093aed9d032ab5",
+      "gate_results": {
+        "G0": "core and content frozen; raw sidecar metadata later and separately labeled",
+        "G1": "pass: >=3 concrete finding anchors",
+        "G2": "merge into existing profile; no new investigation",
+        "G3": "preliminary excerpts checked; full primary and current publication audit incomplete",
+        "G4": "not performed by this track",
+        "G5": "not applicable to article/dossier angle inside an existing investigation",
+        "G6": "bounded risks and innocent explanation recorded",
+        "G7": "not yet independently reconciled"
+      }
+    },
+    {
+      "candidate_id": "karp-institutional-practice-context",
+      "title": "Brad Karp’s institutional practice, with the actual denominator",
+      "source_profiles": [
+        "brad-karp"
+      ],
+      "format": "dossier refinement; article only if it adds a concrete mechanism beyond the existing SoftBank story",
+      "thesis": "Court appearances, settlements and archived firm biographies establish a broad institutional practice that should contextualize exceptional Epstein correspondence, without labeling ordinary representation as misconduct.",
+      "public_interest": "Institutional accountability and accurate characterization of legal influence.",
+      "families": [
+        "Federal docket personally naming counsel",
+        "DOJ and SEC settlement announcements",
+        "Archived Paul Weiss biographies"
+      ],
+      "independence": "Dockets establish personal appearances; firm biographies are first-party claims about roles; agency releases independently describe settlements but do not prove every lawyer’s individual role.",
+      "missing": "Compare proposed additions against the substantial existing Brad Karp dossier and published SoftBank article. A new article needs a distinctive mechanism, not a roster of clients.",
+      "not_established": [
+        "Representing a charged client does not imply the lawyer committed wrongdoing.",
+        "A firm client is not automatically Karp’s personal client.",
+        "The 59-client and 84-docket samples are lower bounds, not a complete practice denominator."
+      ],
+      "innocent": "A leading litigation lawyer naturally has many large institutional clients and overlapping professional contacts.",
+      "overlap": [
+        "content/dossiers/brad-karp.json (85 embedded findings and 8 narrative sections)",
+        "content/articles/softbank-caper.mdx",
+        "content/articles/gulf-intelligence-web.mdx",
+        "investigations/brad-karp/config.yaml"
+      ],
+      "next": [
+        "Diff omitted verified practice anchors against current dossier prose.",
+        "Keep personal docket roles distinct from firm-level representations.",
+        "Use exceptional message chains only with full context and a testable institutional consequence."
+      ],
+      "kill": "Do not commission a new article if it repeats existing coverage or depends solely on association and client lists.",
+      "recommendation": "merge",
+      "proposed_profile_slug": null,
+      "novelty": {
+        "status": "not_searched_this_track",
+        "class": "existing-profile angle",
+        "note": "Local overlap checked; root owns current prior-art searches."
+      },
+      "total_score": null,
+      "score_reason": "No 100-point score: current novelty and independent scoring gates are not complete.",
+      "readiness_1_to_5": 3,
+      "risk_level": "medium",
+      "established": [
+        {
+          "id": 13263,
+          "profile_id": "brad-karp",
+          "summary": "The SEC v. Citigroup Inc. docket personally records Karp's pro hac vice motion for Citigroup; the SEC's official release says Citigroup separately agreed to pay a $75 million penalty to settle the disclosure charges.",
+          "claim_type": "direct_quote",
+          "confidence": "confirmed",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "SEC-PR:2010-136",
+              "source_quote": "Citigroup agreed to settle the SEC's charges by paying a $75 million penalty.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://www.courtlistener.com/docket/4210999/5/securities-and-exchange-commission-v-citigroup-inc/",
+              "source_quote": "MOTION for Leave to Appear Pro Hac Vice :Attorney Name- Brad S. Karp ... by CITIGROUP, INC.",
+              "evidence_type": "url",
+              "source_page": null
+            }
+          ],
+          "relations": [
+            {
+              "from_finding_id": 13254,
+              "to_finding_id": 13263,
+              "relation_type": "duplicates",
+              "assessment": "Finding 13263 replaces 13254 with the canonical SEC-PR:2010-136 evidence reference."
+            }
+          ]
+        },
+        {
+          "id": 13255,
+          "profile_id": "brad-karp",
+          "summary": "A July 26, 2012 archived Paul, Weiss biography publicly identified Apollo as a Karp client in several litigations and advisory matters.",
+          "claim_type": "direct_quote",
+          "confidence": "confirmed",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "https://web.archive.org/web/20120726185111/http://www.paulweiss.com/professionals/partners-and-counsel/brad-s-karp.aspx",
+              "source_quote": "Apollo in several litigations and advisory matters;",
+              "evidence_type": "url",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        },
+        {
+          "id": 13275,
+          "profile_id": "brad-karp",
+          "summary": "An archived January 2016 Paul, Weiss biography attributed to Karp UBS's settlement with DOJ, SEC, IRS, and 25 state attorneys general concerning the firm's former municipal reinvestment and derivatives group; DOJ announced in May 2011 that UBS agreed to $160 million in restitution, penalties, and disgorgement and accepted responsibility for former employees' anticompetitive conduct.",
+          "claim_type": "paraphrase",
+          "confidence": "high",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "DOJ-PR:f13f5e72-2a26-4b5e-addb-8d467bc174b8",
+              "source_quote": "UBS AG has entered into an agreement with the Department of Justice to resolve anticompetitive activity in the municipal bond investments market and has agreed to pay a total of $160 million in restitution, penalties and disgorgement to federal and state agencies, the Department of Justice announced today.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://web.archive.org/web/20160107073722id_/http://www.paulweiss.com/professionals/partners-and-counsel/brad-s-karp.aspx",
+              "source_quote": "UBS in several matters, including its settlement with the Antitrust Division of the DOJ, the SEC, the Internal Revenue Service and a group of 25 state attorneys general regarding investigations into the firm's former municipal reinvestment and derivatives group, as well as various subprime, credit crisis and mortgage-related litigations;",
+              "evidence_type": "url",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        }
+      ],
+      "counter_evidence": [
+        {
+          "id": 13267,
+          "profile_id": "brad-karp",
+          "summary": "Cross-source coverage now supplies two complementary lower-bound denominators for Karp’s public practice: a 59-client 2013–2019 denominator assembled from an archived non-exhaustive firm roster plus two personally docketed NFL teams, and 84 unique federal dockets personally naming Karp from 2001 through 2024. Neither denominator is complete or independently establishes the reputation label fixer; together they document a broad institutional litigation and advisory practice while preserving firm-level versus personal-role limits.",
+          "claim_type": "synthesis",
+          "confidence": "medium",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "COURTLISTENER:ATTORNEY-BRAD-S-KARP:DATE-BUCKETS-THROUGH-2024:2026-07-14",
+              "source_quote": "84 unique docket IDs after deduplication; earliest filed 2001-10-22 and latest filed 2024-05-01.",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "https://web.archive.org/web/20190507063327/https://www.paulweiss.com/professionals/partners-and-counsel/brad-s-karp",
+              "source_quote": "Brad’s recent clients in significant securities, commercial and regulatory matters have included Citigroup, JPMorgan, Bank of America, Morgan Stanley, HSBC",
+              "evidence_type": "url",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        },
+        {
+          "id": 13264,
+          "profile_id": "brad-karp",
+          "summary": "A bounded exact-phrase EDGAR review returned eight filings; four used “Brad S. Karp” only in Paul, Weiss letterhead or a firm roster and therefore do not independently establish his personal work on those matters.",
+          "claim_type": "synthesis",
+          "confidence": "medium",
+          "verification_status": "verified",
+          "evidence": [
+            {
+              "evidence_ref": "SEC:0000950123-05-009553",
+              "source_quote": "MEREDITH J. KAPLAN / BRAD S. KARP / JOHN C. KENNEDY",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "SEC:0001104659-12-081100",
+              "source_quote": "ALLAN J. ARFFA / BRAD S. KARP / 1285 AVENUE OF THE AMERICAS",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "SEC:0001104659-21-113002",
+              "source_quote": "BRAD S. KARP / JORDAN E. YARETT",
+              "evidence_type": "ref",
+              "source_page": null
+            },
+            {
+              "evidence_ref": "SEC:0001193125-19-302936",
+              "source_quote": "MEREDITH J. KANE / JONATHAN S. KANTER / BRAD S. KARP",
+              "evidence_type": "ref",
+              "source_page": null
+            }
+          ],
+          "relations": []
+        }
+      ],
+      "candidate_fingerprint": "aa2523902fe4f116ce1ce02aa3954ac702c04c285460fa20219ad0d9ccbe908a",
+      "gate_results": {
+        "G0": "core and content frozen; raw sidecar metadata later and separately labeled",
+        "G1": "pass: >=3 concrete finding anchors",
+        "G2": "merge into existing profile; no new investigation",
+        "G3": "preliminary excerpts checked; full primary and current publication audit incomplete",
+        "G4": "not performed by this track",
+        "G5": "not applicable to article/dossier angle inside an existing investigation",
+        "G6": "bounded risks and innocent explanation recorded",
+        "G7": "not yet independently reconciled"
+      }
+    }
+  ],
+  "filtered_out": [
+    {
+      "candidate_id": "hfia-automax-scisparc-valuation-contradiction",
+      "finding_id": 13728,
+      "disposition": "hold for correction/primary bilingual review",
+      "reason": "Summary implies contradictory valuations, but stored Hebrew excerpt says AutoMax received no valuation of SciSparc, while the claimed SEC valuation concerns AutoMax. Opposite valuation targets cannot establish the asserted contradiction."
+    },
+    {
+      "candidate_id": "curaleaf-cash-extraction",
+      "finding_ids": [
+        15315,
+        15311,
+        15291
+      ],
+      "disposition": "reject as currently unsupported",
+      "reason": "No complete store-to-bank-to-treasury join, no recurring peer-ratio anomaly, and no routine cash-account sweep established."
+    },
+    {
+      "candidate_id": "dfj-qwave-organized-crime-identity-bridge",
+      "finding_ids": [
+        13675,
+        13587,
+        13580
+      ],
+      "disposition": "reject unresolved-identity premise",
+      "reason": "Verified corrections separate U.S. technology investor, Spanish defendant and differently named immigration defendant; association cannot bridge identities."
+    },
+    {
+      "candidate_id": "private-person-asset-profiles",
+      "profiles": [
+        "hassan-boston"
+      ],
+      "disposition": "excluded from public-interest commissioning",
+      "reason": "Counted in platform metadata only; no private-person asset dossier proposal generated."
+    },
+    {
+      "candidate_id": "test-and-null-profile-rows",
+      "profiles": [
+        "test",
+        null
+      ],
+      "disposition": "excluded from commissioning",
+      "reason": "Test/unscoped data is not an editorial subject."
+    }
+  ],
+  "limitations": [
+    "Not a source-wide semantic audit, legal review, publication PASS or current-novelty finding.",
+    "Readiness is provisional documentary readiness for the bounded angle; every candidate still needs primary-source and current publication-gate validation.",
+    "No findings, profiles, queues, articles, dossiers or canonical database rows were modified.",
+    "Corpus metadata is in corpora.json; raw sidecars were not frozen and only their metadata was queried."
+  ]
+}

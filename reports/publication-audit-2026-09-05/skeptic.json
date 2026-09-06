@@ -1,0 +1,975 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-06T01:31:24.404141+00:00",
+  "scope_label": "Read-only skeptic audit of four existing-profile evidence packets",
+  "recommendation_scope": "All candidates merge into existing profiles; no launch or weighted scoring performed.",
+  "scope_snapshot": {
+    "db_path": "/tmp/osint-SUw5NK21/investigation-snapshot.db",
+    "db_access": "mode=ro; query_only=ON",
+    "findings_count": 15678,
+    "finding_max_id": 15694,
+    "latest_finding_created_at": "2026-09-06 01:11:13",
+    "packet_manifest": {
+      "geo-group": {
+        "path": "/tmp/osint-SUw5NK21/evidence/geo-group-packet.json",
+        "sha256": "2a1d013835b08bd06e1d88cff63c42638fe6c6d896b3b5ccc7ec2f18118444f9",
+        "finding_rows": 689
+      },
+      "epstein-gates-ipi": {
+        "path": "/tmp/osint-SUw5NK21/evidence/epstein-gates-ipi-packet.json",
+        "sha256": "ac4677effa4db9f211572b5c40933d3ef0dee94e6a3aef4e2965dd73ccf89900",
+        "finding_rows": 202
+      },
+      "allbirds": {
+        "path": "/tmp/osint-SUw5NK21/evidence/allbirds-packet.json",
+        "sha256": "986200051e25de3836a19c3094613fbf2b9c788dc50582d9d59cc23bb9d99986",
+        "finding_rows": 244
+      },
+      "curaleaf": {
+        "path": "/tmp/osint-SUw5NK21/evidence/curaleaf-packet.json",
+        "sha256": "30b97b54be554c8eed418dd0c89c580a159d76881e03fbf9ba9e338a276e64fb",
+        "finding_rows": 341
+      }
+    }
+  },
+  "method": {
+    "rubric": ".codex/skills/discover-investigations/references/candidate-rubric.md",
+    "readiness_scale": "1 speculative;2 signal;3 investigation-ready;4 near-draftable after decisive check;5 core documentary chain draftable",
+    "source_review": "Read full stored source quotes for listed anchors and counterevidence, evaluated relation/claim state and read relevant hypotheses. Original source documents were not reopened; counts and verification flags were not treated as publication approval.",
+    "live_or_novelty_review": "Parent owns live/finished inventory, current novelty, and final editorial review. No new web queries performed here."
+  },
+  "candidates": [
+    {
+      "candidate_id": "geo-contract-payment-oversight",
+      "profile_id": "geo-group",
+      "recommendation": "merge",
+      "title": "GEO: what contracts buy, what public accounts expose, and what oversight found",
+      "readiness_1_to_5": 4,
+      "risk_level": "medium",
+      "readiness_reason": "Several independent primary origins support a bounded contract/accountability narrative. The stored quotations under two central pass-through findings are narrower than their summaries; reconcile the operator agreement and audit pages before using the price-flow amounts in prose.",
+      "draft_now": {
+        "neutral_dossier": true,
+        "article": "A historical explanatory draft can begin with explicit record dates and bounded OIG findings. Stronger current loss, favoritism, or performance-insulation claims need new evidence.",
+        "publication_clearance": false
+      },
+      "bounded_thesis": "ICE contracts include local-government intermediaries and task-order funding; separate primary oversight reports describe specific unused-capacity costs and enforcement failures, while later utilization and corrective responses complicate a single systemic-favoritism story.",
+      "anchors": [
+        {
+          "finding_id": 12404,
+          "proposition_reviewed": "The base Karnes action does not obligate funds; services require funded task orders.",
+          "claim_type": "direct_quote",
+          "verification_status": "verified",
+          "source_family": "ICE contract instrument",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "Directly supported by the full stored quotation. Do not substitute the base ceiling for payments.",
+          "references": [
+            "ICE:70CDCR24DIG000018:BASE-P00001",
+            "https://www.ice.gov/doclib/foia/detFacContracts/70CDCR24DIG000018_BASE-P00001_KarnesCoResidentialCntr_IGSA_KarnesCityTX.pdf"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        },
+        {
+          "finding_id": 12435,
+          "proposition_reviewed": "The LaSalle operator agreement reserves ICE/LEDD inspection rights; the summary also describes equal per-diem pass-through terms.",
+          "claim_type": "direct_quote",
+          "verification_status": "verified",
+          "source_family": "Local government/operator executed agreement",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "PARTIAL: stored quote supports inspection rights only. It does not quote the same-per-diem/payment clauses carrying the broader summary.",
+          "references": [
+            "DOCLOUD:LEDD_Agreement_4-1-2007",
+            "https://cdn.muckrock.com/foia_files/2015/08/19/LEDD_Agreement_4-1-2007.pdf"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        },
+        {
+          "finding_id": 12437,
+          "proposition_reviewed": "The local audit reports $39,802,562 ICE revenue and 99.1% dependence; the summary additionally reports GEO expenditure and admin income.",
+          "claim_type": "direct_quote",
+          "verification_status": "verified",
+          "source_family": "Local audited financial statements",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "PARTIAL: stored quote directly supports the ICE revenue/dependency figures. It does not quote the $39,802,794 GEO-expenditure or $180,000 administrative-income lines.",
+          "references": [
+            "LLA:00005485",
+            "https://lla.la.gov/publicreports.nsf/0/6fef8ffe87f626c086258b6a0053836f/%24file/00005485.pdf"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        },
+        {
+          "finding_id": 12425,
+          "proposition_reviewed": "DHS OIG reported full contract funding despite noncompliance at Folkston.",
+          "claim_type": "direct_quote",
+          "verification_status": "verified",
+          "source_family": "DHS OIG oversight report OIG-22-47",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "The quoted OIG sentence supports the finding of full funding without consequence; attribute it to that report and its review period.",
+          "references": [
+            "DHS-OIG:OIG-22-47#p17"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        },
+        {
+          "finding_id": 13018,
+          "proposition_reviewed": "DHS OIG determined about $18m was paid for unused South Texas beds over the reviewed one-year period.",
+          "claim_type": "direct_quote",
+          "verification_status": "verified",
+          "source_family": "DHS OIG oversight report OIG-22-40",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "Directly supported, including 36% unused and the November 2020–October 2021 boundary. This is OIG’s historical payment finding, not a current estimate from obligations.",
+          "references": [
+            "DHS-OIG:OIG-22-40#p13-unused-beds"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        }
+      ],
+      "independence": "ICE instruments, an operator/local-government agreement, local audited accounts, and statutory OIG work have distinct production paths. Hosting an agreement at MuckRock/DocumentCloud is a mirror, not an additional source. Multiple claims from one OIG report or one ICE template are dependent. USAspending obligations, award-life outlays, and company revenue are different measures.",
+      "counterevidence": [
+        {
+          "finding_id": 12426,
+          "point": "ICE’s response says Folkston covered shifts using overtime at vendor expense; recommendation status was later closed. Neither agency response nor closure alone proves every underlying remedy was effective."
+        },
+        {
+          "finding_id": 13032,
+          "point": "The ICE FY25/FY26 YTD snapshots put all four compared Western facilities above reported minima by April 2, 2026. These are partial, nonparallel periods from one shared template family; they weaken a timeless empty-bed narrative but do not establish prior-period cost effectiveness."
+        },
+        {
+          "hypothesis_ids": [
+            335,
+            336
+          ],
+          "point": "Both performance-insulation and ordinary remedy/surge-readiness explanations remain live in the frozen hypothesis inventory."
+        }
+      ],
+      "best_innocent_explanation": "Guaranteed capacity can purchase surge readiness; incidents can be facility-specific; overtime, remediation and ordinary contract administration may produce consequences that public award summaries do not show.",
+      "not_established": [
+        "Pass-through structure caused poor oversight.",
+        "Missing direct-recipient awards equal concealed or improperly paid GEO revenue.",
+        "Historical pandemic-period empty-bed payments establish current waste.",
+        "Lobbying or former-official hiring caused a particular award."
+      ],
+      "pre_draft_check": "Open the full cited 2007 LaSalle agreement and 2023 audit together; attach the exact pricing, GEO-expenditure and administrative-income pages and confirm that the figures are same-period line items rather than a transaction-level reconciliation.",
+      "killer_next_check": "For one currently relevant facility, reconcile its funded task-order CLINs, bed-day invoices, monitoring deficiencies and actual deductions/credits. Routine proportionate remedies or justified readiness economics would kill or materially narrow the continuing-insulation claim.",
+      "workstreams": [
+        "Contract/prime/operator mapping and same-period fund flow.",
+        "Facility-level utilization, invoice and guarantee economics.",
+        "Performance findings, remedy decisions and closed-recommendation evidence."
+      ],
+      "next_records": [
+        {
+          "record": "Full operator agreement and audited Special ICE Fund pages",
+          "path": "The existing MuckRock agreement URL and Louisiana Legislative Auditor report 00005485 in findings 12435/12437",
+          "question": "Do the quoted source pages establish the reported pass-through and fee figures?",
+          "availability": "Public records already identified"
+        },
+        {
+          "record": "Funded task order and billing/credit ledger for one selected facility",
+          "path": "ICE contracting/FOIA and the relevant county or district records custodian",
+          "question": "What was actually invoiced, paid and deducted in a common period?",
+          "availability": "Contract portions public; invoice/credit records may require requests/redaction"
+        },
+        {
+          "record": "Corrective-action closure packet and monitoring/discrepancy history",
+          "path": "DHS OIG recommendation follow-up and ICE/local-government contract records",
+          "question": "Was the deficiency substantively remediated and did a financial consequence occur?",
+          "availability": "Public summaries exist; closure workpapers may require request"
+        }
+      ],
+      "kill_criteria": [
+        "Invoice and remedy records contradict the proposed continuing absence of consequences.",
+        "A missing award is explained by recipient/period/accounting differences rather than an accountability gap.",
+        "Operational readiness and utilization records explain the disputed guaranteed capacity on its own terms."
+      ],
+      "additional_full_quote_reviews": [
+        {
+          "finding_id": 12426,
+          "all_stored_quotes_read": true,
+          "source_quote_count": 2,
+          "claim_type": "synthesis",
+          "verification_status": "verified",
+          "relations": []
+        },
+        {
+          "finding_id": 13032,
+          "all_stored_quotes_read": true,
+          "source_quote_count": 8,
+          "claim_type": "synthesis",
+          "verification_status": "verified",
+          "relations": []
+        }
+      ],
+      "parent_followup": {
+        "audit": "Parent independently reopened LLA00005485 and confirmed the revenue/GEO-expenditure/admin-income figures. The stored-quote limitation remains accurately described; full operator pricing clauses still need review.",
+        "provenance": "Parent read-only web review; not this worker’s original-document review."
+      }
+    },
+    {
+      "candidate_id": "gates-ipi-briefing-channel",
+      "profile_id": "epstein-gates-ipi",
+      "recommendation": "merge",
+      "title": "Gates–IPI: a documented briefing route and its limits",
+      "readiness_1_to_5": 4,
+      "risk_level": "high",
+      "readiness_reason": "The stored email-chain quotations support an actual routing function, and public grant records corroborate the institutional relationship. It is suitable for a sourced chronology after header/context verification and current-response integration. Parent novelty work finds substantial existing coverage, so this is not an independently established new scoop.",
+      "draft_now": {
+        "neutral_dossier": true,
+        "article": "An attributed explanatory or corrective follow-up can be drafted; a novel investigative article needs a distinct unanswered authorization/deliverables question and new records.",
+        "publication_clearance": false
+      },
+      "bounded_thesis": "Released correspondence shows Epstein relaying IPI polio/security updates into Gates’s orbit; political-access work was expressly requested, and the documents do not establish an intelligence-service operation, concealed grant purpose, criminal participation, or Epstein’s exclusive control.",
+      "anchors": [
+        {
+          "finding_id": 13281,
+          "proposition_reviewed": "The Gates scope expressly requested political-environment analysis in polio geographies.",
+          "claim_type": "direct_quote",
+          "verification_status": "unverified",
+          "source_family": "Released contemporaneous Gates/IPI scope correspondence",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "Stored quotation directly supports political-environment work. It makes a concealment premise weaker; the longer contact/convening scope requires full document context.",
+          "references": [
+            "EFTA00969185"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        },
+        {
+          "finding_id": 13377,
+          "proposition_reviewed": "IPI’s confidential-channel warning was relayed through Epstein/Nikolic, who said he sent it to Bill.",
+          "claim_type": "direct_quote",
+          "verification_status": "verified",
+          "source_family": "Released email chain EFTA00962453/EFTA00962456",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "The two stored quotations support the warning and Nikolic’s acknowledgement. Full headers are needed to retain exact sender/date/chain order.",
+          "references": [
+            "EFTA00962453",
+            "EFTA00962456"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        },
+        {
+          "finding_id": 13390,
+          "proposition_reviewed": "March 2015 IPI reports were routed through Epstein to Bill Gates and Larry Cohen.",
+          "claim_type": "direct_quote",
+          "verification_status": "unverified",
+          "source_family": "Released March 2015 IPI/Epstein/Gates email chains",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "Four stored header/body excerpts support the delivery route; the exact UTC intervals in the detail are not in the stored quotes and require original headers. Four copies/legs of the same chain are not four independent corroborations.",
+          "references": [
+            "EFTA00670737",
+            "EFTA00861605",
+            "EFTA00861648",
+            "EFTA01746272"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        },
+        {
+          "finding_id": 13299,
+          "proposition_reviewed": "The executed project grant and later public listing state different total amounts.",
+          "claim_type": "synthesis",
+          "verification_status": "unverified",
+          "source_family": "Executed grant copy plus Gates Foundation committed-grant listing",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "Both amounts are explicitly quoted ($2.5m executed agreement; $5.5m public listing). The controlling increase/amendment remains missing, so do not treat the difference as diverted funds.",
+          "references": [
+            "EFTA02709169",
+            "https://www.gatesfoundation.org/about/committed-grants/2023/06/inv-007752"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        },
+        {
+          "finding_id": 13452,
+          "proposition_reviewed": "IPI reported continued Gates advisory work in its 2019 annual report.",
+          "claim_type": "direct_quote",
+          "verification_status": "unverified",
+          "source_family": "IPI public annual report",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "Directly supported by the stored annual-report quotation. It is IPI’s account of its work, not proof of every deliverable or expenditure.",
+          "references": [
+            "https://www.ipinst.org/wp-content/uploads/2020/10/IPI_2019AR.pdf"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        }
+      ],
+      "independence": "A unique original email chain can establish routing; multiple EFTA mirrors or forwards cannot be counted as independent confirmations. The official Gates grant listing separately corroborates the grant relationship, not every statement within the emails. IPI annual reports are first-party performance accounts. Media coverage supplies prior art, not primary corroboration.",
+      "counterevidence": [
+        {
+          "finding_id": 13281,
+          "point": "Political/security analysis was stated in the requested scope."
+        },
+        {
+          "finding_id": 13380,
+          "point": "Nikolic’s claim of news before publication is not independently proved by the attached AFP item, which was already linked publicly; quote the characterization rather than asserting privileged intelligence."
+        },
+        {
+          "finding_id": 13464,
+          "point": "Later Gates/IPI work continued through 2021 without showing that Epstein remained necessary. The synthesis has references but no stored source quotes; use its primary anchors such as 13452 and the archived program page."
+        },
+        {
+          "finding_id": 13707,
+          "point": "A direct-return correction supersedes disputed finding13524: do not repeat a donor-side absence or double-count the $150,000 within the $650,000 KPMG total. Finding13707 itself has no stored quotes, so reopen the underlying IRS scans before using those amounts."
+        }
+      ],
+      "parent_current_response_note": {
+        "date": "2026-07-21",
+        "url": "https://www.gatesfoundation.org/ideas/media-center/press-releases/2026/07/external-review",
+        "summary": "Parent independently verified the Foundation statement reporting no evidence of Foundation payments to Epstein or participation in/knowledge of criminal activity, and describing governance/confidentiality reforms. Preserve the published review’s scope and attribution; do not generalize to every personal-office interaction.",
+        "provenance": "Parent primary-source verification after this frozen-packet audit; not a new database finding."
+      },
+      "best_innocent_explanation": "A polio program operating amid conflict legitimately needed political access and situational reports. IPI and Gates personnel could use an informal broker while retaining institutional decision-making; Epstein could exaggerate his centrality. Later continuation is consistent with an ordinary institutional program.",
+      "not_established": [
+        "The Foundation paid Epstein.",
+        "Grant funds financed criminal conduct.",
+        "Epstein controlled Gates, IPI or a government intelligence service.",
+        "A Skype call occurred or its unseen content proves covert activity.",
+        "Ruemmler’s separate legal/social relationships belong in this polio narrative."
+      ],
+      "pre_draft_check": "Verify the complete sender/recipient/date/header chains for EFTA00962453/EFTA00962456 and EFTA00670737/EFTA00861648/EFTA01746272/EFTA00861605, then integrate the Foundation’s current external-review statement without conflating Foundation and personal-office roles.",
+      "killer_next_check": "Recover the grant-approved scope, deliverables, authorized distribution rules and any IPI/Gates record approving or rejecting Epstein as an intermediary. Explicit authorization and ordinary program outputs would defeat a concealed-purpose or indispensable-broker thesis.",
+      "workstreams": [
+        "Who requested and received each report, with complete provenance.",
+        "Grant scope, amendments, deliverables and permitted information distribution.",
+        "Institutional continuation and documented governance response."
+      ],
+      "next_records": [
+        {
+          "record": "Original routing emails with full headers/attachments",
+          "path": "The identified EFTA records in the public release/corpus",
+          "question": "Do recipients, sequence and report identity support actual delivery rather than possession?",
+          "availability": "Already identified public records"
+        },
+        {
+          "record": "January31 proposal, milestones, budget and later grant-increase amendment",
+          "path": "Attachments incorporated into OPP1096058 and related IPI/Gates released records",
+          "question": "What work and funding were actually approved?",
+          "availability": "Decisive attachments not recovered in the packet"
+        },
+        {
+          "record": "Final reports, recipient lists and current external-review scope/results",
+          "path": "Public IPI reports and Gates Foundation review/governance publications; further grant records only through lawful access",
+          "question": "What was delivered and how did the institutions characterize or govern the route?",
+          "availability": "Some public records available; full grant administration may be inaccessible"
+        }
+      ],
+      "kill_criteria": [
+        "The claimed delivery leg lacks an actual recipient/attachment match.",
+        "The proposed hidden purpose was expressly authorized and described.",
+        "A purported novel claim is already documented in existing reporting; redirect to an explanatory dossier or distinct follow-up."
+      ],
+      "novelty_note": "Parent exact-search results in novelty-1.txt include DropSite coverage of the Pakistan/Nikolic channel and the same EFTA00962456 anchor. No new novelty search or weighted score was performed here.",
+      "additional_full_quote_reviews": [
+        {
+          "finding_id": 13375,
+          "all_stored_quotes_read": true,
+          "source_quote_count": 2,
+          "claim_type": "synthesis",
+          "verification_status": "verified",
+          "relations": []
+        },
+        {
+          "finding_id": 13380,
+          "all_stored_quotes_read": true,
+          "source_quote_count": 1,
+          "claim_type": "direct_quote",
+          "verification_status": "verified",
+          "relations": []
+        },
+        {
+          "finding_id": 13464,
+          "all_stored_quotes_read": true,
+          "source_quote_count": 0,
+          "claim_type": "synthesis",
+          "verification_status": "unverified",
+          "relations": []
+        },
+        {
+          "finding_id": 13707,
+          "all_stored_quotes_read": true,
+          "source_quote_count": 0,
+          "claim_type": "synthesis",
+          "verification_status": "unverified",
+          "relations": [
+            {
+              "id": 447,
+              "from_finding_id": 13707,
+              "to_finding_id": 13524,
+              "relation_type": "supersedes",
+              "assessment": "Primary 990-PF returns supersede the local-index negative: Gratitude reported IPI USD 375K (2017) + USD 150K (2019)",
+              "created_by": "claude-orch-w2",
+              "created_at": "2026-07-15 08:06:06"
+            },
+            {
+              "id": 446,
+              "from_finding_id": 13524,
+              "to_finding_id": 13707,
+              "relation_type": "contradicts",
+              "assessment": "Factually wrong: Gratitude America Ltd DID report IPI as a grantee — 2017 Form 990-PF Part XV reports IPI USD 375,000 and 2019 reports USD 150,000 (primary IRS scans, SHA-256 verified, finding 13707). The apparent absence was a local bulk-index coverage gap (missing TY2017/2019), not a donor-side silence.",
+              "created_by": "claude-orch-w2",
+              "created_at": "2026-07-15 08:06:06"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "candidate_id": "allbirds-staged-financing",
+      "profile_id": "allbirds",
+      "recommendation": "merge",
+      "title": "Allbirds/Smartbird: financing capacity, actual closings and contingent investor rights",
+      "readiness_1_to_5": 4,
+      "risk_level": "medium",
+      "readiness_reason": "The agreements and contemporaneous filings sustain a precise financing explainer. A current filing/closing/waiver refresh is the decisive pre-draft check; the packet’s negative filing evidence stops July15. Claims about investor identity, realized conversion, shorting, default enforcement or actual proceeds remain materially less ready.",
+      "draft_now": {
+        "neutral_dossier": true,
+        "article": "A dated terms-and-funding explainer can be drafted with gross purchase-price arithmetic clearly separated from net cash and unused capacity. A scheme/shorting/default-enforcement article needs new evidence.",
+        "publication_clearance": false
+      },
+      "bounded_thesis": "The announced note capacity exceeded the principal documented as sold; discounted, optional financing and registration/default provisions allocate risks differently from a fully funded fixed-price investment.",
+      "anchors": [
+        {
+          "finding_id": 13763,
+          "proposition_reviewed": "The initial closing issued $3.25m principal on April19 to one investor.",
+          "claim_type": "direct_quote",
+          "verification_status": "verified",
+          "source_family": "Issuer SEC filings",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "The full stored 10-Q and FormD quotes support the date and principal/investor count. Both are issuer-origin disclosures, not independent confirmation of net cash.",
+          "references": [
+            "SEC:0001628280-26-035302:10-Q",
+            "SEC:0001653909-26-000008:FORM-D"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        },
+        {
+          "finding_id": 12227,
+          "proposition_reviewed": "The initial $3.25m and June4 $5m sales total $8.25m principal; at $950 per $1,000, contractual purchase price is $7.8375m before deductions.",
+          "claim_type": "synthesis",
+          "verification_status": "unverified",
+          "source_family": "Filed securities-purchase agreement and issuer closing disclosure",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "Purchase-price ratio and June4 principal are directly quoted; the initial amount is independently anchored in13763. Arithmetic checks. This is not an audited net-cash-receipt total.",
+          "references": [
+            "SEC:0001193125-26-164338:EX-10.1",
+            "SEC:0001628280-26-042166"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        },
+        {
+          "finding_id": 12229,
+          "proposition_reviewed": "An amendment increased the maximum principal capacity from $50m to $100m.",
+          "claim_type": "synthesis",
+          "verification_status": "unverified",
+          "source_family": "Filed amendment and issuer disclosure",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "The amendment text supports the capacity change. The $91.75m residual is an as-of arithmetic result dependent on no intervening closing; the stored quote of $41.75m is the earlier capacity context, not proof of current available funds.",
+          "references": [
+            "SEC:0001193125-26-273417:EX-10.1",
+            "SEC:0001628280-26-042166"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        },
+        {
+          "finding_id": 13764,
+          "proposition_reviewed": "The RRA uses a15-calendar-day filing deadline with an alternative form if S-3 is unavailable.",
+          "claim_type": "synthesis",
+          "verification_status": "verified",
+          "source_family": "Filed registration-rights agreement",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "The stored clause and April19 closing support a May4 filing-date calculation. The summarized June3 effectiveness deadline is not quoted in this finding; reopen the definition before using it.",
+          "references": [
+            "SEC:0001193125-26-164338:EX-10.3",
+            "SEC:0001628280-26-035302:10-Q"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        },
+        {
+          "finding_id": 13767,
+          "proposition_reviewed": "The RRA provides2% registration-delay payments on stated events and30-day anniversaries.",
+          "claim_type": "direct_quote",
+          "verification_status": "verified",
+          "source_family": "Filed registration-rights agreement",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "The stored quote supports the conditional formula. It does not establish accrued liabilities, actual payments, applicability of exceptions or absence of waivers.",
+          "references": [
+            "SEC:0001193125-26-164338:EX-10.3"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        },
+        {
+          "finding_id": 13768,
+          "proposition_reviewed": "The note sets conditional registration-default provisions,17% interest and a125%-based redemption formula.",
+          "claim_type": "direct_quote",
+          "verification_status": "verified",
+          "source_family": "Filed convertible-note form",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "The quoted terms support conditional rights, not exercised remedies. IMPORTANT:125% of conversion amount is a25% uplift component, not a125% premium; the detail also says the greater market-based formula may apply. The summary wording must be corrected in editorial prose.",
+          "references": [
+            "SEC:0001193125-26-164338:EX-10.2"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        },
+        {
+          "finding_id": 13771,
+          "proposition_reviewed": "The stored EDGAR inventory found no qualifying resale filing through July15.",
+          "claim_type": "synthesis",
+          "verification_status": "verified",
+          "source_family": "SEC filing-index inventory plus issuer ATM supplements",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "Bounded inventory result, not a quote from an original legal instrument. It supersedes12219/12224 and requires refresh for any later as-of claim. The ATM quotations help exclude false positives.",
+          "references": [
+            "SEC:0001193125-26-267754:424B5",
+            "SEC:0001653909-26-000005:424B5",
+            "SEC:CIK0001653909-SUBMISSIONS-2026-07-15"
+          ],
+          "relations": [
+            {
+              "id": 460,
+              "from_finding_id": 13771,
+              "to_finding_id": 12219,
+              "relation_type": "supersedes",
+              "assessment": "Finding 13771 extends the live EDGAR cutoff from July 11 to July 15, distinguishes the two issuer ATM 424B5s, and is publication-verified with full allbirds/global-thread-61 scope.",
+              "created_by": "codex-filing-55729-20260715",
+              "created_at": "2026-07-15 08:52:31"
+            },
+            {
+              "id": 461,
+              "from_finding_id": 13771,
+              "to_finding_id": 12224,
+              "relation_type": "supersedes",
+              "assessment": "Finding 13771 updates the cutoff to July 15, inventories all alternative registration forms, and adds exact ATM false-positive evidence; finding 12224 is retained for audit history.",
+              "created_by": "codex-filing-55729-20260715",
+              "created_at": "2026-07-15 08:52:55"
+            }
+          ],
+          "original_source_document_reopened": false
+        }
+      ],
+      "independence": "SPA, note, RRA, FormD,10-Q and amendment are predominantly one issuer/transaction evidence family even though SEC holds them. They support a public-document terms explainer. Other Chardan issuers are separate comparison transactions but do not corroborate BIRD’s investor identity or conduct. The strict independent-source gate for an investor-misconduct thesis is not satisfied by counting filings.",
+      "counterevidence": [
+        {
+          "finding_id": 12236,
+          "point": "The synthesis explicitly does not establish note conversion, resale, borrowing/shorting or ATW identity."
+        },
+        {
+          "finding_id": 12218,
+          "point": "A rare drafting phrase and shared counsel can reflect recycled documents, not an identified counterparty."
+        },
+        {
+          "finding_ids": [
+            12232,
+            12233,
+            12234
+          ],
+          "point": "KIDZ uses a different disclosed investor; HYPD/ZOOZ are fixed-price PIPE comparators, not identical floating-note structures."
+        },
+        {
+          "finding_ids": [
+            10547,
+            10548,
+            10549,
+            10550
+          ],
+          "point": "Early insider-sale summaries describe mandatory RSU tax withholding/quarterly pattern; these older rows lack evidence refs in this packet and cannot support a discretionary-trading accusation."
+        }
+      ],
+      "best_innocent_explanation": "A distressed issuer can use expensive staged capital to preserve optionality while selling a loss-making business. A higher ceiling is financing capacity rather than a promise of immediately funded cash. Reused legal drafting, routine vesting, private waivers or amendments can explain apparent patterns without a coordinated trading scheme.",
+      "not_established": [
+        "ATW is the BIRD buyer.",
+        "The full announced capacity was funded.",
+        "The calculated contractual purchase price equals net cash received.",
+        "Registration delay payments accrued or remedies were exercised.",
+        "A125% redemption factor means a125% uplift.",
+        "Investors converted, sold, borrowed or shorted shares."
+      ],
+      "pre_draft_check": "Refresh the complete SEC submissions/closing/amendment record after July15 and inspect the full RRA/note definitions, waivers and exceptions; replace obsolete negative-result assertions and the125%-premium wording.",
+      "killer_next_check": "A buyer-naming resale registration, applicable public financing statement/assignment, or subsequently filed waiver/conversion document can resolve identity and operative terms. Absent an actual BIRD-specific connection, terminate the ATW attribution line; do not promote a template match.",
+      "workstreams": [
+        "Capacity versus executed closings versus net proceeds.",
+        "Contractual rights, waivers and observed registration compliance.",
+        "Investor identity and actual share issuance/resale, separated from template analogues."
+      ],
+      "next_records": [
+        {
+          "record": "Full updated EDGAR submission list plus latest10-Q/8-K and exhibits",
+          "path": "CIK0001653909, including any records after2026-07-15",
+          "question": "What principal was actually sold and what operative terms changed?",
+          "availability": "Public"
+        },
+        {
+          "record": "Resale registration and selling-stockholder table, or documented filing waiver",
+          "path": "CIK0001653909 S-1/S-3/424B and agreement exhibits",
+          "question": "Who is the investor and were registration rights waived or enforced?",
+          "availability": "Public if filed; private waivers may remain inaccessible"
+        },
+        {
+          "record": "Relevant Delaware UCC financing statement/assignment and any conversion/share reconciliation",
+          "path": "Official Delaware corporate-lien records and subsequent issuer filings",
+          "question": "Does a direct BIRD record identify the secured party or establish actual conversion?",
+          "availability": "Official search may require a fee; not acquired here"
+        }
+      ],
+      "kill_criteria": [
+        "Later filings eliminate the claimed funding/registration gap.",
+        "A disclosed investor contradicts the ATW attribution.",
+        "Waivers or exceptions defeat the claimed default/remedy consequence.",
+        "Actual share records do not support conversion/resale/shorting allegations."
+      ],
+      "excluded_findings": [
+        12222,
+        12223,
+        12226
+      ],
+      "additional_full_quote_reviews": [
+        {
+          "finding_id": 12218,
+          "all_stored_quotes_read": true,
+          "source_quote_count": 1,
+          "claim_type": "synthesis",
+          "verification_status": "unverified",
+          "relations": []
+        },
+        {
+          "finding_id": 12219,
+          "all_stored_quotes_read": true,
+          "source_quote_count": 3,
+          "claim_type": "synthesis",
+          "verification_status": "verified",
+          "relations": [
+            {
+              "id": 460,
+              "from_finding_id": 13771,
+              "to_finding_id": 12219,
+              "relation_type": "supersedes",
+              "assessment": "Finding 13771 extends the live EDGAR cutoff from July 11 to July 15, distinguishes the two issuer ATM 424B5s, and is publication-verified with full allbirds/global-thread-61 scope.",
+              "created_by": "codex-filing-55729-20260715",
+              "created_at": "2026-07-15 08:52:31"
+            }
+          ]
+        },
+        {
+          "finding_id": 12224,
+          "all_stored_quotes_read": true,
+          "source_quote_count": 2,
+          "claim_type": "synthesis",
+          "verification_status": "verified",
+          "relations": [
+            {
+              "id": 461,
+              "from_finding_id": 13771,
+              "to_finding_id": 12224,
+              "relation_type": "supersedes",
+              "assessment": "Finding 13771 updates the cutoff to July 15, inventories all alternative registration forms, and adds exact ATM false-positive evidence; finding 12224 is retained for audit history.",
+              "created_by": "codex-filing-55729-20260715",
+              "created_at": "2026-07-15 08:52:55"
+            }
+          ]
+        },
+        {
+          "finding_id": 12236,
+          "all_stored_quotes_read": true,
+          "source_quote_count": 1,
+          "claim_type": "synthesis",
+          "verification_status": "unverified",
+          "relations": []
+        }
+      ]
+    },
+    {
+      "candidate_id": "curaleaf-cash-governance-boundaries",
+      "profile_id": "curaleaf",
+      "recommendation": "merge",
+      "title": "Curaleaf: documented control architecture and the limits of public cash tracing",
+      "readiness_1_to_5": 3,
+      "risk_level": "high",
+      "readiness_reason": "The current till-to-bank-to-treasury mechanism is investigation-ready, not an established improper-flow story: no complete transaction join exists. A separate narrow neutral governance/controls dossier is nearer draftable (4) because executed rights and public regulator records are already identified.",
+      "alternate_scope_readiness": {
+        "scope": "Lifebrook voting/economic rights and public governance approvals",
+        "readiness_1_to_5": 4,
+        "pre_draft_check": "Verify the full shareholders/protection agreements, especially casting-vote/proxy clauses absent from the stored15023 quotation, and preserve entity-layer distinctions."
+      },
+      "draft_now": {
+        "neutral_dossier": true,
+        "article": "A bounded governance/control-map explainer is supportable. A till-to-bank-to-offshore diversion article is not supported and needs transaction-level research.",
+        "publication_clearance": false
+      },
+      "bounded_thesis": "Public agreements and regulator records describe split voting/economic rights, lender account controls and authorized subsidiary debt-service pathways. Those legal permissions and aggregate accounts do not show an improper cash flow or prove the effectiveness/ineffectiveness of nonpublic reconciliation.",
+      "anchors": [
+        {
+          "finding_id": 15021,
+          "proposition_reviewed": "The filed Protection Agreement places999 ClassB nonvoting shares with Holdings and one ClassA voting share with Lifebrook.",
+          "claim_type": "direct_quote",
+          "verification_status": "verified",
+          "source_family": "Executed issuer/investor Protection Agreement",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "Directly supported by the stored clause; this is the agreement’s stated capitalization as of its date.",
+          "references": [
+            "SEC:CIK1756770:0001104659-23-127214:EX-99.7"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        },
+        {
+          "finding_id": 15023,
+          "proposition_reviewed": "The shareholders agreement allocates four board seats2+1+1.",
+          "claim_type": "paraphrase",
+          "verification_status": "verified",
+          "source_family": "Executed shareholders agreement",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "PARTIAL: the stored quote proves seat designations. It does not quote the chair/casting vote, nominee approval or irrevocable proxy claimed in the summary/detail.",
+          "references": [
+            "SEC:CIK1756770:0001104659-23-127214:EX-99.8"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        },
+        {
+          "finding_id": 15028,
+          "proposition_reviewed": "Certain actions require Holdings’ prior written consent.",
+          "claim_type": "paraphrase",
+          "verification_status": "verified",
+          "source_family": "Executed Protection Agreement",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "PARTIAL: the excerpt supports a consent requirement but replaces the affected actions with a bracketed description. Quote the actual action list before describing its breadth.",
+          "references": [
+            "SEC:CIK1756770:0001104659-23-127214:EX-99.7"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        },
+        {
+          "finding_id": 15013,
+          "proposition_reviewed": "Nevada approved the Lifebrook-related transfer request for the TSX restructuring and staff reported no concern in that review.",
+          "claim_type": "direct_quote",
+          "verification_status": "unverified",
+          "source_family": "Nevada Cannabis Compliance Board meeting minutes",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "Directly supported, narrowly limited to that transfer. Do not present as universal compliance approval.",
+          "references": [
+            "https://ccb.nv.gov/wp-content/uploads/2023/12/CCB-Meeting-Minutes-10.24.2023.pdf"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        },
+        {
+          "finding_id": 15269,
+          "proposition_reviewed": "Needham account terms centralize covered accounts, reserve exceptions and give the lender viewing rights; Loan Parties retain access before default.",
+          "claim_type": "direct_quote",
+          "verification_status": "verified",
+          "source_family": "Filed bank loan agreement",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "The full stored clauses support these contractual duties, not actual store-day execution or routine lender sweeps.",
+          "references": [
+            "SEC-0001756770-26-000021-EX99.2"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        },
+        {
+          "finding_id": 15289,
+          "proposition_reviewed": "The indenture allows restricted subsidiaries to pay debt-service amounts in place of the issuer.",
+          "claim_type": "paraphrase",
+          "verification_status": "verified",
+          "source_family": "Filed indenture and noteholder circular",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "Directly supported as legal permission. It does not identify an actual payer, source account, retail deposit or ultimate holder payment.",
+          "references": [
+            "CSE:CURA:2023-MANAGEMENT-INFORMATION-CIRCULAR",
+            "SEC:CIK1756770:0001104659-23-127214:EX99.5",
+            "SEC:CIK1756770:0001756770-26-000021:EX99.1",
+            "SEC:CIK1756770:0001756770-26-000021:EX99.1#section2.6",
+            "SEC:CIK1756770:0001756770-26-000021:EX99.1#section6.5",
+            "SEC:CIK1756770:0001756770-26-000021:EX99.1#sections2.14-2.15"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        },
+        {
+          "finding_id": 15291,
+          "proposition_reviewed": "The note collateral excludes ordinary cash/deposit accounts, subject to exceptions.",
+          "claim_type": "paraphrase",
+          "verification_status": "verified",
+          "source_family": "Filed indenture collateral provisions",
+          "all_stored_source_quotes_read": true,
+          "quote_support_assessment": "The quoted exclusions directly limit an automatic operating-account-sweep interpretation.",
+          "references": [
+            "SEC:CIK1756770:0001756770-26-000021:EX99.1#excluded-property",
+            "SEC:CIK1756770:0001756770-26-000021:EX99.1#section13.4"
+          ],
+          "relations": [],
+          "original_source_document_reopened": false
+        }
+      ],
+      "independence": "Executed contracts are one transaction family; issuer filings repeating them are not added corroboration. Nevada/Massachusetts regulator records and UK registry particulars are separate primary origins. An applicant chart hosted by Utah is still applicant-authored and is not an approval (its approval fields are blank). Independent audit opinions address ICFR, not every criminal predicate or transaction. Analysis-run151 is a synthesis, not a new primary family.",
+      "counterevidence": [
+        {
+          "finding_id": 15009,
+          "point": "Massachusetts closed its Abramovich-lending/control investigation after reviewing documents and finding no undisclosed controlling/ownership interest under its definitions. This is a narrow regulatory conclusion, neither a finding of illicit finance nor universal exoneration."
+        },
+        {
+          "finding_id": 15087,
+          "point": "The Massachusetts/Nevada labels classify different rights at different entity layers and thresholds; they do not establish conflicting control rulings."
+        },
+        {
+          "finding_id": 15262,
+          "point": "Historical material weaknesses were reported remediated in2023 and the independent auditor opined ICFR effective at2025 year-end. Do not present the old adverse opinion as current."
+        },
+        {
+          "finding_id": 15280,
+          "point": "The six-state review found inventory/timing/custody issues but no public record proving bank deposits unsupported by sales; nonpublic records may exist."
+        },
+        {
+          "finding_id": 15311,
+          "point": "No recurring2025 ratio crossed the chosen small-peer outlier screen. This is a descriptive heuristic, not a statistical-significance or transaction-level innocence finding."
+        },
+        {
+          "finding_id": 15312,
+          "point": "The H1 2026 debt-service outlier coincides with disclosed refinancing: $426.511m new-note proceeds, $361.268m principal payments and a $142.202m noncash exchange. This is a concrete ordinary explanation, not proof of hidden extraction."
+        },
+        {
+          "finding_id": 15314,
+          "point": "Cash at stores and restricted payment options recur across peers and are not a Curaleaf-specific suspicious signal."
+        },
+        {
+          "finding_id": 15315,
+          "point": "The synthesis explicitly says no completed store-to-bank-to-treasury join exists. Missing public observability establishes neither unsupported deposits nor effective end-to-end control."
+        }
+      ],
+      "best_innocent_explanation": "Legitimate cannabis receipts may reconcile through nonpublic POS, regulator, bank and auditor controls. Different jurisdictions classify rights differently. Acquisition finance, refinancing and permitted subsidiary debt service can explain aggregate flows without unrelated cash or concealed beneficiaries.",
+      "not_established": [
+        "Unrelated cash was introduced as sales.",
+        "A control exception produced an unsupported bank deposit.",
+        "Retail cash reached a related/offshore lender through a traced chain.",
+        "The Lifebrook structure was a sham or violated listing/licensing rules.",
+        "Public fragmentation means no institution performs end-to-end reconciliation.",
+        "Generic cash handling or debt-service ratios establish laundering."
+      ],
+      "pre_draft_check": "For the neutral governance dossier, inspect full contractual clauses and entity-layer maps. For the cash hypothesis, do not write a completed-mechanism article from permission diagrams or aggregate balances.",
+      "killer_next_check": "Obtain one lawfully accessible, risk-selected store-day reconciliation packet linking POS tender, seed-to-sale/inventory adjustments, physical custody, bank credit and tax reporting, especially during a documented exception. A fully explained join kills that claimed anomaly; no bank-effect record means the stronger allegation remains unsupported.",
+      "workstreams": [
+        "Governance rights and regulator definitions by legal entity.",
+        "Store-to-bank reconciliation and exception closure.",
+        "Specific debt-service/refinancing payments and ultimate recipients."
+      ],
+      "next_records": [
+        {
+          "record": "Full executed shareholders/protection agreements and applicable regulator transfer approval",
+          "path": "SEC accession0001104659-23-127214 exhibits99.7/99.8 and identified state approval records",
+          "question": "What actual rights and thresholds were approved at each entity layer?",
+          "availability": "Public agreements and minutes identified; complete approval file may require request"
+        },
+        {
+          "record": "Store-day reconciliation and exception closure package",
+          "path": "Lawfully released state inspection/enforcement material or authorized records; no unauthorized bank or POS access",
+          "question": "Is any bank credit unsupported after timing, returns, custody and inventory explanations?",
+          "availability": "Often confidential, exempt or nonpublic; no access assumed"
+        },
+        {
+          "record": "Refinancing closing statement, paying-agent/trustee ledger and source/destination payment evidence",
+          "path": "Public issuer/trustee filings or records available through a lawful disclosure channel",
+          "question": "Do actual new-note proceeds settle the disclosed retired obligations without a different material route?",
+          "availability": "Aggregate filings public; transaction ledgers may be unavailable"
+        }
+      ],
+      "kill_criteria": [
+        "A reconciled store-day packet explains the alleged excess cash.",
+        "Actual refinancing payments match the stated debt retirement mechanics.",
+        "Complete governance/approval records show the alleged control inconsistency was a layer/definition mismatch.",
+        "No direct transaction evidence connects the proposed origin and destination; do not turn an access gap into a misconduct finding."
+      ],
+      "additional_full_quote_reviews": [
+        {
+          "finding_id": 15009,
+          "all_stored_quotes_read": true,
+          "source_quote_count": 2,
+          "claim_type": "direct_quote",
+          "verification_status": "unverified",
+          "relations": []
+        },
+        {
+          "finding_id": 15012,
+          "all_stored_quotes_read": true,
+          "source_quote_count": 1,
+          "claim_type": "direct_quote",
+          "verification_status": "unverified",
+          "relations": []
+        },
+        {
+          "finding_id": 15087,
+          "all_stored_quotes_read": true,
+          "source_quote_count": 4,
+          "claim_type": "synthesis",
+          "verification_status": "unverified",
+          "relations": []
+        },
+        {
+          "finding_id": 15262,
+          "all_stored_quotes_read": true,
+          "source_quote_count": 5,
+          "claim_type": "synthesis",
+          "verification_status": "verified",
+          "relations": []
+        },
+        {
+          "finding_id": 15280,
+          "all_stored_quotes_read": true,
+          "source_quote_count": 6,
+          "claim_type": "synthesis",
+          "verification_status": "verified",
+          "relations": []
+        },
+        {
+          "finding_id": 15311,
+          "all_stored_quotes_read": true,
+          "source_quote_count": 5,
+          "claim_type": "synthesis",
+          "verification_status": "verified",
+          "relations": []
+        },
+        {
+          "finding_id": 15312,
+          "all_stored_quotes_read": true,
+          "source_quote_count": 5,
+          "claim_type": "synthesis",
+          "verification_status": "verified",
+          "relations": []
+        },
+        {
+          "finding_id": 15314,
+          "all_stored_quotes_read": true,
+          "source_quote_count": 6,
+          "claim_type": "synthesis",
+          "verification_status": "verified",
+          "relations": []
+        },
+        {
+          "finding_id": 15315,
+          "all_stored_quotes_read": true,
+          "source_quote_count": 1,
+          "claim_type": "synthesis",
+          "verification_status": "verified",
+          "relations": []
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "A packet may quote less than the proposition in its finding summary. Partial-support flags are material, not cosmetic.",
+    "Missing original-header/page review is explicitly recorded; this report is not a primary-document authentication or publication clearance.",
+    "Evidence summaries, analytical inventories, reference-only records and repeated filing families are not independent corroboration.",
+    "No database, content, Git, profile, queue, or research state was modified. Outputs only in the assigned temporary workdir."
+  ]
+}

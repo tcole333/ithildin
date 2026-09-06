@@ -189,7 +189,6 @@ CMS Physician & Other Practitioners spending data. Searches by provider name or 
 ```bash
 uv run python tools/query_medicare.py search "Enkeshafi"
 uv run python tools/query_medicare.py provider 1003000126
-uv run python tools/query_medicare.py stats
 ```
 
 **Known quirks:** CMS API filtering is often exact-match or prefix-based. Last name searches must be uppercase. NPI searches are numeric-only. Default dataset is 2023.

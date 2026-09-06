@@ -6,10 +6,11 @@ on:
       - ".claude/skills/**"
       - ".claude/commands/**"
       - ".codex/skills/**"
+      - ".agents/**"
       - "docs/**"
       - "research/**"
-      - "scripts/validate_skills.py"
-      - "scripts/lint_agent_docs.sh"
+      - "scripts/**"
+      - "tools/**"
   push:
     branches:
       - main
@@ -17,10 +18,11 @@ on:
       - ".claude/skills/**"
       - ".claude/commands/**"
       - ".codex/skills/**"
+      - ".agents/**"
       - "docs/**"
       - "research/**"
-      - "scripts/validate_skills.py"
-      - "scripts/lint_agent_docs.sh"
+      - "scripts/**"
+      - "tools/**"
 
 jobs:
   lint-agent-docs:
@@ -33,12 +35,4 @@ jobs:
         uses: astral-sh/setup-uv@v5
 
       - name: Run validator
-        run: |
-          uv run python scripts/validate_skills.py \
-            --workspace "$GITHUB_WORKSPACE" \
-            --skills-dir "$GITHUB_WORKSPACE/.claude/skills" \
-            --skills-dir "$GITHUB_WORKSPACE/.codex/skills" \
-            --commands-dir "$GITHUB_WORKSPACE/.claude/commands" \
-            --docs-dir "$GITHUB_WORKSPACE/docs" \
-            --docs-dir "$GITHUB_WORKSPACE/research" \
-            --strict
+        run: bash scripts/lint_agent_docs.sh --strict

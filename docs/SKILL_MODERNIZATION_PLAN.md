@@ -49,9 +49,10 @@ The prior review compared all 36 skills / 69 variants. Current guidance: [OpenAI
 
 ## Results
 
-All eight units are implemented and committed on the owned workstream branch.
-The original checkout and personal skill installations were preserved. This
-branch has not been merged or pushed.
+All eight units were implemented and committed on the owned workstream branch.
+The original checkout and personal skill installations were preserved. The
+following records the initial implementation handoff; subsequent integration
+checks are recorded in the merge PR and its CI results.
 
 ### Resulting behavior
 
@@ -94,7 +95,7 @@ branch has not been merged or pushed.
 The final documentation commit adds the integration results and small paired
 clarifications on full methodology-review coverage and useful parallelism.
 
-### Validation and independent review
+### Validation and independent review at implementation handoff
 
 - **459 tests passed** in the combined affected Python suite across 36 files
   with the repository's offline network guard. Three edgartools dependency
@@ -126,11 +127,13 @@ explains how to use the revised packages.
 
 ### Retained limits and follow-up
 
-1. The 34 static warnings are 17 occurrences per runtime across six dynamic
+1. At initial handoff, 34 static warnings were 17 occurrences per runtime across six dynamic
    CLIs: USASpending, SAM, UK company ingestion, property, state courts and
-   California. The linter reports partial contracts; strict mode correctly
-   fails them. Parser-focused coverage/schema extraction can close these gaps.
-   Static success does not establish network health or custom value semantics.
+   California. Integration subsequently expanded safe declaration inspection
+   and separated unknown interface shapes from unexecuted custom value checks.
+   Unknown shapes still fail strict mode; static success does not establish
+   network health or custom value semantics. See the integration validation
+   record in the merge PR for the full documentation/CI scope and final results.
 2. Personal skill copies still exist. Inventory/backup protects differing user
    content; deliberate retirement can follow integration. An already-running
    chat can retain an earlier skill inventory. No temporary worktree link was

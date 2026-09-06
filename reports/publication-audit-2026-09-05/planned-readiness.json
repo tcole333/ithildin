@@ -1,0 +1,303 @@
+{
+  "cutoff_utc": "2026-09-06T01:11:55.470934+00:00",
+  "scope": "Bounded editorial readiness review of three existing plans, maximum five selected primary record anchors per plan. No web searches, external requests, publication approval, canonical writes or article drafting. Newness and current legal/market context remain unassessed. Source quotations are stored evidence; verification_status is the frozen database value, not a new reviewer endorsement.",
+  "plans": [
+    {
+      "cluster": "apollo-money-pipeline",
+      "verdict": "Enough substance for a narrowed first draft; monetary thesis needs reconciliation",
+      "proposed_thesis": "How Black\u2019s family office, professional advisers and bank channels documented their dealings with Epstein\u2014and where the Apollo corporate boundary actually lay.",
+      "existing_headline_status": "Do not retain \u201c$158M+ from 3 billionaires\u201d as an established mechanism without payer/category reconciliation. No evidence here establishes three Apollo founders retained Epstein.",
+      "cluster_db_statuses": {
+        "unverified": 971,
+        "verified": 21,
+        "retracted": 7,
+        "disputed": 1
+      },
+      "anchors": [
+        {
+          "finding_id": 13160,
+          "verification_status": "verified",
+          "source_ref": "EFTA01084756",
+          "source_quote": "You and STC further agree that you have been retained to assist Mr. Black's lawyers, Paul, Weiss, Rifkind, Wharton & Garrison LLP and McDermott, Will, & Emery, in providing legal advice to Mr. Black in connection with the Estate Planning.",
+          "supports": "A formal estate-planning retention, with the lawyers as the stated assistance context.",
+          "limitation": "Other pages identify Halperin and Schneider as contacts; do not substitute Karp or claim this establishes personal representation of Epstein.",
+          "corrections": [],
+          "relations": [
+            {
+              "id": 389,
+              "from_finding_id": 13160,
+              "to_finding_id": 10523,
+              "relation_type": "refines",
+              "assessment": "The formal 2013 agreement retained Epstein/Southern Trust to assist Paul, Weiss and McDermott on Black's estate planning; it does not by itself establish that Paul, Weiss represented Epstein personally.",
+              "created_by": "karp_crossprofile_audit",
+              "created_at": "2026-07-14 17:54:43"
+            }
+          ]
+        },
+        {
+          "finding_id": 13204,
+          "verification_status": "verified",
+          "source_ref": "EFTA00621341",
+          "source_quote": "1,979,761.41 (706,603.94) 1,273,157.47",
+          "supports": "An invoice summary distinguishes total bills, payments and outstanding balance for Black legal work.",
+          "limitation": "These are law-firm billings, not Epstein payments; no timekeeper allocation. Local corpus table inspected; predecessor F13198 was retracted over a noncontinuous quote.",
+          "corrections": [],
+          "relations": []
+        },
+        {
+          "finding_id": 1576,
+          "verification_status": "unverified",
+          "source_ref": "EFTA01385659",
+          "source_quote": "3/31/17 - $22,500,000 Incoming Wire from BV70 LLC",
+          "supports": "A specific bank wire inquiry provides payer, date, amount and the bank\u2019s questions.",
+          "limitation": "The actual local document says the wire was flagged \u201cby our auditors at random\u201d; it does not establish suspicion was the trigger or that every claim in the broad finding is supported.",
+          "corrections": [
+            {
+              "field_name": "confidence",
+              "reason": "Confidence calibration: paraphrase claim_type has max confidence 'high', was 'confirmed'",
+              "created_at": "2026-02-17 03:45:02"
+            },
+            {
+              "field_name": "date_of_event",
+              "reason": "Date extracted from summary text (matched: '3/31/2017')",
+              "created_at": "2026-02-17 04:11:45"
+            }
+          ],
+          "relations": []
+        },
+        {
+          "finding_id": 1583,
+          "verification_status": "unverified",
+          "source_ref": "EFTA00027019",
+          "source_quote": "EXHIBIT A: LEON BLACK / ROTHSCHILD GROUP TRANSACTIONS",
+          "supports": "A transaction table identifies named payers, recipients, dates and Bates sources.",
+          "limitation": "The headline sum mixes payment categories and both directions; the old finding\u2019s attribution to Dechert is not established by the table header itself.",
+          "corrections": [
+            {
+              "field_name": "confidence",
+              "reason": "Confidence calibration: paraphrase claim_type has max confidence 'high', was 'confirmed'",
+              "created_at": "2026-02-17 03:45:02"
+            },
+            {
+              "field_name": "date_of_event",
+              "reason": "Date extracted from summary text (matched: '10/15/2013')",
+              "created_at": "2026-02-17 04:11:45"
+            }
+          ],
+          "relations": []
+        },
+        {
+          "finding_id": 13156,
+          "verification_status": "verified",
+          "source_ref": "https://www.sec.gov/Archives/edgar/data/1411494/000119312521016405/d118102dex991.htm",
+          "source_quote": "Dechert has seen no evidence of any other Apollo executive ever retaining Epstein for his services.",
+          "supports": "Required counterevidence to the three-founders/corporate-Apollo version.",
+          "limitation": "An Apollo-commissioned investigation filed with the SEC is an attributed primary account, not independent adjudication.",
+          "corrections": [],
+          "relations": []
+        }
+      ],
+      "primary_record_review": "Read full available local OCR for invoice, wire inquiry and transaction table; read frozen database source quotations for retainer and SEC-filed Dechert report. Exact retainer page was not found under its individual ID in the local Kabass table; preserve that retrieval gap.",
+      "required_corrections": [
+        "F1583 table has 21 rows summing to $201,999,980, but includes a $10,000,000 Plan D-to-BV70 repayment. Gross inflows to Epstein entities are $191,999,980; net after that repayment is $181,999,980. These remain a selected exhibit, not lifetime fee totals.",
+        "The table includes $24,999,980 from Rothschild-named payers and mixes charitable transfers, loans and other payments. Do not count every row as a fee or every payer as an Apollo founder.",
+        "F13209 records \u201cis PW writing for all three guys?\u201d as a question, not proof of representation for all founders. Use current F13156/13204/13210 rather than retracted F13142/13198/13202."
+      ],
+      "overlap": [
+        "Leon Black and Brad Karp dossiers already cover the corrected advisory/fee-dispute framework.",
+        "Parallel Diplomatic Corps already contains Apollo/Black and Gratitude-related material. A new article should center a reconciled Black-specific documentary process, not repeat institutional name adjacency."
+      ],
+      "next_checks": [
+        "Reconcile the exhibit against underlying bank statements and distinguish fees, loans, charitable contributions and repayment.",
+        "Reconcile the separately reported $158M fee figure with its date range and attribution; do not derive it from the $202M mixed-flow exhibit.",
+        "Choose the incremental thesis against the current Leon Black dossier and Parallel Diplomatic Corps."
+      ],
+      "innocent_explanation": "Estate planning, legitimate loan transactions, charitable giving and ordinary professional billing can explain the documented categories without proving illicit purpose.",
+      "kill_criterion": "If the proposed new mechanism is just ordinary advisory work already described in the current dossiers, update those dossiers rather than commissioning a second article.",
+      "deleted_draft": {
+        "commit": "75b34daa5b67d4f52152b972177b5f03c0766460",
+        "date": "2026-02-20",
+        "message": "Deleting to rewrite from scratch."
+      }
+    },
+    {
+      "cluster": "deutsche-bank-plumbing",
+      "verdict": "Enough substance for a bounded monitoring-and-exit chronology; quantitative money-flow article is not yet ready",
+      "proposed_thesis": "The documentary gap between bank monitoring, escalation, account migration and formal closure.",
+      "existing_headline_status": "The \u201c579 transactions / $304M\u201d subtitle is not substantiated by this bounded review and must be rebuilt from deduplicated source records before use.",
+      "cluster_db_statuses": {
+        "unverified": 1061,
+        "verified": 17,
+        "retracted": 4,
+        "disputed": 2
+      },
+      "anchors": [
+        {
+          "finding_id": 13110,
+          "verification_status": "verified",
+          "source_ref": "https://www.dfs.ny.gov/industry_guidance/enforcement_discipline/ea20200706_deutsche_bank",
+          "source_quote": "the Bank's relationship with Jeffrey Epstein and related individuals and entities",
+          "supports": "The official 2020 consent order is the central regulator-authored baseline.",
+          "limitation": "This finding\u2019s quotation is too short for detailed paragraph-level regulatory claims; reread paragraphs 41\u201346 and 57 from the retained/full official order before writing them.",
+          "corrections": [],
+          "relations": []
+        },
+        {
+          "finding_id": 15694,
+          "verification_status": "unverified",
+          "source_ref": "EFTA01421472",
+          "source_quote": "Based on the updated documentation received regarding this trust, we will need to update our KYC on file for the new beneficiaries.",
+          "supports": "A September 2016 Butterfly Trust KYC update request.",
+          "limitation": "A request does not prove whether the response was complete or the control effective. Local full OCR read."
+        },
+        {
+          "finding_id": 15688,
+          "verification_status": "unverified",
+          "source_ref": "EFTA01369428",
+          "source_quote": "She was thinking of doing a review of his accounts and recommending it to reputation risk.",
+          "supports": "An internal March 2017 proposal to review accounts and escalate reputation risk.",
+          "limitation": "Discussion of escalation is not proof of completion or final decision. Local full OCR read."
+        },
+        {
+          "finding_id": 15686,
+          "verification_status": "unverified",
+          "source_ref": "EFTA01353255",
+          "source_quote": "there is no evidence that NIKOLAY ALEKSANDROVICH GYROV is an OFAC SADN.",
+          "supports": "The bank rejected an apparent sanctions name-component match.",
+          "limitation": "Preserve source typo and the negative match result; do not describe the recipient as an established sanctioned person. Local full OCR read.",
+          "corrections": [],
+          "relations": []
+        },
+        {
+          "finding_id": 12463,
+          "verification_status": "unverified",
+          "source_ref": "EFTA01372545",
+          "source_quote": "Butterfly and JE will be closed today. The other accounts have been closed since May, but are still showing active in DB Force.",
+          "supports": "A July 9, 2019 internal closeout instruction and an acknowledged system-status defect.",
+          "limitation": "The same chain says the listed accounts are all $0 balance. This is not proof of new payments or usable services after May. Two other references in F12463 lack quotes. Local full OCR read.",
+          "corrections": [],
+          "relations": [
+            {
+              "id": 236,
+              "from_finding_id": 12464,
+              "to_finding_id": 12463,
+              "relation_type": "corroborates",
+              "assessment": "Butterfly's 5/10 sweep to Fidelity + DB's 7/9 closure of the Butterfly DB account are two ends of the same account migration",
+              "created_by": "orchestrator",
+              "created_at": "2026-07-13 22:29:46"
+            }
+          ]
+        }
+      ],
+      "primary_record_review": "Read four complete local bank-document OCR records plus the frozen database quote and local research description of the official consent order; no external retrieval.",
+      "required_corrections": [
+        "F1603 is retracted because a purported $1,854,228 transfer was a parser/OCR decimal error: the source was EUR15,000 / USD18,542.78. This is a direct reason to audit amounts before summing the old DS10 pool.",
+        "F12465 was retracted for the wrong source ID on a $13M wire; duplicates F1719 and F1739 were consolidated elsewhere. Exclude retracted rows and follow replacement provenance.",
+        "F3639 has a visibly damaged \u201c.77M\u201d amount and relies on secondary reporting without a quote. It must not supply the May balance or imply all accounts remained operational until July."
+      ],
+      "overlap": [
+        "Corporate Shell Network already discusses bank accounts and entity routing.",
+        "Parallel Diplomatic Corps, Gulf Intelligence Web and SoftBank Caper already mention Deutsche Bank. The new contribution needs a control/decision chronology or independently reconciled transaction analysis.",
+        "The 2020 regulator order means a generic \u201cthe bank missed red flags\u201d story is established prior material; fresh novelty is not assessed here."
+      ],
+      "next_checks": [
+        "Rebuild the flow ledger from canonical statements with stable transaction IDs, currency, direction, account and duplicate lineage; reconcile the 579/$304M claims.",
+        "Distinguish balance, operational access, migration date, formal closure and stale UI status in the account timeline.",
+        "Use the official consent order\u2019s precise findings and limitations; separate known regulatory failures from any new, document-specific claim."
+      ],
+      "innocent_explanation": "Some screening matches were false positives; zero-balance accounts and stale account-status software can explain July closeout messages without post-May payments.",
+      "kill_criterion": "Drop the new-story claim if the article adds no supported mechanism beyond the 2020 consent order; retain a source guide or update the existing corporate dossier instead."
+    },
+    {
+      "cluster": "wexner-trust-architecture",
+      "verdict": "Enough documentary substance for a first draft about delegated authority and trust governance; motive/concealment framing is unsupported",
+      "proposed_thesis": "What recorded powers of attorney, SEC ownership disclosures and a trust-governance lawsuit show about Epstein\u2019s formal authority in Wexner structures.",
+      "existing_headline_status": "Replace \u201cusing trusts to obscure beneficial ownership\u201d with a descriptive question about delegated authority. The inspected public filings explicitly disclose authority; they do not prove a purpose to conceal it.",
+      "cluster_db_statuses": {
+        "unverified": 523,
+        "verified": 6,
+        "disputed": 4
+      },
+      "anchors": [
+        {
+          "finding_id": 14638,
+          "verification_status": "verified",
+          "source_ref": "FRANKLIN-RECORDER:199907290192823#p1",
+          "source_quote": "I, LESLIE H. WEXNER ... do hereby constitute and appoint JEFFREY E. EPSTEIN ... my true and lawful attorney-in-fact",
+          "supports": "The recorded instrument establishes an express delegation of authority.",
+          "limitation": "The frozen quote contains ellipses; recover continuous spans from the instrument for publication. Execution was 1991; recording was 1999, which are distinct events.",
+          "corrections": [],
+          "relations": []
+        },
+        {
+          "finding_id": 14638,
+          "verification_status": "verified",
+          "source_ref": "FRANKLIN-RECORDER:200712270220043#p1",
+          "source_quote": "I, LESLIE H. WEXNER, hereby revoke the Power of Attorney made by me on July 30, 1991, appointing JEFFREY E. EPSTEIN",
+          "supports": "A December 2007 recorded revocation bounds the authority period.",
+          "limitation": "Do not infer continued authority or control after revocation without another instrument.",
+          "corrections": [],
+          "relations": []
+        },
+        {
+          "finding_id": 14681,
+          "verification_status": "verified",
+          "source_ref": "https://investors.bbwinc.com/node/8366/html",
+          "source_quote": "Power to vote or direct the disposition of the 2,754,717 shares held by the Wexner Foundation may be deemed to be shared by Leslie H. Wexner, Jeffrey E. Epstein and Jeffrey J. Smith as the trustees.",
+          "supports": "An April 1996 Schedule 13D names the trustees and shared authority over Foundation-held shares.",
+          "limitation": "Shared voting/dispositive authority is not personal economic ownership; keep the Foundation and private trusts distinct.",
+          "corrections": [],
+          "relations": []
+        },
+        {
+          "finding_id": 14682,
+          "verification_status": "verified",
+          "source_ref": "https://investors.bbwinc.com/static-files/f0c0415c-dcfb-451e-9428-3d947568db4d",
+          "source_quote": "Power to vote or direct the disposition of the 1,407,717 shares held by The Wexner Foundation may be deemed to be shared by Leslie H. Wexner and Jeffrey E. Epstein as the trustees.",
+          "supports": "A March 1998 filing provides a later governance/shareholding observation.",
+          "limitation": "Changes in share counts alone do not prove cash movements or a loss; explain corporate actions and dispositions separately.",
+          "corrections": [],
+          "relations": []
+        },
+        {
+          "finding_id": 14663,
+          "verification_status": "verified",
+          "source_ref": "STATECOURT:us-oh-franklin-common-pleas-cio/oh-franklin-common-pleas/95CV004185/docket_entry/franklin%3Adocket%3Acca094dee4379a6770b1471e",
+          "source_quote": "04/03/97 | DISMISSAL BY PLAINTIFF",
+          "supports": "A real Foundation-v.-Bella-Wexner proceeding ended by plaintiff dismissal in 1997.",
+          "limitation": "The docket establishes procedural history, not the allegations, merits or settlement terms. Read the pleadings before characterizing the dispute.",
+          "corrections": [],
+          "relations": [
+            {
+              "id": 589,
+              "from_finding_id": 14663,
+              "to_finding_id": 14656,
+              "relation_type": "refines",
+              "assessment": "Exact-case retrieval adds parties, addresses, counsel, chronology and plaintiff dismissal to the prior index-only record.",
+              "created_by": "agent:deep-investigate:heritage-overlap",
+              "created_at": "2026-08-02 02:41:21"
+            }
+          ]
+        }
+      ],
+      "primary_record_review": "Five record anchors (two recorder instruments, two SEC/issuer filings, one court docket) assessed from actual source quotes in the frozen database. Full underlying pages were not independently re-rendered in this bounded task.",
+      "required_corrections": [
+        "F14647, backed by an affidavit and closing statement, says the townhouse corporate shares were sold for $20M, with $10M cash and a $10M note said to have been repaid; this materially qualifies an unqualified \u201cgift/free mansion\u201d account. Its dollar amounts were repaired after shell expansion.",
+        "F1508\u2019s 7.87M-share Trust600/R.H.R.E.I. assertion has no stored source quote; it should be separately verified against the exact Schedule13D before becoming the numerical spine.",
+        "F14695 concludes the inspected Heritage Village evidence is most consistent with an ordinary capital campaign and property gifts; do not transform that adjacent charity into an illicit trust-flow mechanism. Disputed F2344/F1401 and retracted duplicate F11529 are not load-bearing anchors."
+      ],
+      "overlap": [
+        "Les Wexner and Financial Trust Company already have dossier pages; these need new-source export/curation comparison.",
+        "Corporate Shell Network mentions Wexner, but the existing article inventory suggests considerably less direct overlap than the three diplomatic-cluster plans. A legal-authority/governance narrative can be distinct.",
+        "Recent August findings are absent from the old May cluster/export layer; commission from the current frozen records, not only the existing 533-row cluster JSON."
+      ],
+      "next_checks": [
+        "Read the underlying power-of-attorney/revocation images and quote continuous exact spans, preserving execution/recording dates.",
+        "Read the 1995 complaint and disposition documents to distinguish a governance inference from pleaded claims and resolved facts.",
+        "Verify private-trust ownership/voting figures separately and keep those instruments, the Foundation and townhouse share sale in distinct factual lanes."
+      ],
+      "innocent_explanation": "Broad delegated authority, co-trusteeship and recorded stock transfers can be conventional estate administration; publicly disclosed control alone is not concealment or wrongdoing.",
+      "kill_criterion": "Abandon a concealment/wrongdoing thesis if the additional instruments show ordinary disclosed fiduciary administration; a neutral explainer may still be useful."
+    }
+  ]
+}

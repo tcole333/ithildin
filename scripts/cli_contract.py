@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import ast
+import copy
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -22,6 +23,7 @@ class Unresolved(ValueError):
 class Contract:
     parser: argparse.ArgumentParser | None
     limitations: list[str] = field(default_factory=list)
+    value_constraints: list[str] = field(default_factory=list)
 
 
 class Inspector:
@@ -30,10 +32,14 @@ class Inspector:
         self.script = script
         self.workspace = next((p for p in script.parents if (p / "tools").is_dir() and (p / "scripts").is_dir()), script.parent)
         self.parser_classes = {n.name for n in tree.body if isinstance(n, ast.ClassDef) and any(isinstance(base, ast.Attribute) and isinstance(base.value, ast.Name) and base.value.id == "argparse" and base.attr == "ArgumentParser" for base in n.bases)}
+        self.classes = {n.name: n for n in tree.body if isinstance(n, ast.ClassDef)}
         self.functions = {n.name: n for n in tree.body if isinstance(n, ast.FunctionDef)}
+        self.imports = [node for node in ast.walk(tree) if isinstance(node, ast.ImportFrom) and node.module]
+        self.unresolved_imports: set[str] = set()
         self.constants: dict[str, Any] = {'__doc__': ast.get_docstring(tree) or ''}
         self.parsers: list[argparse.ArgumentParser] = []
         self.limitations: set[str] = set()
+        self.value_constraints: set[str] = set()
         self.active: set[str] = set()
         for node in tree.body:
             if isinstance(node, (ast.Assign, ast.AnnAssign)) and not any(isinstance(part, ast.Call) for part in ast.walk(node)):
@@ -44,6 +50,9 @@ class Inspector:
 
     def note(self, node: ast.AST, detail: str) -> None:
         self.limitations.add(f'line {getattr(node, "lineno", 1)}: {detail}')
+
+    def value_note(self, node: ast.AST, detail: str) -> None:
+        self.value_constraints.add(f'line {getattr(node, "lineno", 1)}: {detail}')
 
     def value(self, node: ast.AST, env: dict) -> Any:
         if isinstance(node, ast.Constant):
@@ -63,34 +72,103 @@ class Inspector:
             if any(key is None for key in node.keys):
                 raise Unresolved('dictionary expansion')
             return {self.value(k, env): self.value(v, env) for k, v in zip(node.keys, node.values)}
+        if isinstance(node, ast.IfExp):
+            return self.value(node.body if self.value(node.test, env) else node.orelse, env)
+        if isinstance(node, ast.Compare):
+            left = self.value(node.left, env)
+            for operation, expression in zip(node.ops, node.comparators):
+                right = self.value(expression, env)
+                if isinstance(operation, ast.Eq):
+                    result = left == right
+                elif isinstance(operation, ast.NotEq):
+                    result = left != right
+                elif isinstance(operation, ast.In):
+                    result = left in right
+                elif isinstance(operation, ast.NotIn):
+                    result = left not in right
+                elif isinstance(operation, ast.Is):
+                    result = left is right
+                elif isinstance(operation, ast.IsNot):
+                    result = left is not right
+                else:
+                    raise Unresolved('comparison operator')
+                if not result:
+                    return False
+                left = right
+            return True
+        if isinstance(node, ast.BoolOp):
+            for expression in node.values:
+                value = self.value(expression, env)
+                if isinstance(node.op, ast.And) and not value or isinstance(node.op, ast.Or) and value:
+                    return value
+            return value
+        if isinstance(node, ast.UnaryOp) and isinstance(node.op, ast.Not):
+            return not self.value(node.operand, env)
+        if isinstance(node, ast.JoinedStr):
+            parts = []
+            for item in node.values:
+                if isinstance(item, ast.Constant):
+                    parts.append(item.value)
+                elif isinstance(item, ast.FormattedValue) and item.format_spec is None and item.conversion == -1:
+                    value = self.value(item.value, env)
+                    if type(value) not in (str, int, float, bool):
+                        raise Unresolved('non-literal interpolation')
+                    parts.append(str(value))
+                else:
+                    raise Unresolved('formatted interpolation')
+            return ''.join(parts)
         if isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.USub, ast.UAdd)):
             value = self.value(node.operand, env)
             if type(value) not in (int, float):
                 raise Unresolved('non-numeric unary expression')
             return -value if isinstance(node.op, ast.USub) else value
         if isinstance(node, ast.Attribute) and isinstance(node.value, ast.Name) and node.value.id == 'argparse':
-            allowed = {'SUPPRESS', 'REMAINDER', 'RawDescriptionHelpFormatter', 'RawTextHelpFormatter', 'ArgumentDefaultsHelpFormatter'}
+            allowed = {'SUPPRESS', 'REMAINDER', 'RawDescriptionHelpFormatter', 'RawTextHelpFormatter', 'ArgumentDefaultsHelpFormatter', 'BooleanOptionalAction'}
             if node.attr in allowed:
                 return getattr(argparse, node.attr)
+        if isinstance(node, ast.Attribute):
+            receiver = self.value(node.value, env)
+            if isinstance(receiver, (argparse.ArgumentParser, argparse.Action)) and node.attr in {'_actions', 'choices', 'dest', 'default', 'required', 'option_strings'}:
+                return getattr(receiver, node.attr)
+        if isinstance(node, ast.Subscript):
+            receiver = self.value(node.value, env)
+            key = self.value(node.slice, env)
+            if type(receiver) in (dict, list, tuple, str) and type(key) in (str, int):
+                return receiver[key]
+            raise Unresolved('non-literal subscript')
         if isinstance(node, ast.Call):
-            if isinstance(node.func, ast.Name) and node.func.id in {'sorted', 'list', 'tuple', 'set'} and len(node.args) == 1 and not node.keywords:
+            if isinstance(node.func, ast.Name) and node.func.id == 'range' and not node.keywords:
+                args = [self.value(arg, env) for arg in node.args]
+                if not 1 <= len(args) <= 3 or any(type(arg) is not int for arg in args):
+                    raise Unresolved('non-literal range')
+                value = range(*args)
+                if len(value) > 2000:
+                    raise Unresolved('unbounded range')
+                return list(value)
+            if isinstance(node.func, ast.Name) and node.func.id in {'sorted', 'list', 'tuple', 'set', 'frozenset'} and len(node.args) == 1 and not node.keywords:
                 value = self.value(node.args[0], env)
-                if type(value) not in (list, tuple, set, dict):
+                if type(value) not in (list, tuple, set, frozenset, dict):
                     raise Unresolved('non-literal collection')
-                return {'sorted': sorted, 'list': list, 'tuple': tuple, 'set': set}[node.func.id](value)
+                return {'sorted': sorted, 'list': list, 'tuple': tuple, 'set': set, 'frozenset': frozenset}[node.func.id](value)
             if isinstance(node.func, ast.Attribute) and node.func.attr in {'items', 'keys', 'values'} and not node.args and not node.keywords:
                 value = self.value(node.func.value, env)
                 if type(value) is dict:
                     return list(getattr(value, node.func.attr)())
+            if isinstance(node.func, ast.Attribute) and node.func.attr == 'replace' and not node.keywords:
+                receiver = self.value(node.func.value, env)
+                args = [self.value(arg, env) for arg in node.args]
+                if type(receiver) is str and len(args) == 2 and all(type(arg) is str for arg in args):
+                    return receiver.replace(*args)
+                raise Unresolved('non-literal string replacement')
             return self.call(node, env)
         raise Unresolved(type(node).__name__)
 
     def imported_literal(self, name: str) -> Any:
         # Resolve only literal exported constants in repository Python files.
         # Import statements are inspected as text; modules never run.
-        for node in ast.walk(self.tree):
-            if not isinstance(node, ast.ImportFrom) or not node.module:
-                continue
+        if name in self.unresolved_imports:
+            raise Unresolved(name)
+        for node in self.imports:
             imported = next((item.name for item in node.names if (item.asname or item.name) == name), None)
             if imported is None:
                 continue
@@ -108,6 +186,7 @@ class Inspector:
                             return value
                         except (ValueError, TypeError):
                             pass
+        self.unresolved_imports.add(name)
         raise Unresolved(name)
 
     def bind(self, target: ast.AST, value: Any, env: dict) -> None:
@@ -116,6 +195,16 @@ class Inspector:
         elif isinstance(target, (ast.Tuple, ast.List)) and isinstance(value, (tuple, list)) and len(target.elts) == len(value):
             for item, element in zip(target.elts, value):
                 self.bind(item, element, env)
+        elif isinstance(target, ast.Attribute):
+            receiver = self.value(target.value, env)
+            if isinstance(receiver, (argparse.ArgumentParser, argparse.Action)) and target.attr in {'default', 'required', 'metavar'}:
+                setattr(receiver, target.attr, value)
+            elif isinstance(receiver, argparse.ArgumentParser) and not target.attr.startswith('_') and not hasattr(receiver, target.attr):
+                # Application-only metadata (e.g. coordinate normalization)
+                # cannot alter the reconstructed standard parser interface.
+                self.value_note(target, f'custom parser attribute {target.attr} was not applied')
+            else:
+                raise Unresolved('parser attribute mutation')
         else:
             raise Unresolved('assignment target')
 
@@ -155,7 +244,18 @@ class Inspector:
         if isinstance(node.func, ast.Name):
             name = node.func.id
             if name in self.parser_classes:
-                self.note(node, 'custom ArgumentParser behavior was not executed')
+                runtime_methods = {'parse_args', 'parse_known_args', '_parse_optional', 'error', 'exit', 'format_help', 'format_usage', 'print_help', 'print_usage'}
+                definition = self.classes[name]
+                methods = {part.name for part in definition.body if isinstance(part, ast.FunctionDef)}
+                declaration_mutation = any(
+                    isinstance(part, ast.Call) and isinstance(part.func, ast.Attribute)
+                    and part.func.attr in {'add_argument', 'add_parser', 'add_subparsers', 'add_argument_group', 'add_mutually_exclusive_group', 'register', 'setattr', '__init__'}
+                    or isinstance(part, ast.Assign) and any(isinstance(target, ast.Attribute) and target.attr in {'option_strings', 'nargs', 'prefix_chars', '_actions', '_option_string_actions'} for target in part.targets)
+                    for part in ast.walk(definition)
+                )
+                if methods - runtime_methods or definition.decorator_list or definition.keywords or len(definition.bases) != 1 or declaration_mutation:
+                    self.note(node, 'custom ArgumentParser declaration behavior was not executed')
+                self.value_note(node, 'custom ArgumentParser runtime behavior was not executed')
                 clone = ast.Call(func=ast.Attribute(value=ast.Name(id='argparse'), attr='ArgumentParser'), args=node.args, keywords=node.keywords)
                 ast.copy_location(clone, node)
                 return self.call(clone, env)
@@ -205,7 +305,11 @@ class Inspector:
             try:
                 value = self.value(kw.value, env)
             except Unresolved:
-                if kw.arg not in {'help', 'metavar', 'formatter_class'}:
+                if kw.arg in {'type', 'choices'}:
+                    self.value_note(node, f'dynamic {kw.arg} was not evaluated')
+                elif kw.arg == 'action' and isinstance(kw.value, ast.Name) and self.scalar_action(kw.value.id):
+                    self.value_note(node, 'custom scalar action callback was not executed')
+                elif kw.arg not in {'help', 'metavar', 'formatter_class'}:
                     self.note(node, f'dynamic {kw.arg or "keyword expansion"}')
                 continue
             if kw.arg is None:
@@ -215,9 +319,9 @@ class Inspector:
             else:
                 kwargs[kw.arg] = value
         if kwargs.get('type') not in (None, str, int, float, Path):
-            self.note(node, 'custom argument type was not evaluated')
+            self.value_note(node, 'custom argument type was not evaluated')
             kwargs.pop('type', None)
-        if 'action' in kwargs and kwargs['action'] not in {'store', 'store_const', 'store_true', 'store_false', 'append', 'append_const', 'extend', 'count', 'help', 'version'}:
+        if 'action' in kwargs and kwargs['action'] not in {'store', 'store_const', 'store_true', 'store_false', 'append', 'append_const', 'extend', 'count', 'help', 'version', argparse.BooleanOptionalAction}:
             self.note(node, 'custom argument action was not evaluated')
             kwargs.pop('action')
         if constructor:
@@ -228,6 +332,69 @@ class Inspector:
             return parser
         kwargs.pop('parser_class', None)
         return getattr(receiver, method)(*args, **kwargs)
+
+    def scalar_action(self, name: str) -> bool:
+        """An Action subclass inheriting __init__ keeps argparse's declared arity.
+
+        The callback is never invoked. Constructor overrides or additional bases
+        could change option strings/nargs and remain unknown interface shape.
+        """
+        definition = self.classes.get(name)
+        return bool(definition and len(definition.bases) == 1
+                    and not definition.decorator_list and not definition.keywords
+                    and isinstance(definition.bases[0], ast.Attribute)
+                    and isinstance(definition.bases[0].value, ast.Name)
+                    and definition.bases[0].value.id == 'argparse'
+                    and definition.bases[0].attr == 'Action'
+                    and all(isinstance(part, (ast.Expr, ast.Pass)) or isinstance(part, ast.FunctionDef) and part.name == '__call__'
+                            for part in definition.body))
+
+    @staticmethod
+    def shape(value: Any) -> Any:
+        """Compare reconstructed branches without calling application objects."""
+        if isinstance(value, argparse.ArgumentParser):
+            return ('parser', value.prefix_chars, value.allow_abbrev,
+                    [Inspector.shape(action) for action in value._actions if not action.option_strings],
+                    sorted((Inspector.shape(action) for action in value._actions if action.option_strings),
+                           key=lambda action: action[1]))
+        if isinstance(value, argparse.Action):
+            return ('action', value.option_strings, value.dest, value.nargs, value.required,
+                    Inspector.shape(value.choices) if isinstance(value, argparse._SubParsersAction) else None)
+        if type(value) is dict:
+            return {key: Inspector.shape(item) for key, item in value.items()}
+        if type(value) in (list, tuple):
+            return [Inspector.shape(item) for item in value]
+        return value
+
+    def conditional(self, node: ast.If, env: dict) -> None:
+        try:
+            condition = self.value(node.test, env)
+        except Unresolved:
+            declaration = any(isinstance(part, ast.Call) and isinstance(part.func, ast.Attribute)
+                              and part.func.attr in {'ArgumentParser', 'add_argument', 'add_parser', 'add_subparsers'}
+                              for part in ast.walk(node))
+            if not declaration and not self.mentions_parser(node, env):
+                raise Unresolved('non-declaration condition')
+            # Optional-import fallbacks sometimes declare exactly the same CLI.
+            # Compare both isolated branches; never union different interfaces.
+            original = (env, self.parsers, self.limitations, self.value_constraints)
+            branches = []
+            for statements in (node.body, node.orelse):
+                branch_env, self.parsers = copy.deepcopy((original[0], original[1]))
+                self.limitations, self.value_constraints = set(original[2]), set(original[3])
+                self.statements(statements, branch_env)
+                branches.append((branch_env, self.parsers, self.limitations, self.value_constraints))
+            self.parsers, self.limitations, self.value_constraints = original[1:]
+            if self.shape(branches[0][:2]) != self.shape(branches[1][:2]):
+                raise Unresolved('conditional CLI interfaces differ')
+            env.clear()
+            env.update(branches[0][0])
+            self.parsers = branches[0][1]
+            self.limitations = branches[0][2] | branches[1][2]
+            self.value_constraints = branches[0][3] | branches[1][3]
+            self.value_note(node, 'runtime branch condition was not evaluated; both branches declare the same interface')
+        else:
+            self.statements(node.body if condition else node.orelse, env)
 
     def mentions_parser(self, node: ast.AST, env: dict) -> bool:
         names = {name for name, value in env.items() if isinstance(value, (argparse.ArgumentParser, argparse._SubParsersAction, argparse._ArgumentGroup))}
@@ -260,8 +427,11 @@ class Inspector:
                 elif isinstance(node, ast.Return):
                     return self.value(node.value, env) if node.value else None
                 elif isinstance(node, ast.If):
-                    value = self.value(node.test, env)
-                    self.statements(node.body if value else node.orelse, env)
+                    self.conditional(node, env)
+                elif isinstance(node, ast.FunctionDef):
+                    # A nested declaration helper is still source text; it is
+                    # only interpreted if a later parser call selects it.
+                    self.functions[node.name] = node
                 elif not isinstance(node, (ast.Import, ast.ImportFrom, ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef, ast.Pass)):
                     declaration = any(isinstance(part, ast.Call) and isinstance(part.func, ast.Attribute)
                                       and part.func.attr in {'ArgumentParser', 'add_argument', 'add_parser', 'add_subparsers', 'set_defaults'}
@@ -281,7 +451,7 @@ class Inspector:
             parser = self.statements(self.tree.body, {})
         if not isinstance(parser, argparse.ArgumentParser):
             parser = self.parsers[-1] if self.parsers else None
-        return Contract(parser, sorted(self.limitations))
+        return Contract(parser, sorted(self.limitations), sorted(self.value_constraints))
 
 
 def inspect_contract(script: Path) -> Contract:

@@ -157,7 +157,11 @@ def test_cli_imports_and_custom_types_never_execute(tmp_path):
     (tmp_path / 'cli.py').write_text(f'from pathlib import Path\nPath({str(marker)!r}).touch()\nimport argparse\ndef unsafe_type(value):\n    Path({str(marker)!r}).touch()\n    return value\ndef main():\n    p=argparse.ArgumentParser()\n    p.add_argument("--number",type=unsafe_type)\n    p.parse_args()\n')
     md = skill(tmp_path, body='```bash\nuv run python cli.py --number 5\n```')
     issues = lint_markdown_file(md, tmp_path, True, False, {}, None, True)
-    assert any('dynamic type' in issue.message for issue in issues)
+    assert issues == []
+    from scripts.cli_contract import inspect_contract
+    contract = inspect_contract(tmp_path / 'cli.py')
+    assert not contract.limitations
+    assert any('dynamic type' in note for note in contract.value_constraints)
     assert not marker.exists()
 
 

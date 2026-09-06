@@ -14,7 +14,7 @@ import argparse
 import os
 import re
 import shlex
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Iterable
 
@@ -292,15 +292,16 @@ class HelpResult:
     value_options: set[str]
     subcommands: set[str]
     error: str | None = None
+    option_nargs: dict[str, int | str | None] = field(default_factory=dict)
 
 
-def read_help_options(
+def read_command_help(
     workspace: Path,
     script: str,
-    subcmd: str | None,
+    command_path: tuple[str, ...],
     cache: dict,
 ) -> HelpResult:
-    key = (script, subcmd)
+    key = (script, command_path)
     if key in cache:
         return cache[key]
     # Read declarations, not application imports. Even --help can mutate state
@@ -310,7 +311,7 @@ def read_help_options(
         cache[contract_key] = inspect_contract(resolve_script_path(workspace, script))
     contract = cache[contract_key]
     error = None
-    parser = select_parser(contract.parser, shlex.split(subcmd)) if contract.parser and subcmd else contract.parser
+    parser = select_parser(contract.parser, list(command_path)) if contract.parser and command_path else contract.parser
     if parser is None:
         error = "No statically inspectable argparse contract; runtime --help was not executed"
     elif contract.limitations:
@@ -318,28 +319,50 @@ def read_help_options(
     options = set()
     value_options = set()
     subcommands = set()
+    option_nargs = {}
     if parser is not None:
         for action in parser._actions:
             options.update(option for option in action.option_strings if option.startswith('--'))
             if action.nargs != 0:
                 value_options.update(action.option_strings)
+            option_nargs.update({option: action.nargs for option in action.option_strings})
             if isinstance(action, argparse._SubParsersAction):
                 subcommands.update(action.choices)
-    result = HelpResult(options, value_options, subcommands, error)
+    result = HelpResult(options, value_options, subcommands, error, option_nargs)
     cache[key] = result
     return result
 
 
-def first_positional(tokens: list[str], help_result: HelpResult) -> str | None:
+def read_help_options(workspace: Path, script: str, subcmd: str | None, cache: dict) -> HelpResult:
+    """Compatibility facade; this reads declarations and never executes help."""
+    return read_command_help(workspace, script, tuple(shlex.split(subcmd)) if subcmd else (), cache)
+
+
+def first_positional(tokens: list[str], help_result: HelpResult) -> tuple[int, str] | None:
     index = 0
     while index < len(tokens):
         token = tokens[index]
         if token == "--":
-            return tokens[index + 1] if index + 1 < len(tokens) else None
+            return (index + 1, tokens[index + 1]) if index + 1 < len(tokens) else None
         if token.startswith('-'):
-            index += 2 if token in help_result.value_options and '=' not in token else 1
+            nargs = help_result.option_nargs.get(token, 0)
+            index += 1
+            if '=' in token:
+                continue
+            if nargs is None:
+                index += 1
+            elif isinstance(nargs, int):
+                index += nargs
+            elif nargs == '?':
+                if index < len(tokens) and not tokens[index].startswith('-'):
+                    index += 1
+            elif nargs in {'*', '+'}:
+                while index < len(tokens) and not tokens[index].startswith('-'):
+                    index += 1
+            elif nargs == argparse.REMAINDER:
+                return None
             continue
-        return token
+        return index, token
     return None
 
 
@@ -475,7 +498,7 @@ def lint_markdown_file(
                     continue
 
                 remaining = tokens[4:]
-                root_help = read_help_options(workspace, script, None, help_cache)
+                root_help = read_command_help(workspace, script, (), help_cache)
                 if root_help.error:
                     issues.append(Issue("WARN", md_file, command_line,
                                         f"{script}: {root_help.error}"))
@@ -483,19 +506,24 @@ def lint_markdown_file(
                 allowed = set(root_help.options)
                 current_help = root_help
                 subcmd = None
+                command_path = ()
                 rest = remaining
                 while current_help.subcommands:
-                    candidate = first_positional(rest, current_help)
-                    if candidate is None or likely_template_token(candidate):
+                    positional = first_positional(rest, current_help)
+                    if positional is None:
+                        break
+                    candidate_index, candidate = positional
+                    if likely_template_token(candidate):
                         break
                     if candidate not in current_help.subcommands:
                         issues.append(Issue("ERROR", md_file, command_line,
                                             f"Invalid subcommand `{candidate}` for `{script}`"
                                             + (f" after `{subcmd}`" if subcmd else "")))
                         break
-                    subcmd = f"{subcmd} {candidate}" if subcmd else candidate
-                    rest = rest[rest.index(candidate) + 1:]
-                    current_help = read_help_options(workspace, script, subcmd, help_cache)
+                    command_path += (candidate,)
+                    subcmd = ' '.join(command_path)
+                    rest = rest[candidate_index + 1:]
+                    current_help = read_command_help(workspace, script, command_path, help_cache)
                     if current_help.error:
                         issues.append(Issue("WARN", md_file, command_line,
                                             f"{script} {subcmd}: {current_help.error}"))

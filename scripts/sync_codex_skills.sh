@@ -4,4 +4,4 @@
 # Optional inventory/backup requires explicit --personal-root; nothing is deleted.
 set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-exec uv run --no-sync python "$ROOT_DIR/scripts/skill_distribution.py" --workspace "$ROOT_DIR" "$@"
+exec uv run --project "$ROOT_DIR" --locked python "$ROOT_DIR/scripts/skill_distribution.py" --workspace "$ROOT_DIR" "$@"

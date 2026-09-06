@@ -124,8 +124,8 @@ def declarations(path: Path, operation: str | None) -> dict:
         commands = [{'name': operation, 'arguments': arguments(selected)}]
     return {'inspection': 'partial' if contract.limitations else 'declarative_argparse',
             'global_arguments': arguments(contract.parser), 'commands': commands,
-            'limitations': contract.limitations,
-            'limitation': 'Runtime availability was not checked. Dynamic declarations require explicit runtime help inspection.'}
+            'limitations': contract.limitations, 'value_constraints': contract.value_constraints,
+            'limitation': 'Flags and subcommands are inspected statically. Argument values, defaults, callbacks, and runtime availability are not verified; see value_constraints and shape limitations.'}
 
 
 def main() -> int:
