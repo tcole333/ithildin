@@ -1,213 +1,107 @@
 ---
 name: compare-peers
-description: Tier 2 peer benchmarking — compare target financial profile against 3-8 industry peers, flag outliers, generate forensic hypotheses
-user_invocable: true
+description: Compare a target company's financial ratios with relevant peers and test unexplained differences. Use for peer benchmarking or forensic hypotheses after financial screening.
+user-invocable: true
 ---
 
 # /compare-peers
 
-**TIER 2: ANALYSIS AGENT** — This is a theory-building skill on the Analysis Plane. You are comparing a target company's financial profile against industry peers to detect statistical outliers and generate forensic hypotheses. Every hypothesis MUST include falsification criteria and a best innocent explanation. See `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline`.
+Produce a comparison matrix, qualified outlier flags, and testable explanations
+for material differences. Read `docs/RESEARCH_WORKFLOW_CONTRACT.md` for pinned
+profile/database, source reuse and evidence handoffs; use
+`docs/modules/financial.md` and current subcommand `--help` for tool details.
 
-Compare a target company's financial ratios against 3-8 industry peers. The primary output is a **comparison matrix**, **statistical outlier flags**, and **forensic hypotheses** for anomalous ratios.
+## Select comparable companies and periods
 
-## Arguments
+Accept a target plus optional `--peers`. When peers are unspecified, start with
+roughly 3–8 candidates and explain the chosen scope; business model, revenue
+scale and economic exposure matter more than a shared SIC code. Verify identities
+and current business mix using EDGAR metadata, filings and market profiles.
+A small or incomplete peer set can still support a descriptive comparison; state
+its limitations and avoid population-level conclusions.
 
-- `/compare-peers "Palantir" --peers "Booz Allen, Leidos, SAIC, Raytheon"` — explicit peer list
-- `/compare-peers "Palantir"` — auto-select peers by SIC code and agent knowledge
+Create an isolated workdir. Resolve each company to CIK and retain the exact
+filing accession, form, date, statement periods and units. Choose comparable
+complete fiscal periods before calculating differences. Disclose fiscal-year
+end differences, missing periods, currency/unit differences and exclusions.
+If periods cannot be aligned, present the descriptive values separately and
+explain which comparisons remain meaningful.
 
-### Context Loading
-```bash
-uv run python tools/investigation_context.py show
-```
-
-## Process
-
-### 0. Session Setup
+Use `query_edgar.py sections --help` to extract income, balance and cashflow
+statements from the selected filing. Read the underlying filing/footnotes to the
+depth needed for the comparison. Where independent company work helps,
+supervise native chat workers with inherited model settings, pinned context,
+chosen periods and unique artifact paths; reconcile them before comparison.
 
 ```bash
 WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
-echo "Session workdir: $WORKDIR"
-```
-
-### 1. Identify Target and Peers
-
-```bash
-# Get target SIC code and metadata
-uv run python tools/query_edgar.py company <TARGET_CIK> --output $WORKDIR/target-company.json
-uv run python tools/query_market.py profile <TARGET_TICKER> --output $WORKDIR/target-profile.json
-```
-
-**If peers specified:** Resolve each to CIK via `query_edgar.py lookup`.
-
-**If peers not specified:** Select 4-6 peers based on:
-- Same SIC code (from EDGAR company metadata)
-- Same sector/industry (from yfinance profile)
-- Similar revenue scale (within 3x of target)
-- Agent knowledge of competitive landscape
-
-**Document your peer selection reasoning.** Peer group composition matters — comparing a software company to hardware companies produces misleading outlier flags. Group by business model, not just industry classification.
-
-### 2. Extract Financial Data (all companies)
-
-For each company (target + peers):
-
-```bash
-# Extract financial statements
-uv run python tools/query_edgar.py sections <TICKER> --section income_statement --output $WORKDIR/<ticker>-income.json
-uv run python tools/query_edgar.py sections <TICKER> --section balance_sheet --output $WORKDIR/<ticker>-balance.json
-uv run python tools/query_edgar.py sections <TICKER> --section cashflow_statement --output $WORKDIR/<ticker>-cashflow.json
-
-# Compute individual ratios
+uv run python tools/query_edgar.py sections --help
+uv run python tools/query_edgar.py sections "<CIK>" --accession "<SELECTED_ACCESSION>" \
+  --section income_statement --output "$WORKDIR/<ticker>-income.json"
+uv run python tools/query_edgar.py sections "<CIK>" --accession "<SELECTED_ACCESSION>" \
+  --section balance_sheet --output "$WORKDIR/<ticker>-balance.json"
+uv run python tools/query_edgar.py sections "<CIK>" --accession "<SELECTED_ACCESSION>" \
+  --section cashflow_statement --output "$WORKDIR/<ticker>-cashflow.json"
 uv run python tools/financial_ratios.py analyze \
-  $WORKDIR/<ticker>-income.json $WORKDIR/<ticker>-balance.json \
-  --cashflow $WORKDIR/<ticker>-cashflow.json \
-  --output $WORKDIR/<ticker>-ratios.json
-```
-
-**If extraction fails for a peer:** Skip it, note in output. Minimum 3 companies total for meaningful comparison.
-
-### 3. Run Peer Comparison
-
-```bash
+  "$WORKDIR/<ticker>-income.json" "$WORKDIR/<ticker>-balance.json" \
+  --cashflow "$WORKDIR/<ticker>-cashflow.json" \
+  --output "$WORKDIR/<ticker>-ratios.json"
 uv run python tools/financial_ratios.py compare \
-  $WORKDIR/*-ratios.json \
-  --output $WORKDIR/comparison.json
+  "$WORKDIR/"*-ratios.json --output "$WORKDIR/comparison.json"
 ```
 
-Read the comparison output. Key fields:
-- `matrix`: ratio values for each company
-- `medians`: group median for each ratio
-- `outliers`: flagged values with `sample_size`, `outlier_score`, `threshold`, and `score_method`
-- `anomaly_counts`: number of outlier flags per company
+Verify all statement outputs' accession, form, periods and `statement_type`
+before ratios; full-text fallback is not a financial statement artifact.
+The compare command uses each file's **latest** ratio period independently.
+Inspect `latest_periods` before interpreting `matrix`, `medians`, `outliers`
+or `anomaly_counts`. If selecting another period from existing ratio artifacts,
+write a derived comparison input with the chosen row and an artifact manifest;
+retain the original input and explain the selection.
 
-Interpret the method exactly as reported. With at least five non-null values,
-the score is deviation from the median divided by population standard deviation
-and the threshold is 2.0. With two to four values, it is a small-cohort
-heuristic using half the observed range and a 1.5 threshold—not a z-score.
+With at least five non-null values, the reported score is median deviation over
+population standard deviation (threshold 2.0). With two to four values, it is a
+half-range heuristic (threshold 1.5), not a z-score. Record `sample_size`,
+`outlier_score`, `threshold`, and `score_method`; null metrics reduce the
+actual cohort for that ratio. These defaults prioritize review, not proof of
+misconduct. Empty/error outputs and failed target extraction require an explicit
+coverage result; a peer-only table does not complete analysis of a missing target.
 
-### 4. Generate Forensic Hypotheses
+## Explain and test differences
 
-For each statistical outlier flagged in the comparison, generate a hypothesis:
+For materially unexplained deviations, include observation, concerning
+hypothesis, best innocent explanation, falsification criterion, and search plan.
+Select hypotheses for information value rather than generating one per flag.
+Use `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline` and relevant
+frameworks from `research/craft-research/frameworks/` when they help distinguish
+competing explanations.
 
-**Every hypothesis MUST include:**
-
-1. **The observation**: "[Company] has [ratio] of [X] vs peer median of [Y] (score=[Z], n=[N], method=[METHOD])"
-2. **Forensic hypothesis**: What might explain this deviation beyond business model differences?
-3. **Best innocent explanation**: The most plausible non-concerning reason
-4. **Falsification criterion**: What evidence would disprove the concerning interpretation?
-5. **Search plan**: Specific next steps to test the hypothesis
-
-**Quality bar:** 3 well-reasoned hypotheses are better than 10 obvious ones. Don't flag things that are easily explained by known business model differences.
-
-Record each hypothesis:
 ```bash
-PYTHONPATH=. uv run python tools/hypothesis_tracker.py add \
-  --title "<Company> <ratio> outlier: <value> vs median <median>" \
-  --pattern-type operational \
-  --description "OBSERVATION: ... HYPOTHESIS: ... INNOCENT EXPLANATION: ..." \
-  --predicted-evidence "..." \
-  --search-plan "..." \
+uv run python tools/hypothesis_tracker.py add \
+  --title "<Company> <ratio> difference" --pattern-type operational \
+  --description "OBSERVATION: ... HYPOTHESIS: ... INNOCENT EXPLANATION: ... FALSIFICATION: ..." \
+  --predicted-evidence "..." --search-plan "..." \
   --originated-from "analysis:compare-peers"
 ```
 
-### 5. Record Findings
+Record a financial synthesis only when every value contributing to the selected
+ratio's sample size is reproducible from attached exact source rows. Example
+quote syntax is `--source-quote "SEC:CIK<TARGET>:<ACCESSION>:<exact period/value rows>"`,
+paired with the identical `--evidence` reference before the final colon.
+Repeat for each contributing company. Keep the method, periods, null/exclusion
+handling, and calculation artifacts in detail; confidence is at most medium.
+If provenance is incomplete, retain the hypothesis and comparison artifact with
+its gap instead of promoting an unsupported finding.
 
-For each notable outlier (forensically significant, not just business-model-different):
+Peer membership and shared SIC are analytical metadata. Register entities with
+their actual jurisdiction; create graph connections only for independently
+evidenced corporate relationships. Use `entity_tracker.py add-entity --help`
+and `findings_tracker.py add --help` for the current interfaces.
 
-```bash
-PYTHONPATH=. uv run python tools/findings_tracker.py add \
-  --target "<COMPANY>" \
-  --summary "Peer comparison: <ratio> is <value> vs industry median <median> (<direction> outlier)" \
-  --detail "Outlier score <SCORE>, n=<N>, method=<SCORE_METHOD>, threshold=<THRESHOLD>; included peers and any null/excluded peers: <DETAILS>" \
-  --type financial \
-  --evidence \
-    "SEC:CIK<TARGET>:<TARGET_ACCESSION>" \
-    "SEC:CIK<PEER_1>:<PEER_1_ACCESSION>" \
-    "SEC:CIK<PEER_N>:<PEER_N_ACCESSION>" \
-  --claim-type synthesis \
-  --source-quote \
-    "SEC:CIK<TARGET>:<TARGET_ACCESSION>:<exact period/value rows needed to compute the target ratio>" \
-    "SEC:CIK<PEER_1>:<PEER_1_ACCESSION>:<exact period/value rows needed to compute peer 1's ratio>" \
-    "SEC:CIK<PEER_N>:<PEER_N_ACCESSION>:<exact period/value rows needed to compute peer N's ratio>" \
-  --sources edgar \
-  --confidence medium
-```
+## Complete
 
-Attach one evidence reference and exact load-bearing source quote for **every**
-company whose value contributes to that ratio's `sample_size`. The finding must
-be reproducible from the attached rows alone. Put the calculation method and
-null/exclusion handling in `--detail`, never in `--source-quote`. If complete
-peer provenance is unavailable, keep the result in `comparison.json` and the
-hypothesis record; do not promote it to a finding.
-
-Peer-group membership, shared SIC, and selection as a comparator are analytical
-metadata—not corporate relationships. **Do not call `findings_tracker.py
-connect` for those facts.** Create a connection only when independent evidence
-establishes an actual relationship, using its accurate type and attached
-provenance. Register each analyzed company explicitly with its jurisdiction so
-it can be resolved consistently without inventing peer-to-peer edges:
-
-```bash
-uv run python tools/entity_tracker.py add-entity --name "<PEER>" --entity-type inc --jurisdiction <STATE> --source "edgar"
-```
-
-### 6. Create Leads
-
-For companies with unexplained outliers (≥2 outlier flags with no innocent explanation):
-
-```bash
-PYTHONPATH=. uv run python tools/lead_tracker.py add \
-  --title "Financial forensics: <COMPANY> — <N> statistical outliers vs peers: <top outlier>" \
-  --category financial --priority medium \
-  --target "<COMPANY>" --source "agent:compare-peers"
-```
-
-### 7. Output
-
-```
-## /compare-peers: <TARGET> vs <N> Peers
-
-### Peer Group
-| Company | Ticker | SIC | Revenue | Selection Rationale |
-|---------|--------|-----|---------|-------------------|
-
-### Comparison Matrix
-| Ratio | Target | Peer 1 | Peer 2 | ... | Median | Target vs Median |
-|-------|--------|--------|--------|-----|--------|-----------------|
-
-### Statistical Outliers
-| Company | Ratio | Value | Median | Score | n | Method | Threshold | Forensic Note |
-|---------|-------|-------|--------|-------|---|--------|-----------|---------------|
-
-### Forensic Hypotheses
-1. **<Company> <ratio> outlier** — Hypothesis #<ID>
-   - Observation: ...
-   - Hypothesis: ...
-   - Innocent explanation: ...
-   - Falsification: ...
-   - Search plan: ...
-
-### Summary
-- Companies analyzed: N
-- Outliers detected: N
-- Hypotheses generated: N
-- Leads created: N
-- Findings recorded: N
-```
-
-## Stop Conditions
-
-- All companies processed (or skipped with reason)
-- Comparison matrix generated
-- Hypotheses created for all forensically significant outliers
-- Findings recorded for notable deviations
-- Output complete
-
-## Key Analytical Frameworks
-
-When generating hypotheses, consider applying relevant frameworks from `research/craft-research/frameworks/`:
-- **Revenue Recognition Anomalies** — DSO outliers, receivables/revenue divergence
-- **Cash Flow / Earnings Divergence** — accruals ratio outliers, cash conversion anomalies
-- **Related-Party Transaction Scoring** — margin outliers that might indicate RPT-driven pricing
-- **Corporate Governance Red Flags** — compound governance indicators across the peer group
-- **Peripheral Collapse** — margin outliers suggesting pass-through or shell entity behavior
+Create follow-up leads when an unanswered, relevant question warrants further
+investigation, explaining priority without a minimum flag count. Report company
+identities, peer-selection rationale, each compared period, the matrix and method,
+tested explanations, finding/hypothesis/lead IDs, and artifacts. Account for
+failed/skipped/partial companies and metrics. Finish when the requested comparison
+and material hypotheses have a supported result or an explicit next evidence need.

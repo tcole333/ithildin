@@ -1,254 +1,135 @@
 ---
 name: audit-contracts
-description: Tier 2 comparative procurement analysis — spending acceleration, lobbying correlation, revolving door detection, partnership networks across 3-10 contractors
+description: Compare procurement patterns across contractors using spending, lobbying, partnership and staffing evidence. Use analyze-contract for a specific award's lifecycle.
 ---
 
 # $audit-contracts
 
-**TIER 2: ANALYSIS AGENT** — This skill performs comparative procurement analysis across a cohort of 3-10 government contractors. It calculates spending growth rates, detects acceleration anomalies, cross-references lobbying expenditures, maps partnership networks, and checks for revolving door patterns. Every hypothesis about procurement irregularity MUST include falsification criteria. See `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline`.
+Accept a contractor list, `--sector`, or `--thread N`. Produce a cohort
+comparison and testable explanations of material patterns. Roughly 3–10
+contractors is a useful initial scope for a broad request; explicit user scope
+and evidence needs determine the work.
 
-This is NOT single-contract forensics — use `$analyze-contract` for that. This skill compares spending *patterns* across companies to detect systemic anomalies.
+Read `docs/RESEARCH_WORKFLOW_CONTRACT.md` and pin the profile/database first.
+Use `docs/modules/government.md`, `docs/modules/political.md` and
+`docs/modules/financial.md` as applicable; inspect subcommand `--help`
+instead of assuming optional filters. Independent company/source tracks may use
+native chat workers with inherited models, pinned context, unique artifacts and
+parent reconciliation.
 
-## Arguments
-
-- `$audit-contracts "Palantir Technologies, Anduril Industries, Shield AI, SpaceX, Rocket Lab"` — explicit company list
-- `$audit-contracts --thread 3` — extract contractors from investigation thread findings
-- `$audit-contracts --sector "defense-tech"` — agent resolves companies from knowledge
-
-### Context Loading
-```bash
-uv run python tools/investigation_context.py show
-```
-
-## Process
-
-### 0. Session Setup
+## Resolve cohort identity
 
 ```bash
 WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
-echo "Session workdir: $WORKDIR"
+uv run python tools/investigation_context.py show --output "$WORKDIR/profile.json"
+PROFILE=$(jq -r '.name' "$WORKDIR/profile.json")
 ```
 
-### 1. Build Target List
+Verify sector membership from current evidence. For `--thread N`, map the
+profile-local number before querying the tracker:
 
-**From explicit names:** Parse comma-separated list.
-
-**From `--thread N`:** Query investigation.db for companies with contract-related findings:
 ```bash
-PYTHONPATH=. uv run python -c "
-import sqlite3
-db = sqlite3.connect('investigation.db')
-rows = db.execute('''
-    SELECT DISTINCT target_name, COUNT(*) as cnt FROM findings
-    WHERE thread_id = ? AND profile_id = ?
-    AND (finding_type = 'financial' OR summary LIKE '%contract%' OR summary LIKE '%award%')
-    GROUP BY target_name ORDER BY cnt DESC LIMIT 10
-''', (N, 'PROFILE')).fetchall()
-for r in rows: print(f'{r[1]:4d}  {r[0]}')
-"
+LOCAL_THREAD_ID="<REQUESTED_LOCAL_THREAD_ID>"
+GLOBAL_THREAD_ID=$(jq -r --arg local "$LOCAL_THREAD_ID" \
+  '.threads[] | select((.id | tostring) == $local) | .global_id // empty' \
+  "$WORKDIR/profile.json")
+if [[ -z "$GLOBAL_THREAD_ID" || "$GLOBAL_THREAD_ID" == "null" ]]; then
+  printf 'No global mapping for profile %s thread %s\n' "$PROFILE" "$LOCAL_THREAD_ID" >&2
+  exit 1
+fi
+uv run python tools/findings_tracker.py list --thread-id "$GLOBAL_THREAD_ID" \
+  --profile "$PROFILE" --limit 10000 --output "$WORKDIR/thread-findings.json"
+jq -r '.[] | select(.finding_type == "financial" or ((.summary // "") | test("contract|award"; "i"))) | .target_name' \
+  "$WORKDIR/thread-findings.json" | sort -u
 ```
 
-**Resolve each company to a full USASpending name:**
+Resolve company candidates using USASpending search and SAM to exact legal
+identity/UEI and parent/subsidiary scope. A full name helps disambiguation but does
+not guarantee the correct recipient. Verify the returned identity for every
+query; split unrelated name matches. An empty cohort is a complete empty result.
+If the findings limit is reached, obtain remaining records before claiming full
+thread coverage.
+
+## Compare spending periods
+
 ```bash
-uv run python tools/query_usaspending.py search "<COMPANY>" --output $WORKDIR/<slug>-search.json
+uv run python tools/query_usaspending.py search "<COMPANY>" --output "$WORKDIR/<slug>-search.json"
+uv run python tools/ingest_sam.py search "<COMPANY>" --output "$WORKDIR/<slug>-sam.json"
+uv run python tools/query_usaspending.py timeline "<VERIFIED_RECIPIENT>" --output "$WORKDIR/<slug>-timeline.json"
+uv run python tools/query_usaspending.py recipient "<VERIFIED_RECIPIENT>" --output "$WORKDIR/<slug>-recipient.json"
 ```
 
-**Important:** Use the full legal name from search results, not short names. "Palantir" matches the wrong entity; "Palantir Technologies" works correctly.
+Retain exact query filters, recipient identity, retrieval time and artifacts.
+Timeline results aggregate obligations by fiscal year by default. Compare
+complete years with consistent entity scope; show current partial-year data
+separately or compare matched year-to-date windows. Handle zero/negative bases
+and deobligations explicitly; CAGR is not meaningful for every series.
 
-Also check SAM.gov bulk for UEI:
+The recipient helper's agency categories have **all available periods** scope;
+label that table accordingly. A most-recent-FY agency table requires an explicitly
+date-filtered source/query, with the filter verified in its artifact. Never
+relabel all-period totals as annual amounts.
+
+Use YoY growth, CAGR and acceleration to select questions for review. Historical
+25%/50% growth and twice-CAGR cutoffs are optional triage defaults, not established
+sector baselines. Explain the benchmark cohort, period and adjustment for small
+bases, acquisitions, new capabilities, consolidated awards and demand changes.
+Describe an unavailable source as a gap; do not convert it to zero spending.
+
+## Test relevant explanations
+
+Assess lobbying timing/issues/registrants, partnerships and subcontracting, SEC
+financials for public companies, and revolving-door evidence where those bear
+on the observed pattern. The canonical modules and `--help` expose
+`query_lobbying.py client`, `query_highergov.py partnership`, EDGAR sections,
+and FEC donor checks. Confirm identity before attaching a person or organization.
+
+To inspect existing revolving-door evidence, use a profile-scoped tracker search
+and structured rows; expand aliases and limits when coverage requires it:
+
 ```bash
-uv run python tools/ingest_sam.py search "<COMPANY>" --output $WORKDIR/<slug>-sam.json
+uv run python tools/findings_tracker.py search "<COMPANY>" --profile "$PROFILE" \
+  --limit 1000 --output "$WORKDIR/<slug>-existing-findings.json"
+jq -r '.[] | select((.summary // "") | test("revolving|former government|Pentagon|appointee|deputy|joined from"; "i")) | .summary' \
+  "$WORKDIR/<slug>-existing-findings.json"
 ```
 
-### 2. Pull Spending Timelines
+Keyword matches are candidates; open the underlying evidence for actual role
+and service/employment dates. Search negatives are bounded to those aliases and
+terms. Political giving or a former role alone does not establish influence.
 
-For each company:
+For SEC comparison, retain statement periods and accessions. Recognized revenue
+and federal obligations measure different things; reconcile period, entity,
+classified/international work and timing before treating a delta as unexplained.
+Read relevant contracts, filings and footnotes to the depth the question needs.
+
+## Persist and finish
+
+Promote material supported patterns, not one finding per numerical flag. Every
+procurement-irregularity hypothesis includes observation, best innocent
+explanation, falsification criterion and a concrete search plan, following
+`research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline`.
+
+A supported growth synthesis uses exact load-bearing rows, with matching quote
+references (substitute observed values and a reproducible source reference):
+
 ```bash
-uv run python tools/query_usaspending.py timeline "<FULL_NAME>" --output $WORKDIR/<slug>-timeline.json
-uv run python tools/query_usaspending.py recipient "<FULL_NAME>" --output $WORKDIR/<slug>-recipient.json
+uv run python tools/findings_tracker.py add \
+  --target "<COMPANY>" --summary "Federal obligations changed <X>% between complete FY<PREV> and FY<CURR>" \
+  --type financial --evidence "USASPENDING:<SCOPE_REF>" \
+  --source-quote "USASPENDING:<SCOPE_REF>:<exact fiscal-year and obligation rows>" \
+  --detail "Identity/filters, periods, benchmark, calculation and artifact path: ..." \
+  --sources usaspending --claim-type synthesis --confidence medium
 ```
 
-The `timeline` command returns aggregated spending per fiscal year. The `recipient` command returns agency-level breakdown.
+Keep temporal correlations distinct from causal claims and preserve legal
+allegation/status language. Link follow-up leads to specific unanswered questions
+or awards, with justified priority rather than a required count. Use
+`$analyze-contract` for award forensics and `$compare-peers` for financial peers.
 
-### 3. Calculate Growth Rates and Detect Anomalies
-
-Parse each timeline JSON and compute:
-- **FY-over-FY growth rates** for the last 3-4 years
-- **CAGR** (compound annual growth rate) over the full period
-- **Acceleration flag**: Recent year growth > 2x historical CAGR? Flag as ACCELERATION
-- **Rank** companies by most recent FY growth rate
-
-**Growth rate thresholds:**
-- >50% YoY: **HIGH** — unusual for government contractors (typical sector growth is 5-15%)
-- 25-50% YoY: **MEDIUM** — noteworthy, especially if sustained
-- <25% YoY: Normal range for defense/government services
-
-**Record finding for each company with HIGH growth flag:**
-```bash
-PYTHONPATH=. uv run python tools/findings_tracker.py add \
-  --target "<COMPANY>" \
-  --summary "Procurement acceleration: <COMPANY> federal spending grew <X>% YoY (FY<PREV> $<AMT1> → FY<CURR> $<AMT2>), <N>x the sector average" \
-  --type financial \
-  --evidence "USASPENDING:<COMPANY>" \
-  --claim-type synthesis \
-  --source-quote "USASpending timeline data FY<YEARS>" \
-  --sources usaspending \
-  --confidence medium
-```
-
-### 4. Cross-Reference Lobbying
-
-For each company:
-```bash
-uv run python tools/query_lobbying.py client "<COMPANY>" --output $WORKDIR/<slug>-lobbying.json
-```
-
-Extract lobbying spend by year from the filings. Look for:
-- **Pre-acceleration lobbying increases**: Did lobbying spend rise 1-2 years before contract growth?
-- **Issue code shifts**: Did lobbying focus shift to new agencies before contracts from those agencies appeared?
-- **Registrant changes**: Did the company change lobbying firms around the same time as contract acceleration?
-
-Record timing correlations as findings (`claim-type: synthesis`, confidence: `medium`).
-
-### 5. Partnership Network Analysis (HigherGov)
-
-For companies with known HigherGov awardee keys:
-```bash
-uv run python tools/query_highergov.py partnership --awardee-key <KEY> --output $WORKDIR/<slug>-partners.json
-```
-
-Look for:
-- **Co-bidding patterns**: Do any two companies in the cohort frequently team together?
-- **Vehicle concentration**: Does one company dominate a specific contract vehicle?
-- **Subcontractor relationships**: Is Company A frequently a sub to Company B (or vice versa)?
-
-### 6. Financial Cross-Check (Public Companies Only)
-
-For public companies in the cohort, extract SEC financial data:
-```bash
-uv run python tools/query_edgar.py sections <TICKER> --section income_statement --output $WORKDIR/<slug>-income.json
-uv run python tools/query_edgar.py sections <TICKER> --section balance_sheet --output $WORKDIR/<slug>-balance.json
-uv run python tools/financial_ratios.py analyze $WORKDIR/<slug>-income.json $WORKDIR/<slug>-balance.json --output $WORKDIR/<slug>-ratios.json
-```
-
-Cross-check: Does SEC-reported government segment revenue track with USASpending obligations? Large discrepancies (>20% difference) may indicate:
-- Revenue from classified programs (not in USASpending)
-- Timing differences (obligated vs. recognized)
-- International government revenue (not USASpending)
-
-### 7. Revolving Door Check
-
-Search investigation.db for known revolving door connections to the cohort companies:
-```bash
-PYTHONPATH=. uv run python -c "
-import sqlite3
-db = sqlite3.connect('investigation.db')
-for company in ['<COMPANY1>', '<COMPANY2>', ...]:
-    rows = db.execute('''
-        SELECT target_name, summary FROM findings
-        WHERE (target_name LIKE ? OR summary LIKE ?)
-        AND (summary LIKE '%revolving%' OR summary LIKE '%former government%'
-             OR summary LIKE '%Pentagon%' OR summary LIKE '%appointee%'
-             OR summary LIKE '%deputy%' OR summary LIKE '%joined from%')
-    ''', (f'%{company}%', f'%{company}%')).fetchall()
-    if rows:
-        print(f'{company}: {len(rows)} revolving door findings')
-        for r in rows[:3]:
-            print(f'  {r[\"summary\"][:100]}')
-"
-```
-
-Also check if any officers from the companies appear in FEC donor records tied to relevant political committees:
-```bash
-uv run python tools/query_fec.py donor "<OFFICER_NAME>" --output $WORKDIR/<slug>-fec-<officer>.json
-```
-
-### 8. Generate Hypotheses
-
-For each anomalous pattern, generate a hypothesis following the standard framework:
-
-1. **Observation**: "[Company] federal spending grew [X]% in FY[YEAR], [N]x the sector average of [Y]%"
-2. **Forensic hypothesis**: What non-market factor could explain this acceleration?
-3. **Best innocent explanation**: Genuine demand increase, new capability, or contract consolidation
-4. **Falsification criterion**: What evidence would disprove the concerning interpretation?
-5. **Search plan**: Specific next steps (e.g., "check FPDS for competition type on largest awards")
-
-Record via `hypothesis_tracker.py add`.
-
-### 9. Record Findings and Create Leads
-
-- One finding per anomalous growth pattern
-- One finding per lobbying-contract timing correlation
-- One finding per revolving door connection discovered
-- Leads for: companies needing `$analyze-contract` deep dives, specific awards to trace, partnership patterns to investigate
-
-### 10. Output
-
-```
-## $audit-contracts — Comparative Procurement Analysis
-
-### Cohort: <N> Companies
-
-### Spending Timeline
-| Company | FY2022 | FY2023 | FY2024 | FY2025 | CAGR | FY24→25 | Flag |
-|---------|--------|--------|--------|--------|------|---------|------|
-
-### Agency Breakdown (Most Recent FY)
-| Company | DoD | HHS | DHS | DOJ | Treasury | Other | Total |
-|---------|-----|-----|-----|-----|----------|-------|-------|
-
-### Growth Anomaly Ranking
-| Rank | Company | FY24→25 Growth | Sector Avg | Anomaly Score |
-|------|---------|---------------|------------|---------------|
-
-### Lobbying-Contract Correlation
-| Company | Lobby Spend (2yr) | Contract Growth | Timing |
-|---------|------------------|-----------------|--------|
-
-### Partnership Network
-[Cross-teaming patterns within the cohort]
-
-### Revolving Door Connections
-| Company | Person | Government Role | Corporate Role | Dates |
-|---------|--------|----------------|----------------|-------|
-
-### Financial Cross-Check (Public Companies)
-| Company | SEC Gov Revenue | USASpending | Delta | Note |
-|---------|----------------|-------------|-------|------|
-
-### Forensic Hypotheses
-1. **[Company] acceleration hypothesis** — Hypothesis #ID
-   - Observation: ...
-   - Hypothesis: ...
-   - Innocent explanation: ...
-   - Falsification: ...
-   - Search plan: ...
-
-### Summary
-- Companies analyzed: N
-- Growth anomalies detected: N
-- Lobbying correlations: N
-- Revolving door connections: N
-- Hypotheses generated: N
-- Leads created: N
-- Findings recorded: N
-```
-
-## Stop Conditions
-
-- All companies' timelines extracted and growth rates calculated
-- Lobbying data cross-referenced for all companies
-- Partnership network checked (for companies with HigherGov access)
-- Financial cross-check completed for public companies
-- Revolving door check run against investigation.db
-- Hypotheses generated for all HIGH-severity anomalies
-- Findings recorded, leads spawned
-
-## Relationship to Other Skills
-
-- **`$analyze-contract`** (Tier 1): Use for deep single-contract forensics when this skill identifies a specific award worth investigating
-- **`$compare-peers`** (Tier 2): Use for financial ratio comparison if the audit reveals companies with unusual financial profiles
-- **`$screen-targets`** (Tier 0): Use for quick financial health check before running the full procurement audit
-- **`$trace-grants`** (Tier 2): Use if companies have significant nonprofit/foundation arms (e.g., defense think tanks)
-- **`$investigate-person`** (Tier 1): Use for revolving door individuals identified by the audit
-
+Return cohort identities, complete-year timeline, all-period agency breakdown
+(or explicitly filtered alternative), qualified growth comparisons, relevant
+lobbying/partnership/staffing evidence, hypotheses, IDs and artifacts. Account for
+each source track as completed/reused/partial/unavailable/not applicable. Continue
+until the requested comparison is supported or unresolved work has explicit
+evidence needs and disposition, preserving progress for long investigations.

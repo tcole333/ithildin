@@ -1,223 +1,94 @@
 ---
 name: add-registry
-description: Add a new state/country corporate registry to the unified registry system
+description: Add a state or country corporate registry adapter to the unified registry database. Use for jurisdiction-specific corporate registration, officer and filing ingestion.
 ---
 
 # $add-registry
 
-Add a new state or country corporate registry as a data source, creating an ingester that feeds into the unified `registry.db` schema.
+Accept a jurisdiction identifier. Read
+[the source integration contract](../build-infra/references/source-integration.md)
+for pinned context, verified discovery, output contracts and completion.
+Use `docs/modules/registries.md` for current adapters/access routes, and inspect
+`tools/query_registry.py` for the live unified schema instead of copying a
+historical table/field inventory.
 
-## Arguments
+## Discover the jurisdiction
 
-- Required: jurisdiction identifier (e.g., `$add-registry florida`, `$add-registry usvi`, `$add-registry bermuda`)
+Identify available entity types, original IDs, dates, officers, agents, addresses,
+filing history, raw documents and coverage gaps. Jurisdiction choice follows the
+user's question and evidenced entity/address nexus, not a fixed priority-country
+list. Inspect official documentation and the actual portal/API/bulk format;
+record successful bounded probes, authentication, rate limits and limitations.
 
-### Context Loading
-Load the active investigation context before executing:
-```bash
-uv run python tools/investigation_context.py show
-```
-This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
-Use these values instead of hardcoded names throughout this skill.
-
-## Context
-
-Corporate registries are primary sources for investigation — they show who controls entities, when they were created, who the officers are, and how structures changed over time. Each jurisdiction has its own access method:
-
-- **Best case**: Bulk download via SFTP/FTP (Florida)
-- **Good case**: Open data API (New York via Socrata)
-- **Medium case**: Web portal with searchable forms (most states, USVI)
-- **Hard case**: CAPTCHA-protected, pay-per-search (Delaware, BVI)
-
-## Existing Registry Infrastructure
+If anonymous machine access is unavailable, preserve useful paid/account,
+manual/request or archive routes under the source integration contract. Do not
+invent endpoint parameters or equate a CAPTCHA with absence of registry records.
+Use native browser tools for interactive discovery where needed.
 
 ```bash
-# Unified query tool (searches all ingested registries)
-python tools/query_registry.py search "Entity Name"
-python tools/query_registry.py officers "Person Name"
-python tools/query_registry.py address "ADDRESS"
-python tools/query_registry.py stats
-
-# Existing ingesters
-python tools/ingest_florida.py download && python tools/ingest_florida.py ingest
-python tools/ingest_newyork.py search "Entity Name"
-python tools/ingest_newyork.py ingest-batch "{primary_subject}" --with-filings
+uv run python tools/query_registry.py --help
+uv run python tools/query_registry.py search --help
+uv run python tools/query_registry.py jurisdictions
 ```
 
-## Unified Schema (registry.db)
+Reuse a suitable existing adapter where possible. Inspect representative raw
+records before mapping fields; preserve original values, occurrence identity and
+source URLs. Source-jurisdiction codes follow the existing registry conventions.
 
-All registries feed into the same tables:
+## Implement stable entity identity
 
-| Table | Purpose |
-|-------|---------|
-| `registry_entities` | One row per corporate entity (name, type, status, addresses, EIN, dates) |
-| `registry_officers` | Officers/directors/managers with titles and addresses |
-| `registry_agents` | Registered agents with addresses |
-| `registry_filings` | Filing/event history (amendments, annual reports, name changes, dissolutions) |
-| `registry_name_history` | Track entity name changes over time |
-| `registry_ingest_log` | What was ingested and when |
+Build `tools/ingest_<jurisdiction>.py` with query and ingestion operations
+appropriate to the verified access route. Use the live schema from
+`query_registry.py` and the stable-ID update pattern in
+`ingest_florida.py`; add output handling, bounded errors and provenance.
 
-Key fields for investigation:
-- `source_jurisdiction` — two-letter code (fl, ny, vi, de, vg, bm, ky)
-- `source_id` — original ID from the source registry
-- Officer title codes: president, treasurer, director, secretary, VP, manager, member
-- Filing history captures **changes** over time (director changes, address changes, name changes)
-
-## Process
-
-### 1. Research the Registry's Data Access
-
-Before writing code, understand how the registry works:
-
-```
-Questions to answer:
-- Does it have an API? (REST, SOAP, Socrata/SODA)
-- Does it have bulk downloads? (FTP, SFTP, CSV, fixed-width)
-- Is it a web portal that needs scraping? (Selenium/Playwright)
-- What anti-scraping measures exist? (CAPTCHA, rate limiting, session tokens)
-- What data fields are available? (name, officers, agent, addresses, filing history)
-- What entity types are covered? (corp, LLC, LP, nonprofit, trust, foreign)
-- Is officer/director information public? (not in Delaware)
-- Are filing histories available? (with name changes, officer changes)
-```
-
-Use `WebSearch` and `WebFetch` to examine the registry portal, its API documentation, and any existing Python scrapers on GitHub.
-
-### 2. Profile the API/Portal (MANDATORY — live discovery, not guessing)
-
-**You MUST confirm working endpoints before writing the ingester tool.** Do not write code targeting speculative or guessed API URLs. The discovery process below is not optional.
-
-**Step A: Probe for known API patterns**
-```bash
-# Test common endpoint patterns
-curl -s "https://api.example.com/search?q=test" | python3 -m json.tool | head -40
-
-# Check for Socrata/SODA
-curl -s "https://data.state.gov/api/views" | head -20
-
-# Check for FTP/SFTP
-curl -s "ftp://ftp.state.gov/" --list-only
-```
-
-**Step B: Reverse-engineer web portals**
-If the registry is a web portal with no documented API, inspect the page source to find the underlying API:
-```python
-# Use WebFetch to examine the portal's search page
-# Look for: JavaScript API calls, form action URLs, XHR endpoints, Angular/React service URLs
-```
-
-Then systematically probe discovered endpoints:
-```python
-# Write a discovery script that tries each candidate endpoint
-# Record: HTTP status, response content-type, response structure
-# A 200 with JSON is a confirmed endpoint; a 404 means try another path
-```
-
-For SFTP/FTP bulk data:
-```python
-# Connect and LIST the actual directory tree before writing parsers
-# Record: directory names, file names, file sizes, sample first lines
-# Only write field parsers after examining the actual file format
-```
-
-**Step C: Document what you found**
-Before proceeding to Step 3, you must have:
-- The exact working endpoint URL (not a list of guesses)
-- The required parameter names and formats (confirmed by a successful query)
-- The response schema (from an actual response, not speculation)
-- Rate limits and auth requirements (observed, not assumed)
-
-If discovery fails (all endpoints return errors, CAPTCHA blocks access, etc.), report the failure clearly and create a human_action item. Do not write a tool that papers over the failure with try/except loops across speculative URLs.
-
-### 3. Build the Ingester
-
-Create `tools/ingest_<jurisdiction>.py` following the pattern:
+Entity identity is the natural key `(source_jurisdiction, source_id)`, with a
+stable internal ID referenced by officers, agents, filings and name history.
+Update the existing entity in place; replacement deletion breaks those links.
+A minimal pattern, extended only with actually observed source fields:
 
 ```python
-#!/usr/bin/env python3
-"""
-<State/Country> corporate registry ingester.
-Feeds into registry.db via the unified schema.
-
-Usage:
-    python tools/ingest_<jurisdiction>.py search "query"
-    python tools/ingest_<jurisdiction>.py ingest-entity <id>
-    python tools/ingest_<jurisdiction>.py ingest-batch "query"
-"""
-
-import sys
-from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent))
-from query_registry import get_db, _rebuild_fts
-
-# ... implement search, ingest-entity, ingest-batch commands
-# Map source fields to unified schema:
-#   source_jurisdiction = "<two-letter-code>"
-#   source_id = <registry's own entity ID>
-#   entity_name, entity_type, status, formation_date, etc.
-#   INSERT OR REPLACE INTO registry_entities (...)
-#   INSERT OR IGNORE INTO registry_officers (...)
-#   INSERT OR IGNORE INTO registry_agents (...)
-#   INSERT OR IGNORE INTO registry_filings (...)
+def upsert_registry_entity(db, jurisdiction, source_id, entity_name, source_url):
+    row = db.execute(
+        """
+        INSERT INTO registry_entities (
+            source_jurisdiction, source_id, entity_name, source_url
+        ) VALUES (?, ?, ?, ?)
+        ON CONFLICT(source_jurisdiction, source_id) DO UPDATE SET
+            entity_name = excluded.entity_name,
+            source_url = COALESCE(excluded.source_url, registry_entities.source_url),
+            updated_at = CURRENT_TIMESTAMP
+        RETURNING id
+        """,
+        (jurisdiction, source_id, entity_name, source_url),
+    ).fetchone()
+    return row[0]
 ```
 
-### 4. Map Fields to Unified Schema
+Persist related rows against that returned ID in a transaction. Preserve
+historical officer/filing/name occurrences and distinguish missing values from
+source-confirmed removal. Idempotency includes rows with nullable key fields:
+SQLite uniqueness may not deduplicate NULL-containing keys automatically.
+Record source fields, record IDs, dates and raw-artifact references so the
+mapping can be audited. Rebuild/update the relevant search indexes through the
+current registry implementation.
 
-Every registry has different field names. Create a mapping:
+## Verify and deliver
 
-| Unified Field | Florida | New York | New Registry |
-|--------------|---------|----------|-------------|
-| entity_name | corp_name | current_entity_name | ? |
-| entity_type | filing_type | entity_type | ? |
-| status | status (A/I) | current_status | ? |
-| formation_date | file_date | initial_dos_filing_date | ? |
-| ein | fei_number | (not available) | ? |
-| officer_name | officer block | chairman_name | ? |
-| agent_name | ra_name | registered_agent_name | ? |
+Use isolated database fixtures for first ingest, repeat ingest, changed data,
+partial data, empty results and failures. Assert the entity ID remains unchanged,
+related officer/agent/filing rows survive, duplicate history is not introduced,
+and rollback preserves a prior valid state. Query through the unified CLI to
+verify discoverability and indexed field behavior.
 
-### 5. Test with Investigation Targets
+Choose bounded live verification targets from the pinned profile only when they
+are applicable to the jurisdiction. Prefer the profile artifact or supported
+findings tracker over an unscoped checkout-database query. Read enough source
+records to resolve mapping ambiguity; there is no fixed target/page quota.
 
-After building, test against known investigation entities:
-```bash
-# Pull current investigation targets dynamically
-python3 -c "
-import sqlite3
-db = sqlite3.connect('investigation.db')
-rows = db.execute('''
-    SELECT DISTINCT target_name FROM findings
-    WHERE finding_type IN ('financial', 'corporate')
-    UNION
-    SELECT name FROM entities
-    LIMIT 20
-''').fetchall()
-for r in rows:
-    print(r[0])
-"
-```
-
-Also search known_addresses from the investigation profile (loaded via `investigation_context.py show`).
-
-### 6. Log and Update
-
-```bash
-# Verify the ingest
-python tools/query_registry.py stats
-python tools/query_registry.py jurisdictions
-
-# Update both CLAUDE.md and AGENTS.md data source inventories
-# Update the search-all-sources skill to include registry queries
-```
-
-## Priority Jurisdictions for Investigation
-
-| Jurisdiction | Code | Why | Access |
-|-------------|------|-----|--------|
-| **Florida** | `fl` | High-volume entity registrations | SFTP bulk (DONE) |
-| **New York** | `ny` | Corporate headquarters, financial entities | SODA API (DONE) |
-| **US Virgin Islands** | `vi` | Offshore-adjacent entities, trusts | Web portal (Playwright) |
-| **New Mexico** | `nm` | Property-linked entities | REST API (DONE) |
-| **Panama** | `pa` | Offshore shells, leaked registry data | Hybrid ICIJ+Aleph (DONE) |
-| Delaware | `de` | Shell companies, privacy-favoring registrations | CAPTCHA (hard) |
-| British Virgin Islands | `vg` | Offshore shells, nominee directors | Paid per-search |
-| Bermuda | `bm` | Insurance vehicles, reinsurance structures | Limited access |
-
-Prioritize jurisdictions where the investigation profile's known_addresses are located, or where entities have been discovered during investigation.
+Complete the source-integration documentation, citation and health registration;
+update affected skill guidance only where task decisions need new information.
+Report access route, mapping, coverage, test results, acquisition manifest and
+remaining gaps. Keep parallel work under native chat supervision with inherited
+models and explicit file ownership; preserve resumable progress until the
+requested adapter is validated or its exact dependency is documented.

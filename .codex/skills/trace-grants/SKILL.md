@@ -1,290 +1,127 @@
 ---
 name: trace-grants
-description: Tier 2 grant flow network analysis — map nonprofit funding chains, detect circular flows, identify shared officers, generate coordination hypotheses
+description: Trace nonprofit grant flows and shared governance from charity filings. Use for funding-chain, reciprocal-transfer, or nonprofit coordination questions with reproducible primary evidence.
 ---
 
 # $trace-grants
 
-**TIER 2: ANALYSIS AGENT** — This skill performs grant flow network analysis using the IRS 990 bulk database (22.7M grants, 5M filings). The data extraction (grant amounts, officer lists) is Tier 1 factual work, but the network analysis (circular flow detection, shared officer mapping, co-grantor clustering) is Tier 2 pattern recognition. Every hypothesis about coordination or dark money routing MUST include falsification criteria. See `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline`.
+Investigate an organization by name or `--ein`, with optional `--depth`,
+`--min-amount` and traversal limit. Read
+`docs/RESEARCH_WORKFLOW_CONTRACT.md` for pinned context and evidence handoffs;
+use `docs/modules/financial.md` and `query_990.py <command> --help` for current
+coverage and interfaces. Create an isolated workdir and preserve it across a
+long investigation.
 
-## Arguments
+## Resolve identity and financial context
 
-- `$trace-grants "Donors Trust"` — search by name, resolve to EIN
-- `$trace-grants --ein 522166327` — direct EIN
-- `$trace-grants --ein 522166327 --depth 3` — deeper trace (default: 2)
-- `$trace-grants --ein 522166327 --min-amount 1000000` — only trace grants above threshold
-
-### Context Loading
-```bash
-uv run python tools/investigation_context.py show
-```
-
-## Process
-
-### 0. Session Setup
+Resolve the exact EIN with `search` and `lookup`; confirm name, jurisdiction,
+form coverage and years before expanding. Use `financials` to examine revenue,
+expenses and retained assets. Register the entity with its real jurisdiction.
+A local miss can require ProPublica/IRS filing discovery; it does not establish
+that the organization has no activity.
 
 ```bash
 WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
-echo "Session workdir: $WORKDIR"
+uv run python tools/query_990.py lookup "<EIN>" --output "$WORKDIR/lookup.json"
+uv run python tools/query_990.py financials "<EIN>" --output "$WORKDIR/financials.json"
+uv run python tools/query_990.py flow --help
+uv run python tools/query_990.py flow "<EIN>" \
+  --depth 2 --min-amount 50000 --limit 50 --output "$WORKDIR/flow.json"
 ```
 
-### 1. Identify Starting Entity
+The shown depth 2, minimum individual grant 50,000 and 50 edges per queried node
+are **starting defaults**. Honor explicit arguments and adapt omitted values to
+the factual question, recording every filter and reason. Small grants may matter.
 
-If given a name, resolve to EIN:
-```bash
-uv run python tools/query_990.py search "ORGANIZATION NAME" --output $WORKDIR/search.json
-```
+## Understand traversal before interpreting the graph
 
-Then pull comprehensive view:
-```bash
-uv run python tools/query_990.py lookup <EIN> --output $WORKDIR/lookup.json
-```
+`flow` alternates outgoing grants at odd depths and incoming funders at even
+depths, then checks reverse flows for discovered pairs. Depth 2 therefore finds
+co-funders of recipients, not every two-hop downstream recipient. Each per-node
+query is capped by `--limit`; an edge at the cap means possible missing frontier.
+The tool's `depth` reports the requested bound, not proof that all hops were
+visited or the graph was exhausted. EIN-missing records cannot form exact-EIN
+edges, and the amount filter is applied to individual rows before aggregation.
 
-Read the lookup output. Note: org type (501(c)(3) vs (c)(4)), revenue, assets, officers, top grants. **Record the starting entity immediately.**
+Report the observed graph's traversal, years, amount filter, edge limit and
+unresolved frontier. If the research question needs a missing downstream branch,
+query its recipient as a new seed or inspect its `filer` rows; expand only as
+needed to answer the question. Account for uncovered branches explicitly instead
+of describing the bounded graph as complete.
 
-### 2. Pull Financial Context
+Select material flows, reciprocal pairs, and governance overlaps for review
+based on relevance and evidence, not mandatory top-N finding counts. Top
+recipients and co-grantors are useful starting priorities, not a ceiling on
+follow-up. Native chat workers can independently hydrate different filings with
+inherited model settings, pinned context and unique artifacts; the parent
+reconciles every promoted amount and identity.
 
-```bash
-uv run python tools/query_990.py financials <EIN> --output $WORKDIR/financials.json
-```
+## Hydrate load-bearing evidence
 
-Review revenue and expense trends. Key context: is this organization growing? Is it spending more than it receives (drawing down assets)? What's the program expense ratio?
-
-### 3. Extract Grant Flow Network
-
-This is the core operation — build the directed grant flow graph:
-
-Use the requested `--depth` and `--min-amount` values. Default to depth `2` and
-minimum amount `50000` only when the invocation omitted those arguments.
-
-```bash
-uv run python tools/query_990.py flow <EIN> \
-  --depth <REQUESTED_DEPTH_OR_2> \
-  --min-amount <REQUESTED_MIN_AMOUNT_OR_50000> \
-  --output $WORKDIR/flow.json
-```
-
-Read the flow JSON. Key fields:
-- `nodes`: All organizations in the network with total_granted / total_received
-- `edges`: Directed grant flows with amounts, counts, and years
-- `circular_flows`: **Critical** — A↔B patterns where money flows in both directions
-- `stats`: Node count, edge count, total flow volume
-
-**Record findings for:**
-- Every circular flow (`claim-type: synthesis`, confidence: `medium` — the tool derives this from two or more filing rows)
-- Top 5 aggregate edges by amount (`claim-type: synthesis`, confidence: `medium`)
-- Nodes that are both funders and recipients (`type: "both"`) as **candidate** pass-through entities (`claim-type: synthesis`, confidence: `medium`)
-
-Preserve the primary evidence beneath each synthesis. For every load-bearing filing,
-attach an exact Schedule I/Part VII source row or verbatim XML/PDF span that includes
-the names, amount, year, and role used in the calculation. A tool label such as
-"Schedule I grant records" is method metadata, not a `source_quote`. A single raw
-filing row may be recorded separately as `direct_quote`/`confirmed` only when its
-stored quote is verbatim and the summary makes no aggregate or network inference.
-
-#### Hydrate load-bearing filing rows
-
-`flow.json` and `shared-officers.json` are aggregate discovery artifacts, not
-primary evidence. Before promoting an edge, reciprocal pair, or shared officer
-to a finding, retrieve the underlying rows and filing links:
+`flow.json` and `shared-officers` output are discovery artifacts. For each
+promoted edge or officer overlap, retrieve the underlying rows and return links:
 
 ```bash
-# Repeat for every funder EIN contributing to a promoted edge
-uv run python tools/query_990.py filer <FUNDER_EIN> \
+uv run python tools/query_990.py filer "<FUNDER_EIN>" \
   --output "$WORKDIR/filer-<FUNDER_EIN>.json"
-uv run python tools/query_990.py filings <FUNDER_EIN> \
+uv run python tools/query_990.py filings "<FUNDER_EIN>" \
   --output "$WORKDIR/filings-<FUNDER_EIN>.json"
-
-# Repeat for every organization used in a promoted shared-officer synthesis
-uv run python tools/query_990.py officers <ORG_EIN> \
+uv run python tools/query_990.py officers "<ORG_EIN>" \
   --output "$WORKDIR/officers-<ORG_EIN>.json"
-uv run python tools/query_990.py filings <ORG_EIN> \
+uv run python tools/query_990.py filings "<ORG_EIN>" \
   --output "$WORKDIR/filings-<ORG_EIN>.json"
 ```
 
-Filter grant rows by exact normalized recipient EIN and the years reported on
-the aggregate edge. Confirm that the hydrated row count and sum reproduce
-`grant_count` and `amount`; resolve any discrepancy before recording the
-finding. For officers, confirm identity, title, tax year, and overlapping tenure
-from each organization's Part VII row. Preserve the relevant return/PDF link and
-the exact row serialization or verbatim span for every evidence reference. Do
-not use aggregate tool output itself as a `source_quote`.
+Filter by exact normalized recipient EIN, observed tax years, **and the same
+per-row cash_amount threshold used by flow**. Reproduce the edge count and sum;
+resolve discrepancies before promotion. Preserve the exact Schedule I/Part VII
+row serialization or verbatim XML/PDF span and each return URL/object ID. Read
+the full relevant filing sections when purpose, accounting treatment or authority
+is load-bearing; quotes should support the resulting claim.
 
-### 4. Detect Shared Officers
+For shared officers, use `shared-officers`, then confirm the same person, title,
+tax years, overlapping tenure and role authority from the filings. For reciprocal
+flows, retain both directions and timing. Net flow measures observed transfers,
+not control. Test regranting, fiscal sponsorship, returned funds and other
+innocent explanations before advancing a coordination hypothesis.
 
-Extract the top 10 recipient EINs from the flow, then check for officer overlap:
+Use `co-grantors` for relevant recipients and `red-flags` for material entities.
+A common funding pattern may reflect program area, geography or grant cycles.
+A node with both incoming and outgoing grants is a candidate conduit; examine
+purpose, timing, governance and retained assets before classifying it.
+Hub-and-spoke shape alone does not establish a donor-advised fund or donor anonymity.
 
-```bash
-uv run python tools/query_990.py shared-officers <EIN1> <EIN2> <EIN3> ... --output $WORKDIR/shared-officers.json
-```
-
-**Record findings for each person serving on 2+ organizations in the network.** These are the human bridges connecting otherwise "independent" nonprofits.
-
-### 5. Check Co-Grantors
-
-For each of the top 3-5 recipients, find who else funds them:
-
-```bash
-uv run python tools/query_990.py co-grantors "RECIPIENT NAME" --output $WORKDIR/cograntors-<N>.json
-```
-
-This reveals the **funding constellation** around each recipient. If the same set of funders appears for multiple recipients, treat it as a coordination hypothesis, not proof. Test alternative explanations such as shared program area, geography, grant cycle, intermediary advice, or independently similar donor criteria.
-
-### 6. Red Flag Analysis
-
-Run red-flag checks on the starting entity and its top 3 recipients:
+## Cross-reference and persist
 
 ```bash
-uv run python tools/query_990.py red-flags <EIN> --output $WORKDIR/redflags-<ticker>.json
+uv run python tools/query_990.py cross-ref --output "$WORKDIR/cross-ref.json"
+uv run python tools/findings_tracker.py add --help
+uv run python tools/hypothesis_tracker.py add --help
 ```
 
-Red flags include: high compensation relative to revenue, low program expense ratio, insider transactions (Schedule L), missing governance policies (conflict of interest, whistleblower).
+Cross-ref uses shared canonical entities in the **pinned database**. Intersect its
+results with the observed grant network and validate name-only matches. Shared
+entity presence is not itself an investigation-specific finding or relationship.
 
-### 7. Cross-Reference Against Investigation
+Record findings when verified evidence advances the investigation. Aggregated
+flows and shared-officer results are synthesis, maximum medium confidence.
+Attach one reference per load-bearing return and matching
+`--source-quote "REF:<exact row/span>"` pairs. Store calculations, filters,
+timing, graph limitations and artifact paths in detail. A single verbatim primary
+row may separately be direct_quote/confirmed if its summary adds no inference.
+A tool label such as “Schedule I grant records” is not a source quote.
 
-```bash
-uv run python tools/query_990.py cross-ref --output $WORKDIR/cross-ref.json
-```
+Record coordination hypotheses with best innocent explanations, falsification
+criteria and next tests. Create evidence-linked leads for meaningful unanswered
+questions, including new entities when their role matters.
 
-Match all entities in the grant network against investigation.db. **This is where grant tracing connects to the broader investigation.** If a grant recipient is also a corporate entity, political donor, or litigation party in the investigation, that's a cross-domain connection.
+## Complete
 
-### 8. Record Findings
-
-**DB-first principle**: Record findings as you discover them, not at the end.
-
-```bash
-# Circular flow finding
-PYTHONPATH=. uv run python tools/findings_tracker.py add \
-  --target "<ORG_A>" \
-  --summary "Circular grant flow: <ORG_A> sent USD <AMOUNT_A> to <ORG_B>, which sent USD <AMOUNT_B> back. Net flow: USD <NET_AMOUNT> toward <DIRECTION>" \
-  --type financial \
-  --evidence "990:<EIN_A>" "990:<EIN_B>" \
-  --claim-type synthesis \
-  --source-quote \
-    "990:<EIN_A>:<exact Schedule I row or verbatim XML/PDF span showing A→B, amount, and year>" \
-    "990:<EIN_B>:<exact Schedule I row or verbatim XML/PDF span showing B→A, amount, and year>" \
-  --sources 990 \
-  --confidence medium
-
-# Aggregate grant flow finding
-PYTHONPATH=. uv run python tools/findings_tracker.py add \
-  --target "<FUNDER>" \
-  --summary "Grant: <FUNDER> sent USD <AMOUNT> to <RECIPIENT> over <N> grants (<YEARS>)" \
-  --type financial \
-  --evidence "990:<FILER_EIN>" \
-  --claim-type synthesis \
-  --source-quote "990:<FILER_EIN>:<exact source-row serialization or verbatim span for every load-bearing grant, including recipient, amount, and year>" \
-  --sources 990 \
-  --confidence medium
-
-# Shared officer finding (synthesis across filings)
-PYTHONPATH=. uv run python tools/findings_tracker.py add \
-  --target "<PERSON_NAME>" \
-  --summary "<PERSON> serves as officer at <N> organizations in grant network: <ORG1>, <ORG2>, ..." \
-  --type relationship \
-  --evidence "990:<EIN1>" "990:<EIN2>" \
-  --claim-type synthesis \
-  --source-quote \
-    "990:<EIN1>:<exact Part VII row or verbatim XML/PDF span naming the person, title, and year at ORG1>" \
-    "990:<EIN2>:<exact Part VII row or verbatim XML/PDF span naming the person, title, and year at ORG2>" \
-  --sources 990 \
-  --confidence medium
-```
-
-Register entities:
-```bash
-PYTHONPATH=. uv run python tools/entity_tracker.py add-entity \
-  --name "<ORG NAME>" --entity-type nonprofit --jurisdiction "<STATE>" \
-  --source "990:<EIN>"
-```
-
-### 9. Spawn Follow-Up Leads
-
-```bash
-# Undiscovered entity in the network
-PYTHONPATH=. uv run python tools/lead_tracker.py add \
-  --title "Trace grants: <ORG> — received USD <AMOUNT> from <FUNDER>, unknown to investigation" \
-  --category entity --priority medium \
-  --target "<ORG NAME>" --source "agent:trace-grants" \
-  --evidence "990:<FILER_EIN>"
-
-# Person appearing across multiple orgs
-PYTHONPATH=. uv run python tools/lead_tracker.py add \
-  --title "Investigate <PERSON> — officer at <N> nonprofits in <NETWORK_NAME> grant network" \
-  --category person --priority medium \
-  --target "<PERSON>" --source "agent:trace-grants" \
-  --evidence "990:<EIN1>" "990:<EIN2>"
-```
-
-### 10. Output
-
-```
-## $trace-grants: <STARTING_ORG> (EIN: <EIN>)
-
-### Entity Profile
-- Type: 501(c)(3) / 501(c)(4)
-- Revenue: $X (FY<YEAR>)
-- Assets: $X
-- Officers: N
-
-### Grant Flow Network (depth <N>, min $<AMOUNT>)
-- Nodes: N organizations
-- Edges: N grant flows
-- Total flow: $X
-- Circular flows: N detected
-
-### Top Outgoing Grants
-| # | Recipient | EIN | Amount | Grants | Years |
-|---|-----------|-----|--------|--------|-------|
-
-### Top Incoming Grants (if applicable)
-| # | Funder | EIN | Amount | Grants | Years |
-|---|--------|-----|--------|--------|-------|
-
-### Circular Flows
-| Pair | A→B | B→A | Net Flow | Direction |
-|------|-----|-----|----------|-----------|
-
-### Shared Officers
-| Person | Orgs | Titles |
-|--------|------|--------|
-
-### Co-Grantor Clusters
-[For each top recipient: who else funds them?]
-
-### Red Flags
-[Financial ratio anomalies, governance gaps, insider transactions]
-
-### Cross-References with Investigation
-[Entities appearing in both grant network and investigation.db]
-
-### Summary
-- Findings recorded: N
-- Leads created: N
-- Entities registered: N
-```
-
-## Key Analytical Patterns
-
-**Circular flows**: Reciprocal transfers can inflate both organizations' reported activity and may indicate regranting, pass-through behavior, fiscal sponsorship, returned funds, or coordinated funding. If A sends $60M to B and B sends $260M back, the net direction measures the net transfer in the observed rows; it does **not** establish control or make one entity the other's fundraising arm. Treat control as a hypothesis and test grant purposes, transaction timing, governance authority, agreements, and the best innocent explanation.
-
-**Hub-and-spoke topology**: One central funder (Donors Trust) distributing to many recipients is a donor-advised fund pattern. The hub anonymizes the original donor.
-
-**Pass-through entities**: Organizations with type "both" (large incoming AND outgoing grants) and low program expenses are candidate conduits, not proven pass-throughs. Alternatives include grantmaking foundations, fiscal sponsors, pooled funds, accounting differences, or a temporary campaign. Verify purpose descriptions, timing, governance, and retained assets before classifying the organization.
-
-**501(c)(4) coverage is form-specific**: IRS TEOS and ProPublica include 501(c)(4) organizations that file Form 990 or 990-EZ, so query the organization before declaring an opacity gap. If only Form 990-N exists for a year, detailed finances and outgoing grants are unavailable for that year. If a full return exists, inspect it normally. Separately note that contributor identities are often not publicly disclosed for non-private-foundation filers and that recipient-EIN coverage can be incomplete. State the exact missing form, year, field, or identity rather than treating every 501(c)(4) as invisible.
-
-**Shared officers as structural bridges**: A shared officer creates possible governance or information overlap, but does not by itself prove functional coordination. Verify that the records refer to the same person, that service periods overlap, and that the role carried relevant authority. Test alternatives such as a common professional director, accountant, legal adviser, affiliate structure, or non-overlapping tenure before advancing a coordination hypothesis.
-
-## Stop Conditions
-
-- Flow network reached the requested depth or exhausted its frontier; the
-  effective depth and minimum-amount threshold are recorded
-- Every promoted aggregate edge/shared-officer result was reproduced from
-  hydrated filing rows and linked to the relevant return/PDF
-- Circular flows recorded as findings
-- Shared officers checked across top recipients
-- Co-grantors analyzed for top 3-5 recipients
-- Red flags checked for starting entity + top recipients
-- Cross-reference against investigation.db complete
-- All findings recorded, leads spawned for undiscovered entities
+Report seed identity, form/year coverage, observed graph and filters, material
+flows and shared governance, competing explanations, findings/leads, and source
+artifacts. Form coverage is specific: a 501(c)(4) may file a full 990/990-EZ;
+990-N lacks detailed finances, and contributor identities or recipient EINs may
+be absent. State the missing year/form/field instead of treating all (c)(4)s as
+invisible. Finish when the requested question is answered or each unresolved
+branch has a recorded evidence need and disposition; keep resumable progress
+during long work.
