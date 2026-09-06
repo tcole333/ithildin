@@ -13,8 +13,17 @@ Usage:
     uv run python tools/query_usaspending.py search "Palantir"
     uv run python tools/query_usaspending.py recipient "Palantir Technologies"
     uv run python tools/query_usaspending.py awards "PALANTIR TECHNOLOGIES INC." --limit 10
-    uv run python tools/query_usaspending.py uei "RN99S3S7N977"
+    uv run python tools/query_usaspending.py awards --uei "RN99S3S7N977"
     uv run python tools/query_usaspending.py transactions-keyword "skip tracing" --all-pages
+
+Structured output (--output/--json) uses an envelope with query, retrieval,
+status, errors, and results. Former bare row lists now live under results;
+recipient and award detail fields remain available at the top level. A successful
+empty response has status=success. Acquisition failures write the envelope before
+exiting 1, retaining any rows already acquired with status=partial. A requested
+single page can succeed while retrieval.complete is false; the keyword safety
+cap instead has status=partial, errors=[], and a continuation page (exit 0).
+retrieval.complete is null when the API does not report pagination coverage.
 """
 
 import argparse
@@ -23,7 +32,8 @@ import os
 import re
 import ssl
 import sys
-from datetime import date
+from datetime import date, datetime, timezone
+from http.client import HTTPException
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
@@ -70,6 +80,16 @@ def _advanced_search_limit(value):
     return limit
 
 
+def _positive_page(value):
+    try:
+        page = int(value)
+    except (TypeError, ValueError) as exc:
+        raise argparse.ArgumentTypeError("page must be a positive integer") from exc
+    if page < 1:
+        raise argparse.ArgumentTypeError("page must be a positive integer")
+    return page
+
+
 def _agency_filter(args):
     """Build an awarding-agency filter with an explicit hierarchy tier."""
     agency = getattr(args, "agency", None)
@@ -81,6 +101,27 @@ def _agency_filter(args):
         "name": agency,
     }
 
+class AcquisitionError(Exception):
+    """An upstream response could not be acquired or parsed."""
+
+    def __init__(self, kind, message):
+        super().__init__(message)
+        self.kind = kind
+
+
+def _read_response(req, **kwargs):
+    try:
+        with urlopen(req, timeout=60, context=SSL_CONTEXT, **kwargs) as resp:
+            return json.loads(resp.read().decode())
+    except HTTPError as exc:
+        body = exc.read().decode(errors="replace")[:500]
+        raise AcquisitionError("http", f"HTTP {exc.code}: {body}") from exc
+    except (URLError, OSError, HTTPException) as exc:
+        raise AcquisitionError("transport", str(getattr(exc, "reason", exc))) from exc
+    except (ValueError, UnicodeError) as exc:
+        raise AcquisitionError("invalid_response", f"Invalid JSON response: {exc}") from exc
+
+
 def _fetch_post(endpoint, data):
     """Fetch from USAspending API using POST."""
     url = f"{BASE_URL}{endpoint}"
@@ -89,16 +130,7 @@ def _fetch_post(endpoint, data):
         "User-Agent": "OSINT-Research/1.0",
     })
     
-    try:
-        with urlopen(req, data=json.dumps(data).encode(), timeout=60, context=SSL_CONTEXT) as resp:
-            return json.loads(resp.read().decode())
-    except HTTPError as e:
-        body = e.read().decode()[:500]
-        print(f"ERROR: HTTP {e.code}: {body}", file=sys.stderr)
-        return None
-    except URLError as e:
-        print(f"ERROR: {e.reason}", file=sys.stderr)
-        return None
+    return _read_response(req, data=json.dumps(data).encode())
 
 def _fetch_get(endpoint, params=None):
     """Fetch from USAspending API using GET."""
@@ -109,31 +141,115 @@ def _fetch_get(endpoint, params=None):
         "User-Agent": "OSINT-Research/1.0",
     })
     
-    try:
-        with urlopen(req, timeout=60, context=SSL_CONTEXT) as resp:
-            return json.loads(resp.read().decode())
-    except HTTPError as e:
-        body = e.read().decode()[:500]
-        print(f"ERROR: HTTP {e.code}: {body}", file=sys.stderr)
-        return None
-    except URLError as e:
-        print(f"ERROR: {e.reason}", file=sys.stderr)
-        return None
+    return _read_response(req)
+
+
+class _Query:
+    """Keep request provenance and errors local to one command invocation."""
+
+    def __init__(self, args, command):
+        self.args = args
+        self.query = {
+            key: value for key, value in vars(args).items()
+            if key not in {"output", "json_out", "command"}
+        }
+        self.query["command"] = command
+        self.requests = []
+        self.errors = []
+
+    def error(self, kind, message, **context):
+        self.errors.append({"kind": kind, "message": message, **context})
+        print(f"ERROR: {message}", file=sys.stderr)
+
+    def fetch(self, endpoint, payload=None, *, detail=False, allow_list=False):
+        request = {"endpoint": endpoint, "method": "GET" if payload is None else "POST"}
+        if payload is not None:
+            request["payload"] = payload
+        self.requests.append(request)
+        try:
+            response = (
+                _fetch_get(endpoint) if payload is None
+                else _fetch_post(endpoint, payload)
+            )
+            if allow_list and isinstance(response, list):
+                response = {"results": response}
+            if not isinstance(response, dict) or (detail and not response):
+                raise AcquisitionError("invalid_response", "Expected a JSON object response")
+            if not detail:
+                rows = response.get("results")
+                if not isinstance(rows, list) or any(not isinstance(row, dict) for row in rows):
+                    raise AcquisitionError("invalid_response", "Expected a results list of objects")
+                request["returned_count"] = len(rows)
+            request["status"] = "success"
+            request["page_metadata"] = response.get("page_metadata")
+            if "messages" in response:
+                request["messages"] = response["messages"]
+            return response
+        except AcquisitionError as exc:
+            request["status"] = "error"
+            self.error(exc.kind, str(exc), endpoint=endpoint)
+            return None
+
+    def write(self, results, *, summary, extra=None, pagination=None, partial=False):
+        """Emit before exiting on failure, including successfully acquired rows."""
+        output = dict(extra or {})
+        query = {**self.query, **output.pop("query", {})}
+        continuation = (pagination or {}).get("has_next")
+        complete = not (
+            self.errors or partial or continuation
+            or (pagination or {}).get("requested_page", 1) > 1
+        )
+        if complete and pagination is not None and continuation is None:
+            complete = None  # The API did not report whether more rows exist.
+        output.update({
+            "query": query,
+            "retrieval": {
+                "retrieved_at": datetime.now(timezone.utc).isoformat(),
+                "complete": complete,
+                "requests": self.requests,
+            },
+            "status": (
+                "partial" if (self.errors and results) or partial
+                else "error" if self.errors else "success"
+            ),
+            "errors": self.errors,
+            "results": results,
+        })
+        if pagination is not None:
+            output["pagination"] = pagination
+        handled = write_output(
+            output, self.args, summary=summary,
+            result_count=None if output["status"] == "error" else len(results),
+        )
+        if self.errors:
+            if not handled:
+                print(json.dumps(output, indent=2))
+            raise SystemExit(1)
+        return handled
+
+
+def _pagination(response, payload):
+    metadata = (response or {}).get("page_metadata")
+    metadata = metadata if isinstance(metadata, dict) else {}
+    page = payload.get("page", 1)
+    return {
+        "requested_page": page,
+        "requested_limit": payload.get("limit"),
+        "returned_count": len((response or {}).get("results", [])),
+        "reported_total": metadata.get("total"),
+        "has_next": metadata.get("hasNext"),
+        "next_page": metadata.get("next") or (page + 1 if metadata.get("hasNext") else None),
+        "raw": metadata,
+    }
 
 def cmd_search(args):
     """Search for recipients using the autocomplete endpoint."""
+    run = _Query(args, "search")
     data = {"search_text": args.query}
-    result = _fetch_post("/autocomplete/recipient/", data)
+    result = run.fetch("/autocomplete/recipient/", data)
+    results = (result or {}).get("results", [])
     
-    if not result:
-        return
-
-    results = result.get("results", [])
-    
-    if write_output(results, args, summary=f"USAspending search '{args.query}'"):
-        return
-    if getattr(args, "json_out", False):
-        print(json.dumps(results, indent=2))
+    if run.write(results, summary=f"USAspending search '{args.query}'"):
         return
 
     print(f"Found {len(results)} recipient matches for '{args.query}':")
@@ -144,6 +260,7 @@ def cmd_search(args):
 
 def cmd_awards(args):
     """Search for specific awards by recipient name or UEI."""
+    run = _Query(args, "awards")
     # Group types: contracts (A, B, C, D), grants (02, 03, 04, 05), loans (07, 08), insurance (09), direct payments (10, 11)
     # The API throws a 422 if you mix these groups.
     if args.grants:
@@ -174,35 +291,33 @@ def cmd_awards(args):
         "page": args.page
     }
     
-    result = _fetch_post("/search/spending_by_award/", data)
-    if not result:
-        return
-
-    results = result.get("results", [])
+    result = run.fetch("/search/spending_by_award/", data)
+    results = (result or {}).get("results", [])
     
-    if write_output(results, args, summary=f"USAspending awards for '{args.query or args.uei}'"):
-        return
-    if getattr(args, "json_out", False):
-        print(json.dumps(results, indent=2))
+    if run.write(results, summary=f"USAspending awards for '{args.query or args.uei}'",
+                 pagination=_pagination(result, data)):
         return
 
     print(f"Found {len(results)} awards (Limit: {args.limit}):")
     for r in results:
-        amt = f"${r.get('Award Amount', 0):,.2f}"
+        amt = _fmt_money(r.get('Award Amount'))
         print(f"  {r.get('Award ID')} | {amt} | {r.get('Recipient Name')}")
         print(f"    Agency: {r.get('Awarding Agency')} / {r.get('Awarding Sub Agency')}")
         print(f"    Dates: {r.get('Start Date')} to {r.get('End Date')}")
-        print(f"    Desc: {r.get('Description')[:100]}...")
+        print(f"    Desc: {(r.get('Description') or '')[:100]}...")
         print()
 
 def cmd_recipient(args):
     """Get detailed recipient profile and children/parent info."""
+    run = _Query(args, "recipient")
     # First find the recipient to get the hash (required for profile endpoint)
     search_data = {"search_text": args.query}
-    search_result = _fetch_post("/autocomplete/recipient/", search_data)
+    search_result = run.fetch("/autocomplete/recipient/", search_data)
     
-    if not search_result or not search_result.get("results"):
-        print(f"No recipient found matching '{args.query}'")
+    if not (search_result or {}).get("results"):
+        if not run.write([], summary=f"USAspending recipient '{args.query}'",
+                         extra={"recipient": None, "spending_by_agency": None}):
+            print(f"No recipient found matching '{args.query}'")
         return
 
     # Use the first match
@@ -219,24 +334,22 @@ def cmd_recipient(args):
     }
     
     # Spending by agency
-    agency_spending = _fetch_post("/search/spending_by_category/awarding_agency/", spending_data)
+    agency_spending = run.fetch("/search/spending_by_category/awarding_agency/", spending_data)
     agency_results = (
         agency_spending.get("results", [])
         if isinstance(agency_spending, dict)
-        else []
+        else None
     )
     summary = {
         "recipient": recipient,
         "spending_by_agency": agency_results,
     }
-    if write_output(
-        summary,
-        args,
+    if run.write(
+        [recipient],
+        extra=summary,
+        pagination=_pagination(agency_spending, spending_data),
         summary=f"USAspending recipient summary for '{args.query}'",
     ):
-        return
-    if getattr(args, "json_out", False):
-        print(json.dumps(summary, indent=2))
         return
 
     print(f"Recipient: {recipient_name}")
@@ -253,6 +366,7 @@ def cmd_covid(args):
     """Search for COVID-19 relief awards (PPP, EIDL, etc) using DEFC.
     Searches multiple groups (contracts, grants, loans) separately to avoid API 422.
     """
+    run = _Query(args, "covid")
     groups = {
         "Contracts": CONTRACT_AWARD_TYPES,
         "Grants": GRANT_AWARD_TYPES,
@@ -262,6 +376,7 @@ def cmd_covid(args):
     
     all_results = []
     
+    group_pagination = {}
     for group_name, types in groups.items():
         filters = {
             "def_codes": COVID_DEFC,
@@ -279,14 +394,22 @@ def cmd_covid(args):
             "limit": args.limit
         }
         
-        result = _fetch_post("/search/spending_by_award/", data)
+        result = run.fetch("/search/spending_by_award/", data)
+        group_pagination[group_name] = _pagination(result, data)
         if result and result.get("results"):
             all_results.extend(result.get("results"))
             if len(all_results) >= args.limit:
                 break
 
     results = all_results[:args.limit]
-    if write_output(results, args, summary=f"USAspending COVID awards for '{args.query}'"):
+    unqueried_groups = [name for name in groups if name not in group_pagination]
+    partial = bool(unqueried_groups) or len(all_results) > args.limit or any(
+        page["has_next"] for page in group_pagination.values()
+    )
+    if run.write(results, summary=f"USAspending COVID awards for '{args.query}'",
+                 extra={"group_pagination": group_pagination,
+                        "unqueried_groups": unqueried_groups,
+                        "omitted_count": len(all_results) - len(results)}, partial=partial):
         return
     
     if not results:
@@ -305,6 +428,7 @@ def cmd_covid(args):
 
 def cmd_loans(args):
     """Search specifically for loan awards (including PPP/EIDL)."""
+    run = _Query(args, "loans")
     filters = {
         "award_type_codes": LOAN_AWARD_TYPES,
         "recipient_search_text": [args.query]
@@ -320,12 +444,10 @@ def cmd_loans(args):
         "limit": args.limit
     }
     
-    result = _fetch_post("/search/spending_by_award/", data)
-    if not result:
-        return
-
-    results = result.get("results", [])
-    if write_output(results, args, summary=f"USAspending loans for '{args.query}'"):
+    result = run.fetch("/search/spending_by_award/", data)
+    results = (result or {}).get("results", [])
+    if run.write(results, summary=f"USAspending loans for '{args.query}'",
+                 pagination=_pagination(result, data)):
         return
     
     print(f"Found {len(results)} loan awards:")
@@ -357,7 +479,7 @@ def _is_generated_award_identifier(award_id):
     return award_id.isdigit() or award_id.startswith(("CONT_", "ASST_"))
 
 
-def _resolve_piid(piid):
+def _resolve_piid(piid, run):
     """Resolve one exact procurement PIID to a generated award identifier."""
     exact_matches = []
     unavailable_groups = 0
@@ -380,10 +502,14 @@ def _resolve_piid(piid):
             "limit": ADVANCED_SEARCH_LIMIT_MAX,
             "page": 1,
         }
-        response = _fetch_post("/search/spending_by_award/", payload)
+        response = run.fetch("/search/spending_by_award/", payload)
         if response is None:
             unavailable_groups += 1
             continue
+        if _pagination(response, payload)["has_next"]:
+            run.error("incomplete_resolution", "PIID resolution requires additional search pages",
+                      endpoint="/search/spending_by_award/")
+            unavailable_groups += 1
         for row in response.get("results", []):
             if str(row.get("Award ID") or "").strip().upper() != piid.upper():
                 continue
@@ -405,21 +531,21 @@ def _resolve_piid(piid):
             f"{unavailable_groups} USAspending award search request(s) failed.",
             file=sys.stderr,
         )
-        return None
+        return None, list(unique_matches.values())
     if len(unique_matches) == 1:
-        return next(iter(unique_matches))
+        return next(iter(unique_matches)), list(unique_matches.values())
     if not unique_matches:
-        print(
-            f"ERROR: No exact USAspending award matched PIID {piid}. "
+        run.error(
+            "unresolved_identifier",
+            f"No exact USAspending award matched PIID {piid}. "
             "Run the 'awards' command to inspect candidate identifiers.",
-            file=sys.stderr,
         )
-        return None
+        return None, []
 
-    print(
-        f"ERROR: PIID {piid} matched {len(unique_matches)} awards. "
+    run.error(
+        "ambiguous_identifier",
+        f"PIID {piid} matched {len(unique_matches)} awards. "
         "Pass one generated_unique_award_id explicitly:",
-        file=sys.stderr,
     )
     for generated_id, row in unique_matches.items():
         agency = row.get("Awarding Agency") or "unknown agency"
@@ -428,23 +554,24 @@ def _resolve_piid(piid):
             f"  {generated_id} | {agency} | {recipient}",
             file=sys.stderr,
         )
-    return None
+    return None, list(unique_matches.values())
 
 
 def cmd_award_detail(args):
     """Get full detail for a generated award identifier or exact plain PIID."""
+    run = _Query(args, "award")
     requested_id = str(args.award_id).strip()
     award_id = requested_id
     if not _is_generated_award_identifier(requested_id):
-        award_id = _resolve_piid(requested_id)
+        award_id, candidates = _resolve_piid(requested_id, run)
         if award_id is None:
-            raise SystemExit(1)
+            run.write([], summary=f"USAspending award detail {requested_id}",
+                      extra={"resolution_candidates": candidates})
 
-    result = _fetch_get(f"/awards/{award_id}/")
-    if not result:
-        raise SystemExit(1)
+    result = run.fetch(f"/awards/{award_id}/", detail=True)
 
-    if write_output(result, args, summary=f"USAspending award detail {requested_id}"):
+    if run.write([result] if result is not None else [], extra=result,
+                 summary=f"USAspending award detail {requested_id}"):
         return
 
     print(f"Award: {result.get('generated_unique_award_id', 'N/A')}")
@@ -475,6 +602,7 @@ def cmd_award_detail(args):
 
 def cmd_subawards(args):
     """Search subaward/subcontractor data."""
+    run = _Query(args, "subawards")
     filters = {}
 
     if args.uei:
@@ -510,16 +638,15 @@ def cmd_subawards(args):
         "order": "desc",
     }
 
-    result = _fetch_post("/search/spending_by_award/", data)
-    if not result:
-        return
-
-    results = result.get("results", [])
+    result = run.fetch("/search/spending_by_award/", data)
+    results = (result or {}).get("results", [])
     if not _subaward_results_in_scope(results, args):
-        raise SystemExit(1)
+        run.error("scope_mismatch", "USAspending returned out-of-scope subawards")
+        run.write([], summary="USAspending subaward scope validation failed")
     total = len(results)
 
-    if write_output(results, args, summary=f"USAspending subawards ({total} total)"):
+    if run.write(results, summary=f"USAspending subawards ({total} returned)",
+                 pagination=_pagination(result, data)):
         return
 
     print(f"Found {total} subawards (showing {len(results)}):")
@@ -591,6 +718,7 @@ def _subaward_results_in_scope(results, args):
 
 def cmd_transactions(args):
     """Search individual transaction records."""
+    run = _Query(args, "transactions")
     filters = {}
 
     if args.uei:
@@ -623,9 +751,7 @@ def cmd_transactions(args):
         "order": "desc"
     }
 
-    result = _fetch_post("/search/spending_by_transaction/", data)
-    if not result:
-        return
+    result = run.fetch("/search/spending_by_transaction/", data) or {}
 
     results = result.get("results", [])
     page_metadata = result.get("page_metadata")
@@ -670,15 +796,6 @@ def cmd_transactions(args):
                 "requested UEI before combining queries."
             ),
         },
-        "pagination": {
-            "requested_page": args.page,
-            "requested_limit": args.limit,
-            "returned_count": len(results),
-            "reported_total": reported_total,
-            "has_next": page_metadata.get("hasNext"),
-            "next_page": page_metadata.get("next"),
-            "raw": page_metadata,
-        },
         "returned_recipients": [
             {"recipient_uei": uei, "recipient_name": name}
             for uei, name in returned_recipients
@@ -696,7 +813,8 @@ def cmd_transactions(args):
     else:
         summary += ", overall total not reported"
     summary += ")"
-    if write_output(output, args, summary=summary, result_count=len(results)):
+    if run.write(results, summary=summary, extra=output,
+                 pagination=_pagination(result, data)):
         return
 
     if reported_total is None:
@@ -778,16 +896,16 @@ def _load_transactions_keyword_file(path):
     try:
         with open(path) as fixture_file:
             response = json.load(fixture_file)
-    except (OSError, json.JSONDecodeError) as exc:
+    except (OSError, json.JSONDecodeError, UnicodeError) as exc:
         print(
             f"ERROR: Could not read USAspending response {path}: {exc}",
             file=sys.stderr,
         )
         return None
 
-    if not isinstance(response, dict) or not isinstance(
-        response.get("results"), list
-    ):
+    if (not isinstance(response, dict)
+            or not isinstance(response.get("results"), list)
+            or any(not isinstance(row, dict) for row in response["results"])):
         print(
             "ERROR: Saved USAspending response must contain a results list",
             file=sys.stderr,
@@ -827,45 +945,77 @@ def _print_keyword_transactions(results):
 
 def cmd_transactions_keyword(args):
     """Search transaction descriptions by keyword, including modifications."""
+    run = _Query(args, "transactions-keyword")
+    results = []
+    start_page = getattr(args, "page", 1)
+    pagination = _pagination(None, {"page": start_page, "limit": args.limit})
+    pagination.update({"pages_retrieved": 0, "stopped_reason": None})
+    partial = False
+    source = {}
     if args.from_file:
         response = _load_transactions_keyword_file(args.from_file)
         if response is None:
-            return
-        results = response.get("results", [])
+            run.error("invalid_file", "Could not load saved USAspending response",
+                      path=args.from_file)
+        else:
+            results = response["results"]
+            run.requests.append({"method": "FILE", "path": args.from_file,
+                                 "status": "success", "returned_count": len(results)})
+            saved_pagination = response.get("pagination")
+            if isinstance(saved_pagination, dict):
+                pagination.update(saved_pagination)
+            else:
+                pagination.update(_pagination(response, {"page": start_page, "limit": args.limit}))
+                pagination["pages_retrieved"] = 1
+            pagination["stopped_reason"] = "from_file"
+            source = {"source_query": response.get("query"),
+                      "source_retrieval": response.get("retrieval")}
+            partial = response.get("status") == "partial"
+            if response.get("errors") or response.get("status") == "error":
+                run.error("saved_acquisition_error", "Saved response contains acquisition errors")
     else:
-        results = []
         page_cap = 50 if args.all_pages else 1
-        for page in range(1, page_cap + 1):
+        for page in range(start_page, start_page + page_cap):
             payload = _transactions_keyword_payload(args, page)
-            response = _fetch_post(
+            response = run.fetch(
                 "/search/spending_by_transaction/", payload
             )
-            if not response:
-                return
-            results.extend(response.get("results", []))
-            has_next = bool(
-                response.get("page_metadata", {}).get("hasNext")
-            )
-            if not args.all_pages or not has_next:
+            if response is None:
+                pagination.update({"next_page": page, "has_next": True,
+                                   "stopped_reason": "acquisition_error"})
                 break
-            if page == page_cap:
+            results.extend(response["results"])
+            pages_retrieved = pagination["pages_retrieved"] + 1
+            pagination.update(_pagination(response, payload))
+            pagination.update({"requested_page": start_page,
+                               "pages_retrieved": pages_retrieved})
+            has_next = pagination["has_next"]
+            if not args.all_pages or not has_next:
+                pagination["stopped_reason"] = (
+                    "requested_page" if has_next else
+                    "exhausted" if has_next is False else "pagination_unreported"
+                )
+                break
+            if pages_retrieved == page_cap:
+                partial = True
+                pagination["stopped_reason"] = "page_cap"
                 print(
                     "WARNING: Stopped after the 50-page safety cap "
                     "while USAspending still reported another page.",
                     file=sys.stderr,
                 )
 
-    if write_output(
+    pagination["returned_count"] = len(results)
+    if run.write(
         results,
-        args,
+        pagination=pagination,
+        partial=partial,
+        extra=source,
         summary=(
             f"USAspending transactions matching '{args.keyword}' "
             f"({len(results)} returned)"
         ),
     ):
-        return
-    if getattr(args, "json_out", False):
-        print(json.dumps(results, indent=2))
         return
 
     print(f"Found {len(results)} transactions matching '{args.keyword}':")
@@ -874,6 +1024,7 @@ def cmd_transactions_keyword(args):
 
 def cmd_spending_by_geography(args):
     """Analyze spending patterns by geographic area."""
+    run = _Query(args, "geography")
     filters = {}
 
     if args.query:
@@ -894,13 +1045,10 @@ def cmd_spending_by_geography(args):
         "filters": filters,
     }
 
-    result = _fetch_post("/search/spending_by_geography/", data)
-    if not result:
-        return
+    result = run.fetch("/search/spending_by_geography/", data)
+    results = (result or {}).get("results", [])
 
-    results = result.get("results", [])
-
-    if write_output(results, args, summary=f"USAspending geographic spending ({len(results)} regions)"):
+    if run.write(results, summary=f"USAspending geographic spending ({len(results)} regions)"):
         return
 
     # Sort by amount descending
@@ -918,6 +1066,7 @@ def cmd_spending_by_geography(args):
 
 def cmd_spending_over_time(args):
     """Analyze spending trends over time."""
+    run = _Query(args, "timeline")
     filters = {}
 
     if args.query:
@@ -933,13 +1082,10 @@ def cmd_spending_over_time(args):
         "filters": filters,
     }
 
-    result = _fetch_post("/search/spending_over_time/", data)
-    if not result:
-        return
+    result = run.fetch("/search/spending_over_time/", data)
+    results = (result or {}).get("results", [])
 
-    results = result.get("results", [])
-
-    if write_output(results, args, summary=f"USAspending spending over time ({len(results)} periods)"):
+    if run.write(results, summary=f"USAspending spending over time ({len(results)} periods)"):
         return
 
     print(f"Spending by {args.group}:")
@@ -959,6 +1105,7 @@ def cmd_spending_over_time(args):
 
 def cmd_top_recipients(args):
     """Find top recipients by spending amount."""
+    run = _Query(args, "top-recipients")
     filters = {}
 
     if args.agency:
@@ -983,13 +1130,11 @@ def cmd_top_recipients(args):
         "page": 1,
     }
 
-    result = _fetch_post("/search/spending_by_category/recipient/", data)
-    if not result:
-        return
+    result = run.fetch("/search/spending_by_category/recipient/", data)
+    results = (result or {}).get("results", [])
 
-    results = result.get("results", [])
-
-    if write_output(results, args, summary=f"Top {len(results)} recipients"):
+    if run.write(results, summary=f"Top {len(results)} recipients",
+                 pagination=_pagination(result, data)):
         return
 
     print("Top recipients:")
@@ -1003,13 +1148,11 @@ def cmd_top_recipients(args):
 
 def cmd_agencies(args):
     """List top-tier federal agencies."""
-    result = _fetch_get("/references/toptier_agencies/")
-    if not result:
-        return
+    run = _Query(args, "agencies")
+    result = run.fetch("/references/toptier_agencies/", allow_list=True)
+    results = (result or {}).get("results", [])
 
-    results = result.get("results", result) if isinstance(result, dict) else result
-
-    if write_output(results, args, summary="USAspending toptier agencies"):
+    if run.write(results, summary="USAspending toptier agencies"):
         return
 
     if isinstance(results, list):
@@ -1157,6 +1300,8 @@ def main():
         action="store_true",
         help="Fetch every page, capped at 50",
     )
+    p.add_argument("--page", type=_positive_page, default=1,
+                   help="Starting page (use pagination.next_page to resume)")
     p.add_argument(
         "--from-file",
         metavar="PATH",

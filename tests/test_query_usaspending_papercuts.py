@@ -10,7 +10,7 @@ import pytest
 from tools import query_usaspending
 
 
-def test_award_detail_404_exits_nonzero_without_writing(
+def test_award_detail_404_exits_nonzero_with_error_envelope(
     monkeypatch: pytest.MonkeyPatch,
     tmp_path,
     capsys: pytest.CaptureFixture[str],
@@ -36,7 +36,10 @@ def test_award_detail_404_exits_nonzero_without_writing(
         query_usaspending.cmd_award_detail(args)
 
     assert exc_info.value.code == 1
-    assert not output.exists()
+    saved = json.loads(output.read_text())
+    assert saved["status"] == "error"
+    assert saved["results"] == []
+    assert saved["errors"][0]["kind"] == "http"
     assert 'ERROR: HTTP 404: {"detail":"Not found."}' in capsys.readouterr().err
 
 
@@ -117,7 +120,10 @@ def test_award_detail_reports_upstream_503_without_claiming_no_match(
         )
 
     assert exc_info.value.code == 1
-    assert not output.exists()
+    saved = json.loads(output.read_text())
+    assert saved["status"] == "error"
+    assert saved["results"] == []
+    assert len(saved["errors"]) == 2
     stderr = capsys.readouterr().err
     assert stderr.count("ERROR: HTTP 503") == 2
     assert "2 USAspending award search request(s) failed" in stderr
@@ -285,10 +291,12 @@ def test_recipient_writes_structured_summary_to_output(
 
     query_usaspending.cmd_recipient(args)
 
-    assert json.loads(output.read_text()) == {
-        "recipient": recipient,
-        "spending_by_agency": agency_rows,
-    }
+    saved = json.loads(output.read_text())
+    assert saved["recipient"] == recipient
+    assert saved["spending_by_agency"] == agency_rows
+    assert saved["results"] == [recipient]
+    assert saved["status"] == "success"
+    assert saved["errors"] == []
     stdout = capsys.readouterr().out
     assert "saved to" in stdout
     assert "Recipient: PALANTIR" not in stdout

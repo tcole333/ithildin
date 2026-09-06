@@ -47,6 +47,8 @@ uv run python tools/query_usaspending.py transactions-keyword "wellness check" -
 ```
 
 **Known quirks:**
+- All USAspending JSON outputs contain `results`, `status`, `errors`, `query`, and `retrieval`. Former bare-list outputs now put their rows under `results`; award-detail and recipient fields also remain at the top level. Check acquisition errors and `retrieval.complete` before treating an empty result as evidence. Failed acquisition writes the requested artifact and exits 1; partially acquired records are retained with `status: partial`.
+- `transactions-keyword --all-pages` stops after 50 pages with an explicit partial result and `pagination.next_page`. Resume with `--page N --all-pages`. A successful page does not by itself establish complete coverage, and unknown pagination coverage stays `null`.
 - Award type groups cannot be mixed in a single request (API returns 422). The tool separates contracts (A/B/C/D), grants (02-05), and loans (07-08) automatically.
 - The `--grants` flag switches from contract to grant award types.
 - `award` accepts either a generated USAspending identifier or a plain PIID. A plain PIID is exact-matched across contract and IDV award groups first; ambiguous matches fail closed and list the generated identifiers.

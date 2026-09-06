@@ -192,7 +192,11 @@ def test_transactions_keyword_builds_filters_and_paginates(
             "name": "Department of Homeland Security",
         }
     ]
-    assert [row["Award ID"] for row in json.loads(output.read_text())] == [
+    saved = json.loads(output.read_text())
+    assert saved["status"] == "success"
+    assert saved["retrieval"]["complete"] is True
+    assert saved["pagination"]["pages_retrieved"] == 2
+    assert [row["Award ID"] for row in saved["results"]] == [
         "FIRST",
         "SECOND",
     ]
@@ -214,7 +218,9 @@ def test_transactions_keyword_from_file_cli_writes_fixture_results(
     )
 
     assert completed.returncode == 0, completed.stderr
-    results = json.loads(output.read_text())
+    saved = json.loads(output.read_text())
+    assert saved["status"] == "success"
+    results = saved["results"]
     assert len(results) == 82
     assert any(
         row["Award ID"] == "70CDCR25FR0000127"
