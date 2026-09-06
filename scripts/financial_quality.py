@@ -13,9 +13,11 @@ from pathlib import Path
 from typing import Iterable
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 DS10_DB_PATH = PROJECT_ROOT / "datasets" / "lmsband_epstein_files.db"
 INV_DB_PATH = PROJECT_ROOT / "investigation.db"
-EXPORT_JSON_PATH = PROJECT_ROOT / "site" / "content" / "financials" / "ds10-flows.json"
+EXPORT_JSON_PATH = PROJECT_ROOT / "content" / "financials" / "ds10-flows.json"
 DOCS_DB_PATH = Path("/Users/travcole/projects/epstein-docs/output/documents.db")
 
 RECON_TOLERANCE = 1.0
@@ -939,34 +941,17 @@ def evaluate_financial_findings(
     }
 
 
-def _group_promoted_rows(ds10_db: sqlite3.Connection, min_amount: float = 50000.0) -> list[sqlite3.Row]:
-    return ds10_db.execute(
-        """
-        SELECT sender, receiver, ROUND(SUM(amount), 2) AS total_amount, COUNT(*) AS tx_count
-        FROM ds10_transactions
-        WHERE qa_status = 'promoted'
-          AND amount >= ?
-          AND sender IS NOT NULL AND receiver IS NOT NULL
-          AND sender != '' AND receiver != ''
-          AND sender != receiver
-          AND sender NOT IN ('INTERNAL TRANSFER', 'TRANSFER')
-          AND receiver NOT IN ('INTERNAL TRANSFER', 'TRANSFER')
-        GROUP BY sender, receiver
-        ORDER BY total_amount DESC
-        """,
-        (min_amount,),
-    ).fetchall()
-
-
 def run_export_parity_checks(
     *,
     ds10_db: sqlite3.Connection,
     inv_db: sqlite3.Connection,
     run_db_id: int,
+    export_path: Path | None = None,
 ) -> dict:
+    export_path = export_path or EXPORT_JSON_PATH
     record_ref = "financial_export:ds10-flows.json"
     active_keys: set[IssueKey] = set()
-    if not EXPORT_JSON_PATH.exists():
+    if not export_path.exists():
         key = IssueKey(dataset="ds10", record_ref=record_ref, issue_code="MATH004_EXPORT_TOTAL_PARITY")
         active_keys.add(key)
         upsert_issue(
@@ -975,18 +960,20 @@ def run_export_parity_checks(
             record_ref=record_ref,
             issue_code=key.issue_code,
             severity="critical",
-            details={"error": f"missing export file: {EXPORT_JSON_PATH}"},
+            details={"error": f"missing export file: {export_path}"},
             run_db_id=run_db_id,
         )
         return {"math_checks_passed": False, "critical": 1}
 
-    payload = json.loads(EXPORT_JSON_PATH.read_text())
+    payload = json.loads(export_path.read_text())
     links = payload.get("links", [])
     top_tx = payload.get("top_transactions", [])
 
-    src_grouped = _group_promoted_rows(ds10_db, 50000.0)
-    src_total = round(sum(float(r["total_amount"] or 0) for r in src_grouped), 2)
-    json_total = round(sum(float(l.get("value", 0) or 0) for l in links), 2)
+    from tools.financial_flows import promoted_flows
+
+    src_grouped = promoted_flows(ds10_db, inv_db=inv_db, min_amount=50000.0)
+    src_total = round(sum(float(r["value"] or 0) for r in src_grouped), 2)
+    json_total = round(sum(float(link.get("value", 0) or 0) for link in links), 2)
     if abs(src_total - json_total) > ROW_TOLERANCE:
         key = IssueKey(dataset="ds10", record_ref=record_ref, issue_code="MATH004_EXPORT_TOTAL_PARITY")
         active_keys.add(key)
@@ -1000,8 +987,8 @@ def run_export_parity_checks(
             run_db_id=run_db_id,
         )
 
-    source_map = {(r["sender"], r["receiver"]): (round(float(r["total_amount"] or 0), 2), int(r["tx_count"])) for r in src_grouped}
-    json_map = {(l.get("source"), l.get("target")): (round(float(l.get("value", 0) or 0), 2), int(l.get("tx_count", 0) or 0)) for l in links}
+    source_map = {(r["source"], r["target"]): (round(float(r["value"] or 0), 2), int(r["tx_count"])) for r in src_grouped}
+    json_map = {(link.get("source"), link.get("target")): (round(float(link.get("value", 0) or 0), 2), int(link.get("tx_count", 0) or 0)) for link in links}
     if source_map != json_map:
         key = IssueKey(dataset="ds10", record_ref=record_ref, issue_code="MATH005_EXPORT_LINK_PARITY")
         active_keys.add(key)
@@ -1192,7 +1179,12 @@ def cmd_gate(args) -> int:
     try:
         parity = {"math_checks_passed": True, "critical": 0}
         if args.with_math:
-            parity = run_export_parity_checks(ds10_db=ds10_db, inv_db=inv_db, run_db_id=run_db_id)
+            parity = run_export_parity_checks(
+                ds10_db=ds10_db,
+                inv_db=inv_db,
+                run_db_id=run_db_id,
+                export_path=_path_from_args(args, "export_json", EXPORT_JSON_PATH),
+            )
         critical = _critical_publish_issues(inv_db, ds10_db)
         result = {
             "status": "pass" if not critical else "fail",
@@ -1409,6 +1401,11 @@ def build_parser() -> argparse.ArgumentParser:
     gate.add_argument("--scope", default="publish")
     gate.add_argument("--strict", action="store_true")
     gate.add_argument("--with-math", action="store_true")
+    gate.add_argument(
+        "--export-json",
+        default=str(EXPORT_JSON_PATH),
+        help="Financial export to compare with promoted source rows",
+    )
     gate.add_argument("--json", action="store_true")
     gate.add_argument("--run-id")
     gate.set_defaults(func=cmd_gate)

@@ -7,20 +7,19 @@ import sqlite3
 import sys
 from pathlib import Path
 
-LMSBAND_DB = Path(__file__).parent.parent / "datasets" / "lmsband_epstein_files.db"
-INVESTIGATION_DB = Path(__file__).parent.parent / "investigation.db"
-OUTPUT_DIR = Path(__file__).parent.parent / "content" / "financials"
+try:
+    from pipeline.paths import CONTENT_DIR, DB_PATH
+except ModuleNotFoundError:
+    from paths import CONTENT_DIR, DB_PATH
 
-# Add tools to path for name_resolver
+LMSBAND_DB = Path(__file__).parent.parent / "datasets" / "lmsband_epstein_files.db"
+INVESTIGATION_DB = DB_PATH
+OUTPUT_DIR = CONTENT_DIR / "financials"
+
+# Add the repository root for the shared flow definition
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from tools.name_resolver import resolve_canonical
-
-
-def normalize_entity(name: str) -> str:
-    if not name:
-        return name
-    return resolve_canonical(name.strip())
+from tools.financial_flows import promoted_flows  # noqa: E402 - CLI repository path bootstrap
 
 
 def _table_exists(conn: sqlite3.Connection, name: str) -> bool:
@@ -92,47 +91,15 @@ def export_ds10_flows(
     if _column_exists(conn, "ds10_transactions", "qa_status"):
         qa_filter = "AND qa_status = 'promoted'"
 
-    # Get aggregated flows between entities
-    rows = conn.execute(
-        f"""
-        SELECT sender, receiver, SUM(amount) as total_amount, COUNT(*) as tx_count,
-               MIN(tx_date) as first_date, MAX(tx_date) as last_date
-        FROM ds10_transactions
-        WHERE amount >= ? AND sender IS NOT NULL AND receiver IS NOT NULL
-              AND sender != '' AND receiver != ''
-              {qa_filter}
-        GROUP BY sender, receiver
-        HAVING total_amount >= ?
-        ORDER BY total_amount DESC
-        """,
-        (0, min_amount),
-    ).fetchall()
-
-    # Build nodes and links
-    node_set = set()
-    links = []
-
-    for row in rows:
-        sender = normalize_entity(row["sender"])
-        receiver = normalize_entity(row["receiver"])
-
-        # Skip self-transfers and internal transfers
-        if sender == receiver:
-            continue
-        if sender in ("INTERNAL TRANSFER", "TRANSFER") or receiver in ("INTERNAL TRANSFER", "TRANSFER"):
-            continue
-
-        node_set.add(sender)
-        node_set.add(receiver)
-
-        links.append({
-            "source": sender,
-            "target": receiver,
-            "value": round(row["total_amount"], 2),
-            "tx_count": row["tx_count"],
-            "first_date": row["first_date"],
-            "last_date": row["last_date"],
-        })
+    alias_db = None
+    try:
+        if inv_db_path.exists():
+            alias_db = sqlite3.connect(f"{inv_db_path.resolve().as_uri()}?mode=ro", uri=True)
+        links = promoted_flows(conn, inv_db=alias_db, min_amount=min_amount)
+    finally:
+        if alias_db is not None:
+            alias_db.close()
+    node_set = {link[key] for link in links for key in ("source", "target")}
 
     nodes = [{"id": name, "name": name} for name in sorted(node_set)]
 
@@ -177,7 +144,7 @@ def export_ds10_flows(
         "stats": {
             "total_nodes": len(nodes),
             "total_links": len(links),
-            "total_value": sum(l["value"] for l in links),
+            "total_value": sum(link["value"] for link in links),
         },
     }
 
