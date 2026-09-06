@@ -1,0 +1,73 @@
+warning: `VIRTUAL_ENV=/Users/travcole/projects/osint-research/.venv` does not match the project environment path `.venv` and will be ignored; use `--active` to target the active environment instead
+Using CPython 3.11.14
+Creating virtual environment at: .venv
+Downloading curl-cffi (2.9MiB)
+Downloading ruff (10.1MiB)
+Downloading numpy (5.2MiB)
+Downloading pydantic-core (1.8MiB)
+Downloading pymupdf (22.8MiB)
+Downloading pygments (1.2MiB)
+Downloading pyarrow (32.7MiB)
+Downloading lxml (8.2MiB)
+Downloading edgartools (3.0MiB)
+Downloading pandas (9.5MiB)
+Downloading rapidfuzz (1.3MiB)
+Downloading duckdb (13.0MiB)
+   Building multitasking==0.0.12
+   Building ratelimit==2.2.1
+ Downloaded rapidfuzz
+ Downloaded pydantic-core
+ Downloaded pygments
+ Downloaded curl-cffi
+ Downloaded edgartools
+ Downloaded numpy
+      Built multitasking==0.0.12
+      Built ratelimit==2.2.1
+ Downloaded lxml
+ Downloaded pandas
+ Downloaded ruff
+ Downloaded duckdb
+ Downloaded pymupdf
+ Downloaded pyarrow
+Installed 82 packages in 132ms
+........................................................................ [  4%]
+........................................................................ [  9%]
+........................................................................ [ 14%]
+........................................................................ [ 19%]
+........................................................................ [ 24%]
+........................................................................ [ 28%]
+........................................................................ [ 33%]
+........................................................................ [ 38%]
+.............................................................s.......... [ 43%]
+....................................................s................... [ 48%]
+........................................................................ [ 53%]
+........................................................................ [ 57%]
+.......................................................................s [ 62%]
+........................................................................ [ 67%]
+........................................................................ [ 72%]
+...........s.............................sssssss.................sss.... [ 77%]
+.........ssssssssss...............s...............ssss................ss [ 82%]
+sssss................................................................... [ 86%]
+........................................................................ [ 91%]
+........................................................................ [ 96%]
+..................................................                       [100%]
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_query_colorado_judicial.py:713: set RUN_LIVE_CO_JUDICIAL=1 for the official live probe
+SKIPPED [1] tests/test_query_deschutes_property.py:733: set RUN_LIVE_DESCHUTES_PROPERTY=1 for the official live probe
+SKIPPED [1] tests/test_query_new_jersey_parcels.py:563: set LIVE_PUBLIC_RECORDS=1 for official endpoint probes
+SKIPPED [1] tests/test_query_oregon_court_directories.py:527: set LIVE_PUBLIC_RECORDS=1 for official Oregon SOAP probes
+SKIPPED [7] tests/test_query_oregon_court_documents.py:874: set RUN_LIVE_OR_COURT_DOCUMENTS=1 for official API probes
+SKIPPED [3] tests/test_query_oregon_lane_marion_parcels.py:590: set RUN_LIVE_OR_LANE_MARION=1 for official ArcGIS probes
+SKIPPED [8] tests/test_query_oregon_multnomah_sail.py:639: set LIVE_PUBLIC_RECORDS=1 for official SAIL endpoint probes
+SKIPPED [1] tests/test_query_oregon_multnomah_sail.py:664: set LIVE_PUBLIC_RECORDS=1 for official SAIL endpoint probes
+SKIPPED [1] tests/test_query_oregon_multnomah_sail.py:693: set LIVE_PUBLIC_RECORDS=1 for official SAIL endpoint probes
+SKIPPED [1] tests/test_query_oregon_smart_search.py:346: set LIVE_PUBLIC_RECORDS=1 for the rendered Smart Search probe
+SKIPPED [4] tests/test_query_oregon_tax_foreclosures.py:492: set RUN_LIVE_OR_TAX_FORECLOSURES=1 for official live probes
+SKIPPED [1] tests/test_query_oregon_washington_property.py:680: set LIVE_PUBLIC_RECORDS=1
+SKIPPED [1] tests/test_query_oregon_washington_property.py:718: set LIVE_PUBLIC_RECORDS=1
+SKIPPED [1] tests/test_query_oregon_washington_property.py:732: set LIVE_PUBLIC_RECORDS=1
+SKIPPED [1] tests/test_query_oregon_washington_property.py:768: set LIVE_PUBLIC_RECORDS=1
+SKIPPED [1] tests/test_query_oregon_washington_property.py:799: set LIVE_PUBLIC_RECORDS=1
+SKIPPED [1] tests/test_query_oregon_washington_property.py:825: set LIVE_PUBLIC_RECORDS=1
+SKIPPED [1] tests/test_query_oregon_washington_property.py:852: set LIVE_PUBLIC_RECORDS=1
+1454 passed, 36 skipped, 19 deselected in 282.81s (0:04:42)

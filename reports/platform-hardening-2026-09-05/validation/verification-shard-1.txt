@@ -1,0 +1,62 @@
+warning: `VIRTUAL_ENV=/Users/travcole/projects/osint-research/.venv` does not match the project environment path `.venv` and will be ignored; use `--active` to target the active environment instead
+Using CPython 3.11.14
+Creating virtual environment at: .venv
+Downloading pyarrow (32.7MiB)
+Downloading pandas (9.5MiB)
+Downloading edgartools (3.0MiB)
+Downloading duckdb (13.0MiB)
+Downloading lxml (8.2MiB)
+Downloading pymupdf (22.8MiB)
+Downloading pydantic-core (1.8MiB)
+Downloading curl-cffi (2.9MiB)
+Downloading numpy (5.2MiB)
+Downloading pygments (1.2MiB)
+Downloading rapidfuzz (1.3MiB)
+Downloading ruff (10.1MiB)
+   Building multitasking==0.0.12
+   Building ratelimit==2.2.1
+ Downloaded pygments
+ Downloaded rapidfuzz
+ Downloaded pydantic-core
+      Built ratelimit==2.2.1
+      Built multitasking==0.0.12
+ Downloaded curl-cffi
+ Downloaded edgartools
+ Downloaded numpy
+ Downloaded lxml
+ Downloaded pandas
+ Downloaded ruff
+ Downloaded duckdb
+ Downloaded pymupdf
+ Downloaded pyarrow
+Installed 82 packages in 155ms
+........................................................................ [  4%]
+........................................................................ [  9%]
+........................................................................ [ 14%]
+........................................................................ [ 19%]
+........................................................................ [ 23%]
+........................................................................ [ 28%]
+........................................................................ [ 33%]
+........................................................................ [ 38%]
+........................................................................ [ 43%]
+...............................................................s........ [ 47%]
+........................................................................ [ 52%]
+........................................................................ [ 57%]
+........................................................................ [ 62%]
+........................................................................ [ 67%]
+........................................................................ [ 71%]
+........s......................ssss..................................... [ 76%]
+........................s............................................... [ 81%]
+........................................................................ [ 86%]
+........................................................................ [ 91%]
+........................................................................ [ 95%]
+...............................................................          [100%]
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_query_delaware_courts.py:526: set RUN_LIVE_DE_COURTCONNECT=1 for the official live probe
+SKIPPED [1] tests/test_query_oregon_court_calendar.py:815: set OREGON_COURT_CALENDAR_LIVE=1 for official live probe
+SKIPPED [1] tests/test_query_oregon_wasco_property.py:607: set OSINT_LIVE_TESTS=1 for public Wasco source probes
+SKIPPED [1] tests/test_query_oregon_wasco_property.py:629: set OSINT_LIVE_TESTS=1 for public Wasco source probes
+SKIPPED [1] tests/test_query_oregon_wasco_property.py:651: set OSINT_LIVE_TESTS=1 for public Wasco source probes
+SKIPPED [1] tests/test_query_oregon_wasco_property.py:673: set OSINT_LIVE_TESTS=1 for public Wasco source probes
+SKIPPED [1] tests/test_query_riverside_court.py:445: set LIVE_PUBLIC_RECORDS=1 for official endpoint probes
+1496 passed, 7 skipped, 80 deselected in 242.44s (0:04:02)
