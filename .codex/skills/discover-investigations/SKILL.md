@@ -9,6 +9,8 @@ Operate as an **Editorial Plane commissioning orchestrator**. Review the platfor
 
 Read [references/candidate-rubric.md](references/candidate-rubric.md) before screening, scoring, or writing outputs.
 
+Read `docs/RESEARCH_WORKFLOW_CONTRACT.md` and preserve the selected database context. Use native subagents under the current chat's supervision and inherit the configured model. The parent stays engaged, collects every expected report or explicit incomplete handoff, and resumes from a WORKDIR progress note across compaction; do not substitute unattended dispatcher jobs for this interactive review.
+
 ## Arguments
 
 - No arguments: review every profile and configured local corpus; return at most 5 launch candidates.
@@ -60,12 +62,11 @@ Export a reproducible database snapshot with evidence and profile fields:
 
 ```bash
 uv run python .codex/skills/discover-investigations/scripts/export_snapshot.py \
-  --db investigation.db \
   --repo-root . \
   --output "$WORKDIR/platform-snapshot.json"
 ```
 
-Export complementary derived views:
+The exporter honors `ITHILDIN_DB_PATH`; use `--db` only for an explicitly selected alternate database, and pin that same absolute path for all derived views and analysis-run writes. Verify the snapshot's `database.path` matches the run context. Export complementary derived views:
 
 ```bash
 uv run python tools/analysis_export.py entity-network --all-profiles --output "$WORKDIR/entities.json"
@@ -78,7 +79,7 @@ uv run python tools/investigation_context.py list
 uv run python tools/source_report.py
 ```
 
-Do not dump the full snapshot into model context. Query it with `jq` or small read-only `uv run python` selectors and create per-track packets. Keep a reviewer packet to roughly 25–50 documents and at most 100,000 characters; give oversized documents their own packet.
+Do not dump the full snapshot into model context. Query it with `jq` or small read-only `uv run python` selectors and create coherent per-track packets. Size packets for the question and available context, retain source locators, and let reviewers expand to full documents where necessary. A packet budget is not permission to truncate load-bearing qualifications.
 
 Inventory existing editorial work and prior candidate reviews with `rg --files` across:
 
@@ -129,7 +130,7 @@ Assign these tracks:
 
 Require each track to:
 
-- Return 5–15 raw candidates, not a ranked top list.
+- Return up to 15 evidence-anchored raw candidates, allowing fewer or none when the scope does not support more; ranking follows independent discovery.
 - Anchor each candidate to at least 3 concrete finding IDs or primary record IDs.
 - State the mechanism and public consequence, not merely a notable person or odd fact.
 - Identify the existing profile, article, cluster, report, or lead that may already own the scope.
@@ -253,7 +254,7 @@ Only an explicit user selection authorizes promotion. On that later task:
 1. Re-open the selected candidate packet and verify that its decisive facts have not changed.
 2. Run `$init-investigation "<candidate>" --dry-run` first.
 3. Show the proposed profile slug, scope, threads, key people, corpus tools, dates, pillars, and seed leads.
-4. After confirmation, create one profile through `$init-investigation`; never create a database-only profile.
+4. Once the user has authorized the selected scope, create one profile through `$init-investigation`; an existing explicit selection carries forward without a redundant confirmation. Never create a database-only profile.
 5. Seed 5–10 operational leads inside the new profile and update the candidate manifest with the promoted profile and timestamp.
 
 ## Handoffs

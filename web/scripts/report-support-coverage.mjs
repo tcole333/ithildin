@@ -1,11 +1,14 @@
 import { readFileSync, readdirSync, existsSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { resolve } from "node:path";
 import { createJiti } from "jiti";
-import { collectChangedContentFiles } from "./changed-content-files.mjs";
+import { fileURLToPath } from "node:url";
+import { selectCoverageFiles } from "./support-coverage-scope.mjs";
 
-const cwd = process.cwd();
+const cwd = fileURLToPath(new URL("..", import.meta.url));
 const projectRoot = resolve(cwd, "..");
-const contentRoot = resolve(projectRoot, "content");
+const contentRoot = resolve(process.env.ITHILDIN_CONTENT_DIR || resolve(projectRoot, "content"));
+process.env.ITHILDIN_CONTENT_DIR = contentRoot;
 const articlesDir = resolve(contentRoot, "articles");
 const dossiersDir = resolve(contentRoot, "dossiers");
 
@@ -23,18 +26,23 @@ function readArgValue(flag) {
 const changedFilesMode = args.has("--changed-files");
 const baseRef = readArgValue("--base-ref") || process.env.SUPPORT_COVERAGE_BASE_REF || "";
 const headRef = readArgValue("--head-ref") || process.env.SUPPORT_COVERAGE_HEAD_REF || "HEAD";
-
-function isCoverageTrackedContent(path) {
-  return /^content\/articles\/.+\.mdx$/.test(path) || /^content\/dossiers\/(?!_)[^/]+\.json$/.test(path);
-}
+const explicitFiles = [];
 
 function getChangedContentFiles() {
-  if (!changedFilesMode) return null;
-  return collectChangedContentFiles({
+  for (let index = 0; index < argv.length; index += 1) {
+    if (argv[index] !== "--file") continue;
+    const value = argv[index + 1];
+    if (!value || value.startsWith("--")) throw new Error("--file requires a repository-relative or absolute content path");
+    explicitFiles.push(value);
+    index += 1;
+  }
+  return selectCoverageFiles({
     projectRoot,
+    contentRoot,
+    files: explicitFiles,
+    changed: changedFilesMode,
     baseRef,
     headRef,
-    isTrackedContent: isCoverageTrackedContent,
   });
 }
 
@@ -75,7 +83,7 @@ async function gatherArticleMetrics(fileScope, findingEvidenceMap) {
 
   for (const fileName of files) {
     const abs = resolve(articlesDir, fileName);
-    const rel = abs.replace(`${projectRoot}/`, "");
+    const rel = `content/articles/${fileName}`;
     if (fileScope && !fileScope.has(rel)) continue;
 
     const raw = readFileSync(abs, "utf-8");
@@ -85,6 +93,7 @@ async function gatherArticleMetrics(fileScope, findingEvidenceMap) {
     out.push({
       file: rel,
       content_type: "article",
+      content_sha256: createHash("sha256").update(raw).digest("hex"),
       ...result.supportMetrics,
     });
   }
@@ -98,10 +107,11 @@ function gatherDossierMetrics(fileScope) {
 
   for (const fileName of files) {
     const abs = resolve(dossiersDir, fileName);
-    const rel = abs.replace(`${projectRoot}/`, "");
+    const rel = `content/dossiers/${fileName}`;
     if (fileScope && !fileScope.has(rel)) continue;
 
-    const dossier = JSON.parse(readFileSync(abs, "utf-8"));
+    const raw = readFileSync(abs, "utf-8");
+    const dossier = JSON.parse(raw);
     const findingEvidenceMap = buildDossierFindingEvidenceMap(dossier);
     const result = processDossierCurationEvidence({
       findingEvidenceMap,
@@ -114,6 +124,7 @@ function gatherDossierMetrics(fileScope) {
     out.push({
       file: rel,
       content_type: "dossier",
+      content_sha256: createHash("sha256").update(raw).digest("hex"),
       ...result.supportMetrics,
     });
   }
@@ -128,11 +139,14 @@ async function main() {
   const articleMetrics = await gatherArticleMetrics(changedContentFiles, findingEvidenceMap);
   const dossierMetrics = gatherDossierMetrics(changedContentFiles);
   const files = [...articleMetrics, ...dossierMetrics];
+  if (explicitFiles.length && files.length !== changedContentFiles.size) {
+    throw new Error("Not every requested target received a coverage result");
+  }
   const totals = metricTotals(files);
 
   const payload = {
     generated_at: new Date().toISOString(),
-    scope: changedContentFiles ? "changed" : "full",
+    scope: explicitFiles.length ? "explicit" : changedContentFiles ? "changed" : "full",
     file_count: files.length,
     files,
     totals,

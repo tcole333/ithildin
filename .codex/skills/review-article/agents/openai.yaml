@@ -1,4 +1,6 @@
-interface:
-  display_name: "Review Article"
-  short_description: "Adversarially verify investigative articles"
-  default_prompt: "Use $review-article to handle this investigation task with clear evidence and actionable output."
+"interface":
+  "display_name": "Review Article"
+  "short_description": "Verify the current article’s claims and source support"
+  "default_prompt": "Use $review-article. Review the exact current article and source\
+    \ evidence, report material issues, and apply fixes only within the user’s existing\
+    \ authorization."

@@ -1,53 +1,34 @@
 ---
 name: status-report
-description: Generate investigation status summary — open leads, recent findings, source coverage
-user_invocable: true
+user-invocable: true
+description: Report the selected investigation's lead queues, recent findings, analysis activity and source availability. Use for investigation progress/status questions, not to launch research or triage leads.
 ---
 
 # /status-report
 
-Generate a comprehensive status report of the investigation.
+Give a truthful, bounded status report for the requested investigation.
 
-## Process
+Read `docs/RESEARCH_WORKFLOW_CONTRACT.md` and pin the profile/database. Create an isolated `WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)`. Use the read-only snapshot tool:
 
-1. Run `uv run python tools/investigation_context.py show` to display the active investigation profile
-2. Run `uv run python tools/lead_tracker.py stats` to get lead statistics
-3. Run `uv run python tools/findings_tracker.py stats` to get finding statistics
-4. Run `uv run python tools/source_report.py report` to check data source availability
-5. Run `uv run python tools/lead_tracker.py list --status open --priority critical --limit 10` for critical leads
-6. Run `uv run python tools/lead_tracker.py list --status open --priority high --limit 10` for high-priority leads
-7. Run `uv run python tools/lead_tracker.py list --status in_progress --limit 10` for in-progress leads
-8. Run `uv run python tools/findings_tracker.py list --limit 10 -v` for recent findings
-9. Run `uv run python tools/lead_tracker.py list --status open --limit 5` to show newly created leads needing triage
+```bash
+uv run python tools/investigation_status.py --recent-days 7 \
+  --output "$WORKDIR/investigation-status.json"
+```
 
-## Output Format
+Honor an explicit `--profile`/`--db` or the pinned environment. The snapshot does not mutate queues or initialize a DB. Report the resolved profile, database, as-of time and recent-period boundary. Each metric declares availability; unavailable is not zero. Inspect `profile_validation`: an unverified legacy profile is not the same as a registered empty profile with zero activity. Distinguish profile-scoped research activity from global tool/dispatcher health.
 
-Present a structured report with:
+For useful detail, retrieve bounded samples:
 
-### Active Investigation
-- Profile name, primary subject, description
-- Number of threads, key persons, corpus tools
+```bash
+uv run python tools/lead_tracker.py list --status open --priority critical --limit 10 --output "$WORKDIR/critical.json"
+uv run python tools/lead_tracker.py list --status open --priority high --limit 10 --output "$WORKDIR/high.json"
+uv run python tools/lead_tracker.py list --status in_progress --limit 10 --output "$WORKDIR/in-progress.json"
+uv run python tools/lead_tracker.py list --status pending_triage --limit 10 --output "$WORKDIR/needs-triage.json"
+uv run python tools/findings_tracker.py list --limit 10 --output "$WORKDIR/latest-findings.json"
+```
 
-### Investigation Dashboard
-- Total leads (open / in_progress / completed / blocked / dead_end)
-- Total findings and connections
-- Total sessions and searches logged
+Label these as top/latest samples and use snapshot totals to disclose truncation. The findings list is undated: label it “Latest findings,” or filter its timestamps and explicitly state that it is a sample within the recent period. Do not describe its ten items as the complete last-seven-days result. Needs-triage means `pending_triage`, not open leads or presumed lack of human review.
 
-### Critical & High Priority Leads
-- List all open critical and high-priority leads with descriptions
+When source availability matters, run `uv run python tools/source_report.py report` and report it separately as platform source health. Use actual coverage artifacts for coverage gaps; tool availability does not establish that a target was searched.
 
-### In Progress
-- List all leads currently being investigated
-
-### Recent Findings (Last 7 Days)
-- List recent findings with confidence levels and evidence
-
-### Needs Triage
-- Any agent-created leads that haven't been reviewed by a human
-
-### Data Source Status
-- Which sources are available and which need setup (Neo4j, etc.)
-
-### Recommendations
-- Suggest which leads to investigate next based on priority and available sources
-- Note any source coverage gaps (e.g., "Rod-Larsen hasn't been searched in ICIJ yet")
+Present the profile, lead counts by lifecycle state, findings and recent counts, active work and triage samples, relevant source limitations and a small set of suggested next steps. Separate fact from inference. Do not launch jobs, change the active profile, or begin the recommended investigations merely to produce a status report.
