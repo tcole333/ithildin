@@ -128,12 +128,12 @@ tmp_path = PosixPath('/private/var/folders/f_/j4ccgc016vs_0m8jhrmqs61m0000gn/T/p
     ) -> None:
         db_path = tmp_path / "property.db"
         envelope = _envelope(washington.ECOLOGY.source_metadata(), [_parcel_record()])
-    
+
 >       result = ingest_property_envelope(envelope, db_path=db_path)
                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-tests/test_washington_parcel_projection.py:221: 
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_washington_parcel_projection.py:221:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 tools/ingest_property_records.py:21765: in ingest_property_envelope
     projection = record_mapper(
 tools/ingest_property_records.py:3647: in _ingest_washington_parcel_record
@@ -141,7 +141,7 @@ tools/ingest_property_records.py:3647: in _ingest_washington_parcel_record
 tools/ingest_property_records.py:1733: in _ingest_assessor_record
     geoid = _upsert_jurisdiction(db, record)
             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
 db = <sqlite3.Connection object at 0x11b7b4400>
 record = {'alternate_parcel_ids': ['001-2038010000001', 'OBJECTID:12', 'example-global-id'], 'assessment': {'assessed_value': 1...l': 'https://example.test/county/parcel'}, 'county_freshness_source_id': 'us-wa-current-parcels-county-freshness', ...}

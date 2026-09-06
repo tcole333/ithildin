@@ -98,6 +98,11 @@
       "id": 2760,
       "description": "Legacy literal source links bypass canonical citation rendering and source-page generation",
       "resolution": "Converted only those anchors to supported citation tokens; document IDs and surrounding prose preserved. Structural JSON comparison and 589-page/17909-anchor built citation checks passed; no semantic PASS/status change."
+    },
+    {
+      "id": 2766,
+      "description": "Captured build logs contain trailing terminal whitespace that floods the staged diff check",
+      "resolution": "Normalized trailing whitespace and extra EOF blank lines in the three affected retained logs; recorded original/resulting SHA256 hashes and retained raw temporary logs. Working and staged whitespace checks plus repository artifact guard pass."
     }
   ]
 }
