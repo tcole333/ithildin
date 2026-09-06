@@ -1,4 +1,6 @@
-interface:
-  display_name: "Triage Leads"
-  short_description: "Deduplicate, prioritize, and route new leads"
-  default_prompt: "Use $triage-leads to handle this investigation task with clear evidence and actionable output."
+"interface":
+  "display_name": "Triage Leads"
+  "short_description": "Review pending leads with scoped, atomic decisions"
+  "default_prompt": "Use $triage-leads. Review a database-bound pending-lead packet,\
+    \ preserve distinct questions, and apply justified decisions only against current\
+    \ matching state."

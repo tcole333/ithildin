@@ -7,20 +7,23 @@ from tools import profile_threads
 from tools import triage_policy
 
 
-def test_triage_policy_loads_active_profile_metadata(monkeypatch):
-    monkeypatch.setattr(
-        investigation_context,
-        "get_active_profile",
-        lambda: SimpleNamespace(
+def test_triage_policy_loads_selected_profile_metadata(monkeypatch):
+    loaded_profiles = []
+
+    def load_profile(profile_id):
+        loaded_profiles.append(profile_id)
+        return SimpleNamespace(
             key_persons=["Carlos Ghosn"],
             known_addresses={"42 Example Street": "test address"},
-        ),
-    )
+        )
 
-    key_persons, known_addresses = triage_policy._load_profile_config()
+    monkeypatch.setattr(investigation_context, "load_profile", load_profile)
+
+    key_persons, known_addresses = triage_policy._load_profile_config("ghosn")
 
     assert key_persons == ["Carlos Ghosn"]
     assert known_addresses == {"42 Example Street": "test address"}
+    assert loaded_profiles == ["ghosn"]
 
 
 def test_lead_search_matches_name_with_intervening_initial(tmp_path, monkeypatch):

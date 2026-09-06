@@ -1,4 +1,6 @@
-interface:
-  display_name: "Deduplicate Leads"
-  short_description: "Review and consolidate duplicate leads"
-  default_prompt: "Use $dedup-leads to handle this investigation task with clear evidence and actionable output."
+"interface":
+  "display_name": "Deduplicate Leads"
+  "short_description": "Consolidate actual duplicate questions with provenance"
+  "default_prompt": "Use $dedup-leads. Review scoped duplicate candidates, preserve\
+    \ different research questions, and consolidate reviewed duplicates with their\
+    \ evidence and notes."

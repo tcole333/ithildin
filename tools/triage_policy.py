@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Shared triage scheduling policy — depth tier assignment, skill recommendation,
-stop conditions, and thread coverage balancing.
+Suggested triage scheduling policy — depth, skill routing, overlap candidates,
+and thread coverage cues for review.
 
-This module is the single source of truth for triage decisions. Both the
-/triage-leads skill and the dispatcher reference these rules.
+The triage skill uses these defaults; the reviewer owns question equivalence,
+evidence coverage, and final decisions. Counts do not trigger automatic closure.
 
 Usage:
     uv run python tools/triage_policy.py assess "Target Name"
@@ -12,11 +12,20 @@ Usage:
 """
 
 import argparse
+import json
+import os
 import sqlite3
 import sys
 from pathlib import Path
 
-DB_PATH = Path(__file__).resolve().parent.parent / "investigation.db"
+try:
+    from tools.lead_tracker import open_review_db, review_profile_id
+    from tools.output_util import add_output_args, write_output
+except ImportError:
+    from lead_tracker import open_review_db, review_profile_id
+    from output_util import add_output_args, write_output
+
+DB_PATH = Path(os.environ.get("ITHILDIN_DB_PATH", Path(__file__).resolve().parent.parent / "investigation.db"))
 
 # ── Constants ────────────────────────────────────────────────
 
@@ -53,10 +62,7 @@ SKILL_RECOMMENDATION = {
     ("scan", "grant"): "/trace-grants",
 }
 
-DEAD_END_THRESHOLDS = {
-    "exhaustively_covered_findings": 10,
-    "thread_queue_saturated": 30,
-}
+THREAD_QUEUE_REVIEW_SIZE = 30
 
 # Structural signals that trigger tier escalation
 STANDARD_TIER_MIN_ROLES = 3
@@ -67,24 +73,25 @@ DEEP_DIVE_MIN_CONNECTIONS = 8
 
 # ── Assessment Functions ─────────────────────────────────────
 
-def _get_structural_signals(target_name, db):
+def _get_structural_signals(target_name, db, profile_id=None):
     """Query entity_roles, connections, and findings counts for a target."""
+    profile_id = review_profile_id(db, profile_id)
     roles = db.execute(
         "SELECT COUNT(*) FROM entity_roles WHERE person_name LIKE ?",
         (f"%{target_name}%",)
     ).fetchone()[0]
     connections = db.execute(
-        "SELECT COUNT(*) FROM connections WHERE person_a LIKE ? OR person_b LIKE ?",
-        (f"%{target_name}%", f"%{target_name}%")
+        "SELECT COUNT(*) FROM connections WHERE profile_id=? AND (person_a=? COLLATE NOCASE OR person_b=? COLLATE NOCASE)",
+        (profile_id, target_name, target_name)
     ).fetchone()[0]
     findings = db.execute(
-        "SELECT COUNT(*) FROM findings WHERE target_name LIKE ?",
-        (f"%{target_name}%",)
+        "SELECT COUNT(*) FROM findings WHERE profile_id=? AND target_name=? COLLATE NOCASE",
+        (profile_id, target_name)
     ).fetchone()[0]
     return {"roles": roles, "connections": connections, "findings": findings}
 
 
-def assess_depth_tier(target_name, db, key_persons=None, known_addresses=None):
+def assess_depth_tier(target_name, db, key_persons=None, known_addresses=None, profile_id=None):
     """Assign a depth tier based on structural signals and profile context.
 
     Returns (tier, reason) tuple.
@@ -98,7 +105,7 @@ def assess_depth_tier(target_name, db, key_persons=None, known_addresses=None):
         if kp.lower() in target_lower or target_lower in kp.lower():
             return "deep_dive", f"key person match: {kp}"
 
-    signals = _get_structural_signals(target_name, db)
+    signals = _get_structural_signals(target_name, db, profile_id)
 
     # High structural position → deep_dive
     if signals["roles"] >= DEEP_DIVE_MIN_ROLES or signals["connections"] >= DEEP_DIVE_MIN_CONNECTIONS:
@@ -136,97 +143,63 @@ def assess_depth_tier(target_name, db, key_persons=None, known_addresses=None):
 def recommend_skill(depth_tier, category):
     """Return the recommended skill for a given depth tier and lead category.
 
-    Falls back through: exact match → tier with None category → /pursue-lead.
+    Unknown categories use the general research skill for the requested depth.
     """
     # Exact match
     key = (depth_tier, category)
     if key in SKILL_RECOMMENDATION:
         return SKILL_RECOMMENDATION[key]
 
-    # Tier fallback (any category at this tier)
-    for (tier, _cat), skill in SKILL_RECOMMENDATION.items():
-        if tier == depth_tier:
-            return skill
-
-    return "/pursue-lead"
+    return "/deep-investigate" if depth_tier == "deep_dive" else "/pursue-lead"
 
 
-def should_dead_end(target_name, depth_tier, thread_id, db):
-    """Check stop conditions. Returns (should_stop, reason) tuple."""
-    signals = _get_structural_signals(target_name, db)
+def candidate_overlaps(target_name, db, *, profile_id=None, lead_id=None):
+    """Same-target leads need question/scope review; their depth proves no duplication."""
+    profile_id = review_profile_id(db, profile_id)
+    return [dict(row) for row in db.execute(
+        "SELECT id, title, description, category, depth_tier, status FROM leads "
+        "WHERE profile_id=? AND target_name=? COLLATE NOCASE "
+        "AND status IN ('open','in_progress','pending_triage') AND id IS NOT ? ORDER BY id",
+        (profile_id, target_name, lead_id),
+    )]
 
-    # Exhaustively covered
-    threshold = DEAD_END_THRESHOLDS["exhaustively_covered_findings"]
-    if signals["findings"] >= threshold:
-        # Check if there's an existing open lead at same or higher depth
-        existing = db.execute(
-            """SELECT id, depth_tier FROM leads
-               WHERE target_name LIKE ? AND status IN ('open', 'in_progress')
-               AND depth_tier IS NOT NULL""",
-            (f"%{target_name}%",)
-        ).fetchone()
-        if existing:
-            return True, (
-                f"exhaustively_covered: {signals['findings']} findings "
-                f"(threshold: {threshold}), existing lead #{existing['id']} "
-                f"at depth_tier={existing['depth_tier']}"
-            )
 
-    # Duplicate at same or higher depth
-    if depth_tier:
-        tier_rank = {"scan": 0, "standard": 1, "deep_dive": 2}
-        my_rank = tier_rank.get(depth_tier, 0)
-        existing = db.execute(
-            """SELECT id, depth_tier FROM leads
-               WHERE target_name LIKE ? AND status IN ('open', 'in_progress')
-               AND depth_tier IS NOT NULL AND id != -1""",
-            (f"%{target_name}%",)
-        ).fetchall()
-        for e in existing:
-            e_rank = tier_rank.get(e["depth_tier"], 0)
-            if e_rank >= my_rank:
-                return True, (
-                    f"covered_by_lead_#{e['id']}: existing lead at "
-                    f"depth_tier={e['depth_tier']} (>= {depth_tier})"
-                )
+def should_dead_end(target_name, depth_tier, thread_id, db, *, profile_id=None):
+    """Compatibility API: structural signals alone cannot justify closing a lead.
 
-    # Thread queue saturated
-    if thread_id:
-        saturated_threshold = DEAD_END_THRESHOLDS["thread_queue_saturated"]
-        active_in_thread = db.execute(
-            """SELECT COUNT(*) FROM leads
-               WHERE thread_id = ? AND status IN ('open', 'in_progress')""",
-            (thread_id,)
-        ).fetchone()[0]
-        if active_in_thread >= saturated_threshold:
-            return True, (
-                f"thread_saturated: {active_in_thread} active leads in thread "
-                f"{thread_id} (threshold: {saturated_threshold})"
-            )
-
+    Call candidate_overlaps to inspect questions, then record an explicit reviewed
+    disposition through triage-apply. Queue saturation is a scheduling hold, never
+    evidence that an investigation question is exhausted.
+    """
+    overlaps = candidate_overlaps(target_name, db, profile_id=profile_id)
+    if overlaps:
+        return False, f"Review {len(overlaps)} candidate overlaps for question/scope coverage; do not automatically dead-end"
     return False, ""
 
 
-def get_thread_priority_boost(thread_id, db):
+def get_thread_priority_boost(thread_id, db, profile_id=None):
     """Calculate priority adjustment based on thread coverage imbalance.
 
     Returns -1 (lower), 0 (keep), or +1 (raise) relative to other threads.
     """
     if not thread_id:
         return 0
+    profile_id = review_profile_id(db, profile_id)
+    if not db.execute("SELECT 1 FROM investigation_threads WHERE id=? AND profile_id=?", (thread_id, profile_id)).fetchone():
+        raise ValueError("Thread does not belong to the selected profile")
 
     stats = db.execute(
         """SELECT
-            (SELECT COUNT(*) FROM findings WHERE thread_id = ?) as my_findings,
+            (SELECT COUNT(*) FROM findings WHERE thread_id = ? AND profile_id=?) as my_findings,
             (SELECT AVG(cnt) FROM (
                 SELECT COUNT(*) as cnt FROM findings
-                WHERE thread_id IS NOT NULL
+                WHERE thread_id IS NOT NULL AND profile_id=?
                 GROUP BY thread_id
             )) as avg_findings,
             (SELECT COUNT(*) FROM leads
-             WHERE thread_id = ? AND status IN ('open', 'in_progress')) as my_active
+             WHERE thread_id = ? AND profile_id=? AND status IN ('open', 'in_progress')) as my_active
         """,
-        (thread_id, thread_id)
+        (thread_id, profile_id, profile_id, thread_id, profile_id)
     ).fetchone()
 
     my_findings = stats["my_findings"] or 0
@@ -246,15 +219,15 @@ def get_thread_priority_boost(thread_id, db):
 
 # ── CLI ──────────────────────────────────────────────────────
 
-def _load_profile_config():
-    """Load key_persons and known_addresses from active investigation profile."""
+def _load_profile_config(profile_id):
+    """Load key_persons and known_addresses from the explicitly selected profile."""
     try:
         try:
-            from tools.investigation_context import get_active_profile
+            from tools.investigation_context import load_profile
         except ImportError:
-            from investigation_context import get_active_profile
+            from investigation_context import load_profile
 
-        profile = get_active_profile()
+        profile = load_profile(profile_id)
         return profile.key_persons or [], profile.known_addresses or {}
     except (FileNotFoundError, KeyError, TypeError, ValueError) as exc:
         print(f"WARNING: Could not load active investigation profile: {exc}", file=sys.stderr)
@@ -262,30 +235,24 @@ def _load_profile_config():
 
 
 def cmd_assess(args):
-    db = sqlite3.connect(str(DB_PATH))
-    db.row_factory = sqlite3.Row
-    key_persons, known_addresses = _load_profile_config()
-
-    tier, reason = assess_depth_tier(args.target, db, key_persons, known_addresses)
-    signals = _get_structural_signals(args.target, db)
-    category = args.category or "person"
-    skill = recommend_skill(tier, category)
-
-    print(f"Target: {args.target}")
-    print(f"  depth_tier: {tier}")
-    print(f"  recommended_skill: {skill}")
-    print(f"  reason: {reason}")
-    print(f"  signals: roles={signals['roles']} connections={signals['connections']} findings={signals['findings']}")
-
-    stop, stop_reason = should_dead_end(args.target, tier, args.thread_id, db)
-    if stop:
-        print(f"  STOP: {stop_reason}")
-
-    boost = get_thread_priority_boost(args.thread_id, db) if args.thread_id else 0
-    if boost:
-        print(f"  thread_boost: {'+' if boost > 0 else ''}{boost}")
-
-    db.close()
+    db = open_review_db(db_path=DB_PATH)
+    try:
+        profile_id = review_profile_id(db, args.profile)
+        key_persons, known_addresses = _load_profile_config(profile_id)
+        tier, reason = assess_depth_tier(args.target, db, key_persons, known_addresses, profile_id)
+        result = {
+            "profile_id": profile_id, "target": args.target,
+            "suggested_depth_tier": tier, "recommended_skill": recommend_skill(tier, args.category or "person"),
+            "reason": reason, "signals": _get_structural_signals(args.target, db, profile_id),
+            "roles_scope": "global shared entity records",
+            "candidate_overlaps": candidate_overlaps(args.target, db, profile_id=profile_id, lead_id=args.lead_id),
+            "thread_priority_suggestion": get_thread_priority_boost(args.thread_id, db, profile_id),
+            "automatic_dead_end": False,
+        }
+    finally:
+        db.close()
+    if not write_output(result, args):
+        print(json.dumps(result, indent=2))
 
 
 def cmd_rules(_args):
@@ -298,9 +265,9 @@ def cmd_rules(_args):
     for (tier, cat), skill in sorted(SKILL_RECOMMENDATION.items()):
         print(f"  {tier:10} + {cat or 'any':12} -> {skill}")
     print()
-    print("=== Dead-End Thresholds ===")
-    for k, v in DEAD_END_THRESHOLDS.items():
-        print(f"  {k}: {v}")
+    print("Depth thresholds are review suggestions, not caps or evidence of exhaustive coverage.")
+    print(f"Review thread scheduling at {THREAD_QUEUE_REVIEW_SIZE}+ active leads; hold only when justified by current workload.")
+    print("Same target/depth creates candidate overlaps; distinct questions must remain available.")
 
 
 def main():
@@ -311,12 +278,18 @@ def main():
     assess_p.add_argument("target", help="Target name to assess")
     assess_p.add_argument("--category", default=None, help="Lead category (person, entity, financial)")
     assess_p.add_argument("--thread-id", type=int, default=None, help="Thread ID for coverage balancing")
+    assess_p.add_argument("--lead-id", type=int, help="Exclude the current lead from overlap candidates")
+    assess_p.add_argument("--profile", help="Override the pinned/default profile")
+    add_output_args(assess_p)
 
     sub.add_parser("rules", help="Show decision tables and thresholds")
 
     args = parser.parse_args()
     if args.command == "assess":
-        cmd_assess(args)
+        try:
+            cmd_assess(args)
+        except (ValueError, OSError, sqlite3.Error) as exc:
+            parser.exit(1, f"ERROR: {exc}\n")
     elif args.command == "rules":
         cmd_rules(args)
     else:
