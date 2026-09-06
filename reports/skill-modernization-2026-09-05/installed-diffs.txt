@@ -1,0 +1,1063 @@
+--- /Users/travcole/.codex/skills/analyze-network/SKILL.md
++++ .codex/skills/analyze-network/SKILL.md
+@@ -15,12 +15,11 @@
+ - `--thread N`: focus on a specific thread's subgraph
+ 
+ ### Context Loading
+-Load the active investigation context before executing:
+-```bash
+-uv run python tools/investigation_context.py show
+-```
+-This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
+-Use these values instead of hardcoded names throughout this skill.
++Before scoped work, read `docs/RESEARCH_WORKFLOW_CONTRACT.md` and pin the
++resolved task profile with `ITHILDIN_PROFILE`. Preserve/pass the selected
++`ITHILDIN_DB_PATH` to workers. Load `investigation_context.py show` under that
++environment for corpus tools, dates, threads, people, and jurisdictions; use
++those values throughout this skill. Do not change the shared active profile.
+ 
+ ## Process
+ 
+@@ -126,9 +125,17 @@
+     --detail "DETAIL" \
+     --confidence medium \
+     --claim-type synthesis \
+-    --evidence "analysis-run-{RUN_ID}" \
+-    --source-quote "graph_tools output: METRIC=VALUE"
+-```
++    --evidence "SOURCE:ID_A" "SOURCE:ID_B" \
++    --source-quote "SOURCE:ID_A:Exact supporting source excerpt" \
++    --source-quote "SOURCE:ID_B:Exact supporting source excerpt" \
++    --sources analysis_run
++```
++
++Replace placeholders with the underlying canonical evidence and matching exact
++quotes. Include the preserved calculation/report artifact when the claim depends
++on computed results; `analysis_run` identifies the analysis provenance, and add
++the actual underlying source tokens. An analysis-run label alone is not evidence.
++
+ 
+ ### 6. Tag Clusters
+ 
+--- /Users/travcole/.codex/skills/build-infra/SKILL.md
++++ .codex/skills/build-infra/SKILL.md
+@@ -84,12 +84,37 @@
+   --proceed
+ ```
+ 
+-If the endpoint doesn't work or requires paid access:
++Paid, registered, request, purchase, or physical access is an access fact, not
++a reason to reject the source. Record the observed route and proceed when the
++request can be satisfied by an account-aware adapter, catalog entry, licensed
++product, or reproducible human action:
+ ```bash
+ uv run python tools/infra_tracker.py evaluate <ID> \
+-  --notes "API requires paid subscription ($500/year). Documented at URL." \
+-  --reject
+-```
++  --probe-results "Official API requires a paid account; public request route confirmed at https://..." \
++  --notes "Retain both the licensed API and public request capabilities." \
++  --proceed
++```
++
++Use `--block` when a missing credential, account, purchase decision, or other
++dependency prevents the requested implementation from continuing. Reject only
++when evaluation shows that the request itself is invalid, duplicated or
++superseded, or has no viable and useful source route.
++
++Before settling the evaluation, map complementary routes for the same
++information need. When the preferred source is partial, interactive, paid,
++offline, or otherwise difficult to acquire, check adjacent official and useful
++public sources such as calendars, appellate indexes and opinions, recorder or
++assessor records, agency notices, bulk programs, archives, and defined
++request/copy channels. Record each viable route as a distinct source or action,
++including the fields and periods it adds and the gaps it leaves. Treat overlap
++as complementary coverage unless the evidence establishes field-level
++equivalence.
++
++When the source publishes both row/feature identifiers and business fields,
++audit the occurrence grain separately from candidate joins. Sample
++source-observed blank, whitespace, and sentinel encodings as well as database
++nulls. Preserve the raw values and attributable occurrences; project a
++business join only where the observed fields support one.
+ 
+ ### 3. Build the Tool
+ 
+@@ -198,7 +223,9 @@
+ `docs/modules/*.md` inventories, `docs/TOOL_REFERENCE.md`, and
+ `research/OSINT_RESOURCES.md`. Compare those documented sources with the live
+ health report and the open/evaluating infra queue before proposing a gap. Do
+-not rely on a separate memory or priority-source list.
++not rely on a separate memory or priority-source list. For incomplete or
++difficult primary routes, include complementary sources that satisfy part of
++the same information need and state their field and coverage differences.
+ 
+ ### 3. Search Log Analysis
+ 
+@@ -273,7 +300,12 @@
+ 5. **Test**: Verify against known targets
+ 6. **Document**: Update the canonical module, tool reference, citations, source health, and affected skills
+ 
+-If probing fails (403, paywall, requires registration), record the failure and reject or block the request. Do not write speculative code.
++If probing encounters a 403, paywall, registration, purchase, request, or
++physical-access workflow, record exactly what was observed and retain that
++route when it is useful. Proceed with a supported adapter, catalog entry, or
++human action; block when the current implementation has an unmet dependency;
++reject only when the request itself is not viable. Do not write speculative
++code or reject a source solely because machine access is not anonymous.
+ 
+ ## Context Management
+ 
+--- /Users/travcole/.codex/skills/curate-dossier/SKILL.md
++++ .codex/skills/curate-dossier/SKILL.md
+@@ -149,7 +149,7 @@
+ 
+ #### Claim Type Rules
+ 
+-- `direct_quote` / `confirmed` findings → state as fact with citation
++- `direct_quote` / `confirmed` → state the documented fact with citation; a quote establishes what was said, and allegations retain attribution
+ - `paraphrase` / `high` confidence → state as fact with citation
+ - `inference` / `medium` confidence → attribute: "Analysis of [source] indicates..."
+ - `synthesis` → attribute: "Cross-reference of [N] findings shows..." — NEVER state synthesis as confirmed fact
+@@ -159,7 +159,7 @@
+ 
+ #### Evidence Quality
+ 
+-- **Strong** (government filings, court documents, registries): cite as fact
++- **Primary records** (government filings, court documents, registries): state what the record establishes; attribute allegations and self-reported claims
+ - **Moderate** (USASpending, FEC, API data): cite with source: "Federal spending records show..."
+ - **Weak** (web search, news paraphrases): cite with publication: "According to [outlet]..."
+ 
+@@ -253,7 +253,7 @@
+ 
+ ```bash
+ cd /Users/travcole/projects/osint-research/web
+-npm run report:support-coverage:changed -- --base-ref HEAD~1 --head-ref HEAD
++npm run report:support-coverage:changed -- --base-ref HEAD --head-ref WORKTREE
+ ```
+ 
+ Inspect unsupported sentences, orphan citations, and source fanout before publishing.
+--- /Users/travcole/.codex/skills/deep-investigate/SKILL.md
++++ .codex/skills/deep-investigate/SKILL.md
+@@ -15,12 +15,11 @@
+ - Optional context after the name: `$deep-investigate Ron Soffer — French/Israeli lawyer referenced in SoftBank caper, Weingarten considering deploying him Jan 2019`
+ 
+ ### Context Loading
+-Load the active investigation context before executing:
+-```bash
+-uv run python tools/investigation_context.py show
+-```
+-This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
+-Use these values instead of hardcoded names throughout this skill.
++Before scoped work, read `docs/RESEARCH_WORKFLOW_CONTRACT.md` and pin the
++resolved task profile with `ITHILDIN_PROFILE`. Preserve/pass the selected
++`ITHILDIN_DB_PATH` to workers. Load `investigation_context.py show` under that
++environment for corpus tools, dates, threads, people, and jurisdictions; use
++those values throughout this skill. Do not change the shared active profile.
+ 
+ ### Ambient Documentation
+ **Document everything, not just what's relevant to your current hypothesis.**
+@@ -60,22 +59,16 @@
+ 
+ **Before writing any agent prompts**, create a source assignment matrix. This prevents agents from defaulting to web searches and ensures every relevant tool gets used.
+ 
+-**Step 1: Identify all relevant sources for this target.** Consider the target type:
+-
+-| Target Type | Critical Sources (must check) |
+-|-------------|-------------------------------|
+-| **Person** | CourtListener, FEC, 990s, EDGAR, LittleSis, registries (as officer), FARA, lobbying, OpenSanctions, GDELT |
+-| **Corporation** | State registries (DE/NY/FL/CA/TX + incorporation state), EDGAR (10-K, proxy), USASpending, SAM.gov, CourtListener, lobbying, FARA, GLEIF |
+-| **Nonprofit** | IRS 990 (lookup, grants, officers, financials, red-flags), EDGAR, state registries, CourtListener, FEC (PAC affiliates) |
+-| **Government actor** | FEC, lobbying (post-government), FARA, CourtListener, LittleSis, EDGAR (financial disclosures) |
+-| **Financial entity** | EDGAR, GLEIF, DS10, ACRIS, UCC, registries, CourtListener, USASpending |
+-
+-**Nonprofit network analysis:** For nonprofit targets, Agent B should also run:
+-- `uv run python tools/query_990.py lookup <EIN> --output $WORKDIR/990-lookup.json`
+-- `uv run python tools/query_990.py flow <EIN> --depth 1 --output $WORKDIR/990-flow.json`
+-- `uv run python tools/query_990.py officer-search "<NAME>" --output $WORKDIR/990-officers.json`
+-
+-If the flow output shows circular flows or 10+ network nodes, recommend `$trace-grants` for full network analysis as a parallel process.
++**Step 1: Build the applicable source plan.** Read the canonical checklist in
++`docs/RESEARCH_WORKFLOW_CONTRACT.md`. Resolve relevance from the factual question,
++target identity/role, jurisdiction and dates. Record each assessed source's
++scope, relevance reason, owner and outcome, including `not_applicable`,
++`unavailable`, and `partial` where appropriate. Retain every applicable required
++source even if another source already returned useful findings.
++
++The worker templates below are source menus. Instantiate only applicable
++operations, remove inapplicable query examples from worker prompts, and include
++the final source list and the shared contract in every worker mandate.
+ 
+ **Step 2: Assign sources to agents.** The 4-agent split (corpus, corporate/financial, legal, network/OSINT) works well for single targets. Give each source category one persistence owner: other agents may flag cross-category records in their reports, but they do not repeat that owner's searches or create duplicate findings. For custom multi-target plans, ensure each source appears in exactly one primary mandate. Create a table:
+ 
+@@ -113,9 +106,9 @@
+ 
+ **Option B: Organize by topic with source mandates** (for 4+ related targets)
+ - Topical agents (e.g., "GEO Group agent", "Miller network agent") are fine
+-- BUT each agent's prompt MUST include an explicit source checklist from the matrix above
++- BUT each agent's prompt MUST include an explicit source checklist from the applicable source plan
+ - Include this in every topical agent prompt: "You MUST check ALL of these sources, not just web search: [LIST]. Record negative results from each source."
+-- After topical agents complete, run a **coverage check**: which sources in the matrix were NOT used? Spawn follow-up agents to fill gaps.
++- After topical agents complete, run a **coverage check**: which applicable required sources were NOT used? Spawn follow-up agents to fill gaps.
+ 
+ ## Process
+ 
+@@ -262,7 +255,7 @@
+ 
+ #### Agent B: Corporate, Financial & Property Records
+ 
+-**Sources**: Corporate Registry (FL/NY/NM/PA/UK/USVI), SEC EDGAR, NYC ACRIS, FEC, IRS 990, UCC, FAA, LDA Lobbying, FARA, GLEIF, OpenSanctions, DS10 Financial
++**Sources**: Corporate registries, the property/recorder source catalog and adapters, SEC EDGAR, FEC, IRS 990, UCC, FAA, LDA Lobbying, FARA, GLEIF, OpenSanctions, DS10 Financial
+ 
+ **Prompt template**:
+ ```
+@@ -294,8 +287,15 @@
+ 5. uv run python tools/query_edgar.py lookup "[TARGET]" --output [WORKDIR]/b-edgar-lookup.json
+ 6. uv run python tools/query_edgar.py search "[TARGET]" "[ASSOCIATED_ENTITY]" --size 10 --output [WORKDIR]/b-edgar2.json  (if applicable)
+ 
+-PROPERTY (NYC):
+-7. uv run python tools/query_acris.py party "[TARGET]" --output [WORKDIR]/b-acris.json
++PROPERTY AND RECORDER RECORDS:
++7. uv run python tools/public_records_search_plan.py "[TARGET]" --output [WORKDIR]/b-public-record-plan.json
++8. uv run python tools/query_property.py owner "[TARGET]" --output [WORKDIR]/b-property-owner.json
++9. uv run python tools/query_property.py sources --output [WORKDIR]/b-property-sources.json
++10. If an address is known:
++    uv run python tools/query_property.py address "[KNOWN_ADDRESS]" --output [WORKDIR]/b-property-address.json
++11. Follow source IDs and operations from the plan with `query_property.py --source`
++    for direct adapters or `public_records_actions.py plan` for account, request,
++    purchase, formal-feed, or physical-office routes.
+ 
+ CAMPAIGN FINANCE:
+ 8. uv run python tools/query_fec.py donor "[TARGET]" --limit 20 --output [WORKDIR]/b-fec.json
+@@ -317,6 +317,9 @@
+ 
+ UCC FILINGS:
+ 15. uv run python tools/query_registry.py ucc-search "[TARGET]" --output [WORKDIR]/b-ucc.json
++    For a Massachusetts nexus, add live UCC search:
++    uv run python tools/query_massachusetts_ucc.py search-org "[TARGET]" --limit 25 --output "[WORKDIR]/b-ma-ucc.json"
++    For individuals, roles, or historical coverage, follow the Massachusetts UCC section in docs/modules/registries.md.
+ 
+ FAA AIRCRAFT:
+ 16. uv run python tools/ingest_faa.py search "[TARGET]" --output [WORKDIR]/b-faa.json
+@@ -403,7 +406,7 @@
+ 
+ #### Agent C: Legal & Court Records
+ 
+-**Sources**: CourtListener (dockets, opinions, parties, judges), FARA (detailed review), LDA Lobbying (detailed review)
++**Sources**: CourtListener (dockets, opinions, parties, judges), the state/local court source catalog and normalized sidecar, FARA (detailed review), LDA Lobbying (detailed review)
+ 
+ **Prompt template**:
+ ```
+@@ -434,6 +437,14 @@
+ 6. For citation graph: uv run python tools/query_courtlistener.py citations <OPINION_ID> --output [WORKDIR]/c-cl-citations.json
+ 7. RECAP documents: uv run python tools/query_courtlistener.py recap-search "[TARGET]" --output [WORKDIR]/c-cl-recap.json
+ 8. FJC database: uv run python tools/query_courtlistener.py fjc --defendant "[TARGET]" --output [WORKDIR]/c-cl-fjc.json
++
++STATE AND LOCAL COURTS:
++9. uv run python tools/public_records_search_plan.py "[TARGET]" --output [WORKDIR]/c-public-record-plan.json
++10. uv run python tools/query_state_courts.py search "[TARGET]" --output [WORKDIR]/c-state-courts.json
++11. uv run python tools/query_state_courts.py sources --output [WORKDIR]/c-state-court-sources.json
++12. Follow source IDs and operations from the plan with
++    `query_state_courts.py --source` when a direct route exists, or render the
++    catalog-backed work with `public_records_actions.py plan`.
+ 
+ For each case found:
+ - What is the nature of the case?
+--- /Users/travcole/.codex/skills/generate-hunches/SKILL.md
++++ .codex/skills/generate-hunches/SKILL.md
+@@ -17,12 +17,11 @@
+ - `--thread N`: focus on a specific thread
+ 
+ ### Context Loading
+-Load the active investigation context before executing:
+-```bash
+-uv run python tools/investigation_context.py show
+-```
+-This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
+-Use these values instead of hardcoded names throughout this skill.
++Before scoped work, read `docs/RESEARCH_WORKFLOW_CONTRACT.md` and pin the
++resolved task profile with `ITHILDIN_PROFILE`. Preserve/pass the selected
++`ITHILDIN_DB_PATH` to workers. Load `investigation_context.py show` under that
++environment for corpus tools, dates, threads, people, and jurisdictions; use
++those values throughout this skill. Do not change the shared active profile.
+ 
+ ## Process
+ 
+@@ -86,7 +85,7 @@
+ - Example: "Gratitude America and Black Family Foundation both fund Melanoma Research Alliance"
+ 
+ **f) Unexplained gaps**
+-- High-activity targets with sudden silence periods (no findings for 6+ months in an otherwise active timeline)
++- Gaps of six or more months in collected findings: measure source coverage and collection effort before treating them as inactivity
+ - Targets with many connections but zero entity registrations (or vice versa)
+ 
+ **g) Naming pattern analysis**
+@@ -95,25 +94,25 @@
+ 
+ **h) Alumni dispersal patterns**
+ - Run `uv run python tools/pillar_tracker.py dispersal "INSTITUTION" --output $WORKDIR/dispersal.json` for dissolved institutions
+-- Look for coordinated movement: 3+ alumni landing at the same destination
++- Compare shared destinations for 3+ alumni with normal hiring channels, industry concentration, and institution size
+ - Example: "4 alumni from a dissolved institution all landed at the same firm — known names plus an unexpected fourth person"
+ 
+ **i) Cross-pillar broker detection**
+ - Run `uv run python tools/pillar_tracker.py score --top 20 --output $WORKDIR/scores.json`
+ - Look for unexpected names in orchestrator rankings — people who span banking + legal + government
+-- Flag anyone with revolving_door score > 0
++- Inspect nonzero revolving_door scores as candidate transitions; assess role relevance and the background transition rate
+ 
+ **j) Nonprofit funding network concentration**
+ - Identify nonprofits mentioned in 3+ investigation threads via findings search
+ - For each, run `uv run python tools/query_990.py flow <EIN> --depth 1 --output $WORKDIR/hunch-990-flow-<EIN>.json` to see their funding constellation
+-- Look for: same set of funders backing recipients across multiple threads (coordinated funding network)
++- Look for: same funders backing recipients across threads; compare shared mission, grant eligibility, and donor concentration before testing coordination
+ - Look for: circular flows between investigation-linked nonprofits (A funds B which funds A back)
+ - Look for: shared officers across investigation-linked nonprofits via `uv run python tools/query_990.py shared-officers <EIN1> <EIN2> ... --output $WORKDIR/hunch-990-shared.json`
+-- Example: "Donors Trust, Bradley Foundation, and Koch Foundation all fund 4 investigation-linked orgs across threads 2, 4, and 7 — coordinated funding constellation"
++- Example: "Donors Trust, Bradley Foundation, and Koch Foundation all fund 4 investigation-linked orgs across threads 2, 4, and 7 — overlapping grant recipients; test common eligibility and shared strategy as alternatives"
+ 
+ **k) Missing pillar analysis**
+ - Run `uv run python tools/pillar_tracker.py gaps --person "NAME"` for key actors
+-- If a known operator has no legal connections, that's suspicious — lawyers leave fewer traces
++- Missing legal connections describe a collection gap; check expected record coverage, naming, and disclosure requirements before inferring an undisclosed relationship
+ - Example: "A key actor has banking, operations, philanthropy arcs but no legal firm arcs (despite using many firms)"
+ 
+ **l) Procurement acceleration clustering**
+@@ -122,7 +121,7 @@
+ - Flag companies with >50% YoY contract growth in the most recent fiscal year
+ - Cross-reference with lobbying data: `uv run python tools/query_lobbying.py client "<COMPANY>" --output $WORKDIR/hunch-lobby-<slug>.json`
+ - Check for partnership overlaps: do accelerating companies team together on the same contract vehicles?
+-- Example: "Palantir and Anduril both show >50% contract growth and both lobby on DEF/HOM issues — coordinated defense tech acceleration"
++- Example: "Palantir and Anduril both show >50% contract growth and both lobby on DEF/HOM issues — simultaneous growth; compare agency budgets, sector growth, acquisitions, and shared procurement decisions"
+ 
+ ### 5. Novelty Filter (Critical)
+ 
+@@ -131,7 +130,8 @@
+ 1. **Already known?** Check existing hypotheses and tags — skip if already captured
+ 2. **Obviously connected?** Skip patterns between directly-connected actors — that's expected
+ 3. **3+ independent contexts?** Require the pattern to appear in 3+ independent findings/entities, not just one finding's detail text
+-4. **Genuinely surprising?** Ask: "Would an investigator who knows the full case find this interesting?" If not, skip
++4. **Coverage and base rate?** Check whether the pattern survives collection gaps, shared exposure, and a relevant comparison group. Record a discriminating test rather than treating overlap as coordination.
++5. **Genuinely surprising?** Ask: "Would an investigator who knows the full case find this interesting?" If not, skip
+ 
+ ### 6. Record Genuine Hunches
+ 
+--- /Users/travcole/.codex/skills/investigate-person/SKILL.md
++++ .codex/skills/investigate-person/SKILL.md
+@@ -155,7 +155,20 @@
+ uv run python tools/query_fec.py donor "<NAME>" --limit 20 --output $WORKDIR/inv-fec-donor.json
+ uv run python tools/query_fec.py employer "<KNOWN_EMPLOYER>" --output $WORKDIR/inv-fec-employer.json
+ 
+-# NYC ACRIS property records (if NYC connection)
++# Reproducible property -> recorder -> court plan
++uv run python tools/public_records_search_plan.py "<NAME>" \
++  --address "<KNOWN_ADDRESS>" \
++  --output "$WORKDIR/inv-public-record-plan.json"
++
++# Normalized property and state/local-court observations
++uv run python tools/query_property.py owner "<NAME>" \
++  --output "$WORKDIR/inv-property-owner.json"
++uv run python tools/query_property.py address "<KNOWN_ADDRESS>" \
++  --output "$WORKDIR/inv-property-address.json"
++uv run python tools/query_state_courts.py search "<NAME>" \
++  --output "$WORKDIR/inv-state-courts.json"
++
++# NYC ACRIS recorder records when the plan identifies a NYC connection
+ uv run python tools/query_acris.py party "<NAME>" --output $WORKDIR/inv-acris.json
+ 
+ # Federal lobbying disclosures
+@@ -178,6 +191,13 @@
+ uv run python tools/ingest_uk_companies_house.py officer-search "<NAME>" --output "$WORKDIR/inv-uk-officer-search.json"
+ uv run python tools/ingest_uk_companies_house.py search "<NAME>" --limit 20 --output "$WORKDIR/inv-uk-company-search.json"
+ ```
++
++Follow the public-record plan's source capabilities with the matching direct
++adapter for addresses, parcels, instruments, cases, docket entries, and
++documents. For an account, formal feed, request, paid product, or physical
++office route, render the concrete work with `public_records_actions.py plan`,
++passing the source ID, operation, and selector from the plan. Preserve route
++and barrier states in source coverage rather than recording them as zero hits.
+ 
+ ### Nonprofit Board Positions (990)
+ 
+@@ -293,6 +313,13 @@
+     --relation-type funds \
+     --description 'Entity A donated $10M to Entity B via shell LLC' \
+     --source "SOURCE_REF"
++
++# Generate explainable links from retained property/instrument/court-party rows.
++uv run python tools/public_records_entity_candidates.py generate \
++    --output "$WORKDIR/inv-public-record-candidates.json"
++uv run python tools/public_records_entity_candidates.py list --status open \
++    --name "<NAME>" \
++    --output "$WORKDIR/inv-public-record-candidates-for-person.json"
+ ```
+ 
+ **Register these as you find them:**
+--- /Users/travcole/.codex/skills/pursue-lead/SKILL.md
++++ .codex/skills/pursue-lead/SKILL.md
+@@ -15,12 +15,11 @@
+ - No arguments: automatically picks the highest-priority open lead
+ 
+ ### Context Loading
+-Load the active investigation context before executing:
+-```bash
+-uv run python tools/investigation_context.py show
+-```
+-This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
+-Use these values instead of hardcoded names throughout this skill.
++Before scoped work, read `docs/RESEARCH_WORKFLOW_CONTRACT.md` and pin the
++resolved task profile with `ITHILDIN_PROFILE`. Preserve/pass the selected
++`ITHILDIN_DB_PATH` to workers. Load `investigation_context.py show` under that
++environment for corpus tools, dates, threads, people, and jurisdictions; use
++those values throughout this skill. Do not change the shared active profile.
+ 
+ ### Ambient Documentation
+ **Document everything, not just what's relevant to your current hypothesis.**
+@@ -70,63 +69,52 @@
+ - **digital** → Focus on email accounts, usernames, digital footprint
+ - **connection** → Focus on tracing relationship between two known entities
+ 
+-### 3. Check Search Log
+-Before querying any source, check if the query was already run:
+-```python
+-# In your search workflow, check:
+-from tools.lead_tracker import check_searched
+-prior = check_searched("rod-larsen", "doj_vol11")
+-if prior:
+-    # Skip this source, already searched
+-```
+-
+-### 4. Source Checklist by Target Type
+-
+-Before searching, identify which sources are mandatory for this lead type. **Do not skip sources because you "found enough" elsewhere.** Check every mandatory source and record the result (including zero-result searches).
+-
+-**Person leads:**
+-- [ ] Investigation corpus (all corpus_tools from profile)
+-- [ ] CourtListener (federal litigation: `query_courtlistener.py search --party "NAME"`, `cases`, `opinions`)
+-- [ ] FEC donations (`query_fec.py donor`)
+-- [ ] IRS 990 (`query_990.py search` — grants; `officer-search` — check if person is officer/director; `red-flags` — if EIN known)
+-- [ ] SEC EDGAR (`query_edgar.py search/lookup` — insider filings, mentions in proxy statements)
+-- [ ] LittleSis (`query_littlesis.py search` — pre-mapped relationships)
+-- [ ] Corporate registries (`query_registry.py officers` — what entities are they officer of?)
+-- [ ] FARA (`query_fara.py search` — foreign agent registrations)
+-- [ ] Lobbying disclosures (`query_lobbying.py lobbyist`)
+-- [ ] OpenSanctions (`query_opensanctions.py search` — PEP/sanctions check)
+-- [ ] WebSearch (biography, news, known associations)
+-
+-**Entity/corporate leads:**
+-- [ ] Investigation corpus
+-- [ ] Corporate registries (`query_registry.py search` — all jurisdictions)
+-- [ ] SEC EDGAR (`query_edgar.py search` — filings mentioning entity)
+-- [ ] IRS 990 (`query_990.py lookup <EIN>` — comprehensive view; `officers` — board/staff; `financials` — revenue trends)
+-- [ ] USASpending (`query_usaspending.py awards` — federal contracts/grants)
+-- [ ] SAM.gov (`query_sam.py entity/exclusions` — registration, debarments)
+-- [ ] CourtListener (`query_courtlistener.py search --party "ENTITY"` — litigation involving entity)
+-- [ ] GLEIF (`query_gleif.py search` — LEI records, corporate hierarchy)
+-- [ ] Lobbying (`query_lobbying.py client` — lobbying by entity)
+-- [ ] FARA (`query_fara.py search` — foreign principal registrations)
+-- [ ] State registries (CA/TX/MI/MA/NJ/NY DOS as relevant by jurisdiction)
+-- [ ] WebSearch (corporate profile, news)
+-
+-**Financial leads:**
+-- [ ] Investigation corpus
+-- [ ] SEC EDGAR (10-K, 10-Q, proxy, insider transactions)
+-- [ ] IRS 990 (grant flows via `filer`/`recipient`; `officers` for compensation; `red-flags` for ratio analysis)
+-- [ ] FEC (political spending by entity + executives)
+-- [ ] USASpending (contract/grant awards)
+-- [ ] DS10 financial records (`parse_ds10_financials.py query`)
+-- [ ] ACRIS property records (`query_acris.py party`)
+-- [ ] UCC filings (`query_registry.py ucc-search`)
+-- [ ] GLEIF hierarchy
+-- [ ] CourtListener (financial litigation, SEC enforcement)
++### 3. Check Prior Work and Result Reuse
++
++Follow `docs/RESEARCH_WORKFLOW_CONTRACT.md#reuse-a-result-not-a-historical-log-entry`.
++Historical `check_searched` rows describe work already done. Skip a new query only
++when `search_reuse.py check` returns `reusable: true` for the actual operation,
++filters, limit, freshness/source version, successful outcome, and intact artifact.
++Inspect the reused results and record their scope in the lead report.
++
++### 4. Build the Applicable Source Plan
++
++Use the canonical applicability checklist in `docs/RESEARCH_WORKFLOW_CONTRACT.md`.
++For each source record the question, jurisdiction/date scope, relevance reason,
++and planned outcome. Check every applicable required source, including sources
++likely to return zero. Record `not_applicable` for an irrelevant source with a
++specific reason; an unavailable relevant source remains a coverage gap.
+ 
+ ### 4b. Execute Searches
++When the source plan selects property or litigation records, build the
++capability-driven public-record plan before choosing a jurisdiction-specific
++route:
++
++```bash
++uv run python tools/public_records_search_plan.py "<TARGET>" \
++  --output "$WORKDIR/lead-public-record-plan.json"
++uv run python tools/query_property.py owner "<TARGET>" \
++  --output "$WORKDIR/lead-property.json"
++uv run python tools/query_state_courts.py search "<TARGET>" \
++  --output "$WORKDIR/lead-state-courts.json"
++```
++
++Use the plan's source IDs and operations with the unified routers for direct
++adapters. When the catalog describes an account, request, purchase, formal
++feed, or physical-office route, render the concrete work with
++`public_records_actions.py plan`. Treat local-cache misses and acquisition
++states as coverage information rather than source-authoritative zero results.
++
+ Run queries against relevant sources. For each search:
+ 1. Query the source
+-2. Log the search: `uv run python tools/lead_tracker.py` (use log_search function)
++2. Log the search with the current function signature:
++   ```python
++   from tools.lead_tracker import log_search
++   log_search("<query text>", "<source>", result_count)
++   ```
++   Pass `session_id=` only when it is the integer ID of an existing `sessions`
++   row; a lead ID is not a session ID. Use `lead_tracker.py note <LEAD_ID> ...`
++   when the search also needs a lead-specific audit note.
+ 3. Record notable results as notes on the lead
+ 4. If a definitive finding is discovered, create a finding in findings_tracker
+ 
+@@ -264,9 +252,9 @@
+ 
+ Stop investigating and move to completion when ANY of these is true:
+ 
+-- **Mandatory sources exhausted with corroboration**: You've checked all mandatory sources for this target type and found corroborating evidence across 2+ independent sources.
++- **Applicable source plan complete**: You've checked the required sources and answered the factual question to its evidence standard, or recorded the remaining bounded uncertainty. Count independent evidence, not mirrors of one document.
+ - **Mandatory sources exhausted with consistent negatives**: You've checked all mandatory sources and found nothing. Record negative results and complete.
+-- **Diminishing returns**: Recent searches are yielding no new entities, connections, or documents. You've exhausted productive search variations.
++- **Diminishing returns after applicable coverage**: Required source coverage is complete and further query variations yield no new entities, connections, or documents. Unsearched relevant sources remain explicit gaps; an access barrier follows the blocking path below.
+ - **Hard access barrier**: The next useful step requires infrastructure we don't have (e.g., a registry tool, a paid database, FOIA). Create an infra request and block the lead.
+ 
+ Do NOT stop because you "found enough" — stop because sources are exhausted or returns are diminishing. But also do NOT rabbit-hole into speculative searches when mandatory sources are done.
+@@ -314,8 +302,8 @@
+ ### When Recording Findings
+ 
+ - **Distinguish fact from inference.** "Email shows wire transfer of $18M" is a fact. "This was payment for diplomatic access" is an inference. Label them differently.
+-- **Note what you didn't find.** "Searched 5 sources for Target-Subject financial links, found none" is itself a finding.
+-- **End with new hypotheses.** Every completed lead should spawn questions, not just answers.
++- **Scope negative results.** Record searched queries, dates, filters, and coverage in the report/search log. Create a negative finding only when the bounded-negative evidence standard is met.
++- **Record remaining factual questions.** Queue actionable follow-ups when evidence leaves a useful next step; a completed answer need not generate another lead.
+ 
+ ### Thread Awareness
+ 
+@@ -325,9 +313,9 @@
+ 
+ ## Operational Principles
+ 
+-- **Be thorough**: Search at least 3-4 local sources before completing
++- **Complete applicable coverage**: Follow the shared source plan and stop conditions; a universal source count does not establish coverage
+ - **Cite evidence**: Always include EFTA IDs, file paths, or source references
+-- **Don't duplicate**: Check search_log before querying, check existing findings before creating
++- **Reuse deliberately**: Inspect prior search history and use the shared reuse check; search existing findings before creating new ones
+ - **Prefer EFTA IDs** as canonical evidence references when available
+ - **Create follow-ups generously**: If something looks interesting, create a lead for it
+ - **Document dead ends**: A dead end is still valuable — it prevents re-investigation
+--- /Users/travcole/.codex/skills/review-article/SKILL.md
++++ .codex/skills/review-article/SKILL.md
+@@ -260,7 +260,15 @@
+ 
+ #### Estimative-language consistency (blocking)
+ 
+-Check every probability phrase against the cited findings' confidence tiers using the Kent mapping in `research/INVESTIGATIVE_METHODOLOGY.md`: `confirmed` = established/documented; `high` = almost certainly/very likely; `medium` = likely/probably; `low` = possibly/may; `unverified` = unconfirmed/alleged. Prose may not outrun the weakest confidence in its citation chain—for example, "almost certainly" is unsupported when any necessary link is `medium`. Flag every mismatch as a **BLOCKING** edit.
++Apply the estimative-language standard in `research/INVESTIGATIVE_METHODOLOGY.md`.
++Confidence tiers are evidence-quality ceilings, not probability estimates.
++For every likelihood phrase, require a proposition-specific rationale that
++addresses alternatives, source independence, and material uncertainty; `medium`
++alone does not authorize "probably." Prose may not outrun the weakest necessary
++evidence link. A documented quotation establishes that the statement was made;
++preserve allegation or attribution language for its content. Unsupported
++certainty or probability claims are **BLOCKING** edits; a lower confidence tier
++does not require inventing a numeric probability.
+ 
+ **Not a problem**: An article that presents evidence and then draws a conclusion using assertion language. "The Golden Dome procurement structure produces a specific set of conditions" is an earned conclusion if the preceding sections document those conditions.
+ 
+--- /Users/travcole/.codex/skills/review-dossiers/SKILL.md
++++ .codex/skills/review-dossiers/SKILL.md
+@@ -51,18 +51,29 @@
+ 
+ ### Phase 2: LLM Editorial Review
+ 
+-Skip this phase if `--fix-only`. For each dossier that didn't get a clean PASS:
++With `--fix-only`, report that semantic review remains outstanding. Otherwise
++review every selected dossier, including automated PASS results. Skip a semantic
++re-review only when `validate-receipts --slug <slug>` passes for the exact current
++content version. Automated PASS establishes structural checks, not claim support.
++
++```bash
++uv run python scripts/review_dossier_checks.py validate-receipts \
++  --slug <slug> --output "$WORKDIR/prior-review-<slug>.json"
++```
++
++A missing/stale receipt means perform the review; do not convert an old database
++verdict into a new receipt.
+ 
+ Read the dossier JSON:
+ ```bash
+ Read: content/dossiers/<slug>.json
+ ```
+ 
+-Read the automated check results from Phase 1.
++Read the automated check results from Phase 1 and copy their `content_sha256` into the semantic result. Review that exact dossier version and its cited evidence; changes invalidate the review.
+ 
+ **Review checklist** (what automated checks cannot evaluate):
+ 
+-1. **Claim-evidence alignment**: For inference/synthesis findings, is the prose properly attributed? ("Analysis indicates..." not stated as fact). Check `claim_type` on each finding referenced.
++1. **Claim-evidence alignment**: Read the actual finding and its source evidence for every material assertion. A valid or verified citation ID may still be unrelated to the prose. Preserve attribution for allegations and distinguish fact, inference, and synthesis; flag unsupported assertions as BLOCKING.
+ 
+ 2. **Tone**: Encyclopedic and neutral throughout? Any editorializing or loaded language beyond the banned phrase list? Watch for:
+    - Implying guilt or wrongdoing without evidence
+@@ -94,6 +105,10 @@
+ ```json
+ {
+   "slug": "<slug>",
++  "content_sha256": "<hash from reviewed Phase 1 output>",
++  "reviewer": "<reviewing agent or human>",
++  "reviewed_at": "<actual ISO timestamp with timezone>",
++  "verdict": "NEEDS_FIXES",
+   "llm_issues": [
+     {
+       "severity": "SHOULD_FIX",
+@@ -105,7 +120,10 @@
+ }
+ ```
+ 
+-Categorize each issue as `BLOCKING`, `SHOULD_FIX`, or `SUGGESTION`.
++Categorize each issue as `BLOCKING`, `SHOULD_FIX`, or `SUGGESTION`. Verdict is
++`FAIL` with any blocking issue, `NEEDS_FIXES` with any should-fix issue, otherwise
++`PASS`; even a clean result explicitly includes `llm_issues: []`. Only the actual
++reviewer supplies this judgment. A missing field is not an implicit pass.
+ 
+ #### Batch parallelism
+ 
+@@ -116,7 +134,21 @@
+ Prompt: "Review dossier <slug> for editorial quality. Read content/dossiers/<slug>.json and the automated check results at $WORKDIR/automated-<slug>.json. Apply the LLM review checklist [paste checklist]. Write results to $WORKDIR/review-<slug>.json. Do NOT modify the dossier — review only."
+ ```
+ 
+-Read each sub-agent's output file after completion.
++#### Persist completed reviews (single target or batch)
++
++Read each reviewer's completed output. For each newly completed semantic review,
++the parent serially persists the supplied reviews and receipts after checking
++each reviewed hash. Reusing an existing valid receipt needs no new ingestion:
++
++```bash
++uv run python scripts/review_dossier_checks.py ingest-llm --dir "$WORKDIR"
++uv run python scripts/review_dossier_checks.py receipt \
++  --review-file "$WORKDIR/review-<slug>.json"
++```
++
++Receipts live in `content/dossier-review-receipts.json`; add one only for a
++completed actual review, including its issues. The release validator rechecks
++current bytes and automated blockers without using the private database.
+ 
+ ### Phase 3: Compile Report
+ 
+@@ -167,7 +199,7 @@
+ uv run python scripts/review_dossier_checks.py check <slug> --output $WORKDIR/post-fix-<slug>.json
+ ```
+ 
+-Print before/after comparison for each fixed dossier.
++Print before/after comparison for each fixed dossier. Content changes invalidate previous semantic receipts; repeat semantic review on the changed version before claiming publication readiness.
+ 
+ ## Automated Check Reference
+ 
+@@ -178,7 +210,7 @@
+ | 1 | **Cross-link completeness** — names in text that have dossiers but aren't linked | SHOULD_FIX | Yes |
+ | 2 | **Banned phrase scan** — regex against editorial standards list | BLOCKING (titles/system_role), SHOULD_FIX (body) | Partial |
+ | 3 | **Structure validation** — has lead, has sections, no `<ul>`/`<ol>`, valid viz values | BLOCKING if missing lead/sections | No |
+-| 4 | **Citation coverage** — % of sentences with inline citations | BLOCKING if <50%, SHOULD_FIX if <80% | No |
++| 4 | **Citation coverage** — heuristic inline-ID coverage | SHOULD_FIX if <50%, SUGGESTION if <80%; not proof of support | No |
+ | 5 | **Claim type compliance** — inference/synthesis cited without attribution language | SHOULD_FIX | No |
+ | 6 | **Outbound link count** — flag if <5 cross-links | SUGGESTION | No |
+ 
+@@ -194,11 +226,11 @@
+ uv run python scripts/review_dossier_checks.py gate
+ ```
+ 
+-The gate blocks publication if any curated dossier has a FAIL verdict or has never been reviewed.
++The gate requires an exact-content semantic PASS receipt for every curated dossier and reruns static automated blockers. Missing, unbound, or stale reviews are outstanding review work; they do not acquire a PASS from an automated result or historical database row.
+ 
+ ## Context Management
+ 
+ - Dossier JSONs are typically 50-200KB — read in full for review
+ - Use `--output` on all check commands to keep results in WORKDIR
+ - For batch LLM review, sub-agents read files from WORKDIR — read their output files instead of retrieving full transcripts
+-- Don't dump findings into context — the automated checks already analyze them
++- Read cited findings and underlying source evidence selectively for claim support; automated citation checks cannot establish that support
+--- /Users/travcole/.codex/skills/search-all-sources/SKILL.md
++++ .codex/skills/search-all-sources/SKILL.md
+@@ -66,6 +66,10 @@
+ 
+ # UCC Filings (secured transactions, liens)
+ uv run python tools/query_registry.py ucc-search "<QUERY>" --output $WORKDIR/search-ucc.json
++
++# Massachusetts nexus: add live UCC search; see docs/modules/registries.md for
++# individual names, roles, and the separate lapsed archive.
++uv run python tools/query_massachusetts_ucc.py search-org "<QUERY>" --limit 25 --output "$WORKDIR/search-ma-ucc.json"
+ 
+ # DEPRECATED (March 2026): OCCRP removed free tier in 2026. Tool returns 0 results without paid API key. Skip Aleph queries until access is restored.
+ # OCCRP Aleph (corporate registries, leaks, sanctions)
+@@ -128,8 +132,26 @@
+ # FAA Registry (if ingested — aviation-related queries)
+ uv run python tools/ingest_faa.py search "<QUERY>" --output "$WORKDIR/search-faa.json"
+ 
+-# NYC ACRIS property records
+-uv run python tools/query_acris.py party "<QUERY>" --output "$WORKDIR/search-acris.json"
++# Build the property -> recorder -> court plan from the target, active profile,
++# known addresses, aliases, and every cataloged source capability.
++uv run python tools/public_records_search_plan.py "<QUERY>" \
++  --output "$WORKDIR/search-public-record-plan.json"
++
++# Unified property records (normalized local observations by default)
++uv run python tools/query_property.py owner "<QUERY>" --output "$WORKDIR/search-property.json"
++uv run python tools/query_property.py sources \
++  --output "$WORKDIR/search-property-sources.json"
++
++# Unified state/local court records and source inventory
++uv run python tools/query_state_courts.py search "<QUERY>" --output "$WORKDIR/search-state-courts.json"
++uv run python tools/query_state_courts.py sources \
++  --output "$WORKDIR/search-state-court-sources.json"
++
++# If the plan selects a catalog route such as an account, formal feed, paid
++# product, request, or physical office, render the concrete acquisition action.
++uv run python tools/public_records_actions.py plan <SOURCE_ID> \
++  --operation <OPERATION> --selector "<QUERY>" \
++  --output "$WORKDIR/search-public-record-action.json"
+ 
+ # FEC campaign finance
+ uv run python tools/query_fec.py donor "<QUERY>" --limit 20 --output "$WORKDIR/search-fec.json"
+@@ -206,6 +228,14 @@
+ # SAM.gov Bulk (874K entities, 167K exclusions — local SQLite, no API limit)
+ uv run python tools/ingest_sam.py search "<QUERY>" --output $WORKDIR/search-sam-bulk.json
+ ```
++
++Use the public-record plan's dependency order and capability labels to choose
++direct adapters for addresses, parcels, recorder parties, case numbers, docket
++entries, and documents. If an acquisition action should be tracked in the
++investigation, rerun the rendered action with
++`public_records_actions.py enqueue`. Preserve each result's source ID, status,
++coverage, continuation, and warnings; a non-query route or unavailable source
++is source coverage information, not a zero-result search.
+ 
+ ### 1c. Investigation Corpus Tools (from profile)
+ 
+@@ -250,6 +280,8 @@
+ log_search("<QUERY>", "sec_enforcement", result_count)
+ log_search("<QUERY>", "reporting", result_count)
+ log_search("<QUERY>", "government_releases", result_count)
++log_search("<QUERY>", "property_records", result_count)
++log_search("<QUERY>", "state_court_records", result_count)
+ log_search("<QUERY>", "ds10_financial", result_count)
+ log_search("<QUERY>", "usvi", result_count)
+ log_search("<QUERY>", "dc_corp_registry", result_count)
+@@ -304,6 +336,8 @@
+ Registry:     2 hits (FL, NY)
+ Aleph:        4 hits
+ CourtListener: 1 hit
++Property records: 2 hits (list source IDs and jurisdictions)
++State/local courts: 1 hit (or report human_required/terms_blocked/unavailable)
+ 990:          0 hits
+ UCC:          0 hits
+ GDELT:        12 hits (articles), 8 hits (context)
+--- /Users/travcole/.codex/skills/systemic-analysis/SKILL.md
++++ .codex/skills/systemic-analysis/SKILL.md
+@@ -18,12 +18,11 @@
+ Without arguments: analyzes the highest-priority thread or the largest tagged cluster.
+ 
+ ### Context Loading
+-Load the active investigation context before executing:
+-```bash
+-uv run python tools/investigation_context.py show
+-```
+-This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
+-Use these values instead of hardcoded names throughout this skill.
++Before scoped work, read `docs/RESEARCH_WORKFLOW_CONTRACT.md` and pin the
++resolved task profile with `ITHILDIN_PROFILE`. Preserve/pass the selected
++`ITHILDIN_DB_PATH` to workers. Load `investigation_context.py show` under that
++environment for corpus tools, dates, threads, people, and jurisdictions; use
++those values throughout this skill. Do not change the shared active profile.
+ 
+ ## Process
+ 
+@@ -136,9 +135,17 @@
+     --detail "Members: A, B, C. Pattern: DESCRIPTION. Significance: IMPLICATION." \
+     --confidence medium \
+     --claim-type synthesis \
+-    --evidence "analysis-run-{RUN_ID}; littlesis:ID1; edgar:CIK" \
+-    --source-quote "SPECIFIC DATA POINTS from external sources"
+-```
++    --evidence "SOURCE:ID_A" "SOURCE:ID_B" \
++    --source-quote "SOURCE:ID_A:Exact supporting source excerpt" \
++    --source-quote "SOURCE:ID_B:Exact supporting source excerpt" \
++    --sources analysis_run
++```
++
++Replace placeholders with the underlying canonical evidence and matching exact
++quotes. Include the preserved calculation/report artifact when the claim depends
++on computed results; `analysis_run` identifies the analysis provenance, and add
++the actual underlying source tokens. An analysis-run label alone is not evidence.
++
+ 
+ ### 7. Tag with Systemic Labels
+ 
+--- /Users/travcole/.codex/skills/timeline-analysis/SKILL.md
++++ .codex/skills/timeline-analysis/SKILL.md
+@@ -16,12 +16,11 @@
+ - `--window YYYY-MM-DD YYYY-MM-DD`: analyze a specific date range
+ 
+ ### Context Loading
+-Load the active investigation context before executing:
+-```bash
+-uv run python tools/investigation_context.py show
+-```
+-This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
+-Use these values instead of hardcoded names throughout this skill.
++Before scoped work, read `docs/RESEARCH_WORKFLOW_CONTRACT.md` and pin the
++resolved task profile with `ITHILDIN_PROFILE`. Preserve/pass the selected
++`ITHILDIN_DB_PATH` to workers. Load `investigation_context.py show` under that
++environment for corpus tools, dates, threads, people, and jurisdictions; use
++those values throughout this skill. Do not change the shared active profile.
+ 
+ ## Process
+ 
+@@ -60,22 +59,19 @@
+ For each finding with an extractable date, note it for analysis. Optionally backfill `date_of_event`:
+ 
+ ```bash
+-uv run python -c "
+-import sqlite3
+-db = sqlite3.connect('investigation.db')
+-db.execute('UPDATE findings SET date_of_event = ? WHERE id = ?', ('YYYY-MM-DD', FINDING_ID))
+-db.commit()
+-"
+-```
+-
+-Only backfill when extraction is high confidence (exact date mentioned, not inferred).
++uv run python tools/findings_tracker.py correct <FINDING_ID> \
++    --field date_of_event --value "YYYY-MM-DD" \
++    --reason "Exact event date documented in <EVIDENCE_REF>"
++```
++
++Only backfill an exact documented event date. The tracker synchronizes the normalized date/precision and records the correction; retain the source reference in the reason.
+ 
+ ### 4. Temporal Clustering Analysis
+ 
+ **a) Activity bursts**
+ Find clusters where 3+ findings occur within a 14-day window:
+ - Group all dated findings by 2-week windows
+-- Windows with unusually high activity indicate coordinated events or investigative focus
++- Check whether dense windows reflect source availability, collection effort, or actual activity before testing coordination
+ 
+ **b) Cross-reference with events**
+ For each activity cluster, check the event timeline:
+@@ -133,9 +129,17 @@
+     --detail "DETAIL with dates and cross-references" \
+     --confidence medium \
+     --claim-type synthesis \
+-    --evidence "analysis-run-{RUN_ID}" \
+-    --source-quote "timeline analysis: N events in WINDOW"
+-```
++    --evidence "SOURCE:ID_A" "SOURCE:ID_B" \
++    --source-quote "SOURCE:ID_A:Exact supporting source excerpt" \
++    --source-quote "SOURCE:ID_B:Exact supporting source excerpt" \
++    --sources analysis_run
++```
++
++Replace placeholders with the underlying canonical evidence and matching exact
++quotes. Include the preserved calculation/report artifact when the claim depends
++on computed results; `analysis_run` identifies the analysis provenance, and add
++the actual underlying source tokens. An analysis-run label alone is not evidence.
++
+ 
+ ### 7. Tag Temporal Patterns
+ 
+--- /Users/travcole/.codex/skills/trace-entity/SKILL.md
++++ .codex/skills/trace-entity/SKILL.md
+@@ -1,6 +1,6 @@
+ ---
+ name: trace-entity
+-description: Follow corporate/financial entity through registrations, filings, and offshore records
++description: Follow a corporate or financial entity through registries, property, court, financial, and offshore records
+ ---
+ 
+ # $trace-entity
+@@ -136,6 +136,10 @@
+ uv run python tools/query_registry.py ucc-party "<ENTITY>" --role secured --output $WORKDIR/trace-ucc-secured.json
+ uv run python tools/query_registry.py ucc-collateral "aircraft" --output $WORKDIR/trace-ucc-collateral.json
+ 
++# Massachusetts nexus: search the live UCC portal (separate from local registry data).
++# See docs/modules/registries.md for individual names, roles, and the lapsed archive.
++uv run python tools/query_massachusetts_ucc.py search-org "<ENTITY>" --limit 25 --output "$WORKDIR/trace-ma-ucc.json"
++
+ # DEPRECATED (March 2026): OCCRP removed free tier in 2026. Tool returns 0 results without paid API key. Skip Aleph queries until access is restored.
+ # OCCRP Aleph (global corporate registries, leaks)
+ uv run python tools/query_aleph.py search "<ENTITY>" --schema Company --output $WORKDIR/trace-aleph-company.json
+@@ -176,9 +180,23 @@
+ ```
+ 
+ ```bash
+-# NYC property records (if NYC entity)
++# Reproducible property -> recorder -> court plan
++uv run python tools/public_records_search_plan.py "<ENTITY>" \
++  --address "<KNOWN_ADDRESS>" \
++  --output "$WORKDIR/trace-public-record-plan.json"
++
++# Normalized property and state/local-court observations
++uv run python tools/query_property.py owner "<ENTITY>" \
++  --output "$WORKDIR/trace-property-owner.json"
++uv run python tools/query_property.py address "<KNOWN_ADDRESS>" \
++  --output "$WORKDIR/trace-property-address.json"
++uv run python tools/query_state_courts.py search "<ENTITY>" \
++  --output "$WORKDIR/trace-state-courts.json"
++
++# NYC ACRIS recorder records when the plan identifies a NYC connection
+ uv run python tools/query_acris.py party "<ENTITY>" --output $WORKDIR/trace-acris.json
+-uv run python tools/query_acris.py batch-entities   # Cross-ref all investigation entities
++uv run python tools/query_acris.py batch-entities \
++  --output "$WORKDIR/trace-acris-batch.json"
+ 
+ # FEC (donations from entity employees)
+ uv run python tools/query_fec.py employer "<ENTITY>" --output $WORKDIR/trace-fec.json
+@@ -204,6 +222,13 @@
+ uv run python tools/ingest_sam.py entity "<ENTITY>" --output $WORKDIR/trace-sam-bulk-entity.json
+ uv run python tools/ingest_sam.py exclusion "<ENTITY>" --output $WORKDIR/trace-sam-bulk-excl.json
+ ```
++
++Follow the public-record plan's source capabilities with the matching direct
++adapter for addresses, parcels, instruments, cases, docket entries, and
++documents. For an account, formal feed, request, paid product, or physical
++office route, render the concrete work with `public_records_actions.py plan`,
++passing the source ID, operation, and selector from the plan. Preserve route
++and barrier states in source coverage rather than recording them as zero hits.
+ 
+ Web research:
+ - WebSearch: `"<ENTITY>" site:opencorporates.com`
+@@ -255,6 +280,13 @@
+ 
+ # Inspect consolidated entity view
+ uv run python tools/entity_tracker.py show <ENTITY_ID>
++
++# Generate and inspect explainable links from public-record sidecars.
++uv run python tools/public_records_entity_candidates.py generate \
++  --output "$WORKDIR/trace-public-record-candidates.json"
++uv run python tools/public_records_entity_candidates.py list --status open \
++  --name "<ENTITY>" \
++  --output "$WORKDIR/trace-public-record-candidates-for-entity.json"
+ ```
+ 
+ Use allowed entity types: `person, llc, inc, ltd, corporation, pllc, trust, foundation, nonprofit, partnership, fund, association, government, pac, agency, joint_venture, shell, unknown`.
+--- /Users/travcole/.codex/skills/triage-leads/SKILL.md
++++ .codex/skills/triage-leads/SKILL.md
+@@ -39,39 +39,28 @@
+ ### 1. Check Queue Depth
+ 
+ ```bash
+-uv run python -c "
+-import sqlite3
+-db = sqlite3.connect('investigation.db')
+-total = db.execute(\"SELECT COUNT(*) FROM leads WHERE status='pending_triage'\").fetchone()[0]
+-by_cat = db.execute(\"SELECT category, COUNT(*) FROM leads WHERE status='pending_triage' GROUP BY category ORDER BY COUNT(*) DESC\").fetchall()
+-print(f'Pending triage: {total}')
+-for cat, cnt in by_cat: print(f'  {cat}: {cnt}')
+-"
+-```
++uv run python tools/lead_tracker.py stats \
++  --output "$WORKDIR/triage-stats.json"
++```
++
++Read `pending_triage` from that profile-scoped artifact. The active profile is
++applied by default; use an explicit `--profile <PROFILE_ID>` if the session has
++captured a profile ID and must be insulated from later global-profile changes.
+ 
+ If zero leads pending, report that and exit.
+ 
+ ### 2. Claim Batch
+ 
+ ```bash
+-uv run python -c "
+-import sqlite3, json
+-db = sqlite3.connect('investigation.db')
+-rows = db.execute('''
+-    SELECT id, title, description, category, priority, source, target_name, created_at
+-    FROM leads WHERE status='pending_triage'
+-    ORDER BY
+-        CASE priority WHEN 'critical' THEN 0 WHEN 'high' THEN 1 WHEN 'medium' THEN 2 WHEN 'low' THEN 3 END,
+-        created_at ASC
+-    LIMIT 20
+-''').fetchall()
+-leads = [dict(zip([d[0] for d in rows[0].description] if hasattr(rows[0], 'description') else ['id','title','description','category','priority','source','target_name','created_at'], r)) for r in rows] if rows else []
+-json.dump([dict(r) for r in rows], open('$WORKDIR/triage-batch.json','w'), indent=2, default=str)
+-print(f'Claimed {len(rows)} leads for triage')
+-" --output $WORKDIR/triage-batch.json
+-```
+-
+-Or more simply, use the Python API directly within your analysis.
++uv run python tools/lead_tracker.py list \
++  --status pending_triage \
++  --limit 20 \
++  --output "$WORKDIR/triage-batch.json"
++```
++
++This list is profile-scoped by default and preserves the tracker’s priority and
++age ordering. Use the same explicit `--profile <PROFILE_ID>` captured during
++session setup when concurrent work could change the shared active profile.
+ 
+ ### 3. For Each Lead, Apply Triage Rules
+ 
+@@ -87,19 +76,14 @@
+ 
+ Also check by target_name:
+ ```bash
+-uv run python -c "
+-import sqlite3, json
+-db = sqlite3.connect('investigation.db')
+-db.row_factory = sqlite3.Row
+-rows = db.execute('''
+-    SELECT id, title, status, priority, target_name
+-    FROM leads
+-    WHERE target_name LIKE ? AND status != 'pending_triage' AND id != ?
+-''', ('%<TARGET>%', <LEAD_ID>)).fetchall()
+-json.dump([dict(r) for r in rows], open('$WORKDIR/triage-target-dupes.json','w'), indent=2)
+-print(f'{len(rows)} existing leads for this target')
+-"
+-```
++uv run python tools/lead_tracker.py list \
++  --target "<TARGET>" \
++  --limit 50 \
++  --output "$WORKDIR/triage-target-dupes.json"
++```
++
++Exclude the current lead and unrelated `pending_triage` rows while reviewing
++the artifact. The tracker applies the active or explicit profile scope.
+ 
+ **If near-duplicate found** (same target + similar title/description):
+ - Dead-end the triage lead with reason "Duplicate of lead #X"
+@@ -158,17 +142,14 @@
+ Find leads sharing the same target or closely related targets:
+ 
+ ```bash
+-uv run python -c "
+-import sqlite3
+-db = sqlite3.connect('investigation.db')
+-# Find leads with same target
+-rows = db.execute('''
+-    SELECT id, title FROM leads
+-    WHERE target_name = ? AND id != ? AND status IN ('open','in_progress','pending_triage')
+-''', ('<TARGET>', <LEAD_ID>)).fetchall()
+-for r in rows: print(f'Related: #{r[0]} {r[1]}')
+-"
+-```
++uv run python tools/lead_tracker.py list \
++  --target "<TARGET>" \
++  --limit 50 \
++  --output "$WORKDIR/triage-related.json"
++```
++
++Review active and pending rows other than the current lead from this
++profile-scoped artifact.
+ 
+ Create `lead_relations` entries for related leads:
+ ```sql
