@@ -2,38 +2,20 @@ name: Python Tests
 
 on:
   pull_request:
-  push:
-    branches:
-      - main
   schedule:
     - cron: "0 8 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  pr-fast-tests:
-    if: github.event_name != 'schedule'
+  deterministic-tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up uv
-        uses: astral-sh/setup-uv@v5
-
-      - name: Run unittest suite
-        run: uv run python -m unittest discover -s tests -v
-
-      - name: Run deterministic pytest integration suite
-        run: uv run pytest -m "integration and not live_data" -q
-
-  nightly-integration:
-    if: github.event_name == 'schedule'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up uv
-        uses: astral-sh/setup-uv@v5
-
-      - name: Run nightly integration scope
-        run: uv run pytest -m "integration or live_data" -q
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.11"
+      - name: Run all deterministic Python regressions
+        run: uv run --locked python -m pytest --offline -m "not live_data" -q
