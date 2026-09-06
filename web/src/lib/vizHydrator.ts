@@ -15,20 +15,12 @@
  * and mounts React components into them.
  */
 
-import { createElement } from 'react';
-import { createRoot } from 'react-dom/client';
-import TimelineChart from '../components/TimelineChart';
-import TransactionTable from '../components/TransactionTable';
-import EgoNetwork from '../components/EgoNetwork';
-import SankeyDiagram from '../components/SankeyDiagram';
-import CorporateStructure from '../components/CorporateStructure';
-
-const COMPONENTS: Record<string, React.ComponentType<any>> = {
-  TimelineChart,
-  TransactionTable,
-  EgoNetwork,
-  SankeyDiagram,
-  CorporateStructure,
+const COMPONENTS = {
+  TimelineChart: () => import('../components/TimelineChart'),
+  TransactionTable: () => import('../components/TransactionTable'),
+  EgoNetwork: () => import('../components/EgoNetwork'),
+  SankeyDiagram: () => import('../components/SankeyDiagram'),
+  CorporateStructure: () => import('../components/CorporateStructure'),
 };
 
 /** Components that expect the JSON payload nested under a `data` prop. */
@@ -38,26 +30,34 @@ export async function hydrateArticleViz() {
   const markers = document.querySelectorAll<HTMLElement>('[data-viz]');
   if (markers.length === 0) return;
 
-  for (const el of markers) {
+  const { createElement } = await import('react');
+  const { createRoot } = await import('react-dom/client');
+  await Promise.all(Array.from(markers, async el => {
     const name = el.dataset.viz;
-    if (!name || !COMPONENTS[name]) {
+    if (!name || !Object.hasOwn(COMPONENTS, name)) {
       console.warn(`[viz-hydrator] Unknown component: ${name}`);
-      continue;
+      return;
     }
+    if (el.dataset.vizMounted === 'true') return;
 
     const src = el.dataset.src;
     if (!src) {
       console.warn(`[viz-hydrator] Missing data-src for ${name}`);
-      continue;
+      return;
     }
 
     try {
       // Show loading state
-      el.innerHTML = '<div style="padding:2rem;text-align:center;color:#8c97a3;font-size:0.85rem;">Loading visualization...</div>';
+      const message = document.createElement('div');
+      message.textContent = 'Loading visualization...';
+      message.style.cssText = 'padding:2rem;text-align:center;color:#8c97a3;font-size:0.85rem;';
+      el.replaceChildren(message);
+      el.dataset.vizMounted = 'true';
 
-      const res = await fetch(src);
+      const [res, module] = await Promise.all([fetch(src), COMPONENTS[name as keyof typeof COMPONENTS]()]);
       if (!res.ok) throw new Error(`Failed to fetch ${src}: ${res.status}`);
       const data = await res.json();
+      if (!data || typeof data !== 'object' || Array.isArray(data)) throw new Error('Visualization data must be an object');
 
       // Merge data-* overrides
       const overrides: Record<string, any> = {};
@@ -69,12 +69,16 @@ export async function hydrateArticleViz() {
       const props = NESTED_DATA_COMPONENTS.has(name!)
         ? { data, ...overrides }
         : { ...data, ...overrides };
-      const Component = COMPONENTS[name];
       const root = createRoot(el);
-      root.render(createElement(Component, props));
+      // Each selected module owns its source-specific prop shape.
+      root.render(createElement(module.default as React.ComponentType<any>, props));
     } catch (err) {
       console.error(`[viz-hydrator] Error mounting ${name}:`, err);
-      el.innerHTML = `<div style="padding:1rem;color:#b7b1a3;font-size:0.85rem;border:1px solid #2a313b;border-radius:4px;">Visualization unavailable: ${name}</div>`;
+      delete el.dataset.vizMounted;
+      const message = document.createElement('div');
+      message.textContent = `Visualization unavailable: ${name}`;
+      message.style.cssText = 'padding:1rem;color:#b7b1a3;font-size:0.85rem;border:1px solid #2a313b;border-radius:4px;';
+      el.replaceChildren(message);
     }
-  }
+  }));
 }

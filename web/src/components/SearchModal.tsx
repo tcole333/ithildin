@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import type MiniSearch from 'minisearch';
 import { getSearchEngine, searchWithRanking, type SearchDocument, type RankedResult } from '../lib/searchEngine';
 
@@ -17,31 +17,50 @@ const TYPE_COLORS: Record<string, string> = {
 export default function SearchModal() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState<RankedResult[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [loading, setLoading] = useState(false);
-  const engineRef = useRef<MiniSearch<SearchDocument> | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [retry, setRetry] = useState(0);
+  const [engine, setEngine] = useState<MiniSearch<SearchDocument> | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
-  const doOpen = useCallback(async () => {
-    setOpen(true);
-    document.body.style.overflow = 'hidden';
-    if (!engineRef.current) {
-      setLoading(true);
-      engineRef.current = await getSearchEngine();
-      setLoading(false);
-    }
-    setTimeout(() => inputRef.current?.focus(), 50);
-  }, []);
+  const doOpen = useCallback(() => setOpen(true), []);
 
   const doClose = useCallback(() => {
     setOpen(false);
     setQuery('');
-    setResults([]);
     setActiveIndex(0);
-    document.body.style.overflow = '';
   }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    inputRef.current?.focus();
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      if (previousFocus?.isConnected) previousFocus.focus();
+    };
+  }, [open]);
+
+  useEffect(() => {
+    if (!open || engine) return;
+    let active = true;
+    setLoading(true);
+    setError(null);
+    getSearchEngine().then(
+      ready => {
+        if (active) { setEngine(ready); setLoading(false); }
+      },
+      () => {
+        if (active) { setError('Search could not load. Please try again.'); setLoading(false); }
+      },
+    );
+    return () => { active = false; };
+  }, [open, engine, retry]);
 
   // Cmd+K / Ctrl+K global listener
   useEffect(() => {
@@ -63,17 +82,15 @@ export default function SearchModal() {
     return () => window.removeEventListener('open-search', handler);
   }, [doOpen]);
 
-  // Search on query change
+  const results: RankedResult[] = useMemo(
+    () => engine && query.trim() ? searchWithRanking(engine, query) : [],
+    [engine, query],
+  );
+
+  // Recompute immediately when an index finishes loading after the user types.
   useEffect(() => {
-    if (!engineRef.current || !query.trim()) {
-      setResults([]);
-      setActiveIndex(0);
-      return;
-    }
-    const ranked = searchWithRanking(engineRef.current, query);
-    setResults(ranked);
     setActiveIndex(0);
-  }, [query]);
+  }, [engine, query]);
 
   // Scroll active result into view
   useEffect(() => {
@@ -90,7 +107,7 @@ export default function SearchModal() {
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      setActiveIndex(i => Math.min(i + 1, results.length - 1));
+      setActiveIndex(i => Math.min(i + 1, Math.max(0, results.length - 1)));
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       setActiveIndex(i => Math.max(i - 1, 0));
@@ -100,6 +117,15 @@ export default function SearchModal() {
     } else if (e.key === 'Escape') {
       e.preventDefault();
       doClose();
+    } else if (e.key === 'Tab') {
+      const elements = modalRef.current?.querySelectorAll<HTMLElement>('input, button, a[href], [tabindex="0"]');
+      if (!elements?.length) return;
+      const first = elements[0];
+      const last = elements[elements.length - 1];
+      if ((e.shiftKey && document.activeElement === first) || (!e.shiftKey && document.activeElement === last)) {
+        e.preventDefault();
+        (e.shiftKey ? last : first).focus();
+      }
     }
   };
 
@@ -107,7 +133,7 @@ export default function SearchModal() {
 
   return (
     <div className="search-overlay" onClick={doClose}>
-      <div className="search-modal" onClick={e => e.stopPropagation()} onKeyDown={onKeyDown}>
+      <div ref={modalRef} className="search-modal" role="dialog" aria-modal="true" aria-label="Search content" onClick={e => e.stopPropagation()} onKeyDown={onKeyDown}>
         <div className="search-input-wrap">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-mithril)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="11" cy="11" r="8" />
@@ -122,26 +148,37 @@ export default function SearchModal() {
             onChange={e => setQuery(e.target.value)}
             autoComplete="off"
             spellCheck={false}
+            aria-label="Search dossiers, articles, and models"
+            role="combobox"
+            aria-autocomplete="list"
+            aria-expanded={results.length > 0}
+            aria-controls="search-result-list"
+            aria-activedescendant={results[activeIndex] ? `search-result-${activeIndex}` : undefined}
           />
           <kbd className="search-kbd">ESC</kbd>
         </div>
 
-        <div className="search-results" ref={listRef}>
+        <div className="search-results" aria-busy={loading}>
           {loading && (
-            <div className="search-empty">Loading index...</div>
+            <div className="search-empty" role="status">Loading index...</div>
           )}
 
-          {!loading && query && results.length === 0 && (
+          {error && <div className="search-empty" role="alert">{error} <button onClick={() => setRetry(value => value + 1)}>Try again</button></div>}
+
+          {!loading && !error && query && results.length === 0 && (
             <div className="search-empty">No results for "{query}"</div>
           )}
 
-          {!loading && !query && (
+          {!loading && !error && !query && (
             <div className="search-empty">Type to search across all content</div>
           )}
 
-          {results.map((r, i) => (
+          <div ref={listRef} id="search-result-list" role="listbox" aria-label="Search results">{results.map((r, i) => (
             <a
               key={r.id}
+              id={`search-result-${i}`}
+              role="option"
+              aria-selected={i === activeIndex}
               href={r.href}
               className={`search-result ${i === activeIndex ? 'search-result--active' : ''}`}
               onMouseEnter={() => setActiveIndex(i)}
@@ -165,7 +202,7 @@ export default function SearchModal() {
                 <span className="search-result__stats">{r.stats}</span>
               )}
             </a>
-          ))}
+          ))}</div>
         </div>
       </div>
     </div>

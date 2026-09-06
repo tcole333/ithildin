@@ -1,14 +1,14 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import TimelineChart from '../components/TimelineChart';
-import TransactionTable from '../components/TransactionTable';
-import EgoNetwork from '../components/EgoNetwork';
-import CorporateStructure from '../components/CorporateStructure';
-import CorporateStructureV2 from '../components/CorporateStructureV2';
-import StepDiagram from '../components/StepDiagram';
+import BaseLayout from '../src/layouts/BaseLayout.astro';
+import TimelineChart from '../src/components/TimelineChart';
+import TransactionTable from '../src/components/TransactionTable';
+import EgoNetwork from '../src/components/EgoNetwork';
+import CorporateStructure from '../src/components/CorporateStructure';
+import CorporateStructureV2 from './CorporateStructureV2';
+import StepDiagram from '../src/components/StepDiagram';
 
 // Load full shell network hierarchy data
-import shellNetworkData from '../../../content/structures/shell-network-hierarchy.json';
+import shellNetworkData from '../../content/structures/shell-network-hierarchy.json';
 
 const timelineEvents = [
   { date: '1995-03-15', label: 'Wexner grants POA to Epstein', type: 'legal', entity: 'Leslie Wexner', evidence_ref: 'EFTA02336502' },

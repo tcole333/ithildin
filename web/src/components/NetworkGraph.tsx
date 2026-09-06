@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as d3 from 'd3';
+import { setTooltipContent } from '../lib/tooltipContent';
 
 interface NetworkNode {
   id: string;
@@ -468,8 +469,11 @@ export default function NetworkGraph({ data, dossierSlugs = [], primarySubjectId
     tooltip.style('visibility', 'hidden');
 
     node.on('mouseover', (_event: any, d: any) => {
-      tooltip.style('visibility', 'visible')
-        .html(`<strong>${d.name}</strong><br/>${d.connections} connections${d.finding_count ? `<br/>${d.finding_count} findings` : ''}${d.type === 'entity' ? `<br/>${formatEntityType(d.entity_type)} (${d.jurisdiction || '?'})` : ''}`);
+      tooltip.style('visibility', 'visible');
+      const details = [`${d.connections} connections`];
+      if (d.finding_count) details.push(`${d.finding_count} findings`);
+      if (d.type === 'entity') details.push(`${formatEntityType(d.entity_type)} (${d.jurisdiction || '?'})`);
+      setTooltipContent(tooltip.node(), String(d.name), details);
     })
       .on('mousemove', (event: any) => {
         tooltip.style('top', (event.pageY - 10) + 'px').style('left', (event.pageX + 10) + 'px');
@@ -478,8 +482,11 @@ export default function NetworkGraph({ data, dossierSlugs = [], primarySubjectId
 
     link.on('mouseover', function (_event: any, d: any) {
       d3.select(this).attr('stroke-opacity', 0.8);
-      tooltip.style('visibility', 'visible')
-        .html(`<strong>${formatRelationship(d.relationship_type)}</strong><br/>Strength: ${formatStrength(d.strength)}${d.verified ? '' : '<br/>Unverified'}${d.description ? `<br/>${d.description}` : ''}`);
+      tooltip.style('visibility', 'visible');
+      const details = [`Strength: ${formatStrength(d.strength)}`];
+      if (!d.verified) details.push('Unverified');
+      if (d.description) details.push(String(d.description));
+      setTooltipContent(tooltip.node(), formatRelationship(d.relationship_type), details);
     })
       .on('mousemove', (event: any) => {
         tooltip.style('top', (event.pageY - 10) + 'px').style('left', (event.pageX + 10) + 'px');
