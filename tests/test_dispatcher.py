@@ -1,6 +1,5 @@
 import json
 import os
-import signal
 import sqlite3
 import sys
 import tempfile
@@ -12,8 +11,8 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from scripts import dispatcher
-from tools.lead_tracker import _ensure_schema
+from scripts import dispatcher  # noqa: E402 - standalone unittest bootstrap
+from tools.lead_tracker import _ensure_schema  # noqa: E402
 
 
 class FakeAuthFailureBackend:
@@ -232,6 +231,7 @@ class DispatcherTests(unittest.TestCase):
                     "sources_checked": ["hk_registry"],
                     "counts": {"findings": 1, "leads": 1, "entities": 1},
                     "notes": ["ok"],
+                    "lead_disposition": "keep_open",
                 }
             )
         )
@@ -240,9 +240,12 @@ class DispatcherTests(unittest.TestCase):
                 {
                     "target_name": "Swiss Commodity Re Limited",
                     "summary": "Registry confirms Hong Kong incorporation",
-                    "finding_type": "filing",
-                    "source_datasets": "hk_registry",
+                    "finding_type": "financial",
+                    "source_datasets": ["official_website"],
                     "confidence": "high",
+                    "claim_type": "paraphrase",
+                    "evidence_ids": ["https://example.org/registry/fixture"],
+                    "source_quotes": {"https://example.org/registry/fixture": {"quote": "Registry confirms incorporation"}},
                 }
             )
             + "\n"
@@ -287,15 +290,8 @@ class DispatcherTests(unittest.TestCase):
         inspection = dispatcher.inspect_staging_bundle(db, run, self.config, update_db=True)
         self.assertTrue(inspection["ready"])
 
-        db.execute(
-            """
-            UPDATE dispatch_staging
-            SET review_status='approved', reviewed_by='test', reviewed_at=CURRENT_TIMESTAMP
-            WHERE run_id = ?
-            """,
-            (run_id,),
-        )
         db.commit()
+        dispatcher.approve_staged_run(db, run_id, self.config, "test")
 
         counts = dispatcher.import_staged_run(db, run_id, self.config, actor="test")
         self.assertEqual(counts["findings"], 1)
@@ -314,8 +310,8 @@ class DispatcherTests(unittest.TestCase):
         self.assertEqual(finding["profile_id"], "feeding-our-future")
         self.assertEqual(lead["profile_id"], "feeding-our-future")
 
-        with self.assertRaises(ValueError):
-            dispatcher.import_staged_run(db, run_id, self.config, actor="test")
+        self.assertEqual(dispatcher.import_staged_run(db, run_id, self.config, actor="test"), counts)
+        self.assertEqual(db.execute("SELECT COUNT(*) FROM findings").fetchone()[0], 1)
 
         staging = db.execute(
             "SELECT import_status, review_status FROM dispatch_staging WHERE run_id = ?",
@@ -337,6 +333,7 @@ class DispatcherTests(unittest.TestCase):
                     "sources_checked": ["mn_sos", "propublica_990"],
                     "counts": {"findings": 0, "leads": 0, "entities": 4},
                     "notes": ["ok"],
+                    "lead_disposition": "keep_open",
                 }
             )
         )
@@ -403,15 +400,8 @@ class DispatcherTests(unittest.TestCase):
         inspection = dispatcher.inspect_staging_bundle(db, run, self.config, update_db=True)
         self.assertTrue(inspection["ready"])
 
-        db.execute(
-            """
-            UPDATE dispatch_staging
-            SET review_status='approved', reviewed_by='test', reviewed_at=CURRENT_TIMESTAMP
-            WHERE run_id = ?
-            """,
-            (run_id,),
-        )
         db.commit()
+        dispatcher.approve_staged_run(db, run_id, self.config, "test")
 
         counts = dispatcher.import_staged_run(db, run_id, self.config, actor="test")
         self.assertGreaterEqual(counts["entities"], 4)
@@ -424,8 +414,9 @@ class DispatcherTests(unittest.TestCase):
         self.assertEqual(relation_count, 1)
         db.close()
 
-    def test_dispatch_cycle_keeps_auto_launches_legacy_direct(self):
+    def test_dispatch_cycle_stages_research_and_pins_the_selected_profile(self):
         db = self._db()
+        db.execute("INSERT OR REPLACE INTO investigation_config (key, value) VALUES ('active_profile', 'epstein')")
         db.execute(
             """
             INSERT INTO leads (title, description, category, priority, status, source, target_name)
@@ -441,6 +432,7 @@ class DispatcherTests(unittest.TestCase):
                 "Swiss Commodity Re Limited",
             ),
         )
+        db.execute("UPDATE leads SET profile_id='epstein' WHERE title='High priority lead'")
         db.commit()
         db.close()
 
@@ -459,7 +451,10 @@ class DispatcherTests(unittest.TestCase):
 
         self.assertTrue(captured)
         self.assertTrue(all(contract.orchestrator == "auto" for contract in captured))
-        self.assertTrue(all(contract.review_required is False for contract in captured))
+        research = [c for c in captured if c.job_type in {"pursue_lead", "deep_investigate"}]
+        self.assertTrue(research)
+        self.assertTrue(all(c.review_required for c in research))
+        self.assertTrue(all(c.profile_id == "epstein" and c.lead_id for c in research))
 
     def test_hydrate_contract_uses_active_profile_from_investigation_config(self):
         db = self._db()

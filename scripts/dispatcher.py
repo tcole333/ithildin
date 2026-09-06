@@ -24,9 +24,10 @@ import signal
 import sqlite3
 import subprocess
 import sys
+import tempfile
 import time
 from collections import defaultdict
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
@@ -37,7 +38,7 @@ def utcnow() -> datetime:
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DB_PATH = PROJECT_ROOT / "investigation.db"
+DB_PATH = Path(os.environ.get("ITHILDIN_DB_PATH", PROJECT_ROOT / "investigation.db"))
 CONFIG_PATH = Path(__file__).resolve().parent / "dispatch_config.json"
 SKILLS_DIR = PROJECT_ROOT / ".claude" / "skills"
 
@@ -541,6 +542,7 @@ def ensure_dispatch_table(db: sqlite3.Connection) -> None:
     }
     for name, ddl in extra_columns.items():
         ensure_column(db, "dispatch_runs", name, ddl)
+    ensure_column(db, "dispatch_staging", "approved_bundle_hash", "TEXT")
 
     db.execute("UPDATE dispatch_runs SET job_type = run_type WHERE job_type IS NULL")
     db.execute("UPDATE dispatch_runs SET backend = 'claude' WHERE backend IS NULL")
@@ -595,9 +597,9 @@ def slugify(value: str | None) -> str:
 def create_staging_dir(config: dict[str, Any], contract: TaskContract, hash_key: str) -> Path:
     ts = utcnow().strftime("%Y%m%d-%H%M%S")
     root = get_staging_root(config)
-    path = root / f"{ts}-{contract.job_type}-{slugify(contract.target)}-{hash_key}"
-    path.mkdir(parents=True, exist_ok=True)
-    return path
+    return Path(tempfile.mkdtemp(
+        prefix=f"{ts}-{contract.job_type}-{slugify(contract.target)}-{hash_key}-", dir=root
+    ))
 
 
 def artifact_manifest(staging_dir: Path, expected_artifacts: list[str]) -> dict[str, str]:
@@ -616,11 +618,15 @@ def build_staging_instruction(contract: TaskContract, manifest: dict[str, str]) 
             "summary": "One evidence-backed finding",
             "finding_type": "financial",
             "detail": "Optional detail paragraph",
-            "source_datasets": "edgar,hk_registry",
+            "source_datasets": ["edgar"],
             "confidence": "high",
             "date_of_event": "2025-10-30",
             "claim_type": "paraphrase",
             "verification_status": "unverified",
+            "evidence_ids": ["https://www.sec.gov/example-filing"],
+            "source_quotes": {
+                "https://www.sec.gov/example-filing": {"quote": "Exact supporting source text"}
+            },
         },
         "candidate_leads.jsonl": {
             "title": "Follow-up lead title",
@@ -679,13 +685,17 @@ def build_staging_instruction(contract: TaskContract, manifest: dict[str, str]) 
         "- Always create every required file, even when empty.\n"
         "- `report.md` must summarize what you checked, what you found, and what remains open.\n"
         "- `run.json` must be valid JSON and include `summary`, `status`, `sources_checked`, "
-        "`counts`, and `notes` keys.\n"
+        "`counts`, `notes`, and `lead_disposition` keys. `status` must be completed, partial, blocked, or dead_end. "
+        "`lead_disposition` must be keep_open, completed, blocked, or dead_end; default to keep_open. "
+        "Only propose completed after resolving the investigative question.\n"
         "- `candidate_*.jsonl` files must contain one JSON object per line. Empty files are allowed.\n"
         "- For `candidate_entities.jsonl`, use `record_type` values `entity`, `role`, `address`, or `relation`.\n"
         "- For `record_type=role`, use `person_name` and `role`. Do not use `name` or `title` as substitutes.\n"
         "- For `record_type=address`, use `address`. Do not store the address in `name`.\n"
         "- If a role or address row belongs to the primary subject and no explicit entity is known, set "
         "`entity_name` or `associated_entities` to the primary subject.\n"
+        "- Every finding must include claim_type, evidence_ids, and source_quotes mapping each reference to an exact quote. "
+        "Use source_datasets as an array of registered source names.\n"
         "- Preserve provenance in each record using `source`, `source_datasets`, `notes`, or equivalent fields.\n\n"
         "JSONL examples:\n"
         + "\n".join(
@@ -737,11 +747,88 @@ def normalize_candidate_entity_record(
 def process_alive(pid: int | None) -> bool:
     if not pid:
         return False
+    # Reap a supervisor launched by this process; kill(pid, 0) alone sees zombies
+    # as alive forever. A later dispatcher invocation is not its parent.
+    try:
+        reaped, _ = os.waitpid(pid, os.WNOHANG)
+        if reaped == pid:
+            return False
+    except ChildProcessError:
+        pass
     try:
         os.kill(pid, 0)
         return True
-    except (ProcessLookupError, PermissionError):
+    except ProcessLookupError:
         return False
+    except PermissionError:
+        return True
+
+
+def terminate_process_group(pid: int | None, grace_seconds: float = 2.0) -> None:
+    """Stop the session created by launch_job, including surviving descendants."""
+    if not pid or pid <= 1 or pid == os.getpgrp():
+        return
+    try:
+        os.killpg(pid, signal.SIGTERM)
+    except ProcessLookupError:
+        return
+    deadline = time.monotonic() + grace_seconds
+    while time.monotonic() < deadline:
+        process_alive(pid)  # Reap our own supervisor if it exited on SIGTERM.
+        try:
+            os.killpg(pid, 0)
+        except ProcessLookupError:
+            return
+        except PermissionError:
+            # An inaccessible group is not proof of termination. In particular,
+            # a dying macOS child can briefly deny signal 0 before it is reaped.
+            # Keep the bounded grace period and retain the final KILL/error path.
+            pass
+        time.sleep(0.05)
+    try:
+        os.killpg(pid, signal.SIGKILL)
+    except ProcessLookupError:
+        pass
+    process_alive(pid)
+
+
+def process_exit_path(output_file: Path) -> Path:
+    return output_file.with_name(output_file.name + ".exit.json")
+
+
+def supervise_process(db_path: Path, run_id: int, output_file: Path, command: list[str]) -> int:
+    """Persist the child status across one-shot dispatcher invocations.
+
+    The parent reserves the run and its PID in one transaction. Wait for that
+    commit before executing a worker, so a crashed/rolled-back launcher cannot
+    leave an unregistered research process behind.
+    """
+    receipt = {"run_id": run_id, "supervisor_pid": os.getpid()}
+    exit_code = 1
+    try:
+        deadline = time.monotonic() + 10
+        with sqlite3.connect(db_path.resolve().as_uri() + "?mode=ro", uri=True) as db:
+            while True:
+                row = db.execute("SELECT status, pid FROM dispatch_runs WHERE id=?", (run_id,)).fetchone()
+                if row and row[1] == os.getpid():
+                    if row[0] != "running":
+                        raise RuntimeError("Launch reservation is no longer running")
+                    break
+                if time.monotonic() >= deadline:
+                    raise RuntimeError("Launch reservation was not committed")
+                time.sleep(0.05)
+        # Inherit the supervisor's session/process group and stdout/stderr.
+        proc = subprocess.Popen(command, stdin=subprocess.DEVNULL)
+        exit_code = proc.wait()
+    except Exception as exc:  # noqa: BLE001 - record launch failures for the next supervisor pass
+        receipt["error"] = str(exc)
+    receipt["exit_code"] = exit_code
+    receipt["completed_at"] = utcnow().isoformat()
+    target = process_exit_path(output_file)
+    temporary = target.with_name(target.name + f".{os.getpid()}.tmp")
+    temporary.write_text(json.dumps(receipt, sort_keys=True))
+    temporary.replace(target)
+    return exit_code if exit_code >= 0 else 128 - exit_code
 
 
 def latest_artifact_mtime(staging_dir: str | None) -> datetime | None:
@@ -781,6 +868,101 @@ def load_jsonl(path: Path) -> list[dict[str, Any]]:
             raise ValueError(f"{path.name}:{idx}: record must be an object")
         records.append(record)
     return records
+
+
+def read_staged_bundle(staging_dir: Path) -> tuple[dict[str, Any], str]:
+    """Parse and fingerprint exactly the bytes the reviewer/importer will use."""
+    bundle: dict[str, Any] = {}
+    digest = hashlib.sha256()
+    for name in ALL_ARTIFACTS:
+        file_path = staging_dir / name
+        if not file_path.is_file():
+            if name in REQUIRED_ARTIFACTS:
+                raise ValueError(f"Missing required artifact: {name}")
+            raw = None
+        else:
+            raw = file_path.read_bytes()
+        digest.update(name.encode())
+        digest.update(b"\0")
+        digest.update(hashlib.sha256(raw).digest() if raw is not None else b"missing")
+        if name.endswith(".jsonl"):
+            records = []
+            for index, line in enumerate((raw or b"").decode().splitlines(), 1):
+                if line.strip():
+                    record = json.loads(line)
+                    if not isinstance(record, dict):
+                        raise ValueError(f"{name}:{index}: record must be an object")
+                    records.append(record)
+            bundle[name] = records
+        elif name == "run.json":
+            bundle[name] = json.loads(raw)
+        else:
+            bundle[name] = raw.decode()
+    run = bundle["run.json"]
+    if not isinstance(run, dict):
+        raise ValueError("run.json must contain an object")
+    required = {"summary", "status", "sources_checked", "counts", "notes", "lead_disposition"}
+    if required - run.keys():
+        raise ValueError(f"run.json missing fields: {', '.join(sorted(required - run.keys()))}")
+    if not isinstance(run["summary"], str) or not run["summary"].strip():
+        raise ValueError("run.json summary must be nonempty text")
+    if run["status"] not in {"completed", "partial", "blocked", "dead_end"}:
+        raise ValueError("run.json has an invalid research status")
+    disposition = run["lead_disposition"]
+    if disposition not in {"keep_open", "completed", "blocked", "dead_end"}:
+        raise ValueError("run.json has an invalid lead_disposition")
+    if disposition == "completed" and run["status"] != "completed":
+        raise ValueError("Only completed research may propose completing its lead")
+    if not isinstance(run["sources_checked"], list) or not all(isinstance(s, str) for s in run["sources_checked"]):
+        raise ValueError("run.json sources_checked must be a list of source names")
+    if not isinstance(run["notes"], list) or not all(isinstance(note, str) for note in run["notes"]):
+        raise ValueError("run.json notes must be a list of strings")
+    if not isinstance(run["counts"], dict):
+        raise ValueError("run.json counts must be an object")
+    for kind in ("findings", "leads", "entities", "connections"):
+        actual = len(bundle[f"candidate_{kind}.jsonl"])
+        expected = run["counts"].get(kind, 0)
+        if type(expected) is not int or expected != actual:
+            raise ValueError(f"run.json {kind} count does not match its artifact ({actual})")
+    for record in bundle["candidate_findings.jsonl"]:
+        staged_finding_arguments(record)
+    return bundle, digest.hexdigest()
+
+
+def staged_finding_arguments(record: dict[str, Any]) -> dict[str, Any]:
+    """The artifact boundary uses the same fields as the canonical finding writer."""
+    target = record.get("target_name") or record.get("target")
+    if not target or not record.get("summary") or not record.get("claim_type"):
+        raise ValueError("Staged findings require target_name, summary, and claim_type")
+    refs = record.get("evidence_ids")
+    quotes = record.get("source_quotes")
+    if not isinstance(refs, list) or not refs or not all(isinstance(ref, str) and ref.strip() for ref in refs):
+        raise ValueError("Staged findings require a nonempty evidence_ids list")
+    if not isinstance(quotes, dict) or any(
+        not isinstance(quotes.get(ref), dict)
+        or not isinstance(quotes[ref].get("quote"), str)
+        or not quotes[ref]["quote"].strip()
+        for ref in refs
+    ):
+        raise ValueError("Every staged evidence reference requires an exact source quote")
+    sources = record.get("source_datasets") or record.get("sources")
+    if isinstance(sources, str):
+        sources = [source.strip() for source in sources.split(",") if source.strip()]
+    return {
+        "target_name": target,
+        "summary": record["summary"],
+        "finding_type": record.get("finding_type") or record.get("type"),
+        "detail": record.get("detail"),
+        "evidence_ids": refs,
+        "source_quotes": quotes,
+        "source_datasets": sources,
+        "confidence": record.get("confidence", "medium"),
+        "claim_type": record["claim_type"],
+        "date_of_event": record.get("date_of_event") or record.get("date"),
+        "lead_id": record.get("lead_id"),
+        "thread_id": record.get("thread_id"),
+        "profile_id": record.get("profile_id"),
+    }
 
 
 def table_exists(db: sqlite3.Connection, name: str) -> bool:
@@ -1001,35 +1183,21 @@ def inspect_staging_bundle(
         files[artifact] = artifact_path
         artifact_presence[artifact] = bool(artifact_path and artifact_path.exists())
 
-    run_json_path = files["run.json"]
-    report_path = files["report.md"]
-    if not path or not path.exists():
-        validation_error = "Missing staging directory"
-    elif not report_path.exists():
-        validation_error = "Missing report.md"
-    elif not run_json_path.exists():
-        validation_error = "Missing run.json"
-    else:
-        try:
-            run_payload = load_json_file(run_json_path)
-            if run_payload is None or not isinstance(run_payload, dict):
-                raise ValueError("run.json must contain a JSON object")
-        except Exception as exc:  # noqa: BLE001
-            validation_error = f"Invalid run.json: {exc}"
-
-    findings_records: list[dict[str, Any]] = []
-    leads_records: list[dict[str, Any]] = []
-    entities_records: list[dict[str, Any]] = []
-    connections_records: list[dict[str, Any]] = []
-
-    if validation_error is None:
-        try:
-            findings_records = load_jsonl(files["candidate_findings.jsonl"])
-            leads_records = load_jsonl(files["candidate_leads.jsonl"])
-            entities_records = load_jsonl(files["candidate_entities.jsonl"])
-            connections_records = load_jsonl(files["candidate_connections.jsonl"])
-        except Exception as exc:  # noqa: BLE001
-            validation_error = str(exc)
+    bundle: dict[str, Any] = {}
+    bundle_hash = None
+    try:
+        if not path or not path.is_dir():
+            raise ValueError("Missing staging directory")
+        unknown = set(expected) - set(ALL_ARTIFACTS)
+        if unknown:
+            raise ValueError(f"Unknown required artifacts: {', '.join(sorted(unknown))}")
+        bundle, bundle_hash = read_staged_bundle(path)
+    except (ValueError, OSError, UnicodeError) as exc:
+        validation_error = str(exc)
+    findings_records = bundle.get("candidate_findings.jsonl", [])
+    leads_records = bundle.get("candidate_leads.jsonl", [])
+    entities_records = bundle.get("candidate_entities.jsonl", [])
+    connections_records = bundle.get("candidate_connections.jsonl", [])
 
     artifact_counts["findings"] = len(findings_records)
     artifact_counts["leads"] = len(leads_records)
@@ -1091,6 +1259,8 @@ def inspect_staging_bundle(
 
     return {
         "ready": ready,
+        "bundle": bundle,
+        "bundle_hash": bundle_hash,
         "artifact_presence": artifact_presence,
         "artifact_counts": artifact_counts,
         "duplicate_risks": duplicate_risks,
@@ -1198,6 +1368,9 @@ def launch_job(
     dry_run: bool = False,
 ) -> bool:
     backend = backend or ClaudeBackend()
+    # Resolve a caller's interactive default once, before hashing or preflight.
+    if not contract.profile_id:
+        contract = replace(contract, profile_id=resolve_active_profile_id(db))
     hash_key = prompt_hash(contract)
 
     row = db.execute(
@@ -1221,6 +1394,12 @@ def launch_job(
         print(f"  [error] preflight failed for {contract.job_type} (#{run_id}): {detail}")
         return False
 
+    if not contract.profile_id and contract.job_type != "build_infra":
+        message = "No investigation profile resolved; pin ITHILDIN_PROFILE before launching scoped work"
+        insert_failure_run(db, contract, hash_key, "context_missing", message)
+        print(f"  [error] {message}")
+        return False
+
     prompt = build_prompt(contract.job_type, contract.target, contract.brief)
     skill_path = SKILL_PATHS.get(contract.job_type)
     skill_content = skill_path.read_text() if skill_path and skill_path.exists() else None
@@ -1236,86 +1415,81 @@ def launch_job(
         output_file = Path(manifest["raw_output.json"])
         stderr_file = Path(manifest["stderr.log"])
     else:
-        ts = utcnow().strftime("%Y%m%d-%H%M%S")
-        output_file = Path(f"/tmp/dispatch-{contract.job_type}-{slugify(contract.target)}-{ts}.json")
-        stderr_file = Path(f"/tmp/dispatch-{contract.job_type}-{slugify(contract.target)}-{ts}.stderr.log")
+        output_dir = Path(tempfile.mkdtemp(prefix=f"dispatch-{contract.job_type}-"))
+        output_file = output_dir / "raw_output.json"
+        stderr_file = output_dir / "stderr.log"
 
     cmd = backend.build_command(prompt, config, [p for p in system_prompts if p])
+    database_file = next(row[2] for row in db.execute("PRAGMA database_list") if row[1] == "main")
+    if not database_file:
+        raise ValueError("Launching a worker requires a persistent dispatcher database")
     env = os.environ.copy()
     env.pop("CLAUDECODE", None)
+    env["ITHILDIN_DB_PATH"] = str(Path(database_file).resolve())
+    if contract.profile_id:
+        env["ITHILDIN_PROFILE"] = contract.profile_id
 
-    output_file.parent.mkdir(parents=True, exist_ok=True)
-    out_fh = output_file.open("w")
-    err_fh = stderr_file.open("w")
+    # Serialize the duplicate check and reservation across dispatcher processes.
+    # Preflight and prompt construction remain outside the write lock.
+    if db.in_transaction:
+        raise ValueError("launch_job requires a connection with no pending transaction")
+    proc = None
     try:
-        proc = subprocess.Popen(
-            cmd,
-            stdin=subprocess.DEVNULL,
-            stdout=out_fh,
-            stderr=err_fh,
-            cwd=str(PROJECT_ROOT),
-            env=env,
-            start_new_session=True,
+        db.execute("BEGIN IMMEDIATE")
+        duplicate = db.execute(
+            "SELECT id FROM dispatch_runs WHERE prompt_hash=? AND status='running'",
+            (hash_key,),
+        ).fetchone()
+        if duplicate:
+            db.rollback()
+            print(f"  [skip] {contract.job_type} already running (#{duplicate['id']})")
+            return False
+        cursor = db.execute(
+            """
+            INSERT INTO dispatch_runs (
+                run_type, job_type, target, status, prompt_hash, output_file,
+                lead_id, hypothesis_id, brief, skill_name, expected_artifacts, priority,
+                timeout_seconds, cost_cap_usd, review_required, orchestrator, backend,
+                task_contract_json, staging_dir, health_status, health_detail
+            ) VALUES (?, ?, ?, 'running', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                contract.job_type, contract.job_type, contract.target, hash_key, str(output_file),
+                contract.lead_id, contract.hypothesis_id, contract.brief, contract.skill_name,
+                json.dumps(expected_artifacts), contract.priority, contract.timeout_seconds,
+                contract.cost_cap_usd, int(contract.review_required), contract.orchestrator,
+                contract.backend, contract.to_json(), str(staging_dir) if staging_dir else None,
+                "healthy", detail,
+            ),
         )
-    except FileNotFoundError:
-        out_fh.close()
-        err_fh.close()
-        run_id = insert_failure_run(db, contract, hash_key, "launch_failed", "'claude' not found in PATH")
-        print(f"  [error] launch failed for {contract.job_type} (#{run_id}): 'claude' not found in PATH")
-        return False
+        run_id = cursor.lastrowid
+        if staging_dir:
+            db.execute(
+                """INSERT INTO dispatch_staging (run_id, staging_dir, required_artifacts_json)
+                   VALUES (?, ?, ?)""",
+                (run_id, str(staging_dir), json.dumps(expected_artifacts)),
+            )
+        supervisor_command = [
+            sys.executable, str(Path(__file__).resolve()), "_supervise",
+            "--database", env["ITHILDIN_DB_PATH"], "--run-id", str(run_id),
+            "--output-file", str(output_file), "--", *cmd,
+        ]
+        output_file.parent.mkdir(parents=True, exist_ok=True)
+        with output_file.open("w") as out_fh, stderr_file.open("w") as err_fh:
+            proc = subprocess.Popen(
+                supervisor_command, stdin=subprocess.DEVNULL, stdout=out_fh, stderr=err_fh,
+                cwd=str(PROJECT_ROOT), env=env, start_new_session=True,
+            )
+        db.execute("UPDATE dispatch_runs SET pid=? WHERE id=?", (proc.pid, run_id))
+        db.commit()
     except Exception as exc:  # noqa: BLE001
-        out_fh.close()
-        err_fh.close()
+        db.rollback()
+        if proc is not None:
+            terminate_process_group(proc.pid)
+            proc.wait(timeout=5)
         run_id = insert_failure_run(db, contract, hash_key, "launch_failed", str(exc))
         print(f"  [error] launch failed for {contract.job_type} (#{run_id}): {exc}")
         return False
-    finally:
-        out_fh.close()
-        err_fh.close()
-
-    cursor = db.execute(
-        """
-        INSERT INTO dispatch_runs (
-            run_type, job_type, target, pid, status, prompt_hash, output_file,
-            lead_id, hypothesis_id, brief, skill_name, expected_artifacts, priority,
-            timeout_seconds, cost_cap_usd, review_required, orchestrator, backend,
-            task_contract_json, staging_dir, health_status, health_detail
-        ) VALUES (?, ?, ?, ?, 'running', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """,
-        (
-            contract.job_type,
-            contract.job_type,
-            contract.target,
-            proc.pid,
-            hash_key,
-            str(output_file),
-            contract.lead_id,
-            contract.hypothesis_id,
-            contract.brief,
-            contract.skill_name,
-            json.dumps(expected_artifacts),
-            contract.priority,
-            contract.timeout_seconds,
-            contract.cost_cap_usd,
-            1 if contract.review_required else 0,
-            contract.orchestrator,
-            contract.backend,
-            contract.to_json(),
-            str(staging_dir) if staging_dir else None,
-            "healthy",
-            detail,
-        ),
-    )
-    run_id = cursor.lastrowid
-    if staging_dir:
-        db.execute(
-            """
-            INSERT OR REPLACE INTO dispatch_staging (run_id, staging_dir, required_artifacts_json)
-            VALUES (?, ?, ?)
-            """,
-            (run_id, str(staging_dir), json.dumps(expected_artifacts)),
-        )
-    db.commit()
     print(
         f"  [launch] {contract.job_type} target={contract.target or 'batch'} PID={proc.pid} "
         f"orchestrator={contract.orchestrator} review_required={contract.review_required}"
@@ -1580,13 +1754,30 @@ def finalize_run(db: sqlite3.Connection, run: sqlite3.Row, config: dict[str, Any
     leads_created = 0
     health_status = "completed"
     health_detail = run["health_detail"]
+    errors = []
+    try:
+        if output_file is None:
+            raise ValueError("No process output path recorded")
+        receipt = load_json_file(process_exit_path(output_file))
+        if (not isinstance(receipt, dict) or receipt.get("run_id") != run["id"]
+                or receipt.get("supervisor_pid") != run["pid"]
+                or type(receipt.get("exit_code")) is not int):
+            raise ValueError("Process exit receipt does not match this run")
+        exit_code = receipt["exit_code"]
+        if exit_code != 0:
+            errors.append(receipt.get("error") or f"Worker exited with status {exit_code}")
+    except (OSError, ValueError, TypeError) as exc:
+        errors.append(f"Process exit status unavailable: {exc}")
 
     if output_file and output_file.exists():
         try:
-            data = load_json_file(output_file) or {}
+            data = load_json_file(output_file)
+            if not isinstance(data, dict) or not data:
+                raise ValueError("Worker output must be a nonempty JSON object")
+            if data.get("is_error") or str(data.get("subtype", "")).startswith("error"):
+                errors.append(f"Worker reported an error: {data.get('result') or data.get('subtype')}")
             cost = data.get("total_cost_usd") or data.get("cost_usd") or data.get("costUSD")
             session_id = data.get("session_id") or data.get("sessionId")
-            exit_code = 0
             result = data.get("result", "")
             if isinstance(result, str):
                 finding_match = re.search(r"(\d+)\s+finding", result, flags=re.I)
@@ -1596,11 +1787,9 @@ def finalize_run(db: sqlite3.Connection, run: sqlite3.Row, config: dict[str, Any
                 if lead_match:
                     leads_created = int(lead_match.group(1))
         except Exception as exc:  # noqa: BLE001
-            exit_code = 1
-            error_msg = f"Failed to parse JSON output: {exc}"
+            errors.append(f"Failed to parse JSON output: {exc}")
     else:
-        exit_code = 1
-        error_msg = "No output file found"
+        errors.append("No output file found")
 
     if run["review_required"]:
         inspection = inspect_staging_bundle(db, run, config, update_db=True)
@@ -1609,17 +1798,21 @@ def finalize_run(db: sqlite3.Connection, run: sqlite3.Row, config: dict[str, Any
         if inspection["validation_error"]:
             health_status = "invalid_artifacts"
             health_detail = inspection["validation_error"]
-            if not error_msg:
-                error_msg = inspection["validation_error"]
+            errors.append(inspection["validation_error"])
 
-    status = "completed" if exit_code == 0 else "failed"
-    db.execute(
+    error_msg = "; ".join(errors) or None
+    status = "completed" if exit_code == 0 and not errors else "failed"
+    if status == "failed" and health_status == "completed":
+        health_status = "failed"
+        health_detail = error_msg
+    last_artifact_at = latest_artifact_mtime(run["staging_dir"])
+    cursor = db.execute(
         """
         UPDATE dispatch_runs SET
             status = ?, completed_at = CURRENT_TIMESTAMP, exit_code = ?,
             cost_usd = ?, session_id = ?, findings_added = ?, leads_created = ?,
             error = ?, health_status = ?, health_detail = ?, last_artifact_at = ?
-        WHERE id = ?
+        WHERE id = ? AND status = 'running'
         """,
         (
             status,
@@ -1631,11 +1824,13 @@ def finalize_run(db: sqlite3.Connection, run: sqlite3.Row, config: dict[str, Any
             error_msg,
             health_status,
             health_detail,
-            latest_artifact_mtime(run["staging_dir"]).isoformat() if run["staging_dir"] else run["last_artifact_at"],
+            last_artifact_at.isoformat() if last_artifact_at else run["last_artifact_at"],
             run["id"],
         ),
     )
     db.commit()
+    if not cursor.rowcount:
+        return  # A concurrent stop/timeout already chose the terminal outcome.
     print(
         f"  [{status}] #{run['id']} {run['run_type']} target={run['target'] or 'batch'} "
         f"health={health_status} cost=${float(cost or 0):.2f}"
@@ -1654,15 +1849,11 @@ def reap_completed(db: sqlite3.Connection, config: dict[str, Any]) -> None:
         timeout = run["timeout_seconds"] or timeout_default
 
         if not process_alive(pid):
+            # A failed leader can leave a child alive in the recorded group.
+            terminate_process_group(pid)
             finalize_run(db, run, config)
         elif elapsed > timeout:
-            try:
-                os.kill(pid, signal.SIGTERM)
-                time.sleep(2)
-                if process_alive(pid):
-                    os.kill(pid, signal.SIGKILL)
-            except ProcessLookupError:
-                pass
+            terminate_process_group(pid)
             db.execute(
                 """
                 UPDATE dispatch_runs
@@ -1790,13 +1981,17 @@ def dispatch_cycle(config: dict[str, Any], dry_run: bool = False) -> None:
         contract = TaskContract(
             job_type=job_type,
             target=target,
+            profile_id=profile_id,
+            lead_id=int(target) if job_type in {"pursue_lead", "deep_investigate"} and str(target).isdigit() else None,
             skill_name=JOB_DEFS[job_type].get("skill_name"),
             expected_artifacts=job_defaults.get("expected_artifacts", list(REQUIRED_ARTIFACTS)),
             priority=job_defaults.get("priority", "medium"),
             timeout_seconds=job_defaults.get("timeout_seconds", config.get("timeout_seconds")),
             cost_cap_usd=job_defaults.get("cost_cap_usd"),
-            # Preserve queue-driven behavior: auto-dispatch remains legacy/direct in v1.
-            review_required=False,
+            # Research/analysis honors the staged default. Maintenance retains
+            # its existing direct operation; explicit research config can opt out.
+            review_required=(job_type not in {"triage", "build_infra", "auto_leads"}
+                             and bool(job_defaults.get("review_required", True))),
             orchestrator="auto",
         )
         launch_job(db, config, contract, dry_run=dry_run)
@@ -1937,6 +2132,8 @@ def hydrate_contract(args: argparse.Namespace, config: dict[str, Any]) -> TaskCo
 
 
 def resolve_active_profile_id(db: sqlite3.Connection) -> str | None:
+    if os.environ.get("ITHILDIN_PROFILE"):
+        return os.environ["ITHILDIN_PROFILE"]
     row = None
     try:
         row = db.execute(
@@ -2019,63 +2216,11 @@ def import_findings(
     run_id: int,
     artifact_name: str = "candidate_findings.jsonl",
 ) -> int:
-    columns = get_columns(db, "findings")
-    inserted = 0
-    for index, record in enumerate(records, start=1):
-        target_name = record.get("target_name") or record.get("target")
-        summary = record.get("summary")
-        if not target_name or not summary:
-            missing = []
-            if not target_name:
-                missing.append("target_name")
-            if not summary:
-                missing.append("summary")
-            log_import_diagnostic(
-                db,
-                run_id,
-                artifact_name,
-                index,
-                "missing_required_field",
-                f"Finding record missing required field(s): {', '.join(missing)}",
-                record,
-            )
-            continue
-        payload = sanitize_insert_payload(
-            columns,
-            {
-                "target_name": target_name,
-                "finding_type": record.get("finding_type") or record.get("type"),
-                "summary": summary,
-                "detail": record.get("detail"),
-                "source_datasets": record.get("source_datasets") or record.get("sources"),
-                "confidence": record.get("confidence", "medium"),
-                "date_of_event": record.get("date_of_event") or record.get("date"),
-                "lead_id": record.get("lead_id"),
-                "claim_type": record.get("claim_type"),
-                "verification_status": record.get("verification_status"),
-                "thread_id": record.get("thread_id"),
-                "profile_id": record.get("profile_id"),
-                "source_quote": record.get("source_quote"),
-                "source_url": record.get("source_url"),
-            },
-        )
-        fields = ", ".join(payload)
-        placeholders = ", ".join("?" for _ in payload)
-        try:
-            db.execute(f"INSERT INTO findings ({fields}) VALUES ({placeholders})", tuple(payload.values()))
-        except sqlite3.IntegrityError as exc:
-            log_import_diagnostic(
-                db,
-                run_id,
-                artifact_name,
-                index,
-                "integrity_error",
-                f"Findings insert failed: {exc}",
-                record,
-            )
-            continue
-        inserted += 1
-    return inserted
+    from tools.findings_tracker import add_finding_to_db
+
+    for record in records:
+        add_finding_to_db(db, **staged_finding_arguments(record))
+    return len(records)
 
 
 def import_leads(
@@ -2526,6 +2671,34 @@ def import_connections(
     return inserted
 
 
+def approve_staged_run(
+    db: sqlite3.Connection, run_id: int, config: dict[str, Any], actor: str, note: str | None = None,
+) -> None:
+    """Approval binds the reviewed outcome and records to their exact content."""
+    db.execute("BEGIN IMMEDIATE")
+    try:
+        run = db.execute("SELECT * FROM dispatch_runs WHERE id=?", (run_id,)).fetchone()
+        if not run:
+            raise ValueError(f"Run #{run_id} not found")
+        if run["status"] != "completed":
+            raise ValueError("Only a finished successful worker process can be approved")
+        previous = db.execute("SELECT import_status FROM dispatch_staging WHERE run_id=?", (run_id,)).fetchone()
+        if previous and previous["import_status"] == "imported":
+            raise ValueError(f"Run #{run_id} has already been imported")
+        inspection = inspect_staging_bundle(db, run, config, update_db=True)
+        if not inspection["ready"]:
+            raise ValueError(inspection["validation_error"] or "Required artifacts are missing")
+        db.execute(
+            """UPDATE dispatch_staging SET review_status='approved', approved_bundle_hash=?,
+               review_notes=?, reviewed_by=?, reviewed_at=CURRENT_TIMESTAMP WHERE run_id=?""",
+            (inspection["bundle_hash"], note, actor, run_id),
+        )
+        db.commit()
+    except Exception:
+        db.rollback()
+        raise
+
+
 def import_staged_run(
     db: sqlite3.Connection,
     run_id: int,
@@ -2533,131 +2706,84 @@ def import_staged_run(
     actor: str,
     force: bool = False,
 ) -> dict[str, int]:
-    run = db.execute("SELECT * FROM dispatch_runs WHERE id = ?", (run_id,)).fetchone()
-    if not run:
-        raise ValueError(f"Run #{run_id} not found")
-    staging_row = db.execute("SELECT * FROM dispatch_staging WHERE run_id = ?", (run_id,)).fetchone()
-    if not staging_row:
-        raise ValueError(f"Run #{run_id} has no staged artifact record")
-    if staging_row["import_status"] == "imported":
-        raise ValueError(f"Run #{run_id} has already been imported")
-    if run["review_required"] and staging_row["review_status"] != "approved" and not force:
-        raise ValueError(f"Run #{run_id} is not approved for import")
-
-    inspection = inspect_staging_bundle(db, run, config, update_db=True)
-    if inspection["validation_error"]:
-        raise ValueError(inspection["validation_error"])
-    db.commit()
-
-    staging_dir = Path(run["staging_dir"])
-    raw_findings = load_jsonl(staging_dir / "candidate_findings.jsonl")
-    raw_leads = load_jsonl(staging_dir / "candidate_leads.jsonl")
-    raw_entities = load_jsonl(staging_dir / "candidate_entities.jsonl")
-    raw_connections = load_jsonl(staging_dir / "candidate_connections.jsonl")
-
-    findings = [dict(record) for record in raw_findings]
-    leads = [dict(record) for record in raw_leads]
-    entities = [dict(record) for record in raw_entities]
-    connections = [dict(record) for record in raw_connections]
-
-    default_profile_id = None
-    default_entity_name = None
-    if run["task_contract_json"]:
-        try:
-            contract_payload = json.loads(run["task_contract_json"])
-        except json.JSONDecodeError:
-            contract_payload = {}
-        default_profile_id = contract_payload.get("profile_id")
-    if run["lead_id"]:
-        lead_row = db.execute("SELECT profile_id, target_name FROM leads WHERE id = ?", (run["lead_id"],)).fetchone()
-        if lead_row:
-            if lead_row["profile_id"]:
-                default_profile_id = lead_row["profile_id"]
-            if lead_row["target_name"]:
-                default_entity_name = lead_row["target_name"]
-    if not default_profile_id:
-        lead_row = db.execute(
-            "SELECT profile_id, target_name FROM leads WHERE title = ? AND status='open' ORDER BY id LIMIT 1",
-            (run["target"],),
-        ).fetchone()
-        if lead_row:
-            if lead_row["profile_id"]:
-                default_profile_id = lead_row["profile_id"]
-            if not default_entity_name and lead_row["target_name"]:
-                default_entity_name = lead_row["target_name"]
-    if not default_profile_id:
-        default_profile_id = resolve_active_profile_id(db)
-    if not default_entity_name and run["target"] and not str(run["target"]).isdigit():
-        default_entity_name = run["target"]
-
-    if default_profile_id:
-        for record in findings:
-            record.setdefault("profile_id", default_profile_id)
-        for record in leads:
-            record.setdefault("profile_id", default_profile_id)
-        for record in connections:
-            record.setdefault("profile_id", default_profile_id)
-
+    # Keep the lock from the eligibility check through canonical insertion and the
+    # receipt. No separate connection may write as part of this transaction.
+    db.execute("BEGIN IMMEDIATE")
     try:
-        db.execute("BEGIN")
-        archive_raw_records(db, run_id, "candidate_findings.jsonl", raw_findings)
-        archive_raw_records(db, run_id, "candidate_leads.jsonl", raw_leads)
-        archive_raw_records(db, run_id, "candidate_entities.jsonl", raw_entities)
-        archive_raw_records(db, run_id, "candidate_connections.jsonl", raw_connections)
+        run = db.execute("SELECT * FROM dispatch_runs WHERE id=?", (run_id,)).fetchone()
+        staging = db.execute("SELECT * FROM dispatch_staging WHERE run_id=?", (run_id,)).fetchone()
+        if not run or not staging:
+            raise ValueError(f"Run #{run_id} has no staged artifact record")
+        if staging["import_status"] == "imported":
+            counts = json.loads(staging["imported_counts_json"] or "{}")
+            db.commit()
+            return counts
+        if run["status"] != "completed":
+            raise ValueError("Worker process has not completed successfully")
+        if staging["review_status"] != "approved" or not staging["approved_bundle_hash"]:
+            raise ValueError(f"Run #{run_id} requires approval of its current artifact contents; --force cannot bypass review")
+        inspection = inspect_staging_bundle(db, run, config)
+        if not inspection["ready"]:
+            raise ValueError(inspection["validation_error"] or "Required artifacts are missing")
+        if inspection["bundle_hash"] != staging["approved_bundle_hash"]:
+            raise ValueError("Staged artifacts changed after approval; review the current bundle again")
+        bundle = inspection["bundle"]
+        contract = json.loads(run["task_contract_json"] or "{}")
+        profile_id = contract.get("profile_id")
+        default_entity_name = run["target"] if run["target"] and not str(run["target"]).isdigit() else None
+        source_lead = None
+        if run["lead_id"]:
+            source_lead = db.execute("SELECT * FROM leads WHERE id=?", (run["lead_id"],)).fetchone()
+            if not source_lead:
+                raise ValueError("Source lead no longer exists")
+            if profile_id and source_lead["profile_id"] != profile_id:
+                raise ValueError("Source lead does not belong to the task profile")
+            profile_id = source_lead["profile_id"]
+            default_entity_name = source_lead["target_name"] or default_entity_name
+        if not profile_id:
+            raise ValueError("Staged task must pin profile_id before import")
+        records = {}
+        for kind in ("findings", "leads", "entities", "connections"):
+            artifact = f"candidate_{kind}.jsonl"
+            records[kind] = [dict(record) for record in bundle[artifact]]
+            for record in records[kind]:
+                if kind != "entities":
+                    if record.get("profile_id") not in (None, profile_id):
+                        raise ValueError(f"{artifact} contains a record from another profile")
+                    record["profile_id"] = profile_id
+            archive_raw_records(db, run_id, artifact, bundle[artifact])
         counts = {
-            "findings": import_findings(db, findings, run_id=run_id),
-            "leads": import_leads(db, leads, run_id=run_id),
-            "entities": import_entities(
-                db,
-                entities,
-                run_id=run_id,
-                default_entity_name=default_entity_name,
-            ),
-            "connections": import_connections(db, connections, run_id=run_id),
+            "entities": import_entities(db, records["entities"], run_id=run_id, default_entity_name=default_entity_name),
+            "findings": import_findings(db, records["findings"], run_id=run_id),
+            "leads": import_leads(db, records["leads"], run_id=run_id),
+            "connections": import_connections(db, records["connections"], run_id=run_id),
         }
-
+        invalid = db.execute(
+            """SELECT reason FROM dispatch_import_diagnostics WHERE run_id=?
+               AND status NOT IN ('duplicate_ignored') ORDER BY id LIMIT 1""", (run_id,),
+        ).fetchone()
+        if invalid:
+            raise ValueError(f"Invalid staged record: {invalid['reason']}")
+        disposition = bundle["run.json"]["lead_disposition"]
+        if source_lead and disposition != "keep_open":
+            if source_lead["status"] not in {"open", "in_progress", "blocked"}:
+                raise ValueError("Source lead changed to a terminal state; review its disposition before importing")
+            db.execute(
+                """UPDATE leads SET status=?, completed_at=CASE WHEN ? IN ('completed','dead_end')
+                   THEN CURRENT_TIMESTAMP ELSE NULL END, findings=COALESCE(findings,'') || ? WHERE id=?""",
+                (disposition, disposition, f"\n[Reviewed disposition from staged run #{run_id}: {bundle['run.json']['summary']}]", run["lead_id"]),
+            )
         db.execute(
-            """
-            UPDATE dispatch_staging
-            SET import_status='imported', imported_by=?, imported_at=CURRENT_TIMESTAMP,
-                imported_counts_json=?, review_status='imported'
-            WHERE run_id = ?
-            """,
+            """UPDATE dispatch_staging SET import_status='imported', imported_by=?,
+               imported_at=CURRENT_TIMESTAMP, imported_counts_json=?, review_status='imported' WHERE run_id=?""",
             (actor, json.dumps(counts, sort_keys=True), run_id),
         )
-        db.execute(
-            """
-            UPDATE dispatch_runs
-            SET health_status='completed', health_detail='Imported staged artifacts'
-            WHERE id = ?
-            """,
-            (run_id,),
-        )
-
-        # Close the source lead if this run was tied to one
-        if run["lead_id"]:
-            lead_status = db.execute(
-                "SELECT status FROM leads WHERE id = ?", (run["lead_id"],)
-            ).fetchone()
-            if lead_status and lead_status["status"] in ("open", "in_progress"):
-                db.execute(
-                    """
-                    UPDATE leads
-                    SET status='completed', completed_at=CURRENT_TIMESTAMP,
-                        findings=COALESCE(findings, '') || ?
-                    WHERE id = ?
-                    """,
-                    (
-                        f"\n[Auto-closed by dispatcher import of run #{run_id}]",
-                        run["lead_id"],
-                    ),
-                )
-
+        db.execute("UPDATE dispatch_runs SET health_status='completed', health_detail='Imported reviewed artifacts' WHERE id=?", (run_id,))
         db.commit()
+        return counts
     except Exception:
         db.rollback()
         raise
-    return counts
 
 
 # ── Subcommands ──────────────────────────────────────────────────────
@@ -2882,27 +3008,13 @@ def cmd_review(args: argparse.Namespace) -> None:
     config = load_config()
 
     if args.approve is not None:
-        row = db.execute("SELECT * FROM dispatch_runs WHERE id = ?", (args.approve,)).fetchone()
-        if not row:
-            print(f"Run #{args.approve} not found.")
+        try:
+            approve_staged_run(db, args.approve, config, args.reviewer, args.note)
+            print(f"Approved run #{args.approve} for import.")
+        except ValueError as exc:
+            print(f"Run #{args.approve} cannot be approved: {exc}")
+        finally:
             db.close()
-            return
-        inspection = inspect_staging_bundle(db, row, config, update_db=True)
-        if inspection["validation_error"]:
-            print(f"Run #{args.approve} cannot be approved: {inspection['validation_error']}")
-            db.close()
-            return
-        db.execute(
-            """
-            UPDATE dispatch_staging
-            SET review_status='approved', review_notes=?, reviewed_by=?, reviewed_at=CURRENT_TIMESTAMP
-            WHERE run_id = ?
-            """,
-            (args.note, args.reviewer, args.approve),
-        )
-        db.commit()
-        print(f"Approved run #{args.approve} for import.")
-        db.close()
         return
 
     if args.reject is not None:
@@ -2990,7 +3102,7 @@ def cmd_import(args: argparse.Namespace) -> None:
                 """
                 UPDATE dispatch_staging
                 SET import_status='failed', review_notes=COALESCE(review_notes, '') || ?
-                WHERE run_id = ?
+                WHERE run_id = ? AND import_status != 'imported'
                 """,
                 (f"\nImport failed: {exc}", run_id),
             )
@@ -3022,13 +3134,8 @@ def cmd_stop(args: argparse.Namespace) -> None:
 
     for run in selected:
         pid = run["pid"]
-        if process_alive(pid):
-            print(f"  Stopping #{run['id']} {run['job_type'] or run['run_type']} PID {pid}...")
-            os.kill(pid, signal.SIGTERM)
-            time.sleep(2)
-            if process_alive(pid):
-                os.kill(pid, signal.SIGKILL)
-                print(f"    Force-killed PID {pid}")
+        print(f"  Stopping #{run['id']} {run['job_type'] or run['run_type']} process group {pid}...")
+        terminate_process_group(pid)
         db.execute(
             """
             UPDATE dispatch_runs
@@ -3047,6 +3154,11 @@ def cmd_stop(args: argparse.Namespace) -> None:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Dispatch headless Claude Code investigation agents")
     sub = parser.add_subparsers(dest="command")
+    p_supervisor = sub.add_parser("_supervise", help=argparse.SUPPRESS)
+    p_supervisor.add_argument("--database", type=Path, required=True)
+    p_supervisor.add_argument("--run-id", type=int, required=True)
+    p_supervisor.add_argument("--output-file", type=Path, required=True)
+    p_supervisor.add_argument("worker_command", nargs=argparse.REMAINDER)
 
     p_run = sub.add_parser("run", help="One-shot: check queues and launch needed agents")
     p_run.add_argument("--dry-run", action="store_true", help="Show what would launch without launching")
@@ -3101,7 +3213,7 @@ def build_parser() -> argparse.ArgumentParser:
     p_import.add_argument("--run-id", type=int, help="Import a specific staged run")
     p_import.add_argument("--all-approved", action="store_true", help="Import all approved staged runs")
     p_import.add_argument("--actor", default="manual", help="Actor identity to store on import")
-    p_import.add_argument("--force", action="store_true", help="Import even if review_status is not approved")
+    p_import.add_argument("--force", action="store_true", help="Compatibility option; current artifact approval is always required")
 
     p_stop = sub.add_parser("stop", help="Stop running instances")
     p_stop.add_argument("run_id", nargs="?", help="Specific dispatch_run ID to stop (default: all)")
@@ -3113,7 +3225,14 @@ def main() -> None:
     parser = build_parser()
     args = parser.parse_args()
 
-    if args.command == "run":
+    if args.command == "_supervise":
+        command = args.worker_command
+        if command and command[0] == "--":
+            command = command[1:]
+        if not command:
+            parser.error("_supervise requires a worker command after --")
+        sys.exit(supervise_process(args.database, args.run_id, args.output_file, command))
+    elif args.command == "run":
         cmd_run(args)
     elif args.command == "daemon":
         cmd_daemon(args)

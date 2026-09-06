@@ -2,6 +2,10 @@
 
 Complete CLI examples for all investigation tools. Referenced from CLAUDE.md.
 
+Before choosing a dispatcher, submitting workers, or reviewing/recovering their
+output, read the [execution contract](EXECUTION_CONTRACT.md) for context pinning,
+canonical writes, review/import, and cancellation guarantees.
+
 Run `python tools/source_report.py` for live data source status.
 
 ## Canonical Source Names
@@ -8039,7 +8043,7 @@ Generic worker pool manager — spawns agent workers based on pending job types.
 uv run python scripts/queue_dispatcher.py run
 
 # Dry run: show what would spawn without launching
-uv run python scripts/queue_dispatcher.py run --dry-run
+uv run python scripts/queue_dispatcher.py --dry-run run
 
 # Show pending vs active by persona
 uv run python scripts/queue_dispatcher.py status

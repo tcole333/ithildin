@@ -33,6 +33,7 @@ class UnderstandingPersonaWorkerTests(unittest.TestCase):
         self.tmpdir.cleanup()
 
     def _make_job(self, job_type, payload):
+        payload = {"profile_id": "test-profile", **payload}
         job_id = self.queue.create_job(job_type=job_type, domain="understanding", payload=payload)
         return self.queue.get_job(job_id)
 
@@ -42,6 +43,10 @@ class UnderstandingPersonaWorkerTests(unittest.TestCase):
         result = worker.execute(job)
         content_path = Path(result["content_path"])
         self.assertTrue(content_path.exists())
+        review = self.queue.get_job(result["review_job_id"])
+        self.assertEqual(review["parent_job_id"], job["id"])
+        self.assertEqual(review["payload"]["profile_id"], "test-profile")
+        self.assertEqual(review["payload"]["db_path"], str(self.queue.db_path))
 
     def test_contextual_analyst_creates_content(self):
         job = self._make_job("analytical_article", {"title": "Test Analysis", "lens": "financial"})
@@ -49,6 +54,9 @@ class UnderstandingPersonaWorkerTests(unittest.TestCase):
         result = worker.execute(job)
         content_path = Path(result["content_path"])
         self.assertTrue(content_path.exists())
+        review = self.queue.get_job(result["review_job_id"])
+        self.assertEqual(review["parent_job_id"], job["id"])
+        self.assertEqual(review["payload"]["profile_id"], "test-profile")
 
     def test_editor_review(self):
         job = self._make_job("mechanism_explainer", {"mechanism_type": "compliance_gap"})

@@ -22,6 +22,7 @@ DEFAULT_JOB_MAX_ATTEMPTS = 3
 DEFAULT_JOB_RETRY_DELAY_SECONDS = 300
 DEFAULT_JOB_TIMEOUT_SECONDS = 1800
 DEFAULT_RETRY_DELAY_MULTIPLIER = 5
+RESEARCH_DOMAINS = frozenset({"discovery", "investigation", "analysis", "understanding", "curation"})
 
 
 class JobQueue:
@@ -33,7 +34,7 @@ class JobQueue:
         retry_backoff: float = DEFAULT_RETRY_BACKOFF,
         retry_delay_multiplier: int = DEFAULT_RETRY_DELAY_MULTIPLIER,
     ) -> None:
-        self.db_path = db_path or DEFAULT_DB_PATH
+        self.db_path = Path(db_path or os.environ.get("ITHILDIN_DB_PATH") or DEFAULT_DB_PATH).expanduser().resolve()
         self.busy_timeout_ms = busy_timeout_ms
         self.retry_attempts = retry_attempts
         self.retry_backoff = retry_backoff
@@ -251,6 +252,83 @@ class JobQueue:
 
         self._with_retry(_set)
 
+    def capture_profile(
+        self, *, profile_id: Optional[str] = None, conn: Optional[sqlite3.Connection] = None,
+    ) -> Optional[str]:
+        """Read the producer's default once, only from this queue's database."""
+        from tools.investigation_context import _validate_profile_name
+
+        selected = profile_id if profile_id is not None else os.environ.get("ITHILDIN_PROFILE")
+        if selected is None:
+            db = conn if conn is not None else self._connect()
+            try:
+                exists = db.execute(
+                    "SELECT 1 FROM sqlite_master WHERE type='table' AND name='investigation_config'"
+                ).fetchone()
+                row = db.execute(
+                    "SELECT value FROM investigation_config WHERE key='active_profile'"
+                ).fetchone() if exists else None
+                selected = row[0] if row else None
+            finally:
+                if conn is None:
+                    db.close()
+        return _validate_profile_name(selected) if selected is not None else None
+
+    def prepare_job_payload(
+        self,
+        domain: str,
+        payload: Optional[Dict[str, Any]],
+        *,
+        conn: Optional[sqlite3.Connection] = None,
+        parent_job_id: Optional[str] = None,
+        default_profile: Optional[str] = None,
+        resolve_default: bool = True,
+    ) -> Dict[str, Any]:
+        """Persist execution context before a job can wait for another worker.
+
+        Explicit job values win over its parent's captured context. A root
+        research job captures the producer's pinned profile or this DB's default.
+        Global domains do not inherit ambient profile state. The queue and its
+        workers currently use one DB, so a conflicting explicit DB is an error.
+        """
+        from tools.investigation_context import _validate_profile_name
+
+        if payload is not None and not isinstance(payload, dict):
+            raise ValueError("job payload must be an object")
+        result = dict(payload or {})
+        if parent_job_id:
+            owns_connection = conn is None
+            db = conn if conn is not None else self._connect()
+            try:
+                row = db.execute("SELECT payload FROM job_queue WHERE id=?", (parent_job_id,)).fetchone()
+                if row is None:
+                    raise ValueError(f"Parent job does not exist: {parent_job_id}")
+                parent_payload = json.loads(row[0])
+                for key in ("profile_id", "db_path"):
+                    if key in parent_payload and key not in result:
+                        result[key] = parent_payload[key]
+                if domain in RESEARCH_DOMAINS and "profile_id" not in result:
+                    raise ValueError("Research child jobs require an explicit profile_id or a pinned parent")
+            finally:
+                if owns_connection:
+                    db.close()
+        if "db_path" in result:
+            if not isinstance(result["db_path"], str) or not result["db_path"]:
+                raise ValueError("payload.db_path must be a nonempty path")
+            if Path(result["db_path"]).expanduser().resolve() != self.db_path:
+                raise ValueError("payload.db_path must match the queue database")
+        result["db_path"] = str(self.db_path)
+        if "profile_id" in result:
+            result["profile_id"] = _validate_profile_name(result["profile_id"])
+        elif domain in RESEARCH_DOMAINS:
+            profile = default_profile
+            if profile is None and resolve_default:
+                profile = self.capture_profile(conn=conn)
+            if profile is None:
+                raise ValueError("Research jobs require payload.profile_id, ITHILDIN_PROFILE, or a default in the selected database")
+            result["profile_id"] = _validate_profile_name(profile)
+        return result
+
     def create_job(
         self,
         job_type: str,
@@ -272,9 +350,14 @@ class JobQueue:
         timeout_seconds: Optional[int] = None,
         max_depth: Optional[int] = None,
         max_children: Optional[int] = None,
+        conn: Optional[sqlite3.Connection] = None,
     ) -> str:
+        """Create a job, optionally as part of the caller's transaction.
+
+        A supplied connection is never committed, closed, or independently retried.
+        The caller owns transaction boundaries for the job, events, and dependencies.
+        """
         job_id = str(uuid4())
-        payload_json = json.dumps(payload or {})
         tags_json = json.dumps(tags or [])
         dependencies = list(dict.fromkeys(depends_on or []))
         max_attempts = max_attempts if max_attempts is not None else DEFAULT_JOB_MAX_ATTEMPTS
@@ -290,8 +373,14 @@ class JobQueue:
         )
 
         def _insert():
-            db = self._connect()
+            db = conn if conn is not None else self._connect()
             try:
+                if conn is None:
+                    db.execute("BEGIN IMMEDIATE")
+                pinned_payload = self.prepare_job_payload(
+                    domain, payload, conn=db, parent_job_id=parent_job_id,
+                )
+                payload_json = json.dumps(pinned_payload)
                 status_to_use = status
                 error_message = None
 
@@ -317,7 +406,7 @@ class JobQueue:
                             status_to_use = "cancelled"
                             error_message = f"max_children_exceeded:{child_limit}"
 
-                if dependencies and status == "pending":
+                if dependencies and status_to_use == "pending":
                     if not self._dependencies_complete(db, dependencies):
                         status_to_use = "blocked"
 
@@ -387,11 +476,16 @@ class JobQueue:
                             json.dumps({"depends_on": dep_id}),
                         ),
                     )
-                db.commit()
+                if conn is None:
+                    db.commit()
             finally:
-                db.close()
+                if conn is None:
+                    db.close()
 
-        self._with_retry(_insert)
+        if conn is None:
+            self._with_retry(_insert)
+        else:
+            _insert()
         return job_id
 
     def add_dependencies(self, job_id: str, depends_on: Iterable[str]) -> None:
@@ -520,6 +614,11 @@ class JobQueue:
             db = self._connect()
             try:
                 db.execute("BEGIN IMMEDIATE")
+                paused = db.execute("SELECT value FROM system_state WHERE key='paused'").fetchone()
+                agent = db.execute("SELECT status FROM agent_instances WHERE id=?", (agent_id,)).fetchone()
+                if (paused and paused["value"] == "true") or (agent and agent["status"] != "active"):
+                    db.commit()
+                    return None
                 row = self._select_next(db, capabilities or [])
                 if not row:
                     db.commit()
@@ -527,7 +626,9 @@ class JobQueue:
                 updated = db.execute(
                     """
                     UPDATE job_queue
-                    SET status='claimed', claimed_by=?, claimed_at=CURRENT_TIMESTAMP, attempts=attempts+1
+                    SET status='claimed', claimed_by=?, claimed_at=CURRENT_TIMESTAMP,
+                        attempts=attempts+1, completed_at=NULL,
+                        stale_after=datetime('now', '+' || timeout_seconds || ' seconds')
                     WHERE id=? AND status='pending'
                     """,
                     (agent_id, row["id"]),
@@ -540,59 +641,105 @@ class JobQueue:
                     "VALUES (?, ?, 'claimed', ?)",
                     (str(uuid4()), row["id"], agent_id),
                 )
+                claimed = db.execute("SELECT * FROM job_queue WHERE id=?", (row["id"],)).fetchone()
                 db.commit()
-                return self._row_to_dict(row)
+                return self._row_to_dict(claimed)
             finally:
                 db.close()
 
         return self._with_retry(_claim)
 
-    def start_job(self, job_id: str, agent_id: Optional[str] = None) -> None:
+    def start_job(
+        self, job_id: str, agent_id: Optional[str] = None, attempt: Optional[int] = None
+    ) -> Optional[Dict[str, Any]]:
+        if attempt is not None and agent_id is None:
+            raise ValueError("agent_id is required with attempt")
+
         def _start():
             db = self._connect()
             try:
-                db.execute(
-                    """
+                db.execute("BEGIN IMMEDIATE")
+                where = "id=? AND status IN ('pending', 'claimed')"
+                params: List[Any] = [job_id]
+                if attempt is not None:
+                    where = (
+                        "id=? AND status='claimed' AND claimed_by=? AND attempts=? "
+                        "AND (stale_after IS NULL OR stale_after > CURRENT_TIMESTAMP)"
+                        " AND NOT EXISTS (SELECT 1 FROM agent_instances "
+                        "WHERE agent_instances.id=job_queue.claimed_by AND agent_instances.status!='active')"
+                    )
+                    params.extend([agent_id, attempt])
+                elif agent_id is not None:
+                    where += " AND (claimed_by IS NULL OR claimed_by=?)"
+                    params.append(agent_id)
+                updated = db.execute(
+                    f"""
                     UPDATE job_queue
                     SET status='in_progress',
                         started_at=CURRENT_TIMESTAMP,
                         stale_after=datetime('now', '+' || timeout_seconds || ' seconds')
-                    WHERE id=?
+                    WHERE {where}
                     """,
-                    (job_id,),
+                    params,
                 )
+                if updated.rowcount != 1:
+                    db.commit()
+                    return None
                 db.execute(
                     "INSERT INTO job_events (id, job_id, event_type, agent_id) "
                     "VALUES (?, ?, 'started', ?)",
                     (str(uuid4()), job_id, agent_id),
                 )
+                row = db.execute("SELECT * FROM job_queue WHERE id=?", (job_id,)).fetchone()
                 db.commit()
+                return self._row_to_dict(row)
             finally:
                 db.close()
 
-        self._with_retry(_start)
+        return self._with_retry(_start)
+
+    @staticmethod
+    def _worker_guard(agent_id: Optional[str], attempt: Optional[int]) -> tuple[str, list]:
+        """Require both worker identity fields, or preserve administrative calls."""
+        if agent_id is None and attempt is None:
+            return "", []
+        if agent_id is None or attempt is None:
+            raise ValueError("worker transitions require both agent_id and attempt")
+        return (
+            " AND status='in_progress' AND claimed_by=? AND attempts=?"
+            " AND NOT EXISTS (SELECT 1 FROM agent_instances "
+            "WHERE agent_instances.id=job_queue.claimed_by AND agent_instances.status!='active')",
+            [agent_id, attempt],
+        )
 
     def complete_job(
         self,
         job_id: str,
         output: Optional[Dict[str, Any]] = None,
         status: str = "completed",
-    ) -> None:
+        *,
+        agent_id: Optional[str] = None,
+        attempt: Optional[int] = None,
+    ) -> bool:
         output_json = json.dumps(output or {})
+        guard, guard_params = self._worker_guard(agent_id, attempt)
 
         def _complete():
             db = self._connect()
             try:
                 db.execute("BEGIN IMMEDIATE")
                 if status == "completed":
-                    db.execute(
-                        """
+                    updated = db.execute(
+                        f"""
                         UPDATE job_queue
                         SET status='completed', completed_at=CURRENT_TIMESTAMP, output=?
-                        WHERE id=?
+                        WHERE id=?{guard}
                         """,
-                        (output_json, job_id),
+                        [output_json, job_id, *guard_params],
                     )
+                    if updated.rowcount != 1:
+                        db.commit()
+                        return False
                     db.execute(
                         "INSERT INTO job_events (id, job_id, event_type, payload) "
                         "VALUES (?, ?, 'completed', ?)",
@@ -600,24 +747,28 @@ class JobQueue:
                     )
                     self._unblock_dependents(db, job_id)
                 else:
-                    db.execute(
-                        """
+                    updated = db.execute(
+                        f"""
                         UPDATE job_queue
                         SET status=?, output=?
-                        WHERE id=?
+                        WHERE id=?{guard}
                         """,
-                        (status, output_json, job_id),
+                        [status, output_json, job_id, *guard_params],
                     )
+                    if updated.rowcount != 1:
+                        db.commit()
+                        return False
                     db.execute(
                         "INSERT INTO job_events (id, job_id, event_type, payload) "
                         "VALUES (?, ?, 'progress', ?)",
                         (str(uuid4()), job_id, json.dumps({"status": status, "output": output})),
                     )
                 db.commit()
+                return True
             finally:
                 db.close()
 
-        self._with_retry(_complete)
+        return self._with_retry(_complete)
 
     def set_status(
         self,
@@ -667,23 +818,32 @@ class JobQueue:
         job_id: str,
         error_message: str,
         error_traceback: Optional[str] = None,
-    ) -> None:
+        *,
+        agent_id: Optional[str] = None,
+        attempt: Optional[int] = None,
+    ) -> bool:
+        guard, guard_params = self._worker_guard(agent_id, attempt)
+
         def _fail():
             db = self._connect()
             try:
+                db.execute("BEGIN IMMEDIATE")
                 row = db.execute(
-                    """
+                    f"""
                     SELECT attempts, max_attempts, retry_delay_seconds
-                    FROM job_queue WHERE id=?
+                    FROM job_queue WHERE id=?{guard}
                     """,
-                    (job_id,),
+                    [job_id, *guard_params],
                 ).fetchone()
                 if not row:
-                    return
+                    db.commit()
+                    return False
 
                 attempts = row["attempts"] or 0
                 max_attempts = row["max_attempts"] or DEFAULT_JOB_MAX_ATTEMPTS
-                retry_delay_seconds = row["retry_delay_seconds"] or DEFAULT_JOB_RETRY_DELAY_SECONDS
+                retry_delay_seconds = row["retry_delay_seconds"]
+                if retry_delay_seconds is None:
+                    retry_delay_seconds = DEFAULT_JOB_RETRY_DELAY_SECONDS
 
                 if attempts < max_attempts:
                     attempt_index = max(attempts - 1, 0)
@@ -697,7 +857,9 @@ class JobQueue:
                             error_traceback=?,
                             claimed_by=NULL,
                             claimed_at=NULL,
-                            started_at=NULL
+                            started_at=NULL,
+                            completed_at=NULL,
+                            stale_after=NULL
                         WHERE id=?
                         """,
                         (f"+{delay} seconds", error_message, error_traceback, job_id),
@@ -732,34 +894,70 @@ class JobQueue:
                         (str(uuid4()), job_id, error_message),
                     )
                 db.commit()
+                return True
             finally:
                 db.close()
 
-        self._with_retry(_fail)
+        return self._with_retry(_fail)
 
-    def register_agent(self, agent_id: str, persona: str, capabilities: Optional[List[str]] = None) -> None:
+    def register_agent(
+        self,
+        agent_id: str,
+        persona: str,
+        capabilities: Optional[List[str]] = None,
+        *,
+        require_reserved: bool = False,
+        heartbeat_seconds: int = 90,
+    ) -> bool:
         caps_json = json.dumps(capabilities or [])
 
         def _register():
             db = self._connect()
             try:
-                db.execute(
+                if require_reserved:
+                    updated = db.execute(
+                        """
+                        UPDATE agent_instances
+                        SET capabilities=?, last_heartbeat=CURRENT_TIMESTAMP
+                        WHERE id=? AND persona=? AND status='active'
+                          AND last_heartbeat >= datetime('now', ?)
+                        """,
+                        (caps_json, agent_id, persona, f"-{heartbeat_seconds} seconds"),
+                    )
+                    db.commit()
+                    return updated.rowcount == 1
+                updated = db.execute(
                     """
                     INSERT INTO agent_instances (id, persona, capabilities)
                     VALUES (?, ?, ?)
                     ON CONFLICT(id) DO UPDATE SET
                         persona=excluded.persona,
                         capabilities=excluded.capabilities,
-                        status='active',
                         last_heartbeat=CURRENT_TIMESTAMP
+                    WHERE agent_instances.status='active'
                     """,
                     (agent_id, persona, caps_json),
+                )
+                db.commit()
+                return updated.rowcount == 1
+            finally:
+                db.close()
+
+        return self._with_retry(_register)
+
+    def stop_agent(self, agent_id: str) -> None:
+        def _stop():
+            db = self._connect()
+            try:
+                db.execute(
+                    "UPDATE agent_instances SET status='stopped', current_job_id=NULL WHERE id=?",
+                    (agent_id,),
                 )
                 db.commit()
             finally:
                 db.close()
 
-        self._with_retry(_register)
+        self._with_retry(_stop)
 
     def update_agent_job(self, agent_id: str, job_id: Optional[str]) -> None:
         def _update():
@@ -798,19 +996,46 @@ class JobQueue:
 
         self._with_retry(_set)
 
-    def heartbeat_agent(self, agent_id: str) -> None:
+    def heartbeat_agent(self, agent_id: str) -> bool:
         def _heartbeat():
             db = self._connect()
             try:
-                db.execute(
-                    "UPDATE agent_instances SET last_heartbeat=CURRENT_TIMESTAMP WHERE id=?",
+                updated = db.execute(
+                    "UPDATE agent_instances SET last_heartbeat=CURRENT_TIMESTAMP WHERE id=? AND status='active'",
                     (agent_id,),
                 )
                 db.commit()
+                return updated.rowcount == 1
             finally:
                 db.close()
 
-        self._with_retry(_heartbeat)
+        return self._with_retry(_heartbeat)
+
+    def heartbeat_job(self, job_id: str, agent_id: str, attempt: int) -> bool:
+        """Refresh worker liveness only while it owns an unexpired execution.
+
+        Heartbeats deliberately do not extend the job's fixed execution deadline.
+        """
+        def _heartbeat():
+            db = self._connect()
+            try:
+                updated = db.execute(
+                    """
+                    UPDATE agent_instances SET last_heartbeat=CURRENT_TIMESTAMP
+                    WHERE id=? AND status='active' AND EXISTS (
+                        SELECT 1 FROM job_queue
+                        WHERE id=? AND status='in_progress' AND claimed_by=? AND attempts=?
+                          AND (stale_after IS NULL OR stale_after > CURRENT_TIMESTAMP)
+                    )
+                    """,
+                    (agent_id, job_id, agent_id, attempt),
+                )
+                db.commit()
+                return updated.rowcount == 1
+            finally:
+                db.close()
+
+        return self._with_retry(_heartbeat)
 
     def update_agent_stats(self, agent_id: str, completed: bool) -> None:
         field = "jobs_completed" if completed else "jobs_failed"
@@ -886,11 +1111,12 @@ class JobQueue:
         def _mark():
             db = self._connect()
             try:
+                db.execute("BEGIN IMMEDIATE")
                 modifier = f"-{grace_seconds} seconds" if grace_seconds else "0 seconds"
                 rows = db.execute(
                     """
                     SELECT id FROM job_queue
-                    WHERE status='in_progress' AND (
+                    WHERE status IN ('claimed', 'in_progress') AND (
                         (stale_after IS NOT NULL AND stale_after <= datetime('now', ?))
                         OR (
                             stale_after IS NULL
