@@ -834,17 +834,28 @@ def _address_raw(address: Mapping[str, Any]) -> str | None:
 def _upsert_jurisdiction(db, record: Mapping[str, Any]) -> str:
     jurisdiction = _mapping(record.get("jurisdiction"), "record.jurisdiction")
     county_geoid = _text(jurisdiction.get("county_geoid"))
-    # Shared JurisdictionMetadata serializes a county GEOID as county_fips.
+    # Shared metadata uses full GEOIDs; some state adapters retain the standard
+    # three-digit county FIPS component alongside the state and full GEOID.
     county_fips = _text(jurisdiction.get("county_fips"))
+    declared_state = _text(jurisdiction.get("state_fips"))
+    if county_fips and len(county_fips) == 3 and county_fips.isdigit():
+        state_prefix = declared_state or (
+            county_geoid[:2] if county_geoid and len(county_geoid) == 5 else None
+        )
+        if not state_prefix or len(state_prefix) != 2 or not state_prefix.isdigit():
+            raise PropertyIngestError("three-digit county FIPS requires a state FIPS or full county GEOID")
+        county_fips = state_prefix + county_fips
     if county_geoid and county_fips and county_geoid != county_fips:
         raise PropertyIngestError("record jurisdiction has conflicting county GEOIDs")
-    geoid = county_geoid or county_fips or _text(jurisdiction.get("state_fips"))
+    geoid = county_geoid or county_fips or declared_state
     if not geoid:
         raise PropertyIngestError(
             "record jurisdiction requires a county or state GEOID"
         )
     if not geoid.isdigit() or len(geoid) not in {2, 5}:
         raise PropertyIngestError(f"invalid property jurisdiction GEOID: {geoid!r}")
+    if declared_state and declared_state != geoid[:2]:
+        raise PropertyIngestError("record jurisdiction has conflicting state and county GEOIDs")
     state_fips = geoid[:2]
     state_name, canonical_state_code = STATE_METADATA.get(
         state_fips,
