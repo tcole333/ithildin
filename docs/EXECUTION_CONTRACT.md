@@ -9,7 +9,8 @@ and their boundaries. Source planning and evidence handoffs belong to the
 
 | Path | Entry point and state | Completion means |
 |---|---|---|
-| Staged LLM research | `scripts/dispatcher.py launch --review-required` or automatic research dispatch; `dispatch_runs` and `dispatch_staging`; currently a headless Claude backend | Process output is ready for review. Canonical import requires approval of the current bundle. |
+| Supervised chat research (interactive default) | Current chat and native subagent tools; task workdir with assignments, checkpoints, and reports | The parent verifies expected reports, evidence and coverage, persists authorized results, and resolves the question or reports the concrete blocker. |
+| Unattended staged LLM research (explicit selection) | `scripts/dispatcher.py launch --review-required` or configured automatic research dispatch; `dispatch_runs` and `dispatch_staging`; currently a headless Claude backend | Process output is ready for review. Canonical import requires approval of the current bundle. |
 | Deterministic queue work | `scripts/queue_tools.py`, `scripts/queue_dispatcher.py`, `scripts/agent_worker.py`; `job_queue`, `job_events`, `agent_instances` | The selected Python worker finished its operation or produced material awaiting review. Persona names do not imply an LLM investigation. |
 | Direct skill or API work | Interactive agent plus source tools and tracker APIs | The task owner checks the evidence, persists it through supported writers, and explicitly resolves the research question. No dispatcher receipt is created automatically. |
 
@@ -18,6 +19,54 @@ the resolved investigation and `ITHILDIN_DB_PATH` to the selected database's
 absolute path. The shared active profile is an interactive default, not a routing
 mechanism for concurrent work. Pin both values in each task and propagate them to
 children. For fixture runs, select a temporary database explicitly.
+
+## Supervise native subagents in the current chat
+
+Use the host's native spawn, message, wait, and follow-up tools when a task has
+useful independent work. Keep a simple task local. Inherit the chat's configured
+model and reasoning settings; specify a model only when the user requests one.
+Do not translate an interactive investigation into `claude -p`, `codex exec`, a
+dispatcher launch, or a new user-owned chat. Headless execution is an optional
+unattended mode, not a fallback for unavailable native tools.
+
+Give each worker the objective, factual question, pinned profile/database,
+applicable source or file scope, write ownership, completion criteria, and unique
+report path. State whether it may persist findings or only propose them.
+Delegate independent questions rather than duplicate searches; concurrency
+follows task complexity and rate limits, without a fixed worker quota. The
+parent retains integration ownership and does useful work while children run:
+source verification, a separate research question, artifact review, or synthesis
+preparation. It may query sources directly, coordinating overlapping ownership.
+
+Track expected reports and worker IDs in the task workdir. Use bounded native
+waits and messages to obtain actual status; file size, silence, process exit, and
+a successful tool call do not prove research completion. Inspect interim
+artifacts when useful, steer or reassign failed work, and reconcile conflicts.
+Collect every expected report or identify its incomplete scope before synthesis.
+Propagate user corrections to affected workers and update the plan.
+
+For long work, keep a checkpoint with the user's objective and constraints,
+resolved profile/database, assignments and worker IDs, completed coverage,
+artifact paths, evidence IDs, decisions, unresolved questions, and next actions.
+Refresh it at meaningful handoffs or before context compaction. After compaction
+or interruption, read the checkpoint and current artifacts, reconcile active
+workers, and continue unfinished authorized work. Document length, elapsed time,
+a fixed number of findings, or compaction is not itself a stopping condition.
+Stop when the outcome is complete or a concrete dependency prevents further
+useful authorized work; report partial coverage honestly. Preserve user budgets,
+scope, deadlines, and cancellation.
+
+Native workers have no automatic `dispatch_runs` or queue receipt. Reports and
+supported tracker writes form their handoff. Do not invent dispatcher IDs or
+treat deterministic queue completion as semantic review. The research workflow
+contract owns source-reading and coverage requirements.
+
+## Optional unattended and deterministic workers
+
+Select these paths when the user requests unattended/background execution or
+when operating an explicitly configured automation. Their process deadlines,
+budgets, staging, review, and import controls remain applicable; they do not set
+the depth or persistence of interactive chat work.
 
 Queue CLIs also accept `--profile` and `--db-path`; their global options precede
 the subcommand. Enqueue persists `payload.profile_id` and absolute `payload.db_path`
@@ -71,7 +120,7 @@ Concurrent/repeated imports of the **same run** return its receipt without anoth
 write. `--force` cannot bypass approval or content matching. Files remain writable;
 the guarantee is detection of changed reviewed contents, not filesystem immutability.
 
-Operation examples below assume the profile/database are already selected and
+Unattended operation examples below assume that path was selected, context is pinned, and
 `LEAD_ID`/`RUN_ID` identify existing rows in that database:
 
 ```bash

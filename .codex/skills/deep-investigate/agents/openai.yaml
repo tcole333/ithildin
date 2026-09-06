@@ -1,4 +1,6 @@
-interface:
-  display_name: "Deep Investigate"
-  short_description: "Run a parallel multi-source investigation"
-  default_prompt: "Use $deep-investigate to handle this investigation task with clear evidence and actionable output."
+"interface":
+  "display_name": "Deep Investigate"
+  "short_description": "Investigate a target across relevant source tracks"
+  "default_prompt": "Use $deep-investigate. Resolve the target’s material questions\
+    \ across applicable sources, supervise native subagents when useful, and reconcile\
+    \ complete evidence and coverage."

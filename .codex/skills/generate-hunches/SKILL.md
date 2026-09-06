@@ -44,6 +44,8 @@ print(f'Analysis run #{run_id}')
 
 ### 2. Export Data
 
+For `--thread N`, add `--thread-id N` to findings and hypothesis exports and use those findings to define the relevant entity/connection set. Broader profile data may supply labeled comparison context. Check the retained hypothesis scope before concluding a pattern is new; a limited list is not a complete inventory.
+
 ```bash
 uv run python tools/analysis_export.py findings-dump --output $WORKDIR/findings.json
 uv run python tools/analysis_export.py entity-network --output $WORKDIR/entities.json
@@ -62,14 +64,14 @@ uv run python tools/tag_manager.py list-values
 
 ### 4. Theme Detection Scans
 
-Run these scans on the exported data. For each, read the relevant JSON files and look for:
+Choose scans relevant to the question and available data from this menu. Record the scans selected and coverage limits. Counts and time windows below are starting screens, not novelty requirements; zero actionable hunches is a valid outcome.
 
 **a) Recurring agents/attorneys across unrelated entities**
 - Scan entity_roles for person_names appearing as agent/attorney across 3+ entities that aren't otherwise connected
 - Example: "Same formation attorney for shell companies of three targets in different threads"
 
 **b) Temporal clustering of entity formations**
-- Scan entities for formation_dates within narrow windows (e.g., same month) across unrelated targets
+- Scan entities for `date_formed` within narrow windows (e.g., same month) across unrelated targets
 - Example: "5 entities formed within 2 weeks in Dec 2002 across 3 different jurisdictions"
 
 **c) Address convergence**
@@ -127,23 +129,23 @@ Run these scans on the exported data. For each, read the relevant JSON files and
 
 For each potential pattern found, apply these filters:
 
-1. **Already known?** Check existing hypotheses and tags — skip if already captured
-2. **Obviously connected?** Skip patterns between directly-connected actors — that's expected
-3. **3+ independent contexts?** Require the pattern to appear in 3+ independent findings/entities, not just one finding's detail text
+1. **Already known?** Check existing hypotheses and tags; extend an existing item when evidence adds a new mechanism, period, contradiction, or test rather than duplicating it
+2. **New information?** Existing connections do not rule out a surprising new mechanism. Describe what this pattern adds to the documented relationship
+3. **Independent and diagnostic?** Trace provenance and assess what distinguishes plausible explanations. Three contexts can be a useful screen, but one or two diagnostic records can justify a test; repeated mentions of the same source are not independent evidence
 4. **Coverage and base rate?** Check whether the pattern survives collection gaps, shared exposure, and a relevant comparison group. Record a discriminating test rather than treating overlap as coordination.
-5. **Genuinely surprising?** Ask: "Would an investigator who knows the full case find this interesting?" If not, skip
+5. **Useful next question?** Explain the information this adds and the discriminating evidence a follow-up can obtain. Record unsupported curiosity as a question rather than manufacturing a substantive hunch
 
 ### 6. Record Genuine Hunches
 
 For each pattern that passes the novelty filter:
 
-**ACH discipline (required competing set):** Choose a short slug naming the phenomenon. Register both the working hypothesis and its best innocent explanation as first-class competitors; each needs its own falsification criterion.
+Each explanatory hunch needs falsification criteria and an actionable research lead. Use a competing set and the evidence matrix below when the claim concerns coordination or intent, or two or more live explanations compete. Register the best innocent explanation as a rival in those cases. A supported descriptive observation can be recorded without manufacturing rival theories.
 ```bash
 uv run python tools/hypothesis_tracker.py add \
     --title "EMERGING PATTERN" \
     --pattern-type emerging_theme \
     --competition-group "short-phenomenon-slug" \
-    --description "WHAT: description. EVIDENCE: 3+ data points. WHY INTERESTING: what it implies. FALSIFICATION: What evidence would disprove this?" \
+    --description "WHAT: description. EVIDENCE: independent records and their diagnostic value. WHY INTERESTING: what new question follows. FALSIFICATION: What evidence would disprove this?" \
     --predicted-evidence "If this pattern is real, we should also find..." \
     --search-plan "1. Specific search command  2. Another specific search  3. Cross-reference check" \
     --originated-from "analysis:generate-hunches"
@@ -161,9 +163,9 @@ uv run python tools/hypothesis_tracker.py evaluate --hypothesis-id N --finding-i
 uv run python tools/hypothesis_tracker.py compete --competition-group "short-phenomenon-slug"
 ```
 
-Include the competition output in the report. Describe its verdict as **least evidence against**, never "most evidence for." If you cannot articulate what would disprove either hypothesis, do not record the set.
+When ACH applies, include the competition output and unresolved rivals. Describe its verdict as **least evidence against**, never "most evidence for." If the hypotheses are not testable, record the unresolved question and evidence gap instead of an unsupported explanatory set.
 
-**Create lead (only if hypothesis suggests specific new research):**
+**Create a lead for each retained explanatory hypothesis with specific new research:**
 ```bash
 uv run python tools/lead_tracker.py add \
     --title "Hunch: PATTERN — investigate SPECIFICS" \
@@ -182,7 +184,8 @@ uv run python tools/tag_manager.py bulk-tag --table findings --ids ID1,ID2,ID3 \
 
 ### 7. Write Report
 
-Write to `$WORKDIR/report-generate-hunches.md`:
+Write to `$WORKDIR/report-generate-hunches.md`, including selected scans and their scope, evidence/analysis artifacts, unresolved questions, and any partial work with the next resumable step:
+
 
 ```markdown
 # Hunch Generation Report — [DATE]
@@ -197,7 +200,7 @@ Write to `$WORKDIR/report-generate-hunches.md`:
 
 ### 1. [HUNCH TITLE]
 **Pattern type:** emerging_theme / temporal / structural
-**Evidence:** [3+ data points with finding IDs]
+**Evidence:** [canonical evidence/finding IDs, independence, and diagnostic value]
 **Why interesting:** [What this implies about the network]
 **Search plan:** [How to test this]
 **Hypothesis ID:** #N
@@ -207,7 +210,7 @@ Write to `$WORKDIR/report-generate-hunches.md`:
 ...
 
 ## Patterns Checked But Filtered Out
-- [Pattern] — filtered because: [already known / obviously connected / only 2 data points]
+- [Pattern] — decision and reason: [duplicate / baseline explanation / insufficient diagnostic evidence / new test worth pursuing]
 
 ## Scan Statistics
 - Scans performed: N
@@ -234,7 +237,7 @@ This is the core feedback mechanism between Layer 2 (analysis) and Layer 1 (rese
 
 1. **This skill generates hypotheses** — each with a testable prediction and falsification criteria
 2. **Each hypothesis queues a research lead** — with specific tool commands to run, not vague "investigate further"
-3. **Layer 1 agents pursue those leads** — gathering facts, not testing theories
+3. **Research agents pursue those leads** — gather evidence that can support, complicate, or refute the prediction and its alternatives
 4. **Results feed back into the next analysis cycle** — new findings either support, complicate, or refute the hypothesis
 
 Every hypothesis MUST produce at least one lead with a concrete search plan. A hypothesis that doesn't generate actionable research is theoretical overhead, not insight.

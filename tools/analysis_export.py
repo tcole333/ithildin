@@ -19,12 +19,8 @@ Usage:
 """
 
 import argparse
-import json
 import sqlite3
-import sys
 from collections import Counter, defaultdict
-from datetime import datetime
-from pathlib import Path
 
 try:
     from tools.output_util import add_output_args, write_output
@@ -585,7 +581,7 @@ def export_entity_network(profile_id=None, all_profiles=False):
             entity_params = list(entity_ids)
             entities = [dict(r) for r in db.execute("""
                 SELECT id, name, entity_type, jurisdiction, status, ein,
-                       address, source, notes
+                       address, source, notes, date_formed
                 FROM entities
                 WHERE id IN ({ids})
                 ORDER BY id
@@ -610,7 +606,8 @@ def export_entity_network(profile_id=None, all_profiles=False):
             addresses = []
     else:
         entities = [dict(r) for r in db.execute("""
-            SELECT id, name, entity_type, jurisdiction, status, ein, address, source, notes
+            SELECT id, name, entity_type, jurisdiction, status, ein, address, source, notes,
+                   date_formed
             FROM entities ORDER BY id
         """).fetchall()]
 
@@ -773,7 +770,7 @@ def export_thread_summary(thread_id=None, profile_id=None, all_profiles=False):
         ).fetchall()]
         if target_list:
             placeholders = ",".join("?" for _ in target_list)
-            conn_cond = f" AND profile_id = ?" if resolved else ""
+            conn_cond = " AND profile_id = ?" if resolved else ""
             conn_params = target_list + target_list + ([resolved] if resolved else [])
             conn_count = db.execute(f"""
                 SELECT COUNT(DISTINCT id) FROM connections
@@ -989,7 +986,7 @@ def main():
                                  profile_id=p_id, all_profiles=p_all)
         if write_output(result, args, summary="timeline export"):
             return
-        print(f"Timeline Export:")
+        print("Timeline Export:")
         print(f"  {result['dated_finding_count']} dated findings")
         print(f"  {result['event_count']} events")
         print(f"  {result['undated_finding_count']} undated findings")
@@ -998,7 +995,7 @@ def main():
         result = export_entity_network(profile_id=p_id, all_profiles=p_all)
         if write_output(result, args, summary="entity network"):
             return
-        print(f"Entity Network:")
+        print("Entity Network:")
         print(f"  {result['entity_count']} entities")
         print(f"  {result['role_count']} roles")
         print(f"  {result['relation_count']} relations")
@@ -1013,7 +1010,7 @@ def main():
         for c in result["coverage"][:20]:
             print(f"{c['target']:<40} {c['findings']:>8} {c['high_confidence']:>7} {c['connections']:>5}")
         if result["gaps"]:
-            print(f"\nCoverage Gaps (high connectivity, low findings):")
+            print("\nCoverage Gaps (high connectivity, low findings):")
             for g in result["gaps"][:10]:
                 print(f"  {g['target']:<40} conns={g['connections']} findings={g['findings']}")
 
@@ -1038,10 +1035,10 @@ def main():
         if write_output(result, args, summary="analysis state"):
             return
         counts = result["current_counts"]
-        print(f"Analysis State:")
+        print("Analysis State:")
         print(f"  Findings: {counts['findings']}, Connections: {counts['connections']}")
         print(f"  Hypotheses: {counts['hypotheses']}, Tags: {counts['tags']}")
-        print(f"\nChanges Since Last Run:")
+        print("\nChanges Since Last Run:")
         for skill, changes in result["changes_since_last"].items():
             last = changes["last_run"] or "never"
             print(f"  {skill:<25} last={last}  "
@@ -1051,7 +1048,7 @@ def main():
         result = export_pillar_dump()
         if write_output(result, args, summary="pillar dump"):
             return
-        print(f"Pillar Dump:")
+        print("Pillar Dump:")
         print(f"  {result['pillar_count']} institutions")
         print(f"  {result['person_count']} persons")
         print(f"  {result['arc_count']} career arcs")

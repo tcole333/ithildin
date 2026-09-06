@@ -1,4 +1,6 @@
-interface:
-  display_name: "Search All Sources"
-  short_description: "Search relevant local and remote data sources"
-  default_prompt: "Use $search-all-sources to handle this investigation task with clear evidence and actionable output."
+"interface":
+  "display_name": "Search All Sources"
+  "short_description": "Find evidence across applicable local and remote data"
+  "default_prompt": "Use $search-all-sources. Look up the requested term across relevant\
+    \ available sources, reuse only valid result artifacts, and return evidence with\
+    \ explicit coverage."

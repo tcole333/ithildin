@@ -5,11 +5,11 @@ description: Discover, evaluate, and adopt analytical frameworks that deepen age
 
 # $discover-frameworks
 
-**LAYER 2: ANALYSIS AGENT** — This is a theory-building skill. Frameworks are pattern detectors, not interpretive lenses. Every framework MUST include falsification criteria and boundary conditions. See `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline`.
+**LAYER 2: ANALYSIS AGENT** — This is a theory-building skill. Use frameworks to propose testable patterns and explanations; state their assumptions and distinguish applicability from mere resemblance. Every framework MUST include falsification criteria and boundary conditions. See `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline`.
 
 Identify candidate analytical frameworks through training knowledge, academic/practitioner literature, and investigation data review. Evaluate candidates against the investigation's findings and adopt them at the appropriate tier.
 
-The current 8 core models (Bridge Tax, Manufactured Dependency, etc.) were seeded once. This skill evolves the framework inventory by finding new lenses that explain patterns the existing models miss.
+Load the current inventory rather than assuming a fixed model count. Seek frameworks that improve discriminating questions, evidence collection, and understanding of observed patterns.
 
 ## Three-Tier System
 
@@ -25,7 +25,13 @@ The current 8 core models (Bridge Tax, Manufactured Dependency, etc.) were seede
 - `--thread N`: focus on findings from a specific investigation thread
 - `--domain X`: focus on a specific academic domain (financial-crime, org-theory, intelligence, network-science, behavioral, legal-regulatory, economic)
 - `--review`: review existing lenses rather than discover new ones (reassess tier, check evidence growth)
-- `--update-detector`: after run, add detection rules to `model_detector.py` for any newly adopted lenses
+- `--update-detector`: verify the detector's runtime-loaded keywords for newly adopted lenses
+
+### Context and execution
+
+Read `docs/RESEARCH_WORKFLOW_CONTRACT.md` before source planning and pin the resolved profile/database. Use official or original scholarly/practitioner sources to verify candidate definitions and boundary conditions; training knowledge proposes candidates rather than verifying them. Preserve URLs and quoted passages in the run artifacts.
+
+When independent literature or candidate reviews help, use native subagents supervised in the current task, inheriting the configured model. Assign factual questions, pinned context, distinct candidate/source scopes and report paths. Collect every report and reconcile disagreements before adopting a framework. Review mode reports proposed changes unless the user also authorized applying them.
 
 ## Process
 
@@ -53,7 +59,7 @@ ls research/craft-research/frameworks/*.md 2>/dev/null || echo "No lenses yet"
 # Existing reference frameworks
 cat research/craft-research/framework-references.md
 
-# Recent findings (thread-scoped if --thread N)
+# Relevant findings (add --thread-id N to both exports when requested)
 uv run python tools/analysis_export.py findings-dump --output $WORKDIR/findings.json
 uv run python tools/analysis_export.py thread-summary --output $WORKDIR/threads.json
 
@@ -63,22 +69,22 @@ cat research/craft-research/analytical-models.md
 
 ### 2. Identify Gaps (Bottom-Up)
 
-Scan findings for patterns the current 8 models don't explain well:
+Scan findings for questions or patterns the current models do not address:
 
 **a) Run gap detection on recent findings**
 ```bash
-# Sample 50 recent findings through the detector
+# Select relevant findings through the detector
 # Look for findings with no model match
-uv run python tools/model_detector.py gaps --finding-id FINDING_ID
+uv run python tools/model_detector.py gaps --finding-id FINDING_ID --output "$WORKDIR/gaps-FINDING_ID.json"
 ```
 
-Pick 30-50 recent or high-impact findings and run `gaps` on each. Track which findings match no model.
+Choose findings relevant to the requested scope, including counterexamples and ordinary cases. A sample of 30-50 can be a starting point for a broad scan; record selection and coverage, and expand when unresolved questions justify it. A missing keyword match is a candidate inspection task, not proof of an explanatory gap.
 
 **b) Review framework_candidate hypotheses**
 Read the candidates exported in step 1. These are patterns agents noticed during investigation that didn't fit existing models.
 
 **c) Identify thread-level analytical gaps**
-For each thread, ask: Which of the 8 models apply to this thread's findings? Which threads have thin analytical coverage? What patterns repeat within the thread that don't have a framework name?
+For each thread, ask: Which current models apply to this thread's findings? Which threads have thin analytical coverage? What patterns repeat within the thread that don't have a framework name?
 
 **d) Review connection patterns**
 ```bash
@@ -94,7 +100,7 @@ This is the core intellectual work. Draw on training knowledge across relevant d
 1. What academic field studies this type of phenomenon?
 2. What named concepts from that field would apply?
 3. What are the detection markers — how would an agent recognize this pattern?
-4. Does this framework explain something the 8 core models genuinely miss, or is it a variant of an existing model?
+4. Does this framework explain something the current core models miss, or is it a variant of an existing model?
 
 **Domain checklist** (focus on --domain if specified, otherwise scan broadly):
 
@@ -112,7 +118,7 @@ This is the core intellectual work. Draw on training knowledge across relevant d
 - Domain tag
 - Definition (2-3 paragraphs: what it is, how it applies here)
 - Detection markers (what agents should look for)
-- Grounding findings (3+ findings from the investigation that instantiate it)
+- Grounding findings with canonical evidence, independence, and diagnostic value; a count alone does not establish applicability
 - What it explains that existing models don't
 - **Boundary conditions** (when does this framework NOT apply? What would it look like if this pattern were absent?)
 - **Overfit risk** (how might this framework cause agents to see false positives? What innocent scenarios could be misread as instances of this pattern?)
@@ -121,25 +127,21 @@ This is the core intellectual work. Draw on training knowledge across relevant d
 
 ### 4. Evaluate Candidates
 
-Score each candidate on these criteria:
+Evaluate each candidate using these criteria:
 
-| Criterion | Question | Weight |
-|-----------|----------|--------|
-| **Explanatory power** | Does it reveal mechanism, not just describe outcomes? | High |
-| **Novelty** | Does it explain something the current 8 models don't cover? | High |
-| **Transferability** | Can a reader apply this concept beyond this investigation? | Medium |
-| **Detectability** | Can we define keyword markers agents can search for? | Medium |
-| **Evidence grounding** | Do we have 3+ independent findings that instantiate it? | High |
-| **Predictive value** | Does it suggest where to look next? | Medium |
-| **Falsifiability** | Can we define what would disprove it? Does a baseline comparison exist? | High |
+| Criterion | Question |
+|-----------|----------|
+| **Explanatory power** | Does it propose a testable mechanism? |
+| **Novelty** | What useful distinction does it add to the current models? |
+| **Transferability** | Where could it apply beyond this investigation, and where would it fail? |
+| **Detectability** | Which markers support useful searches, and which ordinary cases would also match? |
+| **Evidence grounding** | Do independent records distinguish it from baseline and rival explanations? |
+| **Predictive value** | What discriminating evidence should be sought next? |
+| **Falsifiability** | What would disprove applicability, and what baseline comparison is available? |
 
-**Evaluation rubric:**
-- 5+ criteria met strongly → **Tier 2 Lens (adopted)**
-- 3-4 criteria met → **Tier 2 Lens (evaluated)** — needs more evidence before adoption
-- 1-2 criteria met → **Tier 3 Reference** — useful for grounding but not operationalizable yet
-- 0 criteria → Skip
+**Evaluation decision:** Use the criteria as prompts for judgment, not an additive score. Adopt a Tier 2 lens only when its boundaries, diagnostic evidence, and discriminating tests are adequate for the stated use; explain the decision and unresolved limitations. Keep promising but untested candidates evaluated, and use Tier 3 for useful background that is not yet operational. Reject candidates that add no useful distinction. No number of weak matches substitutes for grounding or falsifiability.
 
-**Novelty check (critical):** A candidate that's really just a sub-case of an existing model should be noted as a variant, not a new lens. E.g., "regulatory arbitrage through trust structures" is just Jurisdictional Arbitrage applied to trusts — not a new framework. But "regulatory capture" is genuinely distinct from any of the 8.
+**Novelty check (critical):** A candidate that's really just a sub-case of an existing model should be noted as a variant, not a new lens. E.g., "regulatory arbitrage through trust structures" is just Jurisdictional Arbitrage applied to trusts — not a new framework. But "regulatory capture" is genuinely distinct from the current inventory when its mechanism and boundary conditions differ.
 
 ### 5. Record Results
 
@@ -159,7 +161,7 @@ slug: framework-slug
 domain: org-theory
 source: "Author, 'Work Title' (Year)"
 status: adopted  # or evaluated or candidate
-created: 2026-MM-DD
+created: YYYY-MM-DD
 grounding_findings: [1234, 2345, 3456]
 related_models: [private-order, enabler-gradient]
 detection_keywords:
@@ -189,12 +191,12 @@ detection_keywords:
 
 Add entries to `research/craft-research/framework-references.md` in the appropriate domain table.
 
-**Record hypotheses for follow-up:**
+**Record hypotheses for follow-up:** Each explanatory hypothesis needs falsification criteria and a concrete research lead. Apply the methodology's competing-set/ACH requirements when the claim concerns coordination or intent, or two or more live rivals exist. Mere keyword matches and descriptive observations do not require invented explanatory hypotheses.
 ```bash
 uv run python tools/hypothesis_tracker.py add \
     --title "FRAMEWORK suggests PATTERN in THREAD" \
     --pattern-type structural \
-    --description "The [FRAMEWORK] lens suggests we should find [PATTERN] in thread [N]. Specific prediction: [WHAT TO LOOK FOR]." \
+    --description "The [FRAMEWORK] suggests [PATTERN] in thread [N]. Prediction: [WHAT TO LOOK FOR]. Falsification: [WHAT WOULD DISPROVE IT]. Baseline or rival: [ALTERNATIVE]." \
     --predicted-evidence "If this framework applies, we should find: [SPECIFIC EVIDENCE]" \
     --search-plan "1. [QUERY]  2. [QUERY]  3. [CROSS-REFERENCE]" \
     --originated-from "analysis:discover-frameworks" \
@@ -228,7 +230,8 @@ uv run python tools/model_detector.py detect --text "TEST TEXT MATCHING NEW LENS
 
 ### 7. Write Report
 
-Write to `$WORKDIR/report-discover-frameworks.md`:
+Write to `$WORKDIR/report-discover-frameworks.md`, including verified source citations, evidence independence, candidate decisions and rationale, counterexamples, unresolved tests, and any partial work with the next resumable step. Finding no useful new framework is a valid outcome:
+
 
 ```markdown
 # Framework Discovery Report — [DATE]
@@ -275,14 +278,14 @@ When `--review` is specified, skip discovery and instead:
 1. Load all existing Tier 2 lenses from `research/craft-research/frameworks/`
 2. For each lens, count grounding findings (have more appeared since adoption?)
 3. Check if any lens has been referenced in articles (search content/articles/ for the slug)
-4. Reassess tier: candidate with strong evidence → promote to evaluated. Evaluated with article use → promote to adopted. Adopted with 3+ articles → recommend promotion to Tier 1 core model.
-5. Flag stale lenses: adopted but no new grounding findings in 30+ days
+4. Reassess tier using evidence independence, diagnosticity, boundary tests, and demonstrated usefulness. Article use can inform usability; it is not independent validation or an automatic promotion threshold.
+5. Flag unsupported or contradicted lenses and obsolete source assumptions. Lack of new findings over an arbitrary time period alone does not make an established framework stale
 6. Report on framework health
 
 ## Quality Standards
 
 - **Depth over breadth.** 3 well-grounded frameworks with detection markers beat 10 vague suggestions.
-- **Novelty is mandatory.** If it's really just an existing model with different vocabulary, note the connection and move on.
-- **Evidence grounds everything.** No framework without 3+ findings that instantiate it. Training knowledge proposes; investigation data validates.
+- **Explain incremental value.** A new label needs a useful distinction; refinements to an existing model can be recorded there.
+- **Evidence grounds adoption.** Assess source independence, counterexamples, diagnostic value, and boundary conditions. Fewer strong records can justify a candidate; many superficial matches do not validate one. Training knowledge proposes; evidence tests applicability.
 - **Detection markers must be specific.** "Look for financial irregularities" is useless. "Look for compliance override by revenue-generating relationship managers" is useful.
 - **Limitations prevent overuse.** Every framework should include clear boundaries — when does it NOT apply?
