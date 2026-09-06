@@ -36,67 +36,15 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
+from tools.core_schema import DDL, ensure_core_model_schema  # noqa: E402, F401
 from tools.date_normalize import normalize_date  # noqa: E402
 
 DB = PROJECT_ROOT / "investigation.db"
 MIGRATION_ID = "2026-07-04_core_model_v2"
 
-DDL = """
-CREATE TABLE IF NOT EXISTS schema_migrations (
-    migration_id TEXT PRIMARY KEY,
-    applied_at   TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    note         TEXT
-);
-
-CREATE TABLE IF NOT EXISTS investigation_profiles (
-    profile_id   TEXT PRIMARY KEY,
-    display_name TEXT,
-    status       TEXT NOT NULL DEFAULT 'active',
-    created_at   TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS finding_entities (
-    finding_id        INTEGER NOT NULL REFERENCES findings(id) ON DELETE CASCADE,
-    entity_id         INTEGER NOT NULL REFERENCES entities(id),
-    mention_role      TEXT NOT NULL DEFAULT 'subject',
-    raw_name          TEXT,
-    resolution_status TEXT NOT NULL DEFAULT 'asserted',   -- asserted|candidate|reviewed
-    resolution_method TEXT,                                -- exact|alias|fuzzy|manual
-    resolution_score  REAL,
-    created_at        TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (finding_id, entity_id, mention_role)
-);
-CREATE INDEX IF NOT EXISTS idx_finding_entities_entity ON finding_entities(entity_id);
-
-CREATE TABLE IF NOT EXISTS finding_relations (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    from_finding_id INTEGER NOT NULL REFERENCES findings(id),
-    to_finding_id   INTEGER NOT NULL REFERENCES findings(id),
-    relation_type   TEXT NOT NULL CHECK (relation_type IN
-        ('contradicts','corroborates','supersedes','duplicates','refines','depends_on')),
-    assessment TEXT,
-    created_by TEXT,
-    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CHECK (from_finding_id <> to_finding_id),
-    UNIQUE (from_finding_id, to_finding_id, relation_type)
-);
-CREATE INDEX IF NOT EXISTS idx_finding_relations_to ON finding_relations(to_finding_id);
-
-CREATE TABLE IF NOT EXISTS data_change_sets (
-    change_set_id TEXT PRIMARY KEY,
-    change_kind   TEXT NOT NULL,   -- semantic_correction|backfill|schema_migration|deduplication
-    actor         TEXT NOT NULL,
-    reason        TEXT NOT NULL,
-    started_at    TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    completed_at  TEXT
-);
-"""
 
 REF_RE = re.compile(r"#(\d+)")
 
-
-def col_exists(db, table, col):
-    return any(r[1] == col for r in db.execute(f"PRAGMA table_info({table})"))
 
 
 def main():
@@ -115,12 +63,7 @@ def main():
 
     # ---- 1. DDL (idempotent) ----
     if apply:
-        db.executescript(DDL)
-        # additive columns (guarded)
-        if not col_exists(db, "findings", "event_date_iso"):
-            db.execute("ALTER TABLE findings ADD COLUMN event_date_iso TEXT")
-        if not col_exists(db, "findings", "date_precision"):
-            db.execute("ALTER TABLE findings ADD COLUMN date_precision TEXT")
+        ensure_core_model_schema(db)
         db.commit()
 
     # ---- 2. profile catalog backfill ----

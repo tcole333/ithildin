@@ -405,6 +405,8 @@ def test_finding_correction_can_link_an_existing_lead(tmp_path, monkeypatch):
         "Target",
         "Verified finding created before its lead link was supplied",
         source_datasets=["courtlistener"],
+        evidence_ids=["COURTLISTENER:fixture-record"],
+        source_quotes={"COURTLISTENER:fixture-record": {"quote": "The record identifies the subject."}},
         profile_id="test",
     )
 
@@ -438,6 +440,8 @@ def test_finding_correction_can_link_an_existing_lead(tmp_path, monkeypatch):
         findings_tracker.add_finding(
             f"Target {index}", "shared searchable phrase", date_of_event="2020",
             source_datasets=["web_search"], profile_id="test",
+            evidence_ids=["https://example.gov/fixture-record"],
+            source_quotes={"https://example.gov/fixture-record": {"quote": "The record identifies the subject."}},
         )
         for index in range(3)
     ]

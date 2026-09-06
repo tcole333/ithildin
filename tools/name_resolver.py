@@ -6,10 +6,11 @@ Loads name_aliases table into memory on first call. Used by write paths
 canonical forms.
 """
 
+import os
 import sqlite3
 from pathlib import Path
 
-DB_PATH = Path(__file__).parent.parent / "investigation.db"
+DB_PATH = Path(os.environ.get("ITHILDIN_DB_PATH", Path(__file__).parent.parent / "investigation.db"))
 
 _alias_cache: dict[str, tuple[str, str, int | None]] | None = None
 

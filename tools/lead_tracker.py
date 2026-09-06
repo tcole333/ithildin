@@ -29,7 +29,7 @@ try:
 except ImportError:
     from output_util import add_output_args, write_output
 
-DB_PATH = Path(__file__).parent.parent / "investigation.db"
+DB_PATH = Path(os.environ.get("ITHILDIN_DB_PATH", Path(__file__).parent.parent / "investigation.db"))
 
 
 def _detect_active_profile():
@@ -136,8 +136,8 @@ def _drop_stale_leads_fts_triggers(db):
     return stale_names
 
 
-def _rewrite_table_sql_for_leads_fk(table, replacement_table, table_sql):
-    """Build CREATE TABLE SQL for a replacement without editing sqlite_master."""
+def _rewrite_create_table_name(table, replacement_table, table_sql):
+    """Rename a CREATE TABLE target while preserving its current definition."""
     table_identifier = re.escape(table)
     table_pattern = re.compile(
         rf"^\s*CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?"
@@ -154,6 +154,12 @@ def _rewrite_table_sql_for_leads_fk(table, replacement_table, table_sql):
             f"Could not rewrite CREATE TABLE statement for {table!r}"
         )
 
+    return rewritten
+
+
+def _rewrite_table_sql_for_leads_fk(table, replacement_table, table_sql):
+    """Build CREATE TABLE SQL for a replacement without editing sqlite_master."""
+    rewritten = _rewrite_create_table_name(table, replacement_table, table_sql)
     stale_target = re.compile(
         r'(\bREFERENCES\s+)'
         r'(?:"leads_old_backup"|`leads_old_backup`|\[leads_old_backup\]|leads_old_backup)'
@@ -167,6 +173,106 @@ def _rewrite_table_sql_for_leads_fk(table, replacement_table, table_sql):
         )
     return rewritten
 
+
+def _rebuild_table(db, table, replacement, create_sql):
+    """Copy a table without losing columns, rows, indexes, triggers, or ID history.
+
+    The caller owns the transaction and must disable foreign keys before it
+    begins, then restore enforcement after commit or rollback.
+    """
+    dependent_objects = db.execute(
+        "SELECT type, name, sql FROM sqlite_master "
+        "WHERE tbl_name = ? AND type IN ('index', 'trigger') "
+        "AND sql IS NOT NULL ORDER BY type, name",
+        (table,),
+    ).fetchall()
+    old_columns = [
+        tuple(row)
+        for row in db.execute(
+            f"PRAGMA table_xinfo({_quote_sqlite_identifier(table)})"
+        ).fetchall()
+    ]
+    insert_columns = [row[1] for row in old_columns if row[6] == 0]
+    old_row_count = db.execute(
+        f"SELECT COUNT(*) FROM {_quote_sqlite_identifier(table)}"
+    ).fetchone()[0]
+
+    try:
+        old_sequences = [
+            row[0]
+            for row in db.execute(
+                "SELECT seq FROM sqlite_sequence WHERE name = ?", (table,)
+            ).fetchall()
+        ]
+    except sqlite3.OperationalError:
+        old_sequences = []
+
+    if db.execute(
+        "SELECT 1 FROM sqlite_master WHERE name = ?", (replacement,)
+    ).fetchone():
+        raise sqlite3.OperationalError(
+            f"Refusing to overwrite existing migration object {replacement!r}"
+        )
+
+    db.execute(create_sql)
+    quoted_columns = ", ".join(
+        _quote_sqlite_identifier(column) for column in insert_columns
+    )
+    db.execute(
+        f"INSERT INTO {_quote_sqlite_identifier(replacement)} ({quoted_columns}) "
+        f"SELECT {quoted_columns} FROM {_quote_sqlite_identifier(table)}"
+    )
+    copied_row_count = db.execute(
+        f"SELECT COUNT(*) FROM {_quote_sqlite_identifier(replacement)}"
+    ).fetchone()[0]
+    if copied_row_count != old_row_count:
+        raise sqlite3.IntegrityError(
+            f"Row-count mismatch rebuilding {table}: "
+            f"expected {old_row_count}, copied {copied_row_count}"
+        )
+
+    new_columns = [
+        tuple(row)
+        for row in db.execute(
+            f"PRAGMA table_xinfo({_quote_sqlite_identifier(replacement)})"
+        ).fetchall()
+    ]
+    if old_columns != new_columns:
+        raise sqlite3.IntegrityError(
+            f"Column metadata changed while rebuilding {table}"
+        )
+
+    db.execute(f"DROP TABLE {_quote_sqlite_identifier(table)}")
+    db.execute(
+        f"ALTER TABLE {_quote_sqlite_identifier(replacement)} "
+        f"RENAME TO {_quote_sqlite_identifier(table)}"
+    )
+    for _object_type, _object_name, object_sql in dependent_objects:
+        db.execute(object_sql)
+
+    # CREATE/COPY/RENAME can create a new sqlite_sequence row while old
+    # migrations may have left duplicates. Preserve the highest value
+    # and normalize it to one row so IDs cannot move backwards.
+    try:
+        current_sequences = [
+            row[0]
+            for row in db.execute(
+                "SELECT seq FROM sqlite_sequence WHERE name IN (?, ?)",
+                (table, replacement),
+            ).fetchall()
+        ]
+        sequences = old_sequences + current_sequences
+        db.execute(
+            "DELETE FROM sqlite_sequence WHERE name IN (?, ?)",
+            (table, replacement),
+        )
+        if sequences:
+            db.execute(
+                "INSERT INTO sqlite_sequence(name, seq) VALUES (?, ?)",
+                (table, max(sequences)),
+            )
+    except sqlite3.OperationalError:
+        pass  # No AUTOINCREMENT tables have created sqlite_sequence yet.
 
 def _repair_stale_leads_foreign_keys(db):
     """Atomically rebuild tables whose lead FKs target a removed backup table.
@@ -200,102 +306,11 @@ def _repair_stale_leads_foreign_keys(db):
             if not table_row or not table_row[0]:
                 raise sqlite3.OperationalError(f"Missing CREATE TABLE SQL for {table!r}")
 
-            dependent_objects = db.execute(
-                "SELECT type, name, sql FROM sqlite_master "
-                "WHERE tbl_name = ? AND type IN ('index', 'trigger') "
-                "AND sql IS NOT NULL ORDER BY type, name",
-                (table,),
-            ).fetchall()
-            old_columns = [
-                tuple(row)
-                for row in db.execute(
-                    f"PRAGMA table_xinfo({_quote_sqlite_identifier(table)})"
-                ).fetchall()
-            ]
-            insert_columns = [row[1] for row in old_columns if row[6] == 0]
-            old_row_count = db.execute(
-                f"SELECT COUNT(*) FROM {_quote_sqlite_identifier(table)}"
-            ).fetchone()[0]
-
-            try:
-                old_sequences = [
-                    row[0]
-                    for row in db.execute(
-                        "SELECT seq FROM sqlite_sequence WHERE name = ?", (table,)
-                    ).fetchall()
-                ]
-            except sqlite3.OperationalError:
-                old_sequences = []
-
             replacement = f"__fk_rebuild_{table}"
-            if db.execute(
-                "SELECT 1 FROM sqlite_master WHERE name = ?", (replacement,)
-            ).fetchone():
-                raise sqlite3.OperationalError(
-                    f"Refusing to overwrite existing migration object {replacement!r}"
-                )
-
-            db.execute(
-                _rewrite_table_sql_for_leads_fk(table, replacement, table_row[0])
+            _rebuild_table(
+                db, table, replacement,
+                _rewrite_table_sql_for_leads_fk(table, replacement, table_row[0]),
             )
-            quoted_columns = ", ".join(
-                _quote_sqlite_identifier(column) for column in insert_columns
-            )
-            db.execute(
-                f"INSERT INTO {_quote_sqlite_identifier(replacement)} ({quoted_columns}) "
-                f"SELECT {quoted_columns} FROM {_quote_sqlite_identifier(table)}"
-            )
-            copied_row_count = db.execute(
-                f"SELECT COUNT(*) FROM {_quote_sqlite_identifier(replacement)}"
-            ).fetchone()[0]
-            if copied_row_count != old_row_count:
-                raise sqlite3.IntegrityError(
-                    f"Row-count mismatch rebuilding {table}: "
-                    f"expected {old_row_count}, copied {copied_row_count}"
-                )
-
-            new_columns = [
-                tuple(row)
-                for row in db.execute(
-                    f"PRAGMA table_xinfo({_quote_sqlite_identifier(replacement)})"
-                ).fetchall()
-            ]
-            if old_columns != new_columns:
-                raise sqlite3.IntegrityError(
-                    f"Column metadata changed while rebuilding {table}"
-                )
-
-            db.execute(f"DROP TABLE {_quote_sqlite_identifier(table)}")
-            db.execute(
-                f"ALTER TABLE {_quote_sqlite_identifier(replacement)} "
-                f"RENAME TO {_quote_sqlite_identifier(table)}"
-            )
-            for _object_type, _object_name, object_sql in dependent_objects:
-                db.execute(object_sql)
-
-            # CREATE/COPY/RENAME can create a new sqlite_sequence row while old
-            # migrations may have left duplicates. Preserve the highest value
-            # and normalize it to one row so IDs cannot move backwards.
-            try:
-                current_sequences = [
-                    row[0]
-                    for row in db.execute(
-                        "SELECT seq FROM sqlite_sequence WHERE name IN (?, ?)",
-                        (table, replacement),
-                    ).fetchall()
-                ]
-                sequences = old_sequences + current_sequences
-                db.execute(
-                    "DELETE FROM sqlite_sequence WHERE name IN (?, ?)",
-                    (table, replacement),
-                )
-                if sequences:
-                    db.execute(
-                        "INSERT INTO sqlite_sequence(name, seq) VALUES (?, ?)",
-                        (table, max(sequences)),
-                    )
-            except sqlite3.OperationalError:
-                pass  # No AUTOINCREMENT tables have created sqlite_sequence yet.
 
             if any(
                 fk[2] == "leads_old_backup"
@@ -321,6 +336,62 @@ def _repair_stale_leads_foreign_keys(db):
             db.execute("PRAGMA foreign_keys=ON")
 
     return rebuilt
+
+
+def _widen_connections_relationships(db):
+    """Expand the historical relationship CHECK without discarding table state."""
+    table_row = db.execute(
+        "SELECT sql FROM sqlite_master WHERE type='table' AND name='connections'"
+    ).fetchone()
+    if not table_row or not table_row[0]:
+        return False
+
+    table_sql = table_row[0]
+    constraint = re.search(
+        r"(\bCHECK\s*\(\s*relationship_type\s+IN\s*\()(.*?)(\)\s*\))",
+        table_sql,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    if not constraint:
+        return False  # An unrestricted relationship column needs no widening.
+    entity_relationships = (
+        "owns", "controls", "funds", "subsidiary_of", "contracts_with",
+        "successor_to", "shares_officer", "supplies",
+    )
+    existing = set(re.findall(r"'([^']+)'", constraint.group(2)))
+    missing = [value for value in entity_relationships if value not in existing]
+    if not missing:
+        return False
+
+    allowed = constraint.group(2).rstrip() + ", " + ", ".join(
+        f"'{value}'" for value in missing
+    )
+    widened_sql = table_sql[:constraint.start(2)] + allowed + table_sql[constraint.end(2):]
+    replacement = "__relationship_rebuild_connections"
+    create_sql = _rewrite_create_table_name("connections", replacement, widened_sql)
+
+    db.commit()
+    foreign_keys_enabled = bool(db.execute("PRAGMA foreign_keys").fetchone()[0])
+    db.execute("PRAGMA foreign_keys=OFF")
+    try:
+        db.execute("BEGIN IMMEDIATE")
+        # Historical databases can contain unrelated preexisting FK violations.
+        # The rebuild must introduce none, including in dependent tables.
+        prior_violations = {tuple(row) for row in db.execute("PRAGMA foreign_key_check")}
+        _rebuild_table(db, "connections", replacement, create_sql)
+        violations = {tuple(row) for row in db.execute("PRAGMA foreign_key_check")}
+        if violations - prior_violations:
+            raise sqlite3.IntegrityError(
+                "Connection migration introduced foreign-key violations"
+            )
+        db.commit()
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        if foreign_keys_enabled:
+            db.execute("PRAGMA foreign_keys=ON")
+    return True
 
 
 def _connection_dedup_rows(db):
@@ -1071,8 +1142,6 @@ def _ensure_schema(db):
         ("findings", "verified_at TIMESTAMP"),
         ("findings", "quality_state TEXT DEFAULT 'unchecked'"),
         ("findings", "confidence_requested TEXT"),
-        ("findings", "event_date_iso TEXT"),
-        ("findings", "date_precision TEXT"),
         # Provenance fields on finding_evidence
         ("finding_evidence", "source_quote TEXT"),               # exact text from source supporting claim
         ("finding_evidence", "source_page TEXT"),                # page/line/section within source
@@ -1369,64 +1438,6 @@ def _ensure_schema(db):
     except sqlite3.OperationalError:
         raise
 
-    # Widen connections.relationship_type CHECK constraint to include entity types.
-    # SQLite can't ALTER CHECK constraints, so we rebuild the table if needed.
-    try:
-        table_sql = db.execute(
-            "SELECT sql FROM sqlite_master WHERE type='table' AND name='connections'"
-        ).fetchone()
-        if table_sql and "'owns'" not in (table_sql[0] or ""):
-            db.commit()
-            db.execute("PRAGMA foreign_keys=OFF")
-            db.execute("""CREATE TABLE connections_new (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                person_a TEXT NOT NULL,
-                person_b TEXT NOT NULL,
-                relationship_type TEXT CHECK(relationship_type IN (
-                    'financial','social','legal','intelligence','employment',
-                    'familial','corporate','advisory','political',
-                    'owns','controls','funds','subsidiary_of','contracts_with',
-                    'successor_to','shares_officer','supplies'
-                )),
-                description TEXT,
-                strength TEXT DEFAULT 'medium' CHECK(strength IN (
-                    'strong','medium','weak','circumstantial'
-                )),
-                date_range TEXT,
-                finding_id INTEGER REFERENCES findings(id),
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                verification_status TEXT DEFAULT 'unverified',
-                verified_by TEXT,
-                verified_at TIMESTAMP,
-                profile_id TEXT DEFAULT 'epstein',
-                valid_from DATE,
-                valid_until DATE
-            )""")
-            db.execute("""INSERT INTO connections_new
-                SELECT id, person_a, person_b, relationship_type, description,
-                       strength, date_range, finding_id, created_at,
-                       verification_status, verified_by, verified_at,
-                       profile_id, valid_from, valid_until
-                FROM connections""")
-            db.execute("DROP TABLE connections")
-            db.execute("ALTER TABLE connections_new RENAME TO connections")
-            db.execute("PRAGMA foreign_keys=ON")
-            # Recreate indexes
-            for idx_sql in [
-                "CREATE INDEX IF NOT EXISTS idx_connections_a ON connections(person_a)",
-                "CREATE INDEX IF NOT EXISTS idx_connections_b ON connections(person_b)",
-                "CREATE INDEX IF NOT EXISTS idx_connections_profile ON connections(profile_id)",
-                """CREATE UNIQUE INDEX IF NOT EXISTS idx_connections_unique
-                   ON connections(person_a, person_b, COALESCE(relationship_type, ''), COALESCE(profile_id, ''))""",
-            ]:
-                db.execute(idx_sql)
-            db.commit()
-    except (sqlite3.OperationalError, sqlite3.IntegrityError):
-        try:
-            db.rollback()
-        except Exception:
-            pass
-
     # FTS for leads
     try:
         db.execute("""
@@ -1662,6 +1673,13 @@ def _ensure_schema(db):
     # target leads_old_backup. This uses transactional table rebuilds instead of
     # editing sqlite_master via PRAGMA writable_schema.
     _repair_stale_leads_foreign_keys(db)
+    _widen_connections_relationships(db)
+
+    try:
+        from tools.core_schema import ensure_core_model_schema
+    except ImportError:
+        from core_schema import ensure_core_model_schema
+    ensure_core_model_schema(db)
 
     db.commit()
     return db

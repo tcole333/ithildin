@@ -16,7 +16,7 @@ try:
 except ImportError:
     from output_util import add_output_args, write_output
 
-DB_PATH = Path(__file__).parent.parent / "investigation.db"
+DB_PATH = Path(os.environ.get("ITHILDIN_DB_PATH", Path(__file__).parent.parent / "investigation.db"))
 
 VALID_ENTITY_TYPES = [
     "person",

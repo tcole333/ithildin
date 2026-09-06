@@ -5,7 +5,7 @@ Findings and connections tracker for OSINT investigations.
 Part of investigation.db (shared with lead_tracker.py).
 
 Usage:
-    python tools/findings_tracker.py add --target "Rod-Larsen" --type financial --summary "..." --detail "..."
+    uv run python tools/findings_tracker.py add --target "TARGET" --summary "..." --sources courtlistener --evidence COURTLISTENER:ID --source-quote "COURTLISTENER:ID:Exact source excerpt" --claim-type paraphrase
     python tools/findings_tracker.py list [--target "Rod-Larsen"] [--type financial]
     python tools/findings_tracker.py show 42
     python tools/findings_tracker.py evidence-add 42 --ref SOURCE:ID --source-quote "..." --reason "..."
@@ -38,7 +38,7 @@ except ImportError:
     from output_util import add_output_args, write_output
 
 # Shared database with lead_tracker.py
-DB_PATH = Path(__file__).parent.parent / "investigation.db"
+DB_PATH = Path(os.environ.get("ITHILDIN_DB_PATH", Path(__file__).parent.parent / "investigation.db"))
 
 
 def _detect_active_profile():
@@ -65,8 +65,29 @@ def _detect_active_profile():
     return None
 
 
-def _profile_thread_id_map(profile_id):
-    """Return configured local-thread ID -> global database ID for a profile."""
+def _profile_thread_id_map(profile_id, db=None):
+    """Map configured thread numbers using the caller's DB when supplied."""
+    if db is not None:
+        try:
+            from tools.investigation_context import load_profile
+        except ImportError:
+            from investigation_context import load_profile
+        try:
+            profile = load_profile(profile_id)
+        except (FileNotFoundError, KeyError, TypeError, ValueError):
+            return {}
+        by_title = {
+            row["title"]: row["id"]
+            for row in db.execute(
+                "SELECT id, title FROM investigation_threads WHERE profile_id=?",
+                (profile_id,),
+            )
+        }
+        return {
+            int(thread["id"]): by_title[thread["name"]]
+            for thread in profile.threads
+            if thread.get("id") is not None and thread.get("name") in by_title
+        }
     try:
         from tools.profile_threads import profile_thread_id_map
     except ImportError:
@@ -729,7 +750,7 @@ def _resolve_finding_thread_id(db, thread_id, profile_id):
         db,
         thread_id,
         profile_id,
-        local_thread_ids=lambda: _profile_thread_id_map(profile_id),
+        local_thread_ids=lambda: _profile_thread_id_map(profile_id, db=db),
     )
 
 
@@ -927,40 +948,89 @@ ALLOWED_CORRECT_FIELDS = {
 }
 
 
-def add_finding(
-    target_name,
-    summary,
-    finding_type=None,
-    detail=None,
-    evidence_ids=None,
-    source_datasets=None,
-    confidence="medium",
-    date_of_event=None,
-    lead_id=None,
-    claim_type="inference",
-    source_quotes=None,
-    thread_id=None,
-    email_sender=None,
-    profile_id=None,
-    agent_run_id=None,
-):
-    """Add a new finding with evidence references and provenance.
+def _validate_finding_candidate(candidate, evidence, *, publication=False, clamp=True):
+    """Validate one candidate record for insertion, correction, or verification.
 
-    Args:
-        source_quotes: dict mapping evidence_ref -> {quote, page, assessment}
-                       e.g. {"EFTA02336502": {"quote": "craft purchase 18M", "page": "p3"}}
-        thread_id: Investigation thread ID to assign this finding to.
-        email_sender: Email sender name to store on EFTA evidence rows.
-        profile_id: Investigation profile. Auto-detected from active profile if None.
-        agent_run_id: Workbench agent run ID. Auto-detected from ITHILDIN_AGENT_RUN_ID env var.
-    Returns: finding ID.
+    This is pure validation/normalization: it performs no database writes and
+    returns the effective confidence. New inserts and verification require every
+    evidence row to be quoted and valid. Correction callers may repair legacy
+    records whose provenance is incomplete without first passing publication.
     """
-    if agent_run_id is None:
-        agent_run_id = os.environ.get("ITHILDIN_AGENT_RUN_ID")
+    claim_type = candidate["claim_type"]
     if claim_type not in VALID_CLAIM_TYPES:
         raise ValueError(
             f"Unsupported claim_type '{claim_type}'. Allowed: {', '.join(VALID_CLAIM_TYPES)}"
         )
+    sources = _parse_stored_source_datasets(candidate["source_datasets"])
+    confidence = candidate["confidence"]
+    if confidence not in VALID_CONFIDENCE:
+        raise ValueError(f"Unsupported confidence '{confidence}'")
+    finding_type = candidate.get("finding_type")
+    if finding_type is not None and finding_type not in VALID_FINDING_TYPES:
+        raise ValueError(f"Unsupported finding_type '{finding_type}'")
+    if (publication or claim_type == "direct_quote") and not evidence:
+        raise ValueError("Cannot record or verify this claim without at least one evidence reference")
+    if publication:
+        missing = [row["evidence_ref"] for row in evidence if not str(row.get("source_quote") or "").strip()]
+        if missing:
+            raise ValueError("missing source_quote for " + ", ".join(missing))
+    for row in evidence:
+        _validate_evidence_payload(
+            row["evidence_ref"], row.get("source_quote"),
+            stored_type=row.get("evidence_type"), claim_type=claim_type,
+            require_quote=publication,
+        )
+    effective, claim_clamped = _enforce_confidence_cap(claim_type, confidence)
+    effective, source_clamped = _enforce_source_confidence_cap(sources, effective)
+    if (claim_clamped or source_clamped) and not clamp:
+        raise ValueError(
+            f"confidence '{confidence}' exceeds the '{effective}' cap for this claim and its sources"
+        )
+    if claim_clamped:
+        print(
+            f"WARNING: Confidence clamped to '{effective}' (max for claim_type='{claim_type}').",
+            file=sys.stderr,
+        )
+    if source_clamped:
+        print(
+            f"WARNING: Confidence clamped to '{effective}' (max for provenance-opaque source(s): "
+            f"{', '.join(sorted(PROVENANCE_OPAQUE_SOURCES.intersection(sources)))}).",
+            file=sys.stderr,
+        )
+    return effective
+
+
+def _finding_evidence_rows(db, finding_id):
+    return [dict(row) for row in db.execute(
+        "SELECT evidence_type, evidence_ref, source_quote FROM finding_evidence WHERE finding_id=?",
+        (finding_id,),
+    )]
+
+
+def _canonical_name_on_db(db, name):
+    """Resolve an unambiguous spelling alias without a second connection/cache."""
+    rows = db.execute(
+        "SELECT DISTINCT canonical_name FROM name_aliases WHERE lower(alias)=lower(?)",
+        (name,),
+    ).fetchall()
+    return rows[0]["canonical_name"] if len(rows) == 1 else name
+
+
+def add_finding_to_db(
+    db, target_name, summary, finding_type=None, detail=None, evidence_ids=None,
+    source_datasets=None, confidence="medium", date_of_event=None, lead_id=None,
+    claim_type="inference", source_quotes=None, thread_id=None, email_sender=None,
+    profile_id=None, agent_run_id=None,
+):
+    """Insert a validated finding using only the caller's open connection.
+
+    The caller owns the transaction, rollback, commit, and connection lifetime.
+    The connection must use sqlite3.Row and the current investigation schema.
+    No schema migration, database open, or commit occurs here. This lets staged
+    imports insert canonical evidence and their import receipt atomically.
+    Every new claim requires evidence references and an exact quote per reference;
+    its verification status remains unverified until a separate review.
+    """
     source_datasets = _validate_source_datasets(source_datasets)
     if evidence_ids is None:
         evidence_ids = []
@@ -975,126 +1045,86 @@ def add_finding(
             "Evidence metadata supplied for refs not present in evidence_ids: "
             + ", ".join(sorted(unknown_metadata_refs))
         )
-    if len(set(evidence_ids)) != len(evidence_ids):
+    normalized_refs = [str(ref).strip() for ref in evidence_ids]
+    if len(set(normalized_refs)) != len(normalized_refs):
         raise ValueError("evidence_ids contains duplicate references")
-    if claim_type == "direct_quote" and not evidence_ids:
-        raise ValueError(
-            "direct_quote findings require at least one evidence reference"
-        )
-
     evidence_rows = []
-    for evidence_ref in evidence_ids:
-        quote_data = source_quotes.get(evidence_ref, {})
-        if quote_data is None:
-            quote_data = {}
-        if not isinstance(quote_data, dict):
-            raise ValueError(
-                f"source_quotes['{evidence_ref}'] must be a metadata mapping"
-            )
+    for ref in evidence_ids:
+        metadata = source_quotes.get(ref) or {}
+        if not isinstance(metadata, dict):
+            raise ValueError(f"source_quotes['{ref}'] must be a metadata mapping")
+        if "quote" in metadata and not isinstance(metadata["quote"], str):
+            raise ValueError(f"Evidence '{ref}' requires a non-empty source_quote string")
         evidence_type = _validate_evidence_payload(
-            evidence_ref,
-            quote_data.get("quote"),
-            claim_type=claim_type,
-            require_quote="quote" in quote_data,
+            ref, metadata.get("quote"), claim_type=claim_type,
+            require_quote=True,
         )
-        evidence_rows.append((str(evidence_ref).strip(), evidence_type, quote_data))
-
-    # Enforce confidence caps by claim type
-    confidence, was_clamped = _enforce_confidence_cap(claim_type, confidence)
-    if was_clamped:
-        print(
-            f"WARNING: Confidence clamped to '{confidence}' (max for claim_type='{claim_type}'). "
-            f"See CONFIDENCE_CAPS in findings_tracker.py.",
-            file=sys.stderr,
-        )
-
-    # Enforce provenance caps after claim-type caps so the lower cap wins
-    confidence, was_source_clamped = _enforce_source_confidence_cap(
-        source_datasets, confidence
+        evidence_rows.append({
+            "evidence_ref": str(ref).strip(), "evidence_type": evidence_type,
+            "source_quote": metadata.get("quote"), "source_page": metadata.get("page"),
+            "assessment": metadata.get("assessment"),
+        })
+    requested_confidence = confidence
+    confidence = _validate_finding_candidate({
+        "claim_type": claim_type, "confidence": confidence,
+        "source_datasets": source_datasets, "finding_type": finding_type,
+    }, evidence_rows, publication=True)
+    if profile_id is None:
+        profile_id = os.environ.get("ITHILDIN_PROFILE")
+        if not profile_id:
+            active = db.execute(
+                "SELECT value FROM investigation_config WHERE key='active_profile'"
+            ).fetchone()
+            profile_id = active["value"] if active else None
+    if agent_run_id is None:
+        agent_run_id = os.environ.get("ITHILDIN_AGENT_RUN_ID")
+    target_name = _canonical_name_on_db(db, target_name)
+    thread_id = _resolve_finding_thread_id(db, thread_id, profile_id)
+    event_date_iso, date_precision = _normalize_event_date(date_of_event)
+    cursor = db.execute(
+        """INSERT INTO findings (
+            target_name, finding_type, summary, detail, source_datasets, confidence,
+            date_of_event, lead_id, claim_type, verification_status, thread_id,
+            quality_state, confidence_requested, profile_id, agent_run_id,
+            event_date_iso, date_precision
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'unverified', ?, 'unchecked', ?, ?, ?, ?, ?)""",
+        (target_name, finding_type, summary, detail, json.dumps(source_datasets),
+         confidence, date_of_event, lead_id, claim_type, thread_id,
+         requested_confidence, profile_id, agent_run_id, event_date_iso, date_precision),
     )
-    if was_source_clamped:
-        opaque_sources = sorted(PROVENANCE_OPAQUE_SOURCES.intersection(source_datasets))
-        print(
-            f"WARNING: Confidence clamped to '{confidence}' (max for provenance-opaque "
-            f"source(s): {', '.join(opaque_sources)}).",
-            file=sys.stderr,
+    finding_id = cursor.lastrowid
+    _link_finding_entity(db, finding_id, target_name, agent_run_id=agent_run_id)
+    for row in evidence_rows:
+        db.execute(
+            """INSERT INTO finding_evidence (
+                finding_id, evidence_type, evidence_ref, source_quote, source_page,
+                assessment, email_sender
+            ) VALUES (?, ?, ?, ?, ?, ?, ?)""",
+            (finding_id, row["evidence_type"], row["evidence_ref"], row["source_quote"],
+             row["source_page"], row["assessment"],
+             email_sender if row["evidence_type"] == "efta" else None),
         )
+    return finding_id
 
-    # Auto-detect profile_id from active investigation if not provided
+
+def add_finding(
+    target_name, summary, finding_type=None, detail=None, evidence_ids=None,
+    source_datasets=None, confidence="medium", date_of_event=None, lead_id=None,
+    claim_type="inference", source_quotes=None, thread_id=None, email_sender=None,
+    profile_id=None, agent_run_id=None,
+):
+    """Add a finding and its evidence atomically through the canonical writer."""
     if profile_id is None:
         profile_id = _detect_active_profile()
-
-    # Resolve aliases to prevent future duplicates
-    try:
-        from tools.name_resolver import resolve_canonical
-
-        target_name = resolve_canonical(target_name)
-    except Exception:
-        pass
-
-    # Precision-aware temporal columns (bare-year/month dates otherwise vanish
-    # from event_timeline date() range queries — see tools/date_normalize.py).
-    event_date_iso, date_precision = _normalize_event_date(date_of_event)
-
     db = _get_db_standalone()
-    sources_json = json.dumps(source_datasets) if source_datasets else None
-
-    thread_id = _resolve_finding_thread_id(db, thread_id, profile_id)
-
     try:
-        cursor = db.execute(
-            """
-            INSERT INTO findings (target_name, finding_type, summary, detail,
-                                 source_datasets, confidence, date_of_event, lead_id,
-                                 claim_type, verification_status, thread_id,
-                                 quality_state, confidence_requested, profile_id,
-                                 agent_run_id, event_date_iso, date_precision)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'unverified', ?, 'unchecked', ?, ?, ?, ?, ?)
-        """,
-            (
-                target_name,
-                finding_type,
-                summary,
-                detail,
-                sources_json,
-                confidence,
-                date_of_event,
-                lead_id,
-                claim_type,
-                thread_id,
-                confidence,
-                profile_id,
-                agent_run_id,
-                event_date_iso,
-                date_precision,
-            ),
+        finding_id = add_finding_to_db(
+            db, target_name, summary, finding_type=finding_type, detail=detail,
+            evidence_ids=evidence_ids, source_datasets=source_datasets,
+            confidence=confidence, date_of_event=date_of_event, lead_id=lead_id,
+            claim_type=claim_type, source_quotes=source_quotes, thread_id=thread_id,
+            email_sender=email_sender, profile_id=profile_id, agent_run_id=agent_run_id,
         )
-        finding_id = cursor.lastrowid
-
-        # Link the finding to a canonical entity so it's visible to network/graph
-        # analysis (identity was historically string-only via target_name). Best-effort:
-        # a resolution failure must never block recording the finding.
-        _link_finding_entity(db, finding_id, target_name, agent_run_id=agent_run_id)
-
-        for evidence_ref, evidence_type, quote_data in evidence_rows:
-            db.execute(
-                """
-                INSERT INTO finding_evidence
-                    (finding_id, evidence_type, evidence_ref, source_quote,
-                     source_page, assessment, email_sender)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
-            """,
-                (
-                    finding_id,
-                    evidence_type,
-                    evidence_ref,
-                    quote_data.get("quote"),
-                    quote_data.get("page"),
-                    quote_data.get("assessment"),
-                    email_sender if evidence_type == "efta" else None,
-                ),
-            )
-
         db.commit()
         return finding_id
     except Exception:
@@ -1250,7 +1280,7 @@ def _record_evidence_correction(
 
 
 def _invalidate_verified_finding(db, finding, reason, corrected_by):
-    """Require fresh human review after evidence supporting a verified claim changes."""
+    """Require fresh review after a verified claim or its evidence changes."""
     if finding["verification_status"] != "verified":
         return
     db.execute(
@@ -1263,7 +1293,7 @@ def _invalidate_verified_finding(db, finding, reason, corrected_by):
     """,
         (
             finding["id"],
-            f"Evidence changed and requires re-verification: {reason}",
+            f"Claim or evidence changed and requires re-verification: {reason}",
             corrected_by,
         ),
     )
@@ -1551,31 +1581,22 @@ def update_finding(
             db.rollback()
             return False
 
+        candidate = dict(finding)
         stored_value = new_value
         if field == "source_datasets":
             stored_value = json.dumps(_parse_stored_source_datasets(new_value))
-        elif field == "claim_type":
-            if new_value not in VALID_CLAIM_TYPES:
-                raise ValueError(
-                    f"Unsupported claim_type '{new_value}'. Allowed: {', '.join(VALID_CLAIM_TYPES)}"
-                )
-            if new_value == "direct_quote":
-                evidence = db.execute(
-                    "SELECT evidence_type, evidence_ref, source_quote "
-                    "FROM finding_evidence WHERE finding_id = ?",
-                    (finding_id,),
-                ).fetchall()
-                if not evidence:
-                    raise ValueError(
-                        "Cannot set claim_type=direct_quote without at least one evidence row"
-                    )
-                for row in evidence:
-                    _validate_evidence_payload(
-                        row["evidence_ref"],
-                        row["source_quote"],
-                        claim_type="direct_quote",
-                        stored_type=row["evidence_type"],
-                    )
+        elif field in {"lead_id", "thread_id"}:
+            stored_value = None if new_value in (None, "") else int(new_value)
+        candidate[field] = stored_value
+        if field in {"thread_id", "profile_id"}:
+            candidate["thread_id"] = _resolve_finding_thread_id(
+                db, candidate["thread_id"], candidate["profile_id"]
+            )
+            if field == "thread_id":
+                stored_value = candidate["thread_id"]
+        effective_confidence = _validate_finding_candidate(
+            candidate, _finding_evidence_rows(db, finding_id)
+        )
 
         old_value = finding[field] if field in finding.keys() else None
         db.execute(
@@ -1611,7 +1632,33 @@ def update_finding(
                 f"UPDATE findings SET {field} = ? WHERE id = ?",
                 (stored_value, finding_id),
             )
-        if field in {"claim_type", "source_datasets"}:
+        if field == "confidence":
+            db.execute(
+                "UPDATE findings SET confidence_requested=? WHERE id=?",
+                (stored_value, finding_id),
+            )
+        if effective_confidence != candidate["confidence"]:
+            db.execute(
+                """INSERT INTO corrections (
+                    table_name, record_id, field_name, old_value, new_value,
+                    reason, corrected_by, correction_type
+                ) VALUES ('findings', ?, 'confidence', ?, ?, ?, ?, 'refinement')""",
+                (finding_id, candidate["confidence"], effective_confidence,
+                 f"Apply claim/source confidence cap after {field} correction: {reason}",
+                 corrected_by),
+            )
+            db.execute(
+                "UPDATE findings SET confidence=?, confidence_requested=? WHERE id=?",
+                (effective_confidence, candidate["confidence"], finding_id),
+            )
+        if field == "profile_id" and candidate["thread_id"] != finding["thread_id"]:
+            db.execute(
+                "UPDATE findings SET thread_id=? WHERE id=?",
+                (candidate["thread_id"], finding_id),
+            )
+        if field == "target_name" and old_value != stored_value:
+            _reconcile_finding_subject(db, finding, stored_value, reason, corrected_by)
+        if old_value != stored_value or effective_confidence != finding["confidence"]:
             _invalidate_verified_finding(db, finding, reason, corrected_by)
         db.commit()
         return True
@@ -1625,62 +1672,27 @@ def update_finding(
 def verify_finding(finding_id, verified_by="human"):
     """Mark a finding verified only when its provenance satisfies publication gates.
 
-    Findings may be drafted before their provenance is complete, but the audit
-    contract requires valid source tokens, at least one evidence reference, and
-    an exact source quote for each reference before verification. Locally
+    Legacy findings may have incomplete provenance. The audit contract requires
+    valid source tokens, at least one evidence reference, and an exact source
+    quote for each reference before verification. Locally
     resolvable quote spans must match; remote/canonical references remain
     publishable but are reported as unchecked by ``evidence-audit``.
     """
     db = _get_db_standalone()
     try:
+        db.execute("BEGIN IMMEDIATE")
         finding = db.execute(
-            "SELECT id, claim_type, source_datasets FROM findings WHERE id = ?",
-            (finding_id,),
+            "SELECT * FROM findings WHERE id = ?", (finding_id,)
         ).fetchone()
         if finding is None:
             raise ValueError(f"Finding #{finding_id} does not exist")
         try:
-            _parse_stored_source_datasets(finding["source_datasets"])
+            _validate_finding_candidate(
+                dict(finding), _finding_evidence_rows(db, finding_id),
+                publication=True, clamp=False,
+            )
         except ValueError as exc:
-            raise ValueError(
-                f"Finding #{finding_id} cannot be verified: {exc}"
-            ) from exc
-
-        evidence = db.execute(
-            "SELECT evidence_type, evidence_ref, source_quote "
-            "FROM finding_evidence WHERE finding_id = ?",
-            (finding_id,),
-        ).fetchall()
-        if not evidence:
-            raise ValueError(
-                f"Finding #{finding_id} cannot be verified without at least one evidence reference"
-            )
-
-        missing_quotes = [
-            row["evidence_ref"]
-            for row in evidence
-            if not str(row["source_quote"] or "").strip()
-        ]
-        if missing_quotes:
-            refs = ", ".join(missing_quotes[:3])
-            if len(missing_quotes) > 3:
-                refs += f", and {len(missing_quotes) - 3} more"
-            raise ValueError(
-                f"Finding #{finding_id} cannot be verified: missing source_quote for {refs}"
-            )
-        for row in evidence:
-            try:
-                _validate_evidence_payload(
-                    row["evidence_ref"],
-                    row["source_quote"],
-                    claim_type=finding["claim_type"],
-                    stored_type=row["evidence_type"],
-                    require_quote=True,
-                )
-            except ValueError as exc:
-                raise ValueError(
-                    f"Finding #{finding_id} cannot be verified: {exc}"
-                ) from exc
+            raise ValueError(f"Finding #{finding_id} cannot be verified: {exc}") from exc
 
         now = datetime.now(timezone.utc).isoformat()
         db.execute(
@@ -2124,7 +2136,7 @@ def _ensure_entity(
 
 
 def _link_finding_entity(
-    db, finding_id, target_name, mention_role="subject", agent_run_id=None
+    db, finding_id, target_name, mention_role="subject", agent_run_id=None, *, strict=False
 ):
     """Best-effort link finding -> canonical entity in finding_entities.
 
@@ -2179,8 +2191,37 @@ def _link_finding_entity(
         )
         return res.entity_id
     except Exception as e:
+        if strict:
+            raise
         print(f"  (finding-entity link skipped: {e})", file=sys.stderr)
         return None
+
+
+def _reconcile_finding_subject(db, finding, target_name, reason, corrected_by):
+    """Replace generated subject links while preserving other/manual mentions."""
+    finding_id = finding["id"]
+    before = [dict(row) for row in db.execute(
+        "SELECT * FROM finding_entities WHERE finding_id=? AND mention_role='subject'",
+        (finding_id,),
+    )]
+    db.execute(
+        """DELETE FROM finding_entities WHERE finding_id=? AND mention_role='subject'
+           AND resolution_method IN ('exact','alias','fuzzy','created','qualified_identifier')""",
+        (finding_id,),
+    )
+    _link_finding_entity(db, finding_id, target_name, strict=True)
+    after = [dict(row) for row in db.execute(
+        "SELECT * FROM finding_entities WHERE finding_id=? AND mention_role='subject'",
+        (finding_id,),
+    )]
+    db.execute(
+        """INSERT INTO corrections (
+            table_name, record_id, field_name, old_value, new_value,
+            reason, corrected_by, correction_type
+        ) VALUES ('finding_entities', ?, 'subject_links', ?, ?, ?, ?, 'refinement')""",
+        (finding_id, json.dumps(before, sort_keys=True), json.dumps(after, sort_keys=True),
+         f"Reconcile subject after target correction: {reason}", corrected_by),
+    )
 
 
 def relate_findings(
@@ -2595,7 +2636,7 @@ def validate_connection_publication(db, connection):
     """
     if connection["finding_id"] is not None:
         finding = db.execute(
-            "SELECT verification_status FROM findings WHERE id=?",
+            "SELECT * FROM findings WHERE id=?",
             (connection["finding_id"],),
         ).fetchone()
         if finding is None:
@@ -2604,6 +2645,10 @@ def validate_connection_publication(db, connection):
             raise ValueError(
                 f"upstream finding #{connection['finding_id']} is not verified"
             )
+        _validate_finding_candidate(
+            dict(finding), _finding_evidence_rows(db, connection["finding_id"]),
+            publication=True, clamp=False,
+        )
     evidence = db.execute(
         "SELECT * FROM connection_evidence WHERE connection_id=? ORDER BY evidence_ref",
         (connection["id"],),
@@ -2987,21 +3032,17 @@ def add_connection(
     if profile_id is None:
         profile_id = _detect_active_profile()
 
-    # Resolve aliases to prevent future duplicates
-    try:
-        from tools.name_resolver import resolve_canonical
-
-        person_a = resolve_canonical(person_a)
-        person_b = resolve_canonical(person_b)
-    except Exception:
-        pass
-
     db = _get_db_standalone()
     try:
+        db.execute("BEGIN IMMEDIATE")
         # Enforce the invariant: every connection endpoint is backed by an entity row.
         # Done before the alphabetical swap so each name stays paired with its type.
-        _ensure_entity(db, person_a, entity_a_type, agent_run_id=agent_run_id)
-        _ensure_entity(db, person_b, entity_b_type, agent_run_id=agent_run_id)
+        entity_a_id, _ = _ensure_entity(db, person_a, entity_a_type, agent_run_id=agent_run_id)
+        entity_b_id, _ = _ensure_entity(db, person_b, entity_b_type, agent_run_id=agent_run_id)
+        if entity_a_id is None or entity_b_id is None:
+            raise ValueError("Connections require two non-empty entity endpoints")
+        person_a = db.execute("SELECT name FROM entities WHERE id=?", (entity_a_id,)).fetchone()["name"]
+        person_b = db.execute("SELECT name FROM entities WHERE id=?", (entity_b_id,)).fetchone()["name"]
 
         # Symmetric relationships use canonical endpoint ordering for dedup.
         # Directional verbs must retain caller order or their meaning reverses.
@@ -3381,12 +3422,12 @@ def main():
     subparsers = parser.add_subparsers(dest="command")
 
     # add
-    add_p = subparsers.add_parser("add", help="Add a finding")
+    add_p = subparsers.add_parser("add", help="Add an unverified finding with quoted evidence")
     add_p.add_argument("--target", required=True)
     add_p.add_argument("--summary", "-s", required=True)
     add_p.add_argument("--type", "-t", choices=VALID_FINDING_TYPES, dest="finding_type")
     add_p.add_argument("--detail", "-d")
-    add_p.add_argument("--evidence", "-e", nargs="+")
+    add_p.add_argument("--evidence", "-e", nargs="+", help="Source references required for every new finding")
     add_p.add_argument(
         "--sources",
         nargs="+",
@@ -3405,7 +3446,7 @@ def main():
         nargs="+",
         action="extend",
         help=(
-            "ref:quote pairs (repeatable). Each evidence ref stores one quote; "
+            "Required ref:quote pairs (repeatable). Each evidence ref needs one quote; "
             "combine multiple excerpts explicitly."
         ),
     )

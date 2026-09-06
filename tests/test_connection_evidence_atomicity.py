@@ -7,7 +7,6 @@ from threading import Barrier
 import pytest
 
 from tools import findings_tracker
-from tools import name_resolver
 
 
 @pytest.fixture
@@ -79,15 +78,16 @@ def connection_db(monkeypatch, tmp_path):
 
     def ensure_entity(db, name, entity_type="unknown", source="auto:connect",
                       agent_run_id=None):
-        db.execute(
+        cursor = db.execute(
             "INSERT OR IGNORE INTO entities(name, entity_type) VALUES (?, ?)",
             (name, entity_type),
         )
+        entity_id = db.execute("SELECT id FROM entities WHERE name=?", (name,)).fetchone()[0]
+        return entity_id, cursor.rowcount == 1
 
     monkeypatch.setattr(findings_tracker, "DB_PATH", db_path)
     monkeypatch.setattr(findings_tracker, "_schema_initialized", True)
     monkeypatch.setattr(findings_tracker, "_ensure_entity", ensure_entity)
-    monkeypatch.setattr(name_resolver, "resolve_canonical", lambda name: name)
     return db_path
 
 

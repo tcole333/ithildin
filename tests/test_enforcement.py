@@ -121,6 +121,8 @@ class TestSourceConfidenceCapping:
         finding_id = add_finding(
             "Inference", "s", source_datasets=["courtlistener"],
             claim_type="inference", confidence="confirmed", profile_id="epstein",
+            evidence_ids=["https://example.gov/fixture-record"],
+            source_quotes={"https://example.gov/fixture-record": {"quote": "The record identifies the subject."}},
         )
         assert self._stored_confidence(db, finding_id) == "medium"
         assert "max for claim_type='inference'" in capsys.readouterr().err
@@ -132,6 +134,8 @@ class TestSourceConfidenceCapping:
         finding_id = add_finding(
             "Opaque Paraphrase", "s", source_datasets=["intelx"],
             claim_type="paraphrase", confidence="confirmed", profile_id="epstein",
+            evidence_ids=["https://example.gov/fixture-record"],
+            source_quotes={"https://example.gov/fixture-record": {"quote": "The record identifies the subject."}},
         )
         assert self._stored_confidence(db, finding_id) == "medium"
         error = capsys.readouterr().err
@@ -466,6 +470,8 @@ class TestProfileThreadGuard:
             add_finding(
                 "Drift Target", "s", source_datasets=["web_search"],
                 thread_id=900, profile_id="epstein",
+                evidence_ids=["https://example.gov/fixture-record"],
+                source_quotes={"https://example.gov/fixture-record": {"quote": "The record identifies the subject."}},
             )
         assert db.execute(
             "SELECT COUNT(*) FROM findings WHERE target_name = 'Drift Target'"
@@ -478,12 +484,14 @@ class TestProfileThreadGuard:
         self._seed_threads(db)
         monkeypatch.setattr(
             "tools.findings_tracker._profile_thread_id_map",
-            lambda profile_id: {7: 901} if profile_id == "epstein" else {},
+            lambda profile_id, db=None: {7: 901} if profile_id == "epstein" else {},
         )
         from tools.findings_tracker import add_finding
         fid = add_finding(
             "Mapped Target", "s", source_datasets=["web_search"],
             thread_id=7, profile_id="epstein",
+            evidence_ids=["https://example.gov/fixture-record"],
+            source_quotes={"https://example.gov/fixture-record": {"quote": "The record identifies the subject."}},
         )
         row = db.execute(
             "SELECT profile_id, thread_id FROM findings WHERE id = ?", (fid,)
@@ -498,6 +506,8 @@ class TestProfileThreadGuard:
         add_finding(
             "Match Target", "s", source_datasets=["web_search"],
             thread_id=900, profile_id="tech-right",
+            evidence_ids=["https://example.gov/fixture-record"],
+            source_quotes={"https://example.gov/fixture-record": {"quote": "The record identifies the subject."}},
         )
         assert "profile/thread drift" not in capsys.readouterr().err
 
@@ -508,6 +518,8 @@ class TestProfileThreadGuard:
         add_finding(
             "No Thread Target", "s", source_datasets=["web_search"],
             profile_id="epstein",
+            evidence_ids=["https://example.gov/fixture-record"],
+            source_quotes={"https://example.gov/fixture-record": {"quote": "The record identifies the subject."}},
         )
         assert "profile/thread drift" not in capsys.readouterr().err
 
@@ -525,6 +537,8 @@ class TestProfileThreadGuard:
         fid = add_finding(
             "Unowned Thread Target", "s", source_datasets=["web_search"],
             thread_id=902, profile_id="epstein",
+            evidence_ids=["https://example.gov/fixture-record"],
+            source_quotes={"https://example.gov/fixture-record": {"quote": "The record identifies the subject."}},
         )
         assert "profile/thread drift" not in capsys.readouterr().err
         assert fid is not None

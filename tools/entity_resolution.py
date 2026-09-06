@@ -15,6 +15,7 @@ Usage:
 
 import argparse
 import json
+import os
 import re
 import sqlite3
 import sys
@@ -26,7 +27,7 @@ try:
 except ImportError:
     from output_util import add_output_args, write_output
 
-DB_PATH = Path(__file__).parent.parent / "investigation.db"
+DB_PATH = Path(os.environ.get("ITHILDIN_DB_PATH", Path(__file__).parent.parent / "investigation.db"))
 REGISTRY_DB_PATH = Path(__file__).parent.parent / "registry.db"
 
 # Suffixes to strip for normalization (order matters — longest first)
@@ -220,6 +221,24 @@ def _jurisdiction_compatible(a, b):
     return a.strip().lower() == b.strip().lower()
 
 
+def _identity_compatible(row, *, entity_type=None, jurisdiction=None, ein=None):
+    """Apply the same identity guards before every resolution shortcut."""
+    if not _jurisdiction_compatible(jurisdiction, row["jurisdiction"]):
+        return False
+    requested_family = _entity_type_family(entity_type)
+    stored_family = _entity_type_family(row["entity_type"])
+    if requested_family and stored_family and requested_family != stored_family:
+        return False
+    # EIN punctuation is presentation; two known different identifiers are not.
+    if ein and row["ein"]:
+        def normalize(value):
+            return re.sub(r"[^a-z0-9]", "", str(value).casefold())
+
+        if normalize(ein) != normalize(row["ein"]):
+            return False
+    return True
+
+
 def _pick_jurisdiction_match(rows, jurisdiction):
     """Choose the best same-name row given the caller's jurisdiction, or None.
 
@@ -374,7 +393,7 @@ def _record_variant_alias(db, *, canonical, alias, entity_id, entity_type):
         invalidate_cache()
 
 
-def _best_fuzzy_match(db, norm, entity_type, jurisdiction, threshold):
+def _best_fuzzy_match(db, norm, entity_type, jurisdiction, threshold, ein=None):
     """Return (row, score) for the best guard-passing fuzzy match, or None."""
     from rapidfuzz import fuzz, process
 
@@ -392,16 +411,12 @@ def _best_fuzzy_match(db, norm, entity_type, jurisdiction, threshold):
         norm_names.append(cn)
     if not norm_names:
         return None
-    fam = _entity_type_family(entity_type)
     # Pull several so a guard-failing top hit doesn't mask a valid lower one.
     for _cand_norm, score, idx in process.extract(
         norm, norm_names, scorer=fuzz.token_sort_ratio, limit=5, score_cutoff=threshold
     ):
         row = candidates[idx]
-        if not _jurisdiction_compatible(jurisdiction, row["jurisdiction"]):
-            continue
-        cand_fam = _entity_type_family(row["entity_type"])
-        if fam and cand_fam and fam != cand_fam:
+        if not _identity_compatible(row, entity_type=entity_type, jurisdiction=jurisdiction, ein=ein):
             continue
         return (row, score)
     return None
@@ -425,10 +440,13 @@ def _insert_entity(db, name, *, entity_type, jurisdiction, ein, address, status,
         return EntityResolution(cur.lastrowid, "created", name, None)
     except sqlite3.IntegrityError:
         row = db.execute(
-            "SELECT id, name FROM entities WHERE name = ? AND COALESCE(jurisdiction, '') = COALESCE(?, '')",
+            "SELECT id, name, entity_type, jurisdiction, ein FROM entities "
+            "WHERE name = ? AND COALESCE(jurisdiction, '') = COALESCE(?, '')",
             (name, jurisdiction),
         ).fetchone()
-        if row:
+        if row and _identity_compatible(
+            row, entity_type=entity_type, jurisdiction=jurisdiction, ein=ein,
+        ):
             return EntityResolution(row["id"], "exact", row["name"], 100.0)
         raise
 
@@ -478,25 +496,31 @@ def resolve_or_create_entity(
         return EntityResolution(None, None, None, None)
     name = name.strip()
 
-    # 1. Alias table (curated or previously auto-recorded variants).
+    # Alias spelling is not stronger than explicit identity evidence. Resolve
+    # all candidates and apply the same guards used by exact/fuzzy matching.
     if use_aliases:
-        arow = db.execute(
-            "SELECT canonical_name, entity_id FROM name_aliases "
-            "WHERE lower(alias) = lower(?) AND entity_id IS NOT NULL LIMIT 1",
+        alias_rows = db.execute(
+            """SELECT DISTINCT e.id, e.name, e.entity_type, e.jurisdiction,
+                      e.ein, e.address, e.source, e.notes
+               FROM name_aliases a JOIN entities e ON e.id=a.entity_id
+               WHERE lower(a.alias)=lower(?)""",
             (name,),
-        ).fetchone()
-        if arow and arow["entity_id"]:
+        ).fetchall()
+        compatible_aliases = [row for row in alias_rows if _identity_compatible(
+            row, entity_type=entity_type, jurisdiction=jurisdiction, ein=ein,
+        )]
+        if len(compatible_aliases) > 1:
+            raise EntityResolutionAmbiguity(
+                f"Alias {name!r} matches multiple compatible entities; provide a jurisdiction or identifier"
+            )
+        if compatible_aliases:
+            row = compatible_aliases[0]
             if backfill:
-                erow = db.execute(
-                    "SELECT id, name, entity_type, jurisdiction, ein, address, source, notes "
-                    "FROM entities WHERE id = ?",
-                    (arow["entity_id"],),
-                ).fetchone()
-                if erow:
-                    _backfill_entity_scalars(db, erow, entity_type=entity_type,
-                                             jurisdiction=jurisdiction, ein=ein, address=address,
-                                             source=source, notes=notes)
-            return EntityResolution(arow["entity_id"], "alias", arow["canonical_name"], 100.0)
+                _backfill_entity_scalars(
+                    db, row, entity_type=entity_type, jurisdiction=jurisdiction,
+                    ein=ein, address=address, source=source, notes=notes,
+                )
+            return EntityResolution(row["id"], "alias", row["name"], 100.0)
 
     # Identifier-bearing finding targets carry useful context but should never
     # create a second canonical entity whose name includes the identifier.
@@ -514,7 +538,16 @@ def resolve_or_create_entity(
         "FROM entities WHERE name = ?",
         (name,),
     ).fetchall()
-    match = _pick_jurisdiction_match(same_name, jurisdiction)
+    compatible_names = [row for row in same_name if _identity_compatible(
+        row, entity_type=entity_type, jurisdiction=jurisdiction, ein=ein,
+    )]
+    match = _pick_jurisdiction_match(compatible_names, jurisdiction)
+    if same_name and not match and any(
+        _jurisdiction_compatible(jurisdiction, row["jurisdiction"]) for row in same_name
+    ):
+        raise EntityResolutionAmbiguity(
+            f"Entity {name!r} conflicts with a stored entity type or identifier; review its identity before linking"
+        )
     if match:
         if (
             source == "auto:finding"
@@ -533,7 +566,7 @@ def resolve_or_create_entity(
     # 3. Fuzzy normalized match.
     norm = normalize_entity_name(name)
     if threshold <= 100 and len(norm) >= _MIN_FUZZY_LEN:
-        fuzzy = _best_fuzzy_match(db, norm, entity_type, jurisdiction, threshold)
+        fuzzy = _best_fuzzy_match(db, norm, entity_type, jurisdiction, threshold, ein=ein)
         if fuzzy:
             row, score = fuzzy
             if backfill:

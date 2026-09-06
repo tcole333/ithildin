@@ -13,7 +13,10 @@ Usage:
 
 import argparse
 import json
+import os
+import re
 import sqlite3
+import subprocess
 import sys
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
@@ -31,7 +34,7 @@ except ImportError:
 
 PROJECT_ROOT = Path(__file__).parent.parent
 INVESTIGATIONS_DIR = PROJECT_ROOT / "investigations"
-DB_PATH = PROJECT_ROOT / "investigation.db"
+DB_PATH = Path(os.environ.get("ITHILDIN_DB_PATH", PROJECT_ROOT / "investigation.db"))
 PROFILE_DATA_TABLES = (
     "connections",
     "event_timeline",
@@ -134,6 +137,7 @@ def _parse_yaml(path: Path) -> dict:
 
 def load_profile(name: str) -> InvestigationProfile:
     """Load an investigation profile from investigations/<name>/config.yaml."""
+    _validate_profile_name(name)
     config_path = INVESTIGATIONS_DIR / name / "config.yaml"
     if not config_path.exists():
         raise FileNotFoundError(f"Investigation profile not found: {config_path}")
@@ -244,8 +248,18 @@ def _reconcile_profile_catalog(
     return profile_ids
 
 
+def _validate_profile_name(name: str) -> str:
+    """Accept a profile identifier, never a filesystem path or empty pin."""
+    if not isinstance(name, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]*", name):
+        raise ValueError(f"Invalid investigation profile identifier: {name!r}")
+    return name
+
+
 def get_active_profile_name() -> str:
-    """Get the name of the active investigation profile from DB."""
+    """Read a task's pinned profile before the interactive shared default."""
+    pinned = os.environ.get("ITHILDIN_PROFILE")
+    if pinned is not None:
+        return _validate_profile_name(pinned)
     db = _get_read_db()
     row = db.execute(
         "SELECT value FROM investigation_config WHERE key = 'active_profile'"
@@ -264,6 +278,36 @@ def get_active_profile_name() -> str:
     return ""
 
 
+def task_environment(profile_id=None, db_path=None, *, environ=None) -> dict[str, str]:
+    """Capture context once for a task and all of its child processes.
+
+    Callers pass this environment to subprocesses instead of changing the
+    shared interactive default. A later `set` in another task cannot change it.
+    """
+    environment = dict(os.environ if environ is None else environ)
+    selected_profile = profile_id or environment.get("ITHILDIN_PROFILE")
+    selected_db = Path(db_path or environment.get("ITHILDIN_DB_PATH") or DB_PATH).expanduser()
+    if not selected_profile:
+        # Resolve a custom database's default without opening the live database
+        # or initializing a missing database as a side effect of launching work.
+        if selected_db.exists():
+            with sqlite3.connect(f"{selected_db.resolve().as_uri()}?mode=ro", uri=True) as db:
+                try:
+                    row = db.execute(
+                        "SELECT value FROM investigation_config WHERE key='active_profile'"
+                    ).fetchone()
+                except sqlite3.OperationalError as exc:
+                    if "no such table" not in str(exc):
+                        raise
+                    row = None
+            selected_profile = row[0] if row else None
+    if not selected_profile:
+        raise ValueError("A task requires --profile or ITHILDIN_PROFILE")
+    environment["ITHILDIN_PROFILE"] = _validate_profile_name(selected_profile)
+    environment["ITHILDIN_DB_PATH"] = str(selected_db.expanduser().resolve())
+    return environment
+
+
 def get_active_profile_id() -> str:
     """Get the active profile ID (name). Convenience alias for get_active_profile_name()."""
     return get_active_profile_name()
@@ -280,6 +324,7 @@ def get_active_profile() -> InvestigationProfile:
 
 def set_active_profile(name: str):
     """Set the active investigation profile in DB."""
+    _validate_profile_name(name)
     config_path = INVESTIGATIONS_DIR / name / "config.yaml"
     if not config_path.exists():
         raise FileNotFoundError(f"Investigation profile not found: {config_path}")
@@ -472,6 +517,11 @@ def main():
 
     sub.add_parser("list", help="List available investigation profiles")
 
+    run_p = sub.add_parser("run", help="Run a task with an immutable profile/database context")
+    run_p.add_argument("--profile", help="Profile to pin; defaults to the selected database's current profile")
+    run_p.add_argument("--db", type=Path, help="Investigation database inherited by every child command")
+    run_p.add_argument("argv", nargs=argparse.REMAINDER, help="Command and arguments after --")
+
     args = parser.parse_args()
 
     if args.command == "show":
@@ -480,6 +530,15 @@ def main():
         cmd_set(args)
     elif args.command == "list":
         cmd_list(args)
+    elif args.command == "run":
+        command = args.argv[1:] if args.argv[:1] == ["--"] else args.argv
+        if not command:
+            parser.error("run requires a command after --")
+        try:
+            environment = task_environment(args.profile, args.db)
+        except ValueError as exc:
+            parser.error(str(exc))
+        raise SystemExit(subprocess.run(command, env=environment, check=False).returncode)
     else:
         parser.print_help()
 

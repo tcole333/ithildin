@@ -20,6 +20,7 @@ def _verification_db(monkeypatch, tmp_path):
         CREATE TABLE findings (
             id INTEGER PRIMARY KEY,
             claim_type TEXT DEFAULT 'inference',
+            confidence TEXT DEFAULT 'medium',
             source_datasets TEXT DEFAULT '["courtlistener"]',
             verification_status TEXT,
             verified_by TEXT,

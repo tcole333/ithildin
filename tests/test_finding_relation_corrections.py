@@ -17,20 +17,6 @@ def findings_db(tmp_path, monkeypatch):
     monkeypatch.setattr(findings_tracker, "DB_PATH", path)
     monkeypatch.setattr(findings_tracker, "_schema_initialized", False)
     db = lead_tracker.get_db()
-    db.executescript(
-        """
-        CREATE TABLE finding_relations (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            from_finding_id INTEGER NOT NULL REFERENCES findings(id),
-            to_finding_id INTEGER NOT NULL REFERENCES findings(id),
-            relation_type TEXT NOT NULL,
-            assessment TEXT,
-            created_by TEXT,
-            created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-            UNIQUE (from_finding_id, to_finding_id, relation_type)
-        );
-        """
-    )
     db.commit()
     db.close()
     return path
@@ -41,6 +27,8 @@ def _add_finding(summary):
         target_name="Correction Target",
         summary=summary,
         source_datasets=["courtlistener"],
+        evidence_ids=["COURTLISTENER:fixture-record"],
+        source_quotes={"COURTLISTENER:fixture-record": {"quote": "The record identifies the subject."}},
         profile_id="test",
     )
 
@@ -124,6 +112,8 @@ def test_add_emits_machine_readable_created_id(
         "--target", "Concurrent Target",
         "--summary", "Created without assuming the next ID",
         "--sources", "courtlistener",
+        "--evidence", "COURTLISTENER:fixture-record",
+        "--source-quote", "COURTLISTENER:fixture-record:The record identifies the subject.",
         "--profile", "test",
     ]
     output_path = tmp_path / "created.json"
