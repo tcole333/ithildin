@@ -1,10 +1,11 @@
 ---
+import { contentRoot } from '../../lib/contentPaths';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { readFileSync, existsSync, readdirSync } from 'fs';
 import { resolve, basename } from 'path';
 
 export function getStaticPaths() {
-  const modelsDir = resolve(process.cwd(), '..', 'content', 'models');
+  const modelsDir = resolve(contentRoot(), 'models');
   if (!existsSync(modelsDir)) return [];
 
   return readdirSync(modelsDir)
@@ -13,7 +14,7 @@ export function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-const modelsDir = resolve(process.cwd(), '..', 'content', 'models');
+const modelsDir = resolve(contentRoot(), 'models');
 const modelPath = resolve(modelsDir, `${slug}.json`);
 
 let model: any = null;
@@ -25,7 +26,7 @@ if (!model) {
   return Astro.redirect('/models');
 }
 
-const backlinksPath = resolve(process.cwd(), '..', 'content', 'backlinks.json');
+const backlinksPath = resolve(contentRoot(), 'backlinks.json');
 let referencedDossiers: any[] = [];
 if (existsSync(backlinksPath)) {
   const backlinks = JSON.parse(readFileSync(backlinksPath, 'utf-8'));

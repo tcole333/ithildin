@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "test:e2e": "playwright test",
+    "test:frontend:browser": "node scripts/test-search-modal.mjs",
     "test:citations": "node scripts/test-citations.mjs",
     "test:citations:snapshots": "node scripts/test-citation-snapshots.mjs",
     "test:citations:build": "node scripts/test-citation-build.mjs",
@@ -22,8 +23,13 @@
     "fix:citation-health": "node scripts/check-citation-health.mjs --fix",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "npm run lint:citations && npm run test:citations && npm run test:citations:snapshots && npm run build && npm run test:citations:build && npx wrangler pages deploy dist/ --project-name=ithildin --branch=main --commit-dirty=true",
-    "deploy:preview": "npm run lint:citations && npm run test:citations && npm run test:citations:snapshots && npm run build && npm run test:citations:build && npx wrangler pages deploy dist/ --project-name=ithildin --branch=preview --commit-dirty=true"
+    "deploy": "node scripts/deploy-validated.mjs --branch main",
+    "deploy:preview": "node scripts/deploy-validated.mjs --branch preview",
+    "check": "astro check",
+    "test:frontend": "npm run test:citations && npm run test:citations:snapshots && npm run test:changed-content && npm run test:support-spans && node scripts/test-frontend-contracts.mjs && node scripts/test-content-selection.mjs && node scripts/test-publication-checks.mjs && node scripts/test-source-catalog-selection.mjs",
+    "prebuild": "node scripts/prepare-content.mjs",
+    "predev": "node scripts/prepare-content.mjs",
+    "release:validate": "cd .. && uv run --locked python scripts/validate_release.py validate"
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
@@ -44,6 +50,11 @@
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
-    "@playwright/test": "^1.58.2"
+    "@playwright/test": "^1.58.2",
+    "playwright": "1.58.2",
+    "@astrojs/check": "0.9.8",
+    "typescript": "5.9.3",
+    "jiti": "2.6.1",
+    "esbuild": "0.27.3"
   }
 }

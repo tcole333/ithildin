@@ -29,12 +29,14 @@ export function initSupportMode(options: SupportModeOptions = {}): void {
   const rootSelector = options.rootSelector || "[data-evidence-page]";
   const defaultMapScriptId = options.defaultMapScriptId || "support-map-data";
 
-  const root = document.querySelector<HTMLElement>(rootSelector);
-  if (!root) return;
+  const candidateRoot = document.querySelector<HTMLElement>(rootSelector);
+  if (!candidateRoot) return;
+  const root: HTMLElement = candidateRoot;
   if (root.dataset.supportModeInitialized === "true") return;
 
-  const supportMap = readSupportMap(root, defaultMapScriptId);
-  if (!supportMap) return;
+  const candidateMap = readSupportMap(root, defaultMapScriptId);
+  if (!candidateMap) return;
+  const supportMap: SupportMap = candidateMap;
 
   const toggle = root.querySelector<HTMLInputElement>("[data-evidence-mode-toggle]");
   if (!toggle) return;

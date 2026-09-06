@@ -7,9 +7,14 @@ import json
 import re
 from pathlib import Path
 
+try:
+    from .paths import CONTENT_DIR
+except ImportError:  # Direct CLI execution
+    from paths import CONTENT_DIR
+
 
 ROOT = Path(__file__).resolve().parents[1]
-DOSSIERS_DIR = ROOT / "content" / "dossiers"
+DOSSIERS_DIR = CONTENT_DIR / "dossiers"
 INDEX_PATH = DOSSIERS_DIR / "_index.json"
 REDIRECTS_PATH = DOSSIERS_DIR / "_redirects.json"
 

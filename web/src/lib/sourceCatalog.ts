@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { basename, resolve } from "node:path";
+import { contentRoot } from "./contentPaths";
 import {
   applyCitations,
   createCitationState,
@@ -112,7 +113,7 @@ function collectSourceEntries(markdown: string, findingEvidenceMap: Record<strin
 }
 
 function scanArticles(catalog: CatalogMap): void {
-  const articlesDir = resolve(process.cwd(), "..", "content", "articles");
+  const articlesDir = resolve(contentRoot(), "articles");
   if (!existsSync(articlesDir)) return;
 
   const articleFiles = readdirSync(articlesDir).filter((file) => file.endsWith(".mdx"));
@@ -172,7 +173,7 @@ function scanArticles(catalog: CatalogMap): void {
 }
 
 function scanDossiers(catalog: CatalogMap): void {
-  const dossiersDir = resolve(process.cwd(), "..", "content", "dossiers");
+  const dossiersDir = resolve(contentRoot(), "dossiers");
   if (!existsSync(dossiersDir)) return;
 
   const dossierFiles = readdirSync(dossiersDir).filter((file) => file.endsWith(".json") && !file.startsWith("_"));
@@ -206,7 +207,7 @@ function scanDossiers(catalog: CatalogMap): void {
       }
     }
 
-    for (const finding of dossier?.findings || []) {
+    for (const finding of [...(dossier?.findings || []), ...(dossier?.citation_findings || [])]) {
       for (const ev of finding?.evidence || []) {
         const records = extractEvidenceSourceRecords(ev.evidence_ref || "", { findingEvidenceMap });
         for (const record of records) {

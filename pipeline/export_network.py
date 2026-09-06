@@ -13,8 +13,13 @@ import sqlite3
 import sys
 from pathlib import Path
 
-DB_PATH = Path(__file__).parent.parent / "investigation.db"
-OUTPUT_PATH = Path(__file__).parent.parent / "content" / "network.json"
+try:
+    from .paths import CONTENT_DIR, DB_PATH
+except ImportError:  # Direct CLI execution
+    from paths import CONTENT_DIR, DB_PATH
+
+
+OUTPUT_PATH = CONTENT_DIR / "network.json"
 
 # Add tools to path for name_resolver
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -55,223 +60,133 @@ def _resolve_node_id(name: str, aliases: dict, entity_id_map: dict[str, str]) ->
     return name
 
 
-def export_network(db_path: str | Path = DB_PATH) -> dict:
-    conn = sqlite3.connect(str(db_path))
+def export_network(db_path: str | Path = DB_PATH, *, include_unverified: bool = False,
+                   profile_id: str | None = None) -> dict:
+    """Project distinct claims, retaining their verification and source ownership.
+
+    Public graphs use the same current-evidence gate as dossiers. Raw entity
+    roles/relations have no verification lifecycle and are research-only; their
+    presence in a registry table does not make them verified claims.
+    """
+    from tools.findings_tracker import validate_connection_publication
+
+    conn = sqlite3.connect(f"file:{Path(db_path).resolve()}?mode=ro", uri=True)
     conn.row_factory = sqlite3.Row
-
-    aliases = _load_aliases(conn)
-
-    nodes = {}  # id -> node dict
-    edges = []
-
-    # 2. Build entity nodes first (so entity_as_person routing has targets)
-    entity_rows = conn.execute(
-        """
-        SELECT e.id, e.name, e.entity_type, e.jurisdiction, e.status
-        FROM entities e
-        ORDER BY e.name
-        """
-    ).fetchall()
-
-    entity_id_map = {}  # entity name -> "entity:N"
-    for row in entity_rows:
-        eid = f"entity:{row['id']}"
-        entity_id_map[row["name"].lower()] = eid
-        nodes[eid] = {
-            "id": eid,
-            "name": row["name"],
-            "slug": slugify(row["name"]),
-            "type": "entity",
-            "entity_type": row["entity_type"],
-            "jurisdiction": row["jurisdiction"],
-            "status": row["status"],
-            "connections": 0,
+    try:
+        aliases = _load_aliases(conn)
+        entity_rows = conn.execute(
+            "SELECT id, name, entity_type, jurisdiction, status FROM entities ORDER BY id"
+        ).fetchall()
+        entity_id_map = {row["name"].lower(): f"entity:{row['id']}" for row in entity_rows}
+        nodes = {
+            f"entity:{row['id']}": {
+                "id": f"entity:{row['id']}", "name": row["name"],
+                "slug": slugify(row["name"]), "type": "entity",
+                "entity_type": row["entity_type"], "jurisdiction": row["jurisdiction"],
+                "status": row["status"], "connections": 0,
+            } for row in entity_rows
         }
+        edges: list[dict] = []
 
-    # 1. Build person nodes from connections table (with alias resolution)
-    conn_rows = conn.execute(
-        """
-        SELECT id, person_a, person_b, relationship_type, description,
-               strength, date_range, verification_status, profile_id
-        FROM connections
-        WHERE verification_status != 'retracted'
-        ORDER BY id
-        """
-    ).fetchall()
+        def add_edge(edge: dict) -> None:
+            if edge["source"] == edge["target"]:
+                return
+            for node_id in (edge["source"], edge["target"]):
+                if node_id not in nodes:
+                    nodes[node_id] = {"id": node_id, "name": node_id,
+                                      "slug": slugify(node_id), "type": "person",
+                                      "connections": 0}
+                nodes[node_id]["connections"] += 1
+            edges.append(edge)
 
-    for row in conn_rows:
-        resolved_a = _resolve_node_id(row["person_a"], aliases, entity_id_map)
-        resolved_b = _resolve_node_id(row["person_b"], aliases, entity_id_map)
+        predicate = ("COALESCE(verification_status, 'unverified') != 'retracted'"
+                     if include_unverified else "verification_status = 'verified'")
+        scope = " AND profile_id = ?" if profile_id else ""
+        rows = conn.execute(
+            f"SELECT * FROM connections WHERE {predicate}{scope} ORDER BY id",
+            (profile_id,) if profile_id else (),
+        ).fetchall()
+        for row in rows:
+            if not include_unverified:
+                try:
+                    validate_connection_publication(conn, row)
+                except ValueError:
+                    continue
+            evidence = [dict(item) for item in conn.execute(
+                "SELECT evidence_type, evidence_ref, source_quote, source_page, assessment "
+                "FROM connection_evidence WHERE connection_id=? ORDER BY evidence_ref",
+                (row["id"],),
+            )]
+            add_edge({
+                "id": f"connection:{row['id']}", "connection_id": row["id"],
+                "source": _resolve_node_id(row["person_a"], aliases, entity_id_map),
+                "target": _resolve_node_id(row["person_b"], aliases, entity_id_map),
+                "relationship_type": row["relationship_type"],
+                "description": row["description"], "strength": row["strength"],
+                "date_range": row["date_range"],
+                "verification_status": row["verification_status"] or "unverified",
+                "verified": row["verification_status"] == "verified",
+                "profile_ids": [row["profile_id"]] if row["profile_id"] else [],
+                "finding_id": row["finding_id"], "evidence": evidence,
+            })
 
-        for node_id in [resolved_a, resolved_b]:
-            if node_id not in nodes:
-                # Determine display name: use canonical or original
-                entry = aliases.get(row["person_a"].lower()) if node_id == resolved_a else aliases.get(row["person_b"].lower())
-                display_name = entry[0] if entry else node_id
-                nodes[node_id] = {
-                    "id": node_id,
-                    "slug": slugify(display_name),
-                    "type": "person",
-                    "connections": 0,
-                }
-            nodes[node_id]["connections"] += 1
+        # A scoped view has no evidence that a global structural claim belongs
+        # to that profile. Keep this optional overlay only in global research.
+        if include_unverified and not profile_id:
+            for row in conn.execute("SELECT er.*, e.name AS entity_name FROM entity_roles er "
+                                    "JOIN entities e ON e.id=er.entity_id ORDER BY er.id"):
+                add_edge({
+                    "id": f"entity_role:{row['id']}",
+                    "source": _resolve_node_id(row["person_name"], aliases, entity_id_map),
+                    "target": f"entity:{row['entity_id']}", "relationship_type": "corporate",
+                    "description": f"{row['role']} of {row['entity_name']}",
+                    "strength": "unknown", "date_range": f"{row['date_start'] or '?'} - {row['date_end'] or '?'}",
+                    "verification_status": "unverified", "verified": False, "profile_ids": [],
+                    "evidence": [{"evidence_ref": row["source"]}] if row["source"] else [],
+                })
+            for row in conn.execute("SELECT * FROM entity_relations ORDER BY id"):
+                add_edge({
+                    "id": f"entity_relation:{row['id']}",
+                    "source": f"entity:{row['entity_a_id']}", "target": f"entity:{row['entity_b_id']}",
+                    "relationship_type": row["relation_type"], "description": row["description"],
+                    "strength": "unknown", "verification_status": "unverified", "verified": False,
+                    "profile_ids": [],
+                    "evidence": [{"evidence_ref": row["source"]}] if row["source"] else [],
+                })
 
-        # Skip self-loops (can happen when aliases merge two names)
-        if resolved_a == resolved_b:
-            continue
-
-        edges.append({
-            "source": resolved_a,
-            "target": resolved_b,
-            "relationship_type": row["relationship_type"],
-            "description": row["description"],
-            "strength": row["strength"],
-            "date_range": row["date_range"],
-            "verified": row["verification_status"] == "verified",
-            "profile_ids": [row["profile_id"]] if row["profile_id"] else [],
-        })
-
-    # 3. Add entity_roles edges (person -> entity) with alias resolution
-    role_rows = conn.execute(
-        """
-        SELECT er.entity_id, er.person_name, er.role, er.date_start, er.date_end,
-               e.name as entity_name
-        FROM entity_roles er
-        JOIN entities e ON er.entity_id = e.id
-        """
-    ).fetchall()
-
-    for row in role_rows:
-        entity_id = f"entity:{row['entity_id']}"
-        person = _resolve_node_id(row["person_name"], aliases, entity_id_map)
-
-        if person not in nodes:
-            entry = aliases.get(row["person_name"].lower())
-            display_name = entry[0] if entry else row["person_name"]
-            nodes[person] = {
-                "id": person,
-                "slug": slugify(display_name),
-                "type": "person",
-                "connections": 0,
-            }
-
-        # Skip self-loops (person resolved to this entity)
-        if person == entity_id:
-            continue
-
-        nodes[person]["connections"] += 1
-        if entity_id in nodes:
-            nodes[entity_id]["connections"] += 1
-
-        edges.append({
-            "source": person,
-            "target": entity_id,
-            "relationship_type": "corporate",
-            "description": f"{row['role']} of {row['entity_name']}",
-            "strength": "strong",
-            "date_range": f"{row['date_start'] or '?'} - {row['date_end'] or 'present'}",
-            "verified": True,
-            "profile_ids": [],
-        })
-
-    # 4. Add entity_relations edges (entity -> entity)
-    rel_rows = conn.execute(
-        """
-        SELECT er.entity_a_id, er.entity_b_id, er.relation_type, er.description,
-               ea.name as entity_a_name, eb.name as entity_b_name
-        FROM entity_relations er
-        JOIN entities ea ON er.entity_a_id = ea.id
-        JOIN entities eb ON er.entity_b_id = eb.id
-        """
-    ).fetchall()
-
-    for row in rel_rows:
-        source = f"entity:{row['entity_a_id']}"
-        target = f"entity:{row['entity_b_id']}"
-
-        if source in nodes:
-            nodes[source]["connections"] += 1
-        if target in nodes:
-            nodes[target]["connections"] += 1
-
-        edges.append({
-            "source": source,
-            "target": target,
-            "relationship_type": row["relation_type"],
-            "description": row["description"],
-            "strength": "strong",
-            "verified": True,
-            "profile_ids": [],
-        })
-
-    # 5. Add finding counts (resolve target names through aliases)
-    finding_counts = conn.execute(
-        """
-        SELECT target_name, COUNT(*) as cnt
-        FROM findings
-        WHERE verification_status != 'retracted'
-        GROUP BY target_name
-        """
-    ).fetchall()
-
-    for row in finding_counts:
-        resolved = _resolve_node_id(row["target_name"], aliases, entity_id_map)
-        if resolved in nodes:
-            nodes[resolved]["finding_count"] = nodes[resolved].get("finding_count", 0) + row["cnt"]
-
-    conn.close()
-
-    # Deduplicate edges (same source+target pair)
-    edge_map: dict[tuple, dict] = {}
-    for edge in edges:
-        key = (edge["source"], edge["target"])
-        rev_key = (edge["target"], edge["source"])
-        # Use canonical direction
-        if rev_key in edge_map and key not in edge_map:
-            key = rev_key
-        if key in edge_map:
-            existing = edge_map[key]
-            # Merge: keep strongest strength, combine descriptions
-            strength_order = ["strong", "medium", "weak", "circumstantial"]
-            if strength_order.index(edge.get("strength", "medium")) < strength_order.index(existing.get("strength", "medium")):
-                existing["strength"] = edge["strength"]
-            existing["verified"] = existing.get("verified", False) or edge.get("verified", False)
-            # Merge profile_ids
-            merged = set(existing.get("profile_ids", []))
-            merged.update(edge.get("profile_ids", []))
-            existing["profile_ids"] = sorted(merged)
-        else:
-            edge_map[key] = edge
-
-    deduped_edges = list(edge_map.values())
-
-    # Build output
-    node_list = sorted(nodes.values(), key=lambda n: n.get("connections", 0), reverse=True)
-    for node in node_list:
-        if node["type"] == "entity" and "name" not in node:
-            node["name"] = node["id"]
-        elif node["type"] == "person":
-            node["name"] = node["id"]
-
-    return {
-        "nodes": node_list,
-        "edges": deduped_edges,
-        "stats": {
-            "total_nodes": len(node_list),
-            "person_nodes": sum(1 for n in node_list if n["type"] == "person"),
-            "entity_nodes": sum(1 for n in node_list if n["type"] == "entity"),
-            "total_edges": len(deduped_edges),
-        },
-    }
+        finding_counts = conn.execute(
+            f"SELECT target_name, COUNT(*) AS cnt FROM findings WHERE {predicate}{scope} GROUP BY target_name",
+            (profile_id,) if profile_id else (),
+        )
+        for row in finding_counts:
+            node_id = _resolve_node_id(row["target_name"], aliases, entity_id_map)
+            if node_id in nodes:
+                nodes[node_id]["finding_count"] = nodes[node_id].get("finding_count", 0) + row["cnt"]
+        node_list = sorted((node for node in nodes.values() if node["connections"]),
+                           key=lambda node: (-node["connections"], node["id"]))
+        return {
+            "schema_version": 2,
+            "export_options": {"include_unverified": include_unverified, "profile_id": profile_id},
+            "nodes": node_list, "edges": edges,
+            "stats": {"total_nodes": len(node_list),
+                      "person_nodes": sum(node["type"] == "person" for node in node_list),
+                      "entity_nodes": sum(node["type"] == "entity" for node in node_list),
+                      "total_edges": len(edges)},
+        }
+    finally:
+        conn.close()
 
 
 def main():
     parser = argparse.ArgumentParser(description="Export network graph from investigation.db")
     parser.add_argument("--output", type=Path, default=OUTPUT_PATH)
     parser.add_argument("--stats-only", action="store_true")
+    parser.add_argument("--db", type=Path, default=DB_PATH)
+    parser.add_argument("--profile", help="Restrict to one investigation profile")
+    parser.add_argument("--include-unverified", action="store_true", help="Research export; still excludes retracted claims")
     args = parser.parse_args()
 
-    network = export_network()
+    network = export_network(args.db, include_unverified=args.include_unverified, profile_id=args.profile)
 
     if args.stats_only:
         print(json.dumps(network["stats"], indent=2))

@@ -11,8 +11,13 @@ import re
 import sqlite3
 from pathlib import Path
 
-DB_PATH = Path(__file__).parent.parent / "investigation.db"
-OUTPUT_DIR = Path(__file__).parent.parent / "content"
+try:
+    from .paths import CONTENT_DIR, DB_PATH
+except ImportError:  # Direct CLI execution
+    from paths import CONTENT_DIR, DB_PATH
+
+
+OUTPUT_DIR = CONTENT_DIR
 
 # Evidence reference classification patterns — order matters (first match wins)
 SOURCE_TYPE_PATTERNS = [

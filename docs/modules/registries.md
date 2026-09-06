@@ -158,8 +158,9 @@ uv run python tools/query_california.py search "APPLE" --limit 25 --output "$WOR
 uv run python tools/query_california.py search C0726332 --by-number --limit 5 --output "$WORKDIR/ca-number.json"
 ```
 
-The helper requires Node.js, `playwright` or `playwright-core`, and installed
-Google Chrome. It launches one bounded operation per process and closes Chrome
+The helper requires Node.js and installed Google Chrome. From the repository
+root, run `npm --prefix web ci` to install the declared Playwright dependency.
+It launches one bounded operation per process and closes Chrome
 afterward; it does not attach to an MCP/Codex browser or start a daemon. Headless
 mode is not supported by the verified path because Imperva returns 403. Advanced
 filters, entity detail, history, and ingestion currently fail explicitly until
@@ -183,10 +184,11 @@ uv run python tools/query_nevada.py search "APOLLO" --limit 25 --output /tmp/nv-
 uv run python tools/query_nevada.py entity E0125332010-5 --output /tmp/nv-entity.json
 ```
 
-The helper requires Node.js, the `playwright` or `playwright-core` package, and
-Google Chrome by default. `runtime-check` reports actionable installation errors
+The helper requires Node.js and Google Chrome by default. Install the declared
+Playwright dependency with `npm --prefix web ci` from the repository root.
+`runtime-check` reports actionable installation errors
 without opening a browser. Set `NV_BROWSER_CHANNEL=chromium` only after installing
-the Playwright browser with `npx playwright install chromium`.
+the Playwright browser with `npm --prefix web exec -- playwright install chromium`.
 
 ## Known Quirks
 

@@ -1,0 +1,36 @@
+name: Web Checks
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  web-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.11"
+      - run: npm ci
+        working-directory: web
+      - run: npm run check
+        working-directory: web
+      - run: npm run test:frontend
+        working-directory: web
+      - run: npx playwright install --with-deps chromium
+        working-directory: web
+      - run: npm run test:frontend:browser
+        working-directory: web
+      - run: PUBLIC_ENABLE_EVIDENCE_MODE=false npm run build
+        working-directory: web
+      - run: npm run test:citations:build
+        working-directory: web

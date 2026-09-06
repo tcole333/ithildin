@@ -10,8 +10,13 @@ import json
 import sys
 from pathlib import Path
 
-DOSSIER_DIR = Path(__file__).parent.parent / "content" / "dossiers"
-OUTPUT_DIR = Path(__file__).parent.parent / "content" / "agent-context"
+try:
+    from .paths import CONTENT_DIR
+except ImportError:  # Direct CLI execution
+    from paths import CONTENT_DIR
+
+DOSSIER_DIR = CONTENT_DIR / "dossiers"
+OUTPUT_DIR = CONTENT_DIR / "agent-context"
 
 
 def export_context(dossier: dict) -> str:

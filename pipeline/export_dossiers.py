@@ -11,6 +11,11 @@ import re
 import sqlite3
 import sys
 from pathlib import Path
+
+try:
+    from .paths import CONTENT_DIR, DB_PATH
+except ImportError:  # Direct CLI execution
+    from paths import CONTENT_DIR, DB_PATH
 from datetime import datetime, timezone
 
 try:
@@ -19,8 +24,8 @@ except ImportError:
     # Allows importing when executed as a package module.
     from .evidence_refs import canonicalize_evidence_rows
 
-DB_PATH = Path(__file__).parent.parent / "investigation.db"
-OUTPUT_DIR = Path(__file__).parent.parent / "content" / "dossiers"
+
+OUTPUT_DIR = CONTENT_DIR / "dossiers"
 CITED_FINDING_RE = re.compile(r"Finding\s*#?\s*(\d+)", re.IGNORECASE)
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -233,10 +238,20 @@ def _can_skip_incremental(existing: dict, dossier: dict,
         return False
     if export_options.get("include_unverified") is not include_unverified:
         return False
+    if export_options != dossier.get("export_options"):
+        # The same first-hop membership can still produce different second-hop
+        # results when the requested investigation scope changes.
+        return False
     if _record_membership(existing) != _record_membership(dossier):
         # This catches verified/retracted transitions even when created_at is
         # older than the dossier already on disk.
         return False
+
+    # A correction can change prose/evidence without advancing created_at or
+    # verified_at. Compare the exported payload, not only membership/timestamps.
+    for key in ("findings", "connections", "citation_findings", "entities", "timeline", "stats"):
+        if existing.get(key) != dossier.get(key):
+            return False
 
     existing_last = _parse_datetime(
         existing.get("last_updated") or existing.get("generated_at")
@@ -477,6 +492,7 @@ def export_target(conn: sqlite3.Connection, canonical_name: str, all_names: list
         "last_updated": last_updated_str,
         "export_options": {
             "include_unverified": include_unverified,
+            "profile_id": profile_id,
         },
         "stats": {
             "total_findings": len(findings),
@@ -708,6 +724,8 @@ def main():
         )
         if existing_curation:
             dossier["curation"] = existing_curation
+        if isinstance(existing, dict) and isinstance(existing.get("viz_data"), dict):
+            dossier["viz_data"] = existing["viz_data"]
         dossier["citation_findings"] = load_citation_findings(
             conn, dossier.get("curation")
         )
@@ -743,7 +761,7 @@ def main():
 
     # Write index — merge into existing when exporting single targets
     index_path = args.output_dir / "_index.json"
-    if args.target and index_path.exists():
+    if (args.target or resolved_profile is not None) and index_path.exists():
         try:
             existing_index = json.loads(index_path.read_text())
         except (json.JSONDecodeError, TypeError):
@@ -759,7 +777,7 @@ def main():
 
     # Write redirects — merge into existing when exporting single targets
     redirects_path = args.output_dir / "_redirects.json"
-    if args.target and redirects_path.exists():
+    if (args.target or resolved_profile is not None) and redirects_path.exists():
         try:
             existing_redirects = json.loads(redirects_path.read_text())
         except (json.JSONDecodeError, TypeError):
@@ -789,6 +807,7 @@ def main():
         result = subprocess.run(curate_args)
         if result.returncode != 0:
             print("  Curation pipeline failed", file=sys.stderr)
+            raise SystemExit(result.returncode)
 
 
 if __name__ == "__main__":

@@ -1,4 +1,5 @@
 ---
+import { contentRoot } from '../../lib/contentPaths';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import FindingCard from '../../components/FindingCard.astro';
 import EgoNetwork from '../../components/EgoNetwork';
@@ -13,7 +14,7 @@ import { loadDossierFindingCatalog, loadGlobalFindingCatalog, mergeFindingCatalo
 import { extractCitedFindingIds, buildDossierFindingDetailMap } from '../../lib/findingDetail';
 
 export function getStaticPaths() {
-  const contentDir = resolve(process.cwd(), '..', 'content', 'dossiers');
+  const contentDir = resolve(contentRoot(), 'dossiers');
   if (!existsSync(contentDir)) return [];
 
   const paths: { params: { slug: string } }[] = [];
@@ -37,7 +38,7 @@ export function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-const contentDir = resolve(process.cwd(), '..', 'content', 'dossiers');
+const contentDir = resolve(contentRoot(), 'dossiers');
 
 const redirectsPath = resolve(contentDir, '_redirects.json');
 let redirectTarget: string | null = null;
@@ -63,14 +64,14 @@ if (!dossier) {
   return Astro.redirect('/dossiers');
 }
 
-const investigationsPath = resolve(process.cwd(), '..', 'content', 'investigations.json');
+const investigationsPath = resolve(contentRoot(), 'investigations.json');
 let investigationsData: Array<{ id: string; name: string; description: string; color: string }> = [];
 if (existsSync(investigationsPath)) {
   investigationsData = JSON.parse(readFileSync(investigationsPath, 'utf-8'));
 }
 const invById = new Map(investigationsData.map(i => [i.id, i]));
 
-const backlinksPath = resolve(process.cwd(), '..', 'content', 'backlinks.json');
+const backlinksPath = resolve(contentRoot(), 'backlinks.json');
 let relatedDossiers: any[] = [];
 let relatedArticles: any[] = [];
 let applicableModels: any[] = [];

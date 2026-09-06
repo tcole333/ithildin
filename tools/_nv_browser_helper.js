@@ -46,7 +46,10 @@ function loadChromium() {
 
     for (const moduleName of candidates) {
         try {
-            const loaded = require(moduleName);
+            const resolved = override ? moduleName : require.resolve(moduleName, {
+                paths: [path.join(__dirname, '..', 'web'), __dirname],
+            });
+            const loaded = require(resolved);
             if (!loaded.chromium) {
                 failures.push(`${moduleName}: module has no chromium export`);
                 continue;
@@ -58,7 +61,7 @@ function loadChromium() {
     }
 
     throw new RuntimeDependencyError(
-        'Playwright runtime not found. Install with: npm install playwright ' +
+        'Playwright runtime not found. Install from the repository root with: npm --prefix web ci ' +
         `(checked ${candidates.join(', ')}; ${failures.join('; ')})`
     );
 }

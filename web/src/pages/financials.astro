@@ -1,11 +1,12 @@
 ---
+import { contentRoot } from '../lib/contentPaths';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SankeyDiagram from '../components/SankeyDiagram';
 import FinancialWorkbench from '../components/FinancialWorkbench';
 import { readFileSync, existsSync } from 'fs';
 import { resolve } from 'path';
 
-const contentDir = resolve(process.cwd(), '..', 'content', 'financials');
+const contentDir = resolve(contentRoot(), 'financials');
 
 type ModelFinding = {
   id: number;
@@ -121,7 +122,7 @@ const modelWithFindings = sankeyModels.find(m => m.findings && m.findings.length
 const findingCards = (modelWithFindings?.findings || []).slice(0, 6);
 
 const ds10Data = loadJson<DS10Data>('ds10-flows.json');
-const dossierIndexPath = resolve(process.cwd(), '..', 'content', 'dossiers', '_index.json');
+const dossierIndexPath = resolve(contentRoot(), 'dossiers', '_index.json');
 const dossierIndex = existsSync(dossierIndexPath)
   ? JSON.parse(readFileSync(dossierIndexPath, 'utf-8')) as DossierIndexEntry[]
   : [];

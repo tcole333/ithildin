@@ -11,12 +11,18 @@ Produces backlinks.json consumed by Astro pages at build time:
 import json
 import re
 import sqlite3
-from pathlib import Path
 
-CONTENT_DIR = Path(__file__).parent.parent / "content"
+try:
+    from .article_metadata import load_article
+    from .paths import CONTENT_DIR, DB_PATH
+except ImportError:  # Direct CLI execution
+    from article_metadata import load_article
+    from paths import CONTENT_DIR, DB_PATH
+
+
 DOSSIERS_DIR = CONTENT_DIR / "dossiers"
 ARTICLES_DIR = CONTENT_DIR / "articles"
-DB_PATH = Path(__file__).parent.parent / "investigation.db"
+
 
 
 def load_dossier_index() -> dict[str, dict]:
@@ -57,26 +63,7 @@ def load_articles() -> list[dict]:
         return articles
 
     for mdx_path in sorted(ARTICLES_DIR.glob("*.mdx")):
-        raw = mdx_path.read_text()
-        meta: dict[str, str] = {}
-        content = raw
-
-        fm_match = re.match(r'^---\n([\s\S]*?)\n---', raw)
-        if fm_match:
-            for line in fm_match.group(1).split('\n'):
-                parts = line.split(':', 1)
-                if len(parts) == 2:
-                    meta[parts[0].strip()] = parts[1].strip().strip('"\'')
-            content = raw[fm_match.end():]
-
-        articles.append({
-            "slug": mdx_path.stem,
-            "title": meta.get("title", mdx_path.stem),
-            "cluster": meta.get("cluster", ""),
-            "targets": meta.get("targets", ""),
-            "content": content,
-            "meta": meta,
-        })
+        articles.append(load_article(mdx_path))
 
     return articles
 
@@ -177,7 +164,7 @@ def compute_article_to_dossier(articles: list[dict], dossier_index: dict[str, di
 
         # Also check targets from frontmatter
         if article["targets"]:
-            for target in article["targets"].split(","):
+            for target in article["targets"]:
                 target = target.strip()
                 target_slug = slugify(target)
                 if target_slug in dossier_index and target_slug not in seen_slugs:

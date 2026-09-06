@@ -220,7 +220,21 @@ function buildWaybackLookupUrl(url?: string): string | undefined {
 
 const clOverrides: Record<string, string> = clOverridesData;
 const sourceUrlOverrides: Record<string, string> = sourceUrlOverridesData;
-const manualSourceRecords: Record<string, ManualSourceRecord> = manualSourceRecordsData;
+export function parseManualSourceRecords(value: unknown): Record<string, ManualSourceRecord> {
+  if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("Source records must be an object");
+  for (const [key, record] of Object.entries(value)) {
+    if (!record || typeof record !== "object" || Array.isArray(record)) throw new Error(`Invalid source record: ${key}`);
+    for (const field of ["title", "source_type", "publisher_or_origin", "publication_or_capture_date", "page_or_locator", "excerpt_or_quote", "access_note", "external_url", "hosted_asset_url", "archive_url"]) {
+      if (record[field] !== undefined && typeof record[field] !== "string") throw new Error(`Invalid source record ${key}.${field}`);
+    }
+    if (record.kind !== undefined && !["external", "hosted_copy", "archived_copy", "record_only", "private_internal"].includes(record.kind)) throw new Error(`Invalid source kind: ${key}`);
+    if (record.publish_valid !== undefined && typeof record.publish_valid !== "boolean") throw new Error(`Invalid source publication status: ${key}`);
+    if (record.integrity !== undefined && (!record.integrity || typeof record.integrity !== "object" || Array.isArray(record.integrity))) throw new Error(`Invalid source integrity: ${key}`);
+  }
+  return value as Record<string, ManualSourceRecord>;
+}
+
+const manualSourceRecords = parseManualSourceRecords(manualSourceRecordsData);
 
 function buildPublicRecordSourceUrl(
   domain: "PROPERTY" | "STATECOURT",
@@ -3111,7 +3125,7 @@ export function applyCitations(markdown: string, options: CitationOptions = {}, 
     transformCitationTextNodes(tree, options, citationState, false);
 
     const output = unified()
-      .use(remarkStringify, { allowDangerousHtml: true })
+      .use(remarkStringify)
       .stringify(tree);
 
     return { markdown: output, entries: citationState.entries };

@@ -6,10 +6,16 @@ search-index.json that MiniSearch consumes client-side.
 """
 
 import json
-from pathlib import Path
 
-CONTENT_DIR = Path(__file__).parent.parent / "content"
-OUTPUT_PATH = Path(__file__).parent.parent / "web" / "public" / "content" / "search-index.json"
+try:
+    from .article_metadata import load_article
+    from .paths import CONTENT_DIR, PUBLIC_CONTENT_DIR
+except ImportError:  # Direct CLI execution
+    from article_metadata import load_article
+    from paths import CONTENT_DIR, PUBLIC_CONTENT_DIR
+
+
+OUTPUT_PATH = PUBLIC_CONTENT_DIR / "search-index.json"
 
 
 def _truncate(text: str, max_len: int = 300) -> str:
@@ -81,7 +87,7 @@ def export_dossiers() -> list[dict]:
 
 def export_articles() -> list[dict]:
     article_dir = CONTENT_DIR / "articles"
-    backlinks_path = Path(__file__).parent.parent / "web" / "public" / "content" / "backlinks.json"
+    backlinks_path = CONTENT_DIR / "backlinks.json"
     docs = []
 
     # Load backlinks for article-to-dossier references
@@ -91,21 +97,10 @@ def export_articles() -> list[dict]:
         backlinks = bl_data.get("article_to_dossier", {})
 
     for path in sorted(article_dir.glob("*.mdx")):
-        text = path.read_text()
-
-        # Parse YAML frontmatter
-        fm = {}
-        if text.startswith("---"):
-            end = text.find("---", 3)
-            if end != -1:
-                for line in text[3:end].strip().split("\n"):
-                    if ":" in line:
-                        key, val = line.split(":", 1)
-                        fm[key.strip()] = val.strip().strip('"')
-
-        title = fm.get("title", path.stem)
-        subtitle = fm.get("subtitle", "")
-        slug = fm.get("cluster", path.stem)
+        fm = load_article(path)
+        slug = fm["slug"]
+        title = fm["title"]
+        subtitle = fm["subtitle"]
 
         # Mentioned dossiers from backlinks
         raw_mentioned = backlinks.get(slug, [])

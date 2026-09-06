@@ -5,7 +5,7 @@ import { collectChangedContentFiles } from "./changed-content-files.mjs";
 
 const cwd = process.cwd();
 const projectRoot = resolve(cwd, "..");
-const contentRoot = resolve(projectRoot, "content");
+const contentRoot = resolve(process.env.ITHILDIN_CONTENT_DIR || resolve(projectRoot, "content"));
 const articlesDir = resolve(contentRoot, "articles");
 const dossiersDir = resolve(contentRoot, "dossiers");
 const argv = process.argv.slice(2);
@@ -388,6 +388,9 @@ function isCitationTrackedContent(path) {
 function getChangedContentFiles() {
   if (!changedFilesMode && !strictChangedFiles) {
     return null;
+  }
+  if (contentRoot !== resolve(projectRoot, "content")) {
+    throw new Error("Changed-file citation lint requires the repository content directory; omit --changed-files for selected publication content.");
   }
   return collectChangedContentFiles({
     projectRoot,

@@ -10,13 +10,18 @@ import sys
 from pathlib import Path
 
 try:
+    from .paths import CONTENT_DIR
+except ImportError:  # Direct CLI execution
+    from paths import CONTENT_DIR
+
+try:
     import yaml
 except ImportError:
     print("PyYAML required: uv pip install pyyaml", file=sys.stderr)
     sys.exit(1)
 
 INVESTIGATIONS_DIR = Path(__file__).parent.parent / "investigations"
-OUTPUT_PATH = Path(__file__).parent.parent / "content" / "investigations.json"
+OUTPUT_PATH = CONTENT_DIR / "investigations.json"
 
 # Preset color palette per investigation
 INVESTIGATION_COLORS = {
