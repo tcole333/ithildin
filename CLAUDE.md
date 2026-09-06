@@ -35,7 +35,7 @@ Scoped skills resolve the requested profile once and pin it for the task. Entiti
 ```bash
 /dispatch                   # Queue depths — what needs attention
 /pursue-lead                # Pick up next lead
-/deep-investigate <name>    # Parallel sub-agents (preferred)
+/deep-investigate <name>    # Parallel source tracks when useful
 /triage-leads               # Process pending_triage leads (batch of 20)
 /build-infra                # Build next infra request (or scan for gaps)
 /search-all-sources <term>  # Fan-out search

@@ -74,7 +74,7 @@ The stop rule treats an existing same-target lead at equal/higher depth as suffi
 
 ### F04 — P2: Installed duplicates can revive obsolete workflows
 
-All 36 project Codex skills also exist in the personal installation, and 14 bodies differ. Stale personal versions include historical-log-only search skipping and older unscoped triage examples. Both locations appear in this session. The sync script still describes copying to personal `$CODEX_HOME/skills` as the required loading route. [Sync script](/Users/travcole/projects/osint-research/scripts/sync_codex_skills.sh:2), [comparison artifact](installed-diffs.txt).
+All 36 project Codex skills also exist in the personal installation, and 14 bodies differ. Stale personal versions include historical-log-only search skipping and older unscoped triage examples. Both locations appear in this session. The sync script still describes copying to personal `$CODEX_HOME/skills` as the required loading route. [Sync script](/Users/travcole/projects/osint-research/scripts/sync_codex_skills.sh:2), [comparison artifact](installed-diffs.json).
 
 **Correction:** establish one version-controlled content source and expose project skills once through current runtime discovery. Use symlinks or generated adapters with normalized hashes where appropriate. Preserve personal edits and unrelated personal skills. **Verify:** clean-session effective paths, benign invocation, and migration fixtures. Do not infer that the current app cannot load `.codex` skills: it demonstrably can in this session.
 

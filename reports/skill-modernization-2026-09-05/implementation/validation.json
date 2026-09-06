@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "branch": "codex/skill-modernization-20260905",
+  "base": "53acdf3eae8fe6a2e8a8ad406c30c1a2e3ade54b",
+  "python": {
+    "command": "uv run python -m pytest --offline tests/test_selected_filing_identity.py tests/test_selected_award_transactions.py tests/test_query_edgar_sections.py tests/test_query_edgar_import_lock.py tests/test_query_edgar_read.py tests/test_query_usaspending.py tests/test_query_usaspending_subawards.py tests/test_query_usaspending_papercuts.py tests/test_query_usaspending_failures.py tests/test_financial_source_skill_contracts.py tests/test_query_990_lookup_flow.py tests/test_query_990_lookup_failures.py tests/test_query_990_shared_officers.py tests/test_research_skill_commands.py tests/test_analysis_skill_modernization.py tests/test_analysis_skill_commands.py tests/test_analysis_export_connections.py tests/test_analysis_export_timeline.py tests/test_analysis_cli_papercuts.py tests/test_profile_analysis_papercuts.py tests/test_core_schema_bootstrap.py tests/test_lead_review_workflows.py tests/test_enforcement.py tests/test_lead_tracker_related_validation.py tests/test_lead_tracker_schema_cache.py tests/test_lead_tracker_fk_migration.py tests/test_extract_sec_enforcement_parties.py tests/test_dispatcher.py tests/test_investigation_status.py tests/test_runtime_model_defaults.py tests/test_editorial_verification_scope.py tests/test_dossier_review_receipts.py tests/test_review_dossier_checks.py tests/test_validate_skills.py tests/test_skill_architecture.py tests/test_tool_catalog.py -q",
+    "test_files": [
+      "tests/test_selected_filing_identity.py",
+      "tests/test_selected_award_transactions.py",
+      "tests/test_query_edgar_sections.py",
+      "tests/test_query_edgar_import_lock.py",
+      "tests/test_query_edgar_read.py",
+      "tests/test_query_usaspending.py",
+      "tests/test_query_usaspending_subawards.py",
+      "tests/test_query_usaspending_papercuts.py",
+      "tests/test_query_usaspending_failures.py",
+      "tests/test_financial_source_skill_contracts.py",
+      "tests/test_query_990_lookup_flow.py",
+      "tests/test_query_990_lookup_failures.py",
+      "tests/test_query_990_shared_officers.py",
+      "tests/test_research_skill_commands.py",
+      "tests/test_analysis_skill_modernization.py",
+      "tests/test_analysis_skill_commands.py",
+      "tests/test_analysis_export_connections.py",
+      "tests/test_analysis_export_timeline.py",
+      "tests/test_analysis_cli_papercuts.py",
+      "tests/test_profile_analysis_papercuts.py",
+      "tests/test_core_schema_bootstrap.py",
+      "tests/test_lead_review_workflows.py",
+      "tests/test_enforcement.py",
+      "tests/test_lead_tracker_related_validation.py",
+      "tests/test_lead_tracker_schema_cache.py",
+      "tests/test_lead_tracker_fk_migration.py",
+      "tests/test_extract_sec_enforcement_parties.py",
+      "tests/test_dispatcher.py",
+      "tests/test_investigation_status.py",
+      "tests/test_runtime_model_defaults.py",
+      "tests/test_editorial_verification_scope.py",
+      "tests/test_dossier_review_receipts.py",
+      "tests/test_review_dossier_checks.py",
+      "tests/test_validate_skills.py",
+      "tests/test_skill_architecture.py",
+      "tests/test_tool_catalog.py"
+    ],
+    "result": {
+      "passed": 459,
+      "warnings": 3,
+      "seconds": 11.85
+    },
+    "environment": {
+      "UV_PROJECT_ENVIRONMENT": "/Users/travcole/projects/osint-research/.venv",
+      "UV_NO_SYNC": "1",
+      "UV_CACHE_DIR": "/tmp/osint-q8INnbtl/uv-cache",
+      "CODEX_HOME": "/tmp/osint-q8INnbtl/test-codex-home"
+    },
+    "scope": "Affected regression tests; temporary model config and synthetic databases; offline network guard"
+  },
+  "checks": [
+    {
+      "command": "npm --silent --prefix web run test:changed-content",
+      "scope": "Fixture tests for requested current content selection"
+    },
+    {
+      "command": "uv run python .codex/skills/audit-skills/scripts/snapshot_skills.py --workspace . --run-repo-validator --output FILE",
+      "result": "36 skills / 69 variants, 0 errors, 34 warnings, 3 info"
+    },
+    {
+      "command": "uv run python scripts/audit_codex_skill_parity.py",
+      "result": "0 shared instruction/resource drift"
+    },
+    {
+      "command": "bash scripts/sync_codex_skills.sh",
+      "result": "36 repository skills resolve; no personal changes"
+    },
+    {
+      "command": "uv run ruff check <changed Python paths>",
+      "result": "pass"
+    },
+    {
+      "command": "bash -n scripts/sync_codex_skills.sh scripts/lint_agent_docs.sh scripts/batch_review_dossiers.sh",
+      "result": "pass"
+    },
+    {
+      "command": "uv run python scripts/repository_hygiene.py check --staged",
+      "result": "pass for each committed unit"
+    },
+    {
+      "command": "git diff --check 53acdf3eae8fe6a2e8a8ad406c30c1a2e3ade54b",
+      "result": "pass"
+    },
+    {
+      "command": "CODEX_HOME=<nonexistent temporary config directory> uv run python -m pytest --offline tests/test_extract_sec_enforcement_parties.py -q",
+      "result": "68 passed in 0.11s",
+      "scope": "Additional check that extraction regressions do not require a configured personal/default model"
+    },
+    {
+      "command": "rg -n --hidden -i '(gpt-|claude-(opus|sonnet|haiku|[0-9])|\\b(sonnet|opus|haiku)\\b|DEFAULT_MODEL)' .claude/skills .codex/skills scripts tools pipeline queue_system config AGENTS.md CLAUDE.md",
+      "result": "Only DEFAULT_MODEL = None and references to that unset variable; no named model/version pins in this active scope"
+    }
+  ],
+  "limitations": [
+    "Static lint remains partial for six dynamic CLI contracts; strict mode fails warnings.",
+    "No production publication, live research or headless worker launch used for validation.",
+    "No repeated cross-model performance benchmark or real host-crash recovery test.",
+    "Personal skill duplicate retirement remains a deliberate post-integration migration."
+  ]
+}

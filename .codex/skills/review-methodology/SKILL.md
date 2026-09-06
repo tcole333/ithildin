@@ -43,6 +43,12 @@ uv run python tools/infra_tracker.py list --status open --type tool_fix --output
 
 ### 2. Read Context Documents
 
+The shown limit of 100 is an initial export size. Compare returned counts with
+the requested category/status totals and increase the export limit to cover the
+requested set before calling a full review complete. Keep the complete artifacts;
+review coherent groups and preserve progress across long observation histories.
+Apply a requested category consistently to the exports and report any exclusions.
+
 Read the files that observations may relate to:
 
 ```bash

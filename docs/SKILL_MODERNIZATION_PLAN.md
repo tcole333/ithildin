@@ -13,16 +13,16 @@ Skills specify scope, evidence standards, tool entry points, and completion crit
 
 | Unit | Owned paths | Acceptance / validation | State |
 |---|---|---|---|
-| A. Scoped lead operations | `tools/lead_tracker.py`, `tools/lead_dedup.py`, `tools/triage_policy.py`, paired triage/dedup skills, dedicated tests | Two DB/profile fixtures; foreign/stale decisions rejected; distinct questions retained; remaining-group batches complete | In progress |
-| B. Validation and discovery | skill validator/parity/sync scripts, dedicated tests, repository discovery wiring | Native metadata accepted; invalid/uninspectable commands visible; current repo discovery without destructive HOME sync | In progress |
-| C. Evidence identity | EDGAR/USASpending operations, paired analyze-filing/analyze-contract skills, dedicated tests | Selected accession/award retained; truthful transaction/obligation scope; complete artifacts and pagination | In progress |
-| D. Editorial verification | evidence audit, dossier review handoff, current-target web checks, paired editorial/discovery/status skills, tests | Requested final content audited; pinned/cited evidence scoped; worker packets exist; status scope accurate | In progress |
-| E. Research skill design | paired deep-investigate/pursue-lead/person/entity/infra/landscape/search skills and conditional references | Native supervised delegation; sufficient full-source reading; meaningful stop conditions; no conflicting role bans or bulk target expansion | In progress |
-| F. Financial/source integration skills | paired financial/cohort/grant/source-onboarding skills, focused tests | Correct runnable examples; safe repeat-ingest scaffold; heuristics become explained defaults; underlying period/scope visible | In progress |
-| G. Analysis skill design | paired network/timeline/systemic/hunch/case/framework skills, analysis export/tests | Evidence-sensitive novelty; observed-graph language; correct fields/quotes; preserved falsification and provenance | In progress |
-| H. Parent orchestration and integration | root instructions, research/execution contracts, orchestrate/dispatch/init/methodology/audit skills, model-pin audit, final plan/results | Chat-native default; explicit unattended boundary; current context inheritance; no unintended model pins; integration tests and independent forward tests | In progress |
+| A. Scoped lead operations | `tools/lead_tracker.py`, `tools/lead_dedup.py`, `tools/triage_policy.py`, paired triage/dedup skills, dedicated tests | Two DB/profile fixtures; foreign/stale decisions rejected; distinct questions retained; remaining-group batches complete | Complete |
+| B. Validation and discovery | skill validator/parity/sync scripts, dedicated tests, repository discovery wiring | Native metadata accepted; invalid/uninspectable commands visible; current repo discovery without destructive HOME sync | Complete |
+| C. Evidence identity | EDGAR/USASpending operations, paired analyze-filing/analyze-contract skills, dedicated tests | Selected accession/award retained; truthful transaction/obligation scope; complete artifacts and pagination | Complete |
+| D. Editorial verification | evidence audit, dossier review handoff, current-target web checks, paired editorial/discovery/status skills, tests | Requested final content audited; pinned/cited evidence scoped; worker packets exist; status scope accurate | Complete |
+| E. Research skill design | paired deep-investigate/pursue-lead/person/entity/infra/landscape/search skills and conditional references | Native supervised delegation; sufficient full-source reading; meaningful stop conditions; no conflicting role bans or bulk target expansion | Complete |
+| F. Financial/source integration skills | paired financial/cohort/grant/source-onboarding skills, focused tests | Correct runnable examples; safe repeat-ingest scaffold; heuristics become explained defaults; underlying period/scope visible | Complete |
+| G. Analysis skill design | paired network/timeline/systemic/hunch/case/framework skills, analysis export/tests | Evidence-sensitive novelty; observed-graph language; correct fields/quotes; preserved falsification and provenance | Complete |
+| H. Parent orchestration and integration | root instructions, research/execution contracts, orchestrate/dispatch/init/methodology/audit skills, model-pin audit, final plan/results | Chat-native default; explicit unattended boundary; current context inheritance; no unintended model pins; integration tests and independent forward tests | Complete |
 
-Subagents share this owned worktree with non-overlapping paths and leave commits to the parent. Root/shared instruction files and global metadata normalization are parent-owned. Any necessary edit to another unit's file is requested from its owner. Production investigation DBs and unrelated checkout changes are outside the implementation/test scope.
+Subagents shared this owned worktree with non-overlapping paths and left commits to the parent. Root/shared instruction files and global metadata normalization are parent-owned. Any necessary edit to another unit's file is requested from its owner. Production investigation DBs and unrelated checkout changes are outside the implementation/test scope.
 
 ## Sequence
 
@@ -49,4 +49,100 @@ The prior review compared all 36 skills / 69 variants. Current guidance: [OpenAI
 
 ## Results
 
-To be filled with commits, validation, forward-test results, and retained limitations as units complete.
+All eight units are implemented and committed on the owned workstream branch.
+The original checkout and personal skill installations were preserved. This
+branch has not been merged or pushed.
+
+### Resulting behavior
+
+- Interactive investigations use native subagents in the current chat when
+  independent work helps. The parent remains active, accepts steering, reviews
+  evidence and owns integration. Headless dispatch is an explicit unattended
+  option. Missing native collaboration tools mean sequential work, not an
+  automatic headless launch.
+- Skills inherit the runtime model. Active dispatcher and extraction generation
+  pins were removed; unknown runtime choices remain unknown in provenance.
+  The isolated extractor inherits the root Codex user-config model, or accepts
+  an explicit override, without loading unrelated user rules or features.
+- Completion depends on the requested questions, material evidence and source
+  coverage. Count limits are export/batching defaults, not cognitive ceilings.
+  Full material documents can be read when needed. Artifacts and checkpoints
+  retain progress, context, unresolved questions and ownership across compaction.
+- CLI contracts, typed review packets and content hashes enforce fragile
+  mechanics. Lead changes are scoped, freshness-checked and atomic; filing and
+  award operations retain the selected record; status distinguishes unavailable
+  data from zero; editorial review binds to actual current content and evidence.
+- Current repository discovery uses `.agents/skills`. Runtime metadata and
+  shared instructions are consistent across Claude/Codex. The tool catalog and
+  linter inspect declarations without executing application code. The old sync
+  command now defaults to a read-only check, with explicit inventory/backup
+  commands for personal duplicates.
+
+### Validated commits
+
+| Commit | Completed unit |
+|---|---|
+| `9e11b903` | Audit baseline and implementation plan |
+| `666445ed` | C: selected filing/award identity and truthful result scope |
+| `0eb2ef95` | F: financial/source workflows and correct scoped examples |
+| `3a4eba7d` | E/G and shared H contracts: persistent research and analysis |
+| `f5c4d98c` | A: scoped, atomic triage and dedup review packets |
+| `df2153b5` | H: model inheritance, read-only scoped status and orchestration |
+| `8e01d6ed` | D: current-content editorial verification and review packets |
+| `b15aa7ff` | B: discovery, runtime metadata and safe CLI introspection |
+
+The final documentation commit adds the integration results and small paired
+clarifications on full methodology-review coverage and useful parallelism.
+
+### Validation and independent review
+
+- **459 tests passed** in the combined affected Python suite across 36 files
+  with the repository's offline network guard. Three edgartools dependency
+  deprecation warnings remain. Tests used synthetic/temporary databases and a
+  temporary model-config fixture.
+- The Node changed-content coverage fixture passed for explicit new, changed
+  and unchanged target files. It checks the actual content bytes selected for
+  verification; no production publication was attempted.
+- Final skill snapshot: **36 skills, 69 variants, 0 errors, 34 warnings and 3
+  informational unpaired packages**. Normalized shared-body/resource drift is
+  **0**. Discovery resolves all 36 repository Codex packages.
+- Independent reviews covered scoped mutations, static parser/distribution
+  safety, editorial evidence/content binding and runtime status. Reproduced
+  issues were corrected and rechecked. The independent H forward exercise
+  selected native supervision, honored an explicit DB over ambient context,
+  preserved partial/unknown status and resumed from a saved planning checkpoint.
+- Changed Python passes Ruff; shell syntax, staged repository hygiene and diff
+  whitespace checks pass. The active model-pin scan found no remaining named
+  generation/tier defaults in skills and launch paths.
+
+Temporary fixtures and raw check output remain under `/tmp/osint-q8INnbtl`;
+durable reports are copied into the repository. An initial ignored worktree
+`.venv` is a regenerable local dependency cache. The temporary `web/node_modules`
+link used for the Node fixture was removed after validation.
+
+[Detailed implementation reports, independent reviews and test artifacts](../reports/skill-modernization-2026-09-05/implementation/README.md)
+record the exact checks and their boundaries. [Runtime/distribution guidance](SKILL_RUNTIME.md)
+explains how to use the revised packages.
+
+### Retained limits and follow-up
+
+1. The 34 static warnings are 17 occurrences per runtime across six dynamic
+   CLIs: USASpending, SAM, UK company ingestion, property, state courts and
+   California. The linter reports partial contracts; strict mode correctly
+   fails them. Parser-focused coverage/schema extraction can close these gaps.
+   Static success does not establish network health or custom value semantics.
+2. Personal skill copies still exist. Inventory/backup protects differing user
+   content; deliberate retirement can follow integration. An already-running
+   chat can retain an earlier skill inventory. No temporary worktree link was
+   installed as a permanent personal dependency.
+3. The forward exercise tested fixture execution and checkpoint-based planning
+   continuation, not recovery from a host crash with live workers. No headless
+   jobs or external research were launched for validation. No repeated Claude
+   versus Codex benchmark establishes token, latency or quality improvements.
+4. The isolated extraction process cannot infer an ephemeral desktop selection
+   or named-profile model choice; pass `--model` for those cases. An unknown
+   default is not assigned a fabricated resolved model or reused as a known
+   model-specific cache entry.
+5. Evidence standards, confidence ceilings, source independence, no-contact
+   boundaries and content-bound publication review remain enforced. Longer
+   context and stronger persistence do not replace these domain requirements.
