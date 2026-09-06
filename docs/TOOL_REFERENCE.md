@@ -6622,7 +6622,7 @@ uv run python tools/query_fl_dor_property.py download --type nal \
     --county Baker --year 2026 --destination "$WORKDIR/fl-baker-nal.zip" \
     --output "$WORKDIR/fl-baker-download.json"
 uv run python tools/ingest_fl_dor_property.py ingest \
-    "$WORKDIR/fl-baker-nal.zip" --dataset-type nal \
+    --archive "$WORKDIR/fl-baker-nal.zip" --type nal \
     --property-db "$WORKDIR/property-records.db" \
     --output "$WORKDIR/fl-baker-nal-ingest.json"
 

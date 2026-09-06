@@ -33,7 +33,6 @@ import os
 import re
 import shlex
 import subprocess
-import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
@@ -66,6 +65,15 @@ class Issue:
     path: Path
     line: int
     message: str
+
+
+@dataclass(frozen=True)
+class CommandHelp:
+    options: frozenset[str] = frozenset()
+    subcommands: frozenset[str] = frozenset()
+
+
+HelpCache = dict[tuple[str, tuple[str, ...]], CommandHelp]
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
@@ -309,24 +317,17 @@ def resolve_script_path(workspace: Path, script_token: str) -> Path:
     return workspace / script_token
 
 
-def help_options_cache_key(script: str, subcmd: str | None) -> tuple[str, str | None]:
-    return (script, subcmd)
-
-
-def read_help_options(
+def read_command_help(
     workspace: Path,
     script: str,
-    subcmd: str | None,
-    cache: dict[tuple[str, str | None], set[str]],
-) -> set[str]:
-    key = help_options_cache_key(script, subcmd)
+    command_path: tuple[str, ...],
+    cache: HelpCache,
+) -> CommandHelp:
+    key = (script, command_path)
     if key in cache:
         return cache[key]
 
-    cmd = ["uv", "run", "python", script]
-    if subcmd:
-        cmd.append(subcmd)
-    cmd.append("--help")
+    cmd = ["uv", "run", "python", script, *command_path, "--help"]
 
     try:
         proc = subprocess.run(
@@ -339,12 +340,20 @@ def read_help_options(
         )
         text = (proc.stdout or "") + "\n" + (proc.stderr or "")
     except Exception:
-        cache[key] = set()
+        cache[key] = CommandHelp()
         return cache[key]
 
-    opts = set(LONG_OPT_RE.findall(text))
-    cache[key] = opts
-    return opts
+    # Argparse advertises subparsers as "{command,other} ..." in usage.
+    # Only descend through these declared choices, never arbitrary positional
+    # arguments or every sibling command, which could conceal an invalid flag.
+    subcommands = frozenset(
+        name
+        for choices in re.findall(r"\{([A-Za-z0-9_,.-]+)\}\s+\.\.\.", text)
+        for name in choices.split(",")
+    )
+    info = CommandHelp(frozenset(LONG_OPT_RE.findall(text)), subcommands)
+    cache[key] = info
+    return info
 
 
 def line_number_of(text: str, needle: str, start: int = 1) -> int:
@@ -359,7 +368,7 @@ def lint_markdown_file(
     workspace: Path,
     require_uv: bool,
     include_hidden: bool,  # kept for signature symmetry and future use
-    help_cache: dict[tuple[str, str | None], set[str]],
+    help_cache: HelpCache,
     required_frontmatter_fields: tuple[str, ...] | None,
     skill_frontmatter: bool = False,
 ) -> list[Issue]:
@@ -459,17 +468,29 @@ def lint_markdown_file(
 
                 remaining = tokens[4:]
                 subcmd = None
-                for tok in remaining:
+                subcmd_index = -1
+                for index, tok in enumerate(remaining):
                     if tok.startswith("-"):
                         continue
                     if likely_template_token(tok):
                         continue
                     subcmd = tok
+                    subcmd_index = index
                     break
 
-                root_opts = read_help_options(workspace, script, None, help_cache)
-                sub_opts = read_help_options(workspace, script, subcmd, help_cache) if subcmd else set()
-                allowed = root_opts | sub_opts
+                root_help = read_command_help(workspace, script, (), help_cache)
+                allowed = set(root_help.options)
+                if subcmd:
+                    command_path = (subcmd,)
+                    command_help = read_command_help(workspace, script, command_path, help_cache)
+                    allowed.update(command_help.options)
+                    for tok in remaining[subcmd_index + 1:]:
+                        if tok not in command_help.subcommands:
+                            break
+                        command_path += (tok,)
+                        command_help = read_command_help(workspace, script, command_path, help_cache)
+                        allowed.update(command_help.options)
+                    subcmd = " ".join(command_path)
                 if not allowed:
                     continue
 
@@ -516,7 +537,7 @@ def main(argv: list[str] | None = None) -> int:
     docs_dirs = [Path(p).expanduser() for p in (args.docs_dir or [])]
 
     all_issues: list[Issue] = []
-    help_cache: dict[tuple[str, str | None], set[str]] = {}
+    help_cache: HelpCache = {}
     checked = 0
     seen: set[Path] = set()
 
