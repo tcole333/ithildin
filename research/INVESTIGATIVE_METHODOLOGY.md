@@ -176,8 +176,8 @@ Networks engaged in illicit or concealed activity are structurally designed to o
 
 In any investigation, look for:
 - **Records that should exist but don't** — flights without manifests, seized materials never released, meetings with no minutes
-- **Dataset discrepancies** — the same relationship showing different volumes across data sources suggests filtering or compartmentalization
-- **Migration to encrypted channels** — when someone switches to encrypted communications, they're protecting something. The *timing* of the switch is the intelligence.
+- **Dataset discrepancies** — different volumes across sources first require comparison of date coverage, duplicates, document units, extraction, and release scope; test selective withholding only after these alternatives
+- **Migration to encrypted channels** — compare changes in communication channels with routine privacy/security practices, product changes, and source visibility before testing a relationship-specific explanation.
 - **The calendar around inflection points** — what was scheduled in the days surrounding an arrest, resignation, or exposure? The subject's planned near-future reveals what they thought was about to happen.
 
 > *Case examples (Epstein):*
@@ -222,7 +222,7 @@ Applied to investigation:
 
 **The practice**: At every investigative step, ask — *what is this thing actually made of, beneath the label I've been given for it?* The label is the abstraction. The filing, the wire transfer, the DNS record, the email header, the certificate — those are the atoms. Investigate the atoms, not the labels.
 
-**Negative unseeing**: The most powerful application is seeing what *isn't* there. A billion-dollar fund with no EDGAR filings. A "technology company" with no GitHub, no patents, no technical employees. A trust company with no clients besides its creator. A person with 300 email mentions but zero corporate filings. These absences are invisible until you unsee the abstraction that explains them away — and once you unsee it, the absence becomes screaming evidence.
+**Negative unseeing**: The most powerful application is seeing what *isn't* there. A billion-dollar fund with no EDGAR filings. A "technology company" with no GitHub, no patents, no technical employees. A trust company with no clients besides its creator. A person with 300 email mentions but zero corporate filings. These absences are invisible until you unsee the abstraction that explains them away — and the absence becomes a question to test against coverage, reporting obligations, identity resolution, and ordinary alternative explanations.
 
 ## When Investigating a Person
 
@@ -256,51 +256,19 @@ An entity discovered through a phone pivot, address pivot, or corporate filing t
 
 ### Required Source Checklist
 
-When investigating ANY entity or person, agents MUST search these sources in addition to the document corpus:
+Before source planning, read `docs/RESEARCH_WORKFLOW_CONTRACT.md`. Its canonical
+applicability table selects sources from the factual question, target role,
+jurisdiction, dates, and available coverage. Check every applicable required
+source; record a reason for `not_applicable`, and distinguish failed/partial
+acquisition from a successful bounded negative. Use the referenced module docs
+for current commands. The same contract governs profile pinning, result reuse,
+worker ownership, and evidence/report handoffs.
 
-**Corporate & Registration:**
-- NY SoS: `tools/ingest_newyork.py search "name"`
-- FL SunBiz: `tools/query_registry.py search "name" --jurisdiction fl`
-- NM SoS: `tools/ingest_newmexico.py search "name"`
-- ~~OCCRP Aleph~~: DEPRECATED (March 2026) — free tier removed. Use OpenCorporates, ICIJ, and OpenSanctions instead
-- SEC EDGAR: `tools/query_edgar.py search "name"` (filings, insider transactions, CIK lookup)
-
-**Financial & Legal:**
-- CourtListener: `tools/query_courtlistener.py search "name"` (federal litigation)
-- FEC: `tools/query_fec.py donor "name"` (campaign finance)
-- IRS 990 (Nonprofits): `tools/query_990.py search "name"` (grants, officers, financials), `tools/query_990.py officer-search "name"` (board positions), `tools/query_990.py flow <EIN> --depth 2` (grant networks, circular flows)
-- Lobbying LDA: `tools/query_lobbying.py client "name"` (lobbying disclosures)
-- FARA: `tools/query_fara.py search "name"` (foreign agent registrations)
-
-**Property & Assets:**
-- NYC ACRIS: `tools/query_acris.py party "name"` (property records)
-- FAA Registry: `tools/ingest_faa.py search "name"` (aircraft registrations)
-- UCC Filings: `tools/query_registry.py ucc-search "name"` (secured transactions)
-
-**Network & Relationships:**
-- LittleSis: `tools/query_littlesis.py search "name"` (power network mapping)
-- LMSBAND co-occurrence: `tools/query_lmsband.py cooccurrence "name"` (who appears alongside)
-
-**External / Open Web:**
-- WebSearch: For news reporting, business records, LinkedIn profiles, import/export records
-- WebFetch: For company websites, archived pages, public filings
-- ~~GDELT~~: DEPRECATED (March 2026) — 3-month window + unreliable API. Use WebSearch for news coverage
-
-**Nonprofit & Grant Networks:**
-- Grant flow tracing: `tools/query_990.py flow <EIN> --depth 2` — follow money through 501(c)(3)/(c)(4) chains via Schedule I grants
-- Circular flow detection: When A funds B and B funds A, the net direction reveals control (use `/trace-grants` for full analysis)
-- Shared officer analysis: `tools/query_990.py shared-officers <EIN1> <EIN2>` — officers serving on multiple nonprofits = structural coordination
-- Co-grantor clustering: `tools/query_990.py co-grantors "RECIPIENT"` — when 5 funders all support the same 3 recipients, that's a funding constellation
-- 501(c)(4) opacity: (c)(4) organizations don't file public 990s — they appear only as *recipients* in other orgs' Schedule I. Note the gap when you hit one.
-- Dark money chains: Donor → Donor-Advised Fund (Donors Trust) → 501(c)(4) → PAC = money laundering through nonprofit layers. Each hop adds anonymity.
-
-**Procurement Audit (Comparative):**
-- USASpending timeline: `tools/query_usaspending.py timeline "<COMPANY>"` — FY spending trends, growth rate calculation
-- Agency breakdown: `tools/query_usaspending.py recipient "<COMPANY>"` — spending by department
-- Lobbying correlation: `tools/query_lobbying.py client "<COMPANY>"` — lobbying spend timing vs. contract acceleration
-- Partnership analysis: `tools/query_highergov.py partnership --awardee-key <KEY>` — teaming patterns across contract vehicles
-- Revolving door: cross-reference investigation.db findings with USASpending contracting data
-- Subaward chains: `tools/query_usaspending.py subawards --uei <UEI>` — follow money through subcontractors
+Grant overlap, shared officers, reciprocal payments, and simultaneous procurement
+growth are observations to explain. Compare ordinary funding, hiring, accounting,
+and sector-wide conditions before testing coordination or unlawful conduct. Trace
+amounts, dates, purposes, and disclosure coverage rather than inferring an illicit
+mechanism from the existence of an intermediary.
 
 ### Pivot Investigation Protocol
 
@@ -313,7 +281,7 @@ When an entity is discovered through a data pivot (phone number, address, office
 5. **Check the address** — is it shared with other entities? Is it a mail drop?
 6. **Follow corporate evolution** — did the entity change names, merge, or spawn successor entities?
 7. **Check import/export records, industry connections** — especially for companies in logistics, telecommunications, financial services, or technology
-8. **Only close as false positive** if you can positively explain the pivot data point (e.g., "BvD data aggregation error confirmed by X") AND the entity has no other suspicious characteristics
+8. **Close a disproved pivot linkage** when evidence explains the linking data point as mistaken or non-diagnostic. Keep unrelated factual questions in separate leads. When coverage cannot resolve the link, use bounded negative/diminishing-return stop conditions and preserve the uncertainty
 
 ## Orchestrator Pattern: Parallel Sub-Agent Investigations
 
@@ -712,15 +680,22 @@ Before promoting any hypothesis to `investigating`, and again before any article
 
 ### Estimative Language Standard
 
-| Confidence | Kent-style probability / approved prose |
-|------------|------------------------------------------|
-| `confirmed` | established; documented |
-| `high` | almost certainly; very likely |
-| `medium` | likely; probably |
-| `low` | possibly; may |
-| `unverified` | unconfirmed; alleged |
+Confidence tiers express evidence-quality ceilings, not measured probabilities.
+`medium` is also a default and a cap on inference/synthesis or opaque provenance;
+it does not establish that a proposition is more likely than not. Preserve the
+existing claim-type and source caps.
 
-Prose may never outrun the weakest confidence tier in its citation chain. A conclusion dependent on a `medium` link cannot be described as "almost certainly," even if its other links are `high` or `confirmed`. The review-article skill enforces this standard.
+State documented facts with attribution that matches what the evidence proves.
+An authentic quotation confirms that a statement was made, while allegations in
+it remain allegations unless independently established. Describe unsupported or
+unresolved claims as uncertain without manufacturing a likelihood estimate.
+
+When probabilistic language is useful, assess the specific proposition: explain
+which evidence distinguishes plausible alternatives, its independence and scope,
+and the uncertainties affecting the judgment. Record that rationale in the
+finding or article. A confidence label alone licenses no phrase such as
+"probably" or "almost certainly." Prose may never outrun the weakest necessary
+evidence link; the article reviewer blocks unsupported certainty.
 
 ### Premortem
 

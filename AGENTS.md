@@ -5,6 +5,12 @@ General-purpose agent-scale network investigation platform. Investigate any publ
 **Design doc**: `PRD.md` | **Methodology**: `research/INVESTIGATIVE_METHODOLOGY.md`
 **Tool reference**: `docs/TOOL_REFERENCE.md` (complete CLI for all 37+ tools) | **OSINT resources**: `research/OSINT_RESOURCES.md`
 
+## Repository and Task Ownership
+
+Before starting work, sharing a checkout, committing, or reorganizing files, read `docs/GIT_WORKFLOW.md`. Use an owned workstream branch, preserve pre-existing edits, stage explicit reviewed paths, and commit completed validated units throughout the task. Separate concurrent unrelated work with worktrees; the task owner coordinates commits for shared subagent work.
+
+Before source planning, reusing search results, or dispatching multi-agent research, read `docs/RESEARCH_WORKFLOW_CONTRACT.md`. It owns source applicability, pinned profile/database context, result reuse, and evidence/report handoff. Automated tasks must inherit `ITHILDIN_PROFILE` and `ITHILDIN_DB_PATH` or pass explicit context; the shared active profile is only an interactive default.
+
 ## Investigation Profiles
 
 Investigations are configured via YAML profiles at `investigations/<name>/config.yaml`. Each profile defines: `primary_subject`, `key_persons`, `known_addresses`, `threads`, `corpus_tools`, `key_dates`, `seed_pillars`.

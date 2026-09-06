@@ -16,12 +16,11 @@ Analyze the investigation graph to find structurally important nodes, dense clus
 - `--thread N`: focus on a specific thread's subgraph
 
 ### Context Loading
-Load the active investigation context before executing:
-```bash
-uv run python tools/investigation_context.py show
-```
-This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
-Use these values instead of hardcoded names throughout this skill.
+Before scoped work, read `docs/RESEARCH_WORKFLOW_CONTRACT.md` and pin the
+resolved task profile with `ITHILDIN_PROFILE`. Preserve/pass the selected
+`ITHILDIN_DB_PATH` to workers. Load `investigation_context.py show` under that
+environment for corpus tools, dates, threads, people, and jurisdictions; use
+those values throughout this skill. Do not change the shared active profile.
 
 ## Process
 
@@ -127,9 +126,17 @@ uv run python tools/findings_tracker.py add \
     --detail "DETAIL" \
     --confidence medium \
     --claim-type synthesis \
-    --evidence "analysis-run-{RUN_ID}" \
-    --source-quote "graph_tools output: METRIC=VALUE"
+    --evidence "SOURCE:ID_A" "SOURCE:ID_B" \
+    --source-quote "SOURCE:ID_A:Exact supporting source excerpt" \
+    --source-quote "SOURCE:ID_B:Exact supporting source excerpt" \
+    --sources analysis_run
 ```
+
+Replace placeholders with the underlying canonical evidence and matching exact
+quotes. Include the preserved calculation/report artifact when the claim depends
+on computed results; `analysis_run` identifies the analysis provenance, and add
+the actual underlying source tokens. An analysis-run label alone is not evidence.
+
 
 ### 6. Tag Clusters
 

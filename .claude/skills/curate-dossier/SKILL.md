@@ -150,7 +150,7 @@ Finding count does NOT equal importance. The investigation may have deeply resea
 
 #### Claim Type Rules
 
-- `direct_quote` / `confirmed` findings → state as fact with citation
+- `direct_quote` / `confirmed` → state the documented fact with citation; a quote establishes what was said, and allegations retain attribution
 - `paraphrase` / `high` confidence → state as fact with citation
 - `inference` / `medium` confidence → attribute: "Analysis of [source] indicates..."
 - `synthesis` → attribute: "Cross-reference of [N] findings shows..." — NEVER state synthesis as confirmed fact
@@ -160,7 +160,7 @@ Finding count does NOT equal importance. The investigation may have deeply resea
 
 #### Evidence Quality
 
-- **Strong** (government filings, court documents, registries): cite as fact
+- **Primary records** (government filings, court documents, registries): state what the record establishes; attribute allegations and self-reported claims
 - **Moderate** (USASpending, FEC, API data): cite with source: "Federal spending records show..."
 - **Weak** (web search, news paraphrases): cite with publication: "According to [outlet]..."
 

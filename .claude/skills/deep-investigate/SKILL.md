@@ -16,12 +16,11 @@ Launch an orchestrated investigation of a person, entity, or topic using four pa
 - Optional context after the name: `/deep-investigate Ron Soffer — French/Israeli lawyer referenced in SoftBank caper, Weingarten considering deploying him Jan 2019`
 
 ### Context Loading
-Load the active investigation context before executing:
-```bash
-uv run python tools/investigation_context.py show
-```
-This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
-Use these values instead of hardcoded names throughout this skill.
+Before scoped work, read `docs/RESEARCH_WORKFLOW_CONTRACT.md` and pin the
+resolved task profile with `ITHILDIN_PROFILE`. Preserve/pass the selected
+`ITHILDIN_DB_PATH` to workers. Load `investigation_context.py show` under that
+environment for corpus tools, dates, threads, people, and jurisdictions; use
+those values throughout this skill. Do not change the shared active profile.
 
 ### Ambient Documentation
 **Document everything, not just what's relevant to your current hypothesis.**
@@ -61,22 +60,16 @@ You are the **orchestrator**. You do NOT search sources yourself. Instead you:
 
 **Before writing any agent prompts**, create a source assignment matrix. This prevents agents from defaulting to web searches and ensures every relevant tool gets used.
 
-**Step 1: Identify all relevant sources for this target.** Consider the target type:
+**Step 1: Build the applicable source plan.** Read the canonical checklist in
+`docs/RESEARCH_WORKFLOW_CONTRACT.md`. Resolve relevance from the factual question,
+target identity/role, jurisdiction and dates. Record each assessed source's
+scope, relevance reason, owner and outcome, including `not_applicable`,
+`unavailable`, and `partial` where appropriate. Retain every applicable required
+source even if another source already returned useful findings.
 
-| Target Type | Critical Sources (must check) |
-|-------------|-------------------------------|
-| **Person** | CourtListener, state/local court catalog, property/recorder catalog, FEC, 990s, EDGAR, LittleSis, registries (as officer), FARA, lobbying, OpenSanctions |
-| **Corporation** | State registries, property/recorder catalog, federal and state/local court sources, EDGAR (10-K, proxy), USASpending, SAM.gov, lobbying, FARA, GLEIF |
-| **Nonprofit** | IRS 990 (lookup, grants, officers, financials, red-flags), EDGAR, state registries, CourtListener, FEC (PAC affiliates) |
-| **Government actor** | FEC, lobbying (post-government), FARA, CourtListener, LittleSis, EDGAR (financial disclosures) |
-| **Financial entity** | EDGAR, GLEIF, DS10, ACRIS, UCC, registries, CourtListener, USASpending |
-
-**Nonprofit network analysis:** For nonprofit targets, Agent B should also run:
-- `uv run python tools/query_990.py lookup <EIN> --output $WORKDIR/990-lookup.json`
-- `uv run python tools/query_990.py flow <EIN> --depth 1 --output $WORKDIR/990-flow.json`
-- `uv run python tools/query_990.py officer-search "<NAME>" --output $WORKDIR/990-officers.json`
-
-If the flow output shows circular flows or 10+ network nodes, recommend `/trace-grants` for full network analysis as a parallel process.
+The worker templates below are source menus. Instantiate only applicable
+operations, remove inapplicable query examples from worker prompts, and include
+the final source list and the shared contract in every worker mandate.
 
 **Step 2: Assign sources to agents.** The 4-agent split (corpus, corporate/financial, legal, network/OSINT) works well for single targets. Give each source category one persistence owner: other agents may flag cross-category records in their reports, but they do not repeat that owner's searches or create duplicate findings. For custom multi-target plans, ensure each source appears in exactly one primary mandate. Create a table:
 
@@ -114,9 +107,9 @@ When running the deep dives, choose between:
 
 **Option B: Organize by topic with source mandates** (for 4+ related targets)
 - Topical agents (e.g., "GEO Group agent", "Miller network agent") are fine
-- BUT each agent's prompt MUST include an explicit source checklist from the matrix above
+- BUT each agent's prompt MUST include an explicit source checklist from the applicable source plan
 - Include this in every topical agent prompt: "You MUST check ALL of these sources, not just web search: [LIST]. Record negative results from each source."
-- After topical agents complete, run a **coverage check**: which sources in the matrix were NOT used? Spawn follow-up agents to fill gaps.
+- After topical agents complete, run a **coverage check**: which applicable required sources were NOT used? Spawn follow-up agents to fill gaps.
 
 ## Process
 
