@@ -23,6 +23,8 @@ def _add_unverified(profile_id, target):
         target_name=target,
         summary=f"{target} summary",
         source_datasets=["courtlistener"],
+        evidence_ids=["COURTLISTENER:fixture-record"],
+        source_quotes={"COURTLISTENER:fixture-record": {"quote": "The record identifies the subject."}},
         profile_id=profile_id,
     )
 

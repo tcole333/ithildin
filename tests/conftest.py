@@ -19,6 +19,16 @@ LIVE_PUBLIC_RECORD_ENV_RE = re.compile(
     r"""["']"""
 )
 
+# Representatives from the four integrity suites omitted by the former
+# integration-only CI selector. Keep these explicit so a rename/removal receives
+# review rather than silently reducing the protected collection contract.
+CRITICAL_TEST_NODEIDS = frozenset({
+    "tests/test_enforcement.py::TestConfidenceCapping::test_inference_confirmed_clamps_to_medium",
+    "tests/test_finding_evidence_crud.py::test_delete_cannot_remove_last_direct_quote_evidence",
+    "tests/test_lead_tracker_fk_migration.py::test_workflow_fk_rebuild_preserves_rows_objects_sequences_and_fts",
+    "tests/test_auto_leads_profile_scope.py::test_cmd_run_propagates_active_profile_to_every_generator",
+})
+
 
 def _live_public_record_env_names(
     tests_root: Path | None = None,
@@ -46,6 +56,12 @@ def _enable_live_public_record_tests(
 
 
 def pytest_addoption(parser: pytest.Parser) -> None:
+    parser.addoption(
+        "--require-critical-tests",
+        action="store_true",
+        default=False,
+        help="Fail collection if CI's required evidence, confidence, migration, or profile tests are omitted",
+    )
     group = parser.getgroup("public records")
     group.addoption(
         "--run-live-public-records",
@@ -89,6 +105,19 @@ def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item
             item.add_marker(pytest.mark.live_data)
         if item.get_closest_marker("live_data") and not allow_live:
             item.add_marker(pytest.mark.skip(reason="live data requires an explicit live-test option"))
+
+
+def pytest_collection_finish(session: pytest.Session) -> None:
+    # Finish runs after all -m/-k/path deselection hooks, unlike a check at the
+    # start of modifyitems, which can accept tests later removed by a selector.
+    if session.config.getoption("require_critical_tests"):
+        missing = sorted(CRITICAL_TEST_NODEIDS - {item.nodeid for item in session.items})
+        if missing:
+            raise pytest.UsageError(
+                "Required critical tests were omitted from collection:\n  "
+                + "\n  ".join(missing)
+                + "\nRun the full deterministic suite without narrowing its path, -m, or -k selection."
+            )
 
 
 @pytest.fixture(autouse=True)

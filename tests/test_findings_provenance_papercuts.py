@@ -102,8 +102,10 @@ def test_add_rejects_blank_unmapped_quote_argument_atomically(
 def test_evidence_add_rejects_explicit_blank_quote_atomically(findings_db):
     finding_id = findings_tracker.add_finding(
         "Blank Quote Target",
-        "Draft finding",
+        "The audit identifies the subject.",
         source_datasets=["gao"],
+        evidence_ids=["https://www.gao.gov/fixture-report"],
+        source_quotes={"https://www.gao.gov/fixture-report": {"quote": "The audit identifies the subject."}},
         profile_id="test",
     )
 
@@ -117,8 +119,8 @@ def test_evidence_add_rejects_explicit_blank_quote_atomically(findings_db):
 
     assert (
         findings_db.execute(
-            "SELECT COUNT(*) FROM finding_evidence WHERE finding_id=?",
-            (finding_id,),
+            "SELECT COUNT(*) FROM finding_evidence WHERE finding_id=? AND evidence_ref=?",
+            (finding_id, "COURTLISTENER:docket/123"),
         ).fetchone()[0]
         == 0
     )

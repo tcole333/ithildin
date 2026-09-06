@@ -2,6 +2,8 @@ name: Python Tests
 
 on:
   pull_request:
+  push:
+    branches: [main]
   schedule:
     - cron: "0 8 * * *"
   workflow_dispatch:
@@ -14,8 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
       - uses: astral-sh/setup-uv@v5
         with:
           python-version: "3.11"
       - name: Run all deterministic Python regressions
-        run: uv run --locked python -m pytest --offline -m "not live_data" -q
+        run: uv run --locked python -m pytest --offline --require-critical-tests -m "not live_data" -q
