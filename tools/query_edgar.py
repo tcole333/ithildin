@@ -501,7 +501,7 @@ def _line_matches(lines, terms, *, context=2, max_matches=20):
     return matches
 
 
-def _emit_filing_text(text, args, *, title, url=None, retrieval="edgartools"):
+def _emit_filing_text(text, args, *, title, url=None, retrieval="edgartools", filing=None):
     """Write full filing text or display a bounded preview/match context."""
     if args.lines < 1:
         raise ValueError("--lines must be positive")
@@ -525,6 +525,9 @@ def _emit_filing_text(text, args, *, title, url=None, retrieval="edgartools"):
         "line_count": len(lines),
         "matches": matches,
     }
+    if filing is not None:
+        result.update(accession=filing.accession_no, form=filing.form,
+                      filing_date=str(filing.filing_date))
     if find_terms:
         result["text_included"] = False
     else:
@@ -1426,18 +1429,63 @@ def _ensure_edgartools_migration_markers(data_dir):
             pass
 
 
-def _get_edgartools_filing(ticker_or_cik, form="10-K", index=0):
+def _normalize_accession(value):
+    """Normalize the SEC's dashed and directory accession representations."""
+    raw = str(value).strip()
+    if not re.fullmatch(r"\d{10}-\d{2}-\d{6}|\d{18}", raw):
+        raise ValueError("Accession must be 0000000000-00-000000 or 18 digits")
+    digits = raw.replace("-", "")
+    return f"{digits[:10]}-{digits[10:12]}-{digits[12:]}"
+
+
+def _filing_url_identity(url):
+    """Parse identity from an official accession URL without fetching a new API."""
+    parsed = urlparse(url)
+    match = re.fullmatch(r"/Archives/edgar/data/(\d+)/(\d{18})(?:/.*)?", parsed.path)
+    if (parsed.scheme != "https" or parsed.hostname not in {"sec.gov", "www.sec.gov"}
+            or parsed.username or parsed.password or parsed.port not in {None, 443}
+            or not match):
+        raise ValueError("Use an HTTPS SEC Archives URL containing CIK and accession")
+    return str(int(match[1])), _normalize_accession(match[2])
+
+
+def _get_edgartools_filing(ticker_or_cik, form=None, index=0, *, accession=None, url=None):
     """Get a filing via edgartools. Returns (filing, company) or (None, None)."""
     os.environ.setdefault("EDGAR_IDENTITY", "Ithildin Research research@example.com")
     data_dir = _configure_edgartools_data_dir()
     with _edgartools_import_lock():
         from edgar import Company
         _ensure_edgartools_migration_markers(data_dir)
-    company = Company(str(ticker_or_cik))
-    filings = company.get_filings(form=form)
+    if accession and url:
+        raise ValueError("Select a filing with either accession or URL")
+    url_cik = None
+    if url:
+        url_cik, accession = _filing_url_identity(url)
+    if accession:
+        accession = _normalize_accession(accession)
+        if index != 0:
+            raise ValueError("An accession or URL cannot be combined with a filing index")
+    if index < 0:
+        raise ValueError("Filing index must be nonnegative")
+    if not ticker_or_cik and not url_cik:
+        raise ValueError("Provide a ticker/CIK, or --url with an SEC accession URL")
+    company = Company(str(ticker_or_cik or url_cik))
+    if url_cik and str(int(company.cik)) != url_cik:
+        raise ValueError("Selected URL CIK does not match the requested company")
+    if accession:
+        # The installed edgartools API searches historical submissions when an
+        # accession is supplied; never fall back to an ordinal/latest filing.
+        filings = company.get_filings(accession_number=accession)
+    else:
+        filings = company.get_filings(form=form or "10-K")
     if not filings or index >= len(filings):
         return None, company
-    return filings[index], company
+    filing = filings[index]
+    if accession and _normalize_accession(filing.accession_no) != accession:
+        raise ValueError("edgartools returned a different accession than requested")
+    if accession and form and filing.form != form:
+        raise ValueError(f"Selected accession is {filing.form}, not requested {form}")
+    return filing, company
 
 
 def cmd_read(args):
@@ -1566,14 +1614,15 @@ def cmd_sections(args):
     """Extract specific sections from a 10-K or 10-Q filing using edgartools."""
     try:
         filing, company = _get_edgartools_filing(
-            args.ticker, form=args.form or "10-K", index=args.index
+            args.ticker, form=args.form, index=args.index or 0,
+            accession=getattr(args, "accession", None), url=getattr(args, "url", None),
         )
     except Exception as e:
         print(f"ERROR: {e}", file=sys.stderr)
         return 2
 
     if not filing:
-        print(f"ERROR: No {args.form or '10-K'} filings found for {args.ticker}", file=sys.stderr)
+        print("ERROR: No filing matched the requested company and selector", file=sys.stderr)
         return 2
 
     try:
@@ -1590,6 +1639,7 @@ def cmd_sections(args):
             ),
             url=getattr(filing, "homepage_url", None),
             retrieval="edgartools-full-text-fallback",
+            filing=filing,
         )
         return
 
@@ -1636,7 +1686,9 @@ def cmd_sections(args):
                     return
                 print(json.dumps(result, indent=2, default=str))
             else:
-                print(f"Financial statement '{key}' not available in this filing.")
+                print(f"ERROR: Financial statement '{key}' not available in selected accession "
+                      f"{filing.accession_no}.", file=sys.stderr)
+                return 2
             return
 
         if key in section_map:
@@ -1661,6 +1713,7 @@ def cmd_sections(args):
                     ),
                     url=getattr(filing, "homepage_url", None),
                     retrieval="edgartools-section",
+                    filing=filing,
                 )
             else:
                 # Try bracket access
@@ -1679,6 +1732,7 @@ def cmd_sections(args):
                         ),
                         url=getattr(filing, "homepage_url", None),
                         retrieval="edgartools-section",
+                        filing=filing,
                     )
                 else:
                     print(f"Section '{args.section}' not found in this filing.")
@@ -1699,6 +1753,7 @@ def cmd_sections(args):
                     ),
                     url=getattr(filing, "homepage_url", None),
                     retrieval="edgartools-section",
+                    filing=filing,
                 )
             else:
                 print(f"Section '{args.section}' not found. Try: business, risk, mda, legal, balance_sheet, income_statement, cashflow_statement")
@@ -1813,10 +1868,13 @@ def main():
 
     # sections (structured section extraction via edgartools)
     p = sub.add_parser("sections", help="Extract specific sections from 10-K/10-Q (clean text or structured financials)")
-    p.add_argument("ticker", help="Ticker symbol or CIK")
+    p.add_argument("ticker", nargs="?", help="Ticker symbol or CIK (optional with --url)")
     p.add_argument("--section", help="Section: business, risk, mda, legal | balance_sheet, income_statement, cashflow_statement")
-    p.add_argument("--form", default="10-K", help="Form type (default: 10-K)")
-    p.add_argument("--index", type=int, default=0, help="Filing index (0=most recent)")
+    p.add_argument("--form", help="Form type (default: 10-K for index selection; validates exact selectors)")
+    selection = p.add_mutually_exclusive_group()
+    selection.add_argument("--index", type=int, default=0, help="Filing index (0=most recent; prefer a stable selector)")
+    selection.add_argument("--accession", help="Exact accession, dashed or 18 digits; never falls back to latest")
+    selection.add_argument("--url", help="SEC Archives URL; selects that accession's structured filing, not an exhibit")
     p.add_argument("--lines", type=int, default=1000, help="Max lines to show")
     add_output_args(p)
 

@@ -1,4 +1,6 @@
-interface:
-  display_name: "Analyze Contract"
-  short_description: "Trace contracts, subawards, and payments"
-  default_prompt: "Use $analyze-contract to handle this investigation task with clear evidence and actionable output."
+"interface":
+  "display_name": "Analyze Contract"
+  "short_description": "Analyze a selected award and its obligation history"
+  "default_prompt": "Use $analyze-contract. Analyze the selected contract, subawards\
+    \ and obligation actions with exact award identity and explicit pagination and\
+    \ payment-data limits."

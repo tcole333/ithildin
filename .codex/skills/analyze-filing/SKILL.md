@@ -5,7 +5,7 @@ description: Deep SEC filing analysis — read full 10-K/proxy/13D text, extract
 
 # $analyze-filing
 
-**TIER 1: DEPTH ANALYSIS** — This skill reads full SEC filing text and extracts structured intelligence that surface-level searches miss. LLMs can process 100-500KB filings, cross-reference every name against the investigation, and find buried disclosures in footnotes that human analysts skim. Record every factual discovery separately. Do not theorize about what disclosures mean — extract and cross-reference.
+**TIER 1: DEPTH ANALYSIS** — Read the selected SEC disclosure package, extract material facts, and cross-reference its people, entities, and transactions. Keep disclosed facts separate from analytical interpretations. Explain significant patterns when the evidence warrants it, with explicit alternatives and inference confidence ceilings.
 
 ## Arguments
 
@@ -15,6 +15,8 @@ description: Deep SEC filing analysis — read full 10-K/proxy/13D text, extract
 - `$analyze-filing --form "DEF 14A"` — filter to proxy statements (default: 10-K)
 
 ### Context Loading
+Read `docs/RESEARCH_WORKFLOW_CONTRACT.md` and pin the requested profile/database before scoped work. Preserve that context throughout the task and any supervised subagent work.
+
 ```bash
 uv run python tools/investigation_context.py show
 ```
@@ -50,11 +52,10 @@ uv run python tools/query_edgar.py filings <CIK> \
   --output $WORKDIR/edgar-filings.json
 ```
 
-Select the most relevant filing: most recent, or one matching a key_date from the investigation profile.
+Honor a supplied filing. Otherwise select the filing relevant to the question and dates, defaulting to the latest only when no historical scope is requested. Record CIK, accession, form, filing date, primary-document URL, and reporting period in the workdir. Use that stable accession for every later extraction; an ordinal filing index can move.
 
 ### 2. Read the Full Filing
 
-This is the core LLM advantage — process the entire document, not just metadata.
 Acquire the complete extracted text through the tool's structured-output path;
 `--lines` only controls terminal previews and is not a full-read mechanism.
 
@@ -65,8 +66,7 @@ jq '{url, retrieval, characters, line_count}' "$WORKDIR/filing-full.json"
 jq -r '.text' "$WORKDIR/filing-full.json" > "$WORKDIR/filing-full.txt"
 ```
 
-For large filings, split the saved complete text into sequential chunks, read
-every chunk, and track the highest line covered against `line_count`:
+Read the complete filing directly when it fits the runtime's available context. For larger filings, use sequential chunks sized for the available tool output and context; 2,000 lines below is an adjustable example. Read every chunk and record covered ranges against `line_count`:
 
 ```bash
 split -l 2000 -d -a 4 "$WORKDIR/filing-full.txt" "$WORKDIR/filing-chunk-"
@@ -75,6 +75,8 @@ ls "$WORKDIR"/filing-chunk-*
 
 Use repeatable `read --find TERM --context N` calls only to revisit targeted
 passages; they do not replace the sequential full-text pass.
+
+Maintain `$WORKDIR/filing-progress.md` with the selected identities, coverage ranges, unresolved references, persisted finding IDs, and next step. Resume from these artifacts after compaction or interruption. Continue the requested analysis while useful authorized work remains; context pressure is a reason to checkpoint and resume. Independent exhibit or cross-reference work can run in native chat subagents with explicit ownership; the parent reconciles the complete package before reporting.
 
 #### Cover the accession package
 
@@ -109,7 +111,7 @@ record the exact missing document and affected checklist items.
 
 ### 3. Extract by Filing Type
 
-Read the filing text and systematically extract information. **Do not skim — read thoroughly.** The value of this skill is exhaustive extraction.
+Use the filing-type checklist to guide a thorough pass, recording material disclosures and explicit not-applicable items. For a user-requested narrow question, define its document coverage and affected checklist items; do not present that scoped answer as an exhaustive filing review.
 
 #### 10-K / 10-Q Extraction Checklist
 
@@ -149,17 +151,19 @@ Read the filing text and systematically extract information. **Do not skim — r
 - [ ] **Financial statements** (structured extraction via edgartools)
   - Pull structured data for ratio analysis:
     ```bash
-    uv run python tools/query_edgar.py sections <TICKER_OR_CIK> --section income_statement --output $WORKDIR/income.json
-    uv run python tools/query_edgar.py sections <TICKER_OR_CIK> --section balance_sheet --output $WORKDIR/balance.json
-    uv run python tools/query_edgar.py sections <TICKER_OR_CIK> --section cashflow_statement --output $WORKDIR/cashflow.json
+    uv run python tools/query_edgar.py sections <CIK> --accession "<SELECTED_ACCESSION>" --section income_statement --output "$WORKDIR/income.json"
+    uv run python tools/query_edgar.py sections <CIK> --accession "<SELECTED_ACCESSION>" --section balance_sheet --output "$WORKDIR/balance.json"
+    uv run python tools/query_edgar.py sections <CIK> --accession "<SELECTED_ACCESSION>" --section cashflow_statement --output "$WORKDIR/cashflow.json"
     ```
+  - An exact `sections --url "<SELECTED_SEC_ARCHIVES_URL>"` can replace CIK/accession selection. It selects that accession's structured filing, even when the URL names an exhibit; continue reading the exact exhibit separately. The tool rejects accession, CIK, or explicit form mismatches and never substitutes the latest 10-K.
+  - Inspect each output's `accession`, `form`, `filing_date`, `statement_type`, and `periods` before ratio analysis. A full-text fallback is not structured financial data. Missing statements or unavailable XBRL are coverage gaps; extract from the selected text where possible and retain units, consolidated scope, and comparable periods.
   - Run ratio analysis:
     ```bash
     uv run python tools/financial_ratios.py analyze $WORKDIR/income.json $WORKDIR/balance.json --cashflow $WORKDIR/cashflow.json --output $WORKDIR/ratios.json
     ```
   - Review ratios for anomalies: margin compression, earnings/cash divergence, high accruals, pass-through indicators
   - Record each anomaly as a separate finding with `--type financial`
-  - Key red flags: gross margin <5% (pass-through), operating CF negative while net income positive, accruals ratio >10%, receivables growing faster than revenue
+  - Screening examples include gross margin below 5%, operating cash flow negative while net income is positive, accruals above 10%, and receivables outgrowing revenue. Interpret these against sector, accounting policies, periods, and peers; they do not establish pass-through activity or misconduct.
 
 - [ ] **Accounting policy changes** (footnotes, typically Note 1-2)
   - Revenue recognition methodology
@@ -208,14 +212,8 @@ uv run python tools/entity_tracker.py lookup --name "<NAME>"
 # Check for existing findings
 uv run python tools/findings_tracker.py search "<NAME>" --output $WORKDIR/xref-<slug>.json
 
-# Check connections
-uv run python -c "
-import sqlite3
-db = sqlite3.connect('investigation.db')
-db.row_factory = sqlite3.Row
-rows = db.execute('SELECT * FROM connections WHERE person_a LIKE ? OR person_b LIKE ?', ('%<NAME>%','%<NAME>%')).fetchall()
-for r in rows: print(dict(r))
-"
+# Check connections using the pinned database/profile
+uv run python tools/findings_tracker.py connections "<NAME>" --output "$WORKDIR/connections-<slug>.json"
 ```
 
 Flag names that appear in the investigation profile's `key_persons` or `known_addresses`.
@@ -234,7 +232,7 @@ Read the parsed XML data. Map:
 
 ### 6. Record Findings
 
-**DB-first principle**: Record every discovery to `findings_tracker.py add` and every entity to `entity_tracker.py` as you extract them from the filing text. Do not accumulate observations and batch them at the end — if you run out of context, unrecorded observations are lost. The filing text in `$WORKDIR/` is ephemeral; the database is permanent.
+Persist supported findings and resolved entities as coherent extraction units finish; keep an evidence ledger for work still being reconciled. Check existing records before adding duplicates. Preserve quoted passages and source artifacts beyond the temporary workdir when they support persisted findings, following `docs/GIT_WORKFLOW.md`.
 
 One finding per discrete factual discovery. **Do not batch into one mega-finding.**
 
@@ -268,7 +266,9 @@ uv run python tools/entity_tracker.py add-entity --name "<SUBSIDIARY>" --entity-
 uv run python tools/entity_tracker.py add-role --entity-id <ID> --person-name "<OFFICER>" --role "<TITLE>" --source "SEC:CIK<NUM>"
 ```
 
-### 7. Spawn Follow-Up Leads
+### 7. Create Follow-Up Leads
+
+Create leads for unresolved, relevant questions with a concrete next step. A newly mentioned name alone does not require a new investigation.
 
 ```bash
 # New person discovered in filing
@@ -293,23 +293,12 @@ uv run python tools/lead_tracker.py add \
 
 ### 8. Stop Conditions
 
-- All extraction checklist items checked for the filing type
+- The requested question is answered with recorded scope, or all applicable checklist items are covered for a full filing review
 - All discovered names cross-referenced against investigation DB
 - Insider transactions analyzed (if person-related investigation)
 - The requested form or exact requested URL was honored
 - The accession index was inventoried; the primary form, load-bearing exhibits,
   and incorporated documents were saved and read through their recorded
   `line_count`, or each unavailable/pending document was explicitly recorded
-- Do not report the analysis as complete while any required accession-package or
-  incorporated-document coverage remains pending
-
-## What Makes This Skill Valuable
-
-A human analyst reading a 10-K skims the summary, checks the financials table, and maybe reads Item 1A risk factors. They rarely read every footnote, cross-reference every subsidiary name, or check every officer against other investigations.
-
-An LLM agent reads the **entire document** and cross-references **every name** against the investigation database. This surfaces:
-- Related-party transactions buried in Note 17 that nobody reads
-- Subsidiaries in offshore jurisdictions disclosed in Exhibit 21
-- Officers who also appear in other investigation targets
-- Litigation disclosures that reveal ongoing enforcement actions
-- Insider trading patterns around key investigation dates
+- Structured statements and ratios retain the selected accession and reporting periods
+- The final report identifies findings, contradictions, source/document coverage, artifacts, and remaining work. Continue through recoverable failures; when an external dependency prevents completion, report partial coverage and an exact resumption step. Do not claim complete package coverage while required incorporated documents remain pending.
