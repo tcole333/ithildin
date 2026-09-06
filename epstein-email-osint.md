@@ -97,7 +97,7 @@ Linked by released documents, shared password patterns, court filings, and Grava
   - http://jeffreyepsteinscience.com/
 
 ### Avatar Image
-- **File**: `gravatar-jeffreyepstein.jpg` (400x400 JPEG, 30KB)
+- **File**: `datasets/legacy-root-evidence/gravatar-jeffreyepstein.jpg` (local evidence archive) (400x400 JPEG, 30KB)
 - **Content**: Photo of Jeffrey Epstein (the financier) with two other individuals
 - **Gravatar hash URL**: https://0.gravatar.com/avatar/af89a0978702cdec43aadd96a4c0435fbec1d3d569973178a4938d8a0104e2a5
 
