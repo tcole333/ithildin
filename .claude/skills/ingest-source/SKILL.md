@@ -1,119 +1,83 @@
 ---
 name: ingest-source
-description: Add a new data source to the investigation infrastructure
-user_invocable: true
+description: Onboard a named dataset, corpus, API or source URL with a reproducible query wrapper. Use build-infra for queued infrastructure and add-registry for a corporate jurisdiction.
+user-invocable: true
 ---
 
 # /ingest-source
 
-Onboard a new data source into the investigation platform.
+Accept a source identifier or URL. Read
+[the source integration contract](../build-infra/references/source-integration.md)
+before acquisition or implementation. It owns pinned context, verified access,
+artifact/provenance handling, dependencies, query contracts and completion tests.
 
-## Arguments
+## Characterize and access the source
 
-- Required: source identifier or URL (e.g., `/ingest-source tensonaut/EPSTEIN_FILES_20K`)
+Establish format, record grain, size, provenance, date/version coverage,
+independence/overlap with existing sources, and relevance to the requested
+investigation. Use the profile's corpus tools and applicable
+`docs/modules/*.md`; historical case-specific sources are not universal defaults.
 
-## Process
+Verify actual endpoints, parameters, response schema and bulk file layout with
+bounded discovery before writing the wrapper. For interactive portals, inspect
+source-observed network/form routes through native browser tools as needed.
+Preserve useful licensed/account/request routes if public machine access fails.
+A failed access attempt is a coverage gap, not a negative search result.
 
-### 1. Characterize the Source
-- What format? (Parquet, CSV, SQLite, JSON, API, .eml, HTML)
-- How large? (file count, record count, size)
-- What does it contain? (emails, documents, entities, financial records, flight logs)
-- What's the provenance? (DOJ release, court filing, FOIA, leaked, community-compiled)
-- Overlap with existing sources? (Check against unified DB, LMSBAND, etc.)
+Retain acquisitions under an appropriate ignored data directory with a tracked
+manifest of source, retrieval/version, checksum, size and relative file path.
+Keep probes and temporary transformations in an isolated workdir. Inspect the
+actual header/schema and representative rows before joins or parser assumptions.
+For large datasets, inspect schema/row groups or bounded samples before deciding
+whether full materialization is practical.
 
-### 2. Download/Access
-For downloadable datasets:
-```bash
-# HuggingFace datasets
-pip install datasets  # if needed
-uv run python -c "from datasets import load_dataset; ds = load_dataset('<ID>'); ds.save_to_disk('datasets/<name>')"
+Install durable dependencies through the repository's `uv` project workflow;
+an isolated experiment can use `uv run --with <package> python ...` with its
+dependency/version recorded. A global `pip install` does not define the project
+runtime. Use `pyproject.toml` and current package documentation to select the
+dependency and source access interface.
 
-# Or direct download
-curl -L <URL> -o datasets/<filename>
-```
+## Implement and smoke-test
 
-For APIs:
-- Document the API endpoint, auth requirements, rate limits
-- Test with a sample query
+Create the appropriate query/ingest adapter under the linked contract. Read a
+similar current implementation and its tests; `--help` owns exact commands.
+A text-search wrapper normally exposes `search`, `--limit`, structured
+`--output` and optional JSON stdout. Specialized sources may need other
+operations; implement the question's useful interface rather than a forced
+generic search command.
 
-**If the API is undocumented or endpoints are uncertain, you MUST run live discovery before writing the tool.** Do not guess at endpoint URLs, parameter names, or response formats and write code around assumptions. Instead:
-
-1. **Fetch the web interface** (`WebFetch` the portal's search page) and extract API endpoints from JavaScript, form actions, and XHR patterns in the page source
-2. **Probe candidate endpoints** with a script that systematically tries likely URL patterns and reports which return valid responses vs 404/403/500
-3. **Document the discovered API** — exact endpoint URL, required parameters, response schema, rate limits, auth requirements
-4. **Only then write the tool** targeting the confirmed, working endpoint
-
-This applies equally to FTP/SFTP servers — connect and list the actual directory structure before writing parsers for files you haven't seen.
-
-Speculative code that "tries multiple endpoints and hopes one works" is not acceptable as a final implementation. It's fine as a discovery script, but the resulting tool must target a specific, verified endpoint.
-
-### 3. Schema Analysis
-Examine the data structure:
-```python
-import pandas as pd
-df = pd.read_parquet('datasets/<file>.parquet')
-print(df.columns.tolist())
-print(df.dtypes)
-print(f"Rows: {len(df)}")
-print(df.head())
-```
-
-### 4. Write Query Wrapper
-Create `tools/query_<source>.py` following the standard pattern:
-- CLI with argparse subcommands
-- `search` command for text/keyword search
-- `--output FILE` via `tools.output_util.add_output_args()` and `write_output()`
-- `--json` flag for structured stdout fallback
-- `--limit` flag for result count
-- Consistent output formatting with only a one-line stdout summary when `--output` is used
-
-See existing wrappers for reference:
-- `tools/ingest_kabasshouse.py` (parquet download + SQLite FTS5)
-- `tools/query_doj.py` (SQLite + FTS5)
-- `tools/query_lmsband.py` (SQLite)
-- `tools/query_icij.py` (official remote service; optional local Neo4j traversal)
-
-### 5. Run Initial Investigation Search
-Test the new source against core targets. Pull the top entities dynamically from the database rather than using a hardcoded list:
 ```bash
 WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
+uv run python tools/investigation_context.py show --output "$WORKDIR/profile.json"
+PROFILE=$(jq -r '.name' "$WORKDIR/profile.json")
+uv run python tools/findings_tracker.py list --profile "$PROFILE" \
+  --limit 1000 --output "$WORKDIR/profile-findings.json"
+```
 
-# Get the most-investigated targets from existing findings
-uv run python -c "
-import sqlite3
-db = sqlite3.connect('investigation.db')
-rows = db.execute('''
-    SELECT target_name, COUNT(*) as cnt FROM findings
-    GROUP BY target_name ORDER BY cnt DESC LIMIT 15
-''').fetchall()
-for name, cnt in rows:
-    print(f'{name} ({cnt} findings)')
-"
+Select test targets from the pinned profile and supported findings artifact,
+checking source applicability and result limits. Include the primary subject or
+key persons when this source can cover them; target quotas are not evidence of
+coverage. Start with fixtures for positive, zero, partial and failed responses,
+then run a bounded authorized source probe.
 
-# Smoke-test the wrapper's bounded artifact output before wider use.
-uv run python tools/query_<source>.py search "<PRIMARY_SUBJECT>" --limit 10 \
-    --output "$WORKDIR/ingest-source-smoke.json"
+```bash
+uv run python tools/query_<source>.py search "<APPLICABLE_TARGET>" --limit 10 \
+  --output "$WORKDIR/ingest-source-smoke.json"
 uv run python -m json.tool "$WORKDIR/ingest-source-smoke.json" >/dev/null
 ```
-Also always include the primary subject and core inner circle members as search terms.
 
-### 6. Create Leads from Findings
-For any significant new results, create leads:
-```bash
-uv run python tools/lead_tracker.py add \
-    --title "New data in <source>: <description>" \
-    --category document \
-    --priority medium \
-    --source "ingest:<source_name>"
-```
+JSON validity alone is insufficient: verify expected fields, row identities,
+evidence URLs, pagination/completeness and the distinction between zero results
+and access/parser errors. Initial discoveries can become evidence-linked leads
+when they answer a relevant new question; review existing work before adding them.
 
-### 7. Update Source Report
-Add the new source to `tools/source_report.py`:
-- Add a check function call in `generate_report()`
-- Include query tool reference
+## Complete
 
-### 8. Update agent guidance
-Add the new source to the Data Source Inventory section in both `CLAUDE.md` and `AGENTS.md`.
-
-### 9. Log the Ingestion
-Document what was ingested, record counts, any issues found.
+Register the tool in the canonical source module/reference, citations and
+health/readiness inventory as applicable under the source integration contract.
+Report ingested record/version coverage, acquisition manifest, verified query
+examples, isolated tests, evidence/lead IDs and remaining access/data gaps.
+Supervise independent native chat workers when they help, inherit model settings,
+and collect artifacts before integration. Continue from saved acquisition and
+implementation state through long tasks rather than restarting or imposing
+an arbitrary source-reading limit.

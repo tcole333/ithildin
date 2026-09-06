@@ -6,22 +6,31 @@ and applies subagent dedup decisions (dead-end duplicates, link via lead_relatio
 
 Usage:
     python tools/lead_dedup.py fill-targets [--dry-run] [--batch-size 200]
-    python tools/lead_dedup.py scan [--profile-id NAME] [--min-group-size 2]
-    python tools/lead_dedup.py show-group <group_hash_or_lead_id>
-    python tools/lead_dedup.py export-batch --batch-size 20 --offset 0 --output FILE
-    python tools/lead_dedup.py apply --decisions-file FILE [--dry-run]
-    python tools/lead_dedup.py verify [--sample-size 10]
-    python tools/lead_dedup.py stats
+    uv run python tools/lead_dedup.py scan [--profile-id NAME] --output FILE
+    uv run python tools/lead_dedup.py show-group <group_hash_or_lead_id>
+    uv run python tools/lead_dedup.py export-batch --batch-size 20 --offset 0 --output FILE
+    uv run python tools/lead_dedup.py apply --batch-file BATCH --decisions-file FILE [--dry-run]
+    uv run python tools/lead_dedup.py verify [--sample-size 15]
+    uv run python tools/lead_dedup.py stats
 """
 import argparse
 import hashlib
 import json
+import os
 import re
 import sqlite3
-import sys
 from pathlib import Path
 
-DB_PATH = Path(__file__).parent.parent / "investigation.db"
+try:
+    from tools.lead_tracker import (open_review_db, review_context, review_profile_id,
+                                    review_lead_snapshot, validate_review_context, validate_review_lead)
+    from tools.output_util import add_output_args, write_output
+except ImportError:
+    from lead_tracker import (open_review_db, review_context, review_profile_id,
+                             review_lead_snapshot, validate_review_context, validate_review_lead)
+    from output_util import add_output_args, write_output
+
+DB_PATH = Path(os.environ.get("ITHILDIN_DB_PATH", Path(__file__).parent.parent / "investigation.db"))
 
 # ---------------------------------------------------------------------------
 # Shared utilities (subset of finding_dedup.py patterns)
@@ -88,18 +97,12 @@ def group_hash(lead_ids):
 # Database
 # ---------------------------------------------------------------------------
 
-def get_db():
-    db = sqlite3.connect(str(DB_PATH))
-    db.row_factory = sqlite3.Row
-    db.execute("PRAGMA journal_mode=WAL")
-    db.execute("PRAGMA busy_timeout=5000")
-    db.execute("PRAGMA foreign_keys=ON")
-    _ensure_dedup_schema(db)
-    return db
+def get_db(*, write=False):
+    return open_review_db(write=write, db_path=DB_PATH)
 
 
 def _ensure_dedup_schema(db):
-    db.executescript("""
+    db.execute("""
         CREATE TABLE IF NOT EXISTS lead_dedup_log (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             group_hash TEXT NOT NULL UNIQUE,
@@ -110,9 +113,33 @@ def _ensure_dedup_schema(db):
             rationale TEXT,
             decided_by TEXT DEFAULT 'agent:dedup',
             decided_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        );
-        CREATE INDEX IF NOT EXISTS idx_dedup_log_hash ON lead_dedup_log(group_hash);
+            , profile_id TEXT
+            , decision_json TEXT
+        )
     """)
+    columns = {row[1] for row in db.execute("PRAGMA table_info(lead_dedup_log)")}
+    for column in ("profile_id", "decision_json"):
+        if column not in columns:
+            db.execute(f"ALTER TABLE lead_dedup_log ADD COLUMN {column} TEXT")
+
+
+def _has_log(db):
+    return bool(db.execute("SELECT 1 FROM sqlite_master WHERE name='lead_dedup_log'").fetchone())
+
+
+def _scoped_log_rows(db, profile_id):
+    """Legacy rows are attributable only when all recorded IDs belong to this profile."""
+    if not _has_log(db):
+        return []
+    columns = {row[1] for row in db.execute("PRAGMA table_info(lead_dedup_log)")}
+    legacy = """EXISTS (SELECT 1 FROM json_each(d.lead_ids)) AND NOT EXISTS (
+        SELECT 1 FROM json_each(d.lead_ids) ids LEFT JOIN leads l ON l.id=ids.value
+        WHERE l.profile_id IS NOT ?)"""
+    if "profile_id" in columns:
+        where, params = f"d.profile_id=? OR (d.profile_id IS NULL AND {legacy})", (profile_id, profile_id)
+    else:
+        where, params = legacy, (profile_id,)
+    return db.execute(f"SELECT d.* FROM lead_dedup_log d WHERE {where} ORDER BY decided_at DESC, id DESC", params).fetchall()
 
 
 # ---------------------------------------------------------------------------
@@ -209,56 +236,40 @@ def _extract_target_from_title(title):
     return None
 
 
-def cmd_fill_targets(args):
-    """Infer missing target_name from title patterns."""
-    db = get_db()
-    leads = db.execute("""
-        SELECT id, title, description, source FROM leads
-        WHERE status IN ('open', 'pending_triage')
-          AND (target_name IS NULL OR target_name = '')
-        ORDER BY id
-    """).fetchall()
-
-    if not leads:
-        print("No leads with missing target_name found.")
+def fill_targets(*, profile_id=None, dry_run=False):
+    """Infer missing target names in one scoped, atomic operation."""
+    db = get_db(write=not dry_run)
+    try:
+        db.execute("BEGIN" if dry_run else "BEGIN IMMEDIATE")
+        profile_id = review_profile_id(db, profile_id)
+        leads = db.execute(
+            "SELECT id, title, description, source FROM leads WHERE profile_id=? "
+            "AND status IN ('open','pending_triage') AND (target_name IS NULL OR target_name='') ORDER BY id",
+            (profile_id,),
+        ).fetchall()
+        fills, unfilled = [], []
+        for lead in leads:
+            target = _extract_target_from_title(lead["title"])
+            if not target:
+                unfilled.append(dict(lead))
+                continue
+            fills.append({"lead_id": lead["id"], "target_name": target, "title": lead["title"]})
+            if not dry_run:
+                db.execute(
+                    "UPDATE leads SET target_name=?, updated_at=CURRENT_TIMESTAMP WHERE id=? AND profile_id=? "
+                    "AND status IN ('open','pending_triage') AND (target_name IS NULL OR target_name='')",
+                    (target, lead["id"], profile_id),
+                )
+                db.execute("INSERT INTO lead_notes (lead_id, note) VALUES (?, ?)",
+                           (lead["id"], f"target_name inferred from title: '{target}'"))
+        db.commit() if not dry_run else db.rollback()
+        return {"profile_id": profile_id, "dry_run": dry_run, "filled": len(fills),
+                "fills": fills, "unfilled": unfilled}
+    except Exception:
+        db.rollback()
+        raise
+    finally:
         db.close()
-        return
-
-    print(f"Leads with missing target_name: {len(leads)}")
-
-    filled = 0
-    unfilled = []
-    for lead in leads:
-        target = _extract_target_from_title(lead["title"])
-        if target:
-            filled += 1
-            if args.dry_run:
-                print(f"  #{lead['id']}: '{target}' <- {lead['title'][:80]}")
-            else:
-                db.execute(
-                    "UPDATE leads SET target_name = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
-                    (target, lead["id"]),
-                )
-                db.execute(
-                    "INSERT INTO lead_notes (lead_id, note) VALUES (?, ?)",
-                    (lead["id"], f"target_name inferred from title: '{target}'"),
-                )
-        else:
-            unfilled.append(lead)
-
-    if not args.dry_run:
-        db.commit()
-        print(f"\nFilled: {filled} target_names")
-    else:
-        print(f"\n[DRY RUN] Would fill: {filled} target_names")
-
-    if unfilled:
-        print(f"Unfilled: {len(unfilled)} (need manual/subagent review)")
-        if args.verbose:
-            for lead in unfilled[:30]:
-                print(f"  #{lead['id']}: {lead['title'][:100]}")
-
-    db.close()
 
 
 # ---------------------------------------------------------------------------
@@ -283,6 +294,7 @@ def _resolve_target(target, aliases):
 
 def _build_groups(db, profile_id=None, min_group_size=2):
     """Build candidate duplicate groups using 4 strategies + union-find."""
+    profile_id = review_profile_id(db, profile_id)
     uf = UnionFind()
 
     # Load open leads
@@ -300,7 +312,7 @@ def _build_groups(db, profile_id=None, min_group_size=2):
         ORDER BY id
     """, params).fetchall()
 
-    leads_by_id = {l["id"]: dict(l) for l in leads}
+    leads_by_id = {lead["id"]: dict(lead) for lead in leads}
     aliases = _load_name_aliases(db)
 
     # Strategy 1: Exact target_name match (after alias resolution)
@@ -363,6 +375,7 @@ def _build_groups(db, profile_id=None, min_group_size=2):
     # Build groups from union-find
     raw_groups = uf.groups()
     groups = []
+    has_log = _has_log(db)
     for root, members in raw_groups.items():
         if len(members) < min_group_size:
             continue
@@ -370,7 +383,7 @@ def _build_groups(db, profile_id=None, min_group_size=2):
         ghash = group_hash(member_ids)
 
         # Check if already processed
-        existing = db.execute(
+        existing = has_log and db.execute(
             "SELECT id FROM lead_dedup_log WHERE group_hash = ?", (ghash,)
         ).fetchone()
         if existing:
@@ -393,601 +406,259 @@ def _build_groups(db, profile_id=None, min_group_size=2):
             )) if targets else None,
         })
 
-    groups.sort(key=lambda g: g["size"], reverse=True)
+    groups.sort(key=lambda g: (-g["size"], g["lead_ids"]))
 
     return groups, {"s1_pairs": s1_pairs, "s2_pairs": s2_pairs, "s3_pairs": s3_pairs}
 
 
-def cmd_scan(args):
-    """Group open leads into candidate duplicate clusters."""
+def export_batch(*, profile_id=None, batch_size=20, offset=0, min_group_size=2):
+    """Export a stable packet; offsets address the current unprocessed queue."""
+    if batch_size < 1 or offset < 0 or min_group_size < 2:
+        raise ValueError("batch-size must be positive, offset nonnegative, and min-group-size at least 2")
     db = get_db()
-    groups, pair_stats = _build_groups(db, profile_id=args.profile_id,
-                                        min_group_size=args.min_group_size)
-
-    print(f"=== Lead Dedup Scan ===")
-    print(f"Strategy 1 (exact target match): {pair_stats['s1_pairs']} pairs")
-    print(f"Strategy 2 (name variants): {pair_stats['s2_pairs']} pairs")
-    print(f"Strategy 3 (title similarity): {pair_stats['s3_pairs']} pairs")
-    print(f"\nCandidate groups: {len(groups)}")
-
-    total_leads = sum(g["size"] for g in groups)
-    print(f"Total leads in groups: {total_leads}")
-
-    # Already processed
-    processed = db.execute("SELECT COUNT(*) FROM lead_dedup_log").fetchone()[0]
-    print(f"Already processed groups: {processed}")
-
-    print(f"\nTop groups by size:")
-    for g in groups[:30]:
-        targets_str = ", ".join(g["targets"][:3])
-        if len(g["targets"]) > 3:
-            targets_str += f" +{len(g['targets']) - 3} more"
-        print(f"  [{g['group_hash']}] {g['size']} leads — {targets_str}")
-
-    if args.output:
-        output_path = Path(args.output)
-        output_path.write_text(json.dumps(groups, indent=2))
-        print(f"\nFull results written to {output_path}")
-
-    db.close()
-
-
-# ---------------------------------------------------------------------------
-# show-group: Display all leads in a group with context
-# ---------------------------------------------------------------------------
-
-def _get_group_by_hash_or_lead(db, identifier):
-    """Find a group by hash prefix or lead ID."""
-    # Try as group_hash prefix in dedup log
-    row = db.execute(
-        "SELECT * FROM lead_dedup_log WHERE group_hash LIKE ?",
-        (f"{identifier}%",)
-    ).fetchone()
-    if row:
-        return json.loads(row["lead_ids"]), row
-
-    # Run scan to find groups
-    groups, _ = _build_groups(db, min_group_size=2)
-
-    # Try matching by hash prefix in scan results
-    for g in groups:
-        if g["group_hash"].startswith(identifier):
-            return g["lead_ids"], None
-
-    # Try as lead ID
     try:
-        lead_id = int(identifier)
-    except ValueError:
-        return None, None
-
-    for g in groups:
-        if lead_id in g["lead_ids"]:
-            return g["lead_ids"], None
-
-    # Also check processed groups in log
-    rows = db.execute("SELECT lead_ids FROM lead_dedup_log").fetchall()
-    for row in rows:
-        ids = json.loads(row["lead_ids"])
-        if lead_id in ids:
-            return ids, row
-
-    return None, None
-
-
-def cmd_show_group(args):
-    """Show all leads in a group with full context."""
-    db = get_db()
-    lead_ids, log_entry = _get_group_by_hash_or_lead(db, args.identifier)
-
-    if lead_ids is None:
-        print(f"No group found for '{args.identifier}'")
+        db.execute("BEGIN")
+        packet = review_context(db, profile_id)
+        groups, _ = _build_groups(db, packet["profile_id"], min_group_size)
+        selected = groups[offset:offset + batch_size]
+        packet["groups"] = [dict(group, leads=[
+            review_lead_snapshot(db, lead_id, packet["profile_id"]) for lead_id in group["lead_ids"]
+        ]) for group in selected]
+        packet.update(unprocessed_count=len(groups), offset=offset,
+                      remaining_after_batch=max(0, len(groups) - offset - len(selected)))
+        return packet
+    finally:
         db.close()
-        return
-
-    if log_entry:
-        print(f"Group {log_entry['group_hash']} — {log_entry['decision']} "
-              f"(decided {log_entry['decided_at']})")
-        if log_entry["rationale"]:
-            print(f"Rationale: {log_entry['rationale']}")
-        print()
-
-    for lid in sorted(lead_ids):
-        lead = db.execute("""
-            SELECT id, title, description, category, priority, status, source,
-                   target_name, depth_tier, stop_reason, created_at
-            FROM leads WHERE id = ?
-        """, (lid,)).fetchone()
-        if not lead:
-            print(f"  #{lid}: NOT FOUND")
-            continue
-
-        status_mark = "X" if lead["status"] == "dead_end" else " "
-        print(f"  [{status_mark}] #{lead['id']} [{lead['priority']}] ({lead['category'] or '?'})")
-        print(f"      Title: {lead['title'][:120]}")
-        if lead["target_name"]:
-            print(f"      Target: {lead['target_name']}")
-        if lead["description"]:
-            print(f"      Desc: {lead['description'][:150]}")
-        if lead["source"]:
-            print(f"      Source: {lead['source'][:80]}")
-        if lead["depth_tier"]:
-            print(f"      Tier: {lead['depth_tier']}")
-        if lead["stop_reason"]:
-            print(f"      Stop: {lead['stop_reason'][:100]}")
-
-        # Notes
-        notes = db.execute(
-            "SELECT note, created_at FROM lead_notes WHERE lead_id = ? ORDER BY created_at DESC LIMIT 3",
-            (lid,)
-        ).fetchall()
-        for note in notes:
-            print(f"      Note: {note['note'][:100]}")
-
-        # Related findings count
-        findings_count = db.execute(
-            "SELECT COUNT(*) FROM findings WHERE target_name = ? AND verification_status != 'retracted'",
-            (lead["target_name"],)
-        ).fetchone()[0] if lead["target_name"] else 0
-        if findings_count:
-            print(f"      Findings for target: {findings_count}")
-
-        # Existing lead_relations
-        rels = db.execute("""
-            SELECT lr.related_lead_id, lr.relation_type, l.title
-            FROM lead_relations lr
-            JOIN leads l ON l.id = lr.related_lead_id
-            WHERE lr.lead_id = ?
-            UNION
-            SELECT lr.lead_id, lr.relation_type, l.title
-            FROM lead_relations lr
-            JOIN leads l ON l.id = lr.lead_id
-            WHERE lr.related_lead_id = ?
-        """, (lid, lid)).fetchall()
-        for rel in rels:
-            print(f"      Rel: {rel['relation_type']} -> #{rel['related_lead_id']} {rel['title'][:60]}")
-
-        print()
-
-    db.close()
 
 
-# ---------------------------------------------------------------------------
-# export-batch: Export unprocessed groups for subagent review
-# ---------------------------------------------------------------------------
-
-def cmd_export_batch(args):
-    """Export unprocessed groups with full context for subagent review."""
-    db = get_db()
-    groups, _ = _build_groups(db, profile_id=args.profile_id,
-                               min_group_size=args.min_group_size)
-
-    # Apply offset and batch_size
-    batch = groups[args.offset:args.offset + args.batch_size]
-
-    if not batch:
-        print(f"No unprocessed groups at offset={args.offset}")
-        db.close()
-        return
-
-    # Enrich each group with full lead context
-    enriched = []
-    for g in batch:
-        group_leads = []
-        for lid in g["lead_ids"]:
-            lead = db.execute("""
-                SELECT id, title, description, category, priority, status, source,
-                       target_name, depth_tier, recommended_skill, created_at
-                FROM leads WHERE id = ?
-            """, (lid,)).fetchone()
-            if not lead:
+def apply_decisions(batch, decisions, *, profile_id=None, dry_run=False):
+    """Apply exactly the reviewed groups, rejecting foreign/stale input atomically."""
+    if not isinstance(decisions, list) or any(not isinstance(item, dict) for item in decisions):
+        raise ValueError("Decisions must be a JSON array of objects")
+    db = get_db(write=not dry_run)
+    try:
+        db.execute("BEGIN" if dry_run else "BEGIN IMMEDIATE")
+        profile_id = validate_review_context(db, batch, profile_id)
+        groups = batch.get("groups")
+        if not isinstance(groups, list) or any(not isinstance(item, dict) for item in groups):
+            raise ValueError("Batch must contain exported groups")
+        by_hash = {}
+        all_ids = set()
+        for group in groups:
+            ids = group.get("lead_ids")
+            snapshots = group.get("leads")
+            if not isinstance(ids, list) or any(type(item) is not int for item in ids):
+                raise ValueError("Group lead_ids must be integers")
+            if len(ids) < 2 or len(set(ids)) != len(ids) or all_ids.intersection(ids):
+                raise ValueError("Groups must have distinct, non-overlapping lead IDs")
+            if group.get("group_hash") != group_hash(ids):
+                raise ValueError("Group hash does not match its exported lead IDs")
+            if not isinstance(snapshots, list) or any(not isinstance(item, dict) for item in snapshots):
+                raise ValueError("Every group needs its exported lead snapshots")
+            if any(type(item.get("id")) is not int for item in snapshots) or len(snapshots) != len(ids) or {item.get("id") for item in snapshots} != set(ids):
+                raise ValueError("Group snapshots do not match lead_ids")
+            by_hash[group["group_hash"]] = group
+            all_ids.update(ids)
+        hashes = [item.get("group_hash") for item in decisions]
+        if any(not isinstance(item, str) for item in hashes) or len(set(hashes)) != len(hashes) or set(hashes) != set(by_hash):
+            raise ValueError("Decisions must cover each exported group exactly once")
+        allowed = {"group_hash", "decision", "keeper_id", "dead_end_ids", "rationale", "target_name_fills"}
+        prepared = []
+        skipped = 0
+        for decision in decisions:
+            if set(decision) - allowed:
+                raise ValueError(f"Unknown decision fields: {sorted(set(decision) - allowed)}")
+            group = by_hash[decision["group_hash"]]
+            ids = set(group["lead_ids"])
+            action = decision.get("decision")
+            keeper = decision.get("keeper_id")
+            dead_ids = decision.get("dead_end_ids", [])
+            fills = decision.get("target_name_fills", {})
+            if not isinstance(action, str) or action not in {"keep_all", "merge", "consolidate"}:
+                raise ValueError("decision must be keep_all, merge, or consolidate")
+            if not isinstance(decision.get("rationale"), str) or not decision["rationale"].strip():
+                raise ValueError("Every decision requires a rationale")
+            if not isinstance(dead_ids, list) or any(type(item) is not int for item in dead_ids):
+                raise ValueError("dead_end_ids must be an array of integers")
+            if len(set(dead_ids)) != len(dead_ids) or not set(dead_ids).issubset(ids):
+                raise ValueError("Dead-ended leads must be distinct members of the reviewed group")
+            if action == "keep_all":
+                if keeper is not None or dead_ids:
+                    raise ValueError("keep_all cannot specify a keeper or dead-ended leads")
+            elif type(keeper) is not int or keeper not in ids or keeper in dead_ids or not dead_ids:
+                raise ValueError("A merge/consolidation requires a group keeper and other group members to close")
+            if not isinstance(fills, dict):
+                raise ValueError("target_name_fills must be an object")
+            for lead_id, target in fills.items():
+                if not isinstance(lead_id, str) or not lead_id.isdecimal() or str(int(lead_id)) != lead_id or int(lead_id) not in ids:
+                    raise ValueError("Target fills must name reviewed group members")
+                if not isinstance(target, str) or not target.strip():
+                    raise ValueError("Target fills must contain nonempty names")
+            canonical = json.dumps(decision, sort_keys=True, ensure_ascii=False)
+            prior = db.execute("SELECT * FROM lead_dedup_log WHERE group_hash=?", (group["group_hash"],)).fetchone() if _has_log(db) else None
+            if prior:
+                if "decision_json" not in prior.keys() or prior["decision_json"] != canonical or prior["profile_id"] != profile_id:
+                    raise ValueError("Group was previously reviewed with a different decision; export remaining work")
+                skipped += 1
                 continue
-
-            lead_data = dict(lead)
-
-            # Notes (top 3)
-            notes = db.execute(
-                "SELECT note FROM lead_notes WHERE lead_id = ? ORDER BY created_at DESC LIMIT 3",
-                (lid,)
-            ).fetchall()
-            lead_data["notes"] = [n["note"] for n in notes]
-
-            # Findings count + top summaries for this target
-            if lead["target_name"]:
-                findings = db.execute("""
-                    SELECT id, summary FROM findings
-                    WHERE target_name = ? AND verification_status != 'retracted'
-                    ORDER BY id DESC LIMIT 5
-                """, (lead["target_name"],)).fetchall()
-                lead_data["findings_count"] = len(findings)
-                lead_data["finding_summaries"] = [f["summary"][:200] for f in findings[:3]]
-            else:
-                lead_data["findings_count"] = 0
-                lead_data["finding_summaries"] = []
-
-            group_leads.append(lead_data)
-
-        enriched.append({
-            "group_hash": g["group_hash"],
-            "lead_ids": g["lead_ids"],
-            "size": g["size"],
-            "targets": g["targets"],
-            "leads": group_leads,
-        })
-
-    output_path = Path(args.output)
-    output_path.write_text(json.dumps(enriched, indent=2, default=str))
-    print(f"Exported {len(enriched)} groups ({sum(g['size'] for g in enriched)} leads) to {output_path}")
-    print(f"  Offset: {args.offset}, Batch size: {args.batch_size}")
-    print(f"  Remaining: {max(0, len(groups) - args.offset - args.batch_size)} groups")
-
-    db.close()
-
-
-# ---------------------------------------------------------------------------
-# apply: Execute subagent dedup decisions
-# ---------------------------------------------------------------------------
-
-def cmd_apply(args):
-    """Apply subagent dedup decisions from a JSON file."""
-    decisions_path = Path(args.decisions_file)
-    if not decisions_path.exists():
-        print(f"ERROR: decisions file not found: {decisions_path}")
-        return
-
-    decisions = json.loads(decisions_path.read_text())
-    if not isinstance(decisions, list):
-        print("ERROR: decisions file must contain a JSON array")
-        return
-
-    db = get_db()
-
-    applied = 0
-    skipped = 0
-    dead_ended = 0
-    errors = 0
-
-    for decision in decisions:
-        ghash = decision.get("group_hash")
-        action = decision.get("decision")
-        keeper_id = decision.get("keeper_id")
-        dead_end_ids = decision.get("dead_end_ids", [])
-        rationale = decision.get("rationale", "")
-        target_fills = decision.get("target_name_fills", {})
-
-        if not ghash or not action:
-            print(f"  SKIP: missing group_hash or decision")
-            errors += 1
-            continue
-
-        # Check if already processed
-        existing = db.execute(
-            "SELECT id FROM lead_dedup_log WHERE group_hash = ?", (ghash,)
-        ).fetchone()
-        if existing:
-            skipped += 1
-            continue
-
-        # Validate keeper exists and is open (for merge/consolidate)
-        if action in ("merge", "consolidate") and keeper_id:
-            keeper = db.execute(
-                "SELECT id, status FROM leads WHERE id = ?", (keeper_id,)
-            ).fetchone()
-            if not keeper:
-                print(f"  ERROR [{ghash[:8]}]: keeper #{keeper_id} not found")
-                errors += 1
+            for snapshot in group["leads"]:
+                current = validate_review_lead(db, snapshot, profile_id, status="open")
+                if str(current["id"]) in fills and current.get("target_name"):
+                    raise ValueError("Target fills cannot overwrite an existing target_name")
+            prepared.append((decision, group, canonical))
+        if not dry_run and prepared:
+            _ensure_dedup_schema(db)
+        dead_ended = 0
+        for decision, group, canonical in prepared:
+            action = decision["decision"]
+            keeper = decision.get("keeper_id")
+            dead_ids = decision.get("dead_end_ids", [])
+            dead_ended += len(dead_ids)
+            if dry_run:
                 continue
-            if keeper["status"] not in ("open", "in_progress", "pending_triage"):
-                print(f"  ERROR [{ghash[:8]}]: keeper #{keeper_id} is {keeper['status']}")
-                errors += 1
-                continue
-
-            # Validate keeper is not in dead_end_ids
-            if keeper_id in dead_end_ids:
-                print(f"  ERROR [{ghash[:8]}]: keeper #{keeper_id} is also in dead_end_ids")
-                errors += 1
-                continue
-
-        # Apply target_name fills
-        for lid_str, target in target_fills.items():
-            lid = int(lid_str)
-            if not args.dry_run:
-                db.execute(
-                    "UPDATE leads SET target_name = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ? AND (target_name IS NULL OR target_name = '')",
-                    (target, lid),
+            for lead_id, target in decision.get("target_name_fills", {}).items():
+                db.execute("UPDATE leads SET target_name=?, updated_at=CURRENT_TIMESTAMP WHERE id=? AND profile_id=?",
+                           (target, int(lead_id), profile_id))
+                db.execute("INSERT INTO lead_notes (lead_id, note) VALUES (?, ?)",
+                           (int(lead_id), f"Target inferred during dedup review: {target}"))
+            for lead_id in dead_ids:
+                prefix = "Duplicate of" if action == "merge" else "Consolidated into"
+                updated = db.execute(
+                    "UPDATE leads SET status='dead_end', stop_reason=?, updated_at=CURRENT_TIMESTAMP, "
+                    "completed_at=CURRENT_TIMESTAMP WHERE id=? AND profile_id=? AND status='open'",
+                    (f"{prefix} lead #{keeper}", lead_id, profile_id),
                 )
-
-        # Execute dead-ends
-        if action in ("merge", "consolidate") and dead_end_ids:
-            relation_type = "duplicate" if action == "merge" else "supersedes"
-            stop_prefix = "Duplicate of" if action == "merge" else "Consolidated into"
-
-            for lid in dead_end_ids:
-                lead = db.execute(
-                    "SELECT id, status FROM leads WHERE id = ?", (lid,)
-                ).fetchone()
-                if not lead:
-                    print(f"  WARN [{ghash[:8]}]: lead #{lid} not found, skipping")
-                    continue
-                if lead["status"] not in ("open", "pending_triage"):
-                    print(f"  WARN [{ghash[:8]}]: lead #{lid} is {lead['status']}, skipping")
-                    continue
-
-                stop_reason = f"{stop_prefix} lead #{keeper_id}"
-                if not args.dry_run:
-                    db.execute("""
-                        UPDATE leads SET status = 'dead_end',
-                            stop_reason = ?,
-                            updated_at = CURRENT_TIMESTAMP,
-                            completed_at = CURRENT_TIMESTAMP
-                        WHERE id = ? AND status IN ('open', 'pending_triage')
-                    """, (stop_reason, lid))
-
-                    # Create lead_relation
-                    db.execute("""
-                        INSERT OR IGNORE INTO lead_relations
-                            (lead_id, related_lead_id, relation_type)
-                        VALUES (?, ?, ?)
-                    """, (lid, keeper_id, relation_type))
-
-                dead_ended += 1
-
-            if not args.dry_run and action == "consolidate" and keeper_id:
-                # Append notes from dead-ended leads to keeper
-                for lid in dead_end_ids:
-                    old_lead = db.execute(
-                        "SELECT title, description FROM leads WHERE id = ?", (lid,)
-                    ).fetchone()
-                    if old_lead:
-                        note = f"Consolidated from lead #{lid}: {old_lead['title']}"
-                        if old_lead["description"]:
-                            note += f" — {old_lead['description'][:200]}"
-                        db.execute(
-                            "INSERT INTO lead_notes (lead_id, note) VALUES (?, ?)",
-                            (keeper_id, note),
-                        )
-
-        # Log the decision
-        if not args.dry_run:
-            db.execute("""
-                INSERT OR IGNORE INTO lead_dedup_log
-                    (group_hash, lead_ids, decision, keeper_id, dead_ended_ids, rationale)
-                VALUES (?, ?, ?, ?, ?, ?)
-            """, (
-                ghash,
-                json.dumps(decision.get("lead_ids", dead_end_ids + ([keeper_id] if keeper_id else []))),
-                action,
-                keeper_id,
-                json.dumps(dead_end_ids),
-                rationale,
-            ))
-
-        applied += 1
-
-        action_str = f"{action}"
-        if keeper_id:
-            action_str += f" (keeper=#{keeper_id}, dead-ended={len(dead_end_ids)})"
-        if args.dry_run:
-            print(f"  [DRY RUN] {ghash[:8]}: {action_str}")
-        else:
-            print(f"  Applied {ghash[:8]}: {action_str}")
-
-    if not args.dry_run:
-        db.commit()
-
-    print(f"\n{'[DRY RUN] ' if args.dry_run else ''}Summary:")
-    print(f"  Applied: {applied}")
-    print(f"  Skipped (already processed): {skipped}")
-    print(f"  Dead-ended: {dead_ended}")
-    print(f"  Errors: {errors}")
-
-    db.close()
-
-
-# ---------------------------------------------------------------------------
-# verify: Spot-check recent dedup decisions
-# ---------------------------------------------------------------------------
-
-def cmd_verify(args):
-    """Spot-check recent dedup decisions for consistency."""
-    db = get_db()
-
-    recent = db.execute("""
-        SELECT * FROM lead_dedup_log
-        ORDER BY decided_at DESC
-        LIMIT ?
-    """, (args.sample_size,)).fetchall()
-
-    if not recent:
-        print("No dedup decisions found.")
+                if updated.rowcount != 1:
+                    raise ValueError(f"Lead #{lead_id} changed during dedup")
+                db.execute(
+                    "INSERT INTO lead_relations (lead_id, related_lead_id, relation_type) VALUES (?, ?, ?) "
+                    "ON CONFLICT(lead_id, related_lead_id) DO UPDATE SET relation_type=excluded.relation_type",
+                    (lead_id, keeper, "duplicate" if action == "merge" else "supersedes"),
+                )
+                db.execute("INSERT INTO lead_notes (lead_id, note) VALUES (?, ?)",
+                           (lead_id, f"Dedup {action}: {decision['rationale']}"))
+                if action == "consolidate":
+                    source = next(item for item in group["leads"] if item["id"] == lead_id)
+                    detail = f"Consolidated from lead #{lead_id}: {source['title']}"
+                    if source.get("description"):
+                        detail += "\n" + source["description"]
+                    for note in source["notes"]:
+                        detail += f"\nOriginal note #{note['id']}: {note['note']}"
+                    db.execute("INSERT INTO lead_notes (lead_id, note) VALUES (?, ?)", (keeper, detail))
+                    db.execute(
+                        "INSERT OR IGNORE INTO lead_evidence (lead_id, evidence_type, evidence_ref) "
+                        "SELECT ?, evidence_type, evidence_ref FROM lead_evidence WHERE lead_id=?", (keeper, lead_id),
+                    )
+            db.execute(
+                "INSERT INTO lead_dedup_log (group_hash, lead_ids, decision, keeper_id, dead_ended_ids, rationale, profile_id, decision_json) "
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                (group["group_hash"], json.dumps(group["lead_ids"]), action, keeper,
+                 json.dumps(dead_ids), decision["rationale"], profile_id, canonical),
+            )
+        db.commit() if not dry_run else db.rollback()
+        return {"profile_id": profile_id, "dry_run": dry_run, "applied": len(prepared),
+                "skipped_already_applied": skipped, "dead_ended": dead_ended}
+    except Exception:
+        db.rollback()
+        raise
+    finally:
         db.close()
-        return
-
-    print(f"Verifying {len(recent)} most recent decisions:\n")
-    issues = 0
-
-    for entry in recent:
-        ghash = entry["group_hash"]
-        decision = entry["decision"]
-        keeper_id = entry["keeper_id"]
-        dead_ended_ids = json.loads(entry["dead_ended_ids"]) if entry["dead_ended_ids"] else []
-
-        status_ok = True
-
-        # Check keeper is still open (for merge/consolidate)
-        if keeper_id and decision in ("merge", "consolidate"):
-            keeper = db.execute(
-                "SELECT id, status FROM leads WHERE id = ?", (keeper_id,)
-            ).fetchone()
-            if not keeper:
-                print(f"  [{ghash[:8]}] ISSUE: keeper #{keeper_id} not found")
-                status_ok = False
-                issues += 1
-            elif keeper["status"] in ("dead_end", "completed"):
-                # Check if it was dead-ended by another dedup decision (chain problem)
-                chained = db.execute(
-                    "SELECT group_hash FROM lead_dedup_log WHERE dead_ended_ids LIKE ?",
-                    (f"%{keeper_id}%",)
-                ).fetchone()
-                if chained:
-                    print(f"  [{ghash[:8]}] CHAIN: keeper #{keeper_id} was dead-ended by {chained['group_hash'][:8]}")
-                    issues += 1
-                    status_ok = False
-
-        # Check dead-ended leads are actually dead-ended
-        for lid in dead_ended_ids:
-            lead = db.execute(
-                "SELECT id, status, stop_reason FROM leads WHERE id = ?", (lid,)
-            ).fetchone()
-            if lead and lead["status"] != "dead_end":
-                print(f"  [{ghash[:8]}] ISSUE: lead #{lid} should be dead_end but is {lead['status']}")
-                status_ok = False
-                issues += 1
-
-            # Check lead_relation exists
-            rel = db.execute(
-                "SELECT * FROM lead_relations WHERE lead_id = ? AND related_lead_id = ?",
-                (lid, keeper_id)
-            ).fetchone()
-            if not rel and keeper_id:
-                print(f"  [{ghash[:8]}] ISSUE: missing lead_relation #{lid} -> #{keeper_id}")
-                status_ok = False
-                issues += 1
-
-        if status_ok:
-            print(f"  [{ghash[:8]}] OK — {decision} (keeper=#{keeper_id}, dead-ended={len(dead_ended_ids)})")
-
-    print(f"\nVerified: {len(recent)} decisions, {issues} issues found")
-    db.close()
 
 
-# ---------------------------------------------------------------------------
-# stats: Dedup metrics
-# ---------------------------------------------------------------------------
-
-def cmd_stats(args):
-    """Show dedup metrics."""
-    db = get_db()
-
-    # Open leads overview
-    total_open = db.execute("SELECT COUNT(*) FROM leads WHERE status = 'open'").fetchone()[0]
-    no_target = db.execute(
-        "SELECT COUNT(*) FROM leads WHERE status = 'open' AND (target_name IS NULL OR target_name = '')"
-    ).fetchone()[0]
-
-    print(f"=== Lead Dedup Stats ===")
-    print(f"Open leads: {total_open}")
-    print(f"Open leads without target_name: {no_target}")
-
-    # Targets with multiple open leads
-    multi = db.execute("""
-        SELECT COUNT(*) FROM (
-            SELECT target_name FROM leads
-            WHERE status = 'open' AND target_name IS NOT NULL AND target_name != ''
-            GROUP BY target_name HAVING COUNT(*) >= 2
-        )
-    """).fetchone()[0]
-    print(f"Targets with 2+ open leads: {multi}")
-
-    # Dedup log stats
-    total_decisions = db.execute("SELECT COUNT(*) FROM lead_dedup_log").fetchone()[0]
-    by_decision = db.execute("""
-        SELECT decision, COUNT(*) as cnt FROM lead_dedup_log GROUP BY decision
-    """).fetchall()
-
-    print(f"\nDedup decisions: {total_decisions}")
-    for row in by_decision:
-        print(f"  {row['decision']}: {row['cnt']}")
-
-    # Count dead-ended by dedup
-    dedup_dead = db.execute("""
-        SELECT COUNT(*) FROM leads
-        WHERE status = 'dead_end'
-          AND (stop_reason LIKE 'Duplicate of lead%'
-               OR stop_reason LIKE 'Consolidated into lead%')
-    """).fetchone()[0]
-    print(f"\nLeads dead-ended by dedup: {dedup_dead}")
-
-    # Lead relations from dedup
-    dup_rels = db.execute(
-        "SELECT COUNT(*) FROM lead_relations WHERE relation_type = 'duplicate'"
-    ).fetchone()[0]
-    sup_rels = db.execute(
-        "SELECT COUNT(*) FROM lead_relations WHERE relation_type = 'supersedes'"
-    ).fetchone()[0]
-    print(f"Lead relations (duplicate): {dup_rels}")
-    print(f"Lead relations (supersedes): {sup_rels}")
-
-    # Scan preview (groups remaining)
-    groups, _ = _build_groups(db, min_group_size=2)
-    print(f"\nUnprocessed candidate groups: {len(groups)}")
-    if groups:
-        total_in_groups = sum(g["size"] for g in groups)
-        print(f"Total leads in unprocessed groups: {total_in_groups}")
-
-    db.close()
+def _show_group(db, identifier, profile_id):
+    groups, _ = _build_groups(db, profile_id)
+    candidates = [(group["group_hash"], group["lead_ids"]) for group in groups]
+    candidates += [(row["group_hash"], json.loads(row["lead_ids"])) for row in _scoped_log_rows(db, profile_id)]
+    matches = {key: ids for key, ids in candidates if key.startswith(identifier) or
+               (identifier.isdecimal() and int(identifier) in ids)}
+    if len(matches) != 1:
+        raise ValueError("Group not found in this profile or identifier is ambiguous")
+    key, ids = next(iter(matches.items()))
+    return {"group_hash": key, "leads": [review_lead_snapshot(db, item, profile_id) for item in ids]}
 
 
-# ---------------------------------------------------------------------------
-# CLI
-# ---------------------------------------------------------------------------
+def _verify(db, profile_id, sample_size):
+    issues = []
+    rows = _scoped_log_rows(db, profile_id)[:sample_size]
+    for row in rows:
+        keeper_id = row["keeper_id"]
+        if keeper_id is not None:
+            keeper = db.execute("SELECT status FROM leads WHERE id=? AND profile_id=?", (keeper_id, profile_id)).fetchone()
+            if not keeper or keeper["status"] == "dead_end":
+                issues.append(f"Keeper #{keeper_id} is missing or dead-ended")
+        for lead_id in json.loads(row["dead_ended_ids"] or "[]"):
+            lead = db.execute("SELECT status FROM leads WHERE id=? AND profile_id=?", (lead_id, profile_id)).fetchone()
+            if not lead or lead["status"] != "dead_end":
+                issues.append(f"Lead #{lead_id} is missing or no longer dead-ended")
+            if not db.execute("SELECT 1 FROM lead_relations WHERE lead_id=? AND related_lead_id=?", (lead_id, keeper_id)).fetchone():
+                issues.append(f"Missing relation #{lead_id} -> #{keeper_id}")
+    return {"profile_id": profile_id, "verified": len(rows), "issues": issues}
+
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Lead deduplication for investigation.db"
-    )
-    sub = parser.add_subparsers(dest="command")
-
-    # fill-targets
-    p_fill = sub.add_parser("fill-targets", help="Infer missing target_name from title patterns")
-    p_fill.add_argument("--dry-run", action="store_true")
-    p_fill.add_argument("--verbose", "-v", action="store_true")
-
-    # scan
-    p_scan = sub.add_parser("scan", help="Group open leads into duplicate clusters")
-    p_scan.add_argument("--profile-id", help="Filter by investigation profile")
-    p_scan.add_argument("--min-group-size", type=int, default=2)
-    p_scan.add_argument("--output", "-o", help="Write full results to JSON file")
-
-    # show-group
-    p_show = sub.add_parser("show-group", help="Show all leads in a group")
-    p_show.add_argument("identifier", help="Group hash prefix or lead ID")
-
-    # export-batch
-    p_export = sub.add_parser("export-batch", help="Export groups for subagent review")
-    p_export.add_argument("--batch-size", type=int, default=20)
-    p_export.add_argument("--offset", type=int, default=0)
-    p_export.add_argument("--output", "-o", required=True)
-    p_export.add_argument("--profile-id", help="Filter by investigation profile")
-    p_export.add_argument("--min-group-size", type=int, default=2)
-
-    # apply
-    p_apply = sub.add_parser("apply", help="Apply subagent dedup decisions")
-    p_apply.add_argument("--decisions-file", required=True)
-    p_apply.add_argument("--dry-run", action="store_true")
-
-    # verify
-    p_verify = sub.add_parser("verify", help="Spot-check recent dedup decisions")
-    p_verify.add_argument("--sample-size", type=int, default=10)
-
-    # stats
-    sub.add_parser("stats", help="Dedup metrics")
-
+    parser = argparse.ArgumentParser(description="Profile-scoped lead deduplication with reviewed batch snapshots")
+    sub = parser.add_subparsers(dest="command", required=True)
+    fill = sub.add_parser("fill-targets", help="Infer missing targets within the selected profile")
+    fill.add_argument("--dry-run", action="store_true")
+    fill.add_argument("--verbose", "-v", action="store_true")
+    scan = sub.add_parser("scan", help="List unprocessed candidate groups")
+    scan.add_argument("--min-group-size", type=int, default=2)
+    show = sub.add_parser("show-group", help="Show a group in the selected profile")
+    show.add_argument("identifier")
+    export = sub.add_parser("export-batch", help="Export a database/profile-bound group snapshot")
+    export.add_argument("--batch-size", type=int, default=20)
+    export.add_argument("--offset", type=int, default=0, help="Offset into currently unprocessed groups; reset after applying a wave")
+    export.add_argument("--min-group-size", type=int, default=2)
+    apply = sub.add_parser("apply", help="Validate and atomically apply all decisions for an exported batch")
+    apply.add_argument("--batch-file", required=True)
+    apply.add_argument("--decisions-file", required=True)
+    apply.add_argument("--dry-run", action="store_true")
+    verify = sub.add_parser("verify", help="Check recent scoped decisions and keeper relationships")
+    verify.add_argument("--sample-size", type=int, default=15)
+    stats = sub.add_parser("stats", help="Report scoped queue and dedup metrics")
+    for command in (fill, scan, show, export, apply, verify, stats):
+        command.add_argument("--profile-id", "--profile", help="Override the pinned/default investigation profile")
+        add_output_args(command)
     args = parser.parse_args()
-
-    commands = {
-        "fill-targets": cmd_fill_targets,
-        "scan": cmd_scan,
-        "show-group": cmd_show_group,
-        "export-batch": cmd_export_batch,
-        "apply": cmd_apply,
-        "verify": cmd_verify,
-        "stats": cmd_stats,
-    }
-
-    if args.command in commands:
-        commands[args.command](args)
-    else:
-        parser.print_help()
+    try:
+        if args.command == "fill-targets":
+            result = fill_targets(profile_id=args.profile_id, dry_run=args.dry_run)
+        elif args.command == "export-batch":
+            result = export_batch(profile_id=args.profile_id, batch_size=args.batch_size,
+                                  offset=args.offset, min_group_size=args.min_group_size)
+        elif args.command == "apply":
+            result = apply_decisions(json.loads(Path(args.batch_file).read_text()),
+                                     json.loads(Path(args.decisions_file).read_text()),
+                                     profile_id=args.profile_id, dry_run=args.dry_run)
+        else:
+            db = get_db()
+            try:
+                profile_id = review_profile_id(db, args.profile_id)
+                if args.command == "show-group":
+                    result = _show_group(db, args.identifier, profile_id)
+                elif args.command == "verify":
+                    if args.sample_size < 1:
+                        raise ValueError("sample-size must be positive")
+                    result = _verify(db, profile_id, args.sample_size)
+                else:
+                    if getattr(args, "min_group_size", 2) < 2:
+                        raise ValueError("min-group-size must be at least 2")
+                    groups, pair_stats = _build_groups(db, profile_id, getattr(args, "min_group_size", 2))
+                    result = {"profile_id": profile_id, "unprocessed_count": len(groups)}
+                    if args.command == "scan":
+                        result.update(groups=groups, pair_stats=pair_stats)
+                    else:
+                        rows = db.execute("SELECT status, COUNT(*) n FROM leads WHERE profile_id=? GROUP BY status", (profile_id,)).fetchall()
+                        result.update(leads_by_status={row["status"]: row["n"] for row in rows},
+                                      reviewed_groups=len(_scoped_log_rows(db, profile_id)))
+            finally:
+                db.close()
+    except (ValueError, OSError, sqlite3.Error) as exc:
+        parser.exit(1, f"ERROR: {exc}\n")
+    if not write_output(result, args):
+        print(json.dumps(result, indent=2))
+    if args.command == "verify" and result["issues"]:
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

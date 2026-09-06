@@ -1,4 +1,5 @@
-interface:
-  display_name: "Status Report"
-  short_description: "Summarize leads, findings, and source coverage"
-  default_prompt: "Use $status-report to handle this investigation task with clear evidence and actionable output."
+"interface":
+  "display_name": "Status Report"
+  "short_description": "Report truthful investigation progress and limitations"
+  "default_prompt": "Use $status-report. Report the requested investigation’s current\
+    \ scoped progress, evidence activity, unresolved work and known coverage limitations."

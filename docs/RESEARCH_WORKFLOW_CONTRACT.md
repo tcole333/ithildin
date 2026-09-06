@@ -20,6 +20,13 @@ database's absolute path when using a staged/test database. Pass both environmen
 values to child workers. Do not change the shared active profile to route a task.
 Create one isolated workdir per run; assign each worker unique output paths.
 
+When changing investigations, replace the task pin before any seed or tracker
+operation. `investigation_context.py set` changes an interactive default; it does
+not override an inherited `ITHILDIN_PROFILE`. For an explicitly scoped command,
+use `investigation_context.py run --profile NAME --db PATH -- uv run python
+tools/TOOL.py ...`. Read the selected profile's case instructions even when the
+shell remains at the repository root.
+
 ## Choose applicable sources
 
 Start with the factual question, target identity, role, jurisdiction, relevant
@@ -46,12 +53,38 @@ reason, owner, and outcome. Outcomes are `searched`, `reused`, `not_applicable`,
 source returns useful results. A source outside the target's jurisdiction or
 question may be `not_applicable` with a concrete reason. An access failure or
 local-cache miss is a coverage gap, not a negative result. If a gap is the next
-useful step, record the needed action and stop or hand off under the skill's stop
-conditions. There is no universal minimum source count.
+useful step, record the needed action and continue independent useful work;
+stop or hand off when no authorized path can advance the requested outcome.
+There is no universal minimum source count.
 
 Use `docs/modules/` and the public-record search planner for executable routes.
 Corporate, corpus, legal and network worker templates are menus: instantiate only
 the applicable operations and include the resulting source list in each mandate.
+
+## Read enough of the source to support the question
+
+Search snippets and extracted sections locate evidence; they do not establish
+whole-document coverage. Retain canonical identity (accession, docket/document
+ID, version or date), URL, and complete retrieved artifact. Read full opinions,
+filings, contracts, or correspondence when the question depends on context,
+qualifications, definitions, exhibits, or omissions. Use available model context
+for sustained reading; choose sections or chunks when that improves accuracy or
+accommodates tool/context limits.
+
+Track sections/pages read, skipped material and reasons, cross-references still
+to inspect, extraction/OCR limitations, contradictions, and exact supporting
+passages. Follow material cross-references and inspect tables or renders when
+text extraction loses meaning. Reopen the original passage before persisting a
+load-bearing quotation. A character slice, search window, or model summary is
+not the complete source. Report partial coverage if material sections remain
+unread. Do not reread unchanged documents solely as a ritual; use the retained
+coverage record.
+
+Hypotheses and domain knowledge may guide collection, source choice, and useful
+follow-up questions. Keep those working explanations distinct from what a source
+establishes, test ordinary alternatives and counter-evidence, and persist them
+with the correct claim type and confidence ceiling. Workflow roles do not forbid
+reasoning or require another agent before a researcher can verify a pattern.
 
 ## Reuse a result, not a historical log entry
 

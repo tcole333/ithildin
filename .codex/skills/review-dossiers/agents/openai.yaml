@@ -1,4 +1,6 @@
-interface:
-  display_name: "Review Dossiers"
-  short_description: "Audit dossiers for evidence and editorial quality"
-  default_prompt: "Use $review-dossiers to handle this investigation task with clear evidence and actionable output."
+"interface":
+  "display_name": "Review Dossiers"
+  "short_description": "Review dossiers with current content-bound receipts"
+  "default_prompt": "Use $review-dossiers. Review the selected dossiers, collect independent\
+    \ review packets where useful, and bind completed verification to their final\
+    \ contents."

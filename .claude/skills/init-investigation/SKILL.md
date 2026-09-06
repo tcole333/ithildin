@@ -1,163 +1,73 @@
 ---
 name: init-investigation
-description: Initialize a new investigation profile — create config, seed threads, set active profile
-user_invocable: true
+description: Create an investigation profile and seed its threads, dates, pillars, and initial leads under explicit database/profile context. Use when starting an investigation or scaffolding its config.
+user-invocable: true
 ---
 
 # /init-investigation
 
-Bootstrap a new investigation from a subject name or topic. Creates the YAML config, seeds the database, and sets the new profile as active.
+Create a profile for a subject or topic. With no target, list available profiles
+and the current context. `--dry-run` prepares proposed configuration and seed
+actions without creating files or database rows. Existing authorization carries
+through the setup; ask only when a conflicting existing profile leaves identity
+or scope unresolved.
 
-## Arguments
-
-- Required: target name or topic (e.g., `/init-investigation "Sam Bankman-Fried"`)
-- Optional `--dry-run`: show what would be created without writing files
-- No arguments: show current active profile and available profiles
-
-## Process
-
-### 1. Check Existing State
+Read [the research workflow contract](../../../docs/RESEARCH_WORKFLOW_CONTRACT.md)
+and [the Git workflow](../../../docs/GIT_WORKFLOW.md). Preserve existing profiles
+and unrelated work. Inspect `investigations/_template/config.yaml` and:
 
 ```bash
-uv run python tools/investigation_context.py list
+rg --files investigations -g config.yaml
 ```
 
-If an investigation for this subject already exists, confirm whether to switch to it or create a fresh one.
+## Build the profile
 
-### 2. Generate Profile Name (slug)
+Read matching profile configs directly for this inventory. The existing
+`investigation_context.py list` command reconciles the database catalog; do not
+use it in a dry run. Resolve a task's current pin through the read-only status
+tool/context resolver when needed, without seeding or registering profiles.
 
-Derive a short lowercase slug from the subject name:
-- Person: last name or recognizable short form (e.g., `sbf`, `madoff`, `holmes`)
-- Organization: abbreviation or short name (e.g., `wirecard`, `theranos`, `enron`)
-- Topic: descriptive slug (e.g., `gulf-state-ops`, `crypto-fraud`)
+Choose a short lowercase slug and create `investigations/<slug>/config.yaml`
+from the template without overwriting an existing file. Populate required
+`name`, `primary_subject`, and `description`, then add supported context:
 
-### 3. Create Investigation Directory
+- `key_persons`, `known_addresses`, `key_dates`, and `seed_pillars` from identified
+  public sources or user-provided context, with provenance notes in the profile's
+  case instructions. Do not turn recalled allegations into established identity
+  or priority rules. Keep uncertain associations as provisional research questions.
+- Useful thematic `threads`, with scoped targets and classification patterns.
+  Start with enough to organize this investigation; no fixed thread/person quota.
+- `corpus_tools` only for actual available corpora. Generic sources are selected
+  for relevance using the research contract, not seeded indiscriminately.
+- Evidence prefixes, reliability overrides, and graph settings when applicable.
+
+Place case-specific source/provenance and uncertainty notes in
+`investigations/<slug>/AGENTS.md`; provide equivalent discoverable case guidance
+for the host when needed. Tasks working from the repository root must read these
+instructions explicitly.
+
+## Pin and seed the new investigation
+
+Select the intended database and replace any inherited old profile pin before
+seeding. Use explicit context on each command; `set` alone does not override an
+inherited `ITHILDIN_PROFILE`.
 
 ```bash
-mkdir -p investigations/<slug>
-cp investigations/_template/config.yaml investigations/<slug>/config.yaml
+uv run python tools/investigation_context.py run --profile "<slug>" \
+  --db "$ITHILDIN_DB_PATH" -- uv run python tools/lead_tracker.py thread seed
+uv run python tools/investigation_context.py run --profile "<slug>" \
+  --db "$ITHILDIN_DB_PATH" -- uv run python tools/event_timeline.py seed
+uv run python tools/investigation_context.py run --profile "<slug>" \
+  --db "$ITHILDIN_DB_PATH" -- uv run python tools/pillar_tracker.py seed
 ```
 
-### 4. Fill In Profile Config
+Read the returned thread IDs from this database. Add a small set of distinct,
+useful initial questions through `lead_tracker.py add`, using the same explicit
+context and actual thread IDs. Check existing leads before re-seeding a resumed
+setup. Do not infer that a matching title means every question is answered.
 
-Edit `investigations/<slug>/config.yaml` with:
-
-#### Required Fields
-- `name`: the slug
-- `primary_subject`: full name of the primary subject
-- `description`: 1-2 sentence scope description
-
-#### Key Persons (use your knowledge)
-Research and populate `key_persons` with known associates, co-conspirators, key executives, lawyers, enablers. These are names that should trigger priority escalation in auto-lead generation. Use lowercase.
-
-For well-known subjects, you should be able to populate 10-30 key persons from training knowledge. For obscure subjects, start with what's known and note that agents will expand the list during investigation.
-
-#### Known Addresses
-Populate `known_addresses` with addresses associated with the subject — offices, residences, properties that appear in public records. Use partial lowercase address patterns as keys.
-
-#### Investigation Threads
-Create 3-7 thematic threads that organize the investigation:
-- Each thread groups related leads/findings under a theme
-- Include `targets` (lowercase names that auto-classify into the thread)
-- Include `keywords` (regex patterns for auto-classification)
-
-Thread design principles:
-- One thread for the core subject and their direct operations
-- One thread per major institutional relationship (e.g., "Banking Pipeline", "Legal Defense", "Political Connections")
-- One thread per geographic or thematic cluster (e.g., "Offshore Structures", "Regulatory Actions")
-- Threads should be broad enough to absorb many leads, narrow enough to be useful
-
-#### Corpus Tools
-Only populate if you know of specific document corpora available for this investigation. Leave empty for most new investigations — the generic tools (EDGAR, FEC, CourtListener, registries) are always available.
-
-#### Key Dates
-Populate `key_dates` with significant dates from public knowledge:
-- Founding/incorporation dates
-- Key financial events
-- Legal actions, arrests, indictments
-- Media exposés
-- Regulatory actions
-
-Categories: `legal`, `financial`, `media`, `operational`, `political`, `milestone`
-
-#### Seed Pillars
-Populate `seed_pillars` with the institutional backbone of the network:
-- Banks the subject used
-- Law firms involved
-- Accounting firms
-- Government agencies with jurisdiction
-- Key companies/organizations
-
-Each pillar needs: `name`, `pillar_type`, `sub_type`, `status`, `significance`
-
-Pillar types: `banking`, `legal`, `accounting`, `government`, `intelligence`, `media`, `philanthropy`, `academia`, `operations`
-
-#### Remaining Fields
-- `evidence_id_prefix`: set if there's a known document corpus with canonical IDs
-- `exclude_from_graph`: typically the primary subject name
-- `source_overrides`: any known media reliability issues
-
-### 5. Set Active Profile
-
-```bash
-uv run python tools/investigation_context.py set <slug>
-```
-
-### 6. Seed Database
-
-```bash
-uv run python tools/lead_tracker.py seed
-uv run python tools/event_timeline.py seed
-uv run python tools/pillar_tracker.py seed
-```
-
-These commands read from the active profile and populate:
-- Investigation threads from `threads`
-- Key dates from `key_dates`
-- Institutional pillars from `seed_pillars`
-
-### 7. Create Initial Leads
-
-Generate 5-10 seed leads to kickstart the investigation:
-
-```bash
-uv run python tools/lead_tracker.py add --title "LEAD_TITLE" \
-  --description "DESCRIPTION" --priority high --thread-id N
-```
-
-Good seed leads:
-- Search all corporate registries for the primary subject
-- Check EDGAR for SEC filings involving the subject
-- Search court records (CourtListener, PACER) for litigation
-- Check FEC for political contributions
-- Search property records in known jurisdictions
-- Trace key corporate entities through registry tools
-- Check OFAC/sanctions lists
-- Search news/GDELT for media coverage patterns
-
-### 8. Create nested CLAUDE.md (optional)
-
-If there's case-specific context that agents need (source reliability notes, corpus-specific search tips, known data quality issues), create:
-
-```
-investigations/<slug>/CLAUDE.md
-```
-
-This file is automatically loaded by the Claude Code harness when working in or below the investigation directory, providing investigation-specific agent instructions without requiring explicit reads.
-
-### 9. Verify
-
-```bash
-uv run python tools/investigation_context.py show
-uv run python tools/lead_tracker.py stats
-uv run python tools/lead_tracker.py list --status open --limit 10
-```
-
-## Output
-
-Print a summary:
-- Profile created at `investigations/<slug>/config.yaml`
-- N key persons, N known addresses, N threads, N key dates, N seed pillars
-- N initial leads created
-- Active profile set to `<slug>`
-- Next steps: `/pursue-lead` or `/deep-investigate <name>` to begin
+Change the shared interactive default with `investigation_context.py set` only
+when the user requested that change; the new task can run with explicit context.
+Verify the new profile and rows with scoped `show` and `stats` commands through
+the same wrapper. Report files created, actual seed counts, selected database,
+profile, any intentionally missing context, and the next useful investigation step.

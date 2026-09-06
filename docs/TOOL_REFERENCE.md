@@ -1,12 +1,39 @@
 # Tool Reference
 
-Complete CLI examples for all investigation tools. Referenced from CLAUDE.md.
+CLI examples and module routes for investigation tools. For a compact offline
+inventory and parser declarations, use:
+
+```bash
+uv run python tools/tool_catalog.py list --domain legal --query court --limit 10 --json
+uv run python tools/tool_catalog.py describe query_courtlistener search --json
+```
+
+The catalog reads repository declarations without importing source tools or
+probing endpoints. It reports incomplete/dynamic declarations and points to
+operation-specific `--help`; inspect that help before a new command. Module
+guides explain access, evidence identity, output scope and source limitations.
+Catalog presence is not a live health claim. For read-only investigation status,
+use `tools/investigation_status.py --profile NAME --db PATH --output FILE`.
 
 Before choosing a dispatcher, submitting workers, or reviewing/recovering their
 output, read the [execution contract](EXECUTION_CONTRACT.md) for context pinning,
 canonical writes, review/import, and cancellation guarantees.
 
-Run `python tools/source_report.py` for live data source status.
+Run `uv run python tools/source_report.py` for live data source status.
+
+## Scoped lead review
+
+For lead review operations, `lead_tracker.py triage-export --output FILE` captures
+a profile/database-bound packet. Include external duplicate keepers with repeated
+`--reference-lead-id ID`. Review the packet, then use `triage-apply --batch-file
+FILE --decisions-file FILE --dry-run --output FILE`; omit `--dry-run` only for an
+authorized application. It validates complete snapshots and applies atomically.
+
+`lead_dedup.py apply` now requires both `--batch-file` and `--decisions-file`.
+Unbound legacy decisions must be re-exported and reviewed. Export every disjoint
+packet for a wave before applying any, then reset offsets for the next wave as
+processed groups leave the queue. See the paired triage/dedup skills for schemas,
+write ownership, and disposition rules.
 
 ## Canonical Source Names
 
@@ -8053,9 +8080,9 @@ uv run python scripts/queue_dispatcher.py daemon
 uv run python scripts/queue_dispatcher.py daemon --poll-interval 60
 ```
 
-## Investigation Dispatcher (primary)
+## Investigation Dispatcher (unattended)
 
-Investigation-aware dispatcher — launches headless Claude Code instances based on lead priorities, triage scheduler fields (depth_tier, recommended_skill), and analysis cooldowns. Uses `dispatch_runs` table. Config: `scripts/dispatch_config.json`.
+Optional unattended dispatcher — launches headless Claude Code instances based on lead priorities, triage scheduler fields (depth_tier, recommended_skill), and analysis cooldowns when this execution path is explicitly selected. Interactive investigations use native subagents supervised in the current chat. Uses `dispatch_runs` table. Config: `scripts/dispatch_config.json`; its unset model inherits the CLI configuration. See the execution contract for staging, review, import, and retained process limits.
 
 ```bash
 # One-shot: check queues, launch needed agents

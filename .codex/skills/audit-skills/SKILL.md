@@ -71,15 +71,17 @@ uv run python scripts/validate_skills.py \
   --require-uv
 ```
 
-Read the snapshot summary and issues first. Open full skill text only for the selected packages or to verify a reported cross-skill interaction. Do not paste every SKILL.md into context.
+Read the snapshot summary and issues first. Open full skill text only for the selected packages or to verify a reported cross-skill interaction. Read whole skills and relevant references when behavioral review needs their context; the snapshot is an index, not a substitute for reading.
 
 The snapshot checks directory/frontmatter agreement, unresolved local links, bundled-resource reachability, TODOs, length, runtime heading conventions, Codex UI metadata, paired-tree presence, and normalized Claude/Codex drift. Treat its severities as triage hints, not final judgment.
 
-When normalized drift is reported and mirror intent is unclear, inspect the actual diff. Use the repository parity helper only as corroboration because it compares raw text and may include intentional runtime syntax differences:
+When normalized drift is reported and mirror intent is unclear, inspect the actual diff. Use normalized parity as corroboration and raw differences to inspect intentional runtime adaptations:
 
 ```bash
 uv run python scripts/audit_codex_skill_parity.py --show-diffs
 ```
+
+Inspect current discovery and installed copies when distribution is in scope; `.agents/skills` is the repository Codex entry point. Do not silently replace personal skill edits.
 
 ## 3. Perform semantic review
 
@@ -163,7 +165,7 @@ For each authorized finding:
 6. Run the narrow validation or forward test, then the repository skill validator.
 7. Review the final diff for unrelated edits and weakened constraints.
 
-Do not bulk-normalize prose, overwrite user changes, or fix unapproved adjacent findings. If a proposed correction expands into a broader redesign, stop and return the revised scope for approval.
+Do not bulk-normalize prose, overwrite user changes, or fix unapproved adjacent findings. Keep a broader redesign within the user's authorized objective. Continue independent in-scope work and ask only when new scope or a consequential action needs authorization.
 
 ## 7. Forward-test behavioral changes
 

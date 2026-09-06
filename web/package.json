@@ -10,7 +10,7 @@
     "test:citations": "node scripts/test-citations.mjs",
     "test:citations:snapshots": "node scripts/test-citation-snapshots.mjs",
     "test:citations:build": "node scripts/test-citation-build.mjs",
-    "test:changed-content": "node scripts/test-changed-content-files.mjs",
+    "test:changed-content": "node scripts/test-changed-content-files.mjs && node scripts/test-support-coverage-targets.mjs",
     "check:citations:focused": "npm run test:citations && npm run test:citations:snapshots",
     "test:support-spans": "node scripts/test-support-spans.mjs",
     "lint:citations": "node scripts/lint-citations.mjs",

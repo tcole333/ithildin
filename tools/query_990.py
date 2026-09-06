@@ -26,6 +26,7 @@ Usage:
 """
 
 import argparse
+import os
 import sqlite3
 import sys
 from collections import defaultdict
@@ -535,12 +536,15 @@ def cmd_co_grantors(args):
 # ── cross-ref ───────────────────────────────────────────────────
 
 def cmd_cross_ref(args):
-    """Match investigation.db entities against the bulk grant database."""
-    if not INVESTIGATION_DB.exists():
-        print("Error: investigation.db not found", file=sys.stderr)
+    """Match shared entities from the selected investigation DB against grants."""
+    investigation_db = Path(
+        os.environ.get("ITHILDIN_DB_PATH", INVESTIGATION_DB)
+    ).expanduser().resolve()
+    if not investigation_db.is_file():
+        print(f"Error: investigation database not found: {investigation_db}", file=sys.stderr)
         sys.exit(1)
 
-    inv_db = sqlite3.connect(str(INVESTIGATION_DB))
+    inv_db = sqlite3.connect(investigation_db.as_uri() + "?mode=ro", uri=True)
     inv_db.row_factory = sqlite3.Row
 
     # Get all entity names and EINs from investigation
@@ -550,7 +554,8 @@ def cmd_cross_ref(args):
     inv_db.close()
 
     if not entities:
-        print("No entities in investigation.db")
+        if not write_output([], args, summary="990 bulk cross-ref (no entities)"):
+            print("No entities in the selected investigation database")
         return
 
     db = get_db()

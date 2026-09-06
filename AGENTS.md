@@ -3,7 +3,11 @@
 General-purpose agent-scale network investigation platform. Investigate any public figure or organization through publicly available data — corporate registries, court filings, financial disclosures, government records, and document corpora. Multiple Codex tasks and subagents can pursue leads in parallel.
 
 **Design doc**: `PRD.md` | **Methodology**: `research/INVESTIGATIVE_METHODOLOGY.md`
-**Tool reference**: `docs/TOOL_REFERENCE.md` (complete CLI for all 37+ tools) | **OSINT resources**: `research/OSINT_RESOURCES.md`
+**Tool reference**: `docs/TOOL_REFERENCE.md` (CLI index and module guides) | **OSINT resources**: `research/OSINT_RESOURCES.md`
+
+**Skill discovery**: `docs/SKILL_RUNTIME.md`. For compact offline CLI discovery,
+use `uv run python tools/tool_catalog.py list --query TERM --json`, then
+`describe TOOL OPERATION --json` and the relevant module or operation help.
 
 ## Repository and Task Ownership
 
@@ -24,14 +28,14 @@ uv run python tools/investigation_context.py set <name>    # Switch active profi
 Template for new investigations: `investigations/_template/config.yaml`
 Case-specific context: `investigations/<name>/AGENTS.md` (if exists)
 
-All skills load the active profile at startup. Entities are shared across investigations; leads/findings/connections are profile-scoped via `profile_id`.
+Scoped skills resolve the requested profile once and pin it for the task. Entities are shared across investigations; leads/findings/connections are profile-scoped via `profile_id`.
 
 ## Quick Start
 
 ```bash
 $dispatch                   # Queue depths — what needs attention
 $pursue-lead                # Pick up next lead
-$deep-investigate <name>    # Parallel sub-agents (preferred)
+$deep-investigate <name>    # Parallel source tracks when useful
 $triage-leads               # Process pending_triage leads (batch of 20)
 $build-infra                # Build next infra request (or scan for gaps)
 $search-all-sources <term>  # Fan-out search
@@ -191,6 +195,7 @@ Auto-leads: `pending_triage -> open` (via `$triage-leads`) or `-> dead_end`
 | **Corpora** | DOJ, LMSBAND, Unified, DugganUSA, DocumentCloud, MuckRock | `docs/modules/corpora.md` |
 | **Blockchain** | Etherscan, Solscan, Dune | `docs/modules/blockchain.md` |
 | **Network/Sanctions** | LittleSis, ICIJ, OpenCorporates, OpenSanctions, GLEIF, FinCEN | `docs/modules/network-sanctions.md` |
+| **Property/public records** | Address/property/UCC planning, county adapters, public-record artifacts | `docs/modules/property.md` |
 | **Patents/IP** | USPTO PatentsView, Assignment API | `docs/modules/patents.md` |
 | **Peru-specific** | El Peruano gazette, SUNARP, SUNAT, Infogob, OEFA, SEACE, Contraloría | (see below) |
 
@@ -233,15 +238,31 @@ Every finding MUST provide: `--evidence`, `--claim-type`, `--source-quote`
 
 **Agents MUST NOT set confidence to `confirmed` for inferences or syntheses.**
 
-## Parallel Execution
+## Parallel Execution and Persistence
 
-Orchestrate work from a single Codex task using collaboration tools. Skills like `$deep-investigate` and `$pursue-lead` dispatch parallel subagents when their workflows benefit from independent research tracks.
+Interactive work stays in the current chat. Use native subagents for independent
+questions or file scopes; the parent stays engaged, can investigate directly,
+steers workers, reviews artifacts, and integrates the result. Inherit the chat's
+model and reasoning settings unless the user requests an override. Choose useful
+parallelism for the scope and source limits, without a mandatory worker count.
 
-- `investigation.db` uses WAL mode for safe concurrent subagent writes
-- Each skill creates a unique `WORKDIR` — prevents cross-agent file collisions
-- Subagents write `$WORKDIR/report-*.md` — the parent reads report files rather than full agent transcripts
-- Default parallelism: ~6 subagents. Scale up or down based on task complexity and API rate limits — this is soft guidance, not a hard cap.
-- Post-wave: run `uv run python tools/auto_leads.py run`
+Read `docs/EXECUTION_CONTRACT.md` before orchestration. It owns native worker
+assignments, checkpoints, recovery, and the optional unattended dispatcher path.
+Headless jobs require an explicit unattended request or configured automation;
+unavailable native tools do not imply permission to launch headless workers.
+
+- Pin `ITHILDIN_PROFILE` and absolute `ITHILDIN_DB_PATH` for every child.
+- Give workers unique report paths, expected outcomes, and explicit write ownership.
+- Collect every expected report or report its incomplete coverage; reconcile
+  contradictions before synthesis. SQLite WAL permits concurrent writes but does
+  not prevent duplicate investigation or conflicting edits.
+- Keep resumable checkpoints during long work and continue after compaction.
+  Use the research contract's document coverage record for long source reading.
+- Complete the authorized outcome; preserve user limits and report actual blockers.
+  Counts, elapsed time, and document length alone do not establish completion.
+- After a completed research wave that persisted new evidence, run
+  `uv run python tools/auto_leads.py run` in the same pinned context and review
+  its output. A read-only audit does not authorize this database mutation.
 
 ## Environment
 

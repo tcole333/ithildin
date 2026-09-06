@@ -1,7 +1,7 @@
 ---
 name: curate-dossier
 description: Generate narrative wiki-style dossier curation with sectioned prose and contextual visualizations
-user_invocable: true
+user-invocable: true
 ---
 
 # /curate-dossier
@@ -16,11 +16,13 @@ Generate encyclopedic wiki-style narrative for dossier entries. Produces a `lead
 - Optional `--dry-run`: show section suggestions without generating
 - No arguments: list dossiers that need curation
 
-## Session Isolation
+## Context and session isolation
 
 ```bash
 WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
 ```
+
+Read `docs/RESEARCH_WORKFLOW_CONTRACT.md` and pin the requested profile/database. Work in the current checkout. For batch curation, use chat-native subagents only for disjoint dossier files and inherit the configured model; the parent collects outputs, reviews changes and owns persistence. Keep selected slugs, artifacts, final hashes and remaining work in WORKDIR so the task can resume through compaction.
 
 ## Process
 
@@ -30,11 +32,11 @@ WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
 uv run python pipeline/curate_dossier.py --target "TARGET_NAME"
 ```
 
-This populates `key_finding_ids`, `key_identifiers`, `section_suggestions`, and `viz_data`.
+This populates `key_finding_ids`, `key_identifiers`, `section_suggestions`, and `viz_data`. For `--dry-run`, copy the selected dossier into `$WORKDIR/dossiers/` first, pass `--dossier-dir "$WORKDIR/dossiers"`, and return those temporary suggestions without editing the source dossier.
 
 ### 2. Load Data
 
-Read the dossier JSON:
+Read the current narrative and relevant findings/relationships from the dossier JSON. Expand to full context when needed; unrelated machine metadata need not occupy the review context:
 ```bash
 Read: content/dossiers/<slug>.json
 ```
@@ -57,7 +59,7 @@ uv run python tools/lead_tracker.py search "TARGET_NAME" --output $WORKDIR/leads
 
 Write these fields into the dossier JSON's `curation` object:
 
-#### `lead` (HTML, 2-3 paragraphs)
+#### `lead` (HTML; usually 2-3 paragraphs, adapted to the subject)
 
 The Wikipedia-style lead section. Must be:
 - **Standalone** — a reader who only reads the lead understands the subject
@@ -73,7 +75,7 @@ Structure:
 
 The lead should work for people, entities, AND events — adapt the structure to what the subject is.
 
-#### `system_role` (plain text, 1-2 sentences)
+#### `system_role` (plain text; usually 1-2 sentences)
 
 What this subject reveals about how power, money, or institutions operate. Use neutral, analytical language — no loaded terms ("operative," "dark money," "machine"). Describe the structural role or mechanism, not a judgment.
 
@@ -115,7 +117,7 @@ Each section has:
 
 #### `open_questions` (array of strings)
 
-3-5 specific, actionable investigative questions. Based on evidence gaps, not speculation.
+Specific, actionable investigative questions based on evidence gaps, not speculation. Include only questions supported by actual gaps; there is no quota.
 
 #### `applicable_models` (array of strings)
 
@@ -138,11 +140,12 @@ Finding count does NOT equal importance. The investigation may have deeply resea
 
 **Banned phrases** — do NOT use any of the following:
 - "raises questions" / "raises concerns"
-- "suggests" / "may indicate" / "appears to"
 - "striking" / "extraordinary" / "remarkable" / "unprecedented" (unless quoting a source)
 - "most significant" / "most consequential" / "most important"
 - "dark money" (unless quoting a specific source that uses the term — attribute it)
 - "machine" / "apparatus" / "operative" in section titles or system_role
+
+**Qualification is appropriate when evidence is uncertain.** Do not replace a cautious, supported statement with a stronger assertion merely to avoid a phrase.
 
 **Instead**: State documented facts and let the reader draw conclusions. If a characterization is relevant, attribute it: "Campaign finance watchdogs described the arrangement as 'dark money' [Finding #N]."
 
@@ -218,7 +221,7 @@ Before writing, verify ALL of the following:
 **Cross-linking (HARD REQUIREMENT):**
 - [ ] Read `content/dossiers/_index.json` to get the list of existing dossier slugs
 - [ ] Every person/entity mentioned in the text that has a dossier slug is linked with `<a href="/dossiers/SLUG">Name</a>` on first mention per section
-- [ ] Count your cross-links — a well-connected dossier should have 5+ outbound links
+- [ ] Link relevant existing dossiers; do not add names or links merely to hit a count
 
 **Citations:**
 - [ ] Every factual claim has an inline citation in the same sentence
@@ -226,7 +229,7 @@ Before writing, verify ALL of the following:
 - [ ] No orphan citations (citation tokens that don't correspond to actual findings/sources)
 
 **Tone (HARD REQUIREMENT):**
-- [ ] Grep your output for banned phrases: "raises questions," "suggests," "striking," "extraordinary," "remarkable," "unprecedented," "most significant," "most consequential," "dark money" (unattributed), "machine," "apparatus" (in titles)
+- [ ] Grep your output for banned phrases: "raises questions," "striking," "extraordinary," "remarkable," "unprecedented," "most significant," "most consequential," "dark money" (unattributed), "machine," "apparatus" (in titles)
 - [ ] Synthesis/inference claims are attributed ("Analysis indicates...") not stated as fact
 - [ ] Section titles are neutral and descriptive, not editorial
 - [ ] `system_role` uses no loaded terms
@@ -253,8 +256,7 @@ Updates dossier JSON in place. Prints summary of sections generated.
 After writing, run support-coverage metrics:
 
 ```bash
-cd /Users/travcole/projects/osint-research/web
-npm run report:support-coverage:changed -- --base-ref HEAD --head-ref WORKTREE
+npm --silent --prefix web run report:support-coverage -- --file "content/dossiers/<slug>.json" > "$WORKDIR/support-coverage.json"
 ```
 
-Inspect unsupported sentences, orphan citations, and source fanout before publishing.
+Confirm the result contains the requested file and current content hash. Inspect unsupported sentences, orphan citations, and source fanout; these structural metrics do not establish semantic support. Run the dossier review workflow on final content before claiming publication readiness; preserve exact-content receipts and the shared release gate.

@@ -19,6 +19,7 @@ Usage:
 
 import argparse
 import hashlib
+import json
 import os
 import re
 import sqlite3
@@ -63,6 +64,75 @@ def _resolve_profile(profile_id=None, all_profiles=False):
     if profile_id is not None:
         return profile_id
     return _detect_active_profile()
+
+
+def open_review_db(*, write=False, db_path=None):
+    """Open an existing review database without initializing or migrating it."""
+    selected = Path(db_path if db_path is not None else DB_PATH).expanduser().resolve()
+    db = sqlite3.connect(f"{selected.as_uri()}?mode={'rw' if write else 'ro'}", uri=True)
+    db.row_factory = sqlite3.Row
+    db.execute("PRAGMA foreign_keys=ON")
+    db.execute("PRAGMA busy_timeout=5000")
+    return db
+
+
+def review_profile_id(db, profile_id=None):
+    """Resolve a mandatory profile from the selected database, never another DB."""
+    selected = profile_id or os.environ.get("ITHILDIN_PROFILE")
+    if not selected:
+        row = db.execute(
+            "SELECT value FROM investigation_config WHERE key='active_profile'"
+        ).fetchone()
+        selected = row[0] if row else None
+    if not isinstance(selected, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]*", selected):
+        raise ValueError("Select a profile with --profile or ITHILDIN_PROFILE")
+    return selected
+
+
+def review_context(db, profile_id=None):
+    """Bind a review packet to its actual database and resolved profile."""
+    database_path = next(row[2] for row in db.execute("PRAGMA database_list") if row[1] == "main")
+    return {
+        "version": 1,
+        "database_path": str(Path(database_path).resolve()),
+        "profile_id": review_profile_id(db, profile_id),
+    }
+
+
+def validate_review_context(db, batch, profile_id=None):
+    expected = review_context(db, profile_id)
+    if not isinstance(batch, dict) or any(batch.get(key) != value for key, value in expected.items()):
+        raise ValueError("Review batch does not match the selected database/profile; export a fresh batch")
+    return expected["profile_id"]
+
+
+def review_lead_snapshot(db, lead_id, profile_id):
+    """Include all lead context and a revision covering notes/evidence as well."""
+    if type(lead_id) is not int:
+        raise ValueError("Lead IDs must be integers")
+    row = db.execute("SELECT * FROM leads WHERE id=? AND profile_id=?", (lead_id, profile_id)).fetchone()
+    if row is None:
+        raise ValueError(f"Lead #{lead_id} is missing or belongs to another profile")
+    snapshot = dict(row)
+    snapshot["notes"] = [dict(note) for note in db.execute(
+        "SELECT * FROM lead_notes WHERE lead_id=? ORDER BY id", (lead_id,)
+    )]
+    snapshot["evidence"] = [dict(item) for item in db.execute(
+        "SELECT * FROM lead_evidence WHERE lead_id=? ORDER BY evidence_ref", (lead_id,)
+    )]
+    snapshot["revision"] = hashlib.sha256(
+        json.dumps(snapshot, sort_keys=True, ensure_ascii=False).encode()
+    ).hexdigest()
+    return snapshot
+
+
+def validate_review_lead(db, snapshot, profile_id, *, status):
+    if not isinstance(snapshot, dict):
+        raise ValueError("Invalid lead snapshot")
+    current = review_lead_snapshot(db, snapshot.get("id"), profile_id)
+    if current["status"] != status or current != snapshot:
+        raise ValueError(f"Lead #{current['id']} changed since export; re-export and review it")
+    return current
 
 
 def _profile_thread_id_map(profile_id):
@@ -2540,6 +2610,170 @@ def format_lead(lead, verbose=False):
     return line
 
 
+def export_triage_batch(*, limit=20, profile_id=None, reference_lead_ids=None):
+    """Export a review snapshot; listing is not a claim on pending work."""
+    if type(limit) is not int or limit < 1:
+        raise ValueError("limit must be a positive integer")
+    db = open_review_db()
+    try:
+        db.execute("BEGIN")
+        batch = review_context(db, profile_id)
+        rows = db.execute(
+            """SELECT id FROM leads WHERE profile_id=? AND status='pending_triage'
+               ORDER BY CASE priority WHEN 'critical' THEN 0 WHEN 'high' THEN 1
+                   WHEN 'medium' THEN 2 ELSE 3 END, created_at, id LIMIT ?""",
+            (batch["profile_id"], limit),
+        ).fetchall()
+        batch["leads"] = [review_lead_snapshot(db, row["id"], batch["profile_id"]) for row in rows]
+        reference_lead_ids = reference_lead_ids or []
+        if any(type(item) is not int for item in reference_lead_ids):
+            raise ValueError("Reference lead IDs must be integers")
+        selected_ids = {row["id"] for row in rows}
+        batch["reference_leads"] = [
+            review_lead_snapshot(db, lead_id, batch["profile_id"])
+            for lead_id in sorted(set(reference_lead_ids) - selected_ids)
+        ]
+        batch["pending_count"] = db.execute(
+            "SELECT COUNT(*) FROM leads WHERE profile_id=? AND status='pending_triage'",
+            (batch["profile_id"],),
+        ).fetchone()[0]
+        return batch
+    finally:
+        db.close()
+
+
+def apply_triage_decisions(batch, decisions, *, profile_id=None, dry_run=False, actor="agent:triage"):
+    """Validate a complete reviewed batch, then apply all decisions atomically."""
+    if not isinstance(decisions, list):
+        raise ValueError("Decisions must be a JSON array")
+    db = open_review_db(write=not dry_run)
+    try:
+        db.execute("BEGIN" if dry_run else "BEGIN IMMEDIATE")
+        profile_id = validate_review_context(db, batch, profile_id)
+        snapshots = batch.get("leads")
+        if not isinstance(snapshots, list) or any(not isinstance(item, dict) for item in snapshots):
+            raise ValueError("Batch must contain lead snapshots")
+        if any(type(item.get("id")) is not int for item in snapshots):
+            raise ValueError("Snapshot lead IDs must be integers")
+        by_id = {item.get("id"): item for item in snapshots}
+        if len(by_id) != len(snapshots):
+            raise ValueError("Duplicate lead IDs in batch")
+        references = batch.get("reference_leads", [])
+        if not isinstance(references, list) or any(not isinstance(item, dict) or type(item.get("id")) is not int for item in references):
+            raise ValueError("reference_leads must contain exported lead snapshots")
+        reference_by_id = {item["id"]: item for item in references}
+        if len(reference_by_id) != len(references) or set(reference_by_id).intersection(by_id):
+            raise ValueError("Reference snapshots must have distinct IDs outside the selected batch")
+        for reference in references:
+            if reference.get("status") not in {"open", "in_progress", "pending_triage"}:
+                raise ValueError("Reference keepers must be active")
+            validate_review_lead(db, reference, profile_id, status=reference["status"])
+        decision_ids = [item.get("lead_id") for item in decisions if isinstance(item, dict)]
+        if len(decision_ids) != len(decisions) or any(type(item) is not int for item in decision_ids):
+            raise ValueError("Every decision must identify an integer lead_id")
+        if len(set(decision_ids)) != len(decision_ids) or set(decision_ids) != set(by_id):
+            raise ValueError("Decisions must cover each exported lead exactly once")
+        allowed = {"lead_id", "action", "rationale", "priority", "depth_tier", "recommended_skill",
+                   "category", "target_name", "thread_id", "stop_reason", "keeper_id", "related_lead_ids"}
+        closing = {item["lead_id"] for item in decisions if item.get("action") == "dead_end"}
+        prepared = []
+        for decision in decisions:
+            if set(decision) - allowed:
+                raise ValueError(f"Unknown triage fields: {sorted(set(decision) - allowed)}")
+            lead_id = decision["lead_id"]
+            current = validate_review_lead(db, by_id[lead_id], profile_id, status="pending_triage")
+            action = decision.get("action")
+            if not isinstance(action, str) or action not in {"promote", "hold", "dead_end"}:
+                raise ValueError(f"Lead #{lead_id}: action must be promote, hold, or dead_end")
+            rationale = decision.get("rationale")
+            if not isinstance(rationale, str) or not rationale.strip():
+                raise ValueError(f"Lead #{lead_id}: a review rationale is required")
+            for field, choices in (
+                ("priority", VALID_PRIORITIES),
+                ("depth_tier", {"scan", "standard", "deep_dive"}),
+                ("category", set(VALID_CATEGORIES) | {"nonprofit", "grant"}),
+            ):
+                if field in decision and (not isinstance(decision[field], str) or decision[field] not in choices):
+                    raise ValueError(f"Lead #{lead_id}: invalid {field}")
+            for field in ("target_name", "recommended_skill", "stop_reason"):
+                if field in decision and (not isinstance(decision[field], str) or not decision[field].strip()):
+                    raise ValueError(f"Lead #{lead_id}: {field} must be nonempty text")
+            if "recommended_skill" in decision and not re.fullmatch(r"/[a-z][a-z0-9-]*", decision["recommended_skill"]):
+                raise ValueError("recommended_skill must be a slash-prefixed skill ID")
+            if action == "promote" and any(not decision.get(field, current.get(field)) for field in (
+                "priority", "depth_tier", "recommended_skill"
+            )):
+                raise ValueError(f"Lead #{lead_id}: promotion requires priority, depth_tier, and recommended_skill")
+            if action == "dead_end" and not decision.get("stop_reason"):
+                raise ValueError(f"Lead #{lead_id}: dead_end requires stop_reason")
+            if "thread_id" in decision and decision["thread_id"] is not None:
+                thread_id = decision["thread_id"]
+                if type(thread_id) is not int or not db.execute(
+                    "SELECT 1 FROM investigation_threads WHERE id=? AND profile_id=?", (thread_id, profile_id)
+                ).fetchone():
+                    raise ValueError(f"Lead #{lead_id}: thread must belong to the selected profile")
+            related = decision.get("related_lead_ids", [])
+            if not isinstance(related, list) or any(type(item) is not int for item in related):
+                raise ValueError("related_lead_ids must be an array of integers")
+            keeper = decision.get("keeper_id")
+            if keeper is not None:
+                if type(keeper) is not int or action != "dead_end" or keeper in closing:
+                    raise ValueError("A duplicate keeper must survive this batch")
+                keeper_snapshot = by_id.get(keeper) or reference_by_id.get(keeper)
+                if keeper_snapshot is None:
+                    raise ValueError("Export and review the keeper with --reference-lead-id before closing a duplicate")
+                keeper_row = validate_review_lead(db, keeper_snapshot, profile_id, status=keeper_snapshot["status"])
+                if keeper_row["status"] not in {"open", "in_progress", "pending_triage"}:
+                    raise ValueError("A duplicate keeper must be active")
+            for related_id in related + ([keeper] if keeper is not None else []):
+                if related_id == lead_id:
+                    raise ValueError("A lead cannot reference itself as a related lead or keeper")
+                review_lead_snapshot(db, related_id, profile_id)
+            prepared.append(decision)
+        counts = {"promote": 0, "hold": 0, "dead_end": 0}
+        for decision in prepared:
+            action = decision["action"]
+            counts[action] += 1
+            if dry_run:
+                continue
+            lead_id = decision["lead_id"]
+            now = datetime.now(timezone.utc).isoformat()
+            changes = {key: decision[key] for key in (
+                "priority", "depth_tier", "recommended_skill", "category", "target_name", "thread_id"
+            ) if key in decision}
+            changes.update(
+                status={"promote": "open", "hold": "pending_triage", "dead_end": "dead_end"}[action],
+                triage_rationale=decision["rationale"], triaged_by=actor, triaged_at=now,
+                updated_at=now, stop_reason=decision.get("stop_reason") if action == "dead_end" else None,
+                completed_at=now if action == "dead_end" else None,
+            )
+            updated = db.execute(
+                f"UPDATE leads SET {', '.join(f'{key}=?' for key in changes)} "
+                "WHERE id=? AND profile_id=? AND status='pending_triage'",
+                [*changes.values(), lead_id, profile_id],
+            )
+            if updated.rowcount != 1:
+                raise ValueError(f"Lead #{lead_id} changed during triage")
+            db.execute("INSERT INTO lead_notes (lead_id, note) VALUES (?, ?)",
+                       (lead_id, f"Triage {action} by {actor}: {decision['rationale']}"))
+            relations = [(item, "related") for item in decision.get("related_lead_ids", [])]
+            if decision.get("keeper_id") is not None:
+                relations.append((decision["keeper_id"], "duplicate"))
+            for related_id, relation in relations:
+                db.execute(
+                    "INSERT INTO lead_relations (lead_id, related_lead_id, relation_type) VALUES (?, ?, ?) "
+                    "ON CONFLICT(lead_id, related_lead_id) DO UPDATE SET relation_type=excluded.relation_type",
+                    (lead_id, related_id, relation),
+                )
+        db.commit() if not dry_run else db.rollback()
+        return {"profile_id": profile_id, "dry_run": dry_run, "reviewed": len(prepared), "actions": counts}
+    except Exception:
+        db.rollback()
+        raise
+    finally:
+        db.close()
+
+
 def main():
     parser = argparse.ArgumentParser(description="OSINT investigation lead tracker")
     subparsers = parser.add_subparsers(dest="command", help="Command")
@@ -2666,6 +2900,21 @@ def main():
     subparsers.add_parser("recover-stale", help="Reset stale leads to open")
 
     # triage-log — review triage decisions
+    export_p = subparsers.add_parser("triage-export", help="Export a scoped pending-lead review snapshot")
+    export_p.add_argument("--limit", type=int, default=20)
+    export_p.add_argument("--profile", help="Override the pinned/default profile")
+    export_p.add_argument("--reference-lead-id", action="append", type=int, default=[],
+                          help="Include an existing keeper's review snapshot (repeatable)")
+    add_output_args(export_p)
+    apply_p = subparsers.add_parser("triage-apply", help="Apply a complete reviewed triage batch atomically")
+    apply_p.add_argument("--batch-file", required=True)
+    apply_p.add_argument("--decisions-file", required=True)
+    apply_p.add_argument("--profile", help="Override the pinned/default profile")
+    apply_p.add_argument("--dry-run", action="store_true")
+    apply_p.add_argument("--actor", default="agent:triage")
+    add_output_args(apply_p)
+
+    # triage-log — review triage decisions
     tlog_p = subparsers.add_parser("triage-log", help="Review triage decisions (dead-ends and promotions)")
     tlog_p.add_argument("--status", choices=["dead_end", "open", "all"], default="all",
                         help="Filter by post-triage status")
@@ -2706,7 +2955,23 @@ def main():
         parser.print_help()
         sys.exit(1)
 
-    if args.command == "add":
+    if args.command in {"triage-export", "triage-apply"}:
+        try:
+            if args.command == "triage-export":
+                result = export_triage_batch(limit=args.limit, profile_id=args.profile,
+                                             reference_lead_ids=args.reference_lead_id)
+            else:
+                result = apply_triage_decisions(
+                    json.loads(Path(args.batch_file).read_text()),
+                    json.loads(Path(args.decisions_file).read_text()),
+                    profile_id=args.profile, dry_run=args.dry_run, actor=args.actor,
+                )
+        except (ValueError, OSError, sqlite3.Error) as exc:
+            parser.exit(1, f"ERROR: {exc}\n")
+        if not write_output(result, args):
+            print(json.dumps(result, indent=2))
+
+    elif args.command == "add":
         lead_id = add_lead(
             title=args.title, description=args.description, category=args.category,
             priority=args.priority, source=args.source, target_name=args.target,

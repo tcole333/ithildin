@@ -1,380 +1,148 @@
 ---
 name: trace-entity
-description: Follow a corporate or financial entity through registries, property, court, financial, and offshore records
-user_invocable: true
+description: Trace a named entity's registration, ownership, officers, assets, and financial relationships across relevant jurisdictions. Use for an entity-centered factual question; use analyze-filing or trace-grants for specialized document or funding depth.
+user-invocable: true
 ---
 
 # /trace-entity
 
-**LAYER 1: RESEARCH AGENT** — This is a fact-gathering skill. Document corporate structures, officers, filings, and jurisdictions. Do not theorize about the purpose of structures — record what exists and let Layer 2 analysis agents interpret patterns. Record negative results from every registry checked.
+Map the entity and the evidenced relationships needed to answer the question.
+Corporate complexity, shared addresses, intermediaries, or jurisdiction choice
+are search leads; test ownership/control and ordinary legal or administrative
+explanations before inferring purpose.
 
-Trace a corporate or financial entity through all available data sources to map ownership chains, financial flows, and jurisdictional connections.
+## 1. Resolve the entity and context
 
-## Arguments
-
-- Required: entity name (e.g., `/trace-entity Liquid Funding Ltd`)
-
-**Refer to `research/INVESTIGATIVE_METHODOLOGY.md` for the investigative mindset, especially the sections on deception patterns and incentive structures.**
-
-### Context Loading
-Load the active investigation context before executing:
-```bash
-uv run python tools/investigation_context.py show
-```
-This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
-Use these values instead of hardcoded names throughout this skill.
-
-### Jurisdiction Trigger: United Kingdom
-
-If the entity is UK-incorporated, has a UK company number, uses a UK registered office, or the search surface indicates a UK corporate footprint, **Companies House is mandatory**. Do not treat a UK trace as complete without checking:
-
-```bash
-uv run python tools/ingest_uk_companies_house.py search "<ENTITY>" --output "$WORKDIR/trace-uk-search.json"
-uv run python tools/ingest_uk_companies_house.py company <COMPANY_NUMBER> --output "$WORKDIR/trace-uk-company.json"
-uv run python tools/ingest_uk_companies_house.py officers <COMPANY_NUMBER> --output "$WORKDIR/trace-uk-officers.json"
-uv run python tools/ingest_uk_companies_house.py psc <COMPANY_NUMBER> --output "$WORKDIR/trace-uk-psc.json"
-uv run python tools/ingest_uk_companies_house.py filings <COMPANY_NUMBER> --output "$WORKDIR/trace-uk-filings.json"
-```
-
-If officers or PSC names are ambiguous, run:
-```bash
-uv run python tools/ingest_uk_companies_house.py officer-search "<PERSON_NAME>" --output "$WORKDIR/trace-uk-officer-search.json"
-```
-
-Record negative results explicitly if the API returns no match.
-
-## Investigative Context
-
-Corporate entities within an investigation network are rarely random bureaucratic structures. Every layer of corporate complexity is a layer of obfuscation. When tracing an entity, always ask:
-
-- **What is this entity hiding?** A BVI shell company with a single director and no visible operations exists for one purpose: opacity. What flows through it?
-- **Why this jurisdiction?** US Virgin Islands, British Virgin Islands, Bermuda, Cayman Islands, Delaware — each has specific advantages for specific types of concealment. The jurisdiction choice reveals the intent.
-- **Who are the real beneficiaries?** Named officers are often nominees (lawyers, trust company employees). The beneficial owners are the intelligence. Follow the chain until you find a natural person.
-- **When was it created relative to events?** An entity incorporated 2 weeks before a large transfer, then dissolved after — that's a single-purpose vehicle. Map entity lifecycle against known events.
-- **What other entities share the same officers, addresses, or intermediaries?** Check known_addresses from the investigation profile. Common addresses and common registered agents reveal entity clusters that operate as a single economic unit.
-
-## Process
-
-### 0. Session Setup — Prevent File Collisions
-
-Create a unique working directory for this session:
+Read `docs/RESEARCH_WORKFLOW_CONTRACT.md` and `docs/EXECUTION_CONTRACT.md`.
+Pin profile/database and inherit the parent lead, source ownership, report path,
+and any existing search plan. Create unique output paths:
 
 ```bash
 WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
-echo "Session workdir: $WORKDIR"
+uv run python tools/investigation_context.py show
+uv run python tools/findings_tracker.py search "<ENTITY>" --output "$WORKDIR/entity-findings.json"
+uv run python tools/lead_tracker.py search "<ENTITY>" --output "$WORKDIR/entity-leads.json"
+uv run python tools/entity_tracker.py lookup --name "<ENTITY>" --output "$WORKDIR/entity-lookup.json"
 ```
 
-Use `$WORKDIR/` instead of `/tmp/` for ALL `--output` paths and report files throughout this session.
+Resolve legal name, aliases, entity type, registration number, jurisdiction, dates,
+and status from records. Distinguish registry IDs from canonical investigation
+entity IDs and namesakes before linking them. State the ownership, asset, or
+transaction question and hypotheses that would guide the next source check.
 
-### 1. Check Existing Knowledge
-```bash
-uv run python tools/findings_tracker.py search "<ENTITY>" --output $WORKDIR/trace-findings.json
-uv run python tools/lead_tracker.py search "<ENTITY>" --output $WORKDIR/trace-leads.json
-ls research/entities/
-```
+## 2. Build and execute applicable coverage
 
-### 2. ICIJ Offshore Leaks (Primary)
+Use the shared source-applicability/reuse contract. Select jurisdictions from
+evidence and assess relevant source families:
 
-Search the official remote service first. Review candidates and pass the exact
-numeric node ID to traversal commands so a fuzzy name cannot select an entity:
+| Nexus | Operations and references |
+|---|---|
+| Registration/ownership | Relevant registry search, entity detail, officers, filing history, beneficial ownership; `docs/modules/registries.md` |
+| Public securities/financial entity | Regulator filings, EDGAR, GLEIF hierarchy where covered; `docs/modules/financial.md` |
+| Charity/funding | Charity filings and EIN-resolved 990 records; `/trace-grants` for deeper flow analysis |
+| Property/secured assets | Property/recorder/UCC/aircraft records and ownership history; public-record planner and source modules |
+| Litigation | Relevant courts, party roles, dockets, and actual filings; `docs/modules/legal.md` |
+| Procurement/political | Relevant award/subaward, campaign, lobbying, and FARA records; government/political module docs |
+| Offshore/network | ICIJ and applicable relationship datasets; `docs/modules/network-sanctions.md` |
+| Documentary context | Configured corpus tools and first-party sources that can cover this target/period |
 
-```bash
-uv run python tools/query_icij.py search "<ENTITY>" --type Entity \
-  --output "$WORKDIR/trace-icij-search.json"
-uv run python tools/query_icij.py officers <EXACT_NODE_ID> \
-  --output "$WORKDIR/trace-icij-officers.json"
-uv run python tools/query_icij.py connections <EXACT_NODE_ID> \
-  --output "$WORKDIR/trace-icij-connections.json"
-# Optional local Neo4j for deeper traversal:
-uv run python tools/query_icij.py connections <EXACT_NODE_ID> --depth 2 --local \
-  --output "$WORKDIR/trace-icij-depth2.json"
-```
+Consult current module commands or `--help` before choosing an operation. Use
+unique artifacts and record actual query scope, limits, continuation, and
+availability. Independent tracks may use native chat subagents under the shared
+execution contract; the parent retains reconciliation and useful unassigned work.
 
-If matches found, trace the full graph:
-- Who are the officers/directors?
-- What intermediary set it up?
-- What jurisdiction?
-- What other entities share the same officers?
-- Which leak (Panama Papers, Paradise Papers, etc.) exposed it?
+For a UK company number/address/corporate nexus, check Companies House search,
+company, officers, PSC, and filings. The UK module owns current routes.
+Identity-resolved company numbers should appear in distinct output paths.
+Officer-name ambiguity needs company/date context.
 
-### 3. Document Corpus (Kabasshouse primary)
-```bash
-uv run python tools/ingest_kabasshouse.py search "<ENTITY>" --limit 30 --json > $WORKDIR/trace-kabass.json
-uv run python tools/ingest_kabasshouse.py entity "<ENTITY>" > $WORKDIR/trace-kabass-ent.txt
-```
-
-Look for:
-- Incorporation documents
-- Financial transfers mentioning the entity
-- Legal filings referencing it
-
-### 4. LMSBAND / Unified DB
-```bash
-uv run python tools/query_lmsband.py search "<ENTITY>" --limit 20 --output $WORKDIR/trace-lmsband.json
-uv run python tools/query_lmsband.py entities "<ENTITY>" --output $WORKDIR/trace-lmsband-ent.json
-uv run python tools/query_unified.py docs "<ENTITY>" --limit 20 --output $WORKDIR/trace-unified-docs.json
-uv run python tools/query_unified.py triples --target "<ENTITY>" --output $WORKDIR/trace-unified-triples.json
-```
-
-### 5. Entity Co-occurrence
-```bash
-uv run python tools/query_lmsband.py cooccurrence "<ENTITY>" --top 20 --output $WORKDIR/trace-lmsband-coocc.json
-uv run python tools/query_unified.py cooccurrence "<ENTITY>" --top 20 --output $WORKDIR/trace-unified-coocc.json
-```
-
-### 6. Corporate Registries & External APIs
-```bash
-# Unified corporate registry (FL, NY, more)
-uv run python tools/query_registry.py search "<ENTITY>" --output $WORKDIR/trace-registry.json
-uv run python tools/query_registry.py officers "<ENTITY>" --output $WORKDIR/trace-registry-officers.json
-uv run python tools/query_registry.py address "<KNOWN_ADDRESS>" --output $WORKDIR/trace-registry-addr.json
-uv run python tools/query_registry.py agent "<ENTITY>" --output $WORKDIR/trace-registry-agent.json
-uv run python tools/query_registry.py filings <registry_entity_id> --output $WORKDIR/trace-registry-filings.json
-
-# UCC Filings (secured transactions, liens, creditor relationships)
-uv run python tools/query_registry.py ucc-search "<ENTITY>" --output $WORKDIR/trace-ucc.json
-uv run python tools/query_registry.py ucc-party "<ENTITY>" --role debtor --output $WORKDIR/trace-ucc-debtor.json
-uv run python tools/query_registry.py ucc-party "<ENTITY>" --role secured --output $WORKDIR/trace-ucc-secured.json
-uv run python tools/query_registry.py ucc-collateral "aircraft" --output $WORKDIR/trace-ucc-collateral.json
-
-# Massachusetts nexus: search the live UCC portal (separate from local registry data).
-# See docs/modules/registries.md for individual names, roles, and the lapsed archive.
-uv run python tools/query_massachusetts_ucc.py search-org "<ENTITY>" --limit 25 --output "$WORKDIR/trace-ma-ucc.json"
-
-# DEPRECATED (March 2026): OCCRP removed free tier in 2026. Tool returns 0 results without paid API key. Skip Aleph queries until access is restored.
-# OCCRP Aleph (global corporate registries, leaks)
-uv run python tools/query_aleph.py search "<ENTITY>" --schema Company --output $WORKDIR/trace-aleph-company.json
-uv run python tools/query_aleph.py search "<ENTITY>" --schema Organization --output $WORKDIR/trace-aleph-org.json
-
-# CourtListener (legal proceedings)
-uv run python tools/query_courtlistener.py search "<ENTITY>" --output $WORKDIR/trace-cl.json
-uv run python tools/query_courtlistener.py party "<ENTITY>" --output $WORKDIR/trace-cl-party.json
-
-# IRS 990 (if nonprofit — comprehensive view with officers, financials, grants)
-uv run python tools/query_990.py lookup <EIN> --output $WORKDIR/trace-990-lookup.json   # if EIN known
-uv run python tools/query_990.py search "<ENTITY>" --output $WORKDIR/trace-990.json     # if searching by name
-uv run python tools/query_990.py officers <EIN> --output $WORKDIR/trace-990-officers.json
-uv run python tools/query_990.py financials <EIN> --output $WORKDIR/trace-990-financials.json
-
-# UK Companies House (mandatory for UK entities/officers/addresses)
-uv run python tools/ingest_uk_companies_house.py search "<ENTITY>" --output "$WORKDIR/trace-uk-search.json"
-uv run python tools/ingest_uk_companies_house.py officer-search "<ENTITY>" --output "$WORKDIR/trace-uk-officer-search.json"
-```
-
-### 6b. External APIs & Web Research
-```bash
-# LittleSis (relationship/board mapping)
-uv run python tools/query_littlesis.py search "<ENTITY>" --output $WORKDIR/trace-littlesis.json
-uv run python tools/query_littlesis.py relationships <ID> --category 10 --output $WORKDIR/trace-littlesis-ownership.json
-
-# SEC EDGAR (mentions in public filings + ownership disclosures)
-uv run python tools/query_edgar.py lookup "<ENTITY>" --output $WORKDIR/trace-edgar-lookup.json
-uv run python tools/query_edgar.py search "<ENTITY>" --size 10 --facets --output $WORKDIR/trace-edgar.json
-uv run python tools/query_edgar.py search "<ENTITY>" --forms "SC 13D" --output $WORKDIR/trace-edgar-13d.json
-uv run python tools/query_edgar.py filings <CIK> --form "DEF 14A" --output $WORKDIR/trace-edgar-proxy.json
-
-# FAA Registry (if aircraft/aviation entity)
-uv run python tools/ingest_faa.py search "<ENTITY>" --output $WORKDIR/trace-faa.json
-
-# Investigation reports (if populated)
-uv run python tools/query_investigations.py search "<ENTITY>" --limit 10 --output $WORKDIR/trace-investigations.json
-```
+ICIJ example: review search candidates, then use the exact numeric node ID:
 
 ```bash
-# Reproducible property -> recorder -> court plan
-uv run python tools/public_records_search_plan.py "<ENTITY>" \
-  --address "<KNOWN_ADDRESS>" \
-  --output "$WORKDIR/trace-public-record-plan.json"
-
-# Normalized property and state/local-court observations
-uv run python tools/query_property.py owner "<ENTITY>" \
-  --output "$WORKDIR/trace-property-owner.json"
-uv run python tools/query_property.py address "<KNOWN_ADDRESS>" \
-  --output "$WORKDIR/trace-property-address.json"
-uv run python tools/query_state_courts.py search "<ENTITY>" \
-  --output "$WORKDIR/trace-state-courts.json"
-
-# NYC ACRIS recorder records when the plan identifies a NYC connection
-uv run python tools/query_acris.py party "<ENTITY>" --output $WORKDIR/trace-acris.json
-uv run python tools/query_acris.py batch-entities \
-  --output "$WORKDIR/trace-acris-batch.json"
-
-# FEC (donations from entity employees)
-uv run python tools/query_fec.py employer "<ENTITY>" --output $WORKDIR/trace-fec.json
-
-# Lobbying (was entity a client or registrant?)
-uv run python tools/query_lobbying.py client "<ENTITY>" --output $WORKDIR/trace-lobbying-client.json
-uv run python tools/query_lobbying.py registrant "<ENTITY>" --output $WORKDIR/trace-lobbying-registrant.json
-
-# FARA (foreign agent registration)
-uv run python tools/query_fara.py search "<ENTITY>" --output $WORKDIR/trace-fara.json
-
-# Federal contracts & grants (USAspending — no auth)
-uv run python tools/query_usaspending.py awards "<ENTITY>" --output $WORKDIR/trace-usaspending-contracts.json
-uv run python tools/query_usaspending.py awards "<ENTITY>" --grants --output $WORKDIR/trace-usaspending-grants.json
-uv run python tools/query_usaspending.py subawards "<ENTITY>" --output $WORKDIR/trace-usaspending-subs.json
-uv run python tools/query_usaspending.py timeline "<ENTITY>" --group fiscal_year --output $WORKDIR/trace-usaspending-timeline.json
-
-# SAM.gov API (entity registration, exclusions — requires SAM_API_KEY)
-uv run python tools/query_sam.py entity "<ENTITY>" --output $WORKDIR/trace-sam-entity.json
-uv run python tools/query_sam.py exclusions "<ENTITY>" --output $WORKDIR/trace-sam-exclusions.json
-
-# SAM.gov Bulk (874K entities, 167K exclusions — local SQLite, no API limit)
-uv run python tools/ingest_sam.py entity "<ENTITY>" --output $WORKDIR/trace-sam-bulk-entity.json
-uv run python tools/ingest_sam.py exclusion "<ENTITY>" --output $WORKDIR/trace-sam-bulk-excl.json
+uv run python tools/query_icij.py search "<ENTITY>" --type Entity --output "$WORKDIR/icij-search.json"
+uv run python tools/query_icij.py officers <EXACT_NODE_ID> --output "$WORKDIR/icij-officers.json"
+uv run python tools/query_icij.py connections <EXACT_NODE_ID> --output "$WORKDIR/icij-connections.json"
 ```
 
-Follow the public-record plan's source capabilities with the matching direct
-adapter for addresses, parcels, instruments, cases, docket entries, and
-documents. For an account, formal feed, request, paid product, or physical
-office route, render the concrete work with `public_records_actions.py plan`,
-passing the source ID, operation, and selector from the plan. Preserve route
-and barrier states in source coverage rather than recording them as zero hits.
+The official remote service supports first-hop lookup. Deeper local traversal is
+a separate capability; an unavailable local graph does not erase remote coverage.
 
-Web research:
-- WebSearch: `"<ENTITY>" site:opencorporates.com`
-- WebSearch: `"<ENTITY>" "beneficial owner" OR "registered agent"`
-- Check `research/RELATED_INVESTIGATIONS.md` for relevant historical parallels
-- Check `research/OSINT_RESOURCES.md` for specialized registry tools
+## 3. Follow selected property and lateral pivots
 
-### 7. Record Findings
-For each entity discovered in the ownership chain (provenance fields required):
+For property/court questions, build the capability plan:
+
 ```bash
-uv run python tools/findings_tracker.py add \
-    --target "<ENTITY>" \
-    --type financial \
-    --summary "What the evidence shows" \
-    --evidence <IDS> \
-    --claim-type <direct_quote|paraphrase|inference> \
-    --source-quote "<ID>:exact text from source" \
-    --sources <SOURCE_NAMES> \
-    --confidence <LEVEL>
+uv run python tools/public_records_search_plan.py "<ENTITY>" --output "$WORKDIR/public-record-plan.json"
 ```
 
-Record ownership/corporate connections:
+Follow the plan's source IDs and operations, preserving local-cache and acquisition
+barriers as coverage information. For a NYC connection, search the selected entity:
+
+```bash
+uv run python tools/query_acris.py party "<ENTITY>" --output "$WORKDIR/acris-party.json"
+```
+
+Repeat targeted party queries only for evidence-selected aliases, officers, or
+entities relevant to the question, each with a unique output. The ordinary entity
+trace does not expand into a corpus-wide entity search.
+
+Trace upstream owners, downstream entities, relevant officers, formation/lifecycle
+dates, and material transactions. Use exact registration numbers and dates to
+separate legal ownership, asserted control, and nominee roles. For address,
+registered-agent, or officer pivots, assess the provider's client base and routine
+shared-service explanations. Explore related entities while the pivot produces
+evidence relevant to the question; retain useful ambient facts and queue further
+independent questions. Record search scope and why a broad or noisy pivot stopped.
+
+## 4. Read and persist the records
+
+Retrieve complete artifacts and read the full document when required to establish
+ownership, chronology, qualifiers, or the claim. For long filings/documents,
+inspect sections or sequential chunks, record read coverage and continuation, and
+continue until the question is resolved or unread relevant material is an explicit
+gap. Snippets are navigation aids.
+
+Persist findings with canonical evidence refs, exact `ref:quote` pairs for each
+reference, source tokens, and claim-type confidence ceilings. Preserve primary
+assertions versus independently established truth. Use inherited lead/thread IDs.
+
+Register entities/roles/addresses/relations through `entity_tracker.py` and resolve
+before adding. Preserve source refs, dated officer roles, formation numbers,
+jurisdictions, observed addresses, and useful financial details. Use the audited
+correction API for repairs; keep currency-bearing text shell-safe.
+
+A relationship needs quoted evidence in its own record:
+
 ```bash
 uv run python tools/findings_tracker.py connect \
-    --person-a "<ENTITY>" --person-b "<OWNER/OFFICER>" \
-    --type corporate --strength strong \
-    --evidence <IDS>
+  --person-a "<ENTITY>" --person-b "<OWNER_OR_OFFICER>" \
+  --type corporate --strength medium \
+  --evidence "<EVIDENCE_REF>" \
+  --source-quote "<EVIDENCE_REF>:exact source text supporting this relationship"
 ```
 
-### 7b. Register Entities, Roles & Relations in DB
+For matching retained public-record rows to canonical entities, consult
+`public_records_entity_candidates.py generate` / `list` and inspect candidates
+before making identity assertions.
 
-**CRITICAL**: Register all discovered entities/roles/addresses/relations with `tools/entity_tracker.py`.
+## 5. Reconcile and finish
 
-```bash
-# Lookup first
-uv run python tools/entity_tracker.py lookup --name "Entity Name"
+Map the ownership chain and distinguish unknown endpoints from natural persons
+actually established by evidence. Cross-check dates, financial counterparties,
+and contradictions. Perform a disconfirmation check for the working explanation;
+consider legitimate structuring, shared service providers, and incomplete
+collection before inferring concealment or common control.
 
-# Add entity if missing
-uv run python tools/entity_tracker.py add-entity   --name "Entity Name"   --entity-type ltd   --jurisdiction bvi   --status active   --source "source_ref"   --notes "ownership chain node"
+Complete when applicable coverage answers the question to its evidence standard
+or the remaining uncertainty/access barrier has a concrete disposition/next
+action. Mark partial ownership chains and unavailable sources explicitly.
+Create related leads for actionable next questions; `/build-infra` owns missing
+tool/source integration.
 
-# Add officers/directors
-uv run python tools/entity_tracker.py add-role   --entity-id <ENTITY_ID>   --person-name "Person Name"   --role "director"   --date-start "2010-01"   --date-end "2019-07"   --source "EFTA02XXXXXX"
-
-# Add addresses
-uv run python tools/entity_tracker.py add-address   --entity-id <ENTITY_ID>   --address "Address"   --address-type registered   --date-observed "2019"   --source "source"
-
-# Add entity-to-entity relationships
-uv run python tools/entity_tracker.py add-relation   --entity-a-id <PARENT_ID>   --entity-b-id <CHILD_ID>   --relation-type owns   --description "Parent holds 100% of subsidiary"   --source "source"
-
-# Inspect consolidated entity view
-uv run python tools/entity_tracker.py show <ENTITY_ID>
-
-# Generate and inspect explainable links from public-record sidecars.
-uv run python tools/public_records_entity_candidates.py generate \
-  --output "$WORKDIR/trace-public-record-candidates.json"
-uv run python tools/public_records_entity_candidates.py list --status open \
-  --name "<ENTITY>" \
-  --output "$WORKDIR/trace-public-record-candidates-for-entity.json"
-```
-
-Use allowed entity types: `person, llc, inc, ltd, corporation, pllc, trust, foundation, nonprofit, partnership, fund, association, government, pac, agency, joint_venture, shell, unknown`.
-
-### 8. Create Entity Research File
-Create `research/entities/<entity-slug>.md`:
-```markdown
-# <Entity Name>
-
-## Registration
-- Jurisdiction:
-- Date incorporated:
-- Status:
-- ICIJ Source: (Panama Papers / Paradise Papers / etc.)
-
-## Officers & Directors
-| Name | Role | Period |
-|------|------|--------|
-
-## Ownership Chain
-(upstream: who owns this entity)
-(downstream: what does this entity own)
-
-## Financial Activity
-- Known accounts
-- Transfer records
-- Asset holdings
-
-## Connection to Investigation Network
-- How it links back to the primary subject or known associates
-
-## Source Coverage
-- [x] ICIJ — node_id XXXXX
-- [x] DOJ Vol 11 — X hits
-- [ ] SEC EDGAR — not searched
-```
-
-### 9. Analyze the Structure
-
-Before spawning follow-ups, step back and assess the overall corporate architecture:
-
-- **Is this a standalone entity or part of a cluster?** Investigation subjects often use dozens of entities. Map which entities share addresses, officers, or intermediaries to identify the cluster. Cross-reference known_addresses and key_persons from the investigation profile.
-- **What's the money trail?** Even partial financial data (a wire amount, a bank name, a transaction date) is valuable. Financial flows between entities reveal the real purpose behind the corporate structure.
-- **Does the timeline make sense?** Entity created in 2005, first transaction in 2012, dissolved in 2019 — the gaps tell a story.
-- **Who benefits from the opacity?** The person most motivated to hide their connection to this entity is often the most important lead.
-
-### 9b. Exhaustive Lateral Exploration
-
-When tracing an entity, perform exhaustive lateral checks:
-1. **Registered address** -- search for all other entities at that address
-2. **Each officer** -- search for all other entities they serve as officer
-3. **Registered agent** -- search for all other entities using that agent (filter mass-market agents like CT Corporation, CSC, NRAI)
-4. **Formation date** -- search for entities formed the same week by the same agent/officer
-5. **Document ALL lateral findings**, even if most seem unrelated -- they may surface connections later
-
-### 10. Spawn Follow-Up Leads
-Create leads for:
-- Newly discovered officers/directors who need investigation
-- Related entities in the ownership chain
-- Financial flows that need tracing (amounts, dates, counterparties)
-- Jurisdictions that need further research
-- **Entities that share officers or addresses** with this one — the cluster analysis
-- **Anomalies**: entities whose stated purpose doesn't match their activity
-
-## Context Management
-
-### Output Discipline
-- **Use `--output $WORKDIR/...` on ALL search commands** (already shown in examples above)
-- **Do NOT `cat` or `Read` full document text** — extract relevant quotes only
-- **Record findings as you go**, not in a batch at the end
-
-### Report File (when running as sub-agent)
-If spawned by another skill or a wave orchestrator, write a completion report:
-
-```markdown
-# Entity Trace Report: <Entity Name>
-## Status: completed | partial | blocked
-## Findings Added: [count] (IDs: ...)
-## Connections Added: [count]
-## Entities Registered: [count]
-## Ownership Chain
-- [parent] → [entity] → [subsidiaries]
-## Key Discoveries
-- [1-2 sentence summary per finding]
-## Gaps / Follow-up Needed
-- [Jurisdictions not searched, officers not investigated]
-## Leads Spawned: [count] (IDs: ...)
-```
-
-Write to `$WORKDIR/report-trace-<entity-slug>.md`.
+When useful, update `research/entities/<entity-slug>.md` with identity,
+registration, ownership, dated roles, assets/flows, cited findings, coverage, and
+open questions. Preserve existing authored work and evidence artifacts under the
+Git workflow. Workers write the assigned report path or
+`$WORKDIR/report-trace-<entity-slug>.md`, including status, record IDs, contradictions,
+bounded negatives, source outcomes, and continuation. Preserve progress across
+interruptions/compaction and resume the original question.

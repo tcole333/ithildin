@@ -1,4 +1,6 @@
-interface:
-  display_name: "Dispatch"
-  short_description: "Report queue depth and recommend next work"
-  default_prompt: "Use $dispatch to handle this investigation task with clear evidence and actionable output."
+"interface":
+  "display_name": "Dispatch"
+  "short_description": "Report scoped queues and recommend useful next work"
+  "default_prompt": "Use $dispatch. Report the selected investigation’s state without\
+    \ mutations and recommend the next useful work, distinguishing scoped activity\
+    \ from global metrics."

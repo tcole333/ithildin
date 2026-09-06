@@ -55,7 +55,10 @@ uv run python tools/query_edgar.py read "https://www.sec.gov/Archives/edgar/data
 # Extract structured sections from 10-K/10-Q (uses edgartools)
 uv run python tools/query_edgar.py sections PLTR --section mda
 uv run python tools/query_edgar.py sections PLTR --section risk
-uv run python tools/query_edgar.py sections PLTR --form 10-Q --section balance
+uv run python tools/query_edgar.py sections PLTR --form 10-Q --section balance_sheet
+# Bind every statement to the same selected filing; do not substitute the latest 10-K
+uv run python tools/query_edgar.py sections "<CIK>" --accession "<SELECTED_ACCESSION>" \
+  --section income_statement --output "$WORKDIR/income.json"
 ```
 
 **Sections aliases:** `business`/`item1`, `risk`/`risk_factors`/`item1a`, `mda`/`item7`, `legal`/`item3`, `balance`/`balance_sheet`, `income`/`income_statement`, `cash_flow`/`cashflow_statement`.
@@ -64,6 +67,12 @@ uv run python tools/query_edgar.py sections PLTR --form 10-Q --section balance
 - EFTS search ignores the `size` param server-side (returns up to 100); the tool slices client-side.
 - `--sort date` and `--sort date-asc` are client-side sorts on the returned results.
 - `sections` command requires the `edgartools` package.
+- `sections --accession` selects an exact historical filing; `--url` accepts an
+  official SEC Archives URL and derives its CIK/accession. An optional `--form`
+  validates an exact selection. `--index` is a separate ordinal selection mode.
+  Inspect accession, statement type, units, and periods before ratios; a text
+  fallback is not a structured financial statement. Keep all material document
+  reading and incorporated exhibits in the source coverage record.
 - `read` previews 500 lines by default. Use repeatable `--find` for late-file matches or `--output` for the complete extracted text, including table footnotes.
 - `filings` follows the SEC submissions metadata into older history segments, newest first, only until it reaches `--limit`. Date filters skip segments whose published date range cannot match, and each submissions response is capped at 25 MB.
 - Direct filing retrieval uses declared SEC identity headers, bounded retries, and a 25 MB response limit. If an individual official Archive document returns 403, the tool makes one bounded attempt to extract that document from the accession's official complete-submission `.txt` file. It never uses this fallback for 429 rate-control responses or non-SEC hosts.

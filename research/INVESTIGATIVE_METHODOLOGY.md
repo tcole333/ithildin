@@ -155,7 +155,7 @@ When searching, try alternate transliterations, native-language name forms, and 
 
 Networks engaged in illicit or concealed activity are structurally designed to obscure. Look for these patterns:
 
-**Shell company layering**: Multiple LLCs, trusts, and offshore entities where every layer of corporate structure is a layer of obfuscation. When you find a new entity name, don't just log it — ask what it was hiding.
+**Corporate layering**: Map LLCs, trusts, and offshore entities and establish their ownership and functions. Separate ordinary financing, liability, tax, and administrative structures from evidence of concealment. A new entity is an identity and relationship question, not proof that something was hidden.
 
 **Intermediaries**: Important relationships mediated through intermediaries who aren't just assistants — they're cutouts providing plausible deniability. When you see a communication going through an intermediary, ask: why wasn't this direct?
 
@@ -283,33 +283,22 @@ When an entity is discovered through a data pivot (phone number, address, office
 7. **Check import/export records, industry connections** — especially for companies in logistics, telecommunications, financial services, or technology
 8. **Close a disproved pivot linkage** when evidence explains the linking data point as mistaken or non-diagnostic. Keep unrelated factual questions in separate leads. When coverage cannot resolve the link, use bounded negative/diminishing-return stop conditions and preserve the uncertainty
 
-## Orchestrator Pattern: Parallel Sub-Agent Investigations
+## Supervised multi-source investigations
 
-**Problem**: A single agent tasked with searching 20+ sources will prioritize the ones it's comfortable with (usually the document corpus) and skip external tools. This creates blind spots — zero corpus results gets treated as "false positive" when CourtListener, EDGAR, corporate registries, and web search were never checked.
+Use `/deep-investigate` when independent source tracks or questions materially
+help. Build a source assignment matrix from the target's jurisdiction, role,
+period, and configured corpora. Corporate/financial, legal, corpus, and network
+tracks are possible divisions, not four required workers or fixed source lists.
+Keep simple follow-ups local. Use native subagents in the current chat and the
+supervision/recovery contract in `docs/EXECUTION_CONTRACT.md`.
 
-**Solution**: The `/deep-investigate` skill implements an **orchestrator pattern** where the investigating agent launches 4 parallel sub-agents, each with a dedicated source mandate:
-
-| Sub-Agent | Sources | What It Finds |
-|-----------|---------|---------------|
-| **A: Corpus** | DOJ Vol 11, DugganUSA, LMSBAND, Unified DB | Document references, exact quotes, email threads, timeline |
-| **B: Corporate/Financial** | Registry, EDGAR, ACRIS, FEC, 990, UCC, FAA, LDA, FARA | Entities, officers, filings, property, donations, regulatory records |
-| **C: Legal/Court** | CourtListener, FARA (detailed), LDA (detailed), Investigation reports | Litigation, opinions, enforcement actions, regulatory status |
-| **D: Network/OSINT** | LittleSis, ICIJ, OpenSanctions, WebSearch, WebFetch | Relationships, offshore structures, public reporting, biographical context |
-
-**Key rules**:
-1. **Every sub-agent MUST search every source in its mandate** — no skipping
-2. **Zero results are recorded** — "Not found in CourtListener" is a finding
-3. **Sub-agents record findings directly** via CLI tools, not just in their output text
-4. **The orchestrator synthesizes** — identifying corroboration across independent source types (corpus email + SEC filing = real corroboration, unlike the same doc in 3 corpus databases)
-5. **All 4 agents launch simultaneously** — maximizes parallelism, minimizes wall-clock time
-
-**When to use this pattern**:
-- Any new person or entity entering the investigation
-- Targets where initial corpus-only search was inconclusive
-- Targets with known external footprints (lawyers, executives, companies)
-- Wave planning — each wave target gets a `/deep-investigate`
-
-**When NOT to use**: Simple follow-ups on a single document or lead that only needs one source type.
+Each worker accounts for every assigned source as searched, reused, not applicable,
+unavailable, or partial, with a reason. A bounded negative result belongs in the
+coverage record; it is a finding only when that absence supports a substantive
+claim with adequate source coverage. State write ownership in the mandate.
+The parent can query sources and inspect complete artifacts while workers run,
+avoiding duplicate assignments, then reconcile actual evidence and remaining
+gaps. Mirrors of the same document remain one evidentiary source.
 
 ## 9. Proactive Source Discovery & Tool Building
 
@@ -433,13 +422,18 @@ uv run python tools/model_detector.py gaps --finding-id FINDING_ID  # reports wh
 
 ## Framework Discipline
 
-Frameworks are **pattern detectors**, not interpretive lenses. They help you recognize recurring structures, but they must never drive the investigation or filter what you see.
+Frameworks help recognize recurring structures and formulate discriminating
+questions. Use them provisionally: they must not predetermine a conclusion or
+filter out contradictory evidence.
 
 ### Rules
 
-1. **Evidence first, frameworks second.** Document what you find. If a pattern reminds you of a known framework, note it — but never search for evidence to "apply" a framework. The question is always "what does the evidence show?" not "which framework applies here?"
+1. **Evidence governs the conclusion.** Document what you find. A framework may
+   suggest an informative search, including a test that could refute it. Evaluate
+   all resulting evidence and ordinary alternatives rather than collecting only
+   facts that fit the label.
 
-2. **Never force the fit.** If a framework doesn't cleanly match, it doesn't match. A partial match is not a match — it's noise. Resist the urge to populate every cell in a framework × subject matrix. Reality is messy and incomplete matrices are honest.
+2. **Never force the fit.** If a framework doesn't cleanly match, it doesn't match. Treat a partial match as a tentative observation with missing or contradictory features recorded; it does not establish the explanation. Resist the urge to populate every cell in a framework × subject matrix. Reality is messy and incomplete matrices are honest.
 
 3. **Actively seek counter-evidence.** For every pattern you identify, ask: what would make this NOT the pattern I think it is? What innocent explanation exists? What evidence would contradict this? If you can't articulate a falsification criterion, the pattern is unfalsifiable and therefore not useful.
 
@@ -464,85 +458,71 @@ A belief system achieves epistemic closure when it becomes self-sealing — no e
 **Apply this check when:**
 - Every new finding seems to confirm the existing framework. Ask: am I pattern-matching or discovering?
 - Counter-evidence is consistently dismissed as "noise" or "cover story." Ask: what would genuine counter-evidence look like? If I can't describe it, the model is unfalsifiable.
-- The investigation has not produced a significant surprise in the last 50+ findings. Surprise is a sign of genuine discovery; its absence may signal closure.
+- The investigation repeatedly generates the same interpretation without testing new alternatives. Review search selection and disconfirming evidence; absence of surprise alone does not establish a problem.
 - You find yourself explaining away evidence that doesn't fit rather than updating the model.
 
 **The Normal Accidents check (Perrow):** For any pattern that appears coordinated, ask: could this emerge from a tightly-coupled system of aligned actors without explicit coordination? Complex systems produce "normal accidents" that look intentional. Some of what appears orchestrated may be emergent behavior from actors with aligned incentives operating in overlapping domains. The question is not "does this look coordinated?" but "does this *require* coordination to explain, or could it emerge from complexity alone?"
 
 **Practical discipline:** Periodically run `/discover-frameworks` with the explicit instruction to find patterns that *contradict* existing models, not just patterns that extend them. If the investigation's analytical vocabulary is only growing and never being pruned, epistemic closure may be setting in.
 
-## Four-Plane Agent Architecture
+## Investigation responsibilities
 
-Investigation agents operate across four planes with distinct mandates. The key distinction from a simple Layer 1/Layer 2 model is the explicit **Control Plane** — skills that route and orchestrate work but do not investigate directly.
+Control, research, analysis, and editorial work describe responsibilities and
+outputs. They are not restrictions on an agent's ability to reason or use sources.
+A parent can oversee native subagents in the current chat while verifying source
+evidence itself. Assign distinct work and coordinate shared writes; choose the
+smallest useful team. See `docs/EXECUTION_CONTRACT.md` for supervision, persistence,
+model inheritance, and explicitly selected unattended execution.
 
-### Control Plane (Scheduling & Orchestration)
-**Skills**: `/dispatch`, `/triage-leads`, `/deep-investigate`
+### Planning and supervision
 
-- **Route work, assign depth, orchestrate agents.** Do NOT investigate directly.
-- `/triage-leads` evaluates pending leads and assigns `depth_tier`, `recommended_skill`, and `triage_rationale` using rules from `tools/triage_policy.py`.
-- `/dispatch` reads queue state and scheduler fields to suggest which skills to launch.
-- `/deep-investigate` is an **orchestrator**: it plans source assignments and dispatches 4 parallel sub-agents, then synthesizes their reports. It does not query sources itself.
-- Control plane skills may produce synthesis findings when combining sub-agent results, but these must be labeled `claim_type=synthesis` with `confidence=medium`.
+`/dispatch` reports state without changing it. `/triage-leads` assigns a justified
+depth, recommended skill, and rationale to reviewed leads. `/deep-investigate`
+and `/orchestrate-investigation` select useful work, supervise children, reconcile
+coverage, and integrate results. The parent may close a verification gap directly
+instead of requiring a new worker for every query.
 
-### Research Plane
+### Research and analysis
 
-#### Tier 0: Landscape Scan
-**Skills**: `/landscape-scan`
+Landscape scans prioritize breadth; deeper investigations follow material
+questions through applicable sources. Initial target/source counts are estimates,
+not quotas. Retain substantive facts, bounded negatives, contradictions, and
+ordinary baseline explanations even when they do not support the initial story.
+The research workflow contract owns applicability, reuse, and full-document
+coverage; a source checklist is assessed for the actual jurisdiction and question.
 
-- **Quick terrain mapping.** 2-3 sources per target, 10-30 targets per scan.
-- Purpose is breadth, not depth — identify who's involved and what warrants deeper investigation.
-- Output: leads for targets warranting Tier 1 investigation, plus a relationship map.
+Researchers may use hypotheses and frameworks to choose informative searches,
+recognize patterns, and test alternatives. They must distinguish observed evidence
+from interpretation. Primary-source quotations can support `direct_quote` findings
+at `confirmed`; paraphrases are capped at `high`; inferences and syntheses at
+`medium`. These limits follow the claim, regardless of which agent writes it.
 
-#### Tier 1: Evidence Collection
-**Skills**: `/pursue-lead`, `/investigate-person`, `/trace-entity`, `/search-all-sources`, `/investigate-infra`
+A material explanatory theory needs a falsification criterion, the strongest
+ordinary alternative, and a concrete way to discriminate between them. Create a
+follow-up lead when a useful unresolved question remains; do not manufacture a
+lead for a disproved idea or to meet a count. Use structured competing-hypothesis
+analysis where the methodology calls for it, proportional to the significance
+and ambiguity of the claim. Frameworks organize questions, not conclusions.
 
-- **Gather, verify, document.** No theorizing, no framework application.
-- Record everything found — including mundane facts, negative results, and baseline comparisons.
-- Follow the source checklist for the target type. Do not skip sources because you "found enough."
-- Findings use `claim_type` of `direct_quote`, `paraphrase`, or (sparingly) `inference` with appropriate confidence caps.
+### Editorial work
 
-**Research Plane MUST NOT:**
-- Assess narrative potential, article-worthiness, or editorial framing
-- Apply analytical frameworks (Manufactured Dependency, Bridge Tax, etc.)
-- Use language like "counterintuitive finding," "character entry point," "narrative hook," or "most article-worthy"
-- Interpret what patterns mean — record the raw data and let Analysis handle interpretation
+Articles and dossiers explain reviewed evidence. Editorial priorities must not
+alter the underlying factual record or turn an allegation into a fact. A writer
+or reviewer who discovers a factual gap may verify sources and persist a properly
+typed finding within the user's scope, coordinating ownership where needed.
+New or changed claims must pass the same evidence and content-bound review path;
+a polished narrative is not verification.
 
-**Research Plane MAY:**
-- Form hypotheses about where to search ("If X is true, I'd expect to find Y in source Z")
-- Record factual observations about corroboration, contradictions, gaps, and temporal clusters
-- Note what's missing or absent from expected sources
-
-### Analysis Plane (Tier 2: Theory-Building)
-**Skills**: `/generate-hunches`, `/analyze-network`, `/timeline-analysis`, `/systemic-analysis`, `/discover-frameworks`
-
-- **Speculate, hypothesize, identify patterns** — but every theory MUST:
-  1. Produce a falsification criterion (what would disprove it?)
-  2. Include the best innocent explanation for the observed pattern
-  3. Generate at least one research lead with a concrete search plan for Research agents
-- Findings use `claim_type=synthesis` with `confidence=medium` maximum.
-- Reference `research/craft-research/frameworks/` as pattern detectors, not interpretive lenses.
-- See Framework Discipline section above.
-
-### Editorial Plane (Narrative Production)
-**Skills**: `/write-article`, `/review-article`, `/curate-dossier`, `/review-dossiers`
-
-- Consume findings but do not produce them
-- Narrative-quality assessment (article-worthiness, character entry points, reader engagement) belongs exclusively here
-- Operate outside the research and analysis stack
-
-### Plane Boundary Quick Reference
-
-| Concept | Control | Research (Tier 0-1) | Analysis (Tier 2) | Editorial |
-|---------|---------|--------------------|--------------------|-----------|
-| **Purpose** | Route work, orchestrate | Gather facts, record evidence | Identify patterns, hypothesize | Frame narratives |
-| **Output** | Scheduling decisions, synthesis | Findings (direct_quote, paraphrase) | Findings (synthesis, inference) + hypotheses | Articles, dossiers |
-| **Max confidence** | medium (synthesis only) | confirmed (direct_quote), high (paraphrase) | medium (synthesis) | N/A |
-| **Forbidden** | Direct source queries | Framework application, narrative assessment | Creating primary findings from raw sources | Producing findings |
-| **Allowed** | Dispatching, planning, combining | Hypothesis-driven search, factual observation | Speculating with falsification criteria | Narrative framing |
+| Responsibility | Typical output | Completion criterion |
+|---|---|---|
+| Planning/supervision | Assignments, checkpoints, integrated result | Expected work collected or its blocker identified; conflicts reconciled |
+| Research | Source artifacts, factual findings, coverage record | Material question resolved within documented coverage |
+| Analysis | Calculations, hypotheses, typed synthesis | Assumptions and alternatives tested; uncertainty retained |
+| Editorial | Articles, dossiers, review receipts | Current claims and source support reviewed for the actual content |
 
 ### Enforcement Mechanisms
 
-The Four-Plane Architecture is enforced through code and hooks, not just convention:
+Evidence invariants and supported routing are enforced through code and hooks:
 
 1. **Confidence caps at write time**: `findings_tracker.py` clamps confidence to the maximum allowed for each `claim_type`. An agent that attempts `--claim-type inference --confidence confirmed` will have confidence clamped to `medium` with a WARNING. Additionally, a pre-execution hook blocks the command before it runs. Caps:
 
@@ -562,30 +542,19 @@ The Four-Plane Architecture is enforced through code and hooks, not just convent
 
 5. **Falsification criteria**: All Analysis Plane skills (`/generate-hunches`, `/analyze-network`, `/timeline-analysis`, `/systemic-analysis`) require every hypothesis to include a falsification criterion and the best innocent explanation.
 
-6. **Triage policy in code**: `tools/triage_policy.py` encodes depth_tier assessment, skill recommendation, and dead-end thresholds as testable Python functions. Both the triage skill and dispatcher reference these shared rules.
+6. **Triage policy in code**: `tools/triage_policy.py` encodes depth assessment, skill recommendations, and overlap candidates as testable Python functions. Both the triage skill and dispatcher reference these shared rules.
 
 7. **Editorial language hook**: `validate-findings.sh` blocks findings containing editorial patterns ("narrative potential", "article-worthy", "character entry point", etc.) before they reach the database.
 
-### Recognizing Plane Boundary Violations
+### Recognizing evidence and ownership failures
 
-**Research Plane violations (research agent editorializing):**
-- "This counterintuitive finding suggests a pattern of deliberate concealment" — interpretive framing belongs in Analysis
-- "This is the most article-worthy discovery" — narrative assessment belongs in Editorial
-- "Applying the Bridge Tax framework, this represents..." — framework application belongs in Analysis
-- Setting `--claim-type inference --confidence confirmed` — enforcement catches this, but agents should not attempt it
-
-**Analysis Plane violations (analysis agent overstepping):**
-- Creating findings with `claim_type=direct_quote` from raw source material — primary finding creation belongs in Research
-- Setting confidence above `medium` on synthesis findings — caps enforce this, but agents should understand why
-
-**Control Plane violations (orchestrator doing research):**
-- `/deep-investigate` orchestrator querying sources directly instead of dispatching to sub-agents
-- `/triage-leads` creating findings instead of routing decisions
-
-**How to spot violations in output:**
-- **Language signals**: "narrative potential," "article-worthy," "character entry point," "most compelling" in Research output
-- **Confidence signals**: any Analysis finding with confidence above `medium`
-- **Structure signals**: a Research agent producing hypotheses without leads, an Analysis agent running source queries, or a Control Plane skill creating primary findings
+Review claims and actions rather than the agent's role label. Failures include
+inferences recorded as confirmed facts, unsupported intent attributed to a
+corporate structure, editorial praise stored as evidence, duplicate conflicting
+writes, missing coverage reported as a negative result, or current content
+published against a stale review. Direct source verification by a parent or an
+analysis agent is useful when coordinated and recorded with proper provenance.
+Triage remains scoped to routing decisions unless the user also requested research.
 
 ### Claim Ladder
 
@@ -618,26 +587,26 @@ Not every target warrants the same level of investigation. Map the landscape fir
 
 ### Tier 0: Landscape Scan
 **Goal**: Understand who's involved and what the terrain looks like.
-**Depth**: WebSearch + 2-3 key sources per target type. Capture whatever is important — the constraint is source breadth (fewer sources per target), not finding count. Don't suppress findings to hit a number.
+**Depth**: A few high-yield applicable sources per target, adjusted for the question. Capture important evidence and explicitly defer material unsearched sources; there is no finding quota.
 **When**: Starting a new area (e.g., "DHS immigration enforcement nexus"). Covers 10-30 targets quickly.
 **Output**: A map of the major actors, entities, and relationships at headline level. Leads for targets warranting deeper investigation. Enough to know what's worth investigating — not enough to draw conclusions.
 **Skill**: `/landscape-scan` (preferred), custom plan agents, or `/search-all-sources` (abbreviated). Not `/deep-investigate`.
 
 ### Tier 1: Standard Investigation
 **Goal**: Build a factual profile of a target across all relevant sources.
-**Depth**: Full source checklist for target type. 3-10 findings.
+**Depth**: Applicable sources and sufficient document coverage to resolve the question; actual findings may be few or many.
 **When**: Target flagged as interesting during landscape scan, or auto-generated lead passes triage.
 **Skill**: `/pursue-lead` or `/investigate-person`.
 
 ### Tier 2: Deep Dive
 **Goal**: Exhaustive multi-source investigation with parallel agents.
-**Depth**: 4 dedicated sub-agents, each covering a source category. 10-30+ findings.
+**Depth**: Sustained source investigation with independent native subagents where useful, full material-document coverage, and resumable checkpoints.
 **When**: Target is a key actor, a major corporate entity, or a critical node in the network. Reserved — most targets never reach this tier.
 **Skill**: `/deep-investigate`.
 
 ### Escalation Criteria
 
-A target moves UP a tier when:
+Use these as escalation heuristics, not mandatory numerical gates. A target may move up a tier when:
 - **Scan → Standard**: Target appears in 3+ sources during scan, has connections to 2+ known actors, or holds a role that could explain network mechanics (registered agent, compliance officer, fund administrator)
 - **Standard → Deep Dive**: Target is a key actor with high betweenness in the graph, controls significant financial flows, holds concurrent authority positions, or initial investigation reveals unexpected complexity
 
@@ -654,7 +623,7 @@ When planning research across a new area (e.g., a new investigation thread), fol
 
 2. **Triage** — Run `/triage-leads` on the batch. Prioritize based on: structural importance (do they connect things?), information richness (are there records to find?), and relevance to the investigation's central questions.
 
-3. **Selective deep dives** — Run `/deep-investigate` only on the 2-4 highest-value targets. Run `/pursue-lead` on medium-priority targets. Leave low-priority targets as open leads.
+3. **Selective deep dives** — Run `/deep-investigate` on the highest-value unresolved targets within the task budget. Run `/pursue-lead` on medium-priority targets. Leave low-priority targets as open leads.
 
 4. **Iterate** — After deep dives complete, run Layer 2 analysis (`/generate-hunches`, `/analyze-network`). New hypotheses may re-prioritize targets that were initially deprioritized.
 

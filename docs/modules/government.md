@@ -24,6 +24,18 @@ Tools for federal spending analysis, contract intelligence, SAM.gov entity regis
 
 The primary tool for federal contract and grant research. Searches recipients, awards, subawards, transactions, and geographic spending patterns.
 
+For a selected award's obligation actions, resolve its canonical generated ID
+from award detail, then use `transactions --uei UEI --award-id CANONICAL_ID
+--all-pages --output FILE`. This filters returned canonical IDs exactly within
+the existing recipient search; it does not invent an award filter on the API.
+Amounts are obligation/modification actions, not evidence of cash payments.
+
+Transactions and subawards support `--all-pages`, `--max-pages N`, and `--page N`
+for continuation. Inspect pagination, partial/errors, matched/excluded/unresolved
+counts, and source scope before treating coverage as complete. Pagination totals
+describe the upstream search, and resumed runs do not cover earlier pages.
+Subaward PIIDs require prime-recipient/agency reconciliation against award detail.
+
 ```bash
 uv run python tools/query_usaspending.py search "Palantir"                       # Recipient autocomplete
 uv run python tools/query_usaspending.py awards "PALANTIR TECHNOLOGIES INC."     # Awards by name
@@ -177,7 +189,6 @@ CMS Physician & Other Practitioners spending data. Searches by provider name or 
 ```bash
 uv run python tools/query_medicare.py search "Enkeshafi"
 uv run python tools/query_medicare.py provider 1003000126
-uv run python tools/query_medicare.py stats
 ```
 
 **Known quirks:** CMS API filtering is often exact-match or prefix-based. Last name searches must be uppercase. NPI searches are numeric-only. Default dataset is 2023.

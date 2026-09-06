@@ -43,6 +43,8 @@ print(f'Analysis run #{run_id}')
 
 ### 2. Export Timeline Data
 
+Honor `--window` with `timeline-export --start <START> --end <END>`. For `--thread N`, use `findings-dump --thread-id N` and restrict the finding-based analysis to that set; keep external events labeled as contextual. Record the requested scope and any broader comparison data separately.
+
 ```bash
 uv run python tools/analysis_export.py timeline-export --output $WORKDIR/timeline.json
 uv run python tools/analysis_export.py findings-dump --output $WORKDIR/findings.json
@@ -69,8 +71,8 @@ Only backfill an exact documented event date. The tracker synchronizes the norma
 ### 4. Temporal Clustering Analysis
 
 **a) Activity bursts**
-Find clusters where 3+ findings occur within a 14-day window:
-- Group all dated findings by 2-week windows
+Use a starting screen such as 3 findings in 14 days, then choose windows suited to the event cadence, date precision, and collection density. Record the parameters and test whether nearby reasonable choices change the result:
+- Group dated findings using the selected windows; preserve uncertain or interval dates
 - Check whether dense windows reflect source availability, collection effort, or actual activity before testing coordination
 
 **b) Cross-reference with events**
@@ -81,20 +83,20 @@ uv run python tools/event_timeline.py window --start YYYY-MM-DD --end YYYY-MM-DD
 What external events coincide? Arrests, filings, media reports, elections?
 
 **c) Pre-event activity**
-Look for activity spikes in the 30 days BEFORE major events (arrests, lawsuits, media exposure):
+Choose before/after windows appropriate to the event cadence; 30 days can be a starting comparison. Examples to assess around major events (arrests, lawsuits, media exposure):
 - Entity formations before arrests
 - Financial transfers before regulatory actions
 - Agent resignations before indictments
 Use key_dates from the investigation profile (loaded via `uv run python tools/investigation_context.py show --json`) to identify the critical dates to check.
 
 **d) Silence periods**
-For active targets (10+ findings), find gaps of 30+ days with no findings. Compare against:
-- Was the target genuinely inactive?
-- Were records destroyed or sealed during this period?
-- Do other targets show the same silence window?
+Choose a baseline period and a gap length meaningful for each target's record cadence. Ten findings and a 30-day gap can be an initial screen, not proof of inactivity. Compare against:
+- Source availability, collection effort, and expected reporting schedules
+- Evidence of actual activity or documented record restrictions
+- Shared gaps across targets, including common collection failures
 
 **e) Coordinated action windows**
-Find weeks where 2+ unrelated targets show activity simultaneously:
+Screen for overlapping activity among targets using a justified time window. Count and timing alone do not establish coordination. Examples to assess:
 - Same week entity formations
 - Parallel financial transfers
 - Concurrent legal filings
@@ -150,7 +152,7 @@ uv run python tools/tag_manager.py bulk-tag --table findings --ids ID1,ID2 \
 
 ### 8. Generate Hypotheses — ACH Discipline
 
-For each unexplained timing correlation, choose a short phenomenon slug. Register the working theory and best innocent explanation as a competing set; each must have its own falsification criterion and Layer 1 search plan.
+Record supported timing observations without inventing an explanation. Explanatory hypotheses need falsification criteria and concrete research leads. Apply ACH when a claim concerns coordination or intent, or when two or more live explanations compete: register the rivals, including the best innocent explanation, and evaluate the relevant evidence against each.
 
 ```bash
 uv run python tools/hypothesis_tracker.py add \
@@ -175,7 +177,7 @@ uv run python tools/hypothesis_tracker.py evaluate --hypothesis-id N --finding-i
 uv run python tools/hypothesis_tracker.py compete --competition-group "short-phenomenon-slug"
 ```
 
-Include the competition output in the report. The verdict is **least evidence against**, never "most evidence for."
+When ACH applies, include the competition output and unresolved rivals. The verdict is **least evidence against**, never "most evidence for."
 
 ### 8b. Create Research Leads from Hypotheses
 
@@ -205,7 +207,8 @@ uv run python tools/event_timeline.py add \
 
 ### 10. Write Report
 
-Write to `$WORKDIR/report-timeline-analysis.md`:
+Write to `$WORKDIR/report-timeline-analysis.md`, including selected windows and thresholds, date precision, source/collection limits, evidence and calculation artifacts, and unresolved questions. No actionable timing pattern is a valid outcome; preserve partial work and the next step when resuming is necessary:
+
 
 ```markdown
 # Timeline Analysis Report — [DATE]
@@ -247,6 +250,6 @@ complete_analysis_run(RUN_ID, findings_created=N, hypotheses_created=M,
 
 - Many findings lack `date_of_event` — extract dates from text where possible
 - Temporal proximity is suggestive, not conclusive. Always note this in findings (claim_type=synthesis)
-- The most valuable patterns are BEFORE major events (proactive/planning behavior)
-- Silence periods can be as significant as activity bursts
+- Compare before and after windows with a relevant baseline; pre-event timing alone does not establish planning
+- Treat gaps in collected records separately from evidenced inactivity
 - Cross-thread temporal correlation is especially interesting (unrelated targets acting simultaneously)

@@ -1,88 +1,89 @@
 #!/usr/bin/env python3
-"""Audit repo-local Codex skills against the definitive Claude skills."""
-
+"""Compare shared skill instructions after documented runtime normalization."""
 from __future__ import annotations
 
 import argparse
 import difflib
-import sys
 from pathlib import Path
 
+import yaml
+
+try:
+    from scripts.skill_metadata import CLAUDE_SKILL_KEYS, FRONTMATTER_RE, normalized_runtime_text
+except ModuleNotFoundError:
+    from skill_metadata import CLAUDE_SKILL_KEYS, FRONTMATTER_RE, normalized_runtime_text
 
 ROOT = Path(__file__).resolve().parents[1]
-CLAUDE_SKILLS_DIR = ROOT / ".claude" / "skills"
-CODEX_SKILLS_DIR = ROOT / ".codex" / "skills"
-INTENTIONAL_ADAPTATIONS = {"deep-investigate"}
+# Runtime-exclusive workflows are listed deliberately, never treated as missing mirrors.
+CODEX_ONLY = frozenset({'audit-skills', 'discover-investigations', 'fix-papercuts'})
 
 
-def skill_names(base: Path) -> list[str]:
-    return sorted(path.name for path in base.iterdir() if path.is_dir() and not path.name.startswith("."))
+def skill_names(base: Path) -> set[str]:
+    return {path.parent.name for path in base.glob('*/SKILL.md')}
 
 
-def read_skill_text(base: Path, skill_name: str) -> str:
-    return (base / skill_name / "SKILL.md").read_text()
+def adapter_metadata(text: str) -> dict:
+    match = FRONTMATTER_RE.match(text)
+    data = yaml.safe_load(match.group(1)) if match else {}
+    return {key: value for key, value in (data or {}).items() if key in CLAUDE_SKILL_KEYS}
 
 
-def diff_preview(left: str, right: str, *, max_lines: int = 24) -> list[str]:
-    lines = list(difflib.unified_diff(left.splitlines(), right.splitlines(), lineterm=""))
-    if len(lines) <= max_lines:
-        return lines
-    head = lines[:max_lines]
-    head.append(f"... ({len(lines) - max_lines} more diff line(s))")
-    return head
+def shared_files(base: Path, name: str) -> dict[str, Path]:
+    root = base / name
+    files = {'SKILL.md': root / 'SKILL.md'}
+    for directory in ('references', 'scripts', 'assets'):
+        for path in (root / directory).rglob('*'):
+            if path.is_file() and '__pycache__' not in path.parts:
+                files[str(path.relative_to(root))] = path
+    return files
+
+
+def audit(workspace: Path, show_diffs: bool = False) -> int:
+    claude = workspace / '.claude/skills'
+    codex = workspace / '.codex/skills'
+    if not claude.is_dir() or not codex.is_dir():
+        print('Both repository runtime skill roots are required.')
+        return 1
+    left_names, right_names = skill_names(claude), skill_names(codex)
+    names = left_names | right_names
+    missing = left_names - right_names
+    unexpected_extra = right_names - left_names - CODEX_ONLY
+    print(f'Claude skills: {len(left_names)}; Codex skills: {len(right_names)}')
+    print('Codex-only packages: ' + (', '.join(sorted(right_names - left_names)) or 'none'))
+    for name in sorted(missing | unexpected_extra):
+        print(f'Unpaired runtime package requires an explicit ownership decision: {name}')
+    drift = []
+    for name in sorted(left_names & right_names):
+        left, right = shared_files(claude, name), shared_files(codex, name)
+        for rel in sorted(set(left) | set(right)):
+            if rel not in left or rel not in right:
+                drift.append(f'{name}/{rel}')
+                continue
+            a, b = left[rel].read_bytes(), right[rel].read_bytes()
+            if rel.endswith('.md'):
+                a = normalized_runtime_text(a.decode(), names)
+                b = normalized_runtime_text(b.decode(), names)
+            if a != b:
+                drift.append(f'{name}/{rel}')
+                if show_diffs and isinstance(a, str):
+                    print('\n'.join(difflib.unified_diff(a.splitlines(), b.splitlines(),
+                                                      fromfile=str(left[rel]), tofile=str(right[rel]), lineterm='')))
+        metadata = adapter_metadata(left['SKILL.md'].read_text())
+        if metadata and metadata != {'user-invocable': True}:
+            print(f'Claude adapter metadata {name}: {metadata}')
+    print(f'Shared instruction/resource drift: {len(drift)}')
+    for item in drift:
+        print(f'  - {item}')
+    return int(bool(missing or unexpected_extra or drift))
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Report Codex skill parity against definitive Claude skills.")
-    parser.add_argument("--show-diffs", action="store_true", help="Print unified diff previews for mismatched skills")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--workspace', type=Path, default=ROOT)
+    parser.add_argument('--show-diffs', action='store_true')
     args = parser.parse_args()
-
-    claude_skills = skill_names(CLAUDE_SKILLS_DIR)
-    codex_skills = skill_names(CODEX_SKILLS_DIR)
-
-    missing_in_codex = [name for name in claude_skills if name not in codex_skills]
-    extra_in_codex = [name for name in codex_skills if name not in claude_skills]
-
-    unexpected_drift: list[str] = []
-    intentional_drift: list[str] = []
-
-    for skill_name in sorted(set(claude_skills) & set(codex_skills)):
-        claude_text = read_skill_text(CLAUDE_SKILLS_DIR, skill_name)
-        codex_text = read_skill_text(CODEX_SKILLS_DIR, skill_name)
-        if claude_text == codex_text:
-            continue
-        if skill_name in INTENTIONAL_ADAPTATIONS:
-            intentional_drift.append(skill_name)
-        else:
-            unexpected_drift.append(skill_name)
-
-        if args.show_diffs:
-            print(f"\n## {skill_name}")
-            for line in diff_preview(codex_text, claude_text):
-                print(line)
-
-    print(f"Claude skills: {len(claude_skills)}")
-    print(f"Codex skills: {len(codex_skills)}")
-    print(f"Missing in Codex: {len(missing_in_codex)}")
-    for name in missing_in_codex:
-        print(f"  - {name}")
-
-    print(f"Extra in Codex: {len(extra_in_codex)}")
-    for name in extra_in_codex:
-        print(f"  - {name}")
-
-    print(f"Unexpected drift: {len(unexpected_drift)}")
-    for name in unexpected_drift:
-        print(f"  - {name}")
-
-    print(f"Intentional Codex adaptations: {len(intentional_drift)}")
-    for name in intentional_drift:
-        print(f"  - {name}")
-
-    if missing_in_codex or unexpected_drift:
-        return 1
-    return 0
+    return audit(args.workspace.resolve(), args.show_diffs)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     raise SystemExit(main())

@@ -1,12 +1,12 @@
 ---
 name: analyze-contract
-description: Government contract forensics — subaward chains, payment timelines, vehicle tracking, partnership mapping
-user_invocable: true
+description: Government contract forensics — subaward chains, obligation and modification timelines, vehicle tracking, partnership mapping
+user-invocable: true
 ---
 
 # /analyze-contract
 
-**TIER 1: DEPTH ANALYSIS** — This skill traces government contracts through their full lifecycle: prime awards, subcontractor chains, payment timelines, vehicle competition, and teaming partnerships. LLMs can process hundreds of transaction records, cross-reference every contractor name against the investigation, and detect payment anomalies that humans miss in tabular data. Record every factual discovery separately. Do not theorize about procurement intent — record the money flows and flag patterns.
+**TIER 1: DEPTH ANALYSIS** — Trace the selected contracts through award actions, reported subcontracting, vehicle competition, and teaming relationships. Distinguish obligations, ceilings/options, and actual outlays. Preserve factual observations separately from inferences; investigate explanations for significant patterns without inferring intent from timing alone.
 
 ## Arguments
 
@@ -15,6 +15,8 @@ user_invocable: true
 - `/analyze-contract --uei "ZE2JVFS8ML75"` — all awards for a specific entity (by UEI)
 
 ### Context Loading
+Read `docs/RESEARCH_WORKFLOW_CONTRACT.md` and pin the requested profile/database. Select applicable sources and checks from the question and award type; record unavailable or not-applicable routes.
+
 ```bash
 uv run python tools/investigation_context.py show
 ```
@@ -40,7 +42,7 @@ uv run python tools/query_highergov.py contract --awardee-uei <UEI> --output $WO
 uv run python tools/query_highergov.py contract --parent-award <PARENT_ID> --all-pages --output $WORKDIR/hg-vehicle-contracts.json
 ```
 
-Select the most significant awards by: dollar value, relevance to investigation threads, awarding agency, and recency.
+Honor a supplied award identifier. For a recipient-wide request, enumerate its requested scope and select deeper reviews by relevance, value, agency, and dates, recording selection criteria. An award list's first page is not the recipient's complete portfolio: inspect pagination and retrieve remaining pages when required.
 
 ### 2. Get Award Detail
 
@@ -50,6 +52,7 @@ uv run python tools/query_usaspending.py award <AWARD_ID> --output $WORKDIR/awar
 ```
 
 Extract and record:
+- Canonical `generated_unique_award_id`, plain PIID, recipient identity, and the requested identifier. A PIID can repeat across agencies or parent awards; use the resolved canonical ID for award-scoped analysis.
 - Total obligation and base + exercised options
 - Period of performance (start, end, current end)
 - Awarding agency and sub-agency
@@ -60,11 +63,11 @@ Extract and record:
 
 ### 3. Trace the Subcontractor Chain
 
-This is the core forensic capability — follow the money through the supply chain.
+Trace the reported subaward chain. Reporting thresholds, source coverage, and a prime's first-tier subawards limit what the dataset can establish; an empty result does not prove no subcontracting occurred.
 
 ```bash
-# Get all subawards under this prime
-uv run python tools/query_usaspending.py subawards --award-id <AWARD_ID> --output $WORKDIR/subawards.json
+# Enumerate reported subawards using the plain prime PIID
+uv run python tools/query_usaspending.py subawards --award-id "<PRIME_PIID>" --all-pages --output "$WORKDIR/subawards.json"
 
 # For each significant subcontractor, get their detail
 uv run python tools/query_highergov.py subcontract --awardee-uei <SUB_UEI> --output $WORKDIR/sub-<slug>.json
@@ -72,33 +75,41 @@ uv run python tools/query_highergov.py subcontract --awardee-uei <SUB_UEI> --out
 
 For each subcontractor:
 - [ ] Who are they? What's their business?
-- [ ] How much are they receiving relative to the prime?
+- [ ] What reported subaward amount is attributable to this prime, and how does its period/basis compare with the prime's obligations?
 - [ ] Are they in the investigation's entity database?
 - [ ] Do their officers overlap with other investigation targets?
-- [ ] Are they a pass-through (receiving large sums, minimal apparent capability)?
+- [ ] Does evidence of staffing, operations, or subcontracting warrant testing a pass-through hypothesis? A high amount alone does not establish it.
+
+The tool checks exact PIID and supplied scope on each returned page. Verify the prime recipient and awarding agency against award detail before combining rows, especially for reused PIIDs. Inspect `status`, `errors`, `retrieval.complete`, and `pagination`. `--all-pages` has a default 50-page budget; use `--max-pages N` or resume at `pagination.next_page` into a separate artifact, preserving page provenance and avoiding overlapping rows. Missing pagination is partial coverage. Cross-reference every contractor in the analyzed scope and report any remaining pages.
 
 Register each subcontractor:
 ```bash
 uv run python tools/entity_tracker.py add-entity --name "<SUB_NAME>" --entity-type <TYPE> --source "USASpending:<AWARD_ID>"
 ```
 
-### 4. Analyze Payment Timeline
+### 4. Analyze Obligations and Modifications
 
 ```bash
-# Transaction-level payment history
-uv run python tools/query_usaspending.py award <AWARD_ID> --output $WORKDIR/transactions.json
+# Action records selected by canonical award identity
+uv run python tools/query_usaspending.py transactions --uei "<RECIPIENT_UEI>" --award-id "<GENERATED_UNIQUE_AWARD_ID>" --all-pages --output "$WORKDIR/transactions.json"
 
-# Spending trends over time
+# Optional recipient-wide context; keep its broader scope explicit
 uv run python tools/query_usaspending.py timeline "<NAME>" --output $WORKDIR/timeline.json
 ```
 
-Read the transaction data and map:
-- [ ] **Payment cadence**: regular monthly/quarterly, or irregular?
-- [ ] **Spikes**: unusually large single obligations — what triggered them?
-- [ ] **Timing relative to key_dates**: payments clustering before elections, contract modifications after personnel changes
-- [ ] **Front-loading**: disproportionate payments early in the period of performance
-- [ ] **Gaps**: periods with zero activity — contract paused? Performance issues?
-- [ ] **Modification pattern**: frequent contract mods suggesting scope creep or requirements changes
+This command paginates the existing recipient transaction search and applies exact canonical award-ID selection locally. It requires a recipient name or UEI; the generated ID is not sent as an unverified server filter. `award_selection` reports matched, excluded, and unresolvable rows. `pagination.reported_total` describes the upstream recipient query, not the selected award. Inspect all request messages, filters, dates, and completion flags; affiliated recipient records may appear, and source date limits still apply. Do not treat unresolved row identities or an interrupted/capped retrieval as complete.
+
+Read all selected action records, sorting by action date for analysis. Preserve zero and negative obligations and modification identifiers:
+- [ ] **Obligation cadence**: regular or irregular actions, accounting for reporting and fiscal cycles
+- [ ] **Spikes/deobligations**: large positive or negative actions and their descriptions
+- [ ] **Timing relative to key_dates**: temporal associations to test against ordinary procurement explanations
+- [ ] **Early commitments**: disproportionate obligations early in performance, distinguishing funding from expenditure
+- [ ] **Gaps**: no reported actions in the searched period; evaluate coverage before hypothesizing a pause
+- [ ] **Modification pattern**: exercise of options, scope changes, corrections, or administrative actions
+
+`Transaction Amount` is obligation-action data. It does not establish when cash was paid, services delivered, or an invoice settled. Use explicit outlay/disbursement evidence for payment claims. Aggregate award detail and recipient-wide timelines cannot substitute for selected-award action history.
+
+Maintain `$WORKDIR/contract-progress.md` with canonical identities, source/page coverage, analysis completed, finding IDs, and next steps. Read long records directly or in manageable chunks without losing coverage. Resume from these artifacts after compaction or interruption. Independent subcontractor or vehicle analysis can use native chat subagents with unique outputs and pinned context; the parent reconciles identities, amounts, periods, and gaps before synthesis.
 
 Cross-reference transaction dates against investigation `key_dates`:
 ```bash
@@ -179,14 +190,14 @@ Flag:
 One finding per discrete discovery:
 
 ```bash
-# Contract metadata
+# Contract metadata (single quotes preserve literal currency text)
 uv run python tools/findings_tracker.py add \
   --target "<CONTRACTOR>" \
-  --summary "<AGENCY> awarded $<AMOUNT> contract (<AWARD_ID>) to <CONTRACTOR> for <DESCRIPTION>, period <START>-<END>" \
+  --summary '<AWARD_ID> records total obligations of $<AMOUNT> to <CONTRACTOR> for <DESCRIPTION>, period <START>-<END>' \
   --type financial \
   --evidence "USASpending:<AWARD_ID>" \
   --claim-type paraphrase \
-  --source-quote "USASpending:<AWARD_ID>:Total Obligation $X, Award Type Y, Agency Z" \
+  --source-quote 'USASpending:<AWARD_ID>:Total Obligation $X, Award Type Y, Agency Z' \
   --sources usaspending \
   --confidence high
 
@@ -197,55 +208,46 @@ uv run python tools/findings_tracker.py connect \
   --evidence "USASpending:<AWARD_ID>" \
   --finding-id <FID>
 
-# Payment anomaly (inference)
+# Obligation/timing observation interpreted as an inference
 uv run python tools/findings_tracker.py add \
   --target "<CONTRACTOR>" \
-  --summary "Contract <AWARD_ID> shows $X obligation spike on <DATE>, coinciding with <KEY_DATE_EVENT>" \
+  --summary 'Contract <AWARD_ID> shows $X obligation spike on <DATE>, coinciding with <KEY_DATE_EVENT>' \
   --type financial \
   --evidence "USASpending:<AWARD_ID>" \
   --claim-type inference \
-  --source-quote "USASpending:<AWARD_ID>:Federal Action Obligation $X on <DATE>" \
+  --source-quote 'USASpending:<AWARD_ID>:<verbatim action-record excerpt supporting the amount and date>' \
   --sources usaspending \
   --confidence medium
 ```
 
-### 9. Spawn Follow-Up Leads
+### 9. Create Follow-Up Leads
+
+Create leads for unresolved, relevant questions with a concrete next step, after checking existing leads. New contractor names alone are not sufficient.
 
 ```bash
 # Unknown subcontractor
 uv run python tools/lead_tracker.py add \
-  --title "Trace <SUBCONTRACTOR> — received $<AMOUNT> as sub on <AWARD_ID>" \
+  --title 'Trace <SUBCONTRACTOR> — reported subaward of $<AMOUNT> on <AWARD_ID>' \
   --category entity --priority medium \
   --target "<SUBCONTRACTOR>" --source "agent:analyze-contract"
 
 # Officer of contracting entity
 uv run python tools/lead_tracker.py add \
-  --title "Investigate <OFFICER> — <ROLE> at <CONTRACTOR>, $<TOTAL> in federal contracts" \
+  --title 'Investigate <OFFICER> — <ROLE> at <CONTRACTOR>, $<TOTAL> in federal obligations' \
   --category person --priority medium \
   --target "<OFFICER>" --source "agent:analyze-contract"
 
 # Related vehicle analysis
 uv run python tools/lead_tracker.py add \
-  --title "Analyze vehicle <VEHICLE_KEY> — <N> contracts, $<TOTAL> obligated" \
+  --title 'Analyze vehicle <VEHICLE_KEY> — <N> contracts, $<TOTAL> obligated' \
   --category contract --priority medium \
   --target "<VEHICLE_NAME>" --source "agent:analyze-contract"
 ```
 
 ### Stop Conditions
 
-- All subawards enumerated and cross-referenced
-- Payment timeline analyzed for anomalies
-- Vehicle/partnership data checked (if HigherGov available)
-- SAM.gov registration verified
-- All contractor names cross-referenced against investigation DB
-
-## What Makes This Skill Valuable
-
-A human analyst looking at a contract sees: recipient, amount, agency. They rarely trace subcontractor chains, analyze payment timing patterns across hundreds of transactions, or cross-reference every contractor name against an investigation database of thousands of entities.
-
-An LLM agent processes the **full transaction history** and **complete subcontractor tree**, then cross-references every name. This surfaces:
-- Shell subcontractors receiving disproportionate pass-through payments
-- Payment spikes coinciding with political events or personnel changes
-- Contractors who team together across multiple vehicles (hidden relationships)
-- Entities created shortly before contract award (suspicious timing)
-- Geographic patterns (all work performed at an investigation-linked address)
+- Requested awards are identified canonically; transaction and subaward coverage is complete for the declared scope, or outstanding pages/source limitations are explicit
+- Obligation/modification timeline is analyzed with amount semantics and date bounds preserved
+- Applicable vehicle, partnership, and registration checks are completed or documented as unavailable
+- Contractor names within the analyzed scope are cross-referenced against the pinned investigation
+- Findings, contradictions, coverage, artifact paths, and follow-up questions are reported. Continue useful authorized work through recoverable failures; if external access prevents completion, preserve progress and provide the exact next action rather than claiming complete coverage.

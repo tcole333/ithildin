@@ -43,7 +43,7 @@ print(f'Analysis run #{run_id}')
 "
 ```
 
-### 2. Identify Target Group (5-15 actors)
+### 2. Identify Target Group
 
 Depending on the argument:
 
@@ -51,13 +51,13 @@ Depending on the argument:
 ```bash
 uv run python tools/analysis_export.py findings-dump --thread-id N --output $WORKDIR/thread-findings.json
 ```
-Select the top 10-15 actors by finding count in the thread.
+Choose actors relevant to the question, using finding count as a coverage signal rather than an importance score. A group of 5-15 can be a manageable first pass; expand or narrow it with a recorded reason.
 
 **For `--person "Name"`:**
 ```bash
 uv run python tools/graph_tools.py neighbors "Name" --depth 2 --output $WORKDIR/ego.json
 ```
-Select the person plus their top 10-15 connections by degree.
+Choose the person's connections relevant to the question, considering relationship type, timing, evidence, and graph degree. Record the resulting boundary.
 
 **For `--cluster "label"`:**
 ```bash
@@ -67,7 +67,9 @@ Extract the distinct target_names from the tagged findings.
 
 ### 3. Gather External Data
 
-For each member of the target group, search external sources. Use `--output $WORKDIR/...` on all searches:
+Use the shared contract's source-applicability and reuse rules for each member. The sources below are a menu: select by role, jurisdiction, dates, and factual question, and record searched/reused/unavailable/not-applicable coverage. Use `--output $WORKDIR/...` on searches.
+
+For independent source or member groups, use native subagents under the current task's supervision when useful. Inherit the configured model, pass pinned context and unique report paths, assign one persistence owner per source, and collect every report before synthesis. Continue relevant local work and preserve resumable progress.
 
 **a) LittleSis — Relationship mapping**
 ```bash
@@ -110,7 +112,7 @@ From gathered data, build a matrix showing which patterns are shared:
 | Jurisdiction: USVI | Yes | Yes | Yes | |
 | Grant: Charity W | | Yes | Yes | |
 
-Focus on patterns shared by 3+ members — these indicate systemic behavior, not coincidence.
+Shared attributes are observations to assess against a relevant base rate. Three members can be a screening threshold; fewer members with diagnostic evidence can merit investigation, while many routine overlaps may not. Test role, timing, sector concentration, and common service providers before inferring a shared mechanism.
 
 ### 5. Look Beyond Investigation Context
 
@@ -121,7 +123,7 @@ For each member, investigate their activities INDEPENDENT of the primary subject
 - What counsel/advisors do they share?
 - What jurisdictions do they cluster in?
 
-This reveals the SYSTEM — the pre-existing or parallel structure that the primary subject operated within.
+Describe the supported relationships independently of the primary subject, distinguishing observed overlaps from proposed mechanisms.
 
 ### 6. Record Systemic Findings
 
@@ -156,7 +158,7 @@ uv run python tools/tag_manager.py bulk-tag --table findings --ids ID1,ID2,ID3 \
 
 ### 8. Generate Hypotheses — ACH Discipline
 
-For each system-level pattern, choose a short phenomenon slug. Register the working theory and best innocent explanation as a competing set; each must have its own falsification criterion and Layer 1 search plan.
+Record supported overlaps directly. Explanatory hypotheses need falsification criteria and concrete research leads. Apply ACH to coordination or intent claims and to phenomena with two or more live rival explanations; register a competing set and evaluate relevant evidence against every rival. A shared-board measurement alone does not require inventing an explanatory contest.
 
 ```bash
 uv run python tools/hypothesis_tracker.py add \
@@ -181,7 +183,7 @@ uv run python tools/hypothesis_tracker.py evaluate --hypothesis-id N --finding-i
 uv run python tools/hypothesis_tracker.py compete --competition-group "short-phenomenon-slug"
 ```
 
-Include the competition output in the report. The verdict is **least evidence against**, never "most evidence for."
+When ACH applies, include the competition output and unresolved rivals. The verdict is **least evidence against**, never "most evidence for."
 
 ### 9. Create Leads
 
@@ -221,7 +223,8 @@ uv run python tools/entity_tracker.py add-relation --entity-a-id <A> --entity-b-
 
 ### 11. Write Report
 
-Write to `$WORKDIR/report-systemic-analysis.md`:
+Write to `$WORKDIR/report-systemic-analysis.md`, including the chosen group boundary, source coverage and limitations, canonical evidence and calculation artifacts, and unresolved questions. No actionable shared mechanism is a valid outcome; preserve completed work and the next step for any incomplete analysis:
+
 
 ```markdown
 # Systemic Analysis Report — [DATE]
@@ -269,9 +272,9 @@ complete_analysis_run(RUN_ID, findings_created=N, hypotheses_created=M,
 
 ## Notes
 
-- This skill is about the SYSTEM, not individuals. A finding about one person's board membership is not systemic. 3+ people on the same board IS systemic.
+- Explain how relationships connect the selected actors; the number of shared attributes alone does not establish a system or coordination.
 - All findings: `claim_type=synthesis`, max confidence `medium`
-- Use LittleSis as primary system-mapping source (pre-built relationship data)
+- Use LittleSis relationship data where relevant, preserving its source attribution and seeking primary records for load-bearing claims.
 - The comparison matrix is the core deliverable — it reveals shared infrastructure
 - Most valuable insight: what connects network members to each other WITHOUT going through the primary subject
 - Rate-limit external API calls. LittleSis retries on 503. EDGAR needs User-Agent. FEC needs API key.

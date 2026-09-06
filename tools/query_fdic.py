@@ -22,7 +22,7 @@ import sqlite3
 import sys
 from pathlib import Path
 from urllib.error import HTTPError, URLError
-from urllib.parse import quote, urlencode
+from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 try:
@@ -45,7 +45,8 @@ def _fetch(endpoint, params=None):
         # does not recognize as a wildcard
         parts = []
         for k, v in params.items():
-            parts.append(f"{quote(str(k))}={quote(str(v), safe='*:\"')}")
+            encoded_value = quote(str(v), safe='*:"')
+            parts.append(f"{quote(str(k))}={encoded_value}")
         url += "?" + "&".join(parts)
     req = Request(url, headers=HEADERS)
     try:
@@ -201,7 +202,7 @@ def cmd_failures(args):
         ],
     }
 
-    if write_output(results, args, summary=f"FDIC failures"):
+    if write_output(results, args, summary="FDIC failures"):
         return
     if getattr(args, "json_out", False):
         print(json.dumps(results, indent=2))
@@ -398,7 +399,7 @@ def cmd_ingest(args):
 
     if existing and not args.force:
         print(f"Entity already exists: #{existing['id']} {name}")
-        print(f"Use --force to update.")
+        print("Use --force to update.")
         db.close()
         return
 

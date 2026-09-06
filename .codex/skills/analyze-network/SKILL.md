@@ -5,7 +5,7 @@ description: Graph structure analysis — centrality, bridges, clusters, cross-t
 
 # $analyze-network
 
-**LAYER 2: ANALYSIS AGENT** — This is a theory-building skill. You identify structural patterns in the graph and generate hypotheses, but every hypothesis MUST produce a testable prediction queued as a research lead for Layer 1 agents. Do not apply analytical frameworks as interpretive lenses — use them only as pattern detectors. See `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline`. Distinguish structural observations (fact: "Node X has high betweenness") from interpretive claims (theory: "Node X is a gatekeeper") — label them differently.
+**LAYER 2: ANALYSIS AGENT** — This is a theory-building skill. You identify structural patterns in the graph and generate hypotheses, but every hypothesis MUST produce a testable prediction queued as a research lead for Layer 1 agents. Use analytical frameworks to propose testable patterns and explanations, keeping their assumptions and boundary conditions explicit. See `research/INVESTIGATIVE_METHODOLOGY.md#framework-discipline`. Distinguish structural observations (fact: "Node X has high betweenness") from interpretive claims (theory: "Node X is a gatekeeper") — label them differently.
 
 Analyze the investigation graph to find structurally important nodes, dense clusters, bridge positions, cross-thread actors, and under-investigated high-connectivity targets. Focuses on non-subject edges — what connects actors to each other independently?
 
@@ -52,7 +52,7 @@ uv run python tools/analysis_export.py thread-summary --output $WORKDIR/threads.
 
 ### 3. Graph Metrics
 
-Run these analyses and save results:
+Choose metrics that answer the scoped question and save their results. The commands below are a menu; explain the selected metrics and any coverage limits. For `--thread N`, build the target set from thread-scoped findings and restrict the analysis to that induced subgraph or explicitly label full-profile context. The CLI's profile scope is not a thread filter.
 
 ```bash
 uv run python tools/graph_tools.py centrality --metric degree --top 50 --cache --output $WORKDIR/degree.json
@@ -66,7 +66,7 @@ uv run python tools/graph_tools.py clustering --min-degree 3 --top 50 --output $
 uv run python tools/graph_tools.py stats
 ```
 
-### 3b. Institutional Analysis
+### 3b. Institutional Analysis (when institutional roles are relevant)
 
 ```bash
 uv run python tools/pillar_tracker.py score --top 30 --cache --output $WORKDIR/orchestrator-scores.json
@@ -83,16 +83,16 @@ uv run python tools/analysis_export.py pillar-dump --output $WORKDIR/pillar-dump
 Read the exported files and look for:
 
 **a) High-centrality under-investigated nodes**
-Cross-reference betweenness centrality against coverage matrix. A node with high betweenness but few findings is a critical gap — it bridges parts of the network but we know little about it.
+Cross-reference betweenness centrality against coverage matrix. A node with high observed betweenness but few findings is a candidate coverage gap. Check identity, edge provenance, and whether source collection created its apparent importance.
 
 **b) Bridge nodes**
-Nodes whose removal disconnects graph regions. These are brokers, gatekeepers, or intermediaries. Check if their role is already documented in findings. If not, they need investigation.
+Nodes whose removal disconnects regions of the recorded graph. Check whether documented roles and independent evidence support a brokerage explanation, and whether missing records explain the structure.
 
 **c) Structural holes**
-Nodes with high brokerage score (low neighbor density). Their neighbors don't know each other — the node controls information flow. Compare against entity registry: are these lawyers, financial advisors, or fixers?
+Nodes with high brokerage score have few recorded edges among their neighbors. This measures observed graph structure; it does not establish that neighbors are unacquainted or that a node controls information. Compare relationship types, source coverage, and documented roles before proposing a mechanism.
 
 **d) Dense subgraphs (cliques)**
-Groups where everyone knows everyone. These may represent: boards, partnerships, social circles, or operational teams. Cross-reference with threads — does the clique span multiple threads?
+Groups with recorded pairwise edges. Inspect edge types and dates: shared board membership, litigation, and financial ties have different meanings. Cross-reference with threads — does the clique span multiple threads?
 
 **e) Cross-thread actors**
 Using findings-dump, find persons who appear in 2+ threads:
@@ -102,13 +102,13 @@ uv run python tools/analysis_export.py findings-dump --output $WORKDIR/findings.
 Then identify target_names appearing across different thread_ids. These cross-thread actors may be system-level connectors, not just direct associates of the primary subject.
 
 **f) Non-subject edges**
-In the connections graph, find edges where neither endpoint is the primary_subject from the investigation profile. What's the densest non-subject subgraph? This reveals the system that exists independent of the primary subject.
+In the connections graph, find edges where neither endpoint is the primary_subject from the investigation profile. What's the densest non-subject subgraph? This describes the recorded relationships that do not pass through the primary subject; assess their evidence and dates before proposing a broader system.
 
 **g) Open triads (triadic closure)**
-Which missing edges are most surprising? High closure scores mean B and C share strong connections through mutual pivots, have overlapping relationship types, and share institutional affiliations — yet have no documented direct link. Cross-reference with the coverage matrix: if both B and C are under-investigated, the gap may reflect our ignorance rather than reality. If both are well-documented with many findings, the missing edge is genuinely surprising and may indicate a deliberate separation or a relationship conducted through intermediaries.
+Which missing edges are most surprising? High closure scores mean B and C share strong connections through mutual pivots, have overlapping relationship types, and share institutional affiliations — yet have no documented direct link. Cross-reference with the coverage matrix: if both B and C are under-investigated, the gap may reflect our ignorance rather than reality. Even when both have many findings, assess whether the relevant relationship would normally leave a discoverable record. Any separation or intermediary explanation remains a hypothesis requiring a discriminating test.
 
 **h) Clustering coefficients**
-Nodes with low clustering (neighbors don't know each other) are brokers — compare against structural holes output. Nodes with high clustering are embedded in tight groups — cross-reference with cliques. A high-centrality node with low clustering is a system-level connector worth prioritizing.
+Low clustering means few observed neighbor-to-neighbor edges; high clustering means many. Compare against structural holes and cliques, then assess edge semantics, dates, and collection bias before prioritizing a possible connector.
 
 **i) Institutional patterns (pillar analysis)**
 From orchestrator scores: who spans the most pillar types? Who has government↔private transitions (revolving door)? From the institutional graph: which institutions share the most alumni? From pillar-subgraph analysis: who is most central within each pillar type?
@@ -148,7 +148,7 @@ uv run python tools/tag_manager.py bulk-tag --table findings --ids ID1,ID2,ID3 \
 
 ### 7. Generate Hypotheses — ACH Discipline
 
-For each structural observation, choose a short phenomenon slug. Register the working theory and best innocent explanation as a competing set; each must have its own falsification criterion and Layer 1 search plan.
+Record supported structural observations directly. When proposing an explanation, include a falsification criterion and concrete research lead. Apply the methodology's ACH trigger: coordination or intent claims, or two or more live rival explanations, require a competing set and the evidence matrix below. Each rival needs its own discriminating test; routine graph measurements do not require invented theories.
 
 ```bash
 uv run python tools/hypothesis_tracker.py add \
@@ -173,7 +173,7 @@ uv run python tools/hypothesis_tracker.py evaluate --hypothesis-id N --finding-i
 uv run python tools/hypothesis_tracker.py compete --competition-group "short-phenomenon-slug"
 ```
 
-Include the competition output in the report. The verdict is **least evidence against**, never "most evidence for."
+When ACH applies, include the competition output and unresolved rivals in the report. The verdict is **least evidence against**, never "most evidence for."
 
 ### 8. Create Leads for Gaps
 
@@ -191,9 +191,10 @@ uv run python tools/lead_tracker.py add \
 
 ### 9. Write Report
 
-Write analysis report to `$WORKDIR/report-analyze-network.md` with:
+Write analysis report to `$WORKDIR/report-analyze-network.md` with the relevant items below. Include partial/skipped analyses, evidence and calculation artifact paths, and unresolved questions. No actionable pattern is a valid outcome; preserve completed work and the next step if work must resume:
+
 - Graph statistics summary
-- Top 20 centrality rankings (degree + betweenness)
+- Selected metrics, scope, thresholds, and centrality rankings relevant to the question
 - Bridge nodes identified
 - Structural holes with brokerage scores
 - Dense subgraphs / cliques
@@ -217,6 +218,6 @@ complete_analysis_run(RUN_ID, findings_created=N, hypotheses_created=M,
 
 - All findings: `claim_type=synthesis`, max confidence `medium`
 - Focus on NON-subject edges — what connects actors to each other?
-- The coverage gap analysis is especially valuable: high-connectivity nodes with few findings indicate blind spots
+- Use connectivity and finding count to prioritize coverage checks, not to establish a target's importance
 - Use `--thread-id` on hypothesis/lead creation to assign to appropriate thread
-- Tag everything you find for future analysis runs to build on
+- Tag reusable patterns where the label adds retrieval value; no finding, hypothesis, or lead quota applies

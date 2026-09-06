@@ -1,239 +1,118 @@
 ---
 name: landscape-scan
-description: Tier 0 landscape scan — map 10-30 targets quickly with 2-3 sources each, producing leads and a relationship map
-user_invocable: true
+description: Map the actors and evidenced relationships in a new investigation area, then prioritize factual follow-up questions. Use for breadth-first discovery across multiple targets rather than a deep investigation of one selected target.
+user-invocable: true
 ---
 
 # /landscape-scan
 
-**TIER 0: LANDSCAPE SCAN** — This is a terrain-mapping skill on the Research Plane. You are mapping a landscape quickly (2-3 sources per target), not investigating deeply. Record what you find, create leads for targets that warrant Tier 1 investigation. Don't theorize or apply analytical frameworks — map the terrain and move on.
+Produce a preliminary actor/relationship map and identify which questions deserve
+deeper research. Choose breadth and depth from the user's area and evidence, and
+make the limits of this initial pass visible.
 
-Quickly scan 10-30 targets in a new investigation area using 2-3 structured sources per target. The primary output is **leads** and a **relationship map**, not exhaustive findings. But don't suppress findings that are significant — the constraint is source breadth (fewer sources per target), not finding count.
+## 1. Set the scan question and context
 
-## Arguments
-
-- Required: area description (e.g., `/landscape-scan DHS immigration enforcement contractors`)
-- Optional context: `/landscape-scan DHS immigration enforcement contractors — focus on private prison companies, ICE contracts, and revolving door between DHS and contractors`
-
-### Context Loading
-Load the active investigation context before executing:
-```bash
-uv run python tools/investigation_context.py show
-```
-
-## Architecture
-
-You are a **single agent** scanning many targets quickly. Unlike `/deep-investigate` (4 parallel sub-agents per target), you cover breadth over depth.
-
-**Key differences from deep-investigate:**
-- **Multiple targets** (10-30) in one session, not one
-- **Fewer sources per target** (2-3 vs all), but still requires `--sources` on every finding
-- **Primary output is leads** — but don't suppress important findings
-- **Relationship map** as a core deliverable
-- **Triage recommendations** at the end: which targets to escalate
-
-## Process
-
-### 0. Session Setup
+Read `docs/RESEARCH_WORKFLOW_CONTRACT.md` and `docs/EXECUTION_CONTRACT.md`.
+Pin profile/database and create unique outputs:
 
 ```bash
 WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
-echo "Session workdir: $WORKDIR"
+uv run python tools/investigation_context.py show
+uv run python tools/findings_tracker.py search "<AREA_KEYWORDS>" --output "$WORKDIR/scan-findings.json"
+uv run python tools/lead_tracker.py search "<AREA_KEYWORDS>" --output "$WORKDIR/scan-leads.json"
 ```
 
-### 1. Define the Area and Key Questions
+State the area, key factual questions, target types, relevant dates/jurisdictions,
+and existing thread context. Build a candidate list from authoritative source
+inventories, public context, and existing evidence. Verify remembered identities
+and current roles. Ten to thirty targets and a few sources per target are planning
+defaults; adapt them to the actual area and requested scope.
 
-Before searching, articulate:
-- **What is this area?** (e.g., "private companies profiting from immigration enforcement")
-- **What are the key questions?** (e.g., "who gets the contracts? who moves between government and contractors? what are the financial flows?")
-- **What target types are we looking for?** (companies, people, government agencies, nonprofits)
-- **Which investigation threads does this relate to?** (check active profile)
+## 2. Search a bounded initial source set
 
-### 2. Identify Targets (10-30)
+Choose a few high-value sources per target that can answer the scan questions,
+using the shared applicability checklist and current `docs/modules/` commands.
+This is initial coverage, not a claim that all relevant sources are exhausted.
 
-Use a combination of:
-- **Your knowledge** of the area (you know the major players)
-- **WebSearch** to discover actors you don't know about
-- **Existing investigation data** (check findings, leads, entities for overlap)
+| Target/nexus | Initial source choices |
+|---|---|
+| Person | Relevant role/affiliation records, corporate officers, court field matching their role, political or nonprofit records where applicable |
+| Company | Relevant registry, regulator filings, awards or financial statements |
+| Nonprofit | Charity filings, 990 organization/officer records, a bounded grant-flow view |
+| Government actor | Official role records and relevant disclosure/contract/lobbying records |
+| New target or missing identity | Official pages and attributed published context, followed by primary records |
 
-```bash
-# Check existing knowledge
-uv run python tools/findings_tracker.py search "<AREA_KEYWORDS>" --output $WORKDIR/existing-findings.json
-uv run python tools/lead_tracker.py search "<AREA_KEYWORDS>" --output $WORKDIR/existing-leads.json
-```
+Use exact identifiers once known, unique `--output` artifacts, and the shared
+reuse rules. Record source scope, limits, continuation, and outcome for each
+target. Namesakes, unavailable sources, and truncated results remain visible.
 
-Create a target list with type classification:
+Independent target groups may use native chat subagents under the execution
+contract. Give each worker a source/target scope and unique report path; retain
+parent work for identity resolution, coverage, and cross-target reconciliation.
 
-```
-| # | Target | Type | Why Interesting |
-|---|--------|------|----------------|
-| 1 | GEO Group | corporation | Largest private prison company |
-| 2 | CoreCivic | corporation | Second largest |
-| 3 | Thomas Homan | person | Former acting ICE director |
-| ... | ... | ... | ... |
-```
+Read the source context needed to support significant observations. Full
+documents are available when necessary; for long documents retain the complete
+artifact and record sections/chunks read plus continuation. A scan may explicitly
+defer deeper reading rather than claim the document was fully assessed.
 
-### 3. Quick-Pass Each Target
+## 3. Record evidence and map relationships
 
-For each target, run **2-3 type-appropriate structured sources** plus WebSearch. Choose sources based on target type:
+Preserve meaningful observations, including institutional roles, financial
+flows, structural connections, and useful ambient facts. Significance depends on
+the question and baseline, not a universal dollar/finding quota. A zero-result
+search is a bounded coverage observation; a negative finding needs the shared
+authoritative-source, identity, scope, and quoted-evidence standard.
 
-**Person targets — pick 2-3:**
-- WebSearch (always)
-- FEC: `uv run python tools/query_fec.py donor "<NAME>" --limit 10 --output $WORKDIR/scan-<N>-fec.json`
-- EDGAR: `uv run python tools/query_edgar.py search "<NAME>" --size 5 --output $WORKDIR/scan-<N>-edgar.json`
-- CourtListener: `uv run python tools/query_courtlistener.py search "<NAME>" --limit 5 --output $WORKDIR/scan-<N>-cl.json`
-- LittleSis: `uv run python tools/query_littlesis.py search "<NAME>" --output $WORKDIR/scan-<N>-ls.json`
-- Registries: `uv run python tools/query_registry.py officers "<NAME>" --output $WORKDIR/scan-<N>-reg.json`
-
-**Corporation targets — pick 2-3:**
-- WebSearch (always)
-- EDGAR: `uv run python tools/query_edgar.py search "<ENTITY>" --size 5 --output $WORKDIR/scan-<N>-edgar.json`
-- USASpending: `uv run python tools/query_usaspending.py awards "<ENTITY>" --output $WORKDIR/scan-<N>-usaspend.json`
-- Registries: `uv run python tools/query_registry.py search "<ENTITY>" --output $WORKDIR/scan-<N>-reg.json`
-- SAM.gov: `uv run python tools/ingest_sam.py search "<ENTITY>" --output $WORKDIR/scan-<N>-sam.json`
-- Lobbying: `uv run python tools/query_lobbying.py client "<ENTITY>" --output $WORKDIR/scan-<N>-lda.json`
-
-**Nonprofit targets — pick 2-3:**
-- WebSearch (always)
-- 990s: `uv run python tools/query_990.py search "<ENTITY>" --output $WORKDIR/scan-<N>-990.json`
-- 990 lookup: `uv run python tools/query_990.py lookup <EIN> --output $WORKDIR/scan-<N>-990-lookup.json`  (if EIN known)
-- 990 flow: `uv run python tools/query_990.py flow <EIN> --depth 1 --min-amount 100000 --output $WORKDIR/scan-<N>-990-flow.json`  (quick grant flow — depth 1 only)
-- EDGAR (if large): `uv run python tools/query_edgar.py search "<ENTITY>" --size 5 --output $WORKDIR/scan-<N>-edgar.json`
-- FEC (PAC affiliates): `uv run python tools/query_fec.py employer "<ENTITY>" --output $WORKDIR/scan-<N>-fec.json`
-
-**Note:** For landscape scans, use `flow --depth 1` for quick funding insight. Don't run full `/trace-grants` (too deep for Tier 0). Escalate targets with circular flows or 10+ grant recipients to `/trace-grants`.
-
-**Government actor targets — pick 2-3:**
-- WebSearch (always)
-- FEC: `uv run python tools/query_fec.py donor "<NAME>" --limit 10 --output $WORKDIR/scan-<N>-fec.json`
-- Lobbying (post-government): `uv run python tools/query_lobbying.py lobbyist "<NAME>" --output $WORKDIR/scan-<N>-lda.json`
-- FARA: `uv run python tools/query_fara.py search "<NAME>" --output $WORKDIR/scan-<N>-fara.json`
-- LittleSis: `uv run python tools/query_littlesis.py search "<NAME>" --output $WORKDIR/scan-<N>-ls.json`
-
-### 4. Record Findings for Significant Discoveries
-
-Don't create a finding for every search result. Create findings for:
-- **Surprising connections** (unexpected relationships between targets)
-- **Large financial flows** (contracts > $10M, donations > $100K)
-- **Structural insights** (who controls what, who connects whom)
-- **Negative results from authoritative sources** (if a major entity has zero court cases, that's notable)
-
-Every finding must have full provenance:
 ```bash
 uv run python tools/findings_tracker.py add \
-    --target "<TARGET>" \
-    --type <TYPE> \
-    --summary "What the evidence shows" \
-    --evidence <REFS> \
-    --claim-type paraphrase \
-    --source-quote "<REF>:key text from source" \
-    --sources <SOURCE_NAMES> \
-    --confidence medium
+  --target "<TARGET>" --type background \
+  --summary "What the source establishes within the scan scope" \
+  --evidence "<EVIDENCE_REF>" --claim-type paraphrase \
+  --source-quote "<EVIDENCE_REF>:exact supporting source text" \
+  --sources <SOURCE_TOKEN> --confidence high
 ```
 
-### 5. Create Leads for Targets Warranting Further Investigation
+Use lower confidence when warranted. Inference/synthesis is at most medium;
+source repetition is not independent corroboration. Resolve entities before
+registering them with `entity_tracker.py` and preserve dated roles/addresses.
 
-For every target that shows enough signal to warrant deeper investigation:
+```bash
+uv run python tools/findings_tracker.py connect \
+  --person-a "<TARGET_A>" --person-b "<TARGET_B>" \
+  --type employment --strength weak \
+  --evidence "<EVIDENCE_REF>" \
+  --source-quote "<EVIDENCE_REF>:exact text supporting the relationship"
+```
+
+Choose the actual relationship type from current CLI choices. Keep candidate
+matches and unexplained co-occurrence distinct from established relationships.
+
+## 4. Prioritize and finish
+
+Test the leading selection assumption against contrary evidence or an ordinary
+alternative before recommending deeper work. Prioritize the question's structural
+importance, evidence availability, unresolved contradictions, and expected value
+of the next check. Several mirrors or source appearances alone do not justify
+escalation, and a low-volume authoritative record can be decisive.
+
+Create a lead for each actionable deeper question, linking relevant evidence:
+
 ```bash
 uv run python tools/lead_tracker.py add \
-    --title "Investigate <TARGET> — <reason>" \
-    --category <person|entity|financial> \
-    --priority <high|medium|low> \
-    --source "agent:landscape-scan" \
-    --target "<TARGET>"
-```
-
-Tag leads with their investigation tier:
-```bash
+  --title "Investigate <TARGET> — <specific unresolved question>" \
+  --category entity --priority medium --target "<TARGET>" \
+  --source "agent:landscape-scan" --evidence "<EVIDENCE_REF>"
 uv run python tools/lead_tracker.py tier <LEAD_ID> scan
 ```
 
-### 6. Map Preliminary Relationships
+Choose the actual category/priority and tag created leads `scan`. Recommend
+`/deep-investigate` for independent deep source tracks, `/pursue-lead` for a focused
+queued question, or the relevant specialist skill. The number promoted follows
+the evidence, not a fixed quota.
 
-Record connections discovered during scanning:
-```bash
-uv run python tools/findings_tracker.py connect \
-    --person-a "<TARGET_A>" --person-b "<TARGET_B>" \
-    --type <TYPE> --strength <weak|medium> \
-    --evidence <REFS>
-```
-
-Register entities and roles as you find them:
-```bash
-uv run python tools/entity_tracker.py add-entity --name "<ENTITY>" --entity-type <TYPE> --jurisdiction <JUR> --source "<SOURCE>"
-uv run python tools/entity_tracker.py add-role --entity-id <ID> --person-name "<NAME>" --role "<ROLE>" --source "<SOURCE>"
-```
-
-### 7. Triage and Recommend
-
-After scanning all targets, create a triage summary:
-
-**Escalation criteria** (promote to Tier 1 standard investigation):
-- Target appears in 3+ sources during scan
-- Target has connections to 2+ known actors
-- Target holds a structural role (registered agent, compliance officer, fund administrator, government-to-private revolving door)
-- Significant financial flows discovered
-
-**Recommend:**
-- **2-4 targets for deep dives** (`/deep-investigate`) — highest structural importance
-- **5-10 targets for standard investigation** (`/pursue-lead`) — strong signal, need full source coverage
-- **Remaining targets** — stay as open leads for later, or close as low-priority
-
-### 8. Present Summary
-
-Format:
-```
-## /landscape-scan <AREA> — Results
-
-### Area Overview
-[2-3 sentences describing what was found]
-
-### Targets Scanned: <N>
-| # | Target | Type | Sources Checked | Key Finding | Recommendation |
-|---|--------|------|----------------|-------------|----------------|
-| 1 | GEO Group | corp | edgar, usaspend, web | $2.3B in ICE contracts | Deep dive |
-| 2 | CoreCivic | corp | edgar, usaspend, web | Renamed from CCA 2016 | Standard |
-| ... | ... | ... | ... | ... | ... |
-
-### Relationship Map
-[Key relationships discovered — who connects to whom]
-
-### Sources Checked
-| Source | Queries Run | Total Results | Findings Created |
-|--------|------------|---------------|-----------------|
-| WebSearch | 15 | n/a | 3 |
-| EDGAR | 8 | 42 | 2 |
-| USASpending | 6 | 18 | 4 |
-| ... | ... | ... | ... |
-
-### Escalation Recommendations
-**Deep Dive** (2-4 targets):
-- <TARGET>: <reason> → Lead #X
-
-**Standard Investigation** (5-10 targets):
-- <TARGET>: <reason> → Lead #X
-
-### Key Questions for Further Investigation
-1. [Question that emerged from the scan]
-2. [Pattern that needs deeper analysis]
-
-### Findings Created: <N>
-### Leads Created: <N>
-### Connections Mapped: <N>
-```
-
-## Context Management
-
-- **Use `--output $WORKDIR/...` on ALL search commands**
-- **Record findings as you go**, not in a batch at the end
-- **Don't read full JSON files** unless you need specific details — the summary output is enough for landscape scanning
-- **Aim for < 50 tool calls** — you're scanning, not investigating
-- This skill runs as a single agent in one CC instance
-
-## Notes
-
-- This is Tier 0 — the lightest touch. The goal is breadth, not depth.
-- Every finding still needs full provenance (`--sources`, `--evidence`, `--claim-type`, `--source-quote`)
-- The hook will block findings without `--sources` — this is intentional
-- Tag all created leads with `tier scan` so they can be tracked
-- The value of a landscape scan is the **map**, not the individual findings — who's connected to whom, what the structure looks like, where the money flows
+Completion means the agreed candidate set is accounted for, the preliminary map
+is evidence-linked, coverage limits are explicit, and unresolved questions have
+a triage recommendation. Return targets/types, findings and relationships,
+source outcomes, record IDs, artifact paths, and reasons for prioritization.
+Workers use the assigned report path; preserve incomplete scope and continuation.
+Checkpoint progress across interruptions/compaction and resume the original area.

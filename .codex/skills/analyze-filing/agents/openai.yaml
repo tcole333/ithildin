@@ -1,4 +1,6 @@
-interface:
-  display_name: "Analyze Filing"
-  short_description: "Analyze SEC filings for forensic signals"
-  default_prompt: "Use $analyze-filing to handle this investigation task with clear evidence and actionable output."
+"interface":
+  "display_name": "Analyze Filing"
+  "short_description": "Analyze the selected SEC filing and its evidence"
+  "default_prompt": "Use $analyze-filing. Analyze the selected filing while preserving\
+    \ its accession, relevant document coverage, statement identity, exact evidence,\
+    \ and uncertainty."

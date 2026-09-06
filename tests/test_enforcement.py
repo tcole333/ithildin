@@ -304,14 +304,14 @@ class TestTriagePolicy:
         db.commit()
 
         from tools.triage_policy import assess_depth_tier
-        tier, reason = assess_depth_tier("John Smith", db)
+        tier, reason = assess_depth_tier("John Smith", db, profile_id="test")
         assert tier == "deep_dive"
         assert "5 roles" in reason
 
     def test_generic_target_gets_scan(self, fresh_db):
         db, _ = fresh_db
         from tools.triage_policy import assess_depth_tier
-        tier, reason = assess_depth_tier("Nobody Special", db)
+        tier, reason = assess_depth_tier("Nobody Special", db, profile_id="test")
         assert tier == "scan"
         assert "no escalation" in reason
 
@@ -319,13 +319,13 @@ class TestTriagePolicy:
         db, _ = fresh_db
         for i in range(3):
             db.execute(
-                "INSERT INTO connections (person_a, person_b) "
-                "VALUES ('Jane Doe', ?)", (f"person_{i}",)
+                "INSERT INTO connections (person_a, person_b, profile_id) "
+                "VALUES ('Jane Doe', ?, 'test')", (f"person_{i}",)
             )
         db.commit()
 
         from tools.triage_policy import assess_depth_tier
-        tier, reason = assess_depth_tier("Jane Doe", db)
+        tier, reason = assess_depth_tier("Jane Doe", db, profile_id="test")
         assert tier == "standard"
 
     def test_skill_recommendation_standard_person(self):
@@ -344,25 +344,26 @@ class TestTriagePolicy:
         from tools.triage_policy import recommend_skill
         assert recommend_skill("deep_dive", "person") == "/deep-investigate"
 
-    def test_dead_end_threshold(self, fresh_db):
+    def test_finding_count_and_depth_request_review_without_dead_ending(self, fresh_db):
         db, _ = fresh_db
         # Insert 10 findings for a target
         for i in range(10):
             db.execute(
-                "INSERT INTO findings (target_name, summary) "
-                "VALUES ('Overresearched Target', ?)", (f"finding {i}",)
+                "INSERT INTO findings (target_name, summary, profile_id) "
+                "VALUES ('Overresearched Target', ?, 'test')", (f"finding {i}",)
             )
         # Insert an existing open lead
         db.execute(
-            "INSERT INTO leads (title, target_name, status, priority, depth_tier) "
-            "VALUES ('existing', 'Overresearched Target', 'open', 'medium', 'standard')"
+            "INSERT INTO leads (title, target_name, status, priority, depth_tier, profile_id) "
+            "VALUES ('existing ownership question', 'Overresearched Target', 'open', 'medium', 'standard', 'test')"
         )
         db.commit()
 
         from tools.triage_policy import should_dead_end
-        stop, reason = should_dead_end("Overresearched Target", "scan", None, db)
-        assert stop is True
-        assert "exhaustively_covered" in reason
+        stop, reason = should_dead_end("Overresearched Target", "scan", None, db, profile_id="test")
+        assert stop is False
+        assert "candidate overlaps" in reason
+        assert "question/scope coverage" in reason
 
 
 # ── Connection → Entity Enforcement ──────────────────────────

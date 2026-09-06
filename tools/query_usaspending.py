@@ -14,6 +14,7 @@ Usage:
     uv run python tools/query_usaspending.py recipient "Palantir Technologies"
     uv run python tools/query_usaspending.py awards "PALANTIR TECHNOLOGIES INC." --limit 10
     uv run python tools/query_usaspending.py awards --uei "RN99S3S7N977"
+    uv run python tools/query_usaspending.py transactions --uei "RN99S3S7N977" --award-id "CONT_AWD_..." --all-pages
     uv run python tools/query_usaspending.py transactions-keyword "skip tracing" --all-pages
 
 Structured output (--output/--json) uses an envelope with query, retrieval,
@@ -23,6 +24,11 @@ empty response has status=success. Acquisition failures write the envelope befor
 exiting 1, retaining any rows already acquired with status=partial. A requested
 single page can succeed while retrieval.complete is false; the keyword safety
 cap instead has status=partial, errors=[], and a continuation page (exit 0).
+Transactions and subawards also support --all-pages with a configurable
+--max-pages budget. Their capped or unreported pagination is partial, and a
+resumed run does not claim completeness for earlier pages. Transaction
+--award-id selects canonical award identity locally within the recipient search;
+pagination totals describe the upstream search, not that selected award.
 retrieval.complete is null when the API does not report pagination coverage.
 """
 
@@ -241,6 +247,67 @@ def _pagination(response, payload):
         "next_page": metadata.get("next") or (page + 1 if metadata.get("hasNext") else None),
         "raw": metadata,
     }
+
+
+def _fetch_search_pages(run, endpoint, payload, *, validate=None):
+    """Collect existing advanced-search pages, preserving incomplete coverage."""
+    args = run.args
+    all_pages = getattr(args, "all_pages", False)
+    page_cap = getattr(args, "max_pages", 50) if all_pages else 1
+    start_page = payload["page"]
+    page = start_page
+    results, messages = [], []
+    pagination = _pagination(None, payload)
+    partial = False
+    retrieved = 0
+    for _ in range(page_cap):
+        response = run.fetch(endpoint, {**payload, "page": page})
+        if response is None:
+            pagination.update(has_next=True, next_page=page)
+            break
+        current = _pagination(response, {**payload, "page": page})
+        if validate and not validate(response["results"], args):
+            run.error("scope_mismatch", "USAspending returned out-of-scope subawards")
+            pagination.update(has_next=True, next_page=page)
+            break
+        results.extend(response["results"])
+        messages.extend(response.get("messages") or [])
+        retrieved += 1
+        pagination = current
+        if not all_pages or current["has_next"] is False:
+            break
+        if current["has_next"] is not True:
+            partial = True
+            pagination["stopped_reason"] = "pagination_unknown"
+            break
+        next_page = current["next_page"]
+        if (not isinstance(next_page, int) or isinstance(next_page, bool)
+                or next_page != page + 1):
+            run.error("invalid_pagination", "API next page is not the next sequential page")
+            pagination["next_page"] = page + 1
+            break
+        page = next_page
+    else:
+        partial = bool(pagination["has_next"])
+        if partial:
+            pagination["stopped_reason"] = "page_cap"
+
+    if all_pages:
+        pagination.update(
+            requested_page=start_page, pages_retrieved=retrieved,
+            returned_count=len(results),
+        )
+    return results, pagination, messages, partial
+
+
+def _add_search_pagination_args(parser):
+    parser.add_argument("--page", type=_positive_page, default=1,
+                        help="Starting page (resume from pagination.next_page)")
+    parser.add_argument("--all-pages", action="store_true",
+                        help="Collect pages until exhausted or --max-pages is reached")
+    parser.add_argument("--max-pages", type=_positive_page, default=50,
+                        help="Page budget for --all-pages (default: 50); capped runs are partial")
+
 
 def cmd_search(args):
     """Search for recipients using the autocomplete endpoint."""
@@ -638,15 +705,13 @@ def cmd_subawards(args):
         "order": "desc",
     }
 
-    result = run.fetch("/search/spending_by_award/", data)
-    results = (result or {}).get("results", [])
-    if not _subaward_results_in_scope(results, args):
-        run.error("scope_mismatch", "USAspending returned out-of-scope subawards")
-        run.write([], summary="USAspending subaward scope validation failed")
+    results, pagination, messages, partial = _fetch_search_pages(
+        run, "/search/spending_by_award/", data, validate=_subaward_results_in_scope,
+    )
     total = len(results)
 
     if run.write(results, summary=f"USAspending subawards ({total} returned)",
-                 pagination=_pagination(result, data)):
+                 pagination=pagination, extra={"messages": messages}, partial=partial):
         return
 
     print(f"Found {total} subawards (showing {len(results)}):")
@@ -717,9 +782,15 @@ def _subaward_results_in_scope(results, args):
 
 
 def cmd_transactions(args):
-    """Search individual transaction records."""
+    """Search obligation/modification actions, optionally selecting one award locally."""
     run = _Query(args, "transactions")
     filters = {}
+    selected_award = str(getattr(args, "award_id", None) or "").strip()
+    if selected_award and (not _is_generated_award_identifier(selected_award)
+                           or not (args.uei or args.query)):
+        run.error("invalid_scope", "--award-id requires a canonical generated award ID "
+                  "(or legacy internal ID) and a recipient query/--uei")
+        run.write([], summary="Invalid award transaction scope")
 
     if args.uei:
         filters["recipient_search_text"] = [args.uei]
@@ -731,9 +802,14 @@ def cmd_transactions(args):
         filters["agencies"] = [agency_filter]
 
     if args.date_range:
-        parts = args.date_range.split(",")
-        if len(parts) == 2:
-            filters["time_period"] = [{"start_date": parts[0], "end_date": parts[1]}]
+        try:
+            start, end = args.date_range.split(",")
+            if date.fromisoformat(start) > date.fromisoformat(end):
+                raise ValueError("start follows end")
+        except ValueError:
+            run.error("invalid_date_range", "Use an ordered YYYY-MM-DD,YYYY-MM-DD date range")
+            run.write([], summary="Invalid transaction date scope")
+        filters["time_period"] = [{"start_date": start, "end_date": end}]
 
     award_types = GRANT_AWARD_TYPES if args.grants else CONTRACT_AWARD_TYPES
     filters["award_type_codes"] = award_types
@@ -751,13 +827,27 @@ def cmd_transactions(args):
         "order": "desc"
     }
 
-    result = run.fetch("/search/spending_by_transaction/", data) or {}
-
-    results = result.get("results", [])
-    page_metadata = result.get("page_metadata")
-    if not isinstance(page_metadata, dict):
-        page_metadata = {}
-    reported_total = page_metadata.get("total")
+    results, pagination, messages, partial = _fetch_search_pages(
+        run, "/search/spending_by_transaction/", data,
+    )
+    reported_total = pagination.get("reported_total")
+    excluded_count = 0
+    unresolved_count = 0
+    if selected_award:
+        selected_results = []
+        for row in results:
+            identity = (row.get("internal_id") if selected_award.isdigit() else
+                        row.get("generated_internal_id") or row.get("generated_unique_award_id"))
+            if identity is None:
+                unresolved_count += 1
+            elif str(identity) == selected_award:
+                selected_results.append(row)
+            else:
+                excluded_count += 1
+        results = selected_results
+        if unresolved_count:
+            run.error("missing_award_identity", "Some transaction rows lack the canonical "
+                      "award identifier needed for exact selection", count=unresolved_count)
     returned_recipients = sorted(
         {
             (
@@ -795,29 +885,41 @@ def cmd_transactions(args):
                 "recipient records. Compare returned_recipients with the "
                 "requested UEI before combining queries."
             ),
+            "amount_semantics": "Transaction Amount is an obligation action, not evidence of cash payment",
         },
         "returned_recipients": [
             {"recipient_uei": uei, "recipient_name": name}
             for uei, name in returned_recipients
         ],
         "results": results,
-        "messages": result.get("messages", []),
+        "messages": messages,
     }
+    if selected_award:
+        output["award_selection"] = {
+            "award_id": selected_award,
+            "method": "client_side_exact_canonical_id",
+            "matched_count": len(results),
+            "excluded_count": excluded_count,
+            "unresolved_count": unresolved_count,
+            "coverage_note": "Pagination and reported_total describe the upstream recipient search; "
+                             "complete applies only within the recorded filters and API coverage.",
+        }
 
-    summary = (
-        f"USAspending transactions (page {args.page}, "
-        f"{len(results)} returned"
-    )
+    page_scope = (f"{pagination['pages_retrieved']} pages from {args.page}"
+                  if "pages_retrieved" in pagination else f"page {args.page}")
+    summary = f"USAspending transactions ({page_scope}, {len(results)} returned"
     if reported_total is not None:
-        summary += f", {reported_total} reported total"
+        summary += f", {reported_total} reported upstream total"
     else:
         summary += ", overall total not reported"
     summary += ")"
     if run.write(results, summary=summary, extra=output,
-                 pagination=_pagination(result, data)):
+                 pagination=pagination, partial=partial):
         return
 
-    if reported_total is None:
+    if selected_award:
+        print(f"Returned {len(results)} obligation actions for {selected_award} ({page_scope}).")
+    elif reported_total is None:
         print(
             f"Returned {len(results)} transactions on page {args.page}; "
             "USAspending did not report an overall total."
@@ -838,11 +940,11 @@ def cmd_transactions(args):
         award_id = r.get("Award ID", "?")
         name = r.get("Recipient Name", "?")
         amount = r.get("Transaction Amount", 0)
-        date = r.get("Action Date", "?")
+        action_date = r.get("Action Date", "?")
         agency = r.get("Awarding Agency", "?")
         desc = r.get("Transaction Description", "")
 
-        print(f"\n  {award_id} | {_fmt_money(amount)} | {date}")
+        print(f"\n  {award_id} | {_fmt_money(amount)} | {action_date}")
         print(f"    Recipient: {name}")
         print(f"    Agency: {agency}")
         if desc:
@@ -1208,7 +1310,7 @@ def main():
     p = sub.add_parser("subawards", help="Search subaward/subcontractor data")
     p.add_argument("query", nargs="?", help="Recipient name")
     p.add_argument("--uei", help="Recipient UEI")
-    p.add_argument("--award-id", help="Filter by prime award ID")
+    p.add_argument("--award-id", help="Filter by exact prime PIID (not generated_unique_award_id)")
     p.add_argument(
         "--agency",
         help=(
@@ -1229,13 +1331,14 @@ def main():
         default=20,
         help="Results per page (1-100; default: 20)",
     )
-    p.add_argument("--page", type=int, default=1, help="Page number")
+    _add_search_pagination_args(p)
     add_output_args(p)
 
     # Transactions
     p = sub.add_parser("transactions", help="Search individual transaction records")
     p.add_argument("query", nargs="?", help="Recipient name")
     p.add_argument("--uei", help="Recipient UEI")
+    p.add_argument("--award-id", help="Select exact canonical generated award ID locally; requires recipient query/--uei")
     p.add_argument(
         "--agency",
         help=(
@@ -1257,7 +1360,7 @@ def main():
         default=20,
         help="Results per page (1-100; default: 20)",
     )
-    p.add_argument("--page", type=int, default=1, help="Page number")
+    _add_search_pagination_args(p)
     add_output_args(p)
 
     # Transactions by keyword

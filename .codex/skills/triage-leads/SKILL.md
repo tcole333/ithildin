@@ -1,376 +1,87 @@
 ---
 name: triage-leads
-description: Process pending_triage leads — deduplicate, prioritize, link, and promote to open
+description: Review pending investigation leads, preserve distinct questions, and apply scoped scheduling decisions. Use to triage, prioritize, deduplicate, or route the pending lead queue; --dry-run previews decisions.
 ---
 
 # $triage-leads
 
-**CONTROL PLANE** — This is a scheduling skill. Evaluate leads, assign depth tiers and recommended skills using rules from `tools/triage_policy.py`, and route work to the appropriate research agents. Do not investigate targets directly.
+Turn pending leads into justified research assignments, holds, or documented dead-ends. Use the pinned investigation/database from the research workflow contract. The current chat owns the review and final application; native subagents can review independent batches when useful and inherit the configured model.
 
-Process a batch of `pending_triage` leads created by `auto_leads.py`. Deduplicates, reprioritizes, links related leads, and promotes to `open`.
+## Scope and inputs
 
-## Arguments
+- No arguments: review the next batch, default 20 leads.
+- `--batch-size N`: choose a batch suited to the work; 20 is a convenience, not a cognitive limit.
+- `--dry-run`: preview decisions and leave the database unchanged.
+- Continue through further batches when the user requested the whole queue; preserve completed batch artifacts and resume after context compaction.
 
-- No arguments: process the next batch (up to 20 leads)
-- `--batch-size N`: process N leads instead of default 20
-- `--dry-run`: preview triage decisions without modifying the DB
+Use existing findings, notes, and relevant source checks to resolve identity and question overlap. If deciding a lead would require substantial new research, promote or hold it with a concrete next step instead of silently expanding triage into that investigation.
 
-### Context Loading
-Load the active investigation context before executing:
-```bash
-uv run python tools/investigation_context.py show
-```
-This provides: primary_subject, key_persons, threads, corpus_tools, key_dates, known_addresses.
-Use these values instead of hardcoded names throughout this skill.
-
-## Process
-
-### 0. Session Setup — Prevent File Collisions
-
-Create a unique working directory for this session:
+## 1. Export the review context
 
 ```bash
 WORKDIR=$(mktemp -d /tmp/osint-XXXXXXXX)
-echo "Session workdir: $WORKDIR"
-```
-
-Use `$WORKDIR/` instead of `/tmp/` for ALL `--output` paths throughout this session.
-
-### 1. Check Queue Depth
-
-```bash
-uv run python tools/lead_tracker.py stats \
-  --output "$WORKDIR/triage-stats.json"
-```
-
-Read `pending_triage` from that profile-scoped artifact. The active profile is
-applied by default; use an explicit `--profile <PROFILE_ID>` if the session has
-captured a profile ID and must be insulated from later global-profile changes.
-
-If zero leads pending, report that and exit.
-
-### 2. Claim Batch
-
-```bash
-uv run python tools/lead_tracker.py list \
-  --status pending_triage \
-  --limit 20 \
+uv run python tools/lead_tracker.py triage-export --limit 20 \
   --output "$WORKDIR/triage-batch.json"
 ```
 
-This list is profile-scoped by default and preserves the tracker’s priority and
-age ordering. Use the same explicit `--profile <PROFILE_ID>` captured during
-session setup when concurrent work could change the shared active profile.
+Use the requested batch size in place of 20. The packet contains the resolved `profile_id`, `database_path`, total pending count, full lead rows, notes, evidence references, and review revisions. Treat it as the immutable input to apply. An empty `leads` array means this scoped queue is empty.
 
-### 3. For Each Lead, Apply Triage Rules
+Listing is not a claim. Another task can work concurrently; application rejects stale revisions or changed statuses instead of overwriting that work.
 
-Process each lead through these checks in order:
+## 2. Review the questions
 
-#### 3a. Deduplication Check
-
-Search for leads with similar titles or the same target:
+For each lead, inspect its title, description, notes, and evidence. Find related leads and findings when needed:
 
 ```bash
-uv run python tools/lead_tracker.py search "<LEAD_TITLE_KEYWORDS>" --output $WORKDIR/triage-dupes.json
+uv run python tools/lead_tracker.py list --target "<TARGET>" --limit 50 \
+  --output "$WORKDIR/related-leads.json"
+uv run python tools/findings_tracker.py search "<TARGET>" \
+  --output "$WORKDIR/target-findings.json"
+uv run python tools/triage_policy.py assess "<TARGET>" --lead-id 123 \
+  --output "$WORKDIR/triage-assessment.json"
 ```
 
-Also check by target_name:
-```bash
-uv run python tools/lead_tracker.py list \
-  --target "<TARGET>" \
-  --limit 50 \
-  --output "$WORKDIR/triage-target-dupes.json"
+Replace 123 with the reviewed lead ID. `assess` returns scoped structural signals, suggested depth/routing, and same-target candidate overlaps. Entity roles are shared records and are labeled global. Read more related results when a limit obscures the decision.
+
+Apply judgment to these signals:
+
+- **Duplication:** same identity plus the same research question and covered source/date scope can justify a duplicate. Different legal, financial, registry, or temporal questions remain available even at the same depth. A target/depth match alone cannot close a lead.
+- **Coverage:** assess what the evidence establishes and what remains unknown. Counts of findings, roles, or connections are useful review cues, not proof of exhaustive research. Mirrors and repeated mentions do not create new corroboration.
+- **Priority/depth:** consider likely information value, evidentiary significance, dependencies, user priorities, and the question's complexity. Use policy suggestions as defaults; record why a novel low-degree target needs deeper research or why a familiar target does not.
+- **Scheduling:** a busy thread may justify holding lower-value work; it does not justify a dead-end. A hold needs a dependency or scheduling reason and a next step.
+- **Routing:** use the focused filing, contract, case, nonprofit/grant, person, or entity skill when it matches the question. Persist the scheduler’s slash-prefixed skill IDs; use the host’s native syntax for interactive invocation.
+
+## 3. Record structured decisions
+
+Write a JSON array to `$WORKDIR/triage-decisions.json`, one decision for every exported lead. Use actual integer IDs:
+
+```json
+[
+  {
+    "lead_id": 123,
+    "action": "promote",
+    "priority": "high",
+    "depth_tier": "standard",
+    "recommended_skill": "/trace-entity",
+    "rationale": "The ownership question is distinct from the existing litigation lead.",
+    "related_lead_ids": [122]
+  }
+]
 ```
 
-Exclude the current lead and unrelated `pending_triage` rows while reviewing
-the artifact. The tracker applies the active or explicit profile scope.
+Actions are `promote`, `hold`, or `dead_end`; every action needs a rationale. Promotion needs `priority`, `depth_tier`, and `recommended_skill` (existing values may be retained). Optional enrichments: `category`, `target_name`, and a **global database** `thread_id` belonging to this profile; `null` can clear a thread assignment.
 
-**If near-duplicate found** (same target + similar title/description):
-- Dead-end the triage lead with reason "Duplicate of lead #X"
-- Add a note to the original lead referencing this one
-- Link them: `INSERT INTO lead_relations (lead_id, related_lead_id, relation_type) VALUES (original_id, triage_id, 'duplicate')`
+A dead-end needs `stop_reason`. For a reviewed duplicate also supply `keeper_id`; the keeper must belong to this profile and survive the batch. If it is outside the selected pending batch, re-export with `triage-export --reference-lead-id <KEEPER_ID>` (repeatable) and review the resulting `reference_leads` snapshots as well as any changed batch membership. Preserve novel details as notes/evidence on the keeper before that fresh export, or use $dedup-leads consolidation for open leads. Do not close an unreviewed question merely to complete the packet. A justified `hold` can record the information needed to decide it.
 
-#### 3b. Coverage Check
-
-How well-investigated is this target already?
-
-```bash
-uv run python tools/findings_tracker.py search "<TARGET>" --output $WORKDIR/triage-findings.json
-```
-
-- **5+ findings**: Target is well-covered. Lower priority unless the lead opens a genuinely new angle.
-- **1-4 findings**: Partially covered. Keep current priority.
-- **0 findings**: Under-investigated. If the target is interesting (connected to key persons, financial angle), raise priority.
-
-#### 3c. Priority Adjustment
-
-Adjust priority based on:
-
-| Signal | Priority Change |
-|--------|----------------|
-| Target is a key person from the investigation profile | Raise to `high` |
-| Financial angle (trust, LLC, fund, transfer) | Raise by one level |
-| Entity with 3+ roles in entity_roles | Raise to `medium` minimum |
-| Target has 5+ existing findings | Lower by one level |
-| Generic cross-ref with low-value target | Lower to `low` |
-| Address-only lead at non-key address | Lower to `low` |
-
-Elevate priority for key persons listed in the active investigation profile (loaded via `investigation_context.py`). Also elevate:
-- Any person with 10+ email correspondences
-- Thread-specific key persons — check the thread description for guidance
-
-#### 3c-bis. Thread Assignment
-
-If a lead clearly belongs to an investigation thread, assign it based on the investigation profile's thread definitions (loaded via `investigation_context.py`). Match targets to threads by their described scope and key persons. Leave thread_id NULL if the match is unclear.
-
-Threads with fewer findings should get a slight priority boost to balance coverage across threads.
-
-#### 3d. Category Enrichment
-
-If category is missing, infer from title/description:
-- "officer" / "person" keywords → `person`
-- "registry" / "entity" / "LLC" / "trust" keywords → `entity`
-- "address" / "property" keywords → `entity`
-- "financial" / "payment" / "transfer" → `financial`
-- "nonprofit" / "foundation" / "501(c)" / "grant" / "donor" / "grantee" / "dark money" / "donor-advised" → `nonprofit`
-- "connection" keywords → `connection`
-
-If target_name is obvious from the title but missing, fill it in.
-
-#### 3e. Link Related Leads
-
-Find leads sharing the same target or closely related targets:
+## 4. Preview, apply, and verify
 
 ```bash
-uv run python tools/lead_tracker.py list \
-  --target "<TARGET>" \
-  --limit 50 \
-  --output "$WORKDIR/triage-related.json"
+uv run python tools/lead_tracker.py triage-apply \
+  --batch-file "$WORKDIR/triage-batch.json" \
+  --decisions-file "$WORKDIR/triage-decisions.json" --dry-run \
+  --output "$WORKDIR/triage-preview.json"
 ```
 
-Review active and pending rows other than the current lead from this
-profile-scoped artifact.
+Read the preview. For an authorized triage run, apply the reviewed file by omitting `--dry-run` and saving `$WORKDIR/triage-applied.json`. A requested dry run ends with the preview. The command validates database/profile, exact batch membership, revisions, pending status, related/keeper IDs, and thread ownership, then applies atomically and writes audit notes. Invalid input exits nonzero with no decision changes; re-export and review stale work rather than editing revisions or bypassing checks.
 
-Create `lead_relations` entries for related leads:
-```sql
-INSERT OR IGNORE INTO lead_relations (lead_id, related_lead_id, relation_type) VALUES (?, ?, 'related')
-```
-
-#### 3f. Depth Tier Assignment
-
-Assign a `depth_tier` based on the target's structural position and information richness:
-
-| Signal | Depth Tier |
-|--------|-----------|
-| Target is a key_person from the investigation profile | `deep_dive` |
-| Target has 3+ entity_roles or 3+ connections already | `standard` (may escalate to `deep_dive`) |
-| Entity at a known_address from the profile | `standard` |
-| Nonprofit target appearing as filer/recipient in 990 grants to/from 3+ investigation entities | `standard` (may escalate to `deep_dive`) |
-| Generic cross-ref with no special signals | `scan` |
-| New person with 0 findings, not a key_person | `scan` |
-
-Query to assess structural position:
-```bash
-uv run python -c "
-import sqlite3
-db = sqlite3.connect('investigation.db')
-target = '<TARGET>'
-roles = db.execute('SELECT COUNT(*) FROM entity_roles WHERE person_name LIKE ?', (f'%{target}%',)).fetchone()[0]
-conns = db.execute('SELECT COUNT(*) FROM connections WHERE person_a LIKE ? OR person_b LIKE ?', (f'%{target}%', f'%{target}%')).fetchone()[0]
-findings = db.execute('SELECT COUNT(*) FROM findings WHERE target_name LIKE ?', (f'%{target}%',)).fetchone()[0]
-print(f'roles={roles} connections={conns} findings={findings}')
-"
-```
-
-#### 3g. Recommended Skill Assignment
-
-Based on depth_tier and category, set `recommended_skill`:
-
-Store slash-prefixed skill IDs in the database because `tools/triage_policy.py` and `scripts/dispatcher.py` match those exact values. Use `$skill-name` only when telling a Codex user how to invoke the skill.
-
-| Depth Tier + Category | Recommended Skill |
-|----------------------|-------------------|
-| `deep_dive` + person | `/deep-investigate` |
-| `deep_dive` + entity | `/deep-investigate` |
-| `standard` + person | `/investigate-person` |
-| `standard` + entity | `/trace-entity` |
-| `standard` + financial | `/pursue-lead` |
-| `*` + nonprofit | `/trace-grants` |
-| `*` + grant | `/trace-grants` |
-| `standard` + other | `/pursue-lead` |
-
-**Cohort escalation:** When 3+ contract-category leads exist for different companies in the same investigation thread, assign or suggest `/audit-contracts` for comparative procurement analysis instead of individual `/analyze-contract` runs.
-| `scan` + any | `/pursue-lead` |
-
-#### 3h. Thread Coverage Balancing
-
-Check thread coverage balance before finalizing priorities:
-
-```bash
-uv run python -c "
-import sqlite3
-db = sqlite3.connect('investigation.db')
-rows = db.execute('''
-    SELECT t.id, t.title,
-           (SELECT COUNT(*) FROM leads WHERE thread_id=t.id AND status IN ('open','in_progress')) as active_leads,
-           (SELECT COUNT(*) FROM findings WHERE thread_id=t.id) as finding_count
-    FROM investigation_threads t WHERE t.status='active'
-    ORDER BY finding_count ASC
-''').fetchall()
-for r in rows:
-    print(f'thread={r[0]} title={r[1]} active_leads={r[2]} findings={r[3]}')
-"
-```
-
-Threads with fewer findings AND fewer active leads get a priority boost (raise by one level, capped at `high`). This prevents popular threads from starving under-investigated threads.
-
-#### 3i. Stop Conditions
-
-Before promoting, check if the lead should be stopped rather than investigated:
-
-- **Target already exhaustively covered**: 10+ findings, no new angle in the lead description → dead-end with `stop_reason='exhaustively_covered'`
-- **Duplicate target at same depth**: An existing open/in_progress lead for the same target_name at the same or higher depth_tier → dead-end with `stop_reason='covered_by_lead_#N'`
-- **Budget throttle**: If more than 30 leads are open + in_progress for the same thread, only promote `high` and `critical` leads. Lower-priority leads stay in pending_triage until the queue drains.
-
-#### 3j. Record Triage Rationale
-
-For every lead processed, write a `triage_rationale` explaining the decision:
-
-```sql
-UPDATE leads SET triage_rationale=? WHERE id=?
-```
-
-Format: `"[ACTION]: [REASON]. depth_tier=[TIER], recommended_skill=[SKILL]"`
-
-Examples:
-- `"PROMOTED: Key person with 0 findings. depth_tier=deep_dive, recommended_skill=/deep-investigate"`
-- `"DEPRIORITIZED: 8 existing findings, no new angle. depth_tier=scan, recommended_skill=/pursue-lead"`
-- `"DEAD-ENDED: Duplicate of lead #1234 at standard tier"`
-- `"HELD: 35 leads active in thread 3, holding medium-priority leads until queue drains"`
-
-### 4. Promote to Open
-
-For leads that pass triage (not deduped and not held), update all scheduler fields:
-
-```bash
-uv run python -c "
-import sqlite3
-from datetime import datetime
-db = sqlite3.connect('investigation.db')
-now = datetime.utcnow().isoformat()
-db.execute('''
-    UPDATE leads SET status='open', priority=?, depth_tier=?, recommended_skill=?,
-        triage_rationale=?, triaged_by='agent:triage', triaged_at=?, updated_at=?
-    WHERE id=?
-''', ('<PRIORITY>', '<DEPTH_TIER>', '<RECOMMENDED_SKILL>', '<RATIONALE>', now, now, <LEAD_ID>))
-db.commit()
-"
-```
-
-For leads that are dead-ended by stop conditions:
-```bash
-uv run python -c "
-import sqlite3
-from datetime import datetime
-db = sqlite3.connect('investigation.db')
-now = datetime.utcnow().isoformat()
-db.execute('''
-    UPDATE leads SET status='dead_end', stop_reason=?, triage_rationale=?,
-        triaged_by='agent:triage', triaged_at=?, updated_at=?
-    WHERE id=?
-''', ('<STOP_REASON>', '<RATIONALE>', now, now, <LEAD_ID>))
-db.commit()
-"
-```
-
-### 5. Report
-
-After processing the batch, summarize:
-
-```
-## $triage-leads — Batch Results
-
-### Summary
-- Processed: X leads
-- Promoted to open: Y
-- Deduplicated (dead-ended): Z
-- Stopped (exhaustively covered / duplicate depth): W
-- Held (queue throttle): V
-- Reprioritized: U
-
-### Remaining Queue
-- N leads still pending triage
-
-### Depth Tier Distribution
-| Tier | Count |
-|------|-------|
-| scan | X |
-| standard | Y |
-| deep_dive | Z |
-
-### Skill Recommendations
-| Skill | Count | Example Targets |
-|-------|-------|----------------|
-| /deep-investigate | Z | [names] |
-| /investigate-person | W | [names] |
-| /trace-entity | V | [names] |
-| /pursue-lead | U | [names] |
-
-### Thread Balance
-| Thread | Active Leads | Findings | Status |
-|--------|-------------|----------|--------|
-| [name] | X | Y | [balanced/starved/saturated] |
-
-### Deduplication Details
-| Lead # | Title | Duplicate Of | Action |
-|--------|-------|-------------|--------|
-| #1234  | Cross-ref officer: John Smith | #890 | dead_end |
-
-### Priority Changes
-| Lead # | Title | Old Priority | New Priority | Reason |
-|--------|-------|-------------|-------------|--------|
-| #1235  | Cross-ref registry: Example Trust | medium | high | Key person target |
-
-### Links Created
-- Lead #1236 ↔ Lead #1237 (shared target: "123 Main St")
-```
-
-## Triage Philosophy
-
-### What to Dead-End
-- Exact or near-exact duplicates of existing leads
-- Cross-refs for well-known public entities (Goldman Sachs, Harvard) with no specific investigation angle
-- Address cross-refs for generic addresses (c/o, PO Box, major commercial buildings not in known investigation addresses)
-
-### What to Keep
-- Any lead targeting a person with < 3 findings
-- Any lead with a financial or corporate angle
-- Any lead targeting an entity at a known investigation address (from the profile's known_addresses)
-- Cross-refs for officers at 2+ investigation-linked entities
-
-### What to Raise Priority
-- Leads connected to financial flow investigation threads
-- Leads targeting entities in the corporate architecture under investigation
-- Cross-refs that could reveal new lateral connections
-
-## Autonomy Level
-
-The triage agent has **moderate autonomy**:
-- CAN dead-end clear duplicates without human approval
-- CAN adjust priorities up or down within the range (low ↔ high)
-- CAN assign depth_tier (scan, standard, deep_dive)
-- CAN assign recommended_skill based on depth_tier + category
-- CAN hold leads when thread queues are saturated (30+ active)
-- CAN enrich category and target_name fields
-- CAN create lead_relations links
-- CANNOT set priority to `critical` (reserved for human judgment)
-- CANNOT delete leads (only dead_end)
-- CANNOT escalate to `deep_dive` without structural evidence (3+ roles/connections or key_person status)
-
-Human reviews dead-ends periodically to catch false positives.
-
-## Context Management
-
-- Use `--output $WORKDIR/...` on all searches
-- Process leads in batches of 20 max to keep context manageable
-- Record triage decisions as lead notes for audit trail
+Report processed/promoted/held/dead-ended counts, key rationale and keeper links, any incomplete research/dependencies, and artifact paths. Re-read scoped tracker stats for the remaining pending count. Distinguish a finished batch from a finished queue.

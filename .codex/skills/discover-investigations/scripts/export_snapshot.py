@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sqlite3
 import subprocess
 from collections import defaultdict
@@ -54,7 +55,8 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Export evidence-aware platform state without modifying investigation.db"
     )
-    parser.add_argument("--db", default="investigation.db", help="SQLite database path")
+    parser.add_argument("--db", default=os.environ.get("ITHILDIN_DB_PATH") or "investigation.db",
+                        help="SQLite database path (default: ITHILDIN_DB_PATH or investigation.db)")
     parser.add_argument("--repo-root", default=".", help="Repository root for content inventory")
     parser.add_argument("--output", required=True, help="Destination JSON file")
     parser.add_argument("--pretty", action="store_true", help="Indent JSON output")
@@ -189,10 +191,11 @@ def git_state(repo_root: Path) -> dict[str, Any]:
 
 
 def build_snapshot(db_path: Path, repo_root: Path) -> dict[str, Any]:
-    db_uri = f"file:{db_path.resolve()}?mode=ro"
+    db_uri = db_path.resolve().as_uri() + "?mode=ro"
     db = sqlite3.connect(db_uri, uri=True)
     db.row_factory = sqlite3.Row
     try:
+        db.execute("BEGIN")
         available_tables = table_names(db)
         data = {
             table: select_rows(db, available_tables, table, columns)
@@ -232,9 +235,14 @@ def build_snapshot(db_path: Path, repo_root: Path) -> dict[str, Any]:
 
 def main() -> int:
     args = parse_args()
-    db_path = Path(args.db)
+    db_path = Path(args.db).expanduser().resolve()
     repo_root = Path(args.repo_root)
-    output = Path(args.output)
+    output = Path(args.output).expanduser().resolve()
+    protected = [db_path, *(Path(str(db_path) + suffix) for suffix in ("-wal", "-shm", "-journal"))]
+    destination = output.expanduser().resolve()
+    if any(destination == source or (destination.exists() and source.exists() and destination.samefile(source))
+           for source in protected):
+        raise SystemExit("Snapshot output must not overwrite the selected database or SQLite sidecars")
     if not db_path.is_file():
         raise SystemExit(f"Database not found: {db_path}")
     if not repo_root.is_dir():

@@ -1,4 +1,6 @@
-interface:
-  display_name: "Orchestrate Investigation"
-  short_description: "Control staged investigation worker runs"
-  default_prompt: "Use $orchestrate-investigation to handle this investigation task with clear evidence and actionable output."
+"interface":
+  "display_name": "Orchestrate Investigation"
+  "short_description": "Supervise investigation work in the current chat"
+  "default_prompt": "Use $orchestrate-investigation. Oversee the requested investigation\
+    \ here using native subagents where useful, preserve progress, reconcile evidence,\
+    \ and complete the authorized outcome."

@@ -202,7 +202,7 @@ def extract_sentences(text: str) -> list[str]:
 
 def load_index() -> dict[str, str]:
     """Return {name: slug} from _index.json."""
-    entries = json.loads(INDEX_PATH.read_text())
+    entries = json.loads(INDEX_PATH.read_text()) if INDEX_PATH.exists() else []
     result = {}
     for e in entries:
         result[e["name"]] = e["slug"]
@@ -809,17 +809,17 @@ def run_checks(
 
 
 def get_curated_slugs(top_n: int | None = None) -> list[str]:
-    """Return slugs of curated dossiers, sorted by finding count desc."""
-    index = json.loads(INDEX_PATH.read_text())
+    """Inventory actual curated files; the index supplies optional rank metadata."""
+    index = json.loads(INDEX_PATH.read_text()) if INDEX_PATH.exists() else []
+    ranks = {entry["slug"]: entry.get("stats", {}).get("total_findings", 0) for entry in index}
     curated = []
-    for entry in index:
-        slug = entry["slug"]
-        path = DOSSIER_DIR / f"{slug}.json"
-        if not path.exists():
+    for path in sorted(DOSSIER_DIR.glob("*.json")):
+        slug = path.stem
+        if slug.startswith("_"):
             continue
         d = json.loads(path.read_text())
         if d.get("curation", {}).get("lead"):
-            total = entry.get("stats", {}).get("total_findings", 0)
+            total = ranks.get(slug, len(d.get("findings", [])))
             curated.append((slug, total))
 
     curated.sort(key=lambda x: -x[1])
@@ -930,9 +930,18 @@ def check_publish_gate(
 # --- CLI ---
 
 
+def bound_checks(slug, name_to_slug=None):
+    """Never label checks on earlier bytes with a later content hash."""
+    before = dossier_content_sha256(slug)
+    result = run_checks(slug, name_to_slug)
+    if dossier_content_sha256(slug) != before:
+        raise ValueError(f"Dossier changed during automated checks: {slug}; rerun on current content")
+    result["content_sha256"] = before
+    return result
+
+
 def cmd_check(args):
-    result = run_checks(args.slug)
-    result["content_sha256"] = dossier_content_sha256(args.slug)
+    result = bound_checks(args.slug)
     if not args.no_record and result["verdict"] != "SKIP":
         record_review(result)
     if args.output:
@@ -947,11 +956,15 @@ def cmd_batch(args):
     name_to_slug = load_index()
     results = []
     for slug in slugs:
-        result = run_checks(slug, name_to_slug)
-        result["content_sha256"] = dossier_content_sha256(slug)
+        result = bound_checks(slug, name_to_slug)
         if not args.no_record and result["verdict"] != "SKIP":
             record_review(result)
         results.append(result)
+
+        if getattr(args, "packet_dir", None):
+            packet_dir = Path(args.packet_dir)
+            packet_dir.mkdir(parents=True, exist_ok=True)
+            (packet_dir / f"automated-{slug}.json").write_text(json.dumps(result, indent=2) + "\n")
 
     if args.output:
         Path(args.output).write_text(json.dumps(results, indent=2))
@@ -1369,6 +1382,7 @@ def main():
     p_batch.add_argument("--top", type=int, help="Only check top N by finding count")
     p_batch.add_argument("--output", "-o", help="Output JSON file")
     p_batch.add_argument("--no-record", action="store_true", help="Skip writing to DB")
+    p_batch.add_argument("--packet-dir", type=Path, help="Write automated-<slug>.json packets with the checked content hash for reviewers")
 
     p_fix = sub.add_parser("fix", help="Auto-fix deterministic issues")
     p_fix.add_argument("slug", help="Dossier slug")
