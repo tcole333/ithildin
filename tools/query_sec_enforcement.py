@@ -29,9 +29,11 @@ from pathlib import Path
 try:
     from tools.fts_query import literal_fts_query
     from tools.output_util import add_output_args, write_output
+    from tools.runtime_db import connect_registry_db, registry_db_path
 except ImportError:
     from fts_query import literal_fts_query
     from output_util import add_output_args, write_output
+    from runtime_db import connect_registry_db, registry_db_path
 
 # ---------------------------------------------------------------------------
 # Database paths
@@ -40,7 +42,7 @@ except ImportError:
 PROJECT_ROOT = Path(__file__).parent.parent
 DB_PATH = PROJECT_ROOT / "datasets" / "sec_enforcement.db"
 INVESTIGATION_DB = PROJECT_ROOT / "investigation.db"
-REGISTRY_DB = PROJECT_ROOT / "registry.db"
+REGISTRY_DB = registry_db_path()
 
 
 def _log(query, source, count):
@@ -829,9 +831,15 @@ def _gather_investigation_names():
             print(f"  Warning: could not read investigation.db: {e}", file=sys.stderr)
 
     # Registry.db officers
-    if REGISTRY_DB.exists():
+    if not REGISTRY_DB.exists():
+        print(
+            f"  Warning: registry.db not found at {REGISTRY_DB}; "
+            "registry officers were not cross-referenced",
+            file=sys.stderr,
+        )
+    else:
         try:
-            reg_db = sqlite3.connect(str(REGISTRY_DB))
+            reg_db = connect_registry_db(REGISTRY_DB)
             reg_db.row_factory = sqlite3.Row
 
             for r in reg_db.execute(

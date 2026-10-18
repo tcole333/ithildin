@@ -24,11 +24,13 @@ from pathlib import Path
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.runtime_db import connect_registry_db, registry_db_path
 except ImportError:
     from output_util import add_output_args, write_output
+    from runtime_db import connect_registry_db, registry_db_path
 
 DB_PATH = Path(os.environ.get("ITHILDIN_DB_PATH", Path(__file__).parent.parent / "investigation.db"))
-REGISTRY_DB_PATH = Path(__file__).parent.parent / "registry.db"
+REGISTRY_DB_PATH = registry_db_path()
 
 # Suffixes to strip for normalization (order matters — longest first)
 ENTITY_SUFFIXES = [
@@ -715,11 +717,7 @@ def cmd_scan_registry(args):
     db = get_db()
     threshold = args.threshold
 
-    if not REGISTRY_DB_PATH.exists():
-        print(f"Registry DB not found: {REGISTRY_DB_PATH}")
-        return
-
-    reg_db = sqlite3.connect(str(REGISTRY_DB_PATH))
+    reg_db = connect_registry_db(REGISTRY_DB_PATH)
     reg_db.row_factory = sqlite3.Row
 
     # Load entity_roles persons from investigation.db

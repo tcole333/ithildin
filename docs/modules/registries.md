@@ -49,6 +49,17 @@ add `--broad` only when token-based discovery is intentional.
 
 Prefer this tool over jurisdiction-specific tools. Searches all previously ingested data in `registry.db`.
 
+### Database location
+
+Registry tools use the checkout's `registry.db`, or the file named by
+`ITHILDIN_REGISTRY_DB_PATH`. Query commands open it read-only, and every
+registry tool exits with `SQLite database not found` instead of creating an
+empty stand-in that would answer every query with zero rows. In a git worktree,
+link the main checkout's copy first (`uv run python
+scripts/link_worktree_runtime.py`, see `docs/GIT_WORKFLOW.md`) or set the
+override. Ingest tools write only to an existing registry; create a new, empty
+one explicitly with `uv run python tools/query_registry.py init`.
+
 ### Subcommands
 
 ```bash

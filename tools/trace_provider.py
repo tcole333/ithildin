@@ -33,18 +33,18 @@ Usage:
 
 import argparse
 import csv
-import json
 import sqlite3
 import sys
-import time
 from pathlib import Path
 
 import duckdb
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.runtime_db import connect_registry_db, registry_db_path
 except ImportError:
     from output_util import add_output_args, write_output
+    from runtime_db import connect_registry_db, registry_db_path
 
 # NY DOS live lookup support
 try:
@@ -66,7 +66,7 @@ except ImportError:
         HAS_NYDOS = False
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
-REGISTRY_DB = Path(__file__).resolve().parent.parent / "registry.db"
+REGISTRY_DB = registry_db_path()
 PARQUET_PATH = DATA_DIR / "medicaid_spending.parquet"
 BILLING_PROVIDERS_PATH = DATA_DIR / "billing_providers.parquet"
 SERVICING_PROVIDERS_PATH = DATA_DIR / "servicing_providers.parquet"
@@ -89,7 +89,7 @@ def _registry():
     if not REGISTRY_DB.exists():
         print(f"Warning: {REGISTRY_DB} not found", file=sys.stderr)
         return None
-    db = sqlite3.connect(str(REGISTRY_DB), timeout=30)
+    db = connect_registry_db(REGISTRY_DB, "rw", timeout=30)
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=30000")
     db.row_factory = sqlite3.Row
@@ -596,7 +596,7 @@ def cmd_batch(args):
     if write_output(output, args, summary=f"batch trace {len(results)} NPIs"):
         return
 
-    print(f"\n  Summary:")
+    print("\n  Summary:")
     print(f"    Traced: {summary['total_traced']}")
     print(f"    Registry matches: {summary['registry_matched']}")
     print(f"    Officer networks found: {summary['with_officer_network']}")
@@ -868,10 +868,10 @@ def cmd_pipeline(args):
         if rmatch > 0:
             flags.append(f"{rmatch} reg")
         if result.get("officer_network"):
-            flags.append(f"officer_net")
+            flags.append("officer_net")
         print(f" [{', '.join(flags)}]" if flags else " [no match]")
 
-    print(f"\n=== Phase 3: Build officer/agent network from traces ===")
+    print("\n=== Phase 3: Build officer/agent network from traces ===")
 
     # Collect all officers and agents across all traced entities
     officer_map = {}  # officer_name -> list of entity names
@@ -918,7 +918,7 @@ def cmd_pipeline(args):
     if write_output(output, args, summary=f"pipeline ({len(anomalies)} providers, {len(shared_officers)} shared officers)"):
         return
 
-    print(f"\n  === Pipeline Summary ===")
+    print("\n  === Pipeline Summary ===")
     for k, v in output["pipeline_summary"].items():
         print(f"    {k}: {v}")
 
@@ -934,7 +934,7 @@ def _print_trace(result):
 
     if result.get("nppes"):
         n = result["nppes"]
-        print(f"\n  NPPES:")
+        print("\n  NPPES:")
         print(f"    Name: {n.get('org_name') or n.get('last_name', '')}")
         print(f"    Address: {n.get('address_line1', '')} {n.get('city', '')}, {n.get('state', '')} {n.get('zip', '')}")
         print(f"    Taxonomy: {n.get('taxonomy_code', '?')}")
@@ -942,7 +942,7 @@ def _print_trace(result):
 
     if result.get("spending"):
         s = result["spending"]
-        print(f"\n  Spending (2018-2024):")
+        print("\n  Spending (2018-2024):")
         print(f"    Total Paid: {_fmt(s['total_paid'])}")
         print(f"    Claims: {s['total_claims']:,}")
         print(f"    Avg/Claim: {_fmt(s['avg_per_claim'])}")
@@ -952,7 +952,7 @@ def _print_trace(result):
 
     if result.get("excluded"):
         e = result["excluded"]
-        print(f"\n  *** OIG EXCLUDED ***")
+        print("\n  *** OIG EXCLUDED ***")
         print(f"    Name: {e['name']}")
         print(f"    Type: {e['excl_type']}")
         print(f"    Date: {e['excl_date']}")
@@ -973,7 +973,7 @@ def _print_trace(result):
                     print(f"      Agent: {a['agent_name']}")
 
     if result.get("officer_network"):
-        print(f"\n  Officer Network (other entities controlled by same officers):")
+        print("\n  Officer Network (other entities controlled by same officers):")
         for oname, entities in result["officer_network"].items():
             print(f"    {oname} also controls:")
             for e in entities[:5]:
