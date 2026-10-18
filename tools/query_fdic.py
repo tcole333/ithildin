@@ -20,18 +20,19 @@ import argparse
 import json
 import sqlite3
 import sys
-from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.runtime_db import MissingDatabaseError, connect_investigation_db, investigation_db_path
 except ImportError:
     from output_util import add_output_args, write_output
+    from runtime_db import MissingDatabaseError, connect_investigation_db, investigation_db_path
 
 BASE_URL = "https://api.fdic.gov/banks"
-DB_PATH = Path(__file__).parent.parent / "investigation.db"
+DB_PATH = investigation_db_path()
 
 HEADERS = {"Accept": "application/json"}
 
@@ -378,7 +379,7 @@ def cmd_ingest(args):
     address = record.get("ADDRESS", "")
     full_address = f"{address}, {city}, {state}".strip(", ")
 
-    db = sqlite3.connect(str(DB_PATH))
+    db = connect_investigation_db(DB_PATH, "rw")
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")
@@ -509,7 +510,11 @@ def main():
         "history": cmd_history,
         "ingest": cmd_ingest,
     }
-    handlers[args.command](args)
+    try:
+        handlers[args.command](args)
+    except MissingDatabaseError as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        raise SystemExit(2)
 
 
 if __name__ == "__main__":

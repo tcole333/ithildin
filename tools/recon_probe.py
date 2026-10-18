@@ -35,10 +35,10 @@ if env_path.exists():
 
 try:
     from tools.output_util import add_output_args, write_output
-    from tools.runtime_db import connect, registry_db_path
+    from tools.runtime_db import connect, connect_investigation_db, investigation_db_path, registry_db_path
 except ImportError:
     from output_util import add_output_args, write_output
-    from runtime_db import connect, registry_db_path
+    from runtime_db import connect, connect_investigation_db, investigation_db_path, registry_db_path
 
 TIMEOUT = 15  # seconds per probe
 MAX_WORKERS = 10
@@ -142,11 +142,11 @@ def probe_lobbying_lobbyist(target):
 
 
 def probe_fara(target):
-    db_path = PROJECT_ROOT / "investigation.db"
+    db_path = investigation_db_path()
     if not db_path.exists():
         return ("fara", 0, "no_db", "investigation.db missing")
     try:
-        db = sqlite3.connect(str(db_path), timeout=5)
+        db = connect_investigation_db(db_path, timeout=5)
         # Try FTS5 first, fall back to LIKE
         try:
             count = db.execute(

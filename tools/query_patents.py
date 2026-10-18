@@ -36,8 +36,10 @@ from urllib.error import HTTPError, URLError
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.runtime_db import connect_investigation_db, investigation_db_path
 except ImportError:
     from output_util import add_output_args, write_output
+    from runtime_db import connect_investigation_db, investigation_db_path
 
 # ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -46,7 +48,7 @@ ODP_BASE = "https://api.uspto.gov/api/v1"
 ODP_PATENT_APPS = f"{ODP_BASE}/patent/applications"
 
 DB_PATH = Path(__file__).parent.parent / "datasets" / "patents.db"
-INVESTIGATION_DB = Path(__file__).parent.parent / "investigation.db"
+INVESTIGATION_DB = investigation_db_path()
 
 USER_AGENT = "OSINT-Research osint-research@proton.me"
 CACHE_MAX_AGE_DAYS = 30
@@ -1357,7 +1359,7 @@ def cmd_enrich(args):
         print("ERROR: investigation.db not found", file=sys.stderr)
         sys.exit(1)
 
-    inv_db = sqlite3.connect(str(INVESTIGATION_DB))
+    inv_db = connect_investigation_db(INVESTIGATION_DB, "ro" if dry_run else "rw")
     inv_db.row_factory = sqlite3.Row
 
     entities = inv_db.execute(

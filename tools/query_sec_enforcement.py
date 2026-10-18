@@ -29,11 +29,27 @@ from pathlib import Path
 try:
     from tools.fts_query import literal_fts_query
     from tools.output_util import add_output_args, write_output
-    from tools.runtime_db import connect_registry_db, registry_db_path
+    from tools.runtime_db import (
+        INVESTIGATION_DB_ENV,
+        MissingDatabaseError,
+        connect_investigation_db,
+        connect_registry_db,
+        investigation_db_path,
+        registry_db_path,
+        require_database,
+    )
 except ImportError:
     from fts_query import literal_fts_query
     from output_util import add_output_args, write_output
-    from runtime_db import connect_registry_db, registry_db_path
+    from runtime_db import (
+        INVESTIGATION_DB_ENV,
+        MissingDatabaseError,
+        connect_investigation_db,
+        connect_registry_db,
+        investigation_db_path,
+        registry_db_path,
+        require_database,
+    )
 
 # ---------------------------------------------------------------------------
 # Database paths
@@ -41,7 +57,7 @@ except ImportError:
 
 PROJECT_ROOT = Path(__file__).parent.parent
 DB_PATH = PROJECT_ROOT / "datasets" / "sec_enforcement.db"
-INVESTIGATION_DB = PROJECT_ROOT / "investigation.db"
+INVESTIGATION_DB = investigation_db_path()
 REGISTRY_DB = registry_db_path()
 
 
@@ -801,34 +817,33 @@ def _gather_investigation_names():
     """Gather entity/person names from investigation.db and registry.db."""
     names = {}  # name -> (source, source_id)
 
-    # Investigation.db entities
-    if INVESTIGATION_DB.exists():
-        try:
-            inv_db = sqlite3.connect(str(INVESTIGATION_DB))
-            inv_db.row_factory = sqlite3.Row
+    # Investigation.db entities: the main input, so a missing file is an error
+    inv_db = connect_investigation_db(INVESTIGATION_DB)
+    try:
+        inv_db.row_factory = sqlite3.Row
 
-            for r in inv_db.execute("SELECT id, name FROM entities").fetchall():
-                if r["name"] and len(r["name"]) > 2:
-                    names[r["name"]] = ("investigation_entity", r["id"])
+        for r in inv_db.execute("SELECT id, name FROM entities").fetchall():
+            if r["name"] and len(r["name"]) > 2:
+                names[r["name"]] = ("investigation_entity", r["id"])
 
-            # Connections
-            for col in ["person_a", "person_b"]:
-                for r in inv_db.execute(
-                    f"SELECT DISTINCT {col} as name FROM connections WHERE {col} IS NOT NULL"
-                ).fetchall():
-                    if r["name"] and len(r["name"]) > 2 and r["name"] not in names:
-                        names[r["name"]] = ("investigation_connection", None)
-
-            # Entity roles
+        # Connections
+        for col in ["person_a", "person_b"]:
             for r in inv_db.execute(
-                "SELECT DISTINCT person_name as name FROM entity_roles WHERE person_name IS NOT NULL"
+                f"SELECT DISTINCT {col} as name FROM connections WHERE {col} IS NOT NULL"
             ).fetchall():
                 if r["name"] and len(r["name"]) > 2 and r["name"] not in names:
-                    names[r["name"]] = ("investigation_role", None)
+                    names[r["name"]] = ("investigation_connection", None)
 
-            inv_db.close()
-        except Exception as e:
-            print(f"  Warning: could not read investigation.db: {e}", file=sys.stderr)
+        # Entity roles
+        for r in inv_db.execute(
+            "SELECT DISTINCT person_name as name FROM entity_roles WHERE person_name IS NOT NULL"
+        ).fetchall():
+            if r["name"] and len(r["name"]) > 2 and r["name"] not in names:
+                names[r["name"]] = ("investigation_role", None)
+
+        inv_db.close()
+    except Exception as e:
+        print(f"  Warning: could not read investigation.db: {e}", file=sys.stderr)
 
     # Registry.db officers
     if not REGISTRY_DB.exists():
@@ -857,8 +872,7 @@ def _gather_investigation_names():
 
 def _create_enforcement_leads(matches):
     """Create investigation leads from enforcement cross-reference matches."""
-    if not INVESTIGATION_DB.exists():
-        return 0
+    require_database(INVESTIGATION_DB, env_var=INVESTIGATION_DB_ENV)
 
     try:
         from tools.lead_tracker import get_db as get_inv_db
@@ -991,10 +1005,14 @@ def main():
         "cross-ref": cmd_cross_ref,
     }
 
-    if args.command in commands:
-        commands[args.command](args)
-    else:
+    if args.command not in commands:
         parser.print_help()
+        return
+    try:
+        commands[args.command](args)
+    except MissingDatabaseError as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        raise SystemExit(2)
 
 
 if __name__ == "__main__":

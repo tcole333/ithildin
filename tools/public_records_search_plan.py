@@ -38,16 +38,18 @@ try:
         DEFAULT_DB_PATH as DEFAULT_CATALOG_DB,
         PublicRecordsCatalog,
     )
+    from tools.runtime_db import investigation_db_path
 except ImportError:
     from output_util import add_output_args
     from public_records_catalog import (
         DEFAULT_DB_PATH as DEFAULT_CATALOG_DB,
         PublicRecordsCatalog,
     )
+    from runtime_db import investigation_db_path
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_INVESTIGATION_DB = PROJECT_ROOT / "investigation.db"
+DEFAULT_INVESTIGATION_DB = investigation_db_path()
 DEFAULT_PROFILES_DIR = PROJECT_ROOT / "investigations"
 SCHEMA_VERSION = 1
 

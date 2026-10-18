@@ -15,14 +15,11 @@ Usage:
 import argparse
 import json
 import re
-import sqlite3
 import sys
-from collections import defaultdict
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent.parent
-DB_PATH = PROJECT_ROOT / "investigation.db"
 
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
@@ -135,10 +132,6 @@ def detect_relationship_conflicts(db, limit=50):
         LIMIT ?
     """, (limit * 2,)).fetchall()
 
-    # Only flag genuinely conflicting types
-    conflict_pairs = {
-        frozenset({"financial", "legal"}),  # could be adversarial
-    }
     # These are NOT conflicts — same people can have multiple relationship types
     compatible_types = {
         frozenset({"social", "employment"}),

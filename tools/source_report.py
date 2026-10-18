@@ -20,10 +20,10 @@ from pathlib import Path
 
 try:
     from tools.public_records_catalog import acquisition_result_status
-    from tools.runtime_db import connect, registry_db_path
+    from tools.runtime_db import connect, investigation_db_path, registry_db_path
 except ImportError:
     from public_records_catalog import acquisition_result_status
-    from runtime_db import connect, registry_db_path
+    from runtime_db import connect, investigation_db_path, registry_db_path
 
 PROJECT_ROOT = Path(__file__).parent.parent
 _DEFER_HEALTH_CHECKS = ContextVar("defer_source_health_checks", default=False)
@@ -486,7 +486,7 @@ def generate_report():
         "description": "Leads, findings, connections, search log, sessions",
         "query_tool": "tools/lead_tracker.py / tools/findings_tracker.py",
         **check_sqlite(
-            PROJECT_ROOT / "investigation.db",
+            investigation_db_path(),
             "SELECT COUNT(*) FROM leads"
         ),
     }
@@ -806,7 +806,7 @@ def generate_report():
 
     # FARA Foreign Agents
     fara_info = check_sqlite(
-        PROJECT_ROOT / "investigation.db",
+        investigation_db_path(),
         "SELECT COUNT(*) FROM fara_registrants"
     )
     if fara_info.get("status") == "error":

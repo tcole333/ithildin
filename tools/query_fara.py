@@ -44,8 +44,10 @@ from urllib.request import Request, urlopen
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.runtime_db import MissingDatabaseError, connect_investigation_db, investigation_db_path
 except ImportError:
     from output_util import add_output_args, write_output
+    from runtime_db import MissingDatabaseError, connect_investigation_db, investigation_db_path
 
 
 try:
@@ -57,7 +59,7 @@ except ImportError:
 
 PROJECT_ROOT = Path(__file__).parent.parent
 DATA_DIR = PROJECT_ROOT / "datasets" / "fara"
-DB_PATH = PROJECT_ROOT / "investigation.db"
+DB_PATH = investigation_db_path()
 
 BULK_BASE = "https://efile.fara.gov/bulk/zip"
 
@@ -182,11 +184,12 @@ def _download_file(url, dest_path, max_retries=6):
     return False
 
 
-def _get_db():
+def _get_db(mode="rw"):
     """Get connection to investigation.db."""
-    db = sqlite3.connect(str(DB_PATH))
+    db = connect_investigation_db(DB_PATH, mode)
     db.row_factory = sqlite3.Row
-    db.execute("PRAGMA journal_mode=WAL")
+    if mode != "ro":
+        db.execute("PRAGMA journal_mode=WAL")
     return db
 
 
@@ -474,7 +477,7 @@ def cmd_ingest(args):
 
 def cmd_search(args):
     """Search FARA registrants and foreign principals by name."""
-    db = _get_db()
+    db = _get_db("ro")
 
     # Check if tables exist
     tables = [r[0] for r in db.execute("SELECT name FROM sqlite_master WHERE type='table' AND name LIKE 'fara_%'").fetchall()]
@@ -587,7 +590,7 @@ def cmd_search(args):
 
 def cmd_country(args):
     """Search FARA foreign principals by country, optionally filtered by year."""
-    db = _get_db()
+    db = _get_db("ro")
 
     tables = [r[0] for r in db.execute("SELECT name FROM sqlite_master WHERE type='table' AND name LIKE 'fara_%'").fetchall()]
     if not tables:
@@ -629,7 +632,7 @@ def cmd_country(args):
 
 def cmd_detail(args):
     """Get all records for a specific FARA registration number."""
-    db = _get_db()
+    db = _get_db("ro")
 
     reg_num = args.registration_number
 
@@ -728,7 +731,7 @@ def cmd_detail(args):
 
 def cmd_stats(args):
     """Show FARA data statistics."""
-    db = _get_db()
+    db = _get_db("ro")
 
     tables = {
         "fara_registrants": "Registrants",
@@ -807,7 +810,11 @@ def main():
         "detail": cmd_detail,
         "stats": cmd_stats,
     }
-    handlers[args.command](args)
+    try:
+        handlers[args.command](args)
+    except MissingDatabaseError as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        raise SystemExit(2)
 
 
 if __name__ == "__main__":

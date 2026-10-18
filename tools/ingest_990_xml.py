@@ -41,15 +41,17 @@ from xml.etree import ElementTree as ET
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.runtime_db import MissingDatabaseError, connect_investigation_db, investigation_db_path
 except ImportError:
     from output_util import add_output_args, write_output
+    from runtime_db import MissingDatabaseError, connect_investigation_db, investigation_db_path
 
 try:
     from tools.parse_990_xml import parse_filing
 except ImportError:
     from parse_990_xml import parse_filing
 
-DB_PATH = Path(__file__).parent.parent / "investigation.db"
+DB_PATH = investigation_db_path()
 CACHE_DIR = Path(__file__).parent.parent / "datasets" / "irs_990_xml"
 XML_CACHE = CACHE_DIR / "xml"
 BATCH_CACHE = CACHE_DIR / "batches"
@@ -76,7 +78,7 @@ USER_AGENT = "OSINT-Research/1.0 (academic research)"
 
 def get_db():
     """Get investigation.db connection (schema managed by lead_tracker)."""
-    db = sqlite3.connect(str(DB_PATH))
+    db = connect_investigation_db(DB_PATH, "rw")
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA foreign_keys=ON")
@@ -742,22 +744,26 @@ def main():
 
     args = parser.parse_args()
 
-    if args.command == "download-index":
-        download_indexes()
-    elif args.command == "lookup":
-        cmd_lookup(args)
-    elif args.command == "ingest":
-        cmd_ingest(args)
-    elif args.command == "grants":
-        cmd_grants(args)
-    elif args.command == "related":
-        cmd_related(args)
-    elif args.command == "search":
-        cmd_search(args)
-    elif args.command == "stats":
-        cmd_stats(args)
-    else:
-        parser.print_help()
+    try:
+        if args.command == "download-index":
+            download_indexes()
+        elif args.command == "lookup":
+            cmd_lookup(args)
+        elif args.command == "ingest":
+            cmd_ingest(args)
+        elif args.command == "grants":
+            cmd_grants(args)
+        elif args.command == "related":
+            cmd_related(args)
+        elif args.command == "search":
+            cmd_search(args)
+        elif args.command == "stats":
+            cmd_stats(args)
+        else:
+            parser.print_help()
+    except MissingDatabaseError as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        raise SystemExit(2)
 
 
 if __name__ == "__main__":

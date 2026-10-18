@@ -24,7 +24,6 @@ Usage:
 
 import argparse
 import json
-import os
 import sqlite3
 import sys
 import time
@@ -34,13 +33,15 @@ from urllib.error import HTTPError, URLError
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.runtime_db import connect_investigation_db, investigation_db_path
 except ImportError:
     from output_util import add_output_args, write_output
+    from runtime_db import connect_investigation_db, investigation_db_path
 
 PROJECT_ROOT = Path(__file__).parent.parent
 DB_PATH = PROJECT_ROOT / "datasets" / "opensanctions.db"
 DOWNLOAD_DIR = PROJECT_ROOT / "datasets" / "opensanctions"
-INVESTIGATION_DB = PROJECT_ROOT / "investigation.db"
+INVESTIGATION_DB = investigation_db_path()
 
 DATASET_URLS = {
     "default": "https://data.opensanctions.org/datasets/latest/default/entities.ftm.json",
@@ -357,7 +358,6 @@ def cmd_ingest(args):
         print("  Cleared existing data (use --append to add incrementally)")
 
     inserted = 0
-    skipped = 0
     errors = 0
     schema_counts = {}
     topic_counts = {}
@@ -562,7 +562,7 @@ def cmd_match_entities(args):
         print(f"ERROR: investigation.db not found at {INVESTIGATION_DB}", file=sys.stderr)
         sys.exit(1)
 
-    inv_db = sqlite3.connect(str(INVESTIGATION_DB))
+    inv_db = connect_investigation_db(INVESTIGATION_DB)
     inv_db.row_factory = sqlite3.Row
 
     # Gather names to check from investigation.db
@@ -735,7 +735,6 @@ def cmd_match_entities(args):
 
     # Summary
     total_checked = len(names_to_check)
-    total_hits = len(sanctioned) + len(peps) + len(crime) + len(other_matches)
     print("=" * 80)
     print(f"SUMMARY: {total_checked} names checked")
     print(f"  Sanctioned:   {len(sanctioned)}")
@@ -955,7 +954,7 @@ def cmd_reconcile_ftm(args):
         print(f"ERROR: investigation.db not found at {INVESTIGATION_DB}", file=sys.stderr)
         sys.exit(1)
 
-    inv_db = sqlite3.connect(str(INVESTIGATION_DB))
+    inv_db = connect_investigation_db(INVESTIGATION_DB)
     inv_db.row_factory = sqlite3.Row
 
     # Gather all entities + connection persons from investigation.db
@@ -992,7 +991,6 @@ def cmd_reconcile_ftm(args):
         name_normalized = normalize_entity_name(name)
 
         # Use FTS for candidate retrieval (fast)
-        query_escaped = name.replace('"', '""')
         # Use individual words for broader FTS coverage
         words = [w for w in name.split() if len(w) >= 3]
         if not words:

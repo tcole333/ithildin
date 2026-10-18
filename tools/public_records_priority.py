@@ -43,6 +43,7 @@ try:
         normalize_timestamp,
         utc_now,
     )
+    from tools.runtime_db import connect_investigation_db, investigation_db_path
 except ImportError:
     from output_util import add_output_args, write_output
     from public_records_catalog import (
@@ -51,10 +52,11 @@ except ImportError:
         normalize_timestamp,
         utc_now,
     )
+    from runtime_db import connect_investigation_db, investigation_db_path
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_INVESTIGATION_DB = PROJECT_ROOT / "investigation.db"
+DEFAULT_INVESTIGATION_DB = investigation_db_path()
 DEFAULT_INVESTIGATIONS_DIR = PROJECT_ROOT / "investigations"
 
 ACTIVE_INFRA_STATUSES = frozenset({"open", "evaluating", "in_progress", "blocked"})
@@ -544,7 +546,7 @@ class PublicRecordsPriority:
             raise PriorityError(
                 f"investigation database not found: {self.investigation_db}"
             )
-        db = sqlite3.connect(str(self.investigation_db), timeout=30)
+        db = connect_investigation_db(self.investigation_db, timeout=30)
         db.row_factory = sqlite3.Row
         return db
 

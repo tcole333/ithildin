@@ -14,9 +14,13 @@ import argparse
 import re
 import sqlite3
 import sys
-from pathlib import Path
 
-DB_PATH = Path(__file__).parent.parent / "investigation.db"
+try:
+    from tools.runtime_db import MissingDatabaseError, connect_investigation_db, investigation_db_path
+except ImportError:
+    from runtime_db import MissingDatabaseError, connect_investigation_db, investigation_db_path
+
+DB_PATH = investigation_db_path()
 
 _GENERIC_STOP_WORDS = {"the", "a", "an", "and", "or", "but", "in", "on", "at", "to",
               "for", "of", "with", "by", "from", "is", "was", "were", "are",
@@ -39,10 +43,11 @@ def _build_stop_words():
 STOP_WORDS = _build_stop_words()
 
 
-def get_db():
-    db = sqlite3.connect(str(DB_PATH))
+def get_db(mode="rw"):
+    db = connect_investigation_db(DB_PATH, mode)
     db.row_factory = sqlite3.Row
-    db.execute("PRAGMA journal_mode=WAL")
+    if mode != "ro":
+        db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")
     db.execute("PRAGMA foreign_keys=ON")
     return db
@@ -62,7 +67,7 @@ def jaccard(set_a, set_b):
 
 def cmd_scan(args):
     """Detect duplicate findings."""
-    db = get_db()
+    db = get_db("ro")
     threshold = args.threshold
 
     # Strategy 1: Same EFTA cluster with high summary overlap
@@ -110,7 +115,7 @@ def cmd_scan(args):
               f"[{d['efta']}] sim={d['similarity']:.1%}")
 
     # Strategy 2: Same target + similar summary (no shared EFTA required)
-    print(f"\n=== Strategy 2: Same target + summary overlap ===")
+    print("\n=== Strategy 2: Same target + summary overlap ===")
     targets = db.execute("""
         SELECT target_name, COUNT(*) as cnt FROM findings
         WHERE verification_status != 'retracted'
@@ -144,7 +149,7 @@ def cmd_scan(args):
         print(f"  #{d['id_a']} <-> #{d['id_b']} ({d['target']}) sim={d['similarity']:.1%}")
 
     # Strategy 3: Substring findings (shorter summary is substring of longer)
-    print(f"\n=== Strategy 3: Subset findings ===")
+    print("\n=== Strategy 3: Subset findings ===")
     all_findings = db.execute("""
         SELECT id, target_name, summary FROM findings
         WHERE verification_status != 'retracted'
@@ -196,7 +201,7 @@ def cmd_scan(args):
 
 def cmd_show_cluster(args):
     """Show all findings citing a specific EFTA ID."""
-    db = get_db()
+    db = get_db("ro")
     efta = args.efta_id
 
     findings = db.execute("""
@@ -219,7 +224,7 @@ def cmd_show_cluster(args):
 
     # Pairwise similarity
     if len(findings) >= 2:
-        print(f"\nPairwise similarity:")
+        print("\nPairwise similarity:")
         for i, f1 in enumerate(findings):
             t1 = _tokens(f1["summary"])
             for f2 in findings[i + 1:]:
@@ -313,9 +318,9 @@ def cmd_merge(args):
 
     if not args.dry_run:
         db.commit()
-        print(f"\nMerge complete. All changes committed.")
+        print("\nMerge complete. All changes committed.")
     else:
-        print(f"\n[DRY RUN] No changes applied.")
+        print("\n[DRY RUN] No changes applied.")
 
     db.close()
 
@@ -344,10 +349,14 @@ def main():
         "merge": cmd_merge,
     }
 
-    if args.command in commands:
-        commands[args.command](args)
-    else:
+    if args.command not in commands:
         parser.print_help()
+        return
+    try:
+        commands[args.command](args)
+    except MissingDatabaseError as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        raise SystemExit(2)
 
 
 if __name__ == "__main__":

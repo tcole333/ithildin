@@ -8,12 +8,14 @@ from datetime import datetime, timedelta, timezone
 from types import SimpleNamespace
 
 from tools import query_fara
+from tools.runtime_db import connect
 
 
 def _seed_registrant(db_path, *, status="Active"):
     original_db_path = query_fara.DB_PATH
     query_fara.DB_PATH = db_path
     try:
+        connect(db_path, "rwc").close()
         db = query_fara._get_db()
         query_fara._create_tables(db)
         db.execute(

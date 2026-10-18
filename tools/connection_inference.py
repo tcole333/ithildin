@@ -16,15 +16,12 @@ Usage:
 """
 
 import argparse
-import json
-import sqlite3
 import sys
 from collections import defaultdict
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent.parent
-DB_PATH = PROJECT_ROOT / "investigation.db"
 
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
@@ -145,8 +142,6 @@ def rule_shared_address(db, dry_run=False, limit=50):
 
 def rule_shared_officer(db, dry_run=False, limit=50):
     """Find entities that share an officer."""
-    from rapidfuzz import fuzz
-
     rows = db.execute("""
         SELECT er.entity_id, er.person_name, e.name as entity_name
         FROM entity_roles er
@@ -399,7 +394,7 @@ def main():
     p_scan.add_argument("--limit", type=int, default=50)
     add_output_args(p_scan)
 
-    p_rules = sub.add_parser("rules", help="List available inference rules")
+    sub.add_parser("rules", help="List available inference rules")
 
     p_apply = sub.add_parser("apply", help="Apply a specific rule")
     p_apply.add_argument("--rule", required=True, choices=list(RULES.keys()))

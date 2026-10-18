@@ -26,19 +26,19 @@ import re
 import sqlite3
 import sys
 import time
-from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 try:
     from tools.output_util import add_output_args, write_output
     from tools.lead_tracker import log_search
+    from tools.runtime_db import connect_investigation_db, investigation_db_path
 except ImportError:
     from output_util import add_output_args, write_output
     from lead_tracker import log_search
+    from runtime_db import connect_investigation_db, investigation_db_path
 
-PROJECT_ROOT = Path(__file__).parent.parent
-INVESTIGATION_DB = PROJECT_ROOT / "investigation.db"
+INVESTIGATION_DB = investigation_db_path()
 RECONCILE_URL = "https://offshoreleaks.icij.org/api/v1/reconcile"
 NODE_URL = "https://offshoreleaks.icij.org/nodes/{node_id}?embed=1"
 MAX_NODE_PAGE_BYTES = 5_000_000
@@ -650,7 +650,7 @@ def main():
             print(f"ERROR: investigation.db not found at {INVESTIGATION_DB}", file=sys.stderr)
             sys.exit(1)
 
-        inv_db = sqlite3.connect(str(INVESTIGATION_DB))
+        inv_db = connect_investigation_db(INVESTIGATION_DB)
         inv_db.row_factory = sqlite3.Row
 
         # Gather entity names + connection person names

@@ -40,17 +40,19 @@ import sqlite3
 import sys
 import time
 from pathlib import Path
-from urllib.parse import quote, urlencode
+from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.runtime_db import connect_investigation_db, investigation_db_path
 except ImportError:
     from output_util import add_output_args, write_output
+    from runtime_db import connect_investigation_db, investigation_db_path
 
 BASE_URL = "https://api.gleif.org/api/v1"
-INVESTIGATION_DB = Path(__file__).parent.parent / "investigation.db"
+INVESTIGATION_DB = investigation_db_path()
 
 # Load .env
 env_path = Path(__file__).parent.parent / ".env"
@@ -389,7 +391,7 @@ def cmd_parents(args):
         parent_name = parent_entity.get("legalName", {}).get("name", "?")
         parent_jurisdiction = parent_entity.get("jurisdiction", "?")
         parent_status = parent_entity.get("status", "?")
-        print(f"  Direct Parent:")
+        print("  Direct Parent:")
         print(f"    LEI: {parent_lei}")
         print(f"    Name: {parent_name}")
         print(f"    Jurisdiction: {parent_jurisdiction}")
@@ -410,7 +412,7 @@ def cmd_parents(args):
         parent_name = parent_entity.get("legalName", {}).get("name", "?")
         parent_jurisdiction = parent_entity.get("jurisdiction", "?")
         parent_status = parent_entity.get("status", "?")
-        print(f"  Ultimate Parent:")
+        print("  Ultimate Parent:")
         print(f"    LEI: {parent_lei}")
         print(f"    Name: {parent_name}")
         print(f"    Jurisdiction: {parent_jurisdiction}")
@@ -607,7 +609,7 @@ def cmd_cross_ref(args):
         print(f"ERROR: investigation.db not found at {INVESTIGATION_DB}", file=sys.stderr)
         sys.exit(1)
 
-    conn = sqlite3.connect(str(INVESTIGATION_DB))
+    conn = connect_investigation_db(INVESTIGATION_DB)
     conn.row_factory = sqlite3.Row
 
     # Get entities from investigation.db
@@ -639,7 +641,6 @@ def cmd_cross_ref(args):
         name = row["name"]
         entity_id = row["id"]
         entity_type = row["entity_type"] or "?"
-        jurisdiction = row["jurisdiction"] or "?"
 
         # Skip person entities — GLEIF only has legal entities
         if entity_type and entity_type.lower() in ("person", "individual"):
@@ -721,7 +722,7 @@ def cmd_cross_ref(args):
     # Summary
     print()
     print("=" * 70)
-    print(f"GLEIF Cross-Reference Summary")
+    print("GLEIF Cross-Reference Summary")
     print(f"  Entities searched: {len(rows)}")
     print(f"  Matches found: {len(matches)}")
     print(f"  No results: {len(no_match)}")

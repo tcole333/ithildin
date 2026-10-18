@@ -17,10 +17,15 @@ from datetime import date, datetime
 from pathlib import Path
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
+try:
+    from tools.runtime_db import investigation_db_path
+except ImportError:
+    from runtime_db import investigation_db_path
+
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_DB_PATH = PROJECT_ROOT / "datasets" / "epstein_reporting.db"
-CORE_DB_PATH = PROJECT_ROOT / "investigation.db"
+CORE_DB_PATH = investigation_db_path()
 SCHEMA_VERSION = 10
 
 TRACKING_PARAMS = {

@@ -43,6 +43,7 @@ try:
         LOCAL_COURT_SOURCE_ID,
         execute as execute_directory,
     )
+    from tools.runtime_db import connect_investigation_db, investigation_db_path
 except ImportError:
     from output_util import add_output_args, write_output
     from public_records_catalog import (
@@ -59,10 +60,10 @@ except ImportError:
         LOCAL_COURT_SOURCE_ID,
         execute as execute_directory,
     )
+    from runtime_db import connect_investigation_db, investigation_db_path
 
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_INVESTIGATION_DB = PROJECT_ROOT / "investigation.db"
+DEFAULT_INVESTIGATION_DB = investigation_db_path()
 DISCOVERY_SCHEMA_VERSION = 1
 QUEUE_STATES = ("active", "stale")
 ASSESSMENT_FIELDS = (
@@ -1284,7 +1285,7 @@ class OregonCourtDiscoveryQueue:
             raise OregonCourtDiscoveryQueueError(
                 f"investigation database not found: {db_path}"
             )
-        db = sqlite3.connect(str(db_path))
+        db = connect_investigation_db(db_path)
         db.row_factory = sqlite3.Row
         try:
             try:
