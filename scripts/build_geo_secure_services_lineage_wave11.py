@@ -9,14 +9,20 @@ import hashlib
 import json
 import shutil
 import sqlite3
+import sys
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from tools.runtime_db import connect_investigation_db, investigation_db_path  # noqa: E402
+
 PREFIX = "2026-07-14-lead-57847-geo-secure-services-lineage-wave11"
 SOURCE_DIR = ROOT / "investigations" / "geo-group" / "sources" / PREFIX
 REPORT_DIR = ROOT / "investigations" / "geo-group" / "reports"
-DB_PATH = ROOT / "investigation.db"
+DB_PATH = investigation_db_path()
 
 GSS_URL = (
     "https://search.sunbiz.org/Inquiry/CorporationSearch/"
@@ -488,7 +494,7 @@ def build_matrices(db: sqlite3.Connection) -> None:
 
 
 def build_narratives() -> None:
-    report = f"""# GEO Secure Services legal-identity and lineage trace
+    report = """# GEO Secure Services legal-identity and lineage trace
 
 Lead: #57847  
 Profile: `geo-group`  
@@ -678,7 +684,7 @@ def main() -> None:
 
     SOURCE_DIR.mkdir(parents=True, exist_ok=True)
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
-    db = sqlite3.connect(DB_PATH)
+    db = connect_investigation_db(DB_PATH)
     db.row_factory = sqlite3.Row
     try:
         build_source_archive(workdir, db)

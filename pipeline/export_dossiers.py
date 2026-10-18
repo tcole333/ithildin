@@ -29,6 +29,8 @@ OUTPUT_DIR = CONTENT_DIR / "dossiers"
 CITED_FINDING_RE = re.compile(r"Finding\s*#?\s*(\d+)", re.IGNORECASE)
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
+from tools.runtime_db import connect_investigation_db  # noqa: E402 - CLI repository path bootstrap
+
 try:
     from tools.investigation_context import get_active_profile_id
 except ImportError:
@@ -89,7 +91,7 @@ def _max_datetime(left: datetime | None, right: datetime | None) -> datetime | N
 
 
 def get_connection(db_path: str | Path = DB_PATH) -> sqlite3.Connection:
-    conn = sqlite3.connect(str(db_path))
+    conn = connect_investigation_db(db_path)
     conn.row_factory = sqlite3.Row
     return conn
 

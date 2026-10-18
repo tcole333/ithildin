@@ -33,8 +33,9 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from tools.findings_tracker import update_finding  # noqa: E402
+from tools.runtime_db import connect_investigation_db, investigation_db_path  # noqa: E402
 
-INVESTIGATION_DB = PROJECT_ROOT / "investigation.db"
+INVESTIGATION_DB = investigation_db_path()
 KABASS_DB = PROJECT_ROOT / "datasets" / "kabasshouse_epstein.db"
 
 # Findings citing these keys are candidates for kabass co-citation.
@@ -71,7 +72,7 @@ def main():
     mode.add_argument("--apply", action="store_true", help="write corrections")
     args = ap.parse_args()
 
-    inv = sqlite3.connect(f"file:{INVESTIGATION_DB}?mode=ro", uri=True)
+    inv = connect_investigation_db(INVESTIGATION_DB)
     inv.row_factory = sqlite3.Row
     kab = sqlite3.connect(f"file:{KABASS_DB}?mode=ro", uri=True)
 

@@ -15,8 +15,11 @@ from typing import Iterable
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
+
+from tools.runtime_db import connect_investigation_db, investigation_db_path  # noqa: E402
+
 DS10_DB_PATH = PROJECT_ROOT / "datasets" / "lmsband_epstein_files.db"
-INV_DB_PATH = PROJECT_ROOT / "investigation.db"
+INV_DB_PATH = investigation_db_path()
 EXPORT_JSON_PATH = PROJECT_ROOT / "content" / "financials" / "ds10-flows.json"
 DOCS_DB_PATH = Path("/Users/travcole/projects/epstein-docs/output/documents.db")
 
@@ -35,13 +38,21 @@ def _utcnow() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def connect_db(path: Path) -> sqlite3.Connection:
-    db = sqlite3.connect(str(path))
+def _configure_db(db: sqlite3.Connection) -> sqlite3.Connection:
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA foreign_keys=ON")
     db.execute("PRAGMA busy_timeout=5000")
     return db
+
+
+def connect_db(path: Path) -> sqlite3.Connection:
+    return _configure_db(sqlite3.connect(str(path)))
+
+
+def connect_inv_db(path: Path) -> sqlite3.Connection:
+    """Open investigation.db read-write; a missing file raises instead of being created."""
+    return _configure_db(connect_investigation_db(path, "rw"))
 
 
 def _path_from_args(args, attr: str, default: Path) -> Path:
@@ -1104,7 +1115,7 @@ def _critical_publish_issues(inv_db: sqlite3.Connection, ds10_db: sqlite3.Connec
 
 
 def cmd_qa_ds10(args) -> int:
-    inv_db = connect_db(_path_from_args(args, "inv_db", INV_DB_PATH))
+    inv_db = connect_inv_db(_path_from_args(args, "inv_db", INV_DB_PATH))
     ds10_db = connect_db(_path_from_args(args, "ds10_db", DS10_DB_PATH))
     ensure_quality_schema(inv_db)
     _ensure_ds10_quality_schema(ds10_db)
@@ -1170,7 +1181,7 @@ def cmd_recon_report(args) -> int:
 
 
 def cmd_gate(args) -> int:
-    inv_db = connect_db(_path_from_args(args, "inv_db", INV_DB_PATH))
+    inv_db = connect_inv_db(_path_from_args(args, "inv_db", INV_DB_PATH))
     ds10_db = connect_db(_path_from_args(args, "ds10_db", DS10_DB_PATH))
     ensure_quality_schema(inv_db)
     _ensure_ds10_quality_schema(ds10_db)
@@ -1218,7 +1229,7 @@ def cmd_gate(args) -> int:
 
 
 def cmd_create_review_tasks(args) -> int:
-    inv_db = connect_db(_path_from_args(args, "inv_db", INV_DB_PATH))
+    inv_db = connect_inv_db(_path_from_args(args, "inv_db", INV_DB_PATH))
     ds10_db = connect_db(_path_from_args(args, "ds10_db", DS10_DB_PATH))
     ensure_quality_schema(inv_db)
     _ensure_ds10_quality_schema(ds10_db)
@@ -1230,7 +1241,7 @@ def cmd_create_review_tasks(args) -> int:
 
 
 def cmd_review(args) -> int:
-    inv_db = connect_db(_path_from_args(args, "inv_db", INV_DB_PATH))
+    inv_db = connect_inv_db(_path_from_args(args, "inv_db", INV_DB_PATH))
     ds10_db = connect_db(_path_from_args(args, "ds10_db", DS10_DB_PATH))
     ensure_quality_schema(inv_db)
     _ensure_ds10_quality_schema(ds10_db)
@@ -1249,7 +1260,7 @@ def cmd_review(args) -> int:
 
 
 def cmd_promote_ds10(args) -> int:
-    inv_db = connect_db(_path_from_args(args, "inv_db", INV_DB_PATH))
+    inv_db = connect_inv_db(_path_from_args(args, "inv_db", INV_DB_PATH))
     ds10_db = connect_db(_path_from_args(args, "ds10_db", DS10_DB_PATH))
     ensure_quality_schema(inv_db)
     _ensure_ds10_quality_schema(ds10_db)
@@ -1261,7 +1272,7 @@ def cmd_promote_ds10(args) -> int:
 
 
 def cmd_evaluate_findings(args) -> int:
-    inv_db = connect_db(_path_from_args(args, "inv_db", INV_DB_PATH))
+    inv_db = connect_inv_db(_path_from_args(args, "inv_db", INV_DB_PATH))
     ensure_quality_schema(inv_db)
     run_id = args.run_id or _utcnow().replace(":", "").replace("-", "")
     run_db_id = start_quality_run(inv_db, dataset="findings", run_type="gate", run_id=run_id)
@@ -1303,7 +1314,7 @@ def _ensure_review_task(inv_db: sqlite3.Connection, dataset: str, record_ref: st
 
 def cmd_backfill_financial(args) -> int:
     apply_changes = bool(args.apply)
-    inv_db = connect_db(_path_from_args(args, "inv_db", INV_DB_PATH))
+    inv_db = connect_inv_db(_path_from_args(args, "inv_db", INV_DB_PATH))
     ds10_db = connect_db(_path_from_args(args, "ds10_db", DS10_DB_PATH))
     ensure_quality_schema(inv_db)
     _ensure_ds10_quality_schema(ds10_db)

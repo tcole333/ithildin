@@ -9,6 +9,11 @@ import shutil
 import subprocess
 from pathlib import Path
 
+try:
+    from .paths import DB_PATH
+except ImportError:  # Direct CLI execution
+    from paths import DB_PATH
+
 ROOT = Path(__file__).resolve().parents[1]
 PIPELINE_DIR = ROOT / "pipeline"
 
@@ -39,7 +44,7 @@ def export_steps(stage: Path, db_path: Path) -> list[tuple[list[str], str]]:
 
 def build_candidate(output_dir: Path, *, source_content: Path = ROOT / "content",
                     source_public: Path = ROOT / "web/public/content",
-                    db_path: Path = ROOT / "investigation.db") -> Path:
+                    db_path: Path = DB_PATH) -> Path:
     """Fail on the first failed prerequisite; keep failed staging available for review."""
     stage = output_dir.resolve()
     for label, source in (("content", source_content), ("public content", source_public)):
@@ -98,7 +103,7 @@ def main() -> int:
     parser.add_argument("--output-dir", type=Path, required=True, help="Fresh candidate directory; never the authored content tree")
     parser.add_argument("--content-dir", type=Path, default=ROOT / "content")
     parser.add_argument("--public-content-dir", type=Path, default=ROOT / "web/public/content")
-    parser.add_argument("--db", type=Path, default=ROOT / "investigation.db")
+    parser.add_argument("--db", type=Path, default=DB_PATH)
     args = parser.parse_args()
     try:
         stage = build_candidate(args.output_dir, source_content=args.content_dir,

@@ -9,12 +9,18 @@ import argparse
 import json
 import re
 import sqlite3
+import sys
 from pathlib import Path
 
 try:
     from .paths import CONTENT_DIR, DB_PATH
 except ImportError:  # Direct CLI execution
     from paths import CONTENT_DIR, DB_PATH
+
+# Add the repository root for the shared runtime database helpers
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from tools.runtime_db import connect_investigation_db  # noqa: E402 - CLI repository path bootstrap
 
 
 OUTPUT_DIR = CONTENT_DIR
@@ -434,7 +440,7 @@ def main():
         print(err)
         return
 
-    conn = sqlite3.connect(str(DB_PATH))
+    conn = connect_investigation_db(DB_PATH)
     conn.row_factory = sqlite3.Row
 
     clusters_to_export = CLUSTERS

@@ -17,26 +17,29 @@ Usage:
 import argparse
 import sqlite3
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent.parent
-DB_PATH = PROJECT_ROOT / "investigation.db"
 INVESTIGATIONS_DIR = PROJECT_ROOT / "investigations"
 
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from datetime import datetime, timezone
+from tools.runtime_db import connect_investigation_db, investigation_db_path  # noqa: E402
+
+DB_PATH = investigation_db_path()
 
 
 def _utcnow():
     return datetime.now(timezone.utc).replace(tzinfo=None)
 
 
-def get_db():
-    db = sqlite3.connect(str(DB_PATH))
+def get_db(mode="rw"):
+    db = connect_investigation_db(DB_PATH, mode)
     db.row_factory = sqlite3.Row
-    db.execute("PRAGMA journal_mode=WAL")
+    if mode != "ro":
+        db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")
     return db
 
@@ -163,7 +166,7 @@ def _infer_category(gaps):
 
 def run_scan():
     """Scan completed leads and produce ranked reprocessing report."""
-    db = get_db()
+    db = get_db("ro")
     key_persons = _load_key_persons()
 
     # Get all completed leads with distinct target_names

@@ -10,11 +10,16 @@ Usage:
     python scripts/split_packed_evidence.py --apply
 """
 import argparse
-import sqlite3
 import sys
 from pathlib import Path
 
-DB_PATH = Path(__file__).parent.parent / "investigation.db"
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from tools.runtime_db import connect_investigation_db, investigation_db_path  # noqa: E402
+
+DB_PATH = investigation_db_path()
 
 
 def main():
@@ -27,7 +32,7 @@ def main():
         parser.print_help()
         return
 
-    db = sqlite3.connect(str(DB_PATH))
+    db = connect_investigation_db(DB_PATH, "rw")
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")
 

@@ -52,10 +52,13 @@ import sys
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DB_PATH = PROJECT_ROOT / "investigation.db"
 INVESTIGATIONS_DIR = PROJECT_ROOT / "investigations"
 
 sys.path.insert(0, str(PROJECT_ROOT))
+
+from tools.runtime_db import connect_investigation_db, investigation_db_path  # noqa: E402
+
+DB_PATH = investigation_db_path()
 
 # Reuse the canonical config loader so we read thread declarations exactly the
 # way the rest of the platform does (investigation_context.load_profile).
@@ -85,10 +88,9 @@ def _skey(v):
 
 
 def get_db() -> sqlite3.Connection:
-    db = sqlite3.connect(str(DB_PATH))
+    db = connect_investigation_db(DB_PATH)
     db.row_factory = sqlite3.Row
-    # Read-only usage; WAL + busy_timeout keeps us safe alongside live writers.
-    db.execute("PRAGMA journal_mode=WAL")
+    # Read-only connection; busy_timeout keeps us safe alongside live writers.
     db.execute("PRAGMA busy_timeout=5000")
     return db
 

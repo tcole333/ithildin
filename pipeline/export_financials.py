@@ -20,6 +20,7 @@ OUTPUT_DIR = CONTENT_DIR / "financials"
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from tools.financial_flows import promoted_flows  # noqa: E402 - CLI repository path bootstrap
+from tools.runtime_db import connect_investigation_db  # noqa: E402 - CLI repository path bootstrap
 
 
 def _table_exists(conn: sqlite3.Connection, name: str) -> bool:
@@ -39,7 +40,7 @@ def _fetch_quality_metadata(inv_db_path: Path = INVESTIGATION_DB) -> dict:
     if not inv_db_path.exists():
         return {"quality_run_id": None, "math_checks_passed": False}
 
-    conn = sqlite3.connect(str(inv_db_path))
+    conn = connect_investigation_db(inv_db_path)
     conn.row_factory = sqlite3.Row
     quality_run_id = None
     math_checks_passed = False
@@ -94,7 +95,7 @@ def export_ds10_flows(
     alias_db = None
     try:
         if inv_db_path.exists():
-            alias_db = sqlite3.connect(f"{inv_db_path.resolve().as_uri()}?mode=ro", uri=True)
+            alias_db = connect_investigation_db(inv_db_path)
         links = promoted_flows(conn, inv_db=alias_db, min_amount=min_amount)
     finally:
         if alias_db is not None:
@@ -151,7 +152,7 @@ def export_ds10_flows(
 
 def export_apollo_pipeline(inv_db_path: Path = INVESTIGATION_DB) -> dict:
     """Export Apollo → Epstein money flows from findings."""
-    conn = sqlite3.connect(str(inv_db_path))
+    conn = connect_investigation_db(inv_db_path)
     conn.row_factory = sqlite3.Row
 
     # Get financial findings related to Apollo/Black/Rowan/Harris

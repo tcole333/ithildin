@@ -17,7 +17,13 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-DB_PATH = Path(__file__).parent.parent / "investigation.db"
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from tools.runtime_db import connect_investigation_db, investigation_db_path  # noqa: E402
+
+DB_PATH = investigation_db_path()
 CLUSTERS_PATH = Path(__file__).parent.parent / "content" / "clusters.json"
 
 # Citation token patterns matching citations.ts
@@ -143,10 +149,16 @@ def main():
     cluster = find_cluster_for_article(args.article)
     available = Counter()
     if cluster and DB_PATH.exists():
-        conn = sqlite3.connect(str(DB_PATH))
+        conn = connect_investigation_db(DB_PATH)
         conn.row_factory = sqlite3.Row
         available = find_available_evidence(conn, cluster.get("targets", []))
         conn.close()
+    elif cluster:
+        print(
+            f"WARNING: investigation database not found at {DB_PATH}; "
+            "available-evidence counts are omitted, not zero.",
+            file=sys.stderr,
+        )
 
     # Compute metrics
     dominant_pct = 0.0
@@ -187,7 +199,7 @@ def main():
     print(f"  Source types cited: {result['source_types_cited']}")
     print(f"  Dominant source: {dominant_type} ({dominant_pct}%)")
     if result["single_source_warning"]:
-        print(f"  WARNING: >80% from single source type")
+        print("  WARNING: >80% from single source type")
 
     print(f"\n  {'Source Type':<20} {'Cited':<8} {'Available':<10} {'Gap'}")
     print(f"  {'-' * 50}")
@@ -201,7 +213,7 @@ def main():
         print(f"  {stype:<20} {cited:<8} {avail:<10} {gap}{marker}")
 
     if uncited:
-        print(f"\n  Available but uncited sources:")
+        print("\n  Available but uncited sources:")
         for stype, count in sorted(uncited.items(), key=lambda x: -x[1]):
             print(f"    {stype}: {count} evidence items")
 

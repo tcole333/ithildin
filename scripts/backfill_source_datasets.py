@@ -35,9 +35,16 @@ import argparse
 import json
 import re
 import sqlite3
+import sys
 from pathlib import Path
 
-DB_PATH = Path(__file__).parent.parent / "investigation.db"
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from tools.runtime_db import connect_investigation_db, investigation_db_path  # noqa: E402
+
+DB_PATH = investigation_db_path()
 
 # Map evidence_ref patterns to source_datasets values
 EVIDENCE_PATTERNS = [
@@ -91,7 +98,7 @@ def main():
     parser.add_argument("--limit", type=int, default=0, help="Limit number of findings to process (0=all)")
     args = parser.parse_args()
 
-    db = sqlite3.connect(str(DB_PATH))
+    db = connect_investigation_db(DB_PATH, "rw")
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")
@@ -142,7 +149,7 @@ def main():
 
     print(f"\n{'Would update' if args.dry_run else 'Updated'}: {updated} findings")
     print(f"Skipped (no inference possible): {skipped}")
-    print(f"\nSource distribution:")
+    print("\nSource distribution:")
     for src, count in sorted(by_source.items(), key=lambda x: -x[1]):
         print(f"  {src}: {count}")
 

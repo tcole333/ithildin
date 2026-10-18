@@ -16,10 +16,16 @@ import argparse
 import re
 import sqlite3
 import sys
-from collections import Counter, defaultdict
+from collections import defaultdict
 from pathlib import Path
 
-DB_PATH = Path(__file__).resolve().parent.parent / "investigation.db"
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from tools.runtime_db import connect_investigation_db, investigation_db_path  # noqa: E402
+
+DB_PATH = investigation_db_path()
 
 
 def _load_thread_defs():
@@ -147,10 +153,11 @@ _LEGACY_THREAD_DEFS = {
 }
 
 
-def get_db():
-    db = sqlite3.connect(str(DB_PATH))
+def get_db(mode="rw"):
+    db = connect_investigation_db(DB_PATH, mode)
     db.row_factory = sqlite3.Row
-    db.execute("PRAGMA journal_mode=WAL")
+    if mode != "ro":
+        db.execute("PRAGMA journal_mode=WAL")
     return db
 
 
@@ -259,12 +266,12 @@ def run_classification(dry_run=False):
     print(f"  Ambiguous (assigned to best match): {len(ambiguous)}")
 
     if ambiguous[:20]:
-        print(f"\nAmbiguous cases (first 20):")
+        print("\nAmbiguous cases (first 20):")
         for fid, target, tid, method in ambiguous[:20]:
             print(f"  finding #{fid} [{target}] → Thread {tid} ({method})")
 
     if dry_run:
-        print(f"\n[DRY RUN] No changes written to database.")
+        print("\n[DRY RUN] No changes written to database.")
         db.close()
         return
 
@@ -282,7 +289,7 @@ def run_classification(dry_run=False):
 
 def show_stats():
     """Show current thread assignment statistics."""
-    db = get_db()
+    db = get_db("ro")
 
     total = db.execute("SELECT COUNT(*) FROM findings").fetchone()[0]
     null_thread = db.execute("SELECT COUNT(*) FROM findings WHERE thread_id IS NULL").fetchone()[0]
