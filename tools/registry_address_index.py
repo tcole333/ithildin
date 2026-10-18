@@ -32,9 +32,24 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
+try:
+    from tools.runtime_db import (
+        REGISTRY_DB_ENV,
+        WORKTREE_LINK_COMMAND,
+        missing_database_message,
+        registry_db_path,
+    )
+except ImportError:
+    from runtime_db import (
+        REGISTRY_DB_ENV,
+        WORKTREE_LINK_COMMAND,
+        missing_database_message,
+        registry_db_path,
+    )
+
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DEFAULT_SOURCE_PATH = PROJECT_ROOT / "registry.db"
+DEFAULT_SOURCE_PATH = registry_db_path()
 DEFAULT_INDEX_PATH = PROJECT_ROOT / "datasets" / "registry_address_search.db"
 
 SCHEMA_VERSION = 1
@@ -68,7 +83,7 @@ def open_source_readonly(path: Path = DEFAULT_SOURCE_PATH) -> sqlite3.Connection
     """Open a registry database without permitting writes."""
     path = Path(path)
     if not path.is_file():
-        raise RegistryAddressIndexError(f"Registry database not found: {path}")
+        raise RegistryAddressIndexError(missing_database_message(path, REGISTRY_DB_ENV))
     db = sqlite3.connect(_ro_uri(path), uri=True, timeout=30)
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA query_only=ON")
@@ -119,18 +134,41 @@ def _file_identity(path: Path) -> dict[str, Any] | None:
     return {"size": stat.st_size, "mtime_ns": stat.st_mtime_ns}
 
 
+def _wal_identity(source_path: Path) -> dict[str, Any] | None:
+    """Identify committed WAL frames that have not been checkpointed yet.
+
+    A reader creates an empty -wal beside a WAL-mode database and the last
+    read-write connection deletes it on close, so an empty WAL and a missing
+    one are the same state. Only a WAL that holds frames reflects writes the
+    database file itself does not show yet.
+    """
+    identity = _file_identity(Path(str(source_path) + "-wal"))
+    if identity is None or identity["size"] == 0:
+        return None
+    return identity
+
+
 def _source_file_identities(source_path: Path) -> dict[str, Any]:
     return {
         "database": _file_identity(source_path),
-        "wal": _file_identity(Path(str(source_path) + "-wal")),
+        "wal": _wal_identity(source_path),
     }
+
+
+def _comparable_fingerprint(fingerprint: Any) -> Any:
+    """Read the empty WAL that older builds recorded as no WAL."""
+    if isinstance(fingerprint, dict):
+        wal = fingerprint.get("wal")
+        if isinstance(wal, dict) and wal.get("size") == 0:
+            return {**fingerprint, "wal": None}
+    return fingerprint
 
 
 def source_fingerprint(
     source_path: Path = DEFAULT_SOURCE_PATH,
     db: sqlite3.Connection | None = None,
 ) -> dict[str, Any]:
-    """Fingerprint source bytes, WAL state, relevant schema, and high-water IDs."""
+    """Fingerprint source bytes, pending WAL frames, relevant schema, and high-water IDs."""
     source_path = Path(source_path).resolve()
     own_connection = db is None
     if own_connection:
@@ -183,7 +221,8 @@ def _read_metadata(index_path: Path) -> dict[str, Any]:
     if not index_path.is_file():
         raise RegistryAddressIndexError(
             f"Registry address index is missing: {index_path}. Build it with: "
-            "uv run python tools/registry_address_index.py build"
+            "uv run python tools/registry_address_index.py build. In a git worktree, "
+            f"link the main checkout's datasets/ instead: {WORKTREE_LINK_COMMAND}"
         )
     try:
         db = sqlite3.connect(_ro_uri(index_path), uri=True, timeout=10)
@@ -236,7 +275,7 @@ def validate_index_fast(
             "Registry address index normalizer version is stale. Rebuild the sidecar."
         )
     current = source_fingerprint(Path(source_path))
-    if metadata.get("source_fingerprint") != current:
+    if _comparable_fingerprint(metadata.get("source_fingerprint")) != current:
         raise RegistryAddressIndexError(
             "Registry address index is stale relative to registry.db. Rebuild it with: "
             "uv run python tools/registry_address_index.py build --force"

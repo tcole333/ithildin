@@ -119,7 +119,11 @@ Address queries keep the existing result buckets and alphabetical per-bucket
 limits, with row ID as the deterministic tie-breaker for equal names. Selectors
 must contain at least three normalized letters or digits.
 Missing, stale, or invalid sidecars fail with rebuild instructions; the command
-does not fall back to a full `registry.db` scan.
+does not fall back to a full `registry.db` scan. Freshness compares the registry
+file's size and mtime, page count, maximum row IDs, and relevant schema, plus the
+`-wal` only while it holds uncheckpointed frames. Readers create an empty `-wal`
+and the last read-write connection deletes it, so registry reads never make the
+sidecar stale.
 
 The query route counts FTS candidates independently for each bucket. At 10,000
 or fewer candidates it materializes matching row IDs and sorts the joined base

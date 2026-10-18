@@ -6,6 +6,7 @@ created an empty registry.db and every query returned zero rows without error.
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import os
@@ -17,6 +18,7 @@ from pathlib import Path
 import pytest
 
 from tools import query_registry
+from tools import registry_address_index as address_index
 from tools.runtime_db import REGISTRY_DB_ENV, MissingDatabaseError
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -121,3 +123,36 @@ def test_init_creates_an_empty_registry_explicitly(tmp_path):
     with sqlite3.connect(created) as db:
         assert db.execute("SELECT COUNT(*) FROM registry_entities").fetchone() == (0,)
     db.close()
+
+
+def test_address_index_stays_current_after_registry_reads(registry, tmp_path, monkeypatch, capsys):
+    index = tmp_path / "registry_address_search.db"
+    address_index.build_index(registry, index, min_free_gib=0)
+
+    for command in (("search", "Fixture"), ("officers", "Pat"), ("ucc-search", "Fixture")):
+        assert _query_registry(registry, *command).returncode == 0
+    # An ingest-style read-write connection that writes nothing deletes the
+    # empty WAL on close; that churn must not read as a registry change.
+    monkeypatch.setattr(query_registry, "DB_PATH", registry)
+    query_registry.get_db().close()
+    monkeypatch.setattr(query_registry, "ADDRESS_INDEX_PATH", index)
+
+    query_registry.cmd_address(
+        argparse.Namespace(query="South Biscayne", limit=20, output=None, json_out=False)
+    )
+
+    assert "Fixture Holdings LLC" in capsys.readouterr().out
+
+
+def test_sidecar_that_recorded_an_empty_wal_stays_current(registry, tmp_path):
+    index = tmp_path / "registry_address_search.db"
+    address_index.build_index(registry, index, min_free_gib=0)
+    with sqlite3.connect(index) as db:
+        metadata = json.loads(db.execute("SELECT metadata_json FROM address_index_meta").fetchone()[0])
+        metadata["source_fingerprint"]["wal"] = {"size": 0, "mtime_ns": 1}
+        db.execute("UPDATE address_index_meta SET metadata_json = ?", (json.dumps(metadata),))
+    db.close()
+
+    assert address_index.validate_index_fast(registry, index)["schema_version"] == (
+        address_index.SCHEMA_VERSION
+    )

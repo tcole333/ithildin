@@ -377,6 +377,28 @@ def test_active_wal_update_and_delete_make_sidecar_stale(
     writer.close()
 
 
+def test_reader_wal_churn_keeps_sidecar_current(
+    registry_paths: tuple[Path, Path],
+) -> None:
+    source, index = registry_paths
+    wal = Path(str(source) + "-wal")
+    db = sqlite3.connect(source)
+    db.execute("PRAGMA journal_mode=WAL")
+    db.close()
+    build_index(source, index, min_free_gib=0)
+
+    reader = sqlite3.connect(f"{source.resolve().as_uri()}?mode=ro", uri=True)
+    reader.execute("SELECT COUNT(*) FROM registry_entities").fetchone()
+    reader.close()
+    assert wal.exists() and wal.stat().st_size == 0
+    writer = sqlite3.connect(source)
+    writer.execute("SELECT COUNT(*) FROM registry_entities").fetchone()
+    writer.close()
+    assert not wal.exists()
+
+    assert validate_index_fast(source, index)["source_fingerprint"]["wal"] is None
+
+
 def test_free_space_preflight_leaves_no_partial_sidecar(
     registry_paths: tuple[Path, Path],
 ) -> None:
