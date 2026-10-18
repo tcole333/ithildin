@@ -7,6 +7,7 @@ import re
 import shlex
 import sqlite3
 import sys
+from urllib.parse import unquote, urlsplit
 
 import pytest
 
@@ -95,7 +96,9 @@ def test_preflight_entity_lookup_uses_pinned_database(runtime, tmp_path, monkeyp
     real_connect = sqlite3.connect
 
     def guarded_connect(db_file, *args, **kwargs):
-        assert Path(db_file) == selected, "Preflight escaped the pinned fixture database"
+        target = urlsplit(str(db_file))
+        opened = Path(unquote(target.path)) if target.scheme == "file" else Path(db_file)
+        assert opened.resolve() == selected.resolve(), "Preflight escaped the pinned fixture database"
         return real_connect(db_file, *args, **kwargs)
 
     monkeypatch.setattr(tool.sqlite3, "connect", guarded_connect)

@@ -16,7 +16,7 @@ def connection_workflow_db(tmp_path, monkeypatch):
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
     monkeypatch.setattr(findings_tracker, "DB_PATH", db_path)
     monkeypatch.setattr(findings_tracker, "_schema_initialized", False)
-    db = lead_tracker.get_db()
+    db = lead_tracker.get_db(create=True)
     yield db, db_path
     db.close()
 

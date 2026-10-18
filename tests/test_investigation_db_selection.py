@@ -91,3 +91,48 @@ def test_entity_dedup_fails_loudly_instead_of_creating_a_missing_database(tmp_pa
 
     assert (result.returncode != 0, missing.exists()) == (True, False)
     assert INVESTIGATION_DB_ENV in result.stderr
+
+
+@pytest.mark.parametrize(
+    ("tool", "command"),
+    [
+        ("lead_tracker.py", ("list",)),
+        ("findings_tracker.py", ("stats",)),
+        ("entity_tracker.py", ("lookup", "Fixture")),
+        ("infra_tracker.py", ("show", "331")),
+    ],
+)
+def test_trackers_fail_loudly_instead_of_creating_a_missing_database(tmp_path, tool, command):
+    missing = tmp_path / "investigation.db"
+
+    result = _run_tool(tool, missing, *command)
+
+    assert (result.returncode != 0, missing.exists()) == (True, False)
+    assert INVESTIGATION_DB_ENV in result.stderr
+
+
+def test_lead_tracker_init_creates_the_selected_database_explicitly(tmp_path):
+    created = tmp_path / "investigation.db"
+
+    first = _run_tool("lead_tracker.py", created, "init")
+    second = _run_tool("lead_tracker.py", created, "init")
+
+    assert (first.returncode, second.returncode) == (0, 0), first.stderr + second.stderr
+    assert "already exists" in second.stdout
+    with sqlite3.connect(created) as db:
+        assert db.execute("SELECT COUNT(*) FROM leads").fetchone() == (0,)
+    db.close()
+
+
+def test_active_profile_lookup_never_creates_a_database(tmp_path, monkeypatch):
+    from tools import investigation_context
+    from tools.runtime_db import MissingDatabaseError
+
+    missing = tmp_path / "investigation.db"
+    monkeypatch.delenv("ITHILDIN_PROFILE", raising=False)
+    monkeypatch.setattr(investigation_context, "DB_PATH", missing)
+
+    with pytest.raises(MissingDatabaseError):
+        investigation_context.get_active_profile_name()
+
+    assert not missing.exists()

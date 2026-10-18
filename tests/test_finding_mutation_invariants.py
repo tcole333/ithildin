@@ -17,7 +17,7 @@ def store(tmp_path, monkeypatch):
     monkeypatch.setattr(lt, "_schema_initialized", False)
     monkeypatch.setattr(ft, "DB_PATH", db_path)
     monkeypatch.setattr(ft, "_schema_initialized", False)
-    db = lt.get_db()
+    db = lt.get_db(create=True)
     yield db
     db.close()
 

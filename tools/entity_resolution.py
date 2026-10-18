@@ -24,10 +24,10 @@ from pathlib import Path
 
 try:
     from tools.output_util import add_output_args, write_output
-    from tools.runtime_db import connect_registry_db, registry_db_path
+    from tools.runtime_db import connect_investigation_db, connect_registry_db, registry_db_path
 except ImportError:
     from output_util import add_output_args, write_output
-    from runtime_db import connect_registry_db, registry_db_path
+    from runtime_db import connect_investigation_db, connect_registry_db, registry_db_path
 
 DB_PATH = Path(os.environ.get("ITHILDIN_DB_PATH", Path(__file__).parent.parent / "investigation.db"))
 REGISTRY_DB_PATH = registry_db_path()
@@ -116,7 +116,7 @@ def is_abstract_entity_target(name):
 
 
 def get_db():
-    db = sqlite3.connect(str(DB_PATH))
+    db = connect_investigation_db(DB_PATH, "rw")
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")

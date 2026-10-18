@@ -382,7 +382,10 @@ ITHILDIN_CONTENT_ROOT=content uv run python scripts/agent_worker.py --persona co
 ```
 
 ### Leads
+The trackers open the existing `investigation.db` (or `ITHILDIN_DB_PATH`) and fail
+instead of creating a missing one; `init` creates a new, empty database explicitly.
 ```bash
+python tools/lead_tracker.py init                    # New database at ITHILDIN_DB_PATH only
 python tools/lead_tracker.py add --title "..." --category person --priority high --target "Name"
 python tools/lead_tracker.py list --status open --priority high
 python tools/lead_tracker.py claim 42

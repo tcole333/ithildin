@@ -175,7 +175,7 @@ def test_add_role_reports_ignored_duplicate(tmp_path, monkeypatch, capsys):
     monkeypatch.setattr(lead_tracker, "DB_PATH", path)
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
     monkeypatch.setattr(entity_tracker, "DB_PATH", path)
-    db = entity_tracker.get_db()
+    db = entity_tracker.get_db(create=True)
     db.execute(
         "INSERT INTO entities(id, name, entity_type) VALUES (1, 'Example Inc.', 'inc')"
     )

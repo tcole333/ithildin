@@ -17,8 +17,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 try:
+    from tools.runtime_db import INVESTIGATION_DB_ENV, connect
     from tools.search_log_util import canonical_search_key
 except ImportError:
+    from runtime_db import INVESTIGATION_DB_ENV, connect
     from search_log_util import canonical_search_key
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -76,7 +78,7 @@ def record_result(
         artifact_path = str(Path(artifact).resolve(strict=True))
         digest = _sha256(Path(artifact_path))
     timestamp = (now or datetime.now(timezone.utc)).timestamp()
-    with sqlite3.connect(_db_path(db_path), timeout=30) as db:
+    with connect(_db_path(db_path), "rw", env_var=INVESTIGATION_DB_ENV, timeout=30) as db:
         db.execute("""CREATE TABLE IF NOT EXISTS search_reuse (
             source TEXT NOT NULL, request_key TEXT NOT NULL,
             source_version TEXT, outcome TEXT NOT NULL, result_count INTEGER,

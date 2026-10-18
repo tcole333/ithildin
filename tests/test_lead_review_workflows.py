@@ -22,7 +22,7 @@ def review_dbs(tmp_path, monkeypatch):
     for db_path in paths:
         monkeypatch.setattr(lead_tracker, "DB_PATH", db_path)
         monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
-        db = lead_tracker.get_db()
+        db = lead_tracker.get_db(create=True)
         db.execute("INSERT OR REPLACE INTO investigation_config (key,value) VALUES ('active_profile','alpha')")
         db.commit()
         db.close()

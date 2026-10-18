@@ -217,6 +217,7 @@ def test_dca_projection_retains_regulatory_identity_without_title_claim(
     search_db_path = tmp_path / "search-log.db"
     monkeypatch.setattr(lead_tracker, "DB_PATH", search_db_path)
     monkeypatch.setenv("ITHILDIN_DB_PATH", str(search_db_path))
+    lead_tracker.get_db(create=True).close()
 
     report = ingest_property_envelope(_envelope(), db_path=db_path)
 

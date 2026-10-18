@@ -13,8 +13,10 @@ from pathlib import Path
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.runtime_db import MissingDatabaseError, connect_investigation_db
 except ImportError:
     from output_util import add_output_args, write_output
+    from runtime_db import MissingDatabaseError, connect_investigation_db
 
 DB_PATH = Path(os.environ.get("ITHILDIN_DB_PATH", Path(__file__).parent.parent / "investigation.db"))
 
@@ -59,8 +61,8 @@ VALID_CORRECTION_TYPES = {
 }
 
 
-def get_db():
-    db = sqlite3.connect(str(DB_PATH))
+def get_db(*, create=False):
+    db = connect_investigation_db(DB_PATH, "rwc" if create else "rw")
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")
@@ -672,4 +674,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except MissingDatabaseError as error:
+        sys.exit(f"ERROR: {error}")

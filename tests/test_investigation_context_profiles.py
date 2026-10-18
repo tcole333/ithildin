@@ -7,6 +7,7 @@ import pytest
 import yaml
 
 from tools import investigation_context
+from tools.runtime_db import connect
 
 
 REPO_ROOT = Path(__file__).parents[1]
@@ -62,6 +63,7 @@ def test_profile_catalog_reconciliation_is_idempotent(monkeypatch, tmp_path):
 
     monkeypatch.setattr(investigation_context, "INVESTIGATIONS_DIR", investigations_dir)
     monkeypatch.setattr(investigation_context, "DB_PATH", db_path)
+    connect(db_path, "rwc").close()
 
     investigation_context._get_db().close()
     investigation_context._get_db().close()

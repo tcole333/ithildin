@@ -29,8 +29,10 @@ except ImportError:
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.runtime_db import MissingDatabaseError, connect_investigation_db
 except ImportError:
     from output_util import add_output_args, write_output
+    from runtime_db import MissingDatabaseError, connect_investigation_db
 
 PROJECT_ROOT = Path(__file__).parent.parent
 INVESTIGATIONS_DIR = PROJECT_ROOT / "investigations"
@@ -163,7 +165,7 @@ def load_profile(name: str) -> InvestigationProfile:
 
 def _get_db():
     """Get DB connection, ensuring profile metadata is present and reconciled."""
-    db = sqlite3.connect(str(DB_PATH))
+    db = connect_investigation_db(DB_PATH, "rw")
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")
@@ -188,10 +190,8 @@ def _get_db():
 
 
 def _get_read_db():
-    """Open profile state without schema/catalog writes during ordinary reads."""
-    if not DB_PATH.exists():
-        return _get_db()
-    db = sqlite3.connect(str(DB_PATH), timeout=30)
+    """Open profile state read-only, without schema/catalog writes or creation."""
+    db = connect_investigation_db(DB_PATH, timeout=30)
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA busy_timeout=5000")
     return db
@@ -544,4 +544,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except MissingDatabaseError as error:
+        sys.exit(f"ERROR: {error}")
