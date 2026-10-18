@@ -29,6 +29,13 @@ CRITICAL_TEST_NODEIDS = frozenset({
     "tests/test_auto_leads_profile_scope.py::test_cmd_run_propagates_active_profile_to_every_generator",
 })
 
+# Without these ignored files (CI, an unlinked git worktree), a test that falls
+# back to the checkout's default path creates an empty stand-in database.
+RUNTIME_DATABASES = tuple(
+    Path(__file__).resolve().parent.parent / name for name in ("investigation.db", "registry.db")
+)
+_ABSENT_RUNTIME_DATABASES = pytest.StashKey[tuple[Path, ...]]()
+
 
 def _live_public_record_env_names(
     tests_root: Path | None = None,
@@ -118,6 +125,28 @@ def pytest_collection_finish(session: pytest.Session) -> None:
                 + "\n  ".join(missing)
                 + "\nRun the full deterministic suite without narrowing its path, -m, or -k selection."
             )
+
+
+def pytest_sessionstart(session: pytest.Session) -> None:
+    session.stash[_ABSENT_RUNTIME_DATABASES] = tuple(
+        path for path in RUNTIME_DATABASES if not path.exists()
+    )
+
+
+def pytest_sessionfinish(session: pytest.Session, exitstatus: int) -> None:
+    created = [path for path in session.stash.get(_ABSENT_RUNTIME_DATABASES, ()) if path.exists()]
+    if not created:
+        return
+    reporter = session.config.pluginmanager.get_plugin("terminalreporter")
+    if reporter is not None:
+        reporter.ensure_newline()
+        reporter.write_line(
+            "Tests created runtime databases at the checkout root: "
+            + ", ".join(str(path) for path in created)
+            + ". Point the test at an explicitly created temporary database instead.",
+            red=True,
+        )
+    session.exitstatus = pytest.ExitCode.TESTS_FAILED
 
 
 @pytest.fixture(autouse=True)

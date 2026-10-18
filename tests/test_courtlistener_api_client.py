@@ -1,12 +1,30 @@
 """Unit tests for CourtListener request construction."""
 
+import sqlite3
 from types import SimpleNamespace
 
 import pytest
 import requests
 
-from tools import query_courtlistener
+from tools import lead_tracker, query_courtlistener
 from tools.courtlistener_api_client import CourtListenerClient
+
+
+@pytest.fixture
+def search_log(tmp_path, monkeypatch):
+    """Log CourtListener searches to a temporary tracker database, not the shared one."""
+    db_path = tmp_path / "investigation.db"
+    monkeypatch.setattr(lead_tracker, "DB_PATH", db_path)
+    monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    lead_tracker.get_db(create=True).close()
+    return db_path
+
+
+def _logged_sources(db_path):
+    with sqlite3.connect(db_path) as db:
+        sources = [row[0] for row in db.execute("SELECT source FROM search_log")]
+    db.close()
+    return sources
 
 
 def test_search_cases_forwards_search_endpoint_date_filters(monkeypatch):
@@ -100,7 +118,7 @@ def test_fjc_timeout_is_concise_and_does_not_write_output(
 
 
 def test_opinion_auto_prefers_cluster_when_numeric_ids_collide(
-    monkeypatch, tmp_path
+    monkeypatch, tmp_path, search_log
 ):
     calls = []
 
@@ -133,9 +151,10 @@ def test_opinion_auto_prefers_cluster_when_numeric_ids_collide(
 
     assert calls == [("cluster", 8523350), ("opinion", 8495830)]
     assert output.read_text().find('"id": 8495830') >= 0
+    assert _logged_sources(search_log) == ["courtlistener"]
 
 
-def test_opinion_id_type_can_force_raw_opinion_lookup(monkeypatch, tmp_path):
+def test_opinion_id_type_can_force_raw_opinion_lookup(monkeypatch, tmp_path, search_log):
     calls = []
 
     class OpinionClient:
@@ -157,3 +176,4 @@ def test_opinion_id_type_can_force_raw_opinion_lookup(monkeypatch, tmp_path):
     )
 
     assert calls == [8523350]
+    assert _logged_sources(search_log) == ["courtlistener"]
