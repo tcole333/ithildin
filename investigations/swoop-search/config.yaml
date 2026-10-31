@@ -19,13 +19,22 @@ description: >-
 # officers. Expand after the identity wave resolves founders and executives.
 key_persons:
   - "paul bottum"
+  - "quinn bottum"
+  - "michael bottum"
+  - "brandon w. freeman"
+  - "terry halvorsen"
+  - "matthew amacker"
+  - "kc shaw"
   - "michael guetlein"
   - "steve feinberg"
   - "stephen feinberg"
   - "emil michael"
 
 known_addresses:
-  "2877 itasca ave": "SAM.gov physical and mailing address of Swoop Technologies, LLC (UEI WVT6SJYYJFC5, CAGE 76XE1), Lakeland, MN 55043"
+  "2877 itasca ave": "SAM.gov physical and mailing address of Swoop Technologies, LLC (UEI WVT6SJYYJFC5, CAGE 76XE1); lakeshore house owned of record by Swoop Search LLC since 2020-08-11, St. Mary's Point (Lakeland), MN 55043"
+  "1933 oriole ave": "Swoop Search, LLC address on 2012-2015 trademark, patent and EDGAR records; Bottum residence, Stillwater (West Lakeland), MN"
+  "550 vandalia st": "Minnesota SOS principal executive office of Swoop Technologies LLC (Suite 270), St. Paul, MN"
+  "660 w washington ave": "Swoop Search 2014 Form D issuer address (Suite 303) and Swoop-Med LLC address (Suite 302), Madison, WI"
 
 threads:
   - id: 1
@@ -96,6 +105,19 @@ threads:
       - "guetlein"
       - "drpm"
 
+  - id: 7
+    name: "Swoop digital infrastructure and technical footprint"
+    description: "Passive observations of Swoop's domains (swooptech.com, swoopsrch.com and related), certificate transparency, DNS, mail and SaaS vendors, hosting, indexed scanner records, public code and packages, and website change history, tested against the contracting and consortium timeline"
+    targets:
+      - "swooptech.com"
+      - "swoopsrch.com"
+    keywords:
+      - "swooptech\\.com"
+      - "swoopsrch\\.com"
+      - "certificate transparency"
+      - "subdomain"
+      - "\\bmx record"
+
   - id: 6
     name: "Swoop political, lobbying and influence ties"
     description: "Federal and state lobbying, political contributions by Swoop principals, congressional advocacy and earmarks, links to administration officials, defense-tech forums and investor networks"
@@ -116,9 +138,18 @@ key_dates:
   - date: "2014-07-20"
     event: "Swoop Technologies, LLC first registers in SAM.gov (UEI WVT6SJYYJFC5, CAGE 76XE1)"
     category: "milestone"
+  - date: "2024-09-20"
+    event: "CDAO awards Swoop Search the RIOT prototype OT for Joint Staff J6 (HQ08832490015)"
+    category: "operational"
   - date: "2025-01-27"
     event: "Executive Order 14186, The Iron Dome for America, signed"
     category: "political"
+  - date: "2025-02-12"
+    event: "Swoop Search LLC renamed Swoop Technologies LLC (Minnesota SOS amendment; same Delaware LLC)"
+    category: "milestone"
+  - date: "2025-03-14"
+    event: "AFLCMC C3BM awards Swoop the sole-source PROJECT TWO-STEP prototype OT (FA8612259B001)"
+    category: "operational"
   - date: "2025-05-20"
     event: "Trump announces the Golden Dome architecture, an estimated $175B cost, and Gen. Michael Guetlein as program lead"
     category: "political"
@@ -131,6 +162,12 @@ key_dates:
   - date: "2026-03-24"
     event: "Reuters, citing one source, names Anduril, Palantir, Aalyria, Scale AI and Swoop Technologies as developers of Golden Dome software"
     category: "media"
+  - date: "2026-04-09"
+    event: "Potomac Officers Club relays a Pentagon spokesperson naming Swoop among Golden Dome C2 consortium industry partners"
+    category: "media"
+  - date: "2026-04-10"
+    event: "MDA C2BMC office awards Swoop a competed prototype OT for C2BMC interoperability (HQ0852269E001)"
+    category: "operational"
   - date: "2026-08-27"
     event: "DefenseScoop reports initial Golden Dome tests focused on C2 and software, and a nine-vendor industry consortium"
     category: "media"
