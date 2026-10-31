@@ -222,7 +222,14 @@ the reviews; their council-minutes quotes were checked against the OCR text.
   sitemap place the pages' latest edits on 2026-03-23/24; they do not establish
   an intervening revision history or the precise time of each change. Page
   metadata and job postings retain military framing; motive unknown (#16613,
-  #16614).
+  #16614). Closer captures add one detail: the Technology page, unchanged
+  between 2025-12-08 and 2026-03-11, pitched SwoopOS as "The Platform To Control
+  mission critical infrastructure", able to "Integrate hardware generations,
+  disjointed networking protocols, and cryptography suites" while "leveraging
+  every data feed and sensor available"; it is no longer linked and returned 404
+  on 2026-10-31. The post-edit homepage adds "integration plane" language. No
+  pre-edit capture mentions missile defense, Golden Dome, C2BMC, MDA, Space Force
+  or Anduril (#16642; quotes checked against the captures).
 
 ### Product arc
 Public marketing: apartment search (2012–13) → visual search and analytics
