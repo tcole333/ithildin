@@ -1,0 +1,200 @@
+# Investigation profile: Swoop Search / Swoop Technologies and the Golden Dome
+# command-and-control software group.
+
+name: swoop-search
+
+primary_subject: "Swoop Search, LLC / Swoop Technologies, LLC (SwoopOS)"
+
+description: >-
+  Who is the company behind SwoopOS, reported by Reuters (2026-03-24, citing one
+  source) as "Swoop Technologies", one of five firms in the original Golden Dome
+  command-and-control software group with Anduril, Palantir, Aalyria and Scale AI,
+  and how did it get that work? Covers the Swoop Search / Swoop Technologies entity
+  lineage, founders and investors, federal contracting history and award vehicle,
+  the formation of the Golden Dome C2 consortium, and political or lobbying ties.
+  Golden Dome program-level facts already live in the tech-right profile
+  (thread 13); cite those findings rather than re-deriving them.
+
+# Lowercase names that escalate auto-lead priority when they appear as entity
+# officers. Expand after the identity wave resolves founders and executives.
+key_persons:
+  - "paul bottum"
+  - "michael guetlein"
+  - "steve feinberg"
+  - "stephen feinberg"
+  - "emil michael"
+
+known_addresses:
+  "2877 itasca ave": "SAM.gov physical and mailing address of Swoop Technologies, LLC (UEI WVT6SJYYJFC5, CAGE 76XE1), Lakeland, MN 55043"
+
+threads:
+  - id: 1
+    name: "Swoop entity identity and corporate lineage"
+    description: "Swoop Search, LLC vs Swoop Technologies, LLC: formation, conversions, name changes, parent/subsidiary structure, registered agents, addresses, SAM/CAGE records, trademarks and patents for SwoopOS, Valhalla and Surf, and the pivot from search/analytics to an operating system"
+    targets:
+      - "swoop search"
+      - "swoop technologies"
+      - "swoopos"
+      - "swooptech"
+    keywords:
+      - "swoop search"
+      - "swoop technologies"
+      - "swoop ?os"
+      - "swooptech"
+      - "valhalla sdk"
+      - "wvt6sjyyjfc5"
+      - "76xe1"
+
+  - id: 2
+    name: "Swoop founders, leadership and personnel"
+    description: "Founders, executives, board members, advisors and key hires; their military, intelligence, academic and prior-company backgrounds; cleared workforce; revolving-door movement between Swoop and government"
+    targets:
+      - "paul bottum"
+    keywords:
+      - "bottum"
+      - "swoop.*(founder|ceo|cto|president|chief)"
+      - "(founder|ceo|cto|president|chief).*swoop"
+
+  - id: 3
+    name: "Swoop capital, investors and valuation"
+    description: "Funding rounds, Form D filings, named investors and their overlap with the defense-tech venture network, state angel tax credit certifications, PPP/SBA loans, grants and valuation signals"
+    targets: []
+    keywords:
+      - "form d"
+      - "seed round"
+      - "series [a-c]"
+      - "angel tax credit"
+      - "qualified new business venture"
+      - "ppp loan"
+      - "swoop.*(invest|funding|raise)"
+
+  - id: 4
+    name: "Swoop federal contracting pathway"
+    description: "Every federal award, subaward, SBIR/STTR, OTA, consortium membership and IDIQ position keyed to Swoop's identity (UEI WVT6SJYYJFC5 / CAGE 76XE1 and any predecessor), facility clearance, teaming with Anduril or Palantir, and the vehicle through which Golden Dome C2 work reached Swoop"
+    targets: []
+    keywords:
+      - "sbir"
+      - "sttr"
+      - "other transaction"
+      - "\\bota\\b"
+      - "subaward"
+      - "consortium manager"
+      - "shield idiq"
+      - "facility clearance"
+
+  - id: 5
+    name: "Golden Dome C2 software consortium formation"
+    description: "How the Golden Dome command-and-control software group was assembled: the original five (Anduril, Palantir, Aalyria, Scale AI, Swoop), expansion to nine vendors, selection process, contract vehicle, funding, C2 demonstrations and tests, and oversight"
+    targets:
+      - "aalyria"
+      - "scale ai"
+    keywords:
+      - "golden dome"
+      - "command and control"
+      - "c2bmc"
+      - "glue layer"
+      - "guetlein"
+      - "drpm"
+
+  - id: 6
+    name: "Swoop political, lobbying and influence ties"
+    description: "Federal and state lobbying, political contributions by Swoop principals, congressional advocacy and earmarks, links to administration officials, defense-tech forums and investor networks"
+    targets: []
+    keywords:
+      - "lobbying"
+      - "lobbyist"
+      - "campaign contribution"
+      - "earmark"
+      - "congressionally directed"
+
+corpus_tools: []
+
+key_dates:
+  - date: "2012-10-10"
+    event: "Swoop Technologies, LLC entity start date per SAM.gov (Delaware LLC)"
+    category: "milestone"
+  - date: "2014-07-20"
+    event: "Swoop Technologies, LLC first registers in SAM.gov (UEI WVT6SJYYJFC5, CAGE 76XE1)"
+    category: "milestone"
+  - date: "2025-01-27"
+    event: "Executive Order 14186, The Iron Dome for America, signed"
+    category: "political"
+  - date: "2025-05-20"
+    event: "Trump announces the Golden Dome architecture, an estimated $175B cost, and Gen. Michael Guetlein as program lead"
+    category: "political"
+  - date: "2025-12-02"
+    event: "MDA awards first SHIELD IDIQ tranche (1,014 awardees, $151B ceiling)"
+    category: "operational"
+  - date: "2025-12-18"
+    event: "MDA awards second SHIELD IDIQ tranche (1,086 awardees)"
+    category: "operational"
+  - date: "2026-03-24"
+    event: "Reuters, citing one source, names Anduril, Palantir, Aalyria, Scale AI and Swoop Technologies as developers of Golden Dome software"
+    category: "media"
+  - date: "2026-08-27"
+    event: "DefenseScoop reports initial Golden Dome tests focused on C2 and software, and a nine-vendor industry consortium"
+    category: "media"
+
+seed_pillars:
+  - name: "Office of Golden Dome for America"
+    pillar_type: "government"
+    sub_type: "defense_program_office"
+    status: "active"
+    founded: "2025"
+    dissolved: null
+    jurisdiction: "US"
+    significance: "Direct-reporting program office led by Gen. Michael Guetlein; reports to Deputy Secretary of Defense Feinberg outside the normal acquisition chain (tech-right findings #4726, #6132)"
+  - name: "Missile Defense Agency"
+    pillar_type: "government"
+    sub_type: "defense_agency"
+    status: "active"
+    founded: "2002"
+    dissolved: null
+    jurisdiction: "US"
+    significance: "Runs the $151B SHIELD IDIQ, the main multi-award Golden Dome vehicle"
+  - name: "Anduril Industries"
+    pillar_type: "operations"
+    sub_type: "defense_contractor"
+    status: "active"
+    founded: "2017"
+    dissolved: null
+    jurisdiction: "US"
+    significance: "Golden Dome C2 software group member named with Swoop (Reuters, 2026-03-24)"
+  - name: "Palantir Technologies"
+    pillar_type: "operations"
+    sub_type: "defense_contractor"
+    status: "active"
+    founded: "2003"
+    dissolved: null
+    jurisdiction: "US"
+    significance: "Golden Dome C2 software group member named with Swoop (Reuters, 2026-03-24)"
+  - name: "Aalyria Technologies"
+    pillar_type: "operations"
+    sub_type: "defense_contractor"
+    status: "active"
+    founded: "2022"
+    dissolved: null
+    jurisdiction: "US"
+    significance: "Golden Dome C2 software group member named with Swoop (Reuters, 2026-03-24)"
+  - name: "Scale AI"
+    pillar_type: "operations"
+    sub_type: "defense_contractor"
+    status: "active"
+    founded: "2016"
+    dissolved: null
+    jurisdiction: "US"
+    significance: "Golden Dome C2 software group member named with Swoop (Reuters, 2026-03-24)"
+  - name: "Defense Counterintelligence and Security Agency"
+    pillar_type: "government"
+    sub_type: "security_clearance_authority"
+    status: "active"
+    founded: "2019"
+    dissolved: null
+    jurisdiction: "US"
+    significance: "Issues facility clearances; Swoop recruits cleared engineers, which implies a sponsored facility clearance"
+
+evidence_id_prefix: ""
+
+exclude_from_graph: "Swoop Technologies, LLC"
+
+source_overrides: {}
