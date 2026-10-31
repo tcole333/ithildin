@@ -57,6 +57,21 @@ DepSecDef Feinberg), #4718 (SHIELD IDIQ), #4720 (classified SBI OTAs), #4731 and
 #5097 (Palantir positioned for C2), #5102 (C2 demo planned for summer 2026),
 #6136 and #6139 (architecture, BMC3 ground segment).
 
+## Artifacts and reports
+
+- Wave-1 artifacts (track reports, raw responses, review verdicts, correction
+  ledgers) live locally at `data/swoop-search/wave1-20261031/` (ignored; main
+  checkout), copied from the temporary workdir `/tmp/osint-RaqESl4j/`. The
+  tracked sha256 manifest is
+  `reports/swoop-search-2026-10-31/artifact-manifest.tsv`. Evidence refs use
+  the repo-relative `data/swoop-search/...` form; in a worktree, symlink
+  `data/swoop-search` to the main checkout's copy so they resolve.
+- Current narrative: `reports/swoop-search-2026-10-31/synthesis.md`, revised
+  after three adversarial reviews. Keep its fact/inference separation: Systems
+  Intelligence awards are not Swoop performance; Swoop's founder status, its
+  coalition contract vehicle and the Phelan stake's retention are unresolved;
+  hostnames are operator-chosen labels.
+
 ## Working rules
 
 - Pin `ITHILDIN_PROFILE=swoop-search` and `ITHILDIN_DB_PATH` to the main
