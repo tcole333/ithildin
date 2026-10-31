@@ -69,6 +69,14 @@ the reviews; their council-minutes quotes were checked against the OCR text.
   participating in a Swoop award or coalition decision. Guetlein's reported
   reporting line ran to Deputy Secretary Feinberg, not through the Navy
   Secretary; that does not exclude Navy participation in the wider program.
+- **Retired senior officials, no documented role.** Swoop's unpublished 2023
+  website media include a photo identical to the official-style portrait of
+  retired Maj. Gen. Robert E. Wheeler — deputy DoD CIO for C4 in 2012–2016 and a
+  Defense Science Board subcommittee member in 2024–2025 — and one very likely
+  showing Gen. James L. Jones Jr. Swoop's own court filing places former DoD CIO
+  Terry Halvorsen, as a "special Government employee", in a 2019 meeting about
+  its INTREPID contract; Wheeler served as Halvorsen's deputy. No record shows
+  any of the three in a Swoop role (#16569, #16654–#16664).
 - **No visible influence operation.** The reviewed federal lobbying
   disclosures, FEC committee records, selected earmark tables and
   congressional searches did not identify one. Identified employee donations
@@ -153,7 +161,10 @@ the reviews; their council-minutes quotes were checked against the OCR text.
   CTO and showed him presenting at IBM SPADE on encryption and "quantum for
   defense" (#16572). Swoop's own 2021 federal complaint settles the family
   roles: "In 2012, Paul Bottum founded Swoop along with his son (Quinn Bottum)
-  and brother (Michael Bottum)" (#16645).
+  and brother (Michael Bottum)" (#16645). A September 2023 image on Swoop's
+  site captions Quinn on an AFA Air, Space and Cyber Conference panel with
+  Lockheed Martin and Leidos executives, "moderated by Major General
+  Genatempo, PEO, C3I & NETWORKS" (first-party; #16666).
 - **Michael Christopher Bottum** is a co-founder and co-inventor; the current
   site's WordPress metadata attributes its main page to an account named
   Michael Bottum (#16550, #16596).
@@ -375,9 +386,9 @@ establishes a selection mechanism.
 | Hypothesis | What the record shows | Gaps and contrary context | Status |
 |---|---|---|---|
 | H1 Relevant prior work made Swoop a plausible C2 participant | Direct prototype OTs with CDAO (Joint Staff J6) and the Air Force C3BM office before formation (#16531, #16530); Systems Intelligence awards naming Swoop OS demonstrations on MDA and Space Force radars, Swoop's role undisclosed (#16560, #16561); by Swoop's court account, government discussions from 2016 and projects from 2018; "integration plane" product (#16597); the retained records describe purchases of Swoop OS radar demonstrations through Systems Intelligence, with later OSD and Army obligations on that contract; performance and Swoop's share are unverified (#16630, #16632, #16634) | Establishes relevant or planned work, not selection, founder status or successful delivery; Aalyria is a similarly small specialist and Anduril held a C2 operating-system demonstrator, so the capability was not unique; the same court filing alleges missed demonstrations, a 2019 stop-work order and harm to Swoop's reputation with the government (Swoop's litigation account, not adjudicated); no record links the work to Golden Dome | Plausible capability-based explanation; the prior-work premise is the best documented, selection unproven |
-| H2 A disclosed investment gave an access route | Phelan's January 2025 disclosure lists the Swoop-named interest; his tenure (2025-03-25 to 2026-04-22) overlapped the coalition's life and the MDA OT (#16599) | Retention, acquisition date and any intervention unestablished; general recusal obligations applied; no matter-level recusal records located; Swoop's direct awards began before his nomination; no reviewed direct award to Swoop made during his tenure lists Navy funding — the one Navy-funded Swoop record is a 2023 subaward under a GTARC order (Navy COMPACFLT funds) that ran 2021-07-09 to 2026-07-08, so the prime order overlapped his tenure though the subaward predates it (#16532); subcontracted work and cross-service influence cannot be excluded | Speculative; no intervention evidence located |
+| H2 Access through investors or senior officials | Phelan's January 2025 disclosure lists the Swoop-named interest; his tenure (2025-03-25 to 2026-04-22) overlapped the coalition's life and the MDA OT (#16599). Separately, Swoop's 2023 site media include a photo matching retired Maj. Gen. Robert Wheeler, a DSB subcommittee member in 2024–2025 (SGE by charter, inference), with no documented Swoop role (#16657, #16660) | Retention, acquisition date and any intervention unestablished; general recusal obligations applied; no matter-level recusal records located; Swoop's direct awards began before his nomination; no reviewed direct award to Swoop made during his tenure lists Navy funding — the one Navy-funded Swoop record is a 2023 subaward under a GTARC order (Navy COMPACFLT funds) that ran 2021-07-09 to 2026-07-08, so the prime order overlapped his tenure though the subaward predates it (#16532); subcontracted work and cross-service influence cannot be excluded | Speculative; no intervention evidence located |
 | H3 An industry partner introduced Swoop | `swoop-anduril.swooptech.com` certificates dated 2025-11-07 and 2026-02-04 suggest a named technical environment (#16588, #16622, #16625) | The dates postdate the reported formation; a hostname establishes neither a relationship nor an introduction, and Swoop uses codenames (Valhalla, Olympus, Sherwood); no source names a sponsor; direct awards and subcontracts can coexist | Speculative; lead #103009 |
-| H4 Continuity from earlier government work | Swoop's court filings say its first major government contract came in 2015 and that it was prime on INTREPID (2018), and describe a 2019 meeting with Terry Halvorsen of Samsung, called a special Government employee; SEP's complaint says Swoop described nearly all its business as classified (#16569, #16645, #16646) | A party's pleading, not a government finding; sponsor, classification and any link to Golden Dome unknown; a missing public award ID has ordinary explanations | Speculative; court exhibits needed |
+| H4 Continuity from earlier government work | Swoop's court filings say its first major government contract came in 2015 and that it was prime on INTREPID (2018), and describe a 2019 meeting with Terry Halvorsen of Samsung, called a special Government employee (very likely the DoD CIO of 2015–2017, then a Samsung executive; the agency behind his 2019 SGE status is unidentified); SEP's complaint says Swoop described nearly all its business as classified (#16569, #16645, #16646, #16662, #16663) | A party's pleading, not a government finding; sponsor, classification and any link to Golden Dome unknown; a missing public award ID has ordinary explanations | Speculative; court exhibits needed |
 | H5 Two-Step funds Golden Dome-relevant work | Pre-formation sole-source OT with $9.8M and $2.4M modifications signed during the coalition's reported life; funding office AFLCMC ESG (F3QCAZ), contracting office AFLCMC C3BM (#16530) | Both modifications coded as work within scope; title is only "Project Two-Step"; ordinary continuation of the Air Force project fits equally well; absence of HQ0202 funding is weak evidence because Guetlein can use department-wide vehicles | Unresolved contract-scope question; agreement, modifications and DEC determination needed |
 | H6 Later entrant / changing roster | Membership grew from nine (2026-03-17) to 11 (2026-04-27); Swoop's earliest dated naming is 2026-03-24 (#16558, #16520) | No dated roster or agreement places Swoop before or after 2026-03-17 | Unresolved; tests the founder premise |
 | H7 Routine technical matching or program reuse | Industry teaming or program-office technical evaluation could bring a capable vendor in, with the investment, website maintenance and contract growth unrelated | No specific selection record located; Swoop's known contracts may be separate from its coalition role | Compatible with the observed facts |
@@ -438,11 +449,28 @@ establishes a selection mechanism.
   one disclosed raise; the ultimate source of funds is unknown and may include
   operating revenue, insider funds, borrowing or private financing (#16600,
   #16534).
-- Swoop's public WordPress media records hold four 2023-09-14 items titled
-  "Gen James Jones" and "Gen Robert Wheeler", attached to the homepage object.
-  The reviewed archived pages do not display or reference them; the
-  individuals' identities and any relationship to Swoop are unverified (lead
-  #103013).
+- Swoop's public WordPress media records hold two photos titled "Gen Robert
+  Wheeler" and "Gen James Jones" (each uploaded in color and grayscale on
+  2023-09-14, attached to the homepage next to template "testimonial"
+  placeholder images); none of 119 reviewed captures displays them (#16654–
+  #16656). The Wheeler photo is the same photograph Aireon and the Defense
+  Science Board publish for retired Maj. Gen. Robert E. Wheeler (identity by
+  photo match, inference; checked visually), and Swoop's copy predates every
+  dated public copy found. Wheeler was the DoD's deputy CIO for C4 from 2012
+  until 2016, overlapping Terry Halvorsen's tenure as DoD CIO, and the DSB's
+  2024 and 2025 rosters list him on its Permanent Subcommittee on Threat
+  Reduction; under the board's charter, outside members serve as special
+  government employees (inference; appointment papers not seen). The Jones
+  photo very likely shows Gen. James L. Jones Jr. (inference). **No record shows
+  either man in any role at Swoop**, and nothing ties Wheeler's DSB work to
+  Golden Dome, MDA, C3BM or CDAO matters (#16657–#16661, #16664, #16665; leads
+  #103555, #103559, #103561).
+- The same redesign attached "BDT + MSD" (BDT & MSD Partners) and "Equality
+  Asset Management" logos to the homepage on 2023-09-15; none is displayed in
+  reviewed captures, and their meaning is unknown. Context, not a link: MSD-
+  branded vehicles appear under Black Marlin Investments in Phelan's OGE 278e,
+  the same parent line as the Swoop Search holding (#16667, #16599; lead
+  #103570).
 
 ## 6. Next steps
 
@@ -466,6 +494,12 @@ St. Mary's Point records request for the withdrawn CUP file and the 2024
 letter (needs your approval; #103214); FOIA for the HQ086224C0002 statement of
 work, test report and 8(a) offering letter, and the SSC PARCS deliverables
 (#102674); full WSJ text.
+
+From the senior-officials track: a FOIA for Wheeler's DSB appointment, SGE
+status and any recusals (#103555, human); the agency behind Halvorsen's 2019 SGE
+status (#103557, high); re-running the FACA member search when GSA restores it
+(#103559); any Wheeler or Strategic Consulting Unlimited tie to Swoop
+(#103561); and the BDT & MSD / Equality Asset Management logos (#103570, high).
 
 Pending your decision (raised in the forked session): saving six free MCRO
 PDFs that were read in the browser but not downloaded, and ordering Hennepin
