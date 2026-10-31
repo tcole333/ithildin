@@ -13,9 +13,9 @@ the reviews; their council-minutes quotes were checked against the OCR text.
 
 - **Who they are.** **Swoop Search LLC, now Swoop Technologies LLC**, is a
   Delaware LLC whose housing-search website launched in Madison, Wisconsin on
-  2012-10-10 (the company dates its founding to December 2011). Its early
-  website named founders Quinn, Michael and Paul Bottum; contemporary reporting
-  described Quinn's co-founders as his father and uncle. Minnesota's
+  2012-10-10 (the company dates its founding to December 2011). By Swoop's own
+  2021 federal complaint, Paul Bottum founded it "along with his son (Quinn
+  Bottum) and brother (Michael Bottum)" (#16645). Minnesota's
   foreign-LLC record identifies Swoop Search LLC as the prior Minnesota and
   home-jurisdiction name of Swoop Technologies LLC; Minnesota recorded the name
   amendment on 2025-02-12 (the Delaware effective date is unverified). Paul
@@ -112,7 +112,16 @@ the reviews; their council-minutes quotes were checked against the OCR text.
   or lien appears in the sources checked, but the county recorder index and UCC
   records were not searched, so the absence of a mortgage is not established.
   No other Swoop-owned parcel was found in 59 Minnesota counties or in the
-  Wisconsin parcel data searched (Dane County partial) (#16640).
+  Wisconsin parcel data searched (Dane County partial) (#16640). The assessor
+  lists only the 2020 sale, so the prior chain of title is still open; the
+  county's 4,552 sq ft is above-grade area, which with the finished basement
+  reconciles with the MLS's 6,898 sq ft (#16652, #16653).
+- Minnesota state courts show one Swoop case — Sweat Equity Partners v. Swoop
+  Search (Washington County 82-CV-21-5250, a 2021 subpoena dispute in which
+  Swoop won a $4,000 sanction) — and no docketed money judgment against Swoop
+  or the Bottums, and no criminal, family or probate cases for the founders
+  (MCRO covers state courts only, not recorder or UCC filings) (#16643, #16644,
+  #16648, #16649).
 - Use of the house: St. Mary's Point council minutes (2024-02-06 to 2024-05-07)
   record the city attorney saying Swoop "now clearly has employees working at
   the house as an office (place of employment) which is not allowed" after a
@@ -137,13 +146,14 @@ the reviews; their council-minutes quotes were checked against the OCR text.
   (1998), then Jundt Associates analyst (1999) and portfolio manager (2000);
   UW BA 1985 and MS 1987, University of Minnesota PhD 1992. It lists no
   government or military service; later service is not excluded (#16539,
-  #16541, #16542, #16598).
+  #16541, #16542, #16598). His 2006 suit against his former employer produced
+  money judgments for him (most recently $1.23M in 2009, now marked expired;
+  whether it was collected is unknown) (#16647).
 - **Quinn Colton Bottum**: Swoop's 2023 site identified him as co-founder and
   CTO and showed him presenting at IBM SPADE on encryption and "quantum for
-  defense" (#16572). The Badger Herald (2012) described Quinn's co-founders as
-  his father and uncle; the reviewed records do not establish which role belongs
-  to Paul and which to Michael (the patents list Quinn and Paul in the same
-  city, not at a shared address) (#16548, #16596).
+  defense" (#16572). Swoop's own 2021 federal complaint settles the family
+  roles: "In 2012, Paul Bottum founded Swoop along with his son (Quinn Bottum)
+  and brother (Michael Bottum)" (#16645).
 - **Michael Christopher Bottum** is a co-founder and co-inventor; the current
   site's WordPress metadata attributes its main page to an account named
   Michael Bottum (#16550, #16596).
@@ -187,6 +197,18 @@ the reviews; their council-minutes quotes were checked against the OCR text.
 - The source of funds for the 2020 cash house purchase is not established;
   operating revenue, insider contributions, borrowing or unfiled private
   financing all remain possible (#16600).
+- Adverse-party allegations, unadjudicated (Sweat Equity Partners' 2021 San
+  Francisco complaint, filed as an exhibit in Minnesota case 82-CV-21-5250):
+  Swoop represented that it had "booked $170 million in revenue for 2019" and
+  had inquiries valuing it at "nearly $1 billion"; SEP alleges Swoop's "actual
+  2019 revenues were less than $2 million" and that its latest internal
+  financial statements valued it at $40.7M; that "all or nearly all" of its
+  business "flowed from classified contracts" it would not describe; and that
+  a March 2020 demonstration to Swoop's government customer "secured Swoop's
+  largest current revenue stream" (SEP elsewhere values a stream it helped
+  secure at $100M). If accurate, that revenue would predate the August 2020
+  cash house purchase — a possible ordinary explanation for the cash, not an
+  established one (#16646).
 
 ### Digital infrastructure (passive observations, thread 233)
 - Domains: swoopsrch.com (registered 2012-09-05, five weeks before the website
@@ -240,9 +262,13 @@ system for defense and industry" (2023) (#16584, #16585). Swoop's April 2020
 bankruptcy-court motion (Bankr. D. Del. 20-10534, D.I. 19 ¶¶4–7) says it began
 discussing its technology with senior U.S. government officials in 2016 and
 generated two projects in 2018: MS FURY, as Rincon Research's subcontractor,
-and INTREPID, as prime with DirectStream Federal as its subcontractor. Neither
-project has been tied to a public award identifier in the reviewed material;
-their sponsor, reporting status and classification are unverified.
+and INTREPID, as prime with DirectStream Federal as its subcontractor. Swoop's
+2021 federal complaint adds that its "first major contract with the United
+States Government" came in 2015, "processing and analyzing geospatial data in
+remote locations", and dates MS FURY to April 2018 and INTREPID to August 2018;
+SEP's complaint says Swoop told it those contracts were classified (#16645,
+#16646). None of these projects has been tied to a public award identifier in
+the reviewed material; their sponsors and classification are unverified.
 
 ## 2. The Golden Dome C2 Coalition
 
@@ -351,7 +377,7 @@ establishes a selection mechanism.
 | H1 Relevant prior work made Swoop a plausible C2 participant | Direct prototype OTs with CDAO (Joint Staff J6) and the Air Force C3BM office before formation (#16531, #16530); Systems Intelligence awards naming Swoop OS demonstrations on MDA and Space Force radars, Swoop's role undisclosed (#16560, #16561); by Swoop's court account, government discussions from 2016 and projects from 2018; "integration plane" product (#16597); the retained records describe purchases of Swoop OS radar demonstrations through Systems Intelligence, with later OSD and Army obligations on that contract; performance and Swoop's share are unverified (#16630, #16632, #16634) | Establishes relevant or planned work, not selection, founder status or successful delivery; Aalyria is a similarly small specialist and Anduril held a C2 operating-system demonstrator, so the capability was not unique; the same court filing alleges missed demonstrations, a 2019 stop-work order and harm to Swoop's reputation with the government (Swoop's litigation account, not adjudicated); no record links the work to Golden Dome | Plausible capability-based explanation; the prior-work premise is the best documented, selection unproven |
 | H2 A disclosed investment gave an access route | Phelan's January 2025 disclosure lists the Swoop-named interest; his tenure (2025-03-25 to 2026-04-22) overlapped the coalition's life and the MDA OT (#16599) | Retention, acquisition date and any intervention unestablished; general recusal obligations applied; no matter-level recusal records located; Swoop's direct awards began before his nomination; no reviewed direct award to Swoop made during his tenure lists Navy funding — the one Navy-funded Swoop record is a 2023 subaward under a GTARC order (Navy COMPACFLT funds) that ran 2021-07-09 to 2026-07-08, so the prime order overlapped his tenure though the subaward predates it (#16532); subcontracted work and cross-service influence cannot be excluded | Speculative; no intervention evidence located |
 | H3 An industry partner introduced Swoop | `swoop-anduril.swooptech.com` certificates dated 2025-11-07 and 2026-02-04 suggest a named technical environment (#16588, #16622, #16625) | The dates postdate the reported formation; a hostname establishes neither a relationship nor an introduction, and Swoop uses codenames (Valhalla, Olympus, Sherwood); no source names a sponsor; direct awards and subcontracts can coexist | Speculative; lead #103009 |
-| H4 Continuity from earlier government work | Swoop's court filing says it was prime on INTREPID (2018) and describes a 2019 meeting with Terry Halvorsen of Samsung, called a special Government employee (#16569) | A party's pleading, not a government finding; sponsor, classification and any link to Golden Dome unknown; a missing public award ID has ordinary explanations | Speculative; court exhibits needed |
+| H4 Continuity from earlier government work | Swoop's court filings say its first major government contract came in 2015 and that it was prime on INTREPID (2018), and describe a 2019 meeting with Terry Halvorsen of Samsung, called a special Government employee; SEP's complaint says Swoop described nearly all its business as classified (#16569, #16645, #16646) | A party's pleading, not a government finding; sponsor, classification and any link to Golden Dome unknown; a missing public award ID has ordinary explanations | Speculative; court exhibits needed |
 | H5 Two-Step funds Golden Dome-relevant work | Pre-formation sole-source OT with $9.8M and $2.4M modifications signed during the coalition's reported life; funding office AFLCMC ESG (F3QCAZ), contracting office AFLCMC C3BM (#16530) | Both modifications coded as work within scope; title is only "Project Two-Step"; ordinary continuation of the Air Force project fits equally well; absence of HQ0202 funding is weak evidence because Guetlein can use department-wide vehicles | Unresolved contract-scope question; agreement, modifications and DEC determination needed |
 | H6 Later entrant / changing roster | Membership grew from nine (2026-03-17) to 11 (2026-04-27); Swoop's earliest dated naming is 2026-03-24 (#16558, #16520) | No dated roster or agreement places Swoop before or after 2026-03-17 | Unresolved; tests the founder premise |
 | H7 Routine technical matching or program reuse | Industry teaming or program-office technical evaluation could bring a capable vendor in, with the investment, website maintenance and contract growth unrelated | No specific selection record located; Swoop's known contracts may be separate from its coalition role | Compatible with the observed facts |
@@ -401,6 +427,13 @@ establishes a selection mechanism.
   arrangements or contract place-of-performance entries is an open question,
   not an allegation; cleared work may occur at government or other sites, and
   Minnesota's record lists a separate executive office in St. Paul (#16573).
+- SEP's complaint also says Swoop represented that it had received an
+  investment proposal from "Cerberus Capital Partners" valuing it at $400–500M,
+  plus interest from Samsung and Macquarie, and that "Swoop has never been able
+  to substantiate these representations, and no such transaction has ever come
+  to fruition" (¶¶41–42). The name is not resolved to Cerberus Capital
+  Management, the firm Deputy Secretary Feinberg co-founded; no Cerberus or
+  Feinberg link to Swoop is established (#16646).
 - Capital: the eCRV records a $2.75M cash purchase in August 2020, more than the
   one disclosed raise; the ultimate source of funds is unknown and may include
   operating revenue, insider funds, borrowing or private financing (#16600,
@@ -434,14 +467,11 @@ letter (needs your approval; #103214); FOIA for the HQ086224C0002 statement of
 work, test report and 8(a) offering letter, and the SSC PARCS deliverables
 (#102674); full WSJ text.
 
-In progress in a forked session (track H2, terms accepted with your approval):
-Minnesota court records via MCRO, including Bottum v. Jundt (#103216), and the
-Washington County assessor's sales history and building data for the Itasca
-parcel (#103218).
-
-Also worth resolving: the 2024-05-07 minutes record a family member referring
-to "her son, a founder of Swoop"; identifying that speaker may settle which
-co-founder is Quinn's father.
+Pending your decision (raised in the forked session): saving six free MCRO
+PDFs that were read in the browser but not downloaded, and ordering Hennepin
+County paper copies of the 2007 and 2009 Bottum v. Jundt orders. New
+follow-up leads from the court and assessor track: #103494, #103496, #103498,
+#103500.
 
 ## 7. Coverage limits
 DoD procurement data reaches FPDS about 90 days late; classified and
