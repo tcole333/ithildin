@@ -12,7 +12,7 @@ Usage:
     python tools/graph_tools.py centrality [--metric degree|betweenness] [--top 30] [--output FILE]
     python tools/graph_tools.py components [--min-size 3] [--output FILE]
     python tools/graph_tools.py bridges [--output FILE]
-    python tools/graph_tools.py paths "Leon Black" "Ehud Barak" [--max-hops 4]
+    python tools/graph_tools.py paths "Leon Black" "Ehud Barak" [--max-hops 4] [--output FILE]
     python tools/graph_tools.py neighbors "Leon Black" [--depth 2] [--output FILE]
     python tools/graph_tools.py holes [--min-degree 5] [--output FILE]
     python tools/graph_tools.py cliques [--min-size 4] [--output FILE]
@@ -92,11 +92,11 @@ def _load_aliases(db):
     """Load name alias map: alias -> canonical_name."""
     alias_map = {}
     try:
-        rows = db.execute("SELECT alias_name, canonical_name FROM name_aliases").fetchall()
+        rows = db.execute("SELECT alias, canonical_name FROM name_aliases").fetchall()
         for r in rows:
-            alias_map[r["alias_name"].lower()] = r["canonical_name"]
-    except sqlite3.OperationalError:
-        pass  # table doesn't exist yet
+            alias_map[r["alias"].lower()] = r["canonical_name"]
+    except sqlite3.OperationalError as exc:
+        print(f"Warning: could not load name aliases: {exc}", file=sys.stderr)
     return alias_map
 
 
@@ -108,22 +108,28 @@ def _canonicalize(name, alias_map):
     return alias_map.get(lower, name.strip())
 
 
-def build_graph(db=None, as_of=None, profile_id=None, all_profiles=False):
+def build_graph(db=None, as_of=None, profile_id=None, all_profiles=False,
+                directed=False, as_of_policy="lenient"):
     """Build adjacency list from connections table with alias resolution.
 
     Args:
         db: Optional database connection.
         as_of: Optional date string (YYYY-MM-DD). If provided, only include
                connections where valid_from <= as_of and (valid_until IS NULL
-               or valid_until >= as_of). Connections without temporal data
-               are always included.
+               or valid_until >= as_of).
         profile_id: Scope to connections from this profile. Defaults to active profile.
         all_profiles: If True, include all profiles regardless of active profile.
+        directed: If True, preserve stored edge direction instead of adding reverse edges.
+        as_of_policy: Under an as_of build, "lenient" includes edges without
+                      valid_from while "strict" excludes them.
 
     Returns:
         adj: dict[str, dict[str, list[dict]]] — adj[a][b] = list of connection records
         nodes: set of all node names
     """
+    if as_of_policy not in {"lenient", "strict"}:
+        raise ValueError("as_of_policy must be 'lenient' or 'strict'")
+
     close_db = False
     if db is None:
         db = get_graph_db()
@@ -137,10 +143,6 @@ def build_graph(db=None, as_of=None, profile_id=None, all_profiles=False):
     if resolved:
         conditions.append("profile_id = ?")
         params.append(resolved)
-    if as_of:
-        conditions.append("(valid_from IS NULL OR valid_from <= ?)")
-        conditions.append("(valid_until IS NULL OR valid_until >= ?)")
-        params.extend([as_of, as_of])
 
     where = f"WHERE {' AND '.join(conditions)}" if conditions else ""
     cols = "id, person_a, person_b, relationship_type, description, strength, created_at"
@@ -153,6 +155,8 @@ def build_graph(db=None, as_of=None, profile_id=None, all_profiles=False):
     adj = defaultdict(lambda: defaultdict(list))
     nodes = set()
     scoped_names = set()
+    candidate_edges = 0
+    undated_edges = 0
 
     if resolved:
         try:
@@ -174,6 +178,19 @@ def build_graph(db=None, as_of=None, profile_id=None, all_profiles=False):
         if not a or not b or a == b:
             continue
 
+        candidate_edges += 1
+        if as_of:
+            valid_from = r["valid_from"]
+            valid_until = r["valid_until"]
+            if valid_until and valid_until < as_of:
+                continue
+            if not valid_from:
+                undated_edges += 1
+                if as_of_policy == "strict":
+                    continue
+            elif valid_from > as_of:
+                continue
+
         edge_data = {
             "id": r["id"],
             "type": r["relationship_type"],
@@ -181,7 +198,8 @@ def build_graph(db=None, as_of=None, profile_id=None, all_profiles=False):
             "strength": r["strength"],
         }
         adj[a][b].append(edge_data)
-        adj[b][a].append(edge_data)
+        if not directed:
+            adj[b][a].append(edge_data)
         nodes.add(a)
         nodes.add(b)
 
@@ -201,6 +219,11 @@ def build_graph(db=None, as_of=None, profile_id=None, all_profiles=False):
                 continue
             if resolved and not ({a, b} & (nodes | scoped_names)):
                 continue
+            candidate_edges += 1
+            if as_of:
+                undated_edges += 1
+                if as_of_policy == "strict":
+                    continue
             edge_data = {
                 "id": f"er:{r['id']}",
                 "type": r["relation_type"],
@@ -208,11 +231,23 @@ def build_graph(db=None, as_of=None, profile_id=None, all_profiles=False):
                 "strength": "medium",
             }
             adj[a][b].append(edge_data)
-            adj[b][a].append(edge_data)
+            if not directed:
+                adj[b][a].append(edge_data)
             nodes.add(a)
             nodes.add(b)
     except sqlite3.OperationalError:
         pass  # entity_relations table may not exist
+
+    if as_of:
+        dated_edges = candidate_edges - undated_edges
+        date_coverage = 100 * dated_edges / candidate_edges if candidate_edges else 0.0
+        disposition = "included" if as_of_policy == "lenient" else "excluded"
+        print(
+            f"as-of {as_of} ({as_of_policy}): {undated_edges}/{candidate_edges} "
+            f"edges undated and {disposition} — dates cover {date_coverage:.1f}% "
+            "of the graph",
+            file=sys.stderr,
+        )
 
     if close_db:
         db.close()
@@ -852,6 +887,8 @@ def main():
     p_cent.add_argument("--top", type=int, default=30)
     p_cent.add_argument("--cache", action="store_true", help="Cache results in graph_metrics table")
     p_cent.add_argument("--as-of", help="Temporal snapshot date (YYYY-MM-DD)")
+    p_cent.add_argument("--as-of-policy", choices=["lenient", "strict"], default="lenient",
+                        help="Include or exclude edges without valid_from in temporal snapshots")
     add_output_args(p_cent)
 
     # components
@@ -868,6 +905,7 @@ def main():
     p_paths.add_argument("source")
     p_paths.add_argument("target")
     p_paths.add_argument("--max-hops", type=int, default=6)
+    add_output_args(p_paths)
 
     # neighbors
     p_neigh = sub.add_parser("neighbors", help="Ego network around a node")
@@ -933,6 +971,8 @@ def main():
     # stats
     p_stats = sub.add_parser("stats", help="Graph summary statistics")
     p_stats.add_argument("--as-of", help="Temporal snapshot date (YYYY-MM-DD)")
+    p_stats.add_argument("--as-of-policy", choices=["lenient", "strict"], default="lenient",
+                         help="Include or exclude edges without valid_from in temporal snapshots")
     add_output_args(p_stats)
 
     args = parser.parse_args()
@@ -941,6 +981,7 @@ def main():
 
     if args.command == "centrality":
         adj, nodes = build_graph(as_of=getattr(args, 'as_of', None),
+                                 as_of_policy=getattr(args, 'as_of_policy', 'lenient'),
                                  profile_id=p_id, all_profiles=p_all)
         if args.metric == "degree":
             metrics = degree_centrality(adj, nodes)
@@ -998,6 +1039,16 @@ def main():
     elif args.command == "paths":
         adj, nodes = build_graph(profile_id=p_id, all_profiles=p_all)
         path = _bfs_shortest_path(adj, args.source, args.target, max_depth=args.max_hops)
+        result = {
+            "source": args.source,
+            "target": args.target,
+            "max_hops": args.max_hops,
+            "found": path is not None,
+            "hops": len(path) - 1 if path else None,
+            "path": path or [],
+        }
+        if write_output(result, args, summary=f"path from {args.source} to {args.target}"):
+            return
         if path:
             print(f"\nShortest path ({len(path) - 1} hops):")
             for i, node in enumerate(path):
@@ -1249,6 +1300,7 @@ def main():
 
     elif args.command == "stats":
         adj, nodes = build_graph(as_of=getattr(args, 'as_of', None),
+                                 as_of_policy=getattr(args, 'as_of_policy', 'lenient'),
                                  profile_id=p_id, all_profiles=p_all)
         s = graph_stats(adj, nodes)
         if write_output(s, args, summary="graph statistics"):
