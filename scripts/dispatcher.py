@@ -2645,7 +2645,8 @@ def import_connections(
                 "strength": record.get("strength", "medium"),
                 "date_range": record.get("date_range"),
                 "finding_id": record.get("finding_id"),
-                "verification_status": record.get("verification_status"),
+                # Review state is granted by findings_tracker gates, never asserted by workers.
+                "verification_status": "unverified",
                 "profile_id": record.get("profile_id"),
             },
         )
