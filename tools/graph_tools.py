@@ -182,11 +182,13 @@ def build_graph(db=None, as_of=None, profile_id=None, all_profiles=False,
         if as_of:
             valid_from = r["valid_from"]
             valid_until = r["valid_until"]
+            if valid_until and valid_until < as_of:
+                continue
             if not valid_from:
                 undated_edges += 1
                 if as_of_policy == "strict":
                     continue
-            elif valid_from > as_of or (valid_until and valid_until < as_of):
+            elif valid_from > as_of:
                 continue
 
         edge_data = {

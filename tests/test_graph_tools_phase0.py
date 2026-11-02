@@ -186,6 +186,16 @@ def test_as_of_policy_strict_and_lenient(graph_db, capsys):
     ) in strict_warning
 
 
+def test_lenient_as_of_drops_undated_edges_that_ended_before_the_date(graph_db):
+    _add_connection(graph_db, "Ended A", "Ended B", valid_until="2020-01-01")
+    _add_connection(graph_db, "Open A", "Open B")
+
+    lenient, _ = graph_tools.build_graph(graph_db, as_of="2026-01-01", all_profiles=True)
+
+    assert "Ended A" not in lenient
+    assert "Open B" in lenient["Open A"]
+
+
 @pytest.mark.parametrize("command", ["centrality", "stats"])
 def test_as_of_subcommands_forward_policy(command, monkeypatch, capsys):
     captured = {}
