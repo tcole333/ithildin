@@ -28,11 +28,12 @@ from pathlib import Path
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.runtime_db import connect_investigation_db, investigation_db_path
 except ImportError:
     from output_util import add_output_args, write_output
+    from runtime_db import connect_investigation_db, investigation_db_path
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DB_PATH = PROJECT_ROOT / "investigation.db"
+DB_PATH = investigation_db_path()
 CACHE_DIR = Path("/tmp/propublica-cache")
 
 BASE_URL = "https://projects.propublica.org/trump-team-financial-disclosures"
@@ -154,7 +155,7 @@ def _log(query, count):
 
 def _get_db():
     """Get investigation.db connection with financial_disclosures schema."""
-    db = sqlite3.connect(str(DB_PATH))
+    db = connect_investigation_db(DB_PATH, "rw")
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")
@@ -702,7 +703,7 @@ def cmd_scan_entities(args):
                 all_appointees[slug] = match_info
             print(f" -> {len(results)} matches")
         else:
-            print(f" -> 0 matches")
+            print(" -> 0 matches")
 
     # Search person terms
     for i, term in enumerate(person_terms):
@@ -724,7 +725,7 @@ def cmd_scan_entities(args):
                 all_appointees[slug] = match_info
             print(f" -> {len(results)} matches")
         else:
-            print(f" -> 0 matches")
+            print(" -> 0 matches")
 
     # Build output
     output = {
@@ -1037,7 +1038,7 @@ def cmd_stats(args):
             ORDER BY fetched_at DESC
             LIMIT 10
         """).fetchall()
-        print(f"\n  Recently ingested:")
+        print("\n  Recently ingested:")
         for row in rows:
             nw = ""
             if row["net_worth_low"]:
@@ -1091,7 +1092,7 @@ def main():
     add_output_args(p_scan)
 
     # stats
-    p_stats = sub.add_parser("stats", help="Show database and ingestion stats")
+    sub.add_parser("stats", help="Show database and ingestion stats")
 
     args = parser.parse_args()
 

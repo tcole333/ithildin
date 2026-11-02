@@ -49,6 +49,17 @@ add `--broad` only when token-based discovery is intentional.
 
 Prefer this tool over jurisdiction-specific tools. Searches all previously ingested data in `registry.db`.
 
+### Database location
+
+Registry tools use the checkout's `registry.db`, or the file named by
+`ITHILDIN_REGISTRY_DB_PATH`. Query commands open it read-only, and every
+registry tool exits with `SQLite database not found` instead of creating an
+empty stand-in that would answer every query with zero rows. In a git worktree,
+link the main checkout's copy first (`uv run python
+scripts/link_worktree_runtime.py`, see `docs/GIT_WORKFLOW.md`) or set the
+override. Ingest tools write only to an existing registry; create a new, empty
+one explicitly with `uv run python tools/query_registry.py init`.
+
 ### Subcommands
 
 ```bash
@@ -108,7 +119,11 @@ Address queries keep the existing result buckets and alphabetical per-bucket
 limits, with row ID as the deterministic tie-breaker for equal names. Selectors
 must contain at least three normalized letters or digits.
 Missing, stale, or invalid sidecars fail with rebuild instructions; the command
-does not fall back to a full `registry.db` scan.
+does not fall back to a full `registry.db` scan. Freshness compares the registry
+file's size and mtime, page count, maximum row IDs, and relevant schema, plus the
+`-wal` only while it holds uncheckpointed frames. Readers create an empty `-wal`
+and the last read-write connection deletes it, so registry reads never make the
+sidecar stale.
 
 The query route counts FTS candidates independently for each bucket. At 10,000
 or fewer candidates it materializes matching row IDs and sorts the joined base

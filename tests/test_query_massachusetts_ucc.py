@@ -1,4 +1,5 @@
 import json
+import sqlite3
 from pathlib import Path
 
 import pytest
@@ -182,7 +183,7 @@ def test_probe_requires_real_form(monkeypatch):
 def test_source_readiness_does_not_probe_other_sources(monkeypatch):
     monkeypatch.setattr(ucc, "runtime_check", lambda: {"ok": True, "runtime": {"channel": "chrome"}})
     monkeypatch.setattr(source_report, "load_env_file", lambda: None)
-    monkeypatch.setattr(source_report.sqlite3, "connect", lambda *_: pytest.fail("Unrelated DB access"))
+    monkeypatch.setattr(sqlite3, "connect", lambda *_: pytest.fail("Unrelated DB access"))
     monkeypatch.setattr("urllib.request.urlopen", lambda *_: pytest.fail("Unrelated network access"))
     result = source_report.quick_health_check("Massachusetts UCC")
     assert result["status"] == "configured"

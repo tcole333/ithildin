@@ -29,10 +29,28 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.runtime_db import MissingDatabaseError, connect_investigation_db
 except ImportError:
     from output_util import add_output_args, write_output
+    from runtime_db import MissingDatabaseError, connect_investigation_db
 
 DB_PATH = Path(os.environ.get("ITHILDIN_DB_PATH", Path(__file__).parent.parent / "investigation.db"))
+INIT_COMMAND = "uv run python tools/lead_tracker.py init"
+
+
+def connect_tracker_db(path, *, create=False):
+    """Open an investigation database read-write without creating it implicitly.
+
+    A missing file is an error: SQLite would otherwise create an empty
+    database that answers every query with zero rows. ``create=True`` (or the
+    ``init`` command) starts a new database deliberately.
+    """
+    try:
+        return connect_investigation_db(path, "rwc" if create else "rw")
+    except MissingDatabaseError as error:
+        raise MissingDatabaseError(
+            f"{error}\nTo start a new, empty investigation database there instead: {INIT_COMMAND}"
+        ) from None
 
 
 def _detect_active_profile():
@@ -45,7 +63,7 @@ def _detect_active_profile():
     except Exception:
         pass
     try:
-        _db = sqlite3.connect(str(DB_PATH))
+        _db = connect_investigation_db(DB_PATH)
         row = _db.execute(
             "SELECT value FROM investigation_config WHERE key='active_profile'"
         ).fetchone()
@@ -633,10 +651,13 @@ def _merge_duplicate_connection_rows(db):
     ]
 
 
-def get_db():
-    """Get a database connection, creating schema if needed."""
+def get_db(*, create=False):
+    """Open the existing tracker database, creating missing schema objects.
+
+    Pass ``create=True`` only to start a new database at DB_PATH.
+    """
     global _schema_initialized
-    db = sqlite3.connect(str(DB_PATH))
+    db = connect_tracker_db(DB_PATH, create=create)
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")
@@ -2778,6 +2799,9 @@ def main():
     parser = argparse.ArgumentParser(description="OSINT investigation lead tracker")
     subparsers = parser.add_subparsers(dest="command", help="Command")
 
+    # init
+    subparsers.add_parser("init", help="Create a new, empty investigation database at the selected path")
+
     # add
     add_p = subparsers.add_parser("add", help="Add a new lead")
     add_p.add_argument("--title", "-t", required=True)
@@ -2955,7 +2979,14 @@ def main():
         parser.print_help()
         sys.exit(1)
 
-    if args.command in {"triage-export", "triage-apply"}:
+    if args.command == "init":
+        if Path(DB_PATH).exists():
+            print(f"Investigation database already exists: {DB_PATH}")
+        else:
+            get_db(create=True).close()
+            print(f"Created investigation database: {DB_PATH}")
+
+    elif args.command in {"triage-export", "triage-apply"}:
         try:
             if args.command == "triage-export":
                 result = export_triage_batch(limit=args.limit, profile_id=args.profile,
@@ -3375,4 +3406,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except MissingDatabaseError as error:
+        sys.exit(f"ERROR: {error}")

@@ -11,6 +11,7 @@ def ach_db(tmp_path, monkeypatch):
     db_path = tmp_path / "investigation.db"
     monkeypatch.setattr(lead_tracker, "DB_PATH", db_path)
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    lead_tracker.get_db(create=True).close()
     db = hypothesis_tracker.get_hypothesis_db()
     db.executemany(
         "INSERT INTO findings (target_name, summary) VALUES (?, ?)",

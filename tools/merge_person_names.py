@@ -15,13 +15,17 @@ import argparse
 import sqlite3
 import sys
 from collections import defaultdict
-from pathlib import Path
 
-DB_PATH = Path(__file__).parent.parent / "investigation.db"
+try:
+    from tools.runtime_db import MissingDatabaseError, connect_investigation_db, investigation_db_path
+except ImportError:
+    from runtime_db import MissingDatabaseError, connect_investigation_db, investigation_db_path
+
+DB_PATH = investigation_db_path()
 
 
-def get_db():
-    conn = sqlite3.connect(str(DB_PATH))
+def get_db(mode="rw"):
+    conn = connect_investigation_db(DB_PATH, mode)
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -34,7 +38,7 @@ def cmd_scan(args):
         print("Install rapidfuzz: uv pip install rapidfuzz")
         sys.exit(1)
 
-    db = get_db()
+    db = get_db("ro")
     threshold = args.threshold
 
     # Collect all person names from findings and connections
@@ -312,7 +316,7 @@ def cmd_dedup_connections(args):
 
 def cmd_show(args):
     """Show all names, aliases, findings, and connections for a person."""
-    db = get_db()
+    db = get_db("ro")
     name = args.name
 
     # Aliases
@@ -387,7 +391,11 @@ def main():
         parser.print_help()
         return
 
-    {"scan": cmd_scan, "merge": cmd_merge, "dedup-connections": cmd_dedup_connections, "show": cmd_show}[args.command](args)
+    try:
+        {"scan": cmd_scan, "merge": cmd_merge, "dedup-connections": cmd_dedup_connections, "show": cmd_show}[args.command](args)
+    except MissingDatabaseError as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        raise SystemExit(2)
 
 
 if __name__ == "__main__":

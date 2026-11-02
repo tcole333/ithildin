@@ -5,10 +5,12 @@ import sqlite3
 import pytest
 
 from tools import lead_tracker
+from tools.runtime_db import MissingDatabaseError, connect
 
 
 @pytest.fixture
 def schema_calls(monkeypatch, tmp_path):
+    connect(tmp_path / "first.db", "rwc").close()
     monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "first.db")
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
     monkeypatch.setattr(lead_tracker, "_schema_cache", {})
@@ -28,6 +30,7 @@ def test_switching_databases_preserves_independent_schema_and_search_logs(
 ):
     first = lead_tracker.DB_PATH
     second = tmp_path / "second.db"
+    connect(second, "rwc").close()
     for db_path, query in [(first, "first query"), (second, "second query"), (first, "repeat visit")]:
         monkeypatch.setattr(lead_tracker, "DB_PATH", db_path)
         lead_tracker.log_search(query, "fixture", 1)
@@ -58,6 +61,9 @@ def test_deleted_or_replaced_path_cannot_reuse_schema_cache(
         replacement.replace(db_path)
     else:
         db_path.unlink()
+        with pytest.raises(MissingDatabaseError):
+            lead_tracker.log_search("deleted file", "fixture", 0)
+        connect(db_path, "rwc").close()
 
     lead_tracker.log_search("new file", "fixture", 0)
     db = lead_tracker.get_db()

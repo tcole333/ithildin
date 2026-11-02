@@ -11,7 +11,7 @@ def lead_db(monkeypatch, tmp_path):
     db_path = tmp_path / "investigation.db"
     monkeypatch.setattr(lead_tracker, "DB_PATH", db_path)
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
-    db = lead_tracker.get_db()
+    db = lead_tracker.get_db(create=True)
     existing_id = db.execute(
         "INSERT INTO leads (title, profile_id) VALUES ('Existing lead', 'test')"
     ).lastrowid

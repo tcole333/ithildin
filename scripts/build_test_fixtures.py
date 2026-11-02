@@ -14,7 +14,6 @@ from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_INV_DB = REPO_ROOT / "investigation.db"
 DEFAULT_DS10_DB = REPO_ROOT / "datasets" / "lmsband_epstein_files.db"
 DEFAULT_DOSSIER_DIR = REPO_ROOT / "content" / "dossiers"
 DEFAULT_OUTPUT_DIR = REPO_ROOT / "tests" / "fixtures" / "data"
@@ -24,6 +23,9 @@ if str(REPO_ROOT) not in sys.path:
 
 from scripts.financial_quality import ensure_quality_schema  # noqa: E402
 from tools.parse_ds10_financials import create_tables as create_ds10_tables  # noqa: E402
+from tools.runtime_db import connect_investigation_db, investigation_db_path  # noqa: E402
+
+DEFAULT_INV_DB = investigation_db_path()
 
 
 def _connect(path: Path) -> sqlite3.Connection:
@@ -112,7 +114,8 @@ def _build_check_sync_fixture(
     out_db_path: Path,
     out_dossier_path: Path,
 ) -> dict[str, Any]:
-    src_db = _connect(source_inv_path)
+    src_db = connect_investigation_db(source_inv_path)
+    src_db.row_factory = sqlite3.Row
     try:
         source = _load_check_sync_source(src_db, source_dossier_dir)
     finally:

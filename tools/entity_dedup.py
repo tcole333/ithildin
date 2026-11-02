@@ -19,9 +19,13 @@ Usage:
 import argparse
 import sqlite3
 import sys
-from pathlib import Path
 
-DB_PATH = Path(__file__).parent.parent / "investigation.db"
+try:
+    from tools.runtime_db import MissingDatabaseError, connect_investigation_db, investigation_db_path
+except ImportError:
+    from runtime_db import MissingDatabaseError, connect_investigation_db, investigation_db_path
+
+DB_PATH = investigation_db_path()
 
 ALIAS_TYPES = ("person_variant", "entity_variant", "entity_as_person")
 
@@ -102,10 +106,11 @@ ENTITY_SEEDS = {
 }
 
 
-def get_db():
-    db = sqlite3.connect(str(DB_PATH))
+def get_db(mode="rw"):
+    db = connect_investigation_db(DB_PATH, mode)
     db.row_factory = sqlite3.Row
-    db.execute("PRAGMA journal_mode=WAL")
+    if mode != "ro":
+        db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA foreign_keys=ON")
     return db
 
@@ -169,7 +174,7 @@ def cmd_remove_alias(args):
 
 
 def cmd_list_aliases(args):
-    db = get_db()
+    db = get_db("ro")
     _ensure_aliases_table(db)
 
     conditions, params = [], []
@@ -205,7 +210,7 @@ def cmd_list_aliases(args):
 
 def cmd_scan(args):
     """Auto-detect probable duplicates across findings, connections, and entities."""
-    db = get_db()
+    db = get_db("ro")
     _ensure_aliases_table(db)
 
     existing = {r[0].lower() for r in db.execute("SELECT alias FROM name_aliases").fetchall()}
@@ -418,7 +423,7 @@ def cmd_merge(args):
 
 
 def cmd_stats(args):
-    db = get_db()
+    db = get_db("ro")
     _ensure_aliases_table(db)
 
     total = db.execute("SELECT COUNT(*) FROM name_aliases").fetchone()[0]
@@ -476,7 +481,7 @@ def main():
     p_list.add_argument("--canonical", help="Filter by canonical name")
     p_list.add_argument("--type", choices=ALIAS_TYPES, help="Filter by type")
 
-    p_scan = sub.add_parser("scan", help="Auto-detect probable duplicates")
+    sub.add_parser("scan", help="Auto-detect probable duplicates")
 
     p_apply = sub.add_parser("apply", help="Auto-populate entity_as_person aliases")
     p_apply.add_argument("--dry-run", action="store_true")
@@ -496,7 +501,7 @@ def main():
     )
     p_merge.add_argument("--dry-run", action="store_true")
 
-    p_stats = sub.add_parser("stats", help="Alias and collision stats")
+    sub.add_parser("stats", help="Alias and collision stats")
 
     args = parser.parse_args()
 
@@ -511,10 +516,14 @@ def main():
         "stats": cmd_stats,
     }
 
-    if args.command in commands:
-        commands[args.command](args)
-    else:
+    if args.command not in commands:
         parser.print_help()
+        return
+    try:
+        commands[args.command](args)
+    except MissingDatabaseError as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        raise SystemExit(2)
 
 
 if __name__ == "__main__":

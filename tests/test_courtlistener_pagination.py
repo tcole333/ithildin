@@ -1,8 +1,28 @@
 import json
+import sqlite3
 from argparse import Namespace
 
-from tools import query_courtlistener
+import pytest
+
+from tools import lead_tracker, query_courtlistener
 from tools.courtlistener_api_client import CourtListenerClient
+
+
+@pytest.fixture
+def search_log(tmp_path, monkeypatch):
+    """Log CourtListener searches to a temporary tracker database, not the shared one."""
+    db_path = tmp_path / "investigation.db"
+    monkeypatch.setattr(lead_tracker, "DB_PATH", db_path)
+    monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    lead_tracker.get_db(create=True).close()
+    return db_path
+
+
+def _logged_sources(db_path):
+    with sqlite3.connect(db_path) as db:
+        sources = [row[0] for row in db.execute("SELECT source FROM search_log")]
+    db.close()
+    return sources
 
 
 def test_client_follows_next_links_and_records_pagination(monkeypatch):
@@ -122,7 +142,7 @@ def test_pagination_report_warns_when_upstream_ends_early(capsys):
 
 
 def test_search_reports_complete_upstream_count_below_limit(
-    monkeypatch, tmp_path, capsys
+    monkeypatch, tmp_path, capsys, search_log
 ):
     class CompleteClient:
         last_pagination = None
@@ -168,6 +188,7 @@ def test_search_reports_complete_upstream_count_below_limit(
         "pagination complete: returned 2 of 2 upstream results"
         in capsys.readouterr().err
     )
+    assert _logged_sources(search_log) == ["courtlistener"]
 
 
 def test_investment_search_writes_explicit_zero_result_artifact(

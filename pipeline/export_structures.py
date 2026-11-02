@@ -24,6 +24,7 @@ OUTPUT_DIR = CONTENT_DIR / "structures"
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from tools.name_resolver import resolve_canonical  # noqa: E402 - CLI repository path bootstrap
+from tools.runtime_db import connect_investigation_db  # noqa: E402 - CLI repository path bootstrap
 
 # Ownership/control relation types — these define parent→child in the DAG
 STRUCTURAL_RELATIONS = {
@@ -66,7 +67,7 @@ def get_db():
     if not INVESTIGATION_DB.exists():
         print(f"  Error: {INVESTIGATION_DB} not found")
         sys.exit(1)
-    conn = sqlite3.connect(str(INVESTIGATION_DB))
+    conn = connect_investigation_db(INVESTIGATION_DB)
     conn.row_factory = sqlite3.Row
     return conn
 

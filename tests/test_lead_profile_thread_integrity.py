@@ -17,7 +17,7 @@ def scoped_lead_db(monkeypatch, tmp_path):
         "_profile_thread_id_map",
         lambda profile_id: {1: 61} if profile_id == "allbirds" else {},
     )
-    db = lead_tracker.get_db()
+    db = lead_tracker.get_db(create=True)
     db.executemany(
         "INSERT INTO investigation_threads (id, title, profile_id) "
         "VALUES (?, ?, ?)",

@@ -8,11 +8,17 @@ import hashlib
 import json
 import shutil
 import sqlite3
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from tools.runtime_db import connect_investigation_db  # noqa: E402
+
 WORKDIR = Path("/tmp/osint-oep1Qb2D")
 SOURCE_REL = Path(
     "investigations/geo-group/sources/"
@@ -256,7 +262,7 @@ def main() -> None:
     write_csv(REPORTS["ledger"], list(ledger_rows[0]), ledger_rows)
     write_csv(REPORTS["negative"], list(negative_rows[0]), negative_rows)
 
-    db = sqlite3.connect(ROOT / "investigation.db")
+    db = connect_investigation_db()
     db.row_factory = sqlite3.Row
     finding = dict(db.execute(
         "SELECT id, target_name, summary, claim_type, confidence, verification_status, thread_id, profile_id FROM findings WHERE id=12993"

@@ -34,16 +34,18 @@ from typing import Any
 try:
     from tools.output_util import add_output_args, write_output
     from tools.public_records_contract import canonical_json, utc_now_iso
+    from tools.runtime_db import investigation_db_path
 except ImportError:
     from output_util import add_output_args, write_output
     from public_records_contract import canonical_json, utc_now_iso
+    from runtime_db import investigation_db_path
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_DB = PROJECT_ROOT / "datasets" / "public_records_entity_candidates.db"
 DEFAULT_PROPERTY_DB = PROJECT_ROOT / "datasets" / "property_records.db"
 DEFAULT_COURT_DB = PROJECT_ROOT / "datasets" / "state_court_records.db"
-DEFAULT_CORE_DB = PROJECT_ROOT / "investigation.db"
+DEFAULT_CORE_DB = investigation_db_path()
 SCHEMA_VERSION = 1
 
 _RECORD_SPECS = {
@@ -398,7 +400,7 @@ def _row_to_dict(row: sqlite3.Row | None) -> dict[str, Any] | None:
 def _open_readonly(path: Path) -> sqlite3.Connection:
     if not path.is_file():
         raise FileNotFoundError(f"database not found: {path}")
-    db = sqlite3.connect(f"file:{path.resolve()}?mode=ro", uri=True)
+    db = sqlite3.connect(f"{path.resolve().as_uri()}?mode=ro", uri=True)
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA foreign_keys = ON")
     return db

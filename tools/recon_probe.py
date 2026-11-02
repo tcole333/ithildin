@@ -18,8 +18,8 @@ import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
-from urllib.error import HTTPError, URLError
-from urllib.parse import quote_plus, urlencode
+from urllib.error import HTTPError
+from urllib.parse import quote_plus
 from urllib.request import Request, urlopen
 
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -35,8 +35,10 @@ if env_path.exists():
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.runtime_db import connect, connect_investigation_db, investigation_db_path, registry_db_path
 except ImportError:
     from output_util import add_output_args, write_output
+    from runtime_db import connect, connect_investigation_db, investigation_db_path, registry_db_path
 
 TIMEOUT = 15  # seconds per probe
 MAX_WORKERS = 10
@@ -71,7 +73,7 @@ def _sqlite_count(db_path, query_sql, params=None):
     """Run a COUNT query against a local SQLite database."""
     if not db_path.exists():
         return None
-    db = sqlite3.connect(str(db_path), timeout=5)
+    db = connect(db_path, timeout=5)
     try:
         row = db.execute(query_sql, params or []).fetchone()
         return row[0] if row else 0
@@ -140,11 +142,11 @@ def probe_lobbying_lobbyist(target):
 
 
 def probe_fara(target):
-    db_path = PROJECT_ROOT / "investigation.db"
+    db_path = investigation_db_path()
     if not db_path.exists():
         return ("fara", 0, "no_db", "investigation.db missing")
     try:
-        db = sqlite3.connect(str(db_path), timeout=5)
+        db = connect_investigation_db(db_path, timeout=5)
         # Try FTS5 first, fall back to LIKE
         try:
             count = db.execute(
@@ -219,7 +221,7 @@ def probe_usaspending(target):
 
 
 def probe_registry(target):
-    db_path = PROJECT_ROOT / "registry.db"
+    db_path = registry_db_path()
     count = _sqlite_count(
         db_path,
         "SELECT COUNT(*) FROM registry_entities WHERE entity_name LIKE ?",

@@ -19,14 +19,16 @@ from dataclasses import dataclass
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-INV_DB = REPO_ROOT / "investigation.db"
 DEFAULT_OUT_DIR = REPO_ROOT / "reports" / "evidence-triage"
 DOCS_DB = Path("/Users/travcole/projects/epstein-docs/output/documents.db")
 
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from pipeline.evidence_refs import canonicalize_evidence_ref
+from pipeline.evidence_refs import canonicalize_evidence_ref  # noqa: E402
+from tools.runtime_db import connect_investigation_db, investigation_db_path  # noqa: E402
+
+INV_DB = investigation_db_path()
 
 
 @dataclass
@@ -352,7 +354,7 @@ def main() -> int:
         return 2
 
     efta_docs = docsdb_efta_status_map()
-    conn = sqlite3.connect(str(INV_DB))
+    conn = connect_investigation_db(INV_DB)
     conn.row_factory = sqlite3.Row
     try:
         rows = load_missing_rows(conn, efta_docs)

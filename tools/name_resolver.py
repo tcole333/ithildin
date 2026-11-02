@@ -10,6 +10,11 @@ import os
 import sqlite3
 from pathlib import Path
 
+try:
+    from tools.runtime_db import MissingDatabaseError, connect_investigation_db
+except ImportError:
+    from runtime_db import MissingDatabaseError, connect_investigation_db
+
 DB_PATH = Path(os.environ.get("ITHILDIN_DB_PATH", Path(__file__).parent.parent / "investigation.db"))
 
 _alias_cache: dict[str, tuple[str, str, int | None]] | None = None
@@ -22,7 +27,10 @@ def _load_aliases() -> dict[str, tuple[str, str, int | None]]:
         return _alias_cache
 
     _alias_cache = {}
-    db = sqlite3.connect(str(DB_PATH))
+    try:
+        db = connect_investigation_db(DB_PATH)
+    except MissingDatabaseError:
+        return _alias_cache  # Like a missing table: no aliases, and no empty file created.
     db.row_factory = sqlite3.Row
     try:
         rows = db.execute("SELECT canonical_name, alias, alias_type, entity_id FROM name_aliases").fetchall()

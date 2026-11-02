@@ -23,8 +23,9 @@ import re
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from tools.parse_email_chain import parse_email_chain
+from tools.runtime_db import connect_investigation_db, investigation_db_path
 
-INVESTIGATION_DB = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "investigation.db")
+INVESTIGATION_DB = investigation_db_path()
 DOCUMENTS_DB = "/Users/travcole/projects/epstein-docs/output/documents.db"
 MAX_QUOTE_LENGTH = 300
 CONFIDENCE_ORDER = ["confirmed", "high", "medium", "low", "unverified"]
@@ -143,7 +144,7 @@ def get_rows_to_backfill(inv_db, specific_ids=None):
 def cmd_backfill(inv_db, doc_db, dry_run=False, specific_ids=None):
     """Backfill missing source_quotes using email body text."""
     rows = get_rows_to_backfill(inv_db, specific_ids)
-    print(f"EFTA Source Quote Backfill (body-aware)")
+    print("EFTA Source Quote Backfill (body-aware)")
     print(f"{'=' * 50}")
     print(f"Evidence rows to process: {len(rows)}")
 
@@ -192,7 +193,7 @@ def cmd_backfill(inv_db, doc_db, dry_run=False, specific_ids=None):
     if not dry_run:
         inv_db.commit()
 
-    print(f"\nResults:")
+    print("\nResults:")
     print(f"  Documents found in corpus: {found}")
     print(f"  Documents NOT in corpus:   {not_found}")
     print(f"  Empty/unusable OCR text:   {empty_ocr}")
@@ -200,7 +201,7 @@ def cmd_backfill(inv_db, doc_db, dry_run=False, specific_ids=None):
         print(f"  Would update: {found} rows")
     else:
         print(f"  Rows updated: {updated}")
-    print(f"\nBy confidence level:")
+    print("\nBy confidence level:")
     for conf in CONFIDENCE_ORDER:
         if conf in by_confidence:
             print(f"  {conf}: {by_confidence[conf]}")
@@ -221,7 +222,7 @@ def cmd_verify(inv_db, doc_db):
           AND fe.evidence_ref NOT LIKE '%,%'
     """).fetchall()
 
-    print(f"EFTA Source Quote Verification")
+    print("EFTA Source Quote Verification")
     print(f"{'=' * 50}")
     print(f"Evidence rows to check: {len(rows)}")
 
@@ -264,7 +265,7 @@ def cmd_verify(inv_db, doc_db):
         else:
             mismatches += 1
 
-    print(f"\nResults:")
+    print("\nResults:")
     print(f"  OK (quote found in OCR): {ok}")
     print(f"  Header-only quotes: {header_only}")
     print(f"  Quote not in OCR: {mismatches}")
@@ -280,7 +281,7 @@ def main():
         if arg.startswith("--specific="):
             specific_ids = [int(x) for x in arg.split("=", 1)[1].split(",")]
 
-    inv_db = sqlite3.connect(INVESTIGATION_DB)
+    inv_db = connect_investigation_db(INVESTIGATION_DB, "ro" if verify_mode else "rw")
     inv_db.row_factory = sqlite3.Row
     doc_db = sqlite3.connect(DOCUMENTS_DB)
     doc_db.row_factory = sqlite3.Row

@@ -17,9 +17,14 @@ import unicodedata
 from collections import Counter, defaultdict
 
 ROOT = str(pathlib.Path(__file__).resolve().parent.parent)
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
+
+from tools.runtime_db import connect_investigation_db, investigation_db_path  # noqa: E402
+
 KAB = f"{ROOT}/datasets/kabasshouse_epstein.db"
 DER = f"{ROOT}/datasets/epstein_derived.db"
-INV = f"{ROOT}/investigation.db"
+INV = investigation_db_path()
 OUT = f"{ROOT}/reports"
 
 # ---------------------------------------------------------------- noise pages
@@ -237,7 +242,7 @@ def main():
 
     # ---- 4. findings coverage (epstein profile) ---------------------------
     print("== loading findings (epstein profile) ==", flush=True)
-    inv = sqlite3.connect(INV)
+    inv = connect_investigation_db(INV)
     findings = inv.execute("""
         SELECT id, target_name, COALESCE(summary,''), COALESCE(detail,'')
         FROM findings WHERE profile_id = 'epstein'

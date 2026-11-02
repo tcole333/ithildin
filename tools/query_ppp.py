@@ -30,8 +30,10 @@ except ImportError:
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.runtime_db import connect_investigation_db, investigation_db_path
 except ImportError:
     from output_util import add_output_args, write_output
+    from runtime_db import connect_investigation_db, investigation_db_path
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 PARQUET_PATH = DATA_DIR / "ppp_loans.parquet"
@@ -85,7 +87,7 @@ def cmd_stats(con):
 
 
 def _print_stats(s):
-    print(f"\n  SBA PPP Loan Dataset")
+    print("\n  SBA PPP Loan Dataset")
     print(f"  {'='*50}")
     print(f"  Total Loans:       {_fmt_int(s['total_loans'])}")
     print(f"  Total Approved:    {_fmt_money(s['total_approved'])}")
@@ -276,10 +278,11 @@ def cmd_enrich(con, dry_run=False, threshold=90):
         from entity_resolution import normalize_entity_name
     from rapidfuzz import fuzz
 
-    db_path = Path(__file__).resolve().parent.parent / "investigation.db"
-    db = _sqlite3.connect(str(db_path))
+    db_path = investigation_db_path()
+    db = connect_investigation_db(db_path, "ro" if dry_run else "rw")
     db.row_factory = _sqlite3.Row
-    db.execute("PRAGMA journal_mode=WAL")
+    if not dry_run:
+        db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")
 
     entities = db.execute(
@@ -495,7 +498,7 @@ def _print_enrich(data):
     print(f"  Co-located unknown entities: {len(data['colocated_entities'])}")
 
     if high:
-        print(f"\n  --- High-Confidence Matches (auto-enriched) ---")
+        print("\n  --- High-Confidence Matches (auto-enriched) ---")
         for m in high:
             forgiven_pct = ""
             if m["ppp_approved"] and m["ppp_forgiven"]:
@@ -509,12 +512,12 @@ def _print_enrich(data):
             print()
 
     if review:
-        print(f"\n  --- Needs Review (not auto-enriched) ---")
+        print("\n  --- Needs Review (not auto-enriched) ---")
         for m in review:
             print(f"  #{m['entity_id']} {m['entity_name']:40s} -> {m['ppp_borrower']:40s}  [{m['match_score']}]  ${m['ppp_approved']:,.0f}")
 
     if data["colocated_entities"]:
-        print(f"\n  --- Unknown Co-located Entities ---")
+        print("\n  --- Unknown Co-located Entities ---")
         for c in data["colocated_entities"]:
             print(f"  At: {c['address']} (same as {c['known_entity']})")
             print(f"    -> {c['unknown_neighbor']}  PPP: ${c['neighbor_ppp_amount']:,.0f}  NAICS: {c['neighbor_naics']}")

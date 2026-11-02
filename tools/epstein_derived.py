@@ -30,12 +30,17 @@ import argparse
 import sqlite3
 from pathlib import Path
 
+try:
+    from tools.runtime_db import connect_investigation_db, investigation_db_path
+except ImportError:
+    from runtime_db import connect_investigation_db, investigation_db_path
+
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DERIVED_DB = PROJECT_ROOT / "datasets" / "epstein_derived.db"
 KABASS_DB = PROJECT_ROOT / "datasets" / "kabasshouse_epstein.db"
 LMSBAND_DB = PROJECT_ROOT / "datasets" / "lmsband_epstein_files.db"
 UNIFIED_DB = PROJECT_ROOT / "datasets" / "unified_epstein.db"
-CORE_DB = PROJECT_ROOT / "investigation.db"
+CORE_DB = investigation_db_path()
 
 SCHEMA_VERSION = 2
 
@@ -472,7 +477,7 @@ def get_db(path=DERIVED_DB):
 
 def attach(db, alias, path):
     """ATTACH a read-only source DB (kabass/lmsband/unified/core) for a build."""
-    db.execute(f"ATTACH DATABASE 'file:{path}?mode=ro' AS {alias}")
+    db.execute(f"ATTACH DATABASE ? AS {alias}", (f"{Path(path).resolve().as_uri()}?mode=ro",))
 
 
 # Additive column migrations for DBs created before a column existed. CREATE
@@ -532,7 +537,7 @@ def new_run(db, builder, note=None, code_version=None):
     """Open a derivation_run, stamping the core corrections high-water mark."""
     hw = None
     try:
-        core = sqlite3.connect(f"file:{CORE_DB}?mode=ro", uri=True)
+        core = connect_investigation_db(CORE_DB)
         row = core.execute("SELECT MAX(id) FROM corrections").fetchone()
         hw = row[0] if row else None
         core.close()

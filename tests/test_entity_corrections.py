@@ -14,7 +14,7 @@ def entity_db(tmp_path, monkeypatch):
     monkeypatch.setattr(lead_tracker, "DB_PATH", path)
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
     monkeypatch.setattr(entity_tracker, "DB_PATH", path)
-    db = entity_tracker.get_db()
+    db = entity_tracker.get_db(create=True)
     db.execute(
         """
         INSERT INTO entities (

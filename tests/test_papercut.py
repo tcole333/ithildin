@@ -11,6 +11,7 @@ from tools import lead_tracker, papercut
 def papercut_db(tmp_path, monkeypatch):
     monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "investigation.db")
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    lead_tracker.get_db(create=True).close()
     return tmp_path / "investigation.db"
 
 

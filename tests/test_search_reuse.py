@@ -3,6 +3,7 @@ import sqlite3
 
 import pytest
 
+from tools.runtime_db import MissingDatabaseError, connect
 from tools.search_reuse import check_reusable, record_result
 
 
@@ -10,6 +11,7 @@ from tools.search_reuse import check_reusable, record_result
 def search(tmp_path):
     artifact = tmp_path / "results.json"
     artifact.write_text('{"results": []}')
+    connect(tmp_path / "scratch.db", "rwc").close()
     return {
         "request": {"source": "fixture", "operation": "search", "query": "Example",
                     "filters": {"jurisdiction": "ny", "limit": 25}},
@@ -95,9 +97,20 @@ def test_legacy_history_is_not_a_cache_hit(search):
 def test_invalid_success_cannot_create_reuse_record(search):
     with pytest.raises(ValueError, match="count and an existing"):
         record(search, artifact=None)
-    assert not search["db_path"].exists()
     with pytest.raises(ValueError, match="nonnegative integer"):
         record(search, result_count=-1)
+    with sqlite3.connect(search["db_path"]) as db:
+        assert db.execute("SELECT name FROM sqlite_master").fetchall() == []
+    db.close()
+
+
+def test_record_refuses_to_create_a_missing_database(search, tmp_path):
+    missing = tmp_path / "missing.db"
+
+    with pytest.raises(MissingDatabaseError):
+        record(search, db_path=missing)
+
+    assert not missing.exists()
 
 
 def test_db_override_is_respected(search, monkeypatch):

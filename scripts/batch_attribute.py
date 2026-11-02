@@ -22,8 +22,9 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from tools.parse_email_chain import parse_email_chain
+from tools.runtime_db import connect_investigation_db, investigation_db_path
 
-INVESTIGATION_DB = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "investigation.db")
+INVESTIGATION_DB = investigation_db_path()
 DOCUMENTS_DB = "/Users/travcole/projects/epstein-docs/output/documents.db"
 
 
@@ -93,7 +94,7 @@ def main():
     parser.add_argument("--limit", type=int, help="Max rows to process")
     args = parser.parse_args()
 
-    inv_db = sqlite3.connect(INVESTIGATION_DB)
+    inv_db = connect_investigation_db(INVESTIGATION_DB, "rw")
     inv_db.row_factory = sqlite3.Row
     inv_db.execute("PRAGMA journal_mode=WAL")
     inv_db.execute("PRAGMA busy_timeout=5000")
@@ -102,7 +103,7 @@ def main():
     doc_db.row_factory = sqlite3.Row
 
     rows = get_rows_to_attribute(inv_db, limit=args.limit)
-    print(f"Batch Email Attribution")
+    print("Batch Email Attribution")
     print(f"{'=' * 50}")
     print(f"Evidence rows to process: {len(rows)}")
 
@@ -176,7 +177,7 @@ def main():
     if not args.dry_run:
         inv_db.commit()
 
-    print(f"\nResults:")
+    print("\nResults:")
     print(f"  Attributed: {attributed}")
     print(f"  EFTA not in corpus: {not_found}")
     print(f"  Could not parse: {no_parse}")
@@ -184,7 +185,7 @@ def main():
     if errors:
         print(f"  Errors: {errors}")
     if args.dry_run:
-        print(f"\n  (dry run — no changes applied)")
+        print("\n  (dry run — no changes applied)")
 
     inv_db.close()
     doc_db.close()

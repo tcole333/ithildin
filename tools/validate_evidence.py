@@ -19,11 +19,13 @@ from pathlib import Path
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.runtime_db import MissingDatabaseError, connect_investigation_db, investigation_db_path
 except ImportError:
     from output_util import add_output_args, write_output
+    from runtime_db import MissingDatabaseError, connect_investigation_db, investigation_db_path
 
 PROJECT_ROOT = Path(__file__).parent.parent
-INVESTIGATION_DB = PROJECT_ROOT / "investigation.db"
+INVESTIGATION_DB = investigation_db_path()
 
 # Corpus databases where EFTA IDs should resolve
 CORPUS_DBS = {
@@ -90,10 +92,7 @@ def scan_evidence(fix=False):
 
     Returns dict with valid/invalid counts and list of invalid refs.
     """
-    if not INVESTIGATION_DB.exists():
-        return {"error": "investigation.db not found"}
-
-    db = sqlite3.connect(str(INVESTIGATION_DB))
+    db = connect_investigation_db(INVESTIGATION_DB, "rw" if fix else "ro")
     db.row_factory = sqlite3.Row
 
     # Get all evidence refs
@@ -172,19 +171,23 @@ def main():
         sys.exit(1)
 
     if args.command == "scan":
-        result = scan_evidence(fix=args.fix)
+        try:
+            result = scan_evidence(fix=args.fix)
+        except MissingDatabaseError as error:
+            print(f"ERROR: {error}", file=sys.stderr)
+            raise SystemExit(2)
         if not write_output(result, args, summary=f"evidence validation: {result.get('valid', 0)} valid, {result.get('invalid', 0)} invalid"):
             if result.get("error"):
                 print(f"ERROR: {result['error']}")
                 sys.exit(1)
-            print(f"\nEvidence Reference Validation")
+            print("\nEvidence Reference Validation")
             print(f"{'='*60}")
             print(f"  Total EFTA refs:  {result['total_refs']}")
             print(f"  Valid:            {result['valid']}")
             print(f"  Invalid:          {result['invalid']}")
             print(f"  Corpus DBs:       {', '.join(result['corpus_dbs_checked'])}")
             if result["invalid_refs"]:
-                print(f"\nInvalid references:")
+                print("\nInvalid references:")
                 for inv in result["invalid_refs"][:20]:
                     print(f"  Finding #{inv['finding_id']}: {inv['evidence_ref']}")
                     print(f"    {inv['target_name']} — {inv['summary']}")

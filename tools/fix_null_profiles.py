@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 """Fix findings and connections with NULL profile_id by setting them to the active profile."""
 
-import sqlite3
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from tools.investigation_context import get_active_profile
+from tools.runtime_db import connect_investigation_db, investigation_db_path
 
 def main():
     profile = get_active_profile()
     profile_id = profile.name
     print(f"Active profile: {profile_id}")
 
-    conn = sqlite3.connect("investigation.db")
+    conn = connect_investigation_db(investigation_db_path(), "rw")
 
     # Fix findings
     null_findings = conn.execute(

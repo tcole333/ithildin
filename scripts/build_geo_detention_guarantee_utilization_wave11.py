@@ -7,12 +7,18 @@ import csv
 import hashlib
 import json
 import sqlite3
+import sys
 from decimal import Decimal
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DB = ROOT / "investigation.db"
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from tools.runtime_db import connect_investigation_db, investigation_db_path  # noqa: E402
+
+DB = investigation_db_path()
 REPORTS = ROOT / "investigations/geo-group/reports"
 PREFIX = REPORTS / "2026-07-14-tier2-detention-guarantee-utilization-wave11"
 
@@ -198,7 +204,7 @@ def scores(db: sqlite3.Connection) -> list[dict[str, object]]:
 
 def main() -> None:
     REPORTS.mkdir(parents=True, exist_ok=True)
-    db = sqlite3.connect(DB)
+    db = connect_investigation_db(DB)
     db.row_factory = sqlite3.Row
 
     finding_rows = []

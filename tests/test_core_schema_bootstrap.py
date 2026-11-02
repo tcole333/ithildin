@@ -18,7 +18,7 @@ def test_fresh_bootstrap_supports_finding_links_relations_and_profile_export(
     # Spelling canonicalization otherwise consults the shared repository DB.
     monkeypatch.setattr(name_resolver, "resolve_canonical", lambda name: name)
 
-    db = lead_tracker.get_db()
+    db = lead_tracker.get_db(create=True)
     required_tables = {
         "finding_entities", "finding_relations", "investigation_profiles",
         "data_change_sets", "schema_migrations",

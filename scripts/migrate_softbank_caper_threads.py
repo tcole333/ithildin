@@ -13,10 +13,16 @@ not write to the corrections audit table. Idempotent and reversible (reverse map
 is DB id 75+N -> N, but only re-run in reverse if you know no other profile has
 claimed 1-11 in the interim). Scoped strictly to profile_id='softbank-caper'.
 """
-import sqlite3
 import sys
+from pathlib import Path
 
-DB = "investigation.db"
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from tools.runtime_db import connect_investigation_db, investigation_db_path  # noqa: E402
+
+DB = investigation_db_path()
 PROFILE = "softbank-caper"
 # config thread N -> newly seeded DB thread id
 OLD_TO_NEW = {n: 75 + n for n in range(1, 12)}
@@ -24,7 +30,7 @@ OLD_TO_NEW = {n: 75 + n for n in range(1, 12)}
 
 def main():
     apply = "--apply" in sys.argv
-    con = sqlite3.connect(DB)
+    con = connect_investigation_db(DB, "rw")
     con.execute("PRAGMA foreign_keys=ON")
     cur = con.cursor()
 

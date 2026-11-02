@@ -29,8 +29,25 @@ import sqlite3
 import sys
 from pathlib import Path
 
+try:
+    from tools.runtime_db import (
+        MissingDatabaseError,
+        connect,
+        connect_investigation_db,
+        connect_registry_db,
+        investigation_db_path,
+    )
+except ImportError:
+    from runtime_db import (
+        MissingDatabaseError,
+        connect,
+        connect_investigation_db,
+        connect_registry_db,
+        investigation_db_path,
+    )
+
 PROJECT_ROOT = Path(__file__).parent.parent
-DB_PATH = PROJECT_ROOT / "investigation.db"
+DB_PATH = investigation_db_path()
 
 # Ensure project root is on path for tools.* imports when run as script
 if str(PROJECT_ROOT) not in sys.path:
@@ -83,10 +100,11 @@ def get_profile_thread_ids(db, profile_name, bridge_threads=None):
     return thread_ids
 
 
-def get_db():
-    db = sqlite3.connect(str(DB_PATH))
+def get_db(mode="rw"):
+    db = connect_investigation_db(DB_PATH, mode)
     db.row_factory = sqlite3.Row
-    db.execute("PRAGMA journal_mode=WAL")
+    if mode != "ro":
+        db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=10000")
     db.execute("PRAGMA foreign_keys=ON")
     return db
@@ -643,7 +661,7 @@ def _is_mass_market_agent(agent_name, db=None):
     # Dynamic threshold: if this agent serves 50+ entities in registry.db, flag it
     if db:
         try:
-            registry_db = sqlite3.connect(str(PROJECT_ROOT / "registry.db"))
+            registry_db = connect_registry_db()
             count = registry_db.execute(
                 "SELECT COUNT(*) FROM entities WHERE registered_agent LIKE ?",
                 (f"%{agent_name.strip()[:30]}%",)
@@ -1638,6 +1656,7 @@ def process_enforcement_check(db, dry_run=False, profile_id=None):
     """
     ENFORCEMENT_DB = PROJECT_ROOT / "datasets" / "sec_enforcement.db"
     if not ENFORCEMENT_DB.exists():
+        print(f"  Skipped: SEC enforcement database not found at {ENFORCEMENT_DB}")
         return 0, 0
 
     try:
@@ -1648,7 +1667,7 @@ def process_enforcement_check(db, dry_run=False, profile_id=None):
         except ImportError:
             return 0, 0
 
-    enf_db = sqlite3.connect(str(ENFORCEMENT_DB))
+    enf_db = connect(ENFORCEMENT_DB)
     enf_db.row_factory = sqlite3.Row
 
     # Build a set of all normalized enforcement defendant names for fast lookup
@@ -1940,7 +1959,7 @@ def cmd_run(args):
 
 
 def cmd_stats(args):
-    db = get_db()
+    db = get_db("ro")
     print("Auto Cross-Reference Stats")
     print("-" * 40)
     for table in ["entities", "entity_addresses", "entity_roles", "connections", "findings"]:
@@ -2000,10 +2019,14 @@ def main():
         args.profile = None
         args.max_leads = 100
 
-    if args.command == "run":
-        cmd_run(args)
-    elif args.command == "stats":
-        cmd_stats(args)
+    try:
+        if args.command == "run":
+            cmd_run(args)
+        elif args.command == "stats":
+            cmd_stats(args)
+    except MissingDatabaseError as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        raise SystemExit(2)
 
 
 if __name__ == "__main__":

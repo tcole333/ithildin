@@ -209,6 +209,7 @@ def test_vi_claims_can_ingest_and_query_from_local_sidecar(
     search_db_path = tmp_path / "search-log.db"
     monkeypatch.setattr(lead_tracker, "DB_PATH", search_db_path)
     monkeypatch.setenv("ITHILDIN_DB_PATH", str(search_db_path))
+    lead_tracker.get_db(create=True).close()
     _install_catalog(monkeypatch)
     route = query_state_courts.LIVE_ROUTES[
         query_state_courts.VICOURTS_SOURCE_ID

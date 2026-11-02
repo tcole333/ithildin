@@ -44,10 +44,8 @@ Usage:
 import argparse
 import json
 import os
-import sqlite3
 import sys
 import time
-from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
@@ -56,10 +54,12 @@ try:
     from tools.output_util import add_output_args, write_output
     from tools.env_loader import load_env_file
     from tools.search_log_util import canonical_search_key, log_search_result as _log
+    from tools.runtime_db import connect_investigation_db, investigation_db_path
 except ImportError:
     from output_util import add_output_args, write_output
     from env_loader import load_env_file
     from search_log_util import canonical_search_key, log_search_result as _log
+    from runtime_db import connect_investigation_db, investigation_db_path
 
 
 load_env_file()
@@ -630,9 +630,9 @@ def cmd_batch_persons(args):
     ]
 
     # Also pull entity officers from investigation.db
-    db_path = Path(__file__).parent.parent / "investigation.db"
+    db_path = investigation_db_path()
     if db_path.exists():
-        db = sqlite3.connect(str(db_path))
+        db = connect_investigation_db(db_path)
         rows = db.execute("""
             SELECT DISTINCT person_name FROM entity_roles
             WHERE person_name IS NOT NULL AND person_name != ''

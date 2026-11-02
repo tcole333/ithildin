@@ -52,6 +52,7 @@ try:
         PublicRecordsHTTPError,
         SocrataSODAClient,
     )
+    from tools.runtime_db import connect_investigation_db, investigation_db_path
     from tools.seed_public_records_catalog import (
         DEFAULT_CONFIG_PATH as DEFAULT_CATALOG_CONFIG_PATH,
         ensure_catalog_source,
@@ -80,6 +81,7 @@ except ImportError:
         PublicRecordsHTTPError,
         SocrataSODAClient,
     )
+    from runtime_db import connect_investigation_db, investigation_db_path
     from seed_public_records_catalog import (
         DEFAULT_CONFIG_PATH as DEFAULT_CATALOG_CONFIG_PATH,
         ensure_catalog_source,
@@ -667,10 +669,10 @@ def _execute_batch_entities(
     query: PublicRecordsQuery,
     source: _ACRISSource,
 ) -> PublicRecordsResult:
-    db_path = Path(getattr(args, "investigation_db", Path(__file__).parent.parent / "investigation.db"))
+    db_path = Path(getattr(args, "investigation_db", investigation_db_path()))
     if not db_path.exists():
         raise ValueError(f"investigation database not found: {db_path}")
-    with sqlite3.connect(db_path) as db:
+    with connect_investigation_db(db_path) as db:
         db.row_factory = sqlite3.Row
         entities = db.execute(
             "SELECT id, name FROM entities WHERE length(name) >= 4 ORDER BY name"
@@ -1040,7 +1042,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     batch.add_argument(
         "--investigation-db",
-        default=str(Path(__file__).resolve().parent.parent / "investigation.db"),
+        default=str(investigation_db_path()),
     )
     batch.add_argument("--per-entity-limit", type=int, default=5)
     batch.add_argument("--exact", action="store_true")

@@ -21,6 +21,7 @@ def test_methodology_list_can_select_oldest_records(tmp_path, monkeypatch):
     monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "investigation.db")
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
     monkeypatch.setattr(methodology_tracker, "get_db", lead_tracker.get_db)
+    lead_tracker.get_db(create=True).close()
 
     first = methodology_tracker.add_observation("friction", "first")
     second = methodology_tracker.add_observation("friction", "second")
@@ -37,6 +38,7 @@ def test_claim_cli_records_agent_attribution(tmp_path, monkeypatch):
 
     monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "investigation.db")
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    lead_tracker.get_db(create=True).close()
     lead_id = lead_tracker.add_lead("Attribution test")
     monkeypatch.setattr(
         sys, "argv", ["lead_tracker.py", "claim", str(lead_id), "--agent", "agent-a"]

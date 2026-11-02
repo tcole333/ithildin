@@ -4,8 +4,12 @@
 Internal helper — operates only on the connections name-string columns.
 Logs every change to connection_notes for audit trail.
 """
-import sqlite3, sys, datetime, json
-from pathlib import Path
+import datetime
+
+try:
+    from tools.runtime_db import connect_investigation_db, investigation_db_path
+except ImportError:
+    from runtime_db import connect_investigation_db, investigation_db_path
 
 # Mapping is hard-coded for the peru-lockheed Wave-2 merge pass.
 # Add to it for future merges.
@@ -31,8 +35,8 @@ CANONICAL_MAP = {
 }
 
 def main():
-    db_path = Path(__file__).parent.parent / 'investigation.db'
-    db = sqlite3.connect(db_path)
+    db_path = investigation_db_path()
+    db = connect_investigation_db(db_path, 'rw')
     cur = db.cursor()
     ts = datetime.datetime.now().isoformat()
     total = 0

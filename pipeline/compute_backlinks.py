@@ -11,6 +11,8 @@ Produces backlinks.json consumed by Astro pages at build time:
 import json
 import re
 import sqlite3
+import sys
+from pathlib import Path
 
 try:
     from .article_metadata import load_article
@@ -19,6 +21,10 @@ except ImportError:  # Direct CLI execution
     from article_metadata import load_article
     from paths import CONTENT_DIR, DB_PATH
 
+# Add the repository root for the shared runtime database helpers
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from tools.runtime_db import connect_investigation_db  # noqa: E402 - CLI repository path bootstrap
 
 DOSSIERS_DIR = CONTENT_DIR / "dossiers"
 ARTICLES_DIR = CONTENT_DIR / "articles"
@@ -119,9 +125,9 @@ def _load_alias_to_slug(dossier_index: dict[str, dict]) -> dict[str, str]:
         if len(parts) >= 2:
             name_to_slug[parts[-1]] = slug
 
-    # Add aliases from DB
+    # Add aliases from DB; a missing database raises instead of dropping them
     try:
-        conn = sqlite3.connect(str(DB_PATH))
+        conn = connect_investigation_db(DB_PATH)
         conn.row_factory = sqlite3.Row
         rows = conn.execute("SELECT canonical_name, alias FROM name_aliases").fetchall()
         conn.close()
@@ -130,7 +136,7 @@ def _load_alias_to_slug(dossier_index: dict[str, dict]) -> dict[str, str]:
             canonical_slug = slugify(row["canonical_name"])
             if canonical_slug in dossier_index:
                 name_to_slug[row["alias"].lower()] = canonical_slug
-    except (sqlite3.OperationalError, FileNotFoundError):
+    except sqlite3.OperationalError:
         pass
 
     return name_to_slug
@@ -294,9 +300,9 @@ def compute_model_backlinks(
     for slug, info in dossier_index.items():
         name_to_slug[info["name"].lower()] = slug
 
-    # Source 1: Tags with type='model'
+    # Source 1: Tags with type='model'; a missing database raises instead of dropping them
     try:
-        conn = sqlite3.connect(str(DB_PATH))
+        conn = connect_investigation_db(DB_PATH)
         conn.row_factory = sqlite3.Row
         rows = conn.execute("""
             SELECT t.tag_value, f.target_name
@@ -326,7 +332,7 @@ def compute_model_backlinks(
                     "name": dossier_index[dossier_slug]["name"],
                     "via": "tag",
                 })
-    except (sqlite3.OperationalError, FileNotFoundError):
+    except sqlite3.OperationalError:
         pass
 
     # Source 2: Canonical instances from model JSONs

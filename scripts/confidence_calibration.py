@@ -15,9 +15,10 @@ import os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from tools.findings_tracker import update_finding
+from tools.runtime_db import connect_investigation_db, investigation_db_path
 import sqlite3
 
-DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "investigation.db")
+DB_PATH = investigation_db_path()
 
 # claim_type -> max allowed confidence (ordered: confirmed > high > medium > low > unverified)
 CONFIDENCE_ORDER = ["unverified", "low", "medium", "high", "confirmed"]
@@ -29,7 +30,7 @@ MAX_CONFIDENCE = {
 
 def get_violations():
     """Find all findings that violate claim_type → max confidence rules."""
-    db = sqlite3.connect(DB_PATH)
+    db = connect_investigation_db(DB_PATH)
     db.row_factory = sqlite3.Row
     violations = []
     for claim_type, max_conf in MAX_CONFIDENCE.items():
@@ -88,7 +89,7 @@ def main():
     dry_run = "--dry-run" in sys.argv
     violations = get_violations()
 
-    print(f"Confidence calibration audit")
+    print("Confidence calibration audit")
     print(f"{'=' * 50}")
     print(f"Total violations found: {len(violations)}")
     print()
@@ -119,14 +120,14 @@ def main():
     print(f"Applying {len(violations)} corrections...")
     stats, errors = apply_corrections(violations)
     print()
-    print(f"Results:")
+    print("Results:")
     for claim_type, count in stats.items():
         if count > 0:
             print(f"  {claim_type}: {count} corrected")
     if errors:
         print(f"  ERRORS: {len(errors)} findings could not be updated: {errors}")
     print(f"\nTotal corrected: {sum(stats.values())}")
-    print(f"All corrections recorded in corrections table with type='refinement'")
+    print("All corrections recorded in corrections table with type='refinement'")
 
 
 if __name__ == "__main__":

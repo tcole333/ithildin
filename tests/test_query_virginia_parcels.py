@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import json
+import os
 import re
 import subprocess
 import sys
@@ -11,6 +12,7 @@ import pytest
 
 from tools import query_virginia_parcels as va
 from tools.public_records_http import SourceResponseError, SourceSchemaError
+from tools.runtime_db import connect
 
 
 FIXTURE_DIR = (
@@ -577,7 +579,9 @@ def test_parser_has_no_implicit_result_limit():
     assert args.page_size == 2000
 
 
-def test_alternatives_cli_outputs_contract_json():
+def test_alternatives_cli_outputs_contract_json(tmp_path):
+    search_log = tmp_path / "investigation.db"
+    connect(search_log, "rwc").close()
     completed = subprocess.run(
         [
             sys.executable,
@@ -588,6 +592,7 @@ def test_alternatives_cli_outputs_contract_json():
         check=True,
         capture_output=True,
         text=True,
+        env={**os.environ, "ITHILDIN_DB_PATH": str(search_log)},
     )
 
     payload = json.loads(completed.stdout)

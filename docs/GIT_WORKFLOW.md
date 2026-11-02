@@ -21,6 +21,23 @@ For independent parallel work, create an ignored local worktree after checking t
 git worktree add .claude/worktrees/evidence-corrections -b codex/evidence-corrections main
 ```
 
+A new worktree has none of the ignored runtime files: `.env`, `datasets/`,
+`registry.db`, `investigation.db`, and the ignored entries under `data/`. Link the
+main checkout's copies in before running any tool:
+
+```bash
+uv run python scripts/link_worktree_runtime.py --worktree .claude/worktrees/evidence-corrections
+```
+
+The script creates symlinks, never copies, and skips SQLite `-wal`/`-shm` side
+files. It leaves any path that already exists in the worktree untouched, reports
+it, and exits 1. A database a tool created in the worktree before linking is an
+empty stand-in; move it aside and rerun. Tools also honor `ITHILDIN_DB_PATH` and
+`ITHILDIN_REGISTRY_DB_PATH`, and they fail with `SQLite database not found`
+instead of creating an empty database. Writes through a linked database change
+the main checkout's file, so give test and fixture runs a temporary
+`ITHILDIN_DB_PATH`.
+
 Treat `main` as an integration branch. Complete validation and review on the workstream branch. A push, merge, publication, history rewrite, or deletion of another task's work requires authorization for that action; a local commit within an authorized implementation task does not require a repeated permission question. Follow the user's explicit instructions when they differ from the defaults here.
 
 ## Commit completed units while working

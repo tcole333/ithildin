@@ -23,8 +23,25 @@ import sqlite3
 import sys
 from pathlib import Path
 
+try:
+    from tools.runtime_db import (
+        INVESTIGATION_DB_ENV,
+        MissingDatabaseError,
+        connect,
+        investigation_db_path,
+        require_database,
+    )
+except ImportError:
+    from runtime_db import (
+        INVESTIGATION_DB_ENV,
+        MissingDatabaseError,
+        connect,
+        investigation_db_path,
+        require_database,
+    )
+
 DB_PATH = Path(__file__).parent.parent / "datasets" / "madoff.db"
-INVESTIGATION_DB = Path(__file__).parent.parent / "investigation.db"
+INVESTIGATION_DB = investigation_db_path()
 SOURCE_FILE = Path(__file__).parent.parent / "datasets" / "offshore-alerts" / "Madoff_Victims.txt"
 
 # Patterns that indicate entity types
@@ -39,7 +56,8 @@ ENTITY_PATTERNS = {
 
 
 def get_db():
-    db = sqlite3.connect(str(DB_PATH))
+    """Open or create madoff.db as a URI connection, so ATTACH accepts a read-only URI."""
+    db = connect(DB_PATH, "rwc")
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA journal_mode=WAL")
     db.executescript("""
@@ -292,14 +310,12 @@ def cmd_search(args):
 
 def cmd_crossref(args):
     """Cross-reference Madoff entities against investigation.db entities."""
-    if not INVESTIGATION_DB.exists():
-        print(f"ERROR: investigation.db not found at {INVESTIGATION_DB}", file=sys.stderr)
-        sys.exit(1)
+    investigation_db = require_database(INVESTIGATION_DB, env_var=INVESTIGATION_DB_ENV)
 
     db = get_db()
 
-    # Attach investigation.db
-    db.execute(f"ATTACH DATABASE ? AS inv", [str(INVESTIGATION_DB)])
+    # Attach investigation.db read-only
+    db.execute("ATTACH DATABASE ? AS inv", [f"{investigation_db.resolve().as_uri()}?mode=ro"])
 
     # Get all investigation entities
     inv_entities = db.execute("SELECT id, name FROM inv.entities").fetchall()
@@ -389,7 +405,11 @@ def main():
     p.add_argument("--threshold", type=int, default=80, help="Minimum match score 0-100 (default: 80)")
 
     args = parser.parse_args()
-    {"parse": cmd_parse, "stats": cmd_stats, "search": cmd_search, "crossref": cmd_crossref}[args.command](args)
+    try:
+        {"parse": cmd_parse, "stats": cmd_stats, "search": cmd_search, "crossref": cmd_crossref}[args.command](args)
+    except MissingDatabaseError as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        raise SystemExit(2)
 
 
 if __name__ == "__main__":

@@ -17,7 +17,7 @@ def fresh_db(tmp_path, monkeypatch):
     monkeypatch.setattr("tools.lead_tracker.DB_PATH", db_path)
     monkeypatch.setattr("tools.lead_tracker._schema_initialized", False)
     from tools.lead_tracker import get_db
-    db = get_db()
+    db = get_db(create=True)
     return db, db_path
 
 
@@ -377,7 +377,7 @@ def conn_db(tmp_path, monkeypatch):
     monkeypatch.setattr("tools.findings_tracker.DB_PATH", db_path)
     monkeypatch.setattr("tools.findings_tracker._schema_initialized", False)
     from tools.lead_tracker import get_db
-    db = get_db()
+    db = get_db(create=True)
     return db, db_path
 
 

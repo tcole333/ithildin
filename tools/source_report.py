@@ -15,14 +15,15 @@ import base64
 import json
 import os
 import re
-import sqlite3
 from contextvars import ContextVar
 from pathlib import Path
 
 try:
     from tools.public_records_catalog import acquisition_result_status
+    from tools.runtime_db import connect, investigation_db_path, registry_db_path
 except ImportError:
     from public_records_catalog import acquisition_result_status
+    from runtime_db import connect, investigation_db_path, registry_db_path
 
 PROJECT_ROOT = Path(__file__).parent.parent
 _DEFER_HEALTH_CHECKS = ContextVar("defer_source_health_checks", default=False)
@@ -80,7 +81,7 @@ def check_sqlite(path, count_query):
     if not path.exists():
         return {"status": "missing", "path": str(path), "records": 0}
     try:
-        db = sqlite3.connect(str(path))
+        db = connect(path)
         count = db.execute(count_query).fetchone()[0]
         db.close()
         size_mb = path.stat().st_size / (1024 * 1024)
@@ -107,7 +108,7 @@ def check_sqlite_inventory(path, count_queries, *, primary_metric):
             "inventory": {},
         }
     try:
-        db = sqlite3.connect(str(path))
+        db = connect(path)
         try:
             inventory = {
                 name: db.execute(query).fetchone()[0]
@@ -485,7 +486,7 @@ def generate_report():
         "description": "Leads, findings, connections, search log, sessions",
         "query_tool": "tools/lead_tracker.py / tools/findings_tracker.py",
         **check_sqlite(
-            PROJECT_ROOT / "investigation.db",
+            investigation_db_path(),
             "SELECT COUNT(*) FROM leads"
         ),
     }
@@ -589,7 +590,7 @@ def generate_report():
         "description": "FL, NY, NM, PA corps, officers, filings (unified schema)",
         "query_tool": "tools/query_registry.py",
         **check_sqlite(
-            PROJECT_ROOT / "registry.db",
+            registry_db_path(),
             "SELECT COUNT(*) FROM registry_entities"
         ),
     }
@@ -805,7 +806,7 @@ def generate_report():
 
     # FARA Foreign Agents
     fara_info = check_sqlite(
-        PROJECT_ROOT / "investigation.db",
+        investigation_db_path(),
         "SELECT COUNT(*) FROM fara_registrants"
     )
     if fara_info.get("status") == "error":

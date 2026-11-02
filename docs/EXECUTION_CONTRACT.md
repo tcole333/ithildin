@@ -18,7 +18,8 @@ Before importing tracker modules or launching children, set `ITHILDIN_PROFILE` t
 the resolved investigation and `ITHILDIN_DB_PATH` to the selected database's
 absolute path. The shared active profile is an interactive default, not a routing
 mechanism for concurrent work. Pin both values in each task and propagate them to
-children. For fixture runs, select a temporary database explicitly.
+children. For fixture runs, select a temporary database explicitly and create it
+with `lead_tracker.py init`: tools fail rather than create a missing database.
 
 ## Supervise native subagents in the current chat
 

@@ -34,8 +34,10 @@ from urllib.parse import unquote, urlparse
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.runtime_db import MissingDatabaseError, connect_investigation_db
 except ImportError:
     from output_util import add_output_args, write_output
+    from runtime_db import MissingDatabaseError, connect_investigation_db
 
 # Shared database with lead_tracker.py
 DB_PATH = Path(os.environ.get("ITHILDIN_DB_PATH", Path(__file__).parent.parent / "investigation.db"))
@@ -53,7 +55,7 @@ def _detect_active_profile():
         pass
     # Fallback: read directly from DB (works even if import fails in subagents)
     try:
-        _db = sqlite3.connect(str(DB_PATH))
+        _db = connect_investigation_db(DB_PATH)
         row = _db.execute(
             "SELECT value FROM investigation_config WHERE key='active_profile'"
         ).fetchone()
@@ -168,10 +170,13 @@ except ImportError:
 _schema_initialized = False
 
 
-def get_db():
-    """Get database connection. Schema is created by lead_tracker._ensure_schema()."""
+def get_db(*, create=False):
+    """Get database connection. Schema is created by lead_tracker._ensure_schema().
+
+    The database must already exist unless ``create`` starts a new one.
+    """
     global _schema_initialized
-    db = sqlite3.connect(str(DB_PATH))
+    db = connect_investigation_db(DB_PATH, "rwc" if create else "rw")
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")
@@ -189,7 +194,7 @@ def get_db():
 def _get_db_standalone():
     """Standalone DB init (when run directly, not as import)."""
     global _schema_initialized
-    db = sqlite3.connect(str(DB_PATH))
+    db = connect_investigation_db(DB_PATH, "rw")
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA busy_timeout=5000")
@@ -4600,4 +4605,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except MissingDatabaseError as error:
+        sys.exit(f"ERROR: {error}")

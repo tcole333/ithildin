@@ -27,7 +27,7 @@ def inv_db(tmp_path, monkeypatch):
     monkeypatch.setattr("tools.auto_leads._leads_created_this_run", 0)
     from tools.lead_tracker import get_db
 
-    db = get_db()
+    db = get_db(create=True)
     yield db, db_path
     db.close()
 

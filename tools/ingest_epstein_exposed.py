@@ -27,7 +27,6 @@ Usage:
 
 import argparse
 import json
-import os
 import sqlite3
 import sys
 import time
@@ -36,9 +35,14 @@ from urllib.parse import urlencode, quote
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 
+try:
+    from tools.runtime_db import connect_investigation_db, investigation_db_path
+except ImportError:
+    from runtime_db import connect_investigation_db, investigation_db_path
+
 BASE_URL = "https://epsteinexposed.com/api/v1"
 DB_PATH = Path(__file__).parent.parent / "datasets" / "epstein_exposed.db"
-INVESTIGATION_DB = Path(__file__).parent.parent / "investigation.db"
+INVESTIGATION_DB = investigation_db_path()
 
 # Rate limiting: 60 req/min standard, 30 req/min search
 # = 1 req/s standard, 2s between search requests
@@ -324,7 +328,7 @@ def cmd_download(args):
                         c.get("coFlights", 0),
                         c.get("coDocuments", 0),
                     ))
-                except Exception as e:
+                except Exception:
                     pass  # Skip duplicate/error silently
 
             conn.commit()
@@ -366,7 +370,7 @@ def cmd_ingest(args):
 
     src = sqlite3.connect(str(DB_PATH))
     src.row_factory = sqlite3.Row
-    dst = sqlite3.connect(str(INVESTIGATION_DB))
+    dst = connect_investigation_db(INVESTIGATION_DB, "rw")
     dst.execute("PRAGMA journal_mode=WAL")
 
     # Get all persons with some meaningful data
@@ -522,7 +526,6 @@ def cmd_persons(args):
     print()
 
     for p in results:
-        pid = p.get("id", "?")
         name = p.get("name", "?")
         slug = p.get("slug", "")
         cat = p.get("category", "?")
@@ -567,7 +570,6 @@ def cmd_person(args):
     aliases = p.get("aliases", [])
     status = p.get("status") or []
     bio = p.get("bio", "")
-    short_bio = p.get("shortBio", "")
     bb = p.get("blackBookEntry", False)
     stats = p.get("stats", {})
     connections = p.get("connections", [])
@@ -584,7 +586,7 @@ def cmd_person(args):
     print()
 
     if stats:
-        print(f"  Stats:")
+        print("  Stats:")
         print(f"    Flights: {stats.get('flights', 0)}")
         print(f"    Documents: {stats.get('documents', 0):,}")
         print(f"    Connections: {stats.get('connections', 0)}")
@@ -592,7 +594,7 @@ def cmd_person(args):
     print()
 
     if bio:
-        print(f"  Bio:")
+        print("  Bio:")
         # Word-wrap at 80 chars
         words = bio.split()
         line = "    "
@@ -723,7 +725,7 @@ def cmd_match_entities(args):
 
     src = sqlite3.connect(str(DB_PATH))
     src.row_factory = sqlite3.Row
-    inv = sqlite3.connect(str(INVESTIGATION_DB))
+    inv = connect_investigation_db(INVESTIGATION_DB)
     inv.row_factory = sqlite3.Row
 
     # Get all EpsteinExposed persons
@@ -815,7 +817,7 @@ def cmd_match_entities(args):
         else:
             unmatched.append(name)
 
-    print(f"=== Entity Matching: EpsteinExposed vs investigation.db ===")
+    print("=== Entity Matching: EpsteinExposed vs investigation.db ===")
     print(f"  EE persons: {len(ee_persons)}")
     print(f"  Investigation persons: {len(all_inv)}")
     print(f"  Matched: {len(matched)}")

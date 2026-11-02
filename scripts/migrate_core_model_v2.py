@@ -38,8 +38,9 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 from tools.core_schema import DDL, ensure_core_model_schema  # noqa: E402, F401
 from tools.date_normalize import normalize_date  # noqa: E402
+from tools.runtime_db import connect_investigation_db, investigation_db_path  # noqa: E402
 
-DB = PROJECT_ROOT / "investigation.db"
+DB = investigation_db_path()
 MIGRATION_ID = "2026-07-04_core_model_v2"
 
 
@@ -55,7 +56,7 @@ def main():
     args = ap.parse_args()
     apply = args.apply
 
-    db = sqlite3.connect(DB)
+    db = connect_investigation_db(DB, "rw")
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA foreign_keys=OFF")  # backfill inserts reference existing rows only
 

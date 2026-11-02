@@ -170,7 +170,7 @@ def test_log_search_validates_registered_session(tmp_path, monkeypatch):
 
     monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "investigation.db")
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
-    db = lead_tracker.get_db()
+    db = lead_tracker.get_db(create=True)
     session_id = db.execute("INSERT INTO sessions (agent_id) VALUES ('test')").lastrowid
     db.commit()
     db.close()
@@ -192,6 +192,7 @@ def test_profile_stats_label_unscoped_search_totals_global(tmp_path, monkeypatch
 
     monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "investigation.db")
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    lead_tracker.get_db(create=True).close()
     lead_tracker.log_search("query", "source", 1)
 
     stats = lead_tracker.get_stats(profile_id="test")
@@ -208,6 +209,7 @@ def test_lead_stats_recent_completion_excludes_other_terminal_statuses(
 
     monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "investigation.db")
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    lead_tracker.get_db(create=True).close()
     completed = lead_tracker.add_lead("Completed lead", profile_id="test")
     dead_end = lead_tracker.add_lead("Dead-end lead", profile_id="test")
     db = lead_tracker.get_db()
@@ -232,6 +234,7 @@ def test_lead_search_accepts_a_result_limit(tmp_path, monkeypatch):
 
     monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "investigation.db")
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    lead_tracker.get_db(create=True).close()
     lead_tracker.add_lead("Needle alpha", profile_id="test")
     lead_tracker.add_lead("Needle beta", profile_id="test")
 
@@ -243,6 +246,7 @@ def test_lead_evidence_classifies_https_before_file_paths(tmp_path, monkeypatch)
 
     monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "investigation.db")
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    lead_tracker.get_db(create=True).close()
     url = "https://www.courtlistener.com/api/rest/v4/documents/123/"
     lead_id = lead_tracker.add_lead(
         "URL evidence lead",
@@ -261,6 +265,7 @@ def test_existing_lead_can_be_assigned_to_a_profile_thread(tmp_path, monkeypatch
 
     monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "investigation.db")
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    lead_tracker.get_db(create=True).close()
     lead_id = lead_tracker.add_lead("Unthreaded lead", profile_id="test")
     db = lead_tracker.get_db()
     thread_id = db.execute(
@@ -281,6 +286,7 @@ def test_block_lead_preserves_structured_stop_reason(tmp_path, monkeypatch):
 
     monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "investigation.db")
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    lead_tracker.get_db(create=True).close()
     lead_id = lead_tracker.add_lead("Await a nonpublic filing", profile_id="test")
 
     lead_tracker.block_lead(lead_id, "The filing is not public until 2027-01-15")
@@ -304,6 +310,7 @@ def test_reopen_lead_clears_stale_claim_and_block_state(tmp_path, monkeypatch):
 
     monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "investigation.db")
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    lead_tracker.get_db(create=True).close()
     lead_id = lead_tracker.add_lead("Reopen a closed lead", profile_id="test")
     db = lead_tracker.get_db()
     db.execute(
@@ -343,6 +350,7 @@ def test_infra_block_preserves_structured_stop_reason(tmp_path, monkeypatch):
 
     monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "investigation.db")
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    lead_tracker.get_db(create=True).close()
     lead_id = lead_tracker.add_lead("Await registry access", profile_id="test")
     infra_id = infra_tracker.add_request(
         "Authenticated registry lookup",
@@ -372,7 +380,7 @@ def test_findings_search_limit_and_date_correction_stay_consistent(tmp_path, mon
     monkeypatch.setattr(lead_tracker, "DB_PATH", db_path)
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
     monkeypatch.setattr(findings_tracker, "DB_PATH", db_path)
-    db = lead_tracker.get_db()
+    db = lead_tracker.get_db(create=True)
     columns = {row["name"] for row in db.execute("PRAGMA table_info(findings)")}
     for name in ("event_date_iso", "date_precision"):
         if name not in columns:
@@ -388,7 +396,7 @@ def test_finding_correction_can_link_an_existing_lead(tmp_path, monkeypatch):
     monkeypatch.setattr(lead_tracker, "DB_PATH", db_path)
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
     monkeypatch.setattr(findings_tracker, "DB_PATH", db_path)
-    db = lead_tracker.get_db()
+    db = lead_tracker.get_db(create=True)
     columns = {row["name"] for row in db.execute("PRAGMA table_info(findings)")}
     for name in ("event_date_iso", "date_precision"):
         if name not in columns:

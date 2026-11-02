@@ -1279,7 +1279,7 @@ def test_promotion_requires_and_preserves_quoted_primary_evidence(tmp_path, monk
         ),
     )
     from tools.lead_tracker import get_db
-    core = get_db()
+    core = get_db(create=True)
     cols = {row[1] for row in core.execute("PRAGMA table_info(findings)")}
     for column in ("event_date_iso", "date_precision"):
         if column not in cols:

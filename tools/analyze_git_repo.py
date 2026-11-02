@@ -21,7 +21,6 @@ Usage:
 
 import argparse
 import json
-import os
 import re
 import sqlite3
 import subprocess
@@ -32,14 +31,16 @@ from pathlib import Path
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.runtime_db import MissingDatabaseError, connect_investigation_db, investigation_db_path
 except ImportError:
     sys.path.insert(0, str(Path(__file__).parent))
     from output_util import add_output_args, write_output
+    from runtime_db import MissingDatabaseError, connect_investigation_db, investigation_db_path
 
 PROJECT_ROOT = Path(__file__).parent.parent
 DB_PATH = PROJECT_ROOT / "git_analysis.db"
 REPOS_DIR = PROJECT_ROOT / "datasets" / "git_repos"
-INVESTIGATION_DB = PROJECT_ROOT / "investigation.db"
+INVESTIGATION_DB = investigation_db_path()
 
 # ── Subsystem classification ──────────────────────────────────────────
 # Each rule: (subsystem_name, security_level, [path_patterns])
@@ -721,11 +722,7 @@ def cmd_correlate(args):
     days = args.days or 14
 
     # Load events from investigation.db
-    if not INVESTIGATION_DB.exists():
-        print("ERROR: investigation.db not found. Seed events first.")
-        sys.exit(1)
-
-    inv_db = sqlite3.connect(str(INVESTIGATION_DB))
+    inv_db = connect_investigation_db(INVESTIGATION_DB)
     inv_db.row_factory = sqlite3.Row
 
     profile = _get_active_profile()
@@ -840,12 +837,12 @@ def cmd_stats(args):
     print(f"  Commits: {total} ({merges} merges)")
     print(f"  Contributors: {contributors}")
     print(f"  Date range: {repo_row['first_commit_date'][:10] if repo_row['first_commit_date'] else '?'} -> {repo_row['last_commit_date'][:10] if repo_row['last_commit_date'] else '?'}")
-    print(f"\n  Subsystem commit counts:")
+    print("\n  Subsystem commit counts:")
     for r in subsystem_counts:
         level = security_level_for_subsystem(r["subsystem"])
         flag = f" [{level}]" if level in ("CRITICAL", "HIGH") else ""
         print(f"    {r['subsystem']:<20} {r['commits']:>6}{flag}")
-    print(f"\n  Timezone distribution:")
+    print("\n  Timezone distribution:")
     for r in tz_dist:
         offset_hrs = r["author_timezone"] / 3600
         print(f"    UTC{offset_hrs:+.0f}: {r['cnt']} commits")
@@ -874,7 +871,7 @@ def _get_active_profile():
     if not INVESTIGATION_DB.exists():
         return None
     try:
-        inv_db = sqlite3.connect(str(INVESTIGATION_DB))
+        inv_db = connect_investigation_db(INVESTIGATION_DB)
         row = inv_db.execute(
             "SELECT value FROM investigation_config WHERE key = 'active_profile'"
         ).fetchone()
@@ -966,7 +963,11 @@ def main():
         "stats": cmd_stats,
     }
 
-    commands[args.command](args)
+    try:
+        commands[args.command](args)
+    except MissingDatabaseError as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        raise SystemExit(2)
 
 
 if __name__ == "__main__":

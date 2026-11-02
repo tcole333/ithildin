@@ -21,7 +21,6 @@ from dataclasses import dataclass
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-DB_PATH = REPO_ROOT / "investigation.db"
 DOSSIER_DIR = REPO_ROOT / "content" / "dossiers"
 REDIRECTS_FILE = "_redirects.json"
 
@@ -29,6 +28,9 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from pipeline.evidence_refs import canonicalize_evidence_rows  # noqa: E402
+from tools.runtime_db import connect_investigation_db, investigation_db_path  # noqa: E402
+
+DB_PATH = investigation_db_path()
 
 
 @dataclass(frozen=True)
@@ -290,7 +292,7 @@ def main() -> int:
         print(f"Dossier directory not found: {dossier_dir}", file=sys.stderr)
         return 2
 
-    conn = sqlite3.connect(str(db_path))
+    conn = connect_investigation_db(db_path)
     conn.row_factory = sqlite3.Row
     try:
         # Check that required tables exist (investigation.db may be absent in CI)

@@ -53,6 +53,7 @@ from tools.epstein_derived import (  # noqa: E402
     KABASS_DB, CORE_DB,
 )
 from tools.entity_resolution import normalize_person_name as _base_normalize  # noqa: E402
+from tools.runtime_db import INVESTIGATION_DB_ENV, require_database  # noqa: E402
 
 NICKNAMES_PATH = PROJECT_ROOT / "data" / "nicknames.json"
 
@@ -565,7 +566,7 @@ def cmd_build(args):
     db = get_db()
     _with_retry(lambda: init_schema(db), what="init_schema")
     attach(db, "kab", KABASS_DB)
-    attach(db, "core", CORE_DB)
+    attach(db, "core", require_database(CORE_DB, env_var=INVESTIGATION_DB_ENV))
 
     if args.reset:
         # The actual DELETEs run inside the atomic write below (one lock take);
@@ -720,7 +721,6 @@ def cmd_build(args):
     _atomic_write(db, canon_rows, mention_rows, reset=args.reset)
     print(f"  canonical_person rows: {len(canon_rows):,}")
     print(f"  person_mention rows: {len(mention_rows):,}")
-    n = len(mention_rows)
 
     total_mentions = sum(canon_mentions.values())
 
@@ -750,7 +750,7 @@ def cmd_reconcile(args):
     """
     db = get_db()
     init_schema(db)
-    attach(db, "core", CORE_DB)
+    attach(db, "core", require_database(CORE_DB, env_var=INVESTIGATION_DB_ENV))
     run_id = new_run(db, "person_resolution.reconcile", note="canonical->core candidates")
 
     # Build a normalized-name -> core entity_id index (persons + unknown types).

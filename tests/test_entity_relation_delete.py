@@ -23,7 +23,7 @@ def entity_db(tmp_path, monkeypatch):
     monkeypatch.setattr("tools.lead_tracker._schema_initialized", False)
     monkeypatch.setattr("tools.entity_tracker.DB_PATH", db_path)
 
-    db = entity_tracker.get_db()
+    db = entity_tracker.get_db(create=True)
     for eid, name in [(1, "Alpha"), (2, "Beta"), (3, "Gamma")]:
         db.execute(
             "INSERT INTO entities (id, name, entity_type) VALUES (?, ?, 'person')",

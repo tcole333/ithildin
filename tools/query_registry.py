@@ -3,9 +3,12 @@
 Unified corporate registry query tool.
 
 Searches across all ingested state/country corporate registries with a
-standardized schema. Data is stored in registry.db.
+standardized schema. Data is stored in registry.db, or in the file named by
+ITHILDIN_REGISTRY_DB_PATH. Queries open it read-only and fail when it is
+missing; `init` creates a new, empty registry explicitly.
 
 Usage:
+    python tools/query_registry.py init
     python tools/query_registry.py search "Jeffrey Epstein"
     python tools/query_registry.py search "LSJE" --jurisdiction fl
     python tools/query_registry.py search "Financial Trust" --jurisdiction vi
@@ -22,7 +25,6 @@ import argparse
 import json
 import sqlite3
 import sys
-from pathlib import Path
 
 try:
     from tools.output_util import add_output_args, write_output
@@ -42,16 +44,50 @@ except ImportError:
         search_addresses,
     )
 
-DB_PATH = Path(__file__).parent.parent / "registry.db"
+try:
+    from tools.runtime_db import (
+        REGISTRY_DB_ENV,
+        MissingDatabaseError,
+        connect_registry_db,
+        registry_db_path,
+        require_database,
+    )
+except ImportError:
+    from runtime_db import (
+        REGISTRY_DB_ENV,
+        MissingDatabaseError,
+        connect_registry_db,
+        registry_db_path,
+        require_database,
+    )
+
+DB_PATH = registry_db_path()
+INIT_COMMAND = "uv run python tools/query_registry.py init"
 
 
 def get_db():
-    """Get a database connection, creating schema if needed."""
-    db = sqlite3.connect(str(DB_PATH))
+    """Open the existing registry for ingestion, adding any missing schema.
+
+    Ingest tools write through this connection. A missing registry.db is an
+    error rather than a new empty database; ``init`` creates one explicitly.
+    """
+    try:
+        db = connect_registry_db(DB_PATH, "rw")
+    except MissingDatabaseError as error:
+        raise MissingDatabaseError(
+            f"{error}\nTo start a new, empty registry at that path instead: {INIT_COMMAND}"
+        ) from None
     db.row_factory = sqlite3.Row
     db.execute("PRAGMA journal_mode=WAL")
     db.execute("PRAGMA foreign_keys=ON")
     _ensure_schema(db)
+    return db
+
+
+def get_read_db():
+    """Open registry.db read-only for queries: no creation, schema writes, or WAL changes."""
+    db = connect_registry_db(DB_PATH)
+    db.row_factory = sqlite3.Row
     return db
 
 
@@ -406,7 +442,7 @@ def format_entity(row, verbose=False):
 
 def cmd_search(args):
     """Search entities by name."""
-    db = get_db()
+    db = get_read_db()
 
     if args.jurisdiction:
         juris_filter = "AND re.source_jurisdiction = ?"
@@ -483,7 +519,7 @@ def cmd_search(args):
 
 def cmd_entity(args):
     """Get full entity details by ID."""
-    db = get_db()
+    db = get_read_db()
     row = db.execute("SELECT * FROM registry_entities WHERE id = ?", [args.entity_id]).fetchone()
     if not row:
         print(f"Entity {args.entity_id} not found")
@@ -572,7 +608,7 @@ def cmd_entity(args):
 
 def cmd_officers(args):
     """Search officers by name."""
-    db = get_db()
+    db = get_read_db()
 
     try:
         rows = db.execute("""
@@ -617,6 +653,7 @@ def cmd_officers(args):
 
 def cmd_address(args):
     """Search entity, officer, and agent addresses through the trigram sidecar."""
+    require_database(DB_PATH, env_var=REGISTRY_DB_ENV)
     try:
         data = search_addresses(
             args.query,
@@ -666,7 +703,7 @@ def cmd_address(args):
 
 def cmd_agent(args):
     """Search by registered agent name."""
-    db = get_db()
+    db = get_read_db()
 
     rows = db.execute("""
         SELECT a.*, re.entity_name, re.source_jurisdiction, re.source_id, re.status, re.entity_type
@@ -700,7 +737,7 @@ def cmd_agent(args):
 
 def cmd_filings(args):
     """Get all filings for an entity."""
-    db = get_db()
+    db = get_read_db()
 
     entity = db.execute("SELECT * FROM registry_entities WHERE id = ?", [args.entity_id]).fetchone()
     if not entity:
@@ -736,7 +773,7 @@ def cmd_filings(args):
 
 def cmd_stats(args):
     """Show registry statistics."""
-    db = get_db()
+    db = get_read_db()
 
     total = db.execute("SELECT COUNT(*) FROM registry_entities").fetchone()[0]
     print(f"Total entities: {total:,}")
@@ -775,7 +812,7 @@ def cmd_stats(args):
 
 def cmd_jurisdictions(args):
     """List available jurisdictions."""
-    db = get_db()
+    db = get_read_db()
     rows = db.execute("""
         SELECT source_jurisdiction, COUNT(*) as cnt,
                MIN(formation_date) as earliest,
@@ -875,7 +912,7 @@ def _format_ucc_filing(row, db, verbose=False):
 
 def cmd_ucc_search(args):
     """Search UCC filings by debtor or secured party name."""
-    db = get_db()
+    db = get_read_db()
 
     juris_filter = ""
     juris_params = []
@@ -972,7 +1009,7 @@ def cmd_ucc_search(args):
 
 def cmd_ucc_filing(args):
     """Get full detail for a specific UCC filing."""
-    db = get_db()
+    db = get_read_db()
     row = db.execute("SELECT * FROM ucc_filings WHERE id = ?", [args.filing_id]).fetchone()
     if not row:
         print(f"UCC filing {args.filing_id} not found")
@@ -988,7 +1025,7 @@ def cmd_ucc_filing(args):
 
 def cmd_ucc_collateral(args):
     """Search UCC collateral descriptions."""
-    db = get_db()
+    db = get_read_db()
 
     try:
         rows = db.execute("""
@@ -1034,7 +1071,7 @@ def cmd_ucc_collateral(args):
 
 def cmd_ucc_party(args):
     """Search UCC parties by name with role filter."""
-    db = get_db()
+    db = get_read_db()
 
     if args.role == "secured":
         try:
@@ -1138,7 +1175,7 @@ def cmd_ucc_party(args):
 
 def cmd_ucc_stats(args):
     """Show UCC filing statistics."""
-    db = get_db()
+    db = get_read_db()
 
     total_filings = db.execute("SELECT COUNT(*) FROM ucc_filings").fetchone()[0]
     total_debtors = db.execute("SELECT COUNT(*) FROM ucc_debtors").fetchone()[0]
@@ -1194,9 +1231,25 @@ def cmd_ucc_stats(args):
             print(f"  {p['party_name']}: {p['cnt']:,} filings")
 
 
+def cmd_init(args):
+    """Create a new, empty registry at the selected path; never touch an existing one."""
+    if DB_PATH.exists():
+        print(f"Registry database already exists: {DB_PATH}")
+        return
+    db = connect_registry_db(DB_PATH, "rwc")
+    db.execute("PRAGMA journal_mode=WAL")
+    _ensure_schema(db)
+    db.commit()
+    db.close()
+    print(f"Created empty registry database: {DB_PATH}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Unified corporate registry query tool")
     sub = parser.add_subparsers(dest="command", required=True)
+
+    # init
+    sub.add_parser("init", help="Create a new, empty registry.db at the selected path")
 
     # search
     p = sub.add_parser("search", help="Search entities by name")
@@ -1281,6 +1334,7 @@ def main():
         args.json_out = False
 
     handlers = {
+        "init": cmd_init,
         "search": cmd_search,
         "entity": cmd_entity,
         "officers": cmd_officers,
@@ -1295,7 +1349,11 @@ def main():
         "ucc-party": cmd_ucc_party,
         "ucc-stats": cmd_ucc_stats,
     }
-    handlers[args.command](args)
+    try:
+        handlers[args.command](args)
+    except MissingDatabaseError as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        raise SystemExit(2)
 
 
 if __name__ == "__main__":

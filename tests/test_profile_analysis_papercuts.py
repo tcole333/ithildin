@@ -29,6 +29,7 @@ def test_triage_policy_loads_selected_profile_metadata(monkeypatch):
 def test_lead_search_matches_name_with_intervening_initial(tmp_path, monkeypatch):
     monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "investigation.db")
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
+    lead_tracker.get_db(create=True).close()
     lead_id = lead_tracker.add_lead(
         "Review the subject's archived client roster",
         target_name="Brad S. Karp",

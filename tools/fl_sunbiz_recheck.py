@@ -19,14 +19,15 @@ import argparse
 import sqlite3
 import sys
 from datetime import datetime
-from pathlib import Path
 
 try:
     from tools.output_util import add_output_args, write_output
+    from tools.runtime_db import connect_registry_db, registry_db_path
 except ImportError:
     from output_util import add_output_args, write_output
+    from runtime_db import connect_registry_db, registry_db_path
 
-DB_PATH = Path(__file__).parent.parent / "registry.db"
+DB_PATH = registry_db_path()
 
 # ═══════════════════════════════════════════════════════
 # TIER 1: Finding #508 entities marked as "absent"
@@ -100,7 +101,8 @@ TIER4_LEADS = [
 
 
 def get_db():
-    db = sqlite3.connect(str(DB_PATH))
+    """Open registry.db read-only; a missing file is an error, never an empty registry."""
+    db = connect_registry_db(DB_PATH)
     db.row_factory = sqlite3.Row
     return db
 

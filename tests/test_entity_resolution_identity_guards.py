@@ -10,7 +10,7 @@ from tools.entity_resolution import EntityResolutionAmbiguity, resolve_or_create
 def entities(tmp_path, monkeypatch):
     monkeypatch.setattr(lead_tracker, "DB_PATH", tmp_path / "entities.db")
     monkeypatch.setattr(lead_tracker, "_schema_initialized", False)
-    db = lead_tracker.get_db()
+    db = lead_tracker.get_db(create=True)
     yield db
     db.close()
 
