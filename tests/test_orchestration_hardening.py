@@ -153,6 +153,28 @@ def test_invalid_canonical_record_rolls_back_entire_bundle(store, tmp_path):
     assert store.execute("SELECT COUNT(*) FROM dispatch_import_raw").fetchone()[0] == 0
 
 
+@pytest.mark.parametrize("asserted", ["verified", "confirmed"])
+def test_staged_records_cannot_assert_verification_status(store, tmp_path, asserted):
+    run_id, root = staged_run(store, tmp_path, records=[candidate(verification_status=asserted)])
+    connection = {
+        "person_a": "Review Fixture Entity", "person_b": "Fixture Counterparty",
+        "relationship_type": "corporate", "verification_status": asserted,
+    }
+    (root / "candidate_connections.jsonl").write_text(json.dumps(connection) + "\n")
+    run = json.loads((root / "run.json").read_text())
+    run["counts"]["connections"] = 1
+    (root / "run.json").write_text(json.dumps(run))
+    approve(store, run_id)
+
+    counts = dispatcher.import_staged_run(store, run_id, {}, "fixture")
+
+    assert (counts["findings"], counts["connections"]) == (1, 1)
+    assert store.execute("SELECT verification_status FROM findings").fetchone()[0] == "unverified"
+    assert store.execute("SELECT verification_status FROM connections").fetchone()[0] == "unverified"
+    archived = store.execute("SELECT record_json FROM dispatch_import_raw").fetchall()
+    assert {json.loads(row[0])["verification_status"] for row in archived} == {asserted}
+
+
 def test_concurrent_imports_write_once(store, tmp_path):
     run_id, _ = staged_run(store, tmp_path)
     approve(store, run_id)
